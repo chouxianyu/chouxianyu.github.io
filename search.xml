@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[JAI丢包掉帧处理]]></title>
+    <url>%2F2018%2F08%2F22%2FJAI%E4%B8%A2%E5%8C%85%E6%8E%89%E5%B8%A7%E5%A4%84%E7%90%86%2F</url>
+    <content type="text"><![CDATA[问题：时间戳停止变化/图像停止更新描述小白刚刚接触JAI，有很多不懂的。这次是请教了YZ大哥（不知道年龄，暂时这么称呼），很感谢YZ大哥的耐心指导。我不仅是不知道怎么调，连在哪里调也不知道╭(╯^╰)╮。以下是此次解决步骤，是YZ大哥跟我说怎么做，然后我照做，过程中又遇到问题，下边也给出了碰到的问题以及相应的解决方法。（8.21更） 刚刚又看了下JAI SDK Getting Started Guide，发现YZ讲的方法就是文档里那部分我觉得可以先跳过的内容，出现问题应该也是因为我没有按照文档进行配置…..可能我写的这个会有错误、遗漏、表述模糊，具体操作还可参加文档说明（8.22更） 4.4=》设置接收缓冲区 4.5=》设置中断调整 4.6=》打开巨型帧 4.7=》计算和设置包延迟 出现问题原因：JAI图像传输时丢包解决方法：使用 JAI Control Tool 采集图像 防止丢包如何使用JAI Control Tool 采集图像 如何查看是否丢包？ 其实观察刚开始采集图像时图片是否有撕裂的情况（有黑条条闪过） 如果丢包 设置相机据包为8000左右（我是8196）如何设置相机数据包 设置相机数据包后用JAI Control Tool采图时黑屏，查看黑屏是是否有帧率如何查看帧率 有帧率则查看调整网卡巨型帧如何找到相机连接的网卡网络和共享中心-以太网（就是相机那条网线）-属性-由勾选EBUS设置为不勾选EBUS 同时可以看到连接时使用的网卡 找到网卡右击-属性-高级-巨型帧（由关闭设为9KB MTU）接收缓冲区最好设为2048（我的最大只有512，只能这样了） 提醒：文档中指出接收缓冲区最好为2048，而我的网卡最大才512，图中说设为最大值不太明确，请结合自己的实际情况 是不是我的网卡太菜了，众筹给我买个好的可以吗？？？ 如果仍丢包则根据文档设置延时直至成功如何设置延时？参照文档设置延时（主要是帧率）我的Max Fps是2.00 ，Band Width是90% 接下来查看是否丢包 如有丢包可以再次调整数据包大小和延迟 这是第一次记录bug，图片好像有点多或者说有点乱，下次可以尝试以文字为主！]]></content>
+      <tags>
+        <tag>JAI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[FirstWriting]]></title>
+    <url>%2F2018%2F08%2F16%2FFirstWriting%2F</url>
+    <content type="text"><![CDATA[在很久很久以前，你拥有我我拥有你 《外面的世界》在很久很久以前我就有搞一个类似博客的东西的想法，不过一直都没有尝试着搞……某天（10号左右吧）刷知乎看到github和hexo可以搭建博客，于是我就来了hhh不过搞的时候也遇到了好多bug，跳了好多坑…博客一是分享，二是记录，三四五还没想起来。 这是第一次写博客，学习内容是一点点markdown语法，文末有这次学习的链接，之后应该会再好好学学markdown语法。 字体设置斜体1：文字两侧各一个星号斜体2：文字两侧各一个下划线粗体：文字两侧各两个星号粗斜体：文字两侧各三个星号删除线：文字两侧各两个波浪号 那就有个疑问了，如果星号、波浪号、下划线出现在文字中怎么处理…或者说这种情况很少吧，并且对内容没什么影响 标题怎么用二级标题三级标题四级标题五级标题六级标题超链接行内形式：我的博客参考形式：[我的博客][1],[github][2][1]:https://chouxianyu.github.io/[2]:https://github.com/自动链接：我的博客地址https://chouxianyu.github.io/ 列表无序列表 无序列表项1 无序列表项2 无序列表项3 有序列表1.有序列表项12.有序列表项23.有序列表项3 插入图片 表格 表头1 表头2 表头3 表头4 默认左对齐 显式左对齐 居中对齐 右对齐 默认左对齐 显式左对齐 居中对齐 右对齐 默认左对齐 显式左对齐 居中对齐 右对齐 默认左对齐 显式左对齐 居中对齐 右对齐 转载自https://www.jianshu.com/p/56d99a3049a5]]></content>
+      <tags>
+        <tag>hexo</tag>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MyHelloWorld]]></title>
+    <url>%2F2018%2F08%2F16%2FMyHelloWorld%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2018%2F08%2F10%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+</search>
