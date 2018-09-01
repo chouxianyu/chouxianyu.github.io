@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="常量指针和指针常量是两个经常出现的概念，今天做个小小总结。 文章各部分的内容都是很容易理解的，并且附加代码说明，一切的前提是理解文章2.1和2.2部分，所以搞好基础再往后看呐。嫌长的直接跳到结论去。 废话最近在看vc，看到书里有提这两个概念，学c的时候也有这两个概念，学c++的时候也有顶层const和底层const（这个我懂是懂，但从理解层次上不是那么懂）。所以就是很常见啦，但似乎很多人很迷惑，或">
+<meta name="description" content="常量指针和指针常量是两个经常出现的概念，今天做个小小总结。 文章各部分的内容都是很容易理解的，并且附加代码说明，一切的前提是理解文章2.1和2.2部分，所以搞好基础再往后看呐。干货在嫌长的直接跳到结论去。 废话最近在看vc，看到书里有提这两个概念，学c的时候也有这两个概念，学c++的时候也有顶层const和底层const（这个我懂是懂，但从理解层次上不是那么懂）。所以就是很常见啦，但似乎很多人很迷">
 <meta name="keywords" content="c&#x2F;c++,指针">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常量指针与指针常量">
 <meta property="og:url" content="https://chouxianyu.github.io/2018/08/26/常量指针与指针常量/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="常量指针和指针常量是两个经常出现的概念，今天做个小小总结。 文章各部分的内容都是很容易理解的，并且附加代码说明，一切的前提是理解文章2.1和2.2部分，所以搞好基础再往后看呐。嫌长的直接跳到结论去。 废话最近在看vc，看到书里有提这两个概念，学c的时候也有这两个概念，学c++的时候也有顶层const和底层const（这个我懂是懂，但从理解层次上不是那么懂）。所以就是很常见啦，但似乎很多人很迷惑，或">
+<meta property="og:description" content="常量指针和指针常量是两个经常出现的概念，今天做个小小总结。 文章各部分的内容都是很容易理解的，并且附加代码说明，一切的前提是理解文章2.1和2.2部分，所以搞好基础再往后看呐。干货在嫌长的直接跳到结论去。 废话最近在看vc，看到书里有提这两个概念，学c的时候也有这两个概念，学c++的时候也有顶层const和底层const（这个我懂是懂，但从理解层次上不是那么懂）。所以就是很常见啦，但似乎很多人很迷">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-01T04:50:32.735Z">
+<meta property="og:updated_time" content="2018-09-01T13:23:16.036Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常量指针与指针常量">
-<meta name="twitter:description" content="常量指针和指针常量是两个经常出现的概念，今天做个小小总结。 文章各部分的内容都是很容易理解的，并且附加代码说明，一切的前提是理解文章2.1和2.2部分，所以搞好基础再往后看呐。嫌长的直接跳到结论去。 废话最近在看vc，看到书里有提这两个概念，学c的时候也有这两个概念，学c++的时候也有顶层const和底层const（这个我懂是懂，但从理解层次上不是那么懂）。所以就是很常见啦，但似乎很多人很迷惑，或">
+<meta name="twitter:description" content="常量指针和指针常量是两个经常出现的概念，今天做个小小总结。 文章各部分的内容都是很容易理解的，并且附加代码说明，一切的前提是理解文章2.1和2.2部分，所以搞好基础再往后看呐。干货在嫌长的直接跳到结论去。 废话最近在看vc，看到书里有提这两个概念，学c的时候也有这两个概念，学c++的时候也有顶层const和底层const（这个我懂是懂，但从理解层次上不是那么懂）。所以就是很常见啦，但似乎很多人很迷">
 
 
 
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,707 字
+                  1,706 字
                 </span>
               
 
@@ -419,7 +419,7 @@
 
       
         <p>常量指针和指针常量是两个经常出现的概念，今天做个小小总结。</p>
-<p>文章各部分的内容都是很容易理解的，并且附加代码说明，一切的前提是理解<strong>文章2.1和2.2部分</strong>，所以搞好基础再往后看呐。嫌长的直接跳到结论去。</p>
+<p>文章各部分的内容都是很容易理解的，并且附加代码说明，一切的前提是理解<strong>文章2.1和2.2部分</strong>，所以搞好基础再往后看呐。干货在嫌长的直接跳到结论去。</p>
 <h1 id="废话"><a href="#废话" class="headerlink" title="废话"></a>废话</h1><p>最近在看vc，看到书里有提这两个概念，学c的时候也有这两个概念，学c++的时候也有顶层const和底层const（这个我懂是懂，但从理解层次上不是那么懂）。所以就是很常见啦，但似乎很多人很迷惑，或者说理解着不舒服。于是我的“神逻辑”就来了。（希望不要被大佬按在地上摩擦，谢谢合作。欢迎讨论，欢迎留言，欢迎转发。如果你不嫌我菜的话，欢迎提各方面的问题，我可以研究研究）</p>
 <h1 id="我对它们的理解"><a href="#我对它们的理解" class="headerlink" title="我对它们的理解"></a>我对它们的理解</h1><p>常指指常这种名词是英文翻译过来的，所以中文会有点拗口。常量的、指针的，我们生活中是没有这样的词的。</p>
 <p>有的英语变成中文会很生涩。英文里是这样的两个东西:pointer to const, const pointer。const是constant的缩写。</p>
@@ -442,7 +442,7 @@
 <h2 id="如何根据定义判断类型"><a href="#如何根据定义判断类型" class="headerlink" title="如何根据定义判断类型"></a>如何根据定义判断类型</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码1</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> * p;	<span class="comment">//常量指针</span></span><br><span class="line"><span class="keyword">char</span> <span class="keyword">const</span> * p;	<span class="comment">//常量指针 跟上一句等效</span></span><br><span class="line"><span class="keyword">char</span> * <span class="keyword">const</span> p;	<span class="comment">//指针常量</span></span><br></pre></td></tr></table></figure>
 <h3 id="根据const和-的相对位置"><a href="#根据const和-的相对位置" class="headerlink" title="根据const和*的相对位置"></a>根据const和*的相对位置</h3><p>const 在*左边=》常量指针；反之，指针常量。</p>
 <h3 id="根据谁离变量名近"><a href="#根据谁离变量名近" class="headerlink" title="根据谁离变量名近"></a>根据谁离变量名近</h3><p>const近=》指针常量；反之，常量指针。（const就是不变嘛，*就是指针啊，所以理解是很重要的，也就是<strong>2.1</strong>）</p>
-<h1 id="常指和指常的特性"><a href="#常指和指常的特性" class="headerlink" title="常指和指常的特性"></a>常指和指常的特性</h1><h2 id="常量指针-1"><a href="#常量指针-1" class="headerlink" title="常量指针"></a>常量指针</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码2</span></span><br><span class="line"><span class="comment">//char ch[] = "HelloWorld!";</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* pStr1=ch;	<span class="comment">//定义常量指针</span></span><br><span class="line"><span class="comment">//1.常量指针本身的值可以修改</span></span><br><span class="line">pStr1 = <span class="literal">nullptr</span>;	<span class="comment">//correct</span></span><br><span class="line"><span class="comment">//2.不能通过常量指针修改它所指向的内存中的内容（注意通过二字，不要误会常量指针）</span></span><br><span class="line">*pStr1 = <span class="string">'h'</span>;		<span class="comment">//error</span></span><br><span class="line">*(pStr1 + <span class="number">1</span>) = <span class="string">'E'</span>;	<span class="comment">//error</span></span><br><span class="line">pStr1[<span class="number">2</span>] = <span class="string">'L'</span>;		<span class="comment">//error</span></span><br></pre></td></tr></table></figure>
+<h1 id="代码验证"><a href="#代码验证" class="headerlink" title="代码验证"></a>代码验证</h1><h2 id="常量指针-1"><a href="#常量指针-1" class="headerlink" title="常量指针"></a>常量指针</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码2</span></span><br><span class="line"><span class="comment">//char ch[] = "HelloWorld!";</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* pStr1=ch;	<span class="comment">//定义常量指针</span></span><br><span class="line"><span class="comment">//1.常量指针本身的值可以修改</span></span><br><span class="line">pStr1 = <span class="literal">nullptr</span>;	<span class="comment">//correct</span></span><br><span class="line"><span class="comment">//2.不能通过常量指针修改它所指向的内存中的内容（注意通过二字，不要误会常量指针）</span></span><br><span class="line">*pStr1 = <span class="string">'h'</span>;		<span class="comment">//error</span></span><br><span class="line">*(pStr1 + <span class="number">1</span>) = <span class="string">'E'</span>;	<span class="comment">//error</span></span><br><span class="line">pStr1[<span class="number">2</span>] = <span class="string">'L'</span>;		<span class="comment">//error</span></span><br></pre></td></tr></table></figure>
 <h2 id="指针常量-1"><a href="#指针常量-1" class="headerlink" title="指针常量"></a>指针常量</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码3</span></span><br><span class="line"><span class="comment">//char ch[] = "HelloWorld!";</span></span><br><span class="line"><span class="comment">//指针常量（顶层const）</span></span><br><span class="line"><span class="keyword">char</span> * <span class="keyword">const</span> pStr2 = ch;	<span class="comment">//定义并初始化</span></span><br><span class="line"><span class="comment">//1.是常量，不可以被赋值（不把初始化叫做赋值）</span></span><br><span class="line">pStr2 = <span class="literal">nullptr</span>;		<span class="comment">//error</span></span><br></pre></td></tr></table></figure>
 <h2 id="常量指针容易被误解的地方"><a href="#常量指针容易被误解的地方" class="headerlink" title="常量指针容易被误解的地方"></a>常量指针容易被误解的地方</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码4</span></span><br><span class="line"><span class="keyword">int</span> n = <span class="number">0</span>;	<span class="comment">//定义变量n</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> * p1 = &amp;n;	<span class="comment">//常量指针p1</span></span><br><span class="line"><span class="keyword">int</span> * <span class="keyword">const</span> p2 = &amp;n;	<span class="comment">//指针常量p2</span></span><br><span class="line">*p1 = <span class="number">3</span>;	<span class="comment">//error 因为不能通过常量指针修改内存中的内容，划重点！：但这不是说指向内存中的内容不可修改</span></span><br><span class="line">n = <span class="number">3</span>;		<span class="comment">//correct	这是对的，因为n是变量啊</span></span><br><span class="line">*p2 = <span class="number">3</span>;	<span class="comment">//correct 指针常量部分的代码就有体现，不多说</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码5</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> n = <span class="number">0</span>;	<span class="comment">//定义变量n</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> * p1 = &amp;n;	<span class="comment">//常量指针p1</span></span><br><span class="line"><span class="keyword">int</span> * <span class="keyword">const</span> p2 = &amp;n;	<span class="comment">//error 错误的 原因见下-指针间的赋值</span></span><br><span class="line">*p1 = <span class="number">3</span>;		<span class="comment">//error 原因是常指不可修改内存</span></span><br><span class="line">n = <span class="number">3</span>;			<span class="comment">//error 原因是n是变量</span></span><br></pre></td></tr></table></figure>
@@ -587,7 +587,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -600,7 +600,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -654,7 +654,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#废话"><span class="nav-number">1.</span> <span class="nav-text">废话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#我对它们的理解"><span class="nav-number">2.</span> <span class="nav-text">我对它们的理解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">2.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常量指针"><span class="nav-number">2.2.</span> <span class="nav-text">常量指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针常量"><span class="nav-number">2.3.</span> <span class="nav-text">指针常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何根据定义判断类型"><span class="nav-number">2.4.</span> <span class="nav-text">如何根据定义判断类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#根据const和-的相对位置"><span class="nav-number">2.4.1.</span> <span class="nav-text">根据const和*的相对位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据谁离变量名近"><span class="nav-number">2.4.2.</span> <span class="nav-text">根据谁离变量名近</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常指和指常的特性"><span class="nav-number">3.</span> <span class="nav-text">常指和指常的特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常量指针-1"><span class="nav-number">3.1.</span> <span class="nav-text">常量指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针常量-1"><span class="nav-number">3.2.</span> <span class="nav-text">指针常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常量指针容易被误解的地方"><span class="nav-number">3.3.</span> <span class="nav-text">常量指针容易被误解的地方</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结论"><span class="nav-number">4.</span> <span class="nav-text">结论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常量指针-2"><span class="nav-number">4.1.</span> <span class="nav-text">常量指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针常量-2"><span class="nav-number">4.2.</span> <span class="nav-text">指针常量</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#废话"><span class="nav-number">1.</span> <span class="nav-text">废话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#我对它们的理解"><span class="nav-number">2.</span> <span class="nav-text">我对它们的理解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">2.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常量指针"><span class="nav-number">2.2.</span> <span class="nav-text">常量指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针常量"><span class="nav-number">2.3.</span> <span class="nav-text">指针常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何根据定义判断类型"><span class="nav-number">2.4.</span> <span class="nav-text">如何根据定义判断类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#根据const和-的相对位置"><span class="nav-number">2.4.1.</span> <span class="nav-text">根据const和*的相对位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据谁离变量名近"><span class="nav-number">2.4.2.</span> <span class="nav-text">根据谁离变量名近</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码验证"><span class="nav-number">3.</span> <span class="nav-text">代码验证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常量指针-1"><span class="nav-number">3.1.</span> <span class="nav-text">常量指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针常量-1"><span class="nav-number">3.2.</span> <span class="nav-text">指针常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常量指针容易被误解的地方"><span class="nav-number">3.3.</span> <span class="nav-text">常量指针容易被误解的地方</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结论"><span class="nav-number">4.</span> <span class="nav-text">结论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常量指针-2"><span class="nav-number">4.1.</span> <span class="nav-text">常量指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针常量-2"><span class="nav-number">4.2.</span> <span class="nav-text">指针常量</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -688,7 +688,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">6.0k</span>
+    <span title="Site words total count">7.7k</span>
   
 </div>
 

@@ -68,12 +68,10 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="指针，c/c++," />
 
 
 
-
-  
 
 
   <link rel="alternate" href="/atom.xml" title="臭咸鱼的缺氧瓶" type="application/atom+xml" />
@@ -83,18 +81,18 @@
 
 
 
-<meta name="description" content="6DVjwX2xIc">
-<meta name="keywords" content="臭咸鱼">
-<meta property="og:type" content="website">
-<meta property="og:title" content="臭咸鱼的缺氧瓶">
-<meta property="og:url" content="https://chouxianyu.github.io/baidu_verify_6DVjwX2xIc.html">
+<meta name="description" content="文章分为三个大的部分 大标题1提出权限”理念”，大标题2验证赋值规则 大标题3、4、5是我的个人理解。 大标题6是最直接的结论。 提醒 看懂这篇文章可能需要你知道并理解四种指针的定义，这是基础。当然如果真的不懂，可以直接去文尾记住结论。 四种指针详解戳这https://chouxianyu.github.io/2018/08/26/常量指针与指针常量/#more 指针修改指向内容的权限普通指针=指">
+<meta name="keywords" content="指针，c&#x2F;c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="指针间的互相赋值">
+<meta property="og:url" content="https://chouxianyu.github.io/2018/09/01/指针间的互相赋值/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="6DVjwX2xIc">
+<meta property="og:description" content="文章分为三个大的部分 大标题1提出权限”理念”，大标题2验证赋值规则 大标题3、4、5是我的个人理解。 大标题6是最直接的结论。 提醒 看懂这篇文章可能需要你知道并理解四种指针的定义，这是基础。当然如果真的不懂，可以直接去文尾记住结论。 四种指针详解戳这https://chouxianyu.github.io/2018/08/26/常量指针与指针常量/#more 指针修改指向内容的权限普通指针=指">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-21T14:05:45.950Z">
+<meta property="og:updated_time" content="2018-09-01T13:52:17.944Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="臭咸鱼的缺氧瓶">
-<meta name="twitter:description" content="6DVjwX2xIc">
+<meta name="twitter:title" content="指针间的互相赋值">
+<meta name="twitter:description" content="文章分为三个大的部分 大标题1提出权限”理念”，大标题2验证赋值规则 大标题3、4、5是我的个人理解。 大标题6是最直接的结论。 提醒 看懂这篇文章可能需要你知道并理解四种指针的定义，这是基础。当然如果真的不懂，可以直接去文尾记住结论。 四种指针详解戳这https://chouxianyu.github.io/2018/08/26/常量指针与指针常量/#more 指针修改指向内容的权限普通指针=指">
 
 
 
@@ -124,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://chouxianyu.github.io/baidu_verify_6DVjwX2xIc.html"/>
+  <link rel="canonical" href="https://chouxianyu.github.io/2018/09/01/指针间的互相赋值/"/>
 
 
 
 
 
-  <title> | 臭咸鱼的缺氧瓶</title>
+  <title>指针间的互相赋值 | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -289,33 +287,232 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2018/09/01/指针间的互相赋值/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline"></h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          6DVjwX2xIc
+          <h1 class="post-title" itemprop="name headline">指针间的互相赋值</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-01T21:40:11+08:00">
+                2018-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/01/指针间的互相赋值/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/09/01/指针间的互相赋值/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/09/01/指针间的互相赋值/" class="leancloud_visitors" data-flag-title="指针间的互相赋值">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,592 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  6 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>文章分为三个大的部分</p>
+<p>大标题1提出权限”理念”，大标题2验证赋值规则</p>
+<p>大标题3、4、5是我的个人理解。</p>
+<p>大标题6是最直接的结论。</p>
+<p><strong>提醒</strong></p>
+<p>看懂这篇文章可能需要你知道并理解四种指针的定义，这是基础。当然如果真的不懂，可以直接去文尾记住结论。</p>
+<p>四种指针详解戳这<a href="https://chouxianyu.github.io/2018/08/26/常量指针与指针常量/#more">https://chouxianyu.github.io/2018/08/26/常量指针与指针常量/#more</a></p>
+<h1 id="指针修改指向内容的权限"><a href="#指针修改指向内容的权限" class="headerlink" title="指针修改指向内容的权限"></a>指针修改指向内容的权限</h1><p><strong>普通指针=指针常量&gt;常量指针=四号指针</strong></p>
+<p>这个权限指的是<em>通过该指针</em>是否可以修改内存，情况只有两种：是和否。是的话就有权限，否的话就没有权限，这个大小是0和1，false和true，是有和没有，不是12345678的大和小。</p>
+<p>普通指针很好说，四号指针也是个常量指针嘛，当然不可以修改内存</p>
+<p>这个权限大小关系不难理解，前提是你有理解常指和指常这两个名词吧。</p>
+<p>前边的普指和指常都可以修改内存中的内容，而常指和四号则不可以。</p>
+<h1 id="指针赋值规则"><a href="#指针赋值规则" class="headerlink" title="指针赋值规则"></a>指针赋值规则</h1><p><strong>指针间的赋值</strong>：权限大的可以赋值给权限小的（权限指操作内存即修改内存中的内容的权限）</p>
+<p><strong>权限大的可以赋值给权限小的，同级权限也可以，小赋值给大不行</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> n = <span class="number">0</span>;	<span class="comment">//常量n</span></span><br><span class="line"><span class="keyword">int</span> m = <span class="number">0</span>;	<span class="comment">//变量m</span></span><br><span class="line"><span class="keyword">int</span>* p1;				<span class="comment">//普通指针</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>* p2;			<span class="comment">//常量指针	与int const* p2相同</span></span><br><span class="line"><span class="comment">//int* const p3=nullptr; //指针常量</span></span><br><span class="line"><span class="comment">//int const * const p4;  //四号指针 既是常指又是指常，即自身不可修改，也不可通过它修改指向的内存</span></span><br><span class="line"></span><br><span class="line">p1 = p2;	<span class="comment">//error		普指=常指</span></span><br><span class="line">p1 = p3;	<span class="comment">//correct	普指=指常</span></span><br><span class="line">p1 = p4;	<span class="comment">//error		普指=四号</span></span><br><span class="line">p1 = &amp;n;	<span class="comment">//error		普指=常指</span></span><br><span class="line">p1 = &amp;m;	<span class="comment">//correct	普指=普指</span></span><br><span class="line"></span><br><span class="line">p2 = p1;	<span class="comment">//correct	常指=普指</span></span><br><span class="line">p2 = p3;	<span class="comment">//correct	常指=指常</span></span><br><span class="line">p2 = p4;	<span class="comment">//correct	常指=四号</span></span><br><span class="line">p2 = &amp;n;	<span class="comment">//correct	常指=常指</span></span><br><span class="line">p2 = &amp;m;	<span class="comment">//correct	常指=普指</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//p3是指常，是常量 赋值当然不行了，更别说权限了，所以上边不定义p3，</span></span><br><span class="line"><span class="comment">//要讨论的是权限，在此定义并初始化以作示例，但定义只能有一个的啊，我在这提醒过了啊</span></span><br><span class="line"><span class="keyword">int</span>* <span class="keyword">const</span> p3 = p1;		<span class="comment">//correct	指常=普指</span></span><br><span class="line"><span class="keyword">int</span>* <span class="keyword">const</span> p3 = p2;		<span class="comment">//error		指常=常指</span></span><br><span class="line"><span class="keyword">int</span>* <span class="keyword">const</span> p3 = p4;		<span class="comment">//error		指常=四号</span></span><br><span class="line"><span class="keyword">int</span>* <span class="keyword">const</span> p3 = &amp;n;		<span class="comment">//error		指常=常指</span></span><br><span class="line"><span class="keyword">int</span>* <span class="keyword">const</span> p3 = &amp;m;		<span class="comment">//correct	指常=普指</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//p4是四号，是常量，同p3，不赘述</span></span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> * <span class="keyword">const</span> p4 = p1;	<span class="comment">//correct	四号=普指</span></span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> * <span class="keyword">const</span> p4 = p2;	<span class="comment">//correct	四号=常指</span></span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> * <span class="keyword">const</span> p4 = p3;	<span class="comment">//correct	四号=指常</span></span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> * <span class="keyword">const</span> p4 = &amp;n;	<span class="comment">//correct	四号=常指</span></span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> * <span class="keyword">const</span> p4 = &amp;m;	<span class="comment">//correct	四号=普指</span></span><br></pre></td></tr></table></figure>
+<p>这个规则是我自己想出来的，可能书上云里雾里的背后就是这么个规律。我之前好像说过存在即合理..实际表述不太对，应该是<strong>存在就有原因</strong>。上边的代码应该囊括了所有“品种”指针的互相赋值，验证也都符合预期。如有错误，欢迎指出。</p>
+<h1 id="赋值规则的过程"><a href="#赋值规则的过程" class="headerlink" title="赋值规则的过程"></a>赋值规则的过程</h1><p><strong>赋值得要满足被赋值方的要求</strong>，就像你想娶我（捂脸），我就需要你一米八，宠我，其他的都不需要，有的话我也一点不碰。但只要你这两点缺一点，我就不要，你是马云爸爸也不行！</p>
+<p>赋值就是那么个意思，我是指常或者普指，我要求有权限修改内存，所以就只有指常和普指能娶我，能给我赋值，因为常指和四号没有那个权限啊！反过来的话，我是常指和四号，我什么都不要，所以谁赋值都行，上面我们也能看到给常指和四号赋值的时候全都correct了。</p>
+<h1 id="赋值规则的必要性"><a href="#赋值规则的必要性" class="headerlink" title="赋值规则的必要性"></a>赋值规则的必要性</h1><h2 id="赋值规则前提是不同指针的权限不同"><a href="#赋值规则前提是不同指针的权限不同" class="headerlink" title="赋值规则前提是不同指针的权限不同"></a>赋值规则前提是不同指针的权限不同</h2><p>我想多种指针是为了程序更好吧，不然只有一种指针能实现所有的功能，岂不是很可怕。给了程序员太大的权利，程序员一跑神犯错，程序就极有可能崩溃。给予指针权限之差就像c++里override吧，也是一种对程序员的友好？这是一方面,这应该能说明赋予指针不同权限的必要。</p>
+<h2 id="然后才有了赋值规则"><a href="#然后才有了赋值规则" class="headerlink" title="然后才有了赋值规则"></a>然后才有了赋值规则</h2><p>我们举个例子，如果没有这个规则，不同类型指针自由互相赋值：你定义一个常量n，然后再定义一个int* p，就是普指，普指按说是有修改内存的权利的，然后p=&amp;n，拿到n的地址，是不是就可以通过p改变n了？（在存在不同权限指针的前提下）。如果没有这个规则，我们可以很随意地改变常量了。干嘛自己造了一座木屋，然后又给它浇上油？</p>
+<h1 id="斗胆扯内存"><a href="#斗胆扯内存" class="headerlink" title="斗胆扯内存"></a>斗胆扯内存</h1><p>不管是指针常量还是常量指针还有普通指针，<strong>它们本身和那块内存都是没有本质关系的</strong>。</p>
+<p>它们（也包括普通类型的指针）只是一个带着镣铐或者没有镣铐的工具，我们可以通过const控制指针的权限以及它本身，同时我们在使用它们时也不能超出它们的权限范围和它们的个人承受力。</p>
+<p>还是说我在做梦！？？！那有人也在做梦的话，联系我可获得<del>王子之吻</del>，开玩笑的啊，我不是gay，也不是变态</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* p1;				<span class="comment">//普通指针</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>* p2;			<span class="comment">//常量指针	与int const* p2相同</span></span><br><span class="line"><span class="keyword">int</span>* <span class="keyword">const</span> p3=<span class="literal">nullptr</span>; 	<span class="comment">//指针常量</span></span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> * <span class="keyword">const</span> p4;  	<span class="comment">//四号指针 既是常指又是指常</span></span><br></pre></td></tr></table></figure>
+<p>p1和p3可以互相赋值；</p>
+<p>p2和p4可以互相赋值；</p>
+<p>p1和p3可以给p2和p4赋值，反之不行；</p>
+<p>p3和p4在程序中只能在定义时被赋值一次，因为它们是const类型的量。</p>
+<p>作者：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p>
+<p>本文为作者原创，转载请注明出处：<a href="https://chouxianyu.github.io/2018/09/01/指针间的互相赋值/#more">https://chouxianyu.github.io/2018/09/01/指针间的互相赋值/#more</a></p>
+<p>欢迎转发和评论</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/指针，c-c/" rel="tag"># 指针，c/c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/01/物不知其数/" rel="next" title="物不知其数">
+                <i class="fa fa-chevron-left"></i> 物不知其数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
   </div>
 
 
@@ -351,8 +548,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -428,6 +634,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#指针修改指向内容的权限"><span class="nav-number">1.</span> <span class="nav-text">指针修改指向内容的权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指针赋值规则"><span class="nav-number">2.</span> <span class="nav-text">指针赋值规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#赋值规则的过程"><span class="nav-number">3.</span> <span class="nav-text">赋值规则的过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#赋值规则的必要性"><span class="nav-number">4.</span> <span class="nav-text">赋值规则的必要性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#赋值规则前提是不同指针的权限不同"><span class="nav-number">4.1.</span> <span class="nav-text">赋值规则前提是不同指针的权限不同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#然后才有了赋值规则"><span class="nav-number">4.2.</span> <span class="nav-text">然后才有了赋值规则</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#斗胆扯内存"><span class="nav-number">5.</span> <span class="nav-text">斗胆扯内存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结论"><span class="nav-number">6.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
