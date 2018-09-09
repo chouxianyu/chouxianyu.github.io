@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>https://chouxianyu.github.io/2018/09/09/%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E7%9A%84%E8%B7%AF%E5%BE%84/</loc>
+    <lastmod>2018-09-09T09:57:08.648Z</lastmod>
+    <data>
+        <display>
+        <title>如何获取文件夹下所有文件的路径</title>
+        <pubTime>2018-09-09T09:46:38.000Z</pubTime>
+        
+        <tag>c/c++</tag>
+         
+        <tag>文件</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chouxianyu.github.io/2018/08/26/%E5%B8%B8%E9%87%8F%E6%8C%87%E9%92%88%E4%B8%8E%E6%8C%87%E9%92%88%E5%B8%B8%E9%87%8F/</loc>
     <lastmod>2018-09-01T13:55:10.583Z</lastmod>
     <data>
@@ -11,9 +30,9 @@
         <title>常量指针与指针常量</title>
         <pubTime>2018-08-25T19:49:34.000Z</pubTime>
         
-        <tag>指针</tag>
-         
         <tag>c/c++</tag>
+         
+        <tag>指针</tag>
          
          
            
@@ -30,9 +49,9 @@
         <title>指针间的互相赋值</title>
         <pubTime>2018-09-01T13:40:11.000Z</pubTime>
         
-        <tag>指针</tag>
-         
         <tag>c/c++</tag>
+         
+        <tag>指针</tag>
          
          
            
