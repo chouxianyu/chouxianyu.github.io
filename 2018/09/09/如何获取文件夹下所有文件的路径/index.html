@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
 <meta property="og:description" content="代码getFiles()函数的作用： path是一个文件夹路径，函数在path文件夹下寻找所有文件（包括子文件夹下的文件），然后将所有文件的路径存入files 12345678910111213141516171819202122232425#include &amp;lt;io.h&amp;gt;	//实现功能需要包含头文件io.hvoid getFiles(string path, vector&amp;lt;str">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-09T09:57:08.648Z">
+<meta property="og:updated_time" content="2018-09-09T10:08:55.269Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何获取文件夹下所有文件的路径">
 <meta name="twitter:description" content="代码getFiles()函数的作用： path是一个文件夹路径，函数在path文件夹下寻找所有文件（包括子文件夹下的文件），然后将所有文件的路径存入files 12345678910111213141516171819202122232425#include &amp;lt;io.h&amp;gt;	//实现功能需要包含头文件io.hvoid getFiles(string path, vector&amp;lt;str">
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  851 字
+                  858 字
                 </span>
               
 
@@ -430,7 +430,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _A_NORMAL 0x00 <span class="comment">// Normal file - No read/write restrictions</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _A_RDONLY 0x01 <span class="comment">// Read only file</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _A_HIDDEN 0x02 <span class="comment">// Hidden file</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _A_SYSTEM 0x04 <span class="comment">// System file</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _A_SUBDIR 0x10 <span class="comment">// Subdirectory</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _A_ARCH   0x20 <span class="comment">// Archive file</span></span></span><br></pre></td></tr></table></figure>
 <p>成员<code>name</code>就是文件名字嘛…</p>
 <h2 id="findfirst"><a href="#findfirst" class="headerlink" title="_findfirst"></a><code>_findfirst</code></h2><p>第一个参数是标明文件的字符串，可支持通配符：<code>*.c</code>代表后缀为.c的文件，<code>*</code>就代表所有文件</p>
-<p>第二个参数是<code>_finddata_t</code>的地址，用来保存文件信息。</p>
+<p>第二个参数是<code>_finddata_t</code>类型变量的地址。该变量用来保存文件信息。</p>
 <p><strong>这有坑</strong></p>
 <p>我跟网上有点不同的是，网上我看到的例子定义的<code>hFile</code>都是<code>long</code>型，我用<code>long</code>型打开文件就出问题了。</p>
 <p>其实VS已经警告了<code>warning C4244: “=”: 从“intptr_t”转换到“long”，可能丢失数据</code>。</p>
