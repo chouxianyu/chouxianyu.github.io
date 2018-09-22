@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Java," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
-<meta name="keywords" content="臭咸鱼">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="https://chouxianyu.github.io/tags/index.html">
+<meta name="description" content="问题引入做Java作业从标准输入流用到了System.in.read(),然后出现了bug。 1234567891011121314151617181920212223//随机生成一个小写字母，用户猜5次，读取用户输入，并判断是否猜对import java.io.IOException;public class LetterGuessing &amp;#123;	public static void ma">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java字节流read函数">
+<meta property="og:url" content="https://chouxianyu.github.io/2018/09/22/Java字节流read函数/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
+<meta property="og:description" content="问题引入做Java作业从标准输入流用到了System.in.read(),然后出现了bug。 1234567891011121314151617181920212223//随机生成一个小写字母，用户猜5次，读取用户输入，并判断是否猜对import java.io.IOException;public class LetterGuessing &amp;#123;	public static void ma">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-25T19:43:03.591Z">
+<meta property="og:updated_time" content="2018-09-22T14:51:32.719Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
-<meta name="twitter:description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
+<meta name="twitter:title" content="Java字节流read函数">
+<meta name="twitter:description" content="问题引入做Java作业从标准输入流用到了System.in.read(),然后出现了bug。 1234567891011121314151617181920212223//随机生成一个小写字母，用户猜5次，读取用户输入，并判断是否猜对import java.io.IOException;public class LetterGuessing &amp;#123;	public static void ma">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://chouxianyu.github.io/tags/"/>
+  <link rel="canonical" href="https://chouxianyu.github.io/2018/09/22/Java字节流read函数/"/>
 
 
 
 
 
-  <title>tags | 臭咸鱼的缺氧瓶</title>
+  <title>Java字节流read函数 | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -287,40 +287,244 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2018/09/22/Java字节流read函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                8 tags in total
+          <h1 class="post-title" itemprop="name headline">Java字节流read函数</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-22T22:50:12+08:00">
+                2018-09-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/22/Java字节流read函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/09/22/Java字节流read函数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/09/22/Java字节流read函数/" class="leancloud_visitors" data-flag-title="Java字节流read函数">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  994 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4 分
+                </span>
+              
             </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/JAI/" style="font-size: 12px; color: #ccc">JAI</a> <a href="/tags/Java/" style="font-size: 12px; color: #ccc">Java</a> <a href="/tags/c-c/" style="font-size: 30px; color: #111">c/c++</a> <a href="/tags/hexo/" style="font-size: 12px; color: #ccc">hexo</a> <a href="/tags/markdown/" style="font-size: 12px; color: #ccc">markdown</a> <a href="/tags/指针/" style="font-size: 21px; color: #6f6f6f">指针</a> <a href="/tags/文件/" style="font-size: 12px; color: #ccc">文件</a> <a href="/tags/算法/" style="font-size: 12px; color: #ccc">算法</a>
-            </div>
-          </div>
-        
-      </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h1><p>做Java作业从标准输入流用到了<code>System.in.read()</code>,然后出现了bug。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//随机生成一个小写字母，用户猜5次，读取用户输入，并判断是否猜对</span></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LetterGuessing</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="keyword">char</span> ch,answer;</span><br><span class="line">		<span class="comment">//随机生成字母</span></span><br><span class="line">		answer=(<span class="keyword">char</span>)(Math.random()*<span class="number">26</span>+<span class="string">'a'</span>);</span><br><span class="line">		System.out.print(<span class="string">"请输入一个小写字母："</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">5</span>;i++) &#123;</span><br><span class="line">			<span class="comment">//获取用户输入，可能抛出异常</span></span><br><span class="line">			ch=(<span class="keyword">char</span>)System.in.read();</span><br><span class="line">			<span class="comment">//比较大小</span></span><br><span class="line">			<span class="keyword">if</span>(ch == answer)&#123;</span><br><span class="line">				System.out.println(<span class="string">"恭喜，正确！用了"</span>+i+<span class="string">"次猜对"</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(ch &gt; answer)</span><br><span class="line">				System.out.println(<span class="string">"您猜大了，还有"</span>+ (<span class="number">5</span>-i) +<span class="string">"次机会"</span>);</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				System.out.println(<span class="string">"您猜小了，还有"</span>+ (<span class="number">5</span>-i) +<span class="string">"次机会"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输入a，按下Enter,却没有等我下次输入，循环就运行了三次。</p>
+<h1 id="问题来源"><a href="#问题来源" class="headerlink" title="问题来源"></a>问题来源</h1><p><code>System.in.read()</code>按字节读，一次读入一个字节。</p>
+<p>为什么a+Enter,会变成a\r\n呢</p>
+<p>Windows下存在两种文件读写方式，一个是二进制方式，另一种是文本方式。</p>
+<p><strong>文本方式</strong>中写时”换行”会变成”回车-换行”，即\r\n；读时”回车-换行”会变成”换行”。</p>
+<p><strong>二进制方式</strong>中读写是严格按照一个字节一个字节进行的。</p>
+<p><strong>在这里虽然没有用到文件，但道理应该是一样的</strong></p>
+<p>用<code>read()</code>函数是按照一个字节一个字节读取的，即二进制方式。</p>
+<p>可能可以推导出，我们向输入流中输入数据默认是按照文本方式。</p>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>在代码第10行后，加两行<code>System.in.read()</code>;</p>
+<p>目的是读取掉输入流中的/r和/n。</p>
+<p>这种方法的局限性就是输入字母后不能加空格，它不会使空格从输入流中删除。</p>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>不用<code>read()</code>读取，用以下代码代替</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Scanner;</span><br><span class="line">Scanner input=new Scanner(System.in);</span><br><span class="line">ch=input.next().charAt(0);</span><br></pre></td></tr></table></figure>
+<p>这种方法就比较好，读取字符串（忽略空格和换行，空格和换行不会留在输入流里），删去然后取字符串的第一个字符。</p>
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><h2 id="System-in"><a href="#System-in" class="headerlink" title="System.in"></a><code>System.in</code></h2><p>官方文档：<a href="https://docs.oracle.com/javase/10/docs/api/java/lang/System.html#in" target="_blank" rel="noopener">https://docs.oracle.com/javase/10/docs/api/java/lang/System.html#in</a></p>
+<p><code>System</code>是个类，in是<code>System</code>的一个成员，官方介绍如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> InputStream in</span><br></pre></td></tr></table></figure>
+<p>The “standard” input stream. This stream is already  open and ready to supply input data. Typically this stream  corresponds to keyboard input or another input source specified by  the host environment or user.</p>
+<p><code>in</code>是一个<code>InputStream</code>类型的对象,所以只需要了解<code>InputStream</code>即可。</p>
+<h2 id="InputStream"><a href="#InputStream" class="headerlink" title="InputStream"></a><code>InputStream</code></h2><p>官方文档： <a href="https://docs.oracle.com/javase/10/docs/api/java/io/InputStream.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/10/docs/api/java/io/InputStream.html</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">InputStream</span>	//抽象类</span></span><br><span class="line"><span class="class"><span class="keyword">extends</span> <span class="title">Object</span>			//继承<span class="title">Object</span>类</span></span><br><span class="line"><span class="class"><span class="keyword">implements</span> <span class="title">Closeable</span>	//实现<span class="title">Closeable</span>接口</span></span><br></pre></td></tr></table></figure>
+<p>官方介绍如下：</p>
+<p>This abstract class is the superclass of all classes representing  an input stream of bytes.</p>
+<p>翻译为：这个抽象类是所有字节流类的父类。</p>
+<p>字节流的含义：<strong>读取方式为一个字节一个字节地读取</strong>,而字符流是二个字节二个字节的读。</p>
+<p>Applications that need to define a subclass of <code>InputStream</code>  must always provide a method that returns the next byte of input.</p>
+<p>翻译为：需要定义一个<code>InputStream</code>子类的应用必须提供一个返回输入下一字节的方法（函数）。</p>
+<h2 id="read"><a href="#read" class="headerlink" title="read()"></a><code>read()</code></h2><p>官方文档：<a href="https://docs.oracle.com/javase/10/docs/api/java/io/InputStream.html#read()" target="_blank" rel="noopener">https://docs.oracle.com/javase/10/docs/api/java/io/InputStream.html#read()</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">				<span class="keyword">throws</span> IOException</span></span><br></pre></td></tr></table></figure>
+<p>Reads the next byte of data from the input stream. The value byte is returned as an <code>int</code> in the range <code>0</code> to<code>255</code>.</p>
+<p>这个是重点，它<strong>返回下一字节的ASCII码</strong></p>
+<p>If no byte is available because the end of the stream has been reached, the value <code>-1</code> is returned. This method blocks until input data is available, the end of the stream is detected, or an exception is thrown.</p>
+<p>A subclass must provide an implementation of this method.</p>
+<p><strong>Returns:</strong></p>
+<p>the next byte of data, or <code>-1</code> if the end of the stream is reached.</p>
+<p><strong>Throws:</strong></p>
+<p><code>IOException</code> - if an I/O error occurs.</p>
+<p>作者：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p>
+<p>本文为作者原创，转载请注明出处：<a href="https://chouxianyu.github.io/2018/09/22/Java字节流read函数/#more">https://chouxianyu.github.io/2018/09/22/Java字节流read函数/#more</a></p>
+<p>欢迎转发和评论</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/09/如何获取文件夹下所有文件的路径/" rel="next" title="如何获取文件夹下所有文件的路径">
+                <i class="fa fa-chevron-left"></i> 如何获取文件夹下所有文件的路径
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
   </div>
 
 
@@ -356,8 +560,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -433,6 +646,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题引入"><span class="nav-number">1.</span> <span class="nav-text">问题引入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题来源"><span class="nav-number">2.</span> <span class="nav-text">问题来源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决方法"><span class="nav-number">3.</span> <span class="nav-text">解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一"><span class="nav-number">3.1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二"><span class="nav-number">3.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点"><span class="nav-number">4.</span> <span class="nav-text">知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#System-in"><span class="nav-number">4.1.</span> <span class="nav-text">System.in</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InputStream"><span class="nav-number">4.2.</span> <span class="nav-text">InputStream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#read"><span class="nav-number">4.3.</span> <span class="nav-text">read()</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
