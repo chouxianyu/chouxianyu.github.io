@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="问题引入做Java作业从标准输入流用到了System.in.read(),然后出现了bug。 1234567891011121314151617181920212223//随机生成一个小写字母，用户猜5次，读取用户输入，并判断是否猜对import java.io.IOException;public class LetterGuessing &amp;#123;	public static void ma">
+<meta name="description" content="问题引入做Java作业从标准输入流获取用户输入，用到了System.in.read(),然后出现了bug。 1234567891011121314151617181920212223//随机生成一个小写字母，用户猜5次，读取用户输入，并判断是否猜对import java.io.IOException;public class LetterGuessing &amp;#123;	public static">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java字节流read函数">
 <meta property="og:url" content="https://chouxianyu.github.io/2018/09/22/Java字节流read函数/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="问题引入做Java作业从标准输入流用到了System.in.read(),然后出现了bug。 1234567891011121314151617181920212223//随机生成一个小写字母，用户猜5次，读取用户输入，并判断是否猜对import java.io.IOException;public class LetterGuessing &amp;#123;	public static void ma">
+<meta property="og:description" content="问题引入做Java作业从标准输入流获取用户输入，用到了System.in.read(),然后出现了bug。 1234567891011121314151617181920212223//随机生成一个小写字母，用户猜5次，读取用户输入，并判断是否猜对import java.io.IOException;public class LetterGuessing &amp;#123;	public static">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-22T14:51:32.719Z">
+<meta property="og:updated_time" content="2018-09-22T15:04:18.718Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java字节流read函数">
-<meta name="twitter:description" content="问题引入做Java作业从标准输入流用到了System.in.read(),然后出现了bug。 1234567891011121314151617181920212223//随机生成一个小写字母，用户猜5次，读取用户输入，并判断是否猜对import java.io.IOException;public class LetterGuessing &amp;#123;	public static void ma">
+<meta name="twitter:description" content="问题引入做Java作业从标准输入流获取用户输入，用到了System.in.read(),然后出现了bug。 1234567891011121314151617181920212223//随机生成一个小写字母，用户猜5次，读取用户输入，并判断是否猜对import java.io.IOException;public class LetterGuessing &amp;#123;	public static">
 
 
 
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  994 字
+                  1,030 字
                 </span>
               
 
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  4 分
+                  5 分
                 </span>
               
             </div>
@@ -418,23 +418,24 @@
       
 
       
-        <h1 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h1><p>做Java作业从标准输入流用到了<code>System.in.read()</code>,然后出现了bug。</p>
+        <h1 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h1><p>做Java作业从标准输入流获取用户输入，用到了<code>System.in.read()</code>,然后出现了bug。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//随机生成一个小写字母，用户猜5次，读取用户输入，并判断是否猜对</span></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LetterGuessing</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="keyword">char</span> ch,answer;</span><br><span class="line">		<span class="comment">//随机生成字母</span></span><br><span class="line">		answer=(<span class="keyword">char</span>)(Math.random()*<span class="number">26</span>+<span class="string">'a'</span>);</span><br><span class="line">		System.out.print(<span class="string">"请输入一个小写字母："</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">5</span>;i++) &#123;</span><br><span class="line">			<span class="comment">//获取用户输入，可能抛出异常</span></span><br><span class="line">			ch=(<span class="keyword">char</span>)System.in.read();</span><br><span class="line">			<span class="comment">//比较大小</span></span><br><span class="line">			<span class="keyword">if</span>(ch == answer)&#123;</span><br><span class="line">				System.out.println(<span class="string">"恭喜，正确！用了"</span>+i+<span class="string">"次猜对"</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(ch &gt; answer)</span><br><span class="line">				System.out.println(<span class="string">"您猜大了，还有"</span>+ (<span class="number">5</span>-i) +<span class="string">"次机会"</span>);</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				System.out.println(<span class="string">"您猜小了，还有"</span>+ (<span class="number">5</span>-i) +<span class="string">"次机会"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输入a，按下Enter,却没有等我下次输入，循环就运行了三次。</p>
-<h1 id="问题来源"><a href="#问题来源" class="headerlink" title="问题来源"></a>问题来源</h1><p><code>System.in.read()</code>按字节读，一次读入一个字节。</p>
-<p>为什么a+Enter,会变成a\r\n呢</p>
-<p>Windows下存在两种文件读写方式，一个是二进制方式，另一种是文本方式。</p>
+<p>输入字符<code>&#39;a&#39;</code>，按下Enter,却没有等我下次输入，循环就运行了三次。</p>
+<h1 id="问题来源"><a href="#问题来源" class="headerlink" title="问题来源"></a>问题来源</h1><p><code>System.in.read()</code>按字节读，一次读入一个字节。后边有详细讲解。</p>
+<p>经调试，可知三次循环中<code>ch</code>分别为<code>a</code>,<code>\r</code>,<code>\n</code>。</p>
+<p><strong>为什么a+Enter,会变成a\r\n呢</strong></p>
+<p><strong>Windows下存在两种文件读写方式，一个是二进制方式，另一种是文本方式</strong>。</p>
 <p><strong>文本方式</strong>中写时”换行”会变成”回车-换行”，即\r\n；读时”回车-换行”会变成”换行”。</p>
-<p><strong>二进制方式</strong>中读写是严格按照一个字节一个字节进行的。</p>
+<p><strong>二进制方式</strong>中读写是严格按照一个字节一个字节的方式进行的。</p>
 <p><strong>在这里虽然没有用到文件，但道理应该是一样的</strong></p>
 <p>用<code>read()</code>函数是按照一个字节一个字节读取的，即二进制方式。</p>
 <p>可能可以推导出，我们向输入流中输入数据默认是按照文本方式。</p>
 <h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>在代码第10行后，加两行<code>System.in.read()</code>;</p>
 <p>目的是读取掉输入流中的/r和/n。</p>
-<p>这种方法的局限性就是输入字母后不能加空格，它不会使空格从输入流中删除。</p>
+<p>这种方法的局限性就是输入字母前后不能加空格，因为它不会使空格从输入流中删除。</p>
 <h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>不用<code>read()</code>读取，用以下代码代替</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Scanner;</span><br><span class="line">Scanner input=new Scanner(System.in);</span><br><span class="line">ch=input.next().charAt(0);</span><br></pre></td></tr></table></figure>
-<p>这种方法就比较好，读取字符串（忽略空格和换行，空格和换行不会留在输入流里），删去然后取字符串的第一个字符。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line">Scanner input=<span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">ch=input.next().charAt(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p>这种方法就比较好，读取字符串（忽略空格和换行，空格和换行不会留在输入流里），然后取字符串的第一个字符。</p>
 <h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><h2 id="System-in"><a href="#System-in" class="headerlink" title="System.in"></a><code>System.in</code></h2><p>官方文档：<a href="https://docs.oracle.com/javase/10/docs/api/java/lang/System.html#in" target="_blank" rel="noopener">https://docs.oracle.com/javase/10/docs/api/java/lang/System.html#in</a></p>
 <p><code>System</code>是个类，in是<code>System</code>的一个成员，官方介绍如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> InputStream in</span><br></pre></td></tr></table></figure>
@@ -690,7 +691,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">9.5k</span>
+    <span title="Site words total count">9.6k</span>
   
 </div>
 
