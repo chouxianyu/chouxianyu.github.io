@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2018-11-03T02:25:06.981Z</updated>
+  <updated>2019-01-18T01:22:08.499Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,77 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo不蒜子网站访问量统计失效</title>
+    <link href="https://chouxianyu.github.io/2019/01/17/hexo%E4%B8%8D%E8%92%9C%E5%AD%90%E7%BD%91%E7%AB%99%E8%AE%BF%E9%97%AE%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%A4%B1%E6%95%88/"/>
+    <id>https://chouxianyu.github.io/2019/01/17/hexo不蒜子网站访问量统计失效/</id>
+    <published>2019-01-17T15:34:23.000Z</published>
+    <updated>2019-01-18T01:22:08.499Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>hexo博客的<a href="http://ibruce.info/" target="_blank" rel="noopener">不蒜子</a>网站访问量统计最近失效了</p><h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>不蒜子域名更改了，所以需要修改博客的配置文件。</p><h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>进入<strong>博客目录</strong>下<code>\themes\next\layout\_third-party\analytics</code>，（我用的是next主题，如果用的是别的主题，就进入对应主题文件夹。）</p><p>打开文件<code>busuanzi-counter.swig</code></p><p>将<code>&lt;script async src=&quot;https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</code></p><p>修改为<code>&lt;script async src=&quot;https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</code></p><p>不知道为什么空格显示的比较宽，但经验证，复制下来是一个正常的空格，可以复制下来使用。</p><p>其他不变。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h1&gt;&lt;p&gt;hexo博客的&lt;a href=&quot;http://ibruce.info/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;不蒜
+      
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="https://chouxianyu.github.io/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>bash: hexo: command not found</title>
+    <link href="https://chouxianyu.github.io/2019/01/17/bash-hexo-command-not-found/"/>
+    <id>https://chouxianyu.github.io/2019/01/17/bash-hexo-command-not-found/</id>
+    <published>2019-01-17T15:05:33.000Z</published>
+    <updated>2019-01-18T01:25:29.653Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>很久没写博客了，今天用<code>hexo</code>新建文章时<code>git</code>报错：</p><p><code>bash: hexo: command not found</code></p><h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><p>百度之后，将<code>D:\WorkingSoftware\GithubBlog\node_modules\.bin</code>添加进PATH，问题解决。</p><p>加的时候发现path里确实没有这个路径……..不知道为什么会没有</p><p>路径中的<code>GithubBlog</code>是我的博客文件夹，你用的时候改成你的路径，即<code>XXX你的Blog目录XXX\node_modules\.bin</code></p><h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>可能是因为我今天更新<code>npm</code>了？</p><p>或者是因为我这两天改了计算机用户名(用户名在其他地方用到了，中文是宽字符，会出错)，造成了很多麻烦，差点edge都坏了。</p><p><strong>所以告诫大家用户名尽量一开始就用英文，不要用中文</strong>。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h1&gt;&lt;p&gt;很久没写博客了，今天用&lt;code&gt;hexo&lt;/code&gt;新建文章时&lt;code&gt;git&lt;/code&gt;报错：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash
+      
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="https://chouxianyu.github.io/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello React</title>
+    <link href="https://chouxianyu.github.io/2019/01/17/Hello-React/"/>
+    <id>https://chouxianyu.github.io/2019/01/17/Hello-React/</id>
+    <published>2019-01-17T15:03:29.000Z</published>
+    <updated>2019-01-18T01:33:17.590Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>以下是html代码，复制代码到html文件，可直接运行。</p><p>(请关注<code>&lt;body&gt;&lt;/body&gt;</code>里的JS代码和注释)：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"ie=edge"</span>&gt;</span><br><span class="line">    &lt;title&gt;helloReact&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=<span class="string">"app"</span>&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script type=<span class="string">"text/babel"</span>&gt;</span><br><span class="line">        ReactDOM.render(        </span><br><span class="line">            <span class="comment">//代码块①开始</span></span><br><span class="line">        &lt;h1&gt;hello world!&lt;/h1&gt;,      </span><br><span class="line">            <span class="comment">//代码块①结束，注意结束有个逗号</span></span><br><span class="line">            <span class="built_in">document</span>.getElementById(<span class="string">"app"</span>)</span><br><span class="line"><span class="comment">//上一行代码(结尾没有分号)将代码块①放入上边的 &lt;div id="app"&gt;&lt;/div&gt;，F12检查元素可以看到效果。</span></span><br><span class="line">        )</span><br><span class="line">    &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/两个和react相关的脚本文件</span></span><br><span class="line"><span class="regexp">    &lt;script src="https:/</span><span class="regexp">/cdn.bootcss.com/</span>react/<span class="number">16.7</span><span class="number">.0</span>/umd/react.development.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">    &lt;script src="</span>https:<span class="comment">//cdn.bootcss.com/react-dom/16.7.0/umd/react-dom.development.js"&gt;&lt;/script&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//babel文件，作用是解码，详情请参考ES6</span></span><br><span class="line">&lt;script src=<span class="string">"https://cdn.bootcss.com/babel-standalone/7.0.0-beta.3/babel.js"</span>&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure><h1 id="运行效果"><a href="#运行效果" class="headerlink" title="运行效果"></a>运行效果</h1><p><img src="https://i.loli.net/2019/01/17/5c40945603277.png" alt="效果.png"></p><h1 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h1><h2 id="F12检查元素"><a href="#F12检查元素" class="headerlink" title="F12检查元素"></a>F12检查元素</h2><p>可以看到<code>代码块①</code>被添加进<code>id</code>为<code>app</code>的<code>&lt;div&gt;</code></p><p><img src="https://i.loli.net/2019/01/17/5c40921611250.png" alt="代码块①被添加进id为app的div"></p><h2 id="转码效果"><a href="#转码效果" class="headerlink" title="转码效果"></a>转码效果</h2><p><a href="https://babeljs.io/" target="_blank" rel="noopener">babel官网</a>转码（进入官网后点击Try it out）。关于什么是babel，参看ES6（我还不会hh）。</p><p>左边是JSX语法，方便我们写代码。</p><p><img src="https://i.loli.net/2019/01/17/5c409321e7087.png" alt="通过babel转码"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;代码&quot;&gt;&lt;a href=&quot;#代码&quot; class=&quot;headerlink&quot; title=&quot;代码&quot;&gt;&lt;/a&gt;代码&lt;/h1&gt;&lt;p&gt;以下是html代码，复制代码到html文件，可直接运行。&lt;/p&gt;
+&lt;p&gt;(请关注&lt;code&gt;&amp;lt;body&amp;gt;&amp;lt;/body&amp;gt
+      
+    
+    </summary>
+    
+    
+      <category term="react" scheme="https://chouxianyu.github.io/tags/react/"/>
+    
+  </entry>
   
   <entry>
     <title>java.util.NoSuchElementException</title>
@@ -112,9 +183,9 @@
     </summary>
     
     
-      <category term="c/c++" scheme="https://chouxianyu.github.io/tags/c-c/"/>
-    
       <category term="指针" scheme="https://chouxianyu.github.io/tags/%E6%8C%87%E9%92%88/"/>
+    
+      <category term="c/c++" scheme="https://chouxianyu.github.io/tags/c-c/"/>
     
   </entry>
   
@@ -166,9 +237,9 @@
     </summary>
     
     
-      <category term="c/c++" scheme="https://chouxianyu.github.io/tags/c-c/"/>
-    
       <category term="指针" scheme="https://chouxianyu.github.io/tags/%E6%8C%87%E9%92%88/"/>
+    
+      <category term="c/c++" scheme="https://chouxianyu.github.io/tags/c-c/"/>
     
   </entry>
   

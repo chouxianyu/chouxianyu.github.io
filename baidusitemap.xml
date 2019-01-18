@@ -4,6 +4,57 @@
 
     
   <url>
+    <loc>https://chouxianyu.github.io/2019/01/17/Hello-React/</loc>
+    <lastmod>2019-01-18T01:33:17.590Z</lastmod>
+    <data>
+        <display>
+        <title>Hello React</title>
+        <pubTime>2019-01-17T15:03:29.000Z</pubTime>
+        
+        <tag>react</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/17/bash-hexo-command-not-found/</loc>
+    <lastmod>2019-01-18T01:25:29.653Z</lastmod>
+    <data>
+        <display>
+        <title>bash: hexo: command not found</title>
+        <pubTime>2019-01-17T15:05:33.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/17/hexo%E4%B8%8D%E8%92%9C%E5%AD%90%E7%BD%91%E7%AB%99%E8%AE%BF%E9%97%AE%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%A4%B1%E6%95%88/</loc>
+    <lastmod>2019-01-18T01:22:08.499Z</lastmod>
+    <data>
+        <display>
+        <title>hexo不蒜子网站访问量统计失效</title>
+        <pubTime>2019-01-17T15:34:23.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chouxianyu.github.io/2018/11/03/java.util.NoSuchElementException/</loc>
     <lastmod>2018-11-03T02:25:06.981Z</lastmod>
     <data>
@@ -64,9 +115,9 @@
         <title>常量指针与指针常量</title>
         <pubTime>2018-08-25T19:49:34.000Z</pubTime>
         
-        <tag>c/c++</tag>
-         
         <tag>指针</tag>
+         
+        <tag>c/c++</tag>
          
          
            
@@ -83,9 +134,9 @@
         <title>指针间的互相赋值</title>
         <pubTime>2018-09-01T13:40:11.000Z</pubTime>
         
-        <tag>c/c++</tag>
-         
         <tag>指针</tag>
+         
+        <tag>c/c++</tag>
          
          
            
