@@ -90,7 +90,7 @@
 <meta property="og:description" content="输出动态数据就是输出表达式。 表达式就是2+2，变量等等。 现在在Home.js中输出动态数据。 代码注意代码中的第19行 12345678910111213141516171819202122232425262728import React, &amp;#123; Component &amp;#125; from &apos;react&apos;; //固定写法export class Home extends Compone">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/01/18/5c41dc5411332.png">
-<meta property="og:updated_time" content="2019-01-18T14:03:02.490Z">
+<meta property="og:updated_time" content="2019-01-19T02:50:19.545Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React学习（五）之输出动态数据">
 <meta name="twitter:description" content="输出动态数据就是输出表达式。 表达式就是2+2，变量等等。 现在在Home.js中输出动态数据。 代码注意代码中的第19行 12345678910111213141516171819202122232425262728import React, &amp;#123; Component &amp;#125; from &apos;react&apos;; //固定写法export class Home extends Compone">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  163 字
+                  151 字
                 </span>
               
 
@@ -424,7 +424,7 @@
 <p>表达式就是2+2，变量等等。</p>
 <p>现在在<code>Home.js</code>中输出动态数据。</p>
 <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>注意代码中的第19行</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>; <span class="comment">//固定写法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">Home</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123; <span class="comment">//ES6写法</span></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">let</span> content=<span class="string">""</span>;</span><br><span class="line">    <span class="keyword">let</span> flag=<span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">      content=<span class="string">"cbh"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      content=<span class="string">"cxy"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div className=<span class="string">"Container"</span>&gt;</span><br><span class="line">        &lt;div className=<span class="string">"row"</span>&gt;</span><br><span class="line">          &lt;div className=<span class="string">"col-xs-1 col-xs-offset-11"</span>&gt;</span><br><span class="line">            &lt;h1&gt;Home&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">            &#123;content&#125;</span></span><br><span class="line"><span class="regexp">            </span></span><br><span class="line"><span class="regexp">          &lt;/</span>div&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Home;</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>; <span class="comment">//固定写法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">Home</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123; <span class="comment">//ES6写法</span></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">let</span> content=<span class="string">""</span>;</span><br><span class="line">    <span class="keyword">let</span> flag=<span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">      content=<span class="string">"cbh"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      content=<span class="string">"cxy"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">            &lt;h1&gt;Home&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">            &#123;content&#125;</span></span><br><span class="line"><span class="regexp">            </span></span><br><span class="line"><span class="regexp">          &lt;/</span>div&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Home;</span><br></pre></td></tr></table></figure>
 <h1 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h1><p><a href="https://i.loli.net/2019/01/18/5c41dc5411332.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/18/5c41dc5411332.png" alt="输出动态数据效果展示.png"></a></p>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>本文为作者原创，转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
@@ -468,6 +468,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/19/React学习（六）之父组件向子组件传值/" rel="prev" title="React学习（六）之父组件向子组件传值">
+                React学习（六）之父组件向子组件传值 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -557,7 +561,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -658,7 +662,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">13.1k</span>
+    <span title="Site words total count">14.7k</span>
   
 </div>
 

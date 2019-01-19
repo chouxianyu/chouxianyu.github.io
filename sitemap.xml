@@ -2,23 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%94%EF%BC%89%E4%B9%8B%E8%BE%93%E5%87%BA%E5%8A%A8%E6%80%81%E6%95%B0%E6%8D%AE/</loc>
+    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AB%EF%BC%89%E4%B9%8B%E7%BB%84%E4%BB%B6%E7%9A%84state%E5%B1%9E%E6%80%A7/</loc>
     
-    <lastmod>2019-01-18T14:03:02.490Z</lastmod>
+    <lastmod>2019-01-19T13:35:05.882Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%BB%84%E4%BB%B6/</loc>
+    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/</loc>
     
-    <lastmod>2019-01-18T13:55:39.466Z</lastmod>
+    <lastmod>2019-01-19T13:31:58.429Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B9%9D%EF%BC%89%E4%B9%8Breact%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0dom/</loc>
+    
+    <lastmod>2019-01-19T13:28:42.187Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B9%8B%E4%BA%8B%E4%BB%B6/</loc>
+    
+    <lastmod>2019-01-19T13:27:07.799Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%94%EF%BC%89%E4%B9%8B%E8%BE%93%E5%87%BA%E5%8A%A8%E6%80%81%E6%95%B0%E6%8D%AE/</loc>
+    
+    <lastmod>2019-01-19T02:50:19.545Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8B%E5%A4%9A%E4%B8%AA%E7%BB%84%E4%BB%B6/</loc>
     
-    <lastmod>2019-01-18T13:45:09.715Z</lastmod>
+    <lastmod>2019-01-19T02:48:55.009Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%BB%84%E4%BB%B6/</loc>
+    
+    <lastmod>2019-01-19T02:45:20.988Z</lastmod>
     
   </url>
   
