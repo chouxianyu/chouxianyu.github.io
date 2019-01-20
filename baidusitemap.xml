@@ -4,34 +4,216 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AB%EF%BC%89%E4%B9%8B%E7%BB%84%E4%BB%B6%E7%9A%84state%E5%B1%9E%E6%80%A7/</loc>
-    <lastmod>2019-01-19T13:35:05.882Z</lastmod>
+    <loc>https://chouxianyu.github.io/2018/08/16/FirstWriting/</loc>
+    <lastmod>2019-01-20T14:05:28.619Z</lastmod>
     <data>
         <display>
-        <title>React学习（八）之组件的state属性</title>
-        <pubTime>2019-01-19T06:11:58.000Z</pubTime>
+        <title>FirstWriting</title>
+        <pubTime>2018-08-16T07:53:07.000Z</pubTime>
         
-        <tag>react</tag>
-         
          
            
+             
+              <breadCrumb title="markdown" url="https://chouxianyu.github.io/categories/markdown/"/>
+          
         </display>
     </data>
     </url>
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/</loc>
-    <lastmod>2019-01-19T13:31:58.429Z</lastmod>
+    <loc>https://chouxianyu.github.io/2019/01/17/bash-hexo-command-not-found/</loc>
+    <lastmod>2019-01-20T14:02:22.001Z</lastmod>
     <data>
         <display>
-        <title>React学习（六）之父组件向子组件传值</title>
-        <pubTime>2019-01-19T06:10:57.000Z</pubTime>
+        <title>bash: hexo: command not found</title>
+        <pubTime>2019-01-17T15:05:33.000Z</pubTime>
         
-        <tag>react</tag>
+        <tag>Bug</tag>
          
          
            
+             
+              <breadCrumb title="hexo" url="https://chouxianyu.github.io/categories/hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2018/08/10/hello-world/</loc>
+    <lastmod>2019-01-20T14:00:47.941Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2018-08-10T12:24:19.691Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="hexo" url="https://chouxianyu.github.io/categories/hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/17/hexo%E4%B8%8D%E8%92%9C%E5%AD%90%E7%BD%91%E7%AB%99%E8%AE%BF%E9%97%AE%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%A4%B1%E6%95%88/</loc>
+    <lastmod>2019-01-20T14:00:21.588Z</lastmod>
+    <data>
+        <display>
+        <title>hexo不蒜子网站访问量统计失效</title>
+        <pubTime>2019-01-17T15:34:23.000Z</pubTime>
+        
+        <tag>Bug</tag>
+         
+         
+           
+             
+              <breadCrumb title="hexo" url="https://chouxianyu.github.io/categories/hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2018/08/22/JAI%E4%B8%A2%E5%8C%85%E6%8E%89%E5%B8%A7%E5%A4%84%E7%90%86/</loc>
+    <lastmod>2019-01-20T14:00:08.929Z</lastmod>
+    <data>
+        <display>
+        <title>JAI丢包掉帧处理</title>
+        <pubTime>2018-08-22T05:34:40.000Z</pubTime>
+        
+        <tag>Bug</tag>
+         
+         
+           
+             
+              <breadCrumb title="JAI" url="https://chouxianyu.github.io/categories/JAI/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2018/11/03/java.util.NoSuchElementException/</loc>
+    <lastmod>2019-01-20T13:59:47.178Z</lastmod>
+    <data>
+        <display>
+        <title>java.util.NoSuchElementException</title>
+        <pubTime>2018-11-03T02:23:02.000Z</pubTime>
+        
+        <tag>Bug</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="https://chouxianyu.github.io/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2018/09/22/Java%E5%AD%97%E8%8A%82%E6%B5%81read%E5%87%BD%E6%95%B0/</loc>
+    <lastmod>2019-01-20T13:59:31.353Z</lastmod>
+    <data>
+        <display>
+        <title>Java字节流read函数</title>
+        <pubTime>2018-09-22T14:50:12.000Z</pubTime>
+        
+        <tag>Bug</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="https://chouxianyu.github.io/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2018/09/01/%E6%8C%87%E9%92%88%E9%97%B4%E7%9A%84%E4%BA%92%E7%9B%B8%E8%B5%8B%E5%80%BC/</loc>
+    <lastmod>2019-01-20T13:59:00.939Z</lastmod>
+    <data>
+        <display>
+        <title>指针间的互相赋值</title>
+        <pubTime>2018-09-01T13:40:11.000Z</pubTime>
+        
+        <tag>指针</tag>
+         
+         
+           
+             
+              <breadCrumb title="C/C++" url="https://chouxianyu.github.io/categories/C-C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2018/09/01/%E7%89%A9%E4%B8%8D%E7%9F%A5%E5%85%B6%E6%95%B0/</loc>
+    <lastmod>2019-01-20T13:58:35.641Z</lastmod>
+    <data>
+        <display>
+        <title>物不知其数</title>
+        <pubTime>2018-09-01T04:13:11.000Z</pubTime>
+        
+        <tag>中国剩余定理</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据结构与算法" url="https://chouxianyu.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2018/08/26/%E5%B8%B8%E9%87%8F%E6%8C%87%E9%92%88%E4%B8%8E%E6%8C%87%E9%92%88%E5%B8%B8%E9%87%8F/</loc>
+    <lastmod>2019-01-20T13:49:06.713Z</lastmod>
+    <data>
+        <display>
+        <title>常量指针与指针常量</title>
+        <pubTime>2018-08-25T19:49:34.000Z</pubTime>
+        
+        <tag>指针</tag>
+         
+         
+           
+             
+              <breadCrumb title="C/C++" url="https://chouxianyu.github.io/categories/C-C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2018/09/09/%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E7%9A%84%E8%B7%AF%E5%BE%84/</loc>
+    <lastmod>2019-01-20T13:24:13.736Z</lastmod>
+    <data>
+        <display>
+        <title>C++获取文件夹下所有文件的路径</title>
+        <pubTime>2018-09-09T09:46:38.000Z</pubTime>
+        
+        <tag>文件</tag>
+         
+         
+           
+             
+              <breadCrumb title="C/C++" url="https://chouxianyu.github.io/categories/C-C/"/>
+          
         </display>
     </data>
     </url>
@@ -39,7 +221,7 @@
     
   <url>
     <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B9%9D%EF%BC%89%E4%B9%8Breact%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0dom/</loc>
-    <lastmod>2019-01-19T13:28:42.187Z</lastmod>
+    <lastmod>2019-01-20T13:22:41.584Z</lastmod>
     <data>
         <display>
         <title>React学习（九）之react如何更新dom</title>
@@ -49,6 +231,29 @@
          
          
            
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AB%EF%BC%89%E4%B9%8B%E7%BB%84%E4%BB%B6%E7%9A%84state%E5%B1%9E%E6%80%A7/</loc>
+    <lastmod>2019-01-20T13:22:32.664Z</lastmod>
+    <data>
+        <display>
+        <title>React学习（八）之组件的state属性</title>
+        <pubTime>2019-01-19T06:11:58.000Z</pubTime>
+        
+        <tag>react</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
         </display>
     </data>
     </url>
@@ -56,7 +261,7 @@
     
   <url>
     <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B9%8B%E4%BA%8B%E4%BB%B6/</loc>
-    <lastmod>2019-01-19T13:27:07.799Z</lastmod>
+    <lastmod>2019-01-20T13:22:24.585Z</lastmod>
     <data>
         <display>
         <title>React学习（七）之事件</title>
@@ -66,6 +271,29 @@
          
          
            
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/</loc>
+    <lastmod>2019-01-20T13:22:18.475Z</lastmod>
+    <data>
+        <display>
+        <title>React学习（六）之父组件向子组件传值</title>
+        <pubTime>2019-01-19T06:10:57.000Z</pubTime>
+        
+        <tag>react</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
         </display>
     </data>
     </url>
@@ -73,7 +301,7 @@
     
   <url>
     <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%94%EF%BC%89%E4%B9%8B%E8%BE%93%E5%87%BA%E5%8A%A8%E6%80%81%E6%95%B0%E6%8D%AE/</loc>
-    <lastmod>2019-01-19T02:50:19.545Z</lastmod>
+    <lastmod>2019-01-20T13:22:03.500Z</lastmod>
     <data>
         <display>
         <title>React学习（五）之输出动态数据</title>
@@ -83,6 +311,9 @@
          
          
            
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
         </display>
     </data>
     </url>
@@ -90,7 +321,7 @@
     
   <url>
     <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8B%E5%A4%9A%E4%B8%AA%E7%BB%84%E4%BB%B6/</loc>
-    <lastmod>2019-01-19T02:48:55.009Z</lastmod>
+    <lastmod>2019-01-20T13:21:55.869Z</lastmod>
     <data>
         <display>
         <title>React学习（四）之多个组件</title>
@@ -100,6 +331,9 @@
          
          
            
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
         </display>
     </data>
     </url>
@@ -107,7 +341,7 @@
     
   <url>
     <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%BB%84%E4%BB%B6/</loc>
-    <lastmod>2019-01-19T02:45:20.988Z</lastmod>
+    <lastmod>2019-01-20T13:21:48.887Z</lastmod>
     <data>
         <display>
         <title>React学习（三）之第一个组件</title>
@@ -117,6 +351,9 @@
          
          
            
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
         </display>
     </data>
     </url>
@@ -124,7 +361,7 @@
     
   <url>
     <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%E4%B9%8Bcreate-react-app/</loc>
-    <lastmod>2019-01-18T13:17:38.416Z</lastmod>
+    <lastmod>2019-01-20T13:21:41.439Z</lastmod>
     <data>
         <display>
         <title>React学习（二）之create-react-app</title>
@@ -134,6 +371,9 @@
          
          
            
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
         </display>
     </data>
     </url>
@@ -141,7 +381,7 @@
     
   <url>
     <loc>https://chouxianyu.github.io/2019/01/17/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89%E4%B9%8BHello-React/</loc>
-    <lastmod>2019-01-18T13:11:12.020Z</lastmod>
+    <lastmod>2019-01-20T13:21:33.045Z</lastmod>
     <data>
         <display>
         <title>React学习（一）之Hello React</title>
@@ -151,166 +391,29 @@
          
          
            
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
         </display>
     </data>
     </url>
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2018/09/09/%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E7%9A%84%E8%B7%AF%E5%BE%84/</loc>
-    <lastmod>2019-01-18T01:40:08.599Z</lastmod>
+    <loc>https://chouxianyu.github.io/2019/01/20/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%8D%81%EF%BC%89%E4%B9%8B%E5%AD%90%E7%BB%84%E4%BB%B6%E5%90%91%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/</loc>
+    <lastmod>2019-01-20T13:20:22.971Z</lastmod>
     <data>
         <display>
-        <title>如何获取文件夹下所有文件的路径</title>
-        <pubTime>2018-09-09T09:46:38.000Z</pubTime>
+        <title>React学习（十）之子组件向父组件传值</title>
+        <pubTime>2019-01-20T13:18:17.000Z</pubTime>
         
-        <tag>c/c++</tag>
-         
-        <tag>文件</tag>
+        <tag>react</tag>
          
          
            
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2019/01/17/bash-hexo-command-not-found/</loc>
-    <lastmod>2019-01-18T01:25:29.653Z</lastmod>
-    <data>
-        <display>
-        <title>bash: hexo: command not found</title>
-        <pubTime>2019-01-17T15:05:33.000Z</pubTime>
-        
-        <tag>hexo</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2019/01/17/hexo%E4%B8%8D%E8%92%9C%E5%AD%90%E7%BD%91%E7%AB%99%E8%AE%BF%E9%97%AE%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%A4%B1%E6%95%88/</loc>
-    <lastmod>2019-01-18T01:22:08.499Z</lastmod>
-    <data>
-        <display>
-        <title>hexo不蒜子网站访问量统计失效</title>
-        <pubTime>2019-01-17T15:34:23.000Z</pubTime>
-        
-        <tag>hexo</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2018/11/03/java.util.NoSuchElementException/</loc>
-    <lastmod>2018-11-03T02:25:06.981Z</lastmod>
-    <data>
-        <display>
-        <title>java.util.NoSuchElementException</title>
-        <pubTime>2018-11-03T02:23:02.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2018/09/22/Java%E5%AD%97%E8%8A%82%E6%B5%81read%E5%87%BD%E6%95%B0/</loc>
-    <lastmod>2018-09-22T15:04:18.718Z</lastmod>
-    <data>
-        <display>
-        <title>Java字节流read函数</title>
-        <pubTime>2018-09-22T14:50:12.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2018/08/26/%E5%B8%B8%E9%87%8F%E6%8C%87%E9%92%88%E4%B8%8E%E6%8C%87%E9%92%88%E5%B8%B8%E9%87%8F/</loc>
-    <lastmod>2018-09-01T13:55:10.583Z</lastmod>
-    <data>
-        <display>
-        <title>常量指针与指针常量</title>
-        <pubTime>2018-08-25T19:49:34.000Z</pubTime>
-        
-        <tag>指针</tag>
-         
-        <tag>c/c++</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2018/09/01/%E6%8C%87%E9%92%88%E9%97%B4%E7%9A%84%E4%BA%92%E7%9B%B8%E8%B5%8B%E5%80%BC/</loc>
-    <lastmod>2018-09-01T13:55:07.396Z</lastmod>
-    <data>
-        <display>
-        <title>指针间的互相赋值</title>
-        <pubTime>2018-09-01T13:40:11.000Z</pubTime>
-        
-        <tag>指针</tag>
-         
-        <tag>c/c++</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2018/09/01/%E7%89%A9%E4%B8%8D%E7%9F%A5%E5%85%B6%E6%95%B0/</loc>
-    <lastmod>2018-09-01T13:26:06.630Z</lastmod>
-    <data>
-        <display>
-        <title>物不知其数</title>
-        <pubTime>2018-09-01T04:13:11.000Z</pubTime>
-        
-        <tag>算法</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2018/08/22/JAI%E4%B8%A2%E5%8C%85%E6%8E%89%E5%B8%A7%E5%A4%84%E7%90%86/</loc>
-    <lastmod>2018-08-23T03:13:13.494Z</lastmod>
-    <data>
-        <display>
-        <title>JAI丢包掉帧处理</title>
-        <pubTime>2018-08-22T05:34:40.000Z</pubTime>
-        
-        <tag>JAI</tag>
-         
-         
-           
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
         </display>
     </data>
     </url>
@@ -318,53 +421,5 @@
     
     
     
-  <url>
-    <loc>https://chouxianyu.github.io/2018/08/16/FirstWriting/</loc>
-    <lastmod>2018-08-16T09:33:27.467Z</lastmod>
-    <data>
-        <display>
-        <title>FirstWriting</title>
-        <pubTime>2018-08-16T07:53:07.000Z</pubTime>
-        
-        <tag>hexo</tag>
-         
-        <tag>markdown</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
     
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2018/08/16/MyHelloWorld/</loc>
-    <lastmod>2018-08-16T02:48:13.230Z</lastmod>
-    <data>
-        <display>
-        <title>MyHelloWorld</title>
-        <pubTime>2018-08-16T02:48:13.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2018/08/10/hello-world/</loc>
-    <lastmod>2018-08-10T12:24:19.691Z</lastmod>
-    <data>
-        <display>
-        <title>Hello World</title>
-        <pubTime>2018-08-10T12:24:19.691Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
 </urlset>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="算法," />
+  <meta name="keywords" content="中国剩余定理," />
 
 
 
@@ -82,14 +82,14 @@
 
 
 <meta name="description" content="文章分为三个大的部分： 大标题1是物不知其数问题的引入，大标题2将问题抽象。 大标题3、4、5是物不知其数问题的三种解法及其代码实现。 大标题6是提出的一些问题及不太完善的解释。 提醒： 看文章最好先掌握文章整体结构，电脑会比较方便，可以点击标题跳到自己想看的部分。 看代码发现看不到后边的注释的话，调整网页显示比例（Ctrl+鼠标滚轮） 另外代码里的注释也是有规律的，单独一行的注释是解释下边的几行">
-<meta name="keywords" content="算法">
+<meta name="keywords" content="中国剩余定理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="物不知其数">
 <meta property="og:url" content="https://chouxianyu.github.io/2018/09/01/物不知其数/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
 <meta property="og:description" content="文章分为三个大的部分： 大标题1是物不知其数问题的引入，大标题2将问题抽象。 大标题3、4、5是物不知其数问题的三种解法及其代码实现。 大标题6是提出的一些问题及不太完善的解释。 提醒： 看文章最好先掌握文章整体结构，电脑会比较方便，可以点击标题跳到自己想看的部分。 看代码发现看不到后边的注释的话，调整网页显示比例（Ctrl+鼠标滚轮） 另外代码里的注释也是有规律的，单独一行的注释是解释下边的几行">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-01T13:26:06.630Z">
+<meta property="og:updated_time" content="2019-01-20T13:58:35.641Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="物不知其数">
 <meta name="twitter:description" content="文章分为三个大的部分： 大标题1是物不知其数问题的引入，大标题2将问题抽象。 大标题3、4、5是物不知其数问题的三种解法及其代码实现。 大标题6是提出的一些问题及不太完善的解释。 提醒： 看文章最好先掌握文章整体结构，电脑会比较方便，可以点击标题跳到自己想看的部分。 看代码发现看不到后边的注释的话，调整网页显示比例（Ctrl+鼠标滚轮） 另外代码里的注释也是有规律的，单独一行的注释是解释下边的几行">
@@ -339,6 +339,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -381,7 +403,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2,986 字
+                  2,976 字
                 </span>
               
 
@@ -432,10 +454,10 @@
 <p><strong>问：这批物品共有多少件？ 变成一个纯粹的数学问题就是：有一个数，用3除余2，用5除余3，用7除余2。求这个数。</strong></p>
 <p>拿到这个问题，我们可以发现用3和7除余数都是2，自然而然想到3*7=21,21+2=23,23%5=3。所以23就是答案之一，而后边问题中我们求最小值。</p>
 <p>这个问题之所以简单，是由于有被3除和被7除余数相同这个特殊性。</p>
-<h1 id="问题抽象"><a href="#问题抽象" class="headerlink" title="问题抽象"></a>问题抽象</h1><p>去除这个特殊性之后，真正的问题可以是：</p>
+<h1 id="问题抽象"><a href="#问题抽象" class="headerlink" title="问题抽象"></a>问题抽象</h1><p>去除问题数据的特殊性之后，问题可以是像这样：</p>
 <p><strong>三人一组余两人，五人一组余三人，七人一组余四人。问：这队士兵至少有多少人？</strong></p>
 <p>就是说我们要找到一个最小的数，使其除以3余2，除以5余3，除以7余4</p>
-<p>数据变量化后问题改成：找到一个最小的数，使其除以x余a，除以y余b，除以z余c</p>
+<p>数据变量化后<strong>真正的问题</strong>改成：一个数除以x余a，除以y余b，除以z余c，找到符合这三个条件的最小的数。</p>
 <p>三个条件按顺序分别称为条件1，条件2，条件3。</p>
 <h1 id="暴力"><a href="#暴力" class="headerlink" title="暴力"></a>暴力</h1><h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>定义变量n，在范围内从头到尾递增，循环内判断条件为<code>n%3==2&amp;&amp;n%5==3&amp;&amp;n%7==4</code>，符合条件就break</p>
 <h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//找到一个最小的数，使其除以x余a，除以y余b，除以z余c</span></span><br><span class="line"><span class="keyword">int</span> x,y,z;	<span class="comment">//除数</span></span><br><span class="line"><span class="keyword">int</span> a,b,c;	<span class="comment">//余数</span></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d %d %d %d %d %d"</span>,&amp;x,&amp;y,&amp;z,&amp;a,&amp;b,&amp;c);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> n=<span class="number">1</span>;;n++)	<span class="comment">//在这里不设范围</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(n%x==a&amp;&amp;n%y==b&amp;&amp;n%z==c)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>,n);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -444,15 +466,17 @@
 <p>我们发现当i=2时，3i+2=8除以5余数为3，即n=8时除以3余2，除以5余3。</p>
 <p>然后前两个条件就被我们合并成了条件A：n=15i+8，</p>
 <p>本质是：<strong>最小的符合前两个条件的数字8加上3和5的最小公倍数15的整数倍</strong></p>
-<p>定理：<strong>若n除以a余b，n加上a的倍数再除以a余数仍然为b</strong>。我们加上的15i即为a的倍数</p>
+<p>用到的定理：<strong>若n除以a余b，n加上a的倍数再除以a余数仍然为b</strong>。我们加上的15i即为a的倍数</p>
 <p><strong>注意</strong>：</p>
 <p>是最小公倍数，<strong>不要直接看做是两数乘积</strong>，因为只有在指出三个除数两两互质的情况下，两数乘积即为最小公倍数，在这里提醒一下，不要理解错误。</p>
-<p>如果用的不是最小公倍数，我们下边n增加的单位就变大了，可能会求不到最小值，而题目要求是取得符合要求的<strong>最小值</strong>，如果没有这个要求，也没必要是最小公倍数了。</p>
+<p>如果用的不是最小公倍数，我们下边n增加的单位就变大了，可能会求不到最小值，而题目要求是取得符合要求的<strong>最小值</strong>。</p>
 <h3 id="条件A和条件3合并成结果"><a href="#条件A和条件3合并成结果" class="headerlink" title="条件A和条件3合并成结果"></a>条件A和条件3合并成结果</h3><p>我们再使条件A和第三个条件合并，n=15i+8(i是正整数)，使i从1变大，判断15i+8除以7的余数是否为4。</p>
 <p>我们发现当i=3时，15i+8=53除以7余4，53即为答案</p>
 <h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><p>过程中条件合并了两次，让我想到定义一个函数。这个函数要调用两次</p>
 <p>写一个比伪代码还伪的代码： 结果 合并(条件，条件)  </p>
-<h2 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Gcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span>				<span class="comment">//Greatest Common divisior</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> c;</span><br><span class="line">    <span class="comment">//辗转相除法求最大公约数 Greatest Common Divisor</span></span><br><span class="line">    <span class="comment">/* 余数不为0，继续相除，直到余数为0 */</span></span><br><span class="line">	<span class="keyword">while</span>(b!=<span class="number">0</span>)  								 </span><br><span class="line">	&#123;</span><br><span class="line">		c=a%b;</span><br><span class="line">		a=b;</span><br><span class="line">		b=c;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Lcm</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span>				<span class="comment">//Least Common Multiple				 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//最小公倍数等于乘积除以最大公约数</span></span><br><span class="line">    <span class="keyword">return</span> a*b/Gcd(a,b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//找到一个最小的数，使其除以x余a，除以y余b，除以z余c</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> x,y,z;	<span class="comment">//除数</span></span><br><span class="line"><span class="keyword">int</span> a,b,c;	<span class="comment">//余数</span></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d %d %d %d %d %d"</span>,&amp;x,&amp;y,&amp;z,&amp;a,&amp;b,&amp;c);</span><br><span class="line"><span class="comment">//合并条件1和条件2</span></span><br><span class="line"><span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>((x*i+a)%y!=b)					<span class="comment">//循环跳条件为(x*i+a)%y==b</span></span><br><span class="line">    i++;</span><br><span class="line"><span class="comment">//得到条件A</span></span><br><span class="line"><span class="keyword">int</span> d=x*i+a;						<span class="comment">//得到条件A</span></span><br><span class="line"><span class="comment">//合并条件A和条件3</span></span><br><span class="line"><span class="keyword">int</span> j=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>((Lcm(x,y)*j+d)%z!=c)			<span class="comment">//while((Lcm(x,y)*j+d)%z !=c)求得的不一定是最小值</span></span><br><span class="line">    j++;</span><br><span class="line"><span class="comment">//得到结果</span></span><br><span class="line"><span class="keyword">int</span> result=Lcm(x,y)*j+d;			<span class="comment">//int result=x*y*j+d求得的不一定是最小值</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>,result);</span><br></pre></td></tr></table></figure>
+<h2 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="最大公约数"><a href="#最大公约数" class="headerlink" title="最大公约数"></a>最大公约数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Gcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span>				<span class="comment">//Greatest Common divisior</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> c;</span><br><span class="line">    <span class="comment">//辗转相除法求最大公约数 Greatest Common Divisor</span></span><br><span class="line">    <span class="comment">/* 余数不为0，继续相除，直到余数为0 */</span></span><br><span class="line">	<span class="keyword">while</span>(b!=<span class="number">0</span>)  								 </span><br><span class="line">	&#123;</span><br><span class="line">		c=a%b;</span><br><span class="line">		a=b;</span><br><span class="line">		b=c;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="最小公倍数"><a href="#最小公倍数" class="headerlink" title="最小公倍数"></a>最小公倍数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Lcm</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span>				<span class="comment">//Least Common Multiple				 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//最小公倍数等于乘积除以最大公约数</span></span><br><span class="line">    <span class="keyword">return</span> a*b/Gcd(a,b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="求结果"><a href="#求结果" class="headerlink" title="求结果"></a>求结果</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//找到一个最小的数，使其除以x余a，除以y余b，除以z余c</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> x,y,z;	<span class="comment">//除数</span></span><br><span class="line"><span class="keyword">int</span> a,b,c;	<span class="comment">//余数</span></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d %d %d %d %d %d"</span>,&amp;x,&amp;y,&amp;z,&amp;a,&amp;b,&amp;c);</span><br><span class="line"><span class="comment">//合并条件1和条件2</span></span><br><span class="line"><span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>((x*i+a)%y!=b)					<span class="comment">//循环跳条件为(x*i+a)%y==b</span></span><br><span class="line">    i++;</span><br><span class="line"><span class="comment">//得到条件A</span></span><br><span class="line"><span class="keyword">int</span> d=x*i+a;						<span class="comment">//得到条件A</span></span><br><span class="line"><span class="comment">//合并条件A和条件3</span></span><br><span class="line"><span class="keyword">int</span> j=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>((Lcm(x,y)*j+d)%z!=c)			<span class="comment">//while((Lcm(x,y)*j+d)%z !=c)求得的不一定是最小值</span></span><br><span class="line">    j++;</span><br><span class="line"><span class="comment">//得到结果</span></span><br><span class="line"><span class="keyword">int</span> result=Lcm(x,y)*j+d;			<span class="comment">//int result=x*y*j+d求得的不一定是最小值</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>,result);</span><br></pre></td></tr></table></figure>
 <h1 id="中国剩余定理"><a href="#中国剩余定理" class="headerlink" title="中国剩余定理"></a>中国剩余定理</h1><h2 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a>方法</h2><p>除数分别是3、5、7，用70(5乘7乘2)乘以用3除的余数，用21(3乘7)乘以用5除的余数，用15(3乘5)乘以用7除的余数，然后把这三个乘积相加。加得的结果如果比105(3乘5乘7)大，就除以105，所得的余数就是满足题目要求的最小正整数解。</p>
 <h2 id="过程-1"><a href="#过程-1" class="headerlink" title="过程"></a>过程</h2><h3 id="除数两两结合得到公倍数"><a href="#除数两两结合得到公倍数" class="headerlink" title="除数两两结合得到公倍数"></a>除数两两结合得到公倍数</h3><p>对所得公倍数的目标(要求)：除以另外一个除数余1</p>
 <p>这一步骤中，不用关注三个条件要求余几，条件中的余几会在下一步体现</p>
@@ -485,7 +509,6 @@
 <p>原因可能就是定理不适用这种情况吧。我没有深入了解中国剩余定理及其使用。因为我是从韩信点兵的题目了解到这些知识的。搜了一下中国剩余定理，发现它是数论里的一个知识，似乎使用也有一些条件，这里不再过多探索。</p>
 <p>emm还是去看了下，中国剩余定理用的时候已经假设了三个除数两两互质。所以输入3 3 3 1 1 1这种就没必要了。但如果能弄懂3 3 3 1 1 1，还是可以让我们对定理有个更好的理解。</p>
 <p>(放过我吧，每次写完东西都会发现bug，让我不爽..再多的抽象，也得加点前提条件呐。哪有那么多适用于所有情况的东西，真理也是少之又少。但简单的东西又没那么值得写，最多算个记录罢了)</p>
-<p>希望有人可以给我提提建议~单机一点不好玩</p>
 <p>作者：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p>
 <p>本文为作者原创，转载请注明出处：<a href="https://chouxianyu.github.io/2018/09/01/物不知其数/#more">https://chouxianyu.github.io/2018/09/01/物不知其数/#more</a></p>
 
@@ -505,7 +528,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/中国剩余定理/" rel="tag"># 中国剩余定理</a>
           
         </div>
       
@@ -627,13 +650,22 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -687,7 +719,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题引入"><span class="nav-number">1.</span> <span class="nav-text">问题引入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题抽象"><span class="nav-number">2.</span> <span class="nav-text">问题抽象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#暴力"><span class="nav-number">3.</span> <span class="nav-text">暴力</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-number">3.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">3.2.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#合并"><span class="nav-number">4.</span> <span class="nav-text">合并</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法-1"><span class="nav-number">4.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程"><span class="nav-number">4.2.</span> <span class="nav-text">过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件1和条件2合并成条件A"><span class="nav-number">4.2.1.</span> <span class="nav-text">条件1和条件2合并成条件A</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件A和条件3合并成结果"><span class="nav-number">4.2.2.</span> <span class="nav-text">条件A和条件3合并成结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展"><span class="nav-number">4.3.</span> <span class="nav-text">拓展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现-1"><span class="nav-number">4.4.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中国剩余定理"><span class="nav-number">5.</span> <span class="nav-text">中国剩余定理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法-2"><span class="nav-number">5.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程-1"><span class="nav-number">5.2.</span> <span class="nav-text">过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#除数两两结合得到公倍数"><span class="nav-number">5.2.1.</span> <span class="nav-text">除数两两结合得到公倍数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公倍数乘以余数相加"><span class="nav-number">5.2.2.</span> <span class="nav-text">公倍数乘以余数相加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检验是否最小"><span class="nav-number">5.2.3.</span> <span class="nav-text">检验是否最小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展-1"><span class="nav-number">5.3.</span> <span class="nav-text">拓展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现-2"><span class="nav-number">5.4.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#瑕不掩瑜"><span class="nav-number">6.</span> <span class="nav-text">瑕不掩瑜</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题引入"><span class="nav-number">1.</span> <span class="nav-text">问题引入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题抽象"><span class="nav-number">2.</span> <span class="nav-text">问题抽象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#暴力"><span class="nav-number">3.</span> <span class="nav-text">暴力</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-number">3.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">3.2.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#合并"><span class="nav-number">4.</span> <span class="nav-text">合并</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法-1"><span class="nav-number">4.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程"><span class="nav-number">4.2.</span> <span class="nav-text">过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件1和条件2合并成条件A"><span class="nav-number">4.2.1.</span> <span class="nav-text">条件1和条件2合并成条件A</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件A和条件3合并成结果"><span class="nav-number">4.2.2.</span> <span class="nav-text">条件A和条件3合并成结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展"><span class="nav-number">4.3.</span> <span class="nav-text">拓展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现-1"><span class="nav-number">4.4.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最大公约数"><span class="nav-number">4.4.1.</span> <span class="nav-text">最大公约数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最小公倍数"><span class="nav-number">4.4.2.</span> <span class="nav-text">最小公倍数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求结果"><span class="nav-number">4.4.3.</span> <span class="nav-text">求结果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中国剩余定理"><span class="nav-number">5.</span> <span class="nav-text">中国剩余定理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法-2"><span class="nav-number">5.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程-1"><span class="nav-number">5.2.</span> <span class="nav-text">过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#除数两两结合得到公倍数"><span class="nav-number">5.2.1.</span> <span class="nav-text">除数两两结合得到公倍数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公倍数乘以余数相加"><span class="nav-number">5.2.2.</span> <span class="nav-text">公倍数乘以余数相加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检验是否最小"><span class="nav-number">5.2.3.</span> <span class="nav-text">检验是否最小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展-1"><span class="nav-number">5.3.</span> <span class="nav-text">拓展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现-2"><span class="nav-number">5.4.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#瑕不掩瑜"><span class="nav-number">6.</span> <span class="nav-text">瑕不掩瑜</span></a></li></ol></div>
             
 
           </div>
@@ -721,7 +753,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">14.7k</span>
+    <span title="Site words total count">15.0k</span>
   
 </div>
 
