@@ -4,6 +4,286 @@
 
     
   <url>
+    <loc>https://chouxianyu.github.io/2019/01/22/%E9%98%AE%E4%B8%80%E5%B3%B0React%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2019-01-22T07:42:09.489Z</lastmod>
+    <data>
+        <display>
+        <title>阮一峰React入门教程学习笔记</title>
+        <pubTime>2019-01-22T06:40:55.000Z</pubTime>
+        
+        <tag>React</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B9%9D%EF%BC%89%E4%B9%8BReact%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0DOM/</loc>
+    <lastmod>2019-01-22T07:32:26.765Z</lastmod>
+    <data>
+        <display>
+        <title>React学习（九）之React如何更新DOM</title>
+        <pubTime>2019-01-19T06:41:46.000Z</pubTime>
+        
+        <tag>React</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2018/08/22/JAI%E4%B8%A2%E5%8C%85%E6%8E%89%E5%B8%A7%E5%A4%84%E7%90%86/</loc>
+    <lastmod>2019-01-22T07:31:51.728Z</lastmod>
+    <data>
+        <display>
+        <title>JAI丢包掉帧处理</title>
+        <pubTime>2018-08-22T05:34:40.000Z</pubTime>
+        
+        <tag>Bug</tag>
+         
+         
+           
+             
+              <breadCrumb title="JAI" url="https://chouxianyu.github.io/categories/JAI/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/17/hexo%E4%B8%8D%E8%92%9C%E5%AD%90%E7%BD%91%E7%AB%99%E8%AE%BF%E9%97%AE%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%A4%B1%E6%95%88/</loc>
+    <lastmod>2019-01-22T07:30:12.562Z</lastmod>
+    <data>
+        <display>
+        <title>hexo不蒜子网站访问量统计失效</title>
+        <pubTime>2019-01-17T15:34:23.000Z</pubTime>
+        
+        <tag>Bug</tag>
+         
+         
+           
+             
+              <breadCrumb title="hexo" url="https://chouxianyu.github.io/categories/hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%E4%B9%8Bcreate-react-app/</loc>
+    <lastmod>2019-01-22T07:30:01.162Z</lastmod>
+    <data>
+        <display>
+        <title>React学习（二）之create-react-app</title>
+        <pubTime>2019-01-18T02:37:52.000Z</pubTime>
+        
+        <tag>React</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8B%E5%A4%9A%E4%B8%AA%E7%BB%84%E4%BB%B6/</loc>
+    <lastmod>2019-01-22T07:28:54.479Z</lastmod>
+    <data>
+        <display>
+        <title>React学习（四）之多个组件</title>
+        <pubTime>2019-01-18T13:14:32.000Z</pubTime>
+        
+        <tag>React</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/22/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E4%B9%8B%E5%85%84%E5%BC%9F%E7%BB%84%E4%BB%B6%E9%97%B4%E4%BC%A0%E5%80%BC/</loc>
+    <lastmod>2019-01-22T07:28:50.758Z</lastmod>
+    <data>
+        <display>
+        <title>React学习（十一）之兄弟组件间传值</title>
+        <pubTime>2019-01-22T06:45:43.000Z</pubTime>
+        
+        <tag>React</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/20/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%8D%81%EF%BC%89%E4%B9%8B%E5%AD%90%E7%BB%84%E4%BB%B6%E5%90%91%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/</loc>
+    <lastmod>2019-01-22T07:28:43.515Z</lastmod>
+    <data>
+        <display>
+        <title>React学习（十）之子组件向父组件传值</title>
+        <pubTime>2019-01-20T13:18:17.000Z</pubTime>
+        
+        <tag>React</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AB%EF%BC%89%E4%B9%8B%E7%BB%84%E4%BB%B6%E7%9A%84state%E5%B1%9E%E6%80%A7/</loc>
+    <lastmod>2019-01-22T07:28:39.485Z</lastmod>
+    <data>
+        <display>
+        <title>React学习（八）之组件的state属性</title>
+        <pubTime>2019-01-19T06:11:58.000Z</pubTime>
+        
+        <tag>React</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/</loc>
+    <lastmod>2019-01-22T07:28:33.483Z</lastmod>
+    <data>
+        <display>
+        <title>React学习（六）之父组件向子组件传值</title>
+        <pubTime>2019-01-19T06:10:57.000Z</pubTime>
+        
+        <tag>React</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%94%EF%BC%89%E4%B9%8B%E8%BE%93%E5%87%BA%E5%8A%A8%E6%80%81%E6%95%B0%E6%8D%AE/</loc>
+    <lastmod>2019-01-22T07:28:16.655Z</lastmod>
+    <data>
+        <display>
+        <title>React学习（五）之输出动态数据</title>
+        <pubTime>2019-01-18T14:02:43.000Z</pubTime>
+        
+        <tag>React</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%BB%84%E4%BB%B6/</loc>
+    <lastmod>2019-01-22T07:28:11.234Z</lastmod>
+    <data>
+        <display>
+        <title>React学习（三）之第一个组件</title>
+        <pubTime>2019-01-18T13:13:36.000Z</pubTime>
+        
+        <tag>React</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B9%8B%E4%BA%8B%E4%BB%B6/</loc>
+    <lastmod>2019-01-22T07:28:08.902Z</lastmod>
+    <data>
+        <display>
+        <title>React学习（七）之事件</title>
+        <pubTime>2019-01-19T06:11:38.000Z</pubTime>
+        
+        <tag>React</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/17/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89%E4%B9%8BHello-React/</loc>
+    <lastmod>2019-01-22T07:28:06.696Z</lastmod>
+    <data>
+        <display>
+        <title>React学习（一）之Hello React</title>
+        <pubTime>2019-01-17T15:03:29.000Z</pubTime>
+        
+        <tag>React</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chouxianyu.github.io/2018/08/16/FirstWriting/</loc>
     <lastmod>2019-01-20T14:05:28.619Z</lastmod>
     <data>
@@ -53,46 +333,6 @@
            
              
               <breadCrumb title="hexo" url="https://chouxianyu.github.io/categories/hexo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2019/01/17/hexo%E4%B8%8D%E8%92%9C%E5%AD%90%E7%BD%91%E7%AB%99%E8%AE%BF%E9%97%AE%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%A4%B1%E6%95%88/</loc>
-    <lastmod>2019-01-20T14:00:21.588Z</lastmod>
-    <data>
-        <display>
-        <title>hexo不蒜子网站访问量统计失效</title>
-        <pubTime>2019-01-17T15:34:23.000Z</pubTime>
-        
-        <tag>Bug</tag>
-         
-         
-           
-             
-              <breadCrumb title="hexo" url="https://chouxianyu.github.io/categories/hexo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2018/08/22/JAI%E4%B8%A2%E5%8C%85%E6%8E%89%E5%B8%A7%E5%A4%84%E7%90%86/</loc>
-    <lastmod>2019-01-20T14:00:08.929Z</lastmod>
-    <data>
-        <display>
-        <title>JAI丢包掉帧处理</title>
-        <pubTime>2018-08-22T05:34:40.000Z</pubTime>
-        
-        <tag>Bug</tag>
-         
-         
-           
-             
-              <breadCrumb title="JAI" url="https://chouxianyu.github.io/categories/JAI/"/>
           
         </display>
     </data>
@@ -213,206 +453,6 @@
            
              
               <breadCrumb title="C/C++" url="https://chouxianyu.github.io/categories/C-C/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B9%9D%EF%BC%89%E4%B9%8Breact%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0dom/</loc>
-    <lastmod>2019-01-20T13:22:41.584Z</lastmod>
-    <data>
-        <display>
-        <title>React学习（九）之react如何更新dom</title>
-        <pubTime>2019-01-19T06:41:46.000Z</pubTime>
-        
-        <tag>react</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AB%EF%BC%89%E4%B9%8B%E7%BB%84%E4%BB%B6%E7%9A%84state%E5%B1%9E%E6%80%A7/</loc>
-    <lastmod>2019-01-20T13:22:32.664Z</lastmod>
-    <data>
-        <display>
-        <title>React学习（八）之组件的state属性</title>
-        <pubTime>2019-01-19T06:11:58.000Z</pubTime>
-        
-        <tag>react</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B9%8B%E4%BA%8B%E4%BB%B6/</loc>
-    <lastmod>2019-01-20T13:22:24.585Z</lastmod>
-    <data>
-        <display>
-        <title>React学习（七）之事件</title>
-        <pubTime>2019-01-19T06:11:38.000Z</pubTime>
-        
-        <tag>react</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AD%EF%BC%89%E4%B9%8B%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/</loc>
-    <lastmod>2019-01-20T13:22:18.475Z</lastmod>
-    <data>
-        <display>
-        <title>React学习（六）之父组件向子组件传值</title>
-        <pubTime>2019-01-19T06:10:57.000Z</pubTime>
-        
-        <tag>react</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%94%EF%BC%89%E4%B9%8B%E8%BE%93%E5%87%BA%E5%8A%A8%E6%80%81%E6%95%B0%E6%8D%AE/</loc>
-    <lastmod>2019-01-20T13:22:03.500Z</lastmod>
-    <data>
-        <display>
-        <title>React学习（五）之输出动态数据</title>
-        <pubTime>2019-01-18T14:02:43.000Z</pubTime>
-        
-        <tag>react</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B9%8B%E5%A4%9A%E4%B8%AA%E7%BB%84%E4%BB%B6/</loc>
-    <lastmod>2019-01-20T13:21:55.869Z</lastmod>
-    <data>
-        <display>
-        <title>React学习（四）之多个组件</title>
-        <pubTime>2019-01-18T13:14:32.000Z</pubTime>
-        
-        <tag>react</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%BB%84%E4%BB%B6/</loc>
-    <lastmod>2019-01-20T13:21:48.887Z</lastmod>
-    <data>
-        <display>
-        <title>React学习（三）之第一个组件</title>
-        <pubTime>2019-01-18T13:13:36.000Z</pubTime>
-        
-        <tag>react</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%E4%B9%8Bcreate-react-app/</loc>
-    <lastmod>2019-01-20T13:21:41.439Z</lastmod>
-    <data>
-        <display>
-        <title>React学习（二）之create-react-app</title>
-        <pubTime>2019-01-18T02:37:52.000Z</pubTime>
-        
-        <tag>react</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2019/01/17/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89%E4%B9%8BHello-React/</loc>
-    <lastmod>2019-01-20T13:21:33.045Z</lastmod>
-    <data>
-        <display>
-        <title>React学习（一）之Hello React</title>
-        <pubTime>2019-01-17T15:03:29.000Z</pubTime>
-        
-        <tag>react</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2019/01/20/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%8D%81%EF%BC%89%E4%B9%8B%E5%AD%90%E7%BB%84%E4%BB%B6%E5%90%91%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/</loc>
-    <lastmod>2019-01-20T13:20:22.971Z</lastmod>
-    <data>
-        <display>
-        <title>React学习（十）之子组件向父组件传值</title>
-        <pubTime>2019-01-20T13:18:17.000Z</pubTime>
-        
-        <tag>react</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
           
         </display>
     </data>

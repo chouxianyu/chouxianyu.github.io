@@ -81,20 +81,18 @@
 
 
 
-<meta name="description" content="之前组件的功能都是显示字样，现在来加个按钮试试处理事件。 这里用bootstrap写一个好看点的按钮，修改html文件是为了使用bootstrap，如果不使用则不需要修改index.html。 修改html文件百度找到bootstrap的cdn。 1&amp;lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@3.3.">
+<meta name="description" content="原理React传递数据是单向数据流，两个组件必须有关系才可以传值。 而兄弟组件间并无直接关系，所以需要借助父组件。 兄弟组件传值原理： 简单的逻辑是这样：子组件1传值给父组件，父组件再传给子组件2。  子组件1通过函数参数传值给父组件。 父组件利用子组件1传来的值改变自身state中的某个值。 由于父组件将自身state的那个值传给子组件2，而现在state发生改变 ，子组件2会重新渲染，实现子组">
 <meta name="keywords" content="React">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React学习（七）之事件">
-<meta property="og:url" content="https://chouxianyu.github.io/2019/01/19/React学习（七）之事件/index.html">
+<meta property="og:title" content="React学习（十一）之兄弟组件间传值">
+<meta property="og:url" content="https://chouxianyu.github.io/2019/01/22/React学习（十一）之兄弟组件间传值/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="之前组件的功能都是显示字样，现在来加个按钮试试处理事件。 这里用bootstrap写一个好看点的按钮，修改html文件是为了使用bootstrap，如果不使用则不需要修改index.html。 修改html文件百度找到bootstrap的cdn。 1&amp;lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@3.3.">
+<meta property="og:description" content="原理React传递数据是单向数据流，两个组件必须有关系才可以传值。 而兄弟组件间并无直接关系，所以需要借助父组件。 兄弟组件传值原理： 简单的逻辑是这样：子组件1传值给父组件，父组件再传给子组件2。  子组件1通过函数参数传值给父组件。 父组件利用子组件1传来的值改变自身state中的某个值。 由于父组件将自身state的那个值传给子组件2，而现在state发生改变 ，子组件2会重新渲染，实现子组">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.loli.net/2019/01/19/5c42b4e8df6bc.png">
-<meta property="og:updated_time" content="2019-01-22T07:28:08.902Z">
+<meta property="og:updated_time" content="2019-01-22T07:28:50.758Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="React学习（七）之事件">
-<meta name="twitter:description" content="之前组件的功能都是显示字样，现在来加个按钮试试处理事件。 这里用bootstrap写一个好看点的按钮，修改html文件是为了使用bootstrap，如果不使用则不需要修改index.html。 修改html文件百度找到bootstrap的cdn。 1&amp;lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@3.3.">
-<meta name="twitter:image" content="https://i.loli.net/2019/01/19/5c42b4e8df6bc.png">
+<meta name="twitter:title" content="React学习（十一）之兄弟组件间传值">
+<meta name="twitter:description" content="原理React传递数据是单向数据流，两个组件必须有关系才可以传值。 而兄弟组件间并无直接关系，所以需要借助父组件。 兄弟组件传值原理： 简单的逻辑是这样：子组件1传值给父组件，父组件再传给子组件2。  子组件1通过函数参数传值给父组件。 父组件利用子组件1传来的值改变自身state中的某个值。 由于父组件将自身state的那个值传给子组件2，而现在state发生改变 ，子组件2会重新渲染，实现子组">
 
 
 
@@ -124,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://chouxianyu.github.io/2019/01/19/React学习（七）之事件/"/>
+  <link rel="canonical" href="https://chouxianyu.github.io/2019/01/22/React学习（十一）之兄弟组件间传值/"/>
 
 
 
 
 
-  <title>React学习（七）之事件 | 臭咸鱼的缺氧瓶</title>
+  <title>React学习（十一）之兄弟组件间传值 | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -301,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/01/19/React学习（七）之事件/">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/01/22/React学习（十一）之兄弟组件间传值/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="臭咸鱼">
@@ -318,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">React学习（七）之事件</h1>
+          <h1 class="post-title" itemprop="name headline">React学习（十一）之兄弟组件间传值</h1>
         
 
         <div class="post-meta">
@@ -330,8 +328,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-19T14:11:38+08:00">
-                2019-01-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-22T14:45:43+08:00">
+                2019-01-22
               </time>
             
 
@@ -371,8 +369,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/01/19/React学习（七）之事件/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/19/React学习（七）之事件/" itemprop="commentCount"></span>
+                <a href="/2019/01/22/React学习（十一）之兄弟组件间传值/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/22/React学习（十一）之兄弟组件间传值/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -380,7 +378,7 @@
 
           
           
-             <span id="/2019/01/19/React学习（七）之事件/" class="leancloud_visitors" data-flag-title="React学习（七）之事件">
+             <span id="/2019/01/22/React学习（十一）之兄弟组件间传值/" class="leancloud_visitors" data-flag-title="React学习（十一）之兄弟组件间传值">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -405,7 +403,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  487 字
+                  937 字
                 </span>
               
 
@@ -421,7 +419,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2 分
+                  5 分
                 </span>
               
             </div>
@@ -442,19 +440,26 @@
       
 
       
-        <p>之前组件的功能都是显示字样，现在来加个按钮试试处理<strong>事件</strong>。</p>
-<p>这里用bootstrap写一个好看点的按钮，修改html文件是为了使用bootstrap，如果不使用则不需要修改<code>index.html</code>。</p>
-<h1 id="修改html文件"><a href="#修改html文件" class="headerlink" title="修改html文件"></a>修改html文件</h1><p>百度找到<code>bootstrap</code>的<code>cdn</code>。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"</span> <span class="attr">integrity</span>=<span class="string">"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"</span> <span class="attr">crossorigin</span>=<span class="string">"anonymous"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>将其加入<code>index.html</code>的<code>&lt;head&gt;&lt;/head&gt;</code>里边。</p>
-<h1 id="处理事件"><a href="#处理事件" class="headerlink" title="处理事件"></a>处理事件</h1><h2 id="添加按钮及其响应函数"><a href="#添加按钮及其响应函数" class="headerlink" title="添加按钮及其响应函数"></a>添加按钮及其响应函数</h2><p>在组件<code>Header</code>中添加按钮，向<code>Header.js</code>中加入以下代码，二选一即可</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.onMakeOrder.bind(this)&#125;</span> <span class="attr">className</span>=<span class="string">"btn btn-primary"</span>&gt;</span>make me older<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button onClick=&#123;() =&gt; <span class="keyword">this</span>.onMakeOrder()&#125; className=<span class="string">"btn btn-primary"</span>&gt;make me older&lt;<span class="regexp">/button&gt;</span></span><br></pre></td></tr></table></figure>
-<p><code>Header.js</code>代码：</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>; <span class="comment">//固定写法</span></span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Header</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123; <span class="comment">//ES6写法</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">constructor</span>(props)&#123;</span><br><span class="line">    <span class="keyword">super</span>(props);  <span class="comment">//执行父类构造方法</span></span><br><span class="line">    <span class="keyword">this</span>.age=<span class="keyword">this</span>.props.age;  </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  onMakeOrder()&#123;</span><br><span class="line">    <span class="keyword">this</span>.age+=<span class="number">3</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);	<span class="comment">//显示当前Header类的对象</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="comment">//console.log(this.props);	//显示父组件传来的参数</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;Header&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">        &lt;div&gt;your name is &#123;this.props.name&#125;,your age is &#123;this.props.age&#125;&lt;/</span>div&gt;</span><br><span class="line">        &#123;<span class="comment">/*</span></span><br><span class="line"><span class="comment">        &lt;button onClick=&#123;() =&gt; this.onMakeOrder()&#125; className="btn btn-  			primary"&gt;    </span></span><br><span class="line"><span class="comment">        make me older</span></span><br><span class="line"><span class="comment">        &lt;/button&gt;</span></span><br><span class="line"><span class="comment">        */</span>&#125;</span><br><span class="line">        &lt;button onClick=&#123;<span class="keyword">this</span>.onMakeOrder.bind(<span class="keyword">this</span>)&#125; className=<span class="string">"btn btn-primary"</span>&gt;</span><br><span class="line">        make me older  </span><br><span class="line">        &lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">              </span></span><br><span class="line"><span class="regexp">        &lt;div&gt;</span></span><br><span class="line"><span class="regexp">          &lt;h4&gt;hobbies&lt;/</span>h4&gt;</span><br><span class="line">          &lt;ul&gt;</span><br><span class="line">          &#123;<span class="keyword">this</span>.props.user.hobbies.map(<span class="function">(<span class="params">hobby,i</span>) =&gt;</span> &lt;li key=&#123;i&#125;&gt;&#123;hobby&#125;&lt;<span class="regexp">/li&gt;)&#125;</span></span><br><span class="line"><span class="regexp">          &lt;/u</span>l&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;div&gt;&#123;this.props.children&#125;&lt;/</span>div&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">Header.propTypes=&#123;</span></span><br><span class="line"><span class="regexp">  name: PropTypes.string,</span></span><br><span class="line"><span class="regexp">  age: PropTypes.number,</span></span><br><span class="line"><span class="regexp">  user: PropTypes.object,</span></span><br><span class="line"><span class="regexp">  children: PropTypes.element.isRequired</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Header;</span></span><br></pre></td></tr></table></figure>
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><a href="https://i.loli.net/2019/01/19/5c42b4e8df6bc.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/19/5c42b4e8df6bc.png" alt="点击older按钮效果.png"></a></p>
-<p>从图中可以看到age在不断变大，但网页上的age没有更新，这涉及到react的一个机制。</p>
-<p>react并不是对象的属性改变的时候，DOM会改变。<strong>而是对象的state变化的时候，DOM树才会更新。</strong></p>
+        <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>React传递数据是单向数据流，两个组件必须有关系才可以传值。</p>
+<p>而兄弟组件间并无直接关系，所以需要借助父组件。</p>
+<p><strong>兄弟组件传值原理</strong>：</p>
+<p>简单的逻辑是这样：子组件1传值给父组件，父组件再传给子组件2。</p>
+<ol>
+<li>子组件1通过函数参数传值给父组件。</li>
+<li>父组件利用子组件1传来的值<strong>改变自身state中的某个值。</strong></li>
+<li>由于父组件<strong>将自身state的那个值传给</strong>子组件2，而现在<code>state</code>发生改变 ，子组件2会重新渲染，实现子组件1传值到</li>
+</ol>
+<p>这里用到了<code>state</code>和<code>更新dom</code>的知识，不知道的可以看看。前边的文章或百度。</p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>现有三个组件，父组件<code>App</code>,子组件1<code>Header</code>，子组件2<code>Home</code>，<code>Home</code>比<code>Header</code>小2岁。</p>
+<p>实现功能：改变<code>Header</code>的年龄，且同步更新<code>Home</code>的年龄。</p>
+<h2 id="App-js"><a href="#App-js" class="headerlink" title="App.js"></a>App.js</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>; <span class="comment">//固定写法</span></span><br><span class="line"><span class="keyword">import</span> Header <span class="keyword">from</span> <span class="string">'./components/Header'</span>;</span><br><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">'./components/Home'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123; <span class="comment">//ES6写法</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>()&#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line">    <span class="keyword">this</span>.state=&#123;</span><br><span class="line">      homeAge:<span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  onGreet(headerAge)&#123;  <span class="comment">//父组件定义回调函数</span></span><br><span class="line">    alert(<span class="string">"App:Header is"</span>+headerAge+<span class="string">"years old!"</span>);</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      homeAge: headerAge<span class="number">-2</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">const</span> user=&#123;  <span class="comment">//定义一个对象，传给子组件Header</span></span><br><span class="line">      name: <span class="string">"Anna"</span>,</span><br><span class="line">      hobbies: [<span class="string">"Sports"</span>, <span class="string">"Reading"</span>]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;Header greet=&#123;<span class="keyword">this</span>.onGreet.bind(<span class="keyword">this</span>)&#125; name=&#123;<span class="string">"Max"</span>&#125; age=&#123;<span class="number">12</span>&#125; user=&#123;user&#125;&gt;</span><br><span class="line">            &lt;p&gt;I am Header<span class="string">'s children&lt;/p&gt;</span></span><br><span class="line"><span class="string">          &lt;/Header&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &lt;div&gt;</span></span><br><span class="line"><span class="string">          &lt;h1&gt;I am App&lt;/h1&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">      </span></span><br><span class="line"><span class="string">        &lt;div&gt;</span></span><br><span class="line"><span class="string">          &lt;Home homeAge=&#123;this.state.homeAge&#125;/&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">    );</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">export default App;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Header-js"><a href="#Header-js" class="headerlink" title="Header.js"></a>Header.js</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>; <span class="comment">//固定写法</span></span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Header</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123; <span class="comment">//ES6写法</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">constructor</span>(props)&#123;</span><br><span class="line">    <span class="keyword">super</span>(props);  <span class="comment">//执行父类构造方法</span></span><br><span class="line">    <span class="keyword">this</span>.state=&#123;</span><br><span class="line">      age:props.age</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//this.age=this.props.age;  </span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  onMakeOrder()&#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      age:<span class="keyword">this</span>.state.age+<span class="number">3</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">//this.age+=3;</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);  <span class="comment">//显示当前Header类的对象</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleGreet()&#123;</span><br><span class="line">    <span class="keyword">this</span>.props.greet(<span class="keyword">this</span>.state.age);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="comment">//console.log(this.props);  //显示父组件传来的参数</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;I am Header&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &lt;div&gt;</span></span><br><span class="line"><span class="regexp">          props'name is &#123;this.props.name&#125;,my age is &#123;this.state.age&#125;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">        &#123;<span class="comment">/*&lt;button onClick=&#123;() =&gt; this.onMakeOrder()&#125; className="btn btn-primary"&gt;make me older&lt;/button&gt;*/</span>&#125;</span><br><span class="line">        &lt;button onClick=&#123;<span class="keyword">this</span>.onMakeOrder.bind(<span class="keyword">this</span>)&#125; className=<span class="string">"btn btn-primary"</span>&gt;</span><br><span class="line">          make me older  </span><br><span class="line">        &lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &lt;br /</span>&gt;</span><br><span class="line"></span><br><span class="line">        &lt;button onClick=&#123;<span class="keyword">this</span>.handleGreet.bind(<span class="keyword">this</span>)&#125; className=<span class="string">"btn btn-primary"</span>&gt;</span><br><span class="line">          告诉App我几岁</span><br><span class="line">        &lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &lt;div&gt;</span></span><br><span class="line"><span class="regexp">          &lt;h4&gt;props'hobbies如下：&lt;/</span>h4&gt;</span><br><span class="line">          &lt;ul&gt;</span><br><span class="line">            &#123;<span class="keyword">this</span>.props.user.hobbies.map(<span class="function">(<span class="params">hobby,i</span>) =&gt;</span> &lt;li key=&#123;i&#125;&gt;&#123;hobby&#125;&lt;<span class="regexp">/li&gt;)&#125;</span></span><br><span class="line"><span class="regexp">          &lt;/u</span>l&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &lt;div&gt;props's children如下：&#123;this.props.children&#125;&lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">Header.propTypes=&#123;</span></span><br><span class="line"><span class="regexp">  name: PropTypes.string,</span></span><br><span class="line"><span class="regexp">  age: PropTypes.number,</span></span><br><span class="line"><span class="regexp">  user: PropTypes.object,</span></span><br><span class="line"><span class="regexp">  greet: PropTypes.function,</span></span><br><span class="line"><span class="regexp">  children: PropTypes.element.isRequired</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Header;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Home-js"><a href="#Home-js" class="headerlink" title="Home.js"></a>Home.js</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>; <span class="comment">//固定写法</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Home</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123; <span class="comment">//ES6写法</span></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">let</span> content=<span class="string">""</span>;</span><br><span class="line">    <span class="keyword">let</span> flag=<span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">      content=<span class="string">"cbh"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      content=<span class="string">"cxy"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;I am Home&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">        动态数据：&#123;content&#125;</span></span><br><span class="line"><span class="regexp">        &lt;h1&gt;I am &#123;this.props.homeAge&#125; year's old&lt;/</span>h1&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Home;</span></span><br></pre></td></tr></table></figure>
+<h1 id="具体过程"><a href="#具体过程" class="headerlink" title="具体过程"></a>具体过程</h1><p>两个子组件本来就是12岁和10岁，无法查看传值效果。</p>
+<p>所以先点击<code>makeolder</code>按钮，可以看到<code>Header</code>年龄变为15。</p>
+<p>再点击<code>告诉App我几岁</code>按钮。</p>
+<p>子组件1<code>Header</code>通过一个回调函数将自己的年龄传给父组件<code>App</code>，父组件再用<code>Header</code>传来的年龄更新自己的state；</p>
+<p>由于父组件<code>App</code>给子组件2<code>Home</code>传的参数是<code>state</code>中的一个值，所以子组件2变化的部分会重新渲染，实现子组件1传值给子组件2。</p>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>本文为作者原创，转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
 <p>欢迎转发和评论!</p>
@@ -488,8 +493,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/19/React学习（六）之父组件向子组件传值/" rel="next" title="React学习（六）之父组件向子组件传值">
-                <i class="fa fa-chevron-left"></i> React学习（六）之父组件向子组件传值
+              <a href="/2019/01/22/阮一峰React入门教程学习笔记/" rel="next" title="阮一峰React入门教程学习笔记">
+                <i class="fa fa-chevron-left"></i> 阮一峰React入门教程学习笔记
               </a>
             
           </div>
@@ -497,10 +502,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/19/React学习（八）之组件的state属性/" rel="prev" title="React学习（八）之组件的state属性">
-                React学习（八）之组件的state属性 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -666,7 +667,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#修改html文件"><span class="nav-number">1.</span> <span class="nav-text">修改html文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理事件"><span class="nav-number">2.</span> <span class="nav-text">处理事件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加按钮及其响应函数"><span class="nav-number">2.1.</span> <span class="nav-text">添加按钮及其响应函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#效果"><span class="nav-number">2.2.</span> <span class="nav-text">效果</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#原理"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">2.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#App-js"><span class="nav-number">2.1.</span> <span class="nav-text">App.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Header-js"><span class="nav-number">2.2.</span> <span class="nav-text">Header.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Home-js"><span class="nav-number">2.3.</span> <span class="nav-text">Home.js</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体过程"><span class="nav-number">3.</span> <span class="nav-text">具体过程</span></a></li></ol></div>
             
 
           </div>

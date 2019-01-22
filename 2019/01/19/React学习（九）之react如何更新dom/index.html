@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="react," />
+  <meta name="keywords" content="React," />
 
 
 
@@ -81,19 +81,19 @@
 
 
 
-<meta name="description" content="react只重新渲染改变的部分 基本原理react有一个概念：虚拟dom。 每次操作都会生成一个虚拟dom，然后通过diff和上一次的虚拟dom进行比较，通过比较可以找到需要重新渲染的组件，然后只重新渲染这些组件，其他不变。 验证使用chrome浏览器，检查元素，按下图操作  然后页面渲染的地方会被高亮（我这里是绿色）。 每次点击按钮，会发现your name is Max,your age is">
-<meta name="keywords" content="react">
+<meta name="description" content="React只重新渲染HTML页面中改变的部分。 基本原理React有一个概念：虚拟DOM。 每次操作都会生成一个虚拟DOM，然后通过diff算法和上一次的虚拟DOM进行比较，通过比较可以找到需要重新渲染的组件，然后只重新渲染这些组件，其他不变。 验证使用chrome浏览器，检查元素，按下图操作  然后页面渲染的地方会被高亮（我这里是绿色）。 每次点击按钮，会发现your name is Max,y">
+<meta name="keywords" content="React">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React学习（九）之react如何更新dom">
-<meta property="og:url" content="https://chouxianyu.github.io/2019/01/19/React学习（九）之react如何更新dom/index.html">
+<meta property="og:title" content="React学习（九）之React如何更新DOM">
+<meta property="og:url" content="https://chouxianyu.github.io/2019/01/19/React学习（九）之React如何更新DOM/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="react只重新渲染改变的部分 基本原理react有一个概念：虚拟dom。 每次操作都会生成一个虚拟dom，然后通过diff和上一次的虚拟dom进行比较，通过比较可以找到需要重新渲染的组件，然后只重新渲染这些组件，其他不变。 验证使用chrome浏览器，检查元素，按下图操作  然后页面渲染的地方会被高亮（我这里是绿色）。 每次点击按钮，会发现your name is Max,your age is">
+<meta property="og:description" content="React只重新渲染HTML页面中改变的部分。 基本原理React有一个概念：虚拟DOM。 每次操作都会生成一个虚拟DOM，然后通过diff算法和上一次的虚拟DOM进行比较，通过比较可以找到需要重新渲染的组件，然后只重新渲染这些组件，其他不变。 验证使用chrome浏览器，检查元素，按下图操作  然后页面渲染的地方会被高亮（我这里是绿色）。 每次点击按钮，会发现your name is Max,y">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/01/19/5c42c5eb46daf.png">
-<meta property="og:updated_time" content="2019-01-20T13:22:41.584Z">
+<meta property="og:updated_time" content="2019-01-22T07:32:26.765Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="React学习（九）之react如何更新dom">
-<meta name="twitter:description" content="react只重新渲染改变的部分 基本原理react有一个概念：虚拟dom。 每次操作都会生成一个虚拟dom，然后通过diff和上一次的虚拟dom进行比较，通过比较可以找到需要重新渲染的组件，然后只重新渲染这些组件，其他不变。 验证使用chrome浏览器，检查元素，按下图操作  然后页面渲染的地方会被高亮（我这里是绿色）。 每次点击按钮，会发现your name is Max,your age is">
+<meta name="twitter:title" content="React学习（九）之React如何更新DOM">
+<meta name="twitter:description" content="React只重新渲染HTML页面中改变的部分。 基本原理React有一个概念：虚拟DOM。 每次操作都会生成一个虚拟DOM，然后通过diff算法和上一次的虚拟DOM进行比较，通过比较可以找到需要重新渲染的组件，然后只重新渲染这些组件，其他不变。 验证使用chrome浏览器，检查元素，按下图操作  然后页面渲染的地方会被高亮（我这里是绿色）。 每次点击按钮，会发现your name is Max,y">
 <meta name="twitter:image" content="https://i.loli.net/2019/01/19/5c42c5eb46daf.png">
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="https://chouxianyu.github.io/2019/01/19/React学习（九）之react如何更新dom/"/>
+  <link rel="canonical" href="https://chouxianyu.github.io/2019/01/19/React学习（九）之React如何更新DOM/"/>
 
 
 
 
 
-  <title>React学习（九）之react如何更新dom | 臭咸鱼的缺氧瓶</title>
+  <title>React学习（九）之React如何更新DOM | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -301,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/01/19/React学习（九）之react如何更新dom/">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/01/19/React学习（九）之React如何更新DOM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="臭咸鱼">
@@ -318,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">React学习（九）之react如何更新dom</h1>
+          <h1 class="post-title" itemprop="name headline">React学习（九）之React如何更新DOM</h1>
         
 
         <div class="post-meta">
@@ -371,8 +371,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/01/19/React学习（九）之react如何更新dom/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/19/React学习（九）之react如何更新dom/" itemprop="commentCount"></span>
+                <a href="/2019/01/19/React学习（九）之React如何更新DOM/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/19/React学习（九）之React如何更新DOM/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -380,7 +380,7 @@
 
           
           
-             <span id="/2019/01/19/React学习（九）之react如何更新dom/" class="leancloud_visitors" data-flag-title="React学习（九）之react如何更新dom">
+             <span id="/2019/01/19/React学习（九）之React如何更新DOM/" class="leancloud_visitors" data-flag-title="React学习（九）之React如何更新DOM">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  176 字
+                  181 字
                 </span>
               
 
@@ -442,9 +442,9 @@
       
 
       
-        <p><strong>react只重新渲染改变的部分</strong></p>
-<h1 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h1><p>react有一个概念：虚拟dom。</p>
-<p>每次操作都会生成一个虚拟dom，然后通过<code>diff</code>和上一次的虚拟dom进行比较，通过比较可以找到需要重新渲染的组件，然后只重新渲染这些组件，其他不变。</p>
+        <p><strong>React只重新渲染HTML页面中改变的部分</strong>。</p>
+<h1 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h1><p>React有一个概念：虚拟DOM。</p>
+<p>每次操作都会生成一个虚拟DOM，然后通过<code>diff</code>算法和上一次的虚拟DOM进行比较，通过比较可以找到需要重新渲染的组件，然后只重新渲染这些组件，其他不变。</p>
 <h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><p>使用chrome浏览器，检查元素，按下图操作</p>
 <p><a href="https://i.loli.net/2019/01/19/5c42c5eb46daf.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/19/5c42c5eb46daf.png" alt="rendering.png"></a></p>
 <p>然后页面渲染的地方会被高亮（我这里是绿色）。</p>
@@ -469,7 +469,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/react/" rel="tag"># react</a>
+            <a href="/tags/React/" rel="tag"># React</a>
           
         </div>
       
@@ -584,7 +584,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -595,7 +595,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -606,7 +606,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -694,7 +694,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">15.0k</span>
+    <span title="Site words total count">17.0k</span>
   
 </div>
 

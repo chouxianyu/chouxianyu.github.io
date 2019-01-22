@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="react," />
+  <meta name="keywords" content="React," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="上次讲到state更新，DOM树才会更新，原理是react会监听state。 现在来试一下。 Header代码变动修改Header.js,有如下三处变动,其中注释掉的代码是上一节的代码。 1234567constructor(props)&amp;#123;    super(props);  //执行父类构造方法    this.state=&amp;#123;      age:props.age    &amp;#">
-<meta name="keywords" content="react">
+<meta name="description" content="上次讲到state更新，DOM树才会更新，原理是React会监听组件的state。 现在来试一下。 Header代码变动修改Header.js,有如下三处变动,其中注释掉的代码是上一节的代码。 1234567constructor(props)&amp;#123;    super(props);  //执行父类构造方法    this.state=&amp;#123;      age:props.age">
+<meta name="keywords" content="React">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React学习（八）之组件的state属性">
 <meta property="og:url" content="https://chouxianyu.github.io/2019/01/19/React学习（八）之组件的state属性/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="上次讲到state更新，DOM树才会更新，原理是react会监听state。 现在来试一下。 Header代码变动修改Header.js,有如下三处变动,其中注释掉的代码是上一节的代码。 1234567constructor(props)&amp;#123;    super(props);  //执行父类构造方法    this.state=&amp;#123;      age:props.age    &amp;#">
+<meta property="og:description" content="上次讲到state更新，DOM树才会更新，原理是React会监听组件的state。 现在来试一下。 Header代码变动修改Header.js,有如下三处变动,其中注释掉的代码是上一节的代码。 1234567constructor(props)&amp;#123;    super(props);  //执行父类构造方法    this.state=&amp;#123;      age:props.age">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-20T13:22:32.664Z">
+<meta property="og:updated_time" content="2019-01-22T07:28:39.485Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React学习（八）之组件的state属性">
-<meta name="twitter:description" content="上次讲到state更新，DOM树才会更新，原理是react会监听state。 现在来试一下。 Header代码变动修改Header.js,有如下三处变动,其中注释掉的代码是上一节的代码。 1234567constructor(props)&amp;#123;    super(props);  //执行父类构造方法    this.state=&amp;#123;      age:props.age    &amp;#">
+<meta name="twitter:description" content="上次讲到state更新，DOM树才会更新，原理是React会监听组件的state。 现在来试一下。 Header代码变动修改Header.js,有如下三处变动,其中注释掉的代码是上一节的代码。 1234567constructor(props)&amp;#123;    super(props);  //执行父类构造方法    this.state=&amp;#123;      age:props.age">
 
 
 
@@ -403,7 +403,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  413 字
+                  406 字
                 </span>
               
 
@@ -440,13 +440,13 @@
       
 
       
-        <p>上次讲到state更新，DOM树才会更新，原理是react会监听state。</p>
+        <p>上次讲到state更新，DOM树才会更新，原理是React会监听组件的state。</p>
 <p>现在来试一下。</p>
 <h1 id="Header代码变动"><a href="#Header代码变动" class="headerlink" title="Header代码变动"></a>Header代码变动</h1><p>修改<code>Header.js</code>,有如下三处变动,其中注释掉的代码是上一节的代码。</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>(props)&#123;</span><br><span class="line">    <span class="keyword">super</span>(props);  <span class="comment">//执行父类构造方法</span></span><br><span class="line">    <span class="keyword">this</span>.state=&#123;</span><br><span class="line">      age:props.age</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//this.age=this.props.age;  </span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">onMakeOrder()&#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      age:<span class="keyword">this</span>.state.age+<span class="number">3</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">//this.age+=3;</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);  <span class="comment">//显示当前Header类的对象</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;your name is &#123;<span class="keyword">this</span>.props.name&#125;,your age is &#123;<span class="keyword">this</span>.state.age&#125;&lt;<span class="regexp">/div&gt;	</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/表达式中上次是this.props.age</span></span><br></pre></td></tr></table></figure>
-<h1 id="Header-js"><a href="#Header-js" class="headerlink" title="Header.js"></a>Header.js</h1><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>; <span class="comment">//固定写法</span></span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Header</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123; <span class="comment">//ES6写法</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">constructor</span>(props)&#123;</span><br><span class="line">    <span class="keyword">super</span>(props);  <span class="comment">//执行父类构造方法</span></span><br><span class="line">    <span class="keyword">this</span>.state=&#123;</span><br><span class="line">      age:props.age</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//this.age=this.props.age;  </span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  onMakeOrder()&#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      age:<span class="keyword">this</span>.state.age+<span class="number">3</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">//this.age+=3;</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);  <span class="comment">//显示当前Header类的对象</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="comment">//console.log(this.props);  //显示父组件传来的参数</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">            &lt;h1&gt;Header&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">            &lt;div&gt;your name is &#123;this.props.name&#125;,your age is &#123;this.state.age&#125;&lt;/</span>div&gt;</span><br><span class="line">              &#123;<span class="comment">/*&lt;button onClick=&#123;() =&gt; this.onMakeOrder()&#125; className="btn btn-primary"&gt;make me older&lt;/button&gt;*/</span>&#125;</span><br><span class="line">              &lt;button onClick=&#123;<span class="keyword">this</span>.onMakeOrder.bind(<span class="keyword">this</span>)&#125; className=<span class="string">"btn btn-primary"</span>&gt;</span><br><span class="line">               make me older  </span><br><span class="line">              &lt;<span class="regexp">/button&gt; </span></span><br><span class="line"><span class="regexp">            &lt;div&gt;</span></span><br><span class="line"><span class="regexp">              &lt;h4&gt;hobbies&lt;/</span>h4&gt;</span><br><span class="line">              &lt;ul&gt;</span><br><span class="line">                &#123;<span class="keyword">this</span>.props.user.hobbies.map(<span class="function">(<span class="params">hobby,i</span>) =&gt;</span> &lt;li key=&#123;i&#125;&gt;&#123;hobby&#125;&lt;<span class="regexp">/li&gt;)&#125;</span></span><br><span class="line"><span class="regexp">              &lt;/u</span>l&gt;</span><br><span class="line">            &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">            &lt;div&gt;&#123;this.props.children&#125;&lt;/</span>div&gt;</span><br><span class="line">          &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">Header.propTypes=&#123;</span></span><br><span class="line"><span class="regexp">  name: PropTypes.string,</span></span><br><span class="line"><span class="regexp">  age: PropTypes.number,</span></span><br><span class="line"><span class="regexp">  user: PropTypes.object,</span></span><br><span class="line"><span class="regexp">  children: PropTypes.element.isRequired</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Header;</span></span><br></pre></td></tr></table></figure>
+<h1 id="Header-js"><a href="#Header-js" class="headerlink" title="Header.js"></a>Header.js</h1><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>; <span class="comment">//固定写法</span></span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Header</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123; <span class="comment">//ES6写法</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">constructor</span>(props)&#123;</span><br><span class="line">    <span class="keyword">super</span>(props);  <span class="comment">//执行父类构造方法</span></span><br><span class="line">    <span class="keyword">this</span>.state=&#123;</span><br><span class="line">      age:props.age</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//this.age=this.props.age;  </span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  onMakeOrder()&#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      age:<span class="keyword">this</span>.state.age+<span class="number">3</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">//this.age+=3;</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);  <span class="comment">//显示当前Header类的对象</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="comment">//console.log(this.props);  //显示父组件传来的参数</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;Header&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">        &lt;div&gt;your name is &#123;this.props.name&#125;,your age is &#123;this.state.age&#125;&lt;/</span>div&gt;</span><br><span class="line">        &#123;<span class="comment">/*&lt;button onClick=&#123;() =&gt; this.onMakeOrder()&#125; className="btn btn-primary"&gt;make me older&lt;/button&gt;*/</span>&#125;</span><br><span class="line">        &lt;button onClick=&#123;<span class="keyword">this</span>.onMakeOrder.bind(<span class="keyword">this</span>)&#125; className=<span class="string">"btn btn-primary"</span>&gt;make me older  &lt;<span class="regexp">/button&gt; </span></span><br><span class="line"><span class="regexp">        &lt;div&gt;</span></span><br><span class="line"><span class="regexp">          &lt;h4&gt;hobbies&lt;/</span>h4&gt;</span><br><span class="line">          &lt;ul&gt;</span><br><span class="line">          &#123;<span class="keyword">this</span>.props.user.hobbies.map(<span class="function">(<span class="params">hobby,i</span>) =&gt;</span> &lt;li key=&#123;i&#125;&gt;&#123;hobby&#125;&lt;<span class="regexp">/li&gt;)&#125;</span></span><br><span class="line"><span class="regexp">          &lt;/u</span>l&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;div&gt;&#123;this.props.children&#125;&lt;/</span>div&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">Header.propTypes=&#123;</span></span><br><span class="line"><span class="regexp">  name: PropTypes.string,</span></span><br><span class="line"><span class="regexp">  age: PropTypes.number,</span></span><br><span class="line"><span class="regexp">  user: PropTypes.object,</span></span><br><span class="line"><span class="regexp">  children: PropTypes.element.isRequired</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Header;</span></span><br></pre></td></tr></table></figure>
 <h1 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h1><p>页面中的age会更改哟。</p>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>本文为作者原创，转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
@@ -468,7 +468,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/react/" rel="tag"># react</a>
+            <a href="/tags/React/" rel="tag"># React</a>
           
         </div>
       
@@ -491,8 +491,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/19/React学习（九）之react如何更新dom/" rel="prev" title="React学习（九）之react如何更新dom">
-                React学习（九）之react如何更新dom <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/19/React学习（九）之React如何更新DOM/" rel="prev" title="React学习（九）之React如何更新DOM">
+                React学习（九）之React如何更新DOM <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -583,7 +583,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -594,7 +594,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -605,7 +605,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -693,7 +693,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">15.0k</span>
+    <span title="Site words total count">17.0k</span>
   
 </div>
 

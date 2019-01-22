@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="react," />
+  <meta name="keywords" content="React," />
 
 
 
@@ -81,21 +81,21 @@
 
 
 
-<meta name="description" content="子组件向父组件传值，一般要通过回调函数的参数。 父组件定义一个回调函数，并将其传递给子组件，然后子组件调用该函数，并将值通过回调函数的参数传给父组件。 父组件定义回调函数App.js中定义回调函数： 123onGreet(age)&amp;#123;  //父组件定义回调函数    alert(&quot;Son is&quot;+age+&quot;years old!&quot;);&amp;#125; 父组件传回调函数给子组件App.js中将定义">
-<meta name="keywords" content="react">
+<meta name="description" content="子组件向父组件传值，一般要通过回调函数的参数。这也是 父组件定义一个回调函数，并将其传递给子组件，然后子组件调用该函数，并将值通过回调函数的参数传给父组件。 这说明了React数据传递的单向性，虽然实现了子组件传值给父组件，但本质还是父组件传给了子组件一个函数。 父组件定义回调函数App.js中定义回调函数： 123onGreet(age)&amp;#123;  //父组件定义回调函数    alert(">
+<meta name="keywords" content="React">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React学习（十）之子组件向父组件传值">
 <meta property="og:url" content="https://chouxianyu.github.io/2019/01/20/React学习（十）之子组件向父组件传值/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="子组件向父组件传值，一般要通过回调函数的参数。 父组件定义一个回调函数，并将其传递给子组件，然后子组件调用该函数，并将值通过回调函数的参数传给父组件。 父组件定义回调函数App.js中定义回调函数： 123onGreet(age)&amp;#123;  //父组件定义回调函数    alert(&quot;Son is&quot;+age+&quot;years old!&quot;);&amp;#125; 父组件传回调函数给子组件App.js中将定义">
+<meta property="og:description" content="子组件向父组件传值，一般要通过回调函数的参数。这也是 父组件定义一个回调函数，并将其传递给子组件，然后子组件调用该函数，并将值通过回调函数的参数传给父组件。 这说明了React数据传递的单向性，虽然实现了子组件传值给父组件，但本质还是父组件传给了子组件一个函数。 父组件定义回调函数App.js中定义回调函数： 123onGreet(age)&amp;#123;  //父组件定义回调函数    alert(">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/01/20/5c4473d94a6f4.png">
 <meta property="og:image" content="https://i.loli.net/2019/01/20/5c4473d945184.png">
 <meta property="og:image" content="https://i.loli.net/2019/01/20/5c4473d9676e2.png">
-<meta property="og:updated_time" content="2019-01-20T13:20:22.971Z">
+<meta property="og:updated_time" content="2019-01-22T07:28:43.515Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React学习（十）之子组件向父组件传值">
-<meta name="twitter:description" content="子组件向父组件传值，一般要通过回调函数的参数。 父组件定义一个回调函数，并将其传递给子组件，然后子组件调用该函数，并将值通过回调函数的参数传给父组件。 父组件定义回调函数App.js中定义回调函数： 123onGreet(age)&amp;#123;  //父组件定义回调函数    alert(&quot;Son is&quot;+age+&quot;years old!&quot;);&amp;#125; 父组件传回调函数给子组件App.js中将定义">
+<meta name="twitter:description" content="子组件向父组件传值，一般要通过回调函数的参数。这也是 父组件定义一个回调函数，并将其传递给子组件，然后子组件调用该函数，并将值通过回调函数的参数传给父组件。 这说明了React数据传递的单向性，虽然实现了子组件传值给父组件，但本质还是父组件传给了子组件一个函数。 父组件定义回调函数App.js中定义回调函数： 123onGreet(age)&amp;#123;  //父组件定义回调函数    alert(">
 <meta name="twitter:image" content="https://i.loli.net/2019/01/20/5c4473d94a6f4.png">
 
 
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  280 字
+                  328 字
                 </span>
               
 
@@ -444,8 +444,9 @@
       
 
       
-        <p>子组件向父组件传值，一般要通过回调函数的参数。</p>
-<p>父组件定义一个回调函数，并将其传递给子组件，然后子组件调用该函数，并<strong>将值通过回调函数的参数传给父组件</strong>。</p>
+        <p>子组件向父组件传值，一般要通过回调函数的参数。这也是</p>
+<p>父组件定义一个回调函数，并<strong>将其传递给子组件</strong>，然后子组件调用该函数，并<strong>将值通过回调函数的参数传给父组件</strong>。</p>
+<p>这说明了React数据传递的单向性，虽然实现了子组件传值给父组件，但本质还是父组件传给了子组件一个函数。</p>
 <h1 id="父组件定义回调函数"><a href="#父组件定义回调函数" class="headerlink" title="父组件定义回调函数"></a>父组件定义回调函数</h1><p><code>App.js</code>中定义回调函数：</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">onGreet(age)&#123;  <span class="comment">//父组件定义回调函数</span></span><br><span class="line">    alert(<span class="string">"Son is"</span>+age+<span class="string">"years old!"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="父组件传回调函数给子组件"><a href="#父组件传回调函数给子组件" class="headerlink" title="父组件传回调函数给子组件"></a>父组件传回调函数给子组件</h1><p><code>App.js</code>中将定义的回调函数传给子组件：</p>
@@ -486,7 +487,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/react/" rel="tag"># react</a>
+            <a href="/tags/React/" rel="tag"># React</a>
           
         </div>
       
@@ -499,8 +500,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/19/React学习（九）之react如何更新dom/" rel="next" title="React学习（九）之react如何更新dom">
-                <i class="fa fa-chevron-left"></i> React学习（九）之react如何更新dom
+              <a href="/2019/01/19/React学习（九）之React如何更新DOM/" rel="next" title="React学习（九）之React如何更新DOM">
+                <i class="fa fa-chevron-left"></i> React学习（九）之React如何更新DOM
               </a>
             
           </div>
@@ -508,6 +509,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/22/阮一峰React入门教程学习笔记/" rel="prev" title="阮一峰React入门教程学习笔记">
+                阮一峰React入门教程学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -597,7 +602,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -608,7 +613,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -619,7 +624,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -707,7 +712,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">15.0k</span>
+    <span title="Site words total count">17.0k</span>
   
 </div>
 
