@@ -7,9 +7,6 @@
       <categories>
         <category>前端</category>
       </categories>
-      <tags>
-        <tag>React</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[阮一峰React入门教程学习笔记]]></title>
@@ -18,9 +15,6 @@
       <categories>
         <category>前端</category>
       </categories>
-      <tags>
-        <tag>React</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（十）之子组件向父组件传值]]></title>
@@ -29,9 +23,6 @@
       <categories>
         <category>前端</category>
       </categories>
-      <tags>
-        <tag>React</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（九）之React如何更新DOM]]></title>
@@ -40,9 +31,6 @@
       <categories>
         <category>前端</category>
       </categories>
-      <tags>
-        <tag>React</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（八）之组件的state属性]]></title>
@@ -51,9 +39,6 @@
       <categories>
         <category>前端</category>
       </categories>
-      <tags>
-        <tag>React</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（七）之事件]]></title>
@@ -62,9 +47,6 @@
       <categories>
         <category>前端</category>
       </categories>
-      <tags>
-        <tag>React</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（六）之父组件向子组件传值]]></title>
@@ -73,9 +55,6 @@
       <categories>
         <category>前端</category>
       </categories>
-      <tags>
-        <tag>React</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（五）之输出动态数据]]></title>
@@ -84,9 +63,6 @@
       <categories>
         <category>前端</category>
       </categories>
-      <tags>
-        <tag>React</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（四）之多个组件]]></title>
@@ -95,9 +71,6 @@
       <categories>
         <category>前端</category>
       </categories>
-      <tags>
-        <tag>React</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（三）之第一个组件]]></title>
@@ -106,9 +79,6 @@
       <categories>
         <category>前端</category>
       </categories>
-      <tags>
-        <tag>React</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（二）之create-react-app]]></title>
@@ -117,9 +87,6 @@
       <categories>
         <category>前端</category>
       </categories>
-      <tags>
-        <tag>React</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[hexo不蒜子网站访问量统计失效]]></title>
@@ -150,9 +117,6 @@
       <categories>
         <category>前端</category>
       </categories>
-      <tags>
-        <tag>React</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[java.util.NoSuchElementException]]></title>
@@ -234,7 +198,7 @@
   <entry>
     <title><![CDATA[FirstWriting]]></title>
     <url>%2F2018%2F08%2F16%2FFirstWriting%2F</url>
-    <content type="text"><![CDATA[在很久很久以前，你拥有我我拥有你 《外面的世界》在很久很久以前我就有搞一个类似博客的东西的想法，不过一直都没有尝试着搞……某天（10号左右吧）刷知乎看到github和hexo可以搭建博客，于是我就来了hhh不过搞的时候也遇到了好多bug，跳了好多坑…博客一是分享，二是记录，三四五还没想起来。 这是第一次写博客，学习内容是一点点markdown语法，文末有这次学习的链接，之后应该会再好好学学markdown语法。 字体设置斜体1：文字两侧各一个星号斜体2：文字两侧各一个下划线粗体：文字两侧各两个星号粗斜体：文字两侧各三个星号删除线：文字两侧各两个波浪号 那就有个疑问了，如果星号、波浪号、下划线出现在文字中怎么处理…或者说这种情况很少吧，并且对内容没什么影响 标题怎么用二级标题三级标题四级标题五级标题六级标题超链接行内形式：我的博客参考形式：[我的博客][1],[github][2][1]:https://chouxianyu.github.io/[2]:https://github.com/自动链接：我的博客地址https://chouxianyu.github.io/ 列表无序列表 无序列表项1 无序列表项2 无序列表项3 有序列表1.有序列表项12.有序列表项23.有序列表项3 插入图片 表格 表头1 表头2 表头3 表头4 默认左对齐 显式左对齐 居中对齐 右对齐 默认左对齐 显式左对齐 居中对齐 右对齐 默认左对齐 显式左对齐 居中对齐 右对齐 默认左对齐 显式左对齐 居中对齐 右对齐 转载自https://www.jianshu.com/p/56d99a3049a5]]></content>
+    <content type="text"><![CDATA[在很久很久以前，你拥有我我拥有你 《外面的世界》在很久很久以前我就有搞一个类似博客的东西的想法，不过一直都没有尝试着搞……某天（10号左右吧）刷知乎看到github和hexo可以搭建博客，于是我就来了hhh不过搞的时候也遇到了好多bug，跳了好多坑…博客一是分享，二是记录，三四五还没想起来。 这是第一次写博客，学习内容是一点点markdown语法，文末有这次学习的链接，之后应该会再好好学学markdown语法。 字体设置斜体1：文字两侧各一个星号斜体2：文字两侧各一个下划线粗体：文字两侧各两个星号粗斜体：文字两侧各三个星号删除线：文字两侧各两个波浪号 那就有个疑问了，如果星号、波浪号、下划线出现在文字中怎么处理…或者说这种情况很少吧，并且对内容没什么影响 标题怎么用二级标题三级标题四级标题五级标题六级标题超链接行内形式：我的博客参考形式：我的博客,github 自动链接：我的博客地址https://chouxianyu.github.io/ 列表无序列表 无序列表项1 无序列表项2 无序列表项3 有序列表1.有序列表项12.有序列表项23.有序列表项3 插入图片 表格 表头1 表头2 表头3 表头4 默认左对齐 显式左对齐 居中对齐 右对齐 默认左对齐 显式左对齐 居中对齐 右对齐 默认左对齐 显式左对齐 居中对齐 右对齐 默认左对齐 显式左对齐 居中对齐 右对齐 转载自https://www.jianshu.com/p/56d99a3049a5]]></content>
       <categories>
         <category>markdown</category>
       </categories>
