@@ -5,11 +5,31 @@
     
   <url>
     <loc>https://chouxianyu.github.io/2019/01/22/%E9%98%AE%E4%B8%80%E5%B3%B0React%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2019-01-22T07:42:09.489Z</lastmod>
+    <lastmod>2019-01-23T08:44:14.927Z</lastmod>
     <data>
         <display>
         <title>阮一峰React入门教程学习笔记</title>
         <pubTime>2019-01-22T06:40:55.000Z</pubTime>
+        
+        <tag>React</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B9%8B%E4%BA%8B%E4%BB%B6/</loc>
+    <lastmod>2019-01-23T03:25:57.106Z</lastmod>
+    <data>
+        <display>
+        <title>React学习（七）之事件</title>
+        <pubTime>2019-01-19T06:11:38.000Z</pubTime>
         
         <tag>React</tag>
          
@@ -230,26 +250,6 @@
         <display>
         <title>React学习（三）之第一个组件</title>
         <pubTime>2019-01-18T13:13:36.000Z</pubTime>
-        
-        <tag>React</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="https://chouxianyu.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B9%8B%E4%BA%8B%E4%BB%B6/</loc>
-    <lastmod>2019-01-22T07:28:08.902Z</lastmod>
-    <data>
-        <display>
-        <title>React学习（七）之事件</title>
-        <pubTime>2019-01-19T06:11:38.000Z</pubTime>
         
         <tag>React</tag>
          
