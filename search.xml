@@ -7,6 +7,9 @@
       <categories>
         <category>前端</category>
       </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[阮一峰React入门教程学习笔记]]></title>
@@ -15,6 +18,9 @@
       <categories>
         <category>前端</category>
       </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（十）之子组件向父组件传值]]></title>
@@ -23,6 +29,9 @@
       <categories>
         <category>前端</category>
       </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（九）之React如何更新DOM]]></title>
@@ -31,6 +40,9 @@
       <categories>
         <category>前端</category>
       </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（八）之组件的state属性]]></title>
@@ -39,6 +51,9 @@
       <categories>
         <category>前端</category>
       </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（七）之事件]]></title>
@@ -47,6 +62,9 @@
       <categories>
         <category>前端</category>
       </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（六）之父组件向子组件传值]]></title>
@@ -55,6 +73,9 @@
       <categories>
         <category>前端</category>
       </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（五）之输出动态数据]]></title>
@@ -63,6 +84,9 @@
       <categories>
         <category>前端</category>
       </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（四）之多个组件]]></title>
@@ -71,6 +95,9 @@
       <categories>
         <category>前端</category>
       </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（三）之第一个组件]]></title>
@@ -79,6 +106,9 @@
       <categories>
         <category>前端</category>
       </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[React学习（二）之create-react-app]]></title>
@@ -87,6 +117,9 @@
       <categories>
         <category>前端</category>
       </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[hexo不蒜子网站访问量统计失效]]></title>
@@ -117,6 +150,9 @@
       <categories>
         <category>前端</category>
       </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[java.util.NoSuchElementException]]></title>
