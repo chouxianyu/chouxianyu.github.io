@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="文章分为三个大的部分 大标题1提出权限”理念”，大标题2验证赋值规则 大标题3、4、5是我的个人理解。 大标题6是最直接的结论。 提醒 看懂这篇文章可能需要你知道并理解四种指针的定义，这是基础。当然如果真的不懂，可以直接去文尾记住结论。 四种指针详解戳这https://chouxianyu.github.io/2018/08/26/常量指针与指针常量/#more 指针修改指向内容的权限普通指针=指">
+<meta name="description" content="文章分为三个大的部分 大标题1提出权限”概念”，大标题2验证赋值规则 大标题3、4、5是我的个人理解。 大标题6是最直接的结论。 提醒 看懂这篇文章可能需要你知道并理解四种指针的定义，这是基础。当然如果真的不懂，可以直接去文尾记住结论。 四种指针详解戳这https://chouxianyu.github.io/2018/08/26/常量指针与指针常量/#more 指针修改指向内容的权限普通指针=指">
 <meta name="keywords" content="指针">
 <meta property="og:type" content="article">
 <meta property="og:title" content="指针间的互相赋值">
 <meta property="og:url" content="https://chouxianyu.github.io/2018/09/01/指针间的互相赋值/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="文章分为三个大的部分 大标题1提出权限”理念”，大标题2验证赋值规则 大标题3、4、5是我的个人理解。 大标题6是最直接的结论。 提醒 看懂这篇文章可能需要你知道并理解四种指针的定义，这是基础。当然如果真的不懂，可以直接去文尾记住结论。 四种指针详解戳这https://chouxianyu.github.io/2018/08/26/常量指针与指针常量/#more 指针修改指向内容的权限普通指针=指">
+<meta property="og:description" content="文章分为三个大的部分 大标题1提出权限”概念”，大标题2验证赋值规则 大标题3、4、5是我的个人理解。 大标题6是最直接的结论。 提醒 看懂这篇文章可能需要你知道并理解四种指针的定义，这是基础。当然如果真的不懂，可以直接去文尾记住结论。 四种指针详解戳这https://chouxianyu.github.io/2018/08/26/常量指针与指针常量/#more 指针修改指向内容的权限普通指针=指">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-20T13:59:00.939Z">
+<meta property="og:updated_time" content="2019-02-08T05:14:45.628Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="指针间的互相赋值">
-<meta name="twitter:description" content="文章分为三个大的部分 大标题1提出权限”理念”，大标题2验证赋值规则 大标题3、4、5是我的个人理解。 大标题6是最直接的结论。 提醒 看懂这篇文章可能需要你知道并理解四种指针的定义，这是基础。当然如果真的不懂，可以直接去文尾记住结论。 四种指针详解戳这https://chouxianyu.github.io/2018/08/26/常量指针与指针常量/#more 指针修改指向内容的权限普通指针=指">
+<meta name="twitter:description" content="文章分为三个大的部分 大标题1提出权限”概念”，大标题2验证赋值规则 大标题3、4、5是我的个人理解。 大标题6是最直接的结论。 提醒 看懂这篇文章可能需要你知道并理解四种指针的定义，这是基础。当然如果真的不懂，可以直接去文尾记住结论。 四种指针详解戳这https://chouxianyu.github.io/2018/08/26/常量指针与指针常量/#more 指针修改指向内容的权限普通指针=指">
 
 
 
@@ -403,7 +403,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,592 字
+                  1,552 字
                 </span>
               
 
@@ -441,7 +441,7 @@
 
       
         <p>文章分为三个大的部分</p>
-<p>大标题1提出权限”理念”，大标题2验证赋值规则</p>
+<p>大标题1提出权限”概念”，大标题2验证赋值规则</p>
 <p>大标题3、4、5是我的个人理解。</p>
 <p>大标题6是最直接的结论。</p>
 <p><strong>提醒</strong></p>
@@ -462,7 +462,6 @@
 <h2 id="然后才有了赋值规则"><a href="#然后才有了赋值规则" class="headerlink" title="然后才有了赋值规则"></a>然后才有了赋值规则</h2><p>我们举个例子，如果没有这个规则，不同类型指针自由互相赋值：你定义一个常量n，然后再定义一个int* p，就是普指，普指按说是有修改内存的权利的，然后p=&amp;n，拿到n的地址，是不是就可以通过p改变n了？（在存在不同权限指针的前提下）。如果没有这个规则，我们可以很随意地改变常量了。干嘛自己造了一座木屋，然后又给它浇上油？</p>
 <h1 id="斗胆扯内存"><a href="#斗胆扯内存" class="headerlink" title="斗胆扯内存"></a>斗胆扯内存</h1><p>不管是指针常量还是常量指针还有普通指针，<strong>它们本身和那块内存都是没有本质关系的</strong>。</p>
 <p>它们（也包括普通类型的指针）只是一个带着镣铐或者没有镣铐的工具，我们可以通过const控制指针的权限以及它本身，同时我们在使用它们时也不能超出它们的权限范围和它们的个人承受力。</p>
-<p>还是说我在做梦！？？！那有人也在做梦的话，联系我可获得<del>王子之吻</del>，开玩笑的啊，我不是gay，也不是变态</p>
 <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* p1;				<span class="comment">//普通指针</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>* p2;			<span class="comment">//常量指针	与int const* p2相同</span></span><br><span class="line"><span class="keyword">int</span>* <span class="keyword">const</span> p3=<span class="literal">nullptr</span>; 	<span class="comment">//指针常量</span></span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> * <span class="keyword">const</span> p4;  	<span class="comment">//四号指针 既是常指又是指常</span></span><br></pre></td></tr></table></figure>
 <p>p1和p3可以互相赋值；</p>
 <p>p2和p4可以互相赋值；</p>
@@ -603,7 +602,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -614,7 +613,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -625,7 +624,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -713,7 +712,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">17.0k</span>
+    <span title="Site words total count">18.2k</span>
   
 </div>
 
@@ -1363,6 +1362,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
   <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>

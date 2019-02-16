@@ -471,7 +471,7 @@
 <p>字节流的含义：<strong>读取方式为一个字节一个字节地读取</strong>,而字符流是二个字节二个字节的读。</p>
 <p>Applications that need to define a subclass of <code>InputStream</code>  must always provide a method that returns the next byte of input.</p>
 <p>翻译为：需要定义一个<code>InputStream</code>子类的应用必须提供一个返回输入下一字节的方法（函数）。</p>
-<h2 id="read"><a href="#read" class="headerlink" title="read()"></a><code>read()</code></h2><p>官方文档：<a href="https://docs.oracle.com/javase/10/docs/api/java/io/InputStream.html#read()" target="_blank" rel="noopener">https://docs.oracle.com/javase/10/docs/api/java/io/InputStream.html#read()</a></p>
+<h2 id="read"><a href="#read" class="headerlink" title="read()"></a><code>read()</code></h2><p>官方文档：<a href="https://docs.oracle.com/javase/10/docs/api/java/io/InputStream.html#read(" target="_blank" rel="noopener">https://docs.oracle.com/javase/10/docs/api/java/io/InputStream.html#read(</a>)</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">				<span class="keyword">throws</span> IOException</span></span><br></pre></td></tr></table></figure>
 <p>Reads the next byte of data from the input stream. The value byte is returned as an <code>int</code> in the range <code>0</code> to<code>255</code>.</p>
 <p>这个是重点，它<strong>返回下一字节的ASCII码</strong></p>
@@ -616,7 +616,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -627,7 +627,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -638,7 +638,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -726,7 +726,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">17.0k</span>
+    <span title="Site words total count">18.2k</span>
   
 </div>
 
@@ -1376,6 +1376,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
   <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>

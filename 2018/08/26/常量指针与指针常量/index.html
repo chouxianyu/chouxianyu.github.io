@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
 <meta property="og:description" content="常量指针和指针常量是两个经常出现的概念，今天做个小小总结。 文章各部分的内容都是很容易理解的，并且附加代码说明，一切的前提是理解文章2.1和2.2部分，所以搞好基础再往后看呐。干货在嫌长的直接跳到结论去。 废话最近在看VC++，看到书里有提这两个概念，学C的时候也有这两个概念，学C++的时候也有顶层const和底层const（这个我懂是懂，但从理解层次上不是那么懂为什么叫做顶层和底层）。所以就是这">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-20T13:49:06.713Z">
+<meta property="og:updated_time" content="2019-02-08T05:11:04.060Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常量指针与指针常量">
 <meta name="twitter:description" content="常量指针和指针常量是两个经常出现的概念，今天做个小小总结。 文章各部分的内容都是很容易理解的，并且附加代码说明，一切的前提是理解文章2.1和2.2部分，所以搞好基础再往后看呐。干货在嫌长的直接跳到结论去。 废话最近在看VC++，看到书里有提这两个概念，学C的时候也有这两个概念，学C++的时候也有顶层const和底层const（这个我懂是懂，但从理解层次上不是那么懂为什么叫做顶层和底层）。所以就是这">
@@ -447,6 +447,7 @@
 <p>英文里是这样的两个东西:pointer to const, const pointer。</p>
 <p>pointer是<code>指针</code>的意思；const是constant的缩写，作名词是<code>常量</code>的意思，作形容词是<code>不变的</code>的意思。</p>
 <p>这两个词：pointer to const, const pointer。中文有两种翻译方法：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -468,6 +469,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>说来说去都是翻译的问题。英文里很容易能看懂的意思，换成中文就有两种换法。</p>
 <p>我赞成第一种翻译方法，因为它更符合中文习惯。</p>
 <p>第二种方法确实不该有指针常量这个说法，太不合中文习惯。</p>
@@ -486,7 +488,7 @@
 <h2 id="指针常量"><a href="#指针常量" class="headerlink" title="指针常量"></a>指针常量</h2><p>这里的指针呢，指的是<strong>这个常量是一个地址</strong>。</p>
 <h2 id="如何根据定义判断类型"><a href="#如何根据定义判断类型" class="headerlink" title="如何根据定义判断类型"></a>如何根据定义判断类型</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码1</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> * p;	<span class="comment">//常量指针</span></span><br><span class="line"><span class="keyword">char</span> <span class="keyword">const</span> * p;	<span class="comment">//常量指针 跟上一句等效</span></span><br><span class="line"><span class="keyword">char</span> * <span class="keyword">const</span> p;	<span class="comment">//指针常量</span></span><br></pre></td></tr></table></figure>
 <h3 id="根据const和-的相对位置"><a href="#根据const和-的相对位置" class="headerlink" title="根据const和*的相对位置"></a>根据const和*的相对位置</h3><p>const 在*左边=》常量指针；反之，指针常量。</p>
-<h3 id="根据谁离变量名近"><a href="#根据谁离变量名近" class="headerlink" title="根据谁离变量名近"></a>根据谁离变量名近</h3><p>const近=》指针常量；反之，常量指针。（const就是不变嘛，*就是指针，所以理解是很重要的，也就是<strong>2.1</strong>）</p>
+<h3 id="根据谁离变量名近"><a href="#根据谁离变量名近" class="headerlink" title="根据谁离变量名近"></a>根据谁离变量名近</h3><p>const近=》指针常量；反之，常量指针。（const就是不变嘛，<em>就是指针，所以理解是很重要的，也就是<em>*2.1</em></em>）</p>
 <h1 id="代码验证"><a href="#代码验证" class="headerlink" title="代码验证"></a>代码验证</h1><h2 id="常量指针-1"><a href="#常量指针-1" class="headerlink" title="常量指针"></a>常量指针</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码2</span></span><br><span class="line"><span class="comment">//char ch[] = "HelloWorld!";</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* pStr1=ch;	<span class="comment">//定义常量指针</span></span><br><span class="line"><span class="comment">//1.常量指针本身的值可以修改</span></span><br><span class="line">pStr1 = <span class="literal">nullptr</span>;	<span class="comment">//correct</span></span><br><span class="line"><span class="comment">//2.不能通过常量指针修改它所指向的内存中的内容（注意通过二字，不要误会常量指针）</span></span><br><span class="line">*pStr1 = <span class="string">'h'</span>;		<span class="comment">//error</span></span><br><span class="line">*(pStr1 + <span class="number">1</span>) = <span class="string">'E'</span>;	<span class="comment">//error</span></span><br><span class="line">pStr1[<span class="number">2</span>] = <span class="string">'L'</span>;		<span class="comment">//error</span></span><br></pre></td></tr></table></figure>
 <h2 id="指针常量-1"><a href="#指针常量-1" class="headerlink" title="指针常量"></a>指针常量</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码3</span></span><br><span class="line"><span class="comment">//char ch[] = "HelloWorld!";</span></span><br><span class="line"><span class="comment">//指针常量（顶层const）</span></span><br><span class="line"><span class="keyword">char</span> * <span class="keyword">const</span> pStr2 = ch;	<span class="comment">//定义并初始化</span></span><br><span class="line"><span class="comment">//1.是常量，不可以被赋值（不把初始化叫做赋值）</span></span><br><span class="line">pStr2 = <span class="literal">nullptr</span>;		<span class="comment">//error</span></span><br></pre></td></tr></table></figure>
 <h2 id="常量指针容易被误解的地方"><a href="#常量指针容易被误解的地方" class="headerlink" title="常量指针容易被误解的地方"></a>常量指针容易被误解的地方</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码4</span></span><br><span class="line"><span class="keyword">int</span> n = <span class="number">0</span>;	<span class="comment">//定义变量n</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> * p1 = &amp;n;	<span class="comment">//常量指针p1</span></span><br><span class="line"><span class="keyword">int</span> * <span class="keyword">const</span> p2 = &amp;n;	<span class="comment">//指针常量p2</span></span><br><span class="line">*p1 = <span class="number">3</span>;	<span class="comment">//error 因为不能通过常量指针修改内存中的内容，划重点！：但这不是说指向内存中的内容不可修改</span></span><br><span class="line">n = <span class="number">3</span>;		<span class="comment">//correct	这是对的，因为n是变量啊</span></span><br><span class="line">*p2 = <span class="number">3</span>;	<span class="comment">//correct 指针常量部分的代码就有体现，不多说</span></span><br></pre></td></tr></table></figure>
@@ -630,7 +632,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -641,7 +643,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -652,7 +654,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -740,7 +742,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">17.0k</span>
+    <span title="Site words total count">18.2k</span>
   
 </div>
 
@@ -1390,6 +1392,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
   <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
