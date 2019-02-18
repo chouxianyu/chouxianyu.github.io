@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="PageRank,Matlab," />
 
 
 
@@ -81,17 +81,20 @@
 
 
 
-<meta name="description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
-<meta name="keywords" content="臭咸鱼">
-<meta property="og:type" content="website">
-<meta property="og:title" content="臭咸鱼的缺氧瓶">
-<meta property="og:url" content="https://chouxianyu.github.io/archives/page/3/index.html">
+<meta name="description" content="用Matlab实现一个PageRank算法。 介绍PageRank是一种对网页进行排名的算法，通过引用来判断网页的排名。 具体介绍自寻，可以看一下https://baike.baidu.com/item/google%20pagerank#2 题目图中有六个明星，他们之间的箭头表示关注，比如Kim和Ryan互相关注，图片中间的数字是最终计算出的他们的PageRank。  Matlab实现12345">
+<meta name="keywords" content="PageRank,Matlab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PageRank">
+<meta property="og:url" content="https://chouxianyu.github.io/2019/02/18/PageRank/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
+<meta property="og:description" content="用Matlab实现一个PageRank算法。 介绍PageRank是一种对网页进行排名的算法，通过引用来判断网页的排名。 具体介绍自寻，可以看一下https://baike.baidu.com/item/google%20pagerank#2 题目图中有六个明星，他们之间的箭头表示关注，比如Kim和Ryan互相关注，图片中间的数字是最终计算出的他们的PageRank。  Matlab实现12345">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2019/02/18/5c6a6221c0ccf.png">
+<meta property="og:updated_time" content="2019-02-18T08:09:45.657Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="臭咸鱼的缺氧瓶">
-<meta name="twitter:description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
+<meta name="twitter:title" content="PageRank">
+<meta name="twitter:description" content="用Matlab实现一个PageRank算法。 介绍PageRank是一种对网页进行排名的算法，通过引用来判断网页的排名。 具体介绍自寻，可以看一下https://baike.baidu.com/item/google%20pagerank#2 题目图中有六个明星，他们之间的箭头表示关注，比如Kim和Ryan互相关注，图片中间的数字是最终计算出的他们的PageRank。  Matlab实现12345">
+<meta name="twitter:image" content="https://i.loli.net/2019/02/18/5c6a6221c0ccf.png">
 
 
 
@@ -121,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="https://chouxianyu.github.io/archives/page/3/"/>
+  <link rel="canonical" href="https://chouxianyu.github.io/2019/02/18/PageRank/"/>
 
 
 
 
 
-  <title>Archive | 臭咸鱼的缺氧瓶</title>
+  <title>PageRank | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -156,7 +159,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -284,263 +287,237 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/02/18/PageRank/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">PageRank</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-18T15:58:08+08:00">
+                2019-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        Um..! 26 posts in total. Keep on posting.
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数学建模/" itemprop="url" rel="index">
+                    <span itemprop="name">数学建模</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/18/PageRank/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/18/PageRank/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
+             <span id="/2019/02/18/PageRank/" class="leancloud_visitors" data-flag-title="PageRank">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/09/01/指针间的互相赋值/" itemprop="url">
+          
+
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">指针间的互相赋值</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  579 字
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-01T21:40:11+08:00"
-              content="2018-09-01" >
-          09-01
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  3 分
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/09/01/物不知其数/" itemprop="url">
-              
-                <span itemprop="name">物不知其数</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-01T12:13:11+08:00"
-              content="2018-09-01" >
-          09-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/26/常量指针与指针常量/" itemprop="url">
-              
-                <span itemprop="name">常量指针与指针常量</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-26T03:49:34+08:00"
-              content="2018-08-26" >
-          08-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>用Matlab实现一个PageRank算法。</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>PageRank是一种对网页进行排名的算法，通过引用来判断网页的排名。</p>
+<p>具体介绍自寻，可以看一下<a href="https://baike.baidu.com/item/google%20pagerank#2" target="_blank" rel="noopener">https://baike.baidu.com/item/google%20pagerank#2</a></p>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>图中有六个明星，他们之间的箭头表示关注，比如Kim和Ryan互相关注，图片中间的数字是最终计算出的他们的PageRank。</p>
+<p><img src="https://i.loli.net/2019/02/18/5c6a6221c0ccf.png" alt="明星关注.png"></p>
+<h1 id="Matlab实现"><a href="#Matlab实现" class="headerlink" title="Matlab实现"></a>Matlab实现</h1><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% Find PageRank of network by finding dominant evec</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%      _       _       _             _</span></span><br><span class="line"><span class="comment">%     | (1-d)/N |     | l11, ..., l1n |</span></span><br><span class="line"><span class="comment">% R = |   ...   | + d | ..., ..., ... | R     </span></span><br><span class="line"><span class="comment">%     |_(1-d)/N_|     |_ln1, ..., lnn_|       </span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% R = c + d * L*D * R</span></span><br><span class="line"><span class="comment">% R = (I - d * L*D )\c</span></span><br><span class="line"><span class="comment">% </span></span><br><span class="line"></span><br><span class="line">clc;    <span class="comment">%清屏</span></span><br><span class="line"></span><br><span class="line">d = <span class="number">0.85</span>;  <span class="comment">% damping factor</span></span><br><span class="line"></span><br><span class="line">name = &#123;<span class="string">'bill'</span>, <span class="string">'ellen'</span>, <span class="string">'jimmy'</span>, <span class="string">'kim'</span>, <span class="string">'paula'</span>, <span class="string">'ryan'</span>&#125;; <span class="comment">% celebrities'name</span></span><br><span class="line">[bil, ell, jim, kim, pau, rya] = deal(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>);        <span class="comment">% celebrities'id，bil=1,ell=2...</span></span><br><span class="line">n = <span class="built_in">length</span>(name); <span class="comment">% number of celebrities,n=6</span></span><br><span class="line"></span><br><span class="line">L = <span class="built_in">zeros</span>(n);   <span class="comment">% 明星关注关系矩阵,一行是一个人，元素值表示他是否关注他人;一列也是一个人，元素值表示是否被他人关注</span></span><br><span class="line"><span class="comment">% if user j follows user i, then L(i,j) = 1</span></span><br><span class="line">L(bil, [rya, ell]) = <span class="number">1</span>; <span class="comment">% bil关注rya ell，下五行同理</span></span><br><span class="line">L(ell, [jim, rya]) = <span class="number">1</span>;	</span><br><span class="line">L(jim, [rya, pau, ell]) = <span class="number">1</span>;</span><br><span class="line">L(kim, [jim, rya, ell]) = <span class="number">1</span>;</span><br><span class="line">L(pau, [rya, ell])=<span class="number">1</span>;</span><br><span class="line">L(rya, [bil, jim, kim, pau, ell]) = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% ot = out-degree, in = in-degree</span></span><br><span class="line">ot = sum(L,<span class="number">1</span>);  <span class="comment">% 对每1列求和，得行向量，每一列是一个人，元素值为被关注次数</span></span><br><span class="line">in = sum(L,<span class="number">2</span>);  <span class="comment">% 对每1行求和，得列向量，每一行是一个人，元素值为他关注了多少人</span></span><br><span class="line"></span><br><span class="line">k = <span class="built_in">find</span>(ot~=<span class="number">0</span>); <span class="comment">% 找到ot中不等于0的元素的下标,在此都不为0，返回行向量[1,2,3,..,6]</span></span><br><span class="line">D = full(sparse(k,k,<span class="number">1.</span>/ot(k),n,n)); <span class="comment">%对角矩阵，对角元素表示每个人对其他人的关注的分成</span></span><br><span class="line"><span class="comment">% L*D 是 6*6矩阵，一行、一列都是一个人，一行表示得到每个人的关注的分成，列表示对其他人关注的分成</span></span><br><span class="line">c = (<span class="number">1</span>-d)/n*<span class="built_in">ones</span>(n,<span class="number">1</span>);  <span class="comment">% 值为(1-d)/n 的 n行列向量</span></span><br><span class="line">I = <span class="built_in">eye</span>(n); <span class="comment">% n*n单位矩阵</span></span><br><span class="line"></span><br><span class="line">R = (I - d*L*D)\c  <span class="comment">% 注意是左除,得到6个人的PageRank</span></span><br></pre></td></tr></table></figure>
+<p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>本文为作者原创，转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
+<p>欢迎讨论和交流!</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/22/JAI丢包掉帧处理/" itemprop="url">
-              
-                <span itemprop="name">JAI丢包掉帧处理</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-22T13:34:40+08:00"
-              content="2018-08-22" >
-          08-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/16/FirstWriting/" itemprop="url">
-              
-                <span itemprop="name">FirstWriting</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-16T15:53:07+08:00"
-              content="2018-08-16" >
-          08-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/10/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-10T20:24:19+08:00"
-              content="2018-08-10" >
-          08-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PageRank/" rel="tag"># PageRank</a>
+          
+            <a href="/tags/Matlab/" rel="tag"># Matlab</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/16/多体问题/" rel="next" title="多体问题">
+                <i class="fa fa-chevron-left"></i> 多体问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -548,6 +525,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -568,8 +552,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -654,6 +647,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">2.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Matlab实现"><span class="nav-number">3.</span> <span class="nav-text">Matlab实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -825,6 +834,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
