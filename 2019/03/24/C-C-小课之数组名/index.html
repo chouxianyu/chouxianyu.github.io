@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="C/C++,数组," />
 
 
 
@@ -81,17 +81,18 @@
 
 
 
-<meta name="description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
-<meta name="keywords" content="臭咸鱼">
-<meta property="og:type" content="website">
-<meta property="og:title" content="臭咸鱼的缺氧瓶">
-<meta property="og:url" content="https://chouxianyu.github.io/tags/下载邮件/index.html">
+<meta name="description" content="我们今天讨论数组名是什么东西，理解它有助于我们进一步理解和使用指针。 因为它涉及到了内存地址。 问题数组名是什么？含义是什么？ 思路前提一个值+1之后的变化可以反映出它的意义/含义。 前提的证明其实不证自明，计算机中就是这样的。  生活中   一个苹果+1，结果是两个，增加了一个苹果。   一箱苹果+1，结果是两箱，个数是2*每箱苹果数，增加了一箱苹果。  计算机中   int型变量的地址+1，增">
+<meta name="keywords" content="C&#x2F;C++,数组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C&#x2F;C++小课之数组名">
+<meta property="og:url" content="https://chouxianyu.github.io/2019/03/24/C-C-小课之数组名/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
+<meta property="og:description" content="我们今天讨论数组名是什么东西，理解它有助于我们进一步理解和使用指针。 因为它涉及到了内存地址。 问题数组名是什么？含义是什么？ 思路前提一个值+1之后的变化可以反映出它的意义/含义。 前提的证明其实不证自明，计算机中就是这样的。  生活中   一个苹果+1，结果是两个，增加了一个苹果。   一箱苹果+1，结果是两箱，个数是2*每箱苹果数，增加了一箱苹果。  计算机中   int型变量的地址+1，增">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-24T08:09:40.079Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="臭咸鱼的缺氧瓶">
-<meta name="twitter:description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
+<meta name="twitter:title" content="C&#x2F;C++小课之数组名">
+<meta name="twitter:description" content="我们今天讨论数组名是什么东西，理解它有助于我们进一步理解和使用指针。 因为它涉及到了内存地址。 问题数组名是什么？含义是什么？ 思路前提一个值+1之后的变化可以反映出它的意义/含义。 前提的证明其实不证自明，计算机中就是这样的。  生活中   一个苹果+1，结果是两个，增加了一个苹果。   一箱苹果+1，结果是两箱，个数是2*每箱苹果数，增加了一箱苹果。  计算机中   int型变量的地址+1，增">
 
 
 
@@ -121,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://chouxianyu.github.io/tags/下载邮件/"/>
+  <link rel="canonical" href="https://chouxianyu.github.io/2019/03/24/C-C-小课之数组名/"/>
 
 
 
 
 
-  <title>Tag: 下载邮件 | 臭咸鱼的缺氧瓶</title>
+  <title>C/C++小课之数组名 | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -156,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -284,54 +285,300 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>下载邮件<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/03/24/C-C-小课之数组名/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/03/23/python批量下载邮件附件/" itemprop="url">
-              
-                <span itemprop="name">python批量下载邮件附件</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">C/C++小课之数组名</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-23T01:27:03+08:00"
-              content="2019-03-23" >
-          03-23
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-24T15:59:18+08:00">
+                2019-03-24
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/24/C-C-小课之数组名/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/24/C-C-小课之数组名/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/03/24/C-C-小课之数组名/" class="leancloud_visitors" data-flag-title="C/C++小课之数组名">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,136 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我们今天讨论数组名是什么东西，理解它有助于我们进一步理解和使用指针。</p>
+<p>因为它涉及到了内存地址。</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>数组名是什么？含义是什么？</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>一个值+1之后的变化可以反映出它的意义/含义。</p>
+<h2 id="前提的证明"><a href="#前提的证明" class="headerlink" title="前提的证明"></a>前提的证明</h2><p>其实不证自明，计算机中就是这样的。</p>
+<ul>
+<li><p>生活中</p>
+<p>  一个苹果+1，结果是两个，增加了一个苹果。</p>
+<p>  一箱苹果+1，结果是两箱，个数是2*每箱苹果数，增加了一箱苹果。</p>
+</li>
+<li><p>计算机中</p>
+<p>  int型变量的地址+1，增加了一个int的大小。</p>
+<p>  double型变量的地址+1，增加了一个double的大小。</p>
+</li>
+</ul>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>根据前提，通过将数组名或数组名相关的值+1来判断它的含义。</p>
+<h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><p>编程中要了解一个东西，大多时候我们可以通过输出它来了解它。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//注释指出array代表什么</span></span><br><span class="line">	<span class="keyword">int</span> <span class="built_in">array</span>[<span class="number">5</span>] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"    &amp;array[0] =  %p\n"</span>, &amp;<span class="built_in">array</span>[<span class="number">0</span>]);		<span class="comment">//首元素</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"        array =  %p\n"</span>, <span class="built_in">array</span>);			<span class="comment">//数组</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"      array+1 =  %p\n"</span>, <span class="built_in">array</span> + <span class="number">1</span>);		<span class="comment">//数组</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"  &amp;array[0]+1 =  %p\n"</span>, &amp;<span class="built_in">array</span>[<span class="number">0</span>] + <span class="number">1</span>);	<span class="comment">//首元素</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"       &amp;array =  %p\n"</span>, &amp;<span class="built_in">array</span>);	    <span class="comment">//数组</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"     &amp;array+1 =  %p\n"</span>, &amp;<span class="built_in">array</span> + <span class="number">1</span>);	<span class="comment">//数组</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"sizeof(array) =  %zd\n"</span>, <span class="keyword">sizeof</span>(<span class="built_in">array</span>));<span class="comment">//数组</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为什么用printf不是cout？用cout其实也行，printf更方便。</p>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    &amp;<span class="built_in">array</span>[<span class="number">0</span>] =  <span class="number">0000002</span>A433FF628</span><br><span class="line">        <span class="built_in">array</span> =  <span class="number">0000002</span>A433FF628</span><br><span class="line">      <span class="built_in">array</span>+<span class="number">1</span> =  <span class="number">0000002</span>A433FF62C</span><br><span class="line">  &amp;<span class="built_in">array</span>[<span class="number">0</span>]+<span class="number">1</span> =  <span class="number">0000002</span>A433FF62C</span><br><span class="line">       &amp;<span class="built_in">array</span> =  <span class="number">0000002</span>A433FF628</span><br><span class="line">     &amp;<span class="built_in">array</span>+<span class="number">1</span> =  <span class="number">0000002</span>A433FF63C</span><br><span class="line"><span class="keyword">sizeof</span>(<span class="built_in">array</span>) =  <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><h2 id="数组名是什么，有什么含义"><a href="#数组名是什么，有什么含义" class="headerlink" title="数组名是什么，有什么含义"></a>数组名是什么，有什么含义</h2><p><del>数组名是一个常量（所以不能被赋值），是一个地址。</del>（<code>&amp;array</code>中array并不是地址，因为地址是一个值，我们并不能取一个值的地址吧）</p>
+<p>在不同情况下，有着不同的含义。</p>
+<ul>
+<li><p>代表整个数组</p>
+<p>  碰到<code>&amp;</code>、<code>sizeof</code>时，数组名代表整个数组，作用像是一个变量。</p>
+</li>
+<li><p>代表数组首元素</p>
+<p>  数组名单独出现或碰到<code>[]</code>、<code>*</code>时，数组名代表数组第一个元素，是一个地址。（这个下次会讲）</p>
+</li>
+</ul>
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><h2 id="IDE、编译器、编辑器"><a href="#IDE、编译器、编辑器" class="headerlink" title="IDE、编译器、编辑器"></a>IDE、编译器、编辑器</h2><ul>
+<li><p>编辑器</p>
+<p>  文本编辑器，比如notepad++，sublime。</p>
+</li>
+<li><p>编译器</p>
+<p>  处理我们写的代码。</p>
+<p>  C/C++的比如有：gcc，mingw。</p>
+<p>  计算机语言可以分为两种：编译语言和解释语言。</p>
+</li>
+<li><p>IDE</p>
+<p>  Integrated Development Environment，集成开发环境。</p>
+<p>  集合了编辑器和编译器的功能，还有一些辅助开发的功能。</p>
+</li>
+</ul>
+<h2 id="Visual-Studio"><a href="#Visual-Studio" class="headerlink" title="Visual Studio"></a>Visual Studio</h2><ul>
+<li><p>解决方案</p>
+</li>
+<li><p>项目</p>
+</li>
+<li><p>调试</p>
+</li>
+<li><p>查看源码</p>
+<p>  比如看<code>sizeof</code>、<code>iostream</code>，<code>Ctrl+左键</code></p>
+</li>
+<li><p>查看类图</p>
+<p>  右击(项目)-查看-查看类图</p>
+</li>
+</ul>
+<h2 id="十六进制"><a href="#十六进制" class="headerlink" title="十六进制"></a>十六进制</h2><p><a href="https://tool.lu/hexconvert/" target="_blank" rel="noopener">https://tool.lu/hexconvert/</a></p>
+<h2 id="地址-1"><a href="#地址-1" class="headerlink" title="地址+1"></a>地址+1</h2><p>核心在于单位。==见下篇==</p>
+<h2 id="sizeof"><a href="#sizeof" class="headerlink" title="sizeof"></a>sizeof</h2><p>占用的字节数。基本数据类型、结构体（会字节对齐）。</p>
+<ul>
+<li><p>不同环境下（32位、64位等）某种类型的变量占用字节数可能是不同的</p>
+<p>  比如指针，32位下是4个字节，64位下是8个字节，</p>
+<p>  正好是对应计算机的字长。（后边有讲计算机字长是什么）</p>
+</li>
+<li><p><code>%zd</code>、<code>size_t</code></p>
+</li>
+</ul>
+<p>==后边还有一篇==</p>
+<h2 id="p-x"><a href="#p-x" class="headerlink" title="%p %x"></a>%p %x</h2><p>两者有细微差别。</p>
+<h2 id="重视warning"><a href="#重视warning" class="headerlink" title="重视warning"></a>重视warning</h2><p>VS的warning还是比较全的，其他IDE的waring不一定全。</p>
+<p>如果写代码出了问题却找不到原因，有可能是warning给出的潜在问题没有处理。</p>
+<p>写代码时遇到waring一定要处理，不然很容易出问题。</p>
+<h2 id="混合编程"><a href="#混合编程" class="headerlink" title="混合编程"></a>混合编程</h2><p>C和C++还是不一样的。特别是函数的使用，如果要动态申请一个类对象的内存，可别用malloc，它和new还是不一样的。</p>
+<h2 id="一些重要名词"><a href="#一些重要名词" class="headerlink" title="一些重要名词"></a>一些重要名词</h2><h3 id="值"><a href="#值" class="headerlink" title="值"></a>值</h3><p>生活、编程中出现的数字、字符串、字符等等，都是值。</p>
+<p>比如1,2,3，我爱你等等。</p>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量算是对值的一个<strong>替代</strong>（或者说抽象）吧，提高复用性。</p>
+<h3 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h3><p>地址是个值。</p>
+<p>计算机有存储空间。我们将其一个个地编号，也就是给了它一个地址。</p>
+<h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><p>指针是个变量。</p>
+<p>跟普通变量其实没什么本质区别，只不过它<strong>被用来存储地址</strong>而已。</p>
+<h2 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h2><p><code>*</code> <code>[]</code> <code>&amp;</code>的优先级？</p>
+<h2 id="计算机字长"><a href="#计算机字长" class="headerlink" title="计算机字长"></a>计算机字长</h2><p>字长：字的长度（位数）。</p>
+<p>计算机中有字节这个单位。1个字节等于8位。</p>
+<p>多个<strong>字节</strong>组成<strong>字</strong>。</p>
+<p>我们平常说的电脑32位，64位指的就是字长。</p>
+<p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>本文为作者原创，转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
+<p>欢迎讨论和交流!</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          
+            <a href="/tags/数组/" rel="tag"># 数组</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/23/python批量下载邮件附件/" rel="next" title="python批量下载邮件附件">
+                <i class="fa fa-chevron-left"></i> python批量下载邮件附件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/24/C-C-小课之课程介绍/" rel="prev" title="C/C++小课之课程介绍">
+                C/C++小课之课程介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -339,6 +586,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -359,8 +613,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -436,6 +699,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前提"><span class="nav-number">2.1.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前提的证明"><span class="nav-number">2.2.</span> <span class="nav-text">前提的证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路-1"><span class="nav-number">2.3.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#验证"><span class="nav-number">3.</span> <span class="nav-text">验证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">3.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结果"><span class="nav-number">3.2.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结论"><span class="nav-number">4.</span> <span class="nav-text">结论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组名是什么，有什么含义"><span class="nav-number">4.1.</span> <span class="nav-text">数组名是什么，有什么含义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点"><span class="nav-number">5.</span> <span class="nav-text">知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IDE、编译器、编辑器"><span class="nav-number">5.1.</span> <span class="nav-text">IDE、编译器、编辑器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Visual-Studio"><span class="nav-number">5.2.</span> <span class="nav-text">Visual Studio</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十六进制"><span class="nav-number">5.3.</span> <span class="nav-text">十六进制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地址-1"><span class="nav-number">5.4.</span> <span class="nav-text">地址+1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sizeof"><span class="nav-number">5.5.</span> <span class="nav-text">sizeof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p-x"><span class="nav-number">5.6.</span> <span class="nav-text">%p %x</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重视warning"><span class="nav-number">5.7.</span> <span class="nav-text">重视warning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#混合编程"><span class="nav-number">5.8.</span> <span class="nav-text">混合编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些重要名词"><span class="nav-number">5.9.</span> <span class="nav-text">一些重要名词</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#值"><span class="nav-number">5.9.1.</span> <span class="nav-text">值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">5.9.2.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址"><span class="nav-number">5.9.3.</span> <span class="nav-text">地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针"><span class="nav-number">5.9.4.</span> <span class="nav-text">指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算符优先级"><span class="nav-number">5.10.</span> <span class="nav-text">运算符优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机字长"><span class="nav-number">5.11.</span> <span class="nav-text">计算机字长</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -607,6 +886,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
