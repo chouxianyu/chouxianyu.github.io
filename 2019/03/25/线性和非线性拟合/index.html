@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/03/25/5c98ea25b3240.png">
 <meta property="og:image" content="https://i.loli.net/2019/03/25/5c98ea2708385.png">
-<meta property="og:updated_time" content="2019-03-25T14:52:09.752Z">
+<meta property="og:updated_time" content="2019-03-27T00:18:09.721Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线性和非线性拟合">
 <meta name="twitter:description" content="线性拟合一阶拟合：$y=a_1x+a_2$，这就是线性拟合了。 二阶拟合：$y=a_1x^2+a_2x+a_3​$，这就不是线性拟合了。 polyfita=polyfit(x,y,n)  最小二乘法计算拟合多项式系数 x,y为拟合数据向量 n为拟合多项式次数 通过a保存多项式系数，从最高次向最低次排列  polyvaly=polyval(a,x)  计算多项式的函数值 返回在x处多项式的值 a为多">
@@ -384,7 +384,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  368 字
+                  423 字
                 </span>
               
 
@@ -441,8 +441,9 @@
 <p>图中点是原始数据，线是拟合结果，线有点点弯。</p>
 <h1 id="指定形式拟合"><a href="#指定形式拟合" class="headerlink" title="指定形式拟合"></a>指定形式拟合</h1><h2 id="fittype"><a href="#fittype" class="headerlink" title="fittype"></a>fittype</h2><p>定义拟合形式</p>
 <h2 id="fit"><a href="#fit" class="headerlink" title="fit"></a>fit</h2><p>根据数据向量，按照某种拟合形式拟合。</p>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p = fittype(<span class="string">'a*x+b*sin(x)+c'</span>); <span class="comment">% 定义拟合形式</span></span><br><span class="line">f = fit(x,y,p) <span class="comment">% 向量x,y按照p的形式拟合</span></span><br><span class="line">plot(f,x,y); <span class="comment">% 作图对比拟合结果</span></span><br></pre></td></tr></table></figure>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = [<span class="number">1.0</span> <span class="number">1.5</span> <span class="number">2.0</span> <span class="number">2.5</span> <span class="number">3.0</span>]';</span><br><span class="line">y = [<span class="number">0.9</span> <span class="number">1.7</span> <span class="number">2.2</span> <span class="number">2.6</span> <span class="number">3.0</span>]';</span><br><span class="line">p = fittype(<span class="string">'a*x+b*sin(x)+c'</span>); <span class="comment">% 定义拟合形式</span></span><br><span class="line">f = fit(x,y,p) <span class="comment">% 向量x,y按照p的形式拟合</span></span><br><span class="line">plot(f,x,y); <span class="comment">% 作图对比拟合结果</span></span><br></pre></td></tr></table></figure>
 <h2 id="结果-1"><a href="#结果-1" class="headerlink" title="结果"></a>结果</h2><p><a href="https://i.loli.net/2019/03/25/5c98ea2708385.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/03/25/5c98ea2708385.png" alt="指定形式拟合.png"></a></p>
+<p>图中代码没有定义<code>x</code>,<code>y</code>也可以运行，是因为工作区中已经有这两个变量了。</p>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>本文为作者原创，转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
 <p>欢迎讨论和交流!</p>
@@ -582,7 +583,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -683,7 +684,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">23.6k</span>
+    <span title="Site words total count">24.2k</span>
   
 </div>
 

@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
 <meta property="og:description" content="问题把椅子放在不平的地面上，通常只有三只脚着地，放不稳，然而只需稍挪动几次，就可以使四只脚同时着地而放稳。这个看来似乎与数学无关的现象能用数学语言表述，并用数学工具来证实吗？让我们来试试看！ 再次读题把椅子 放在 不平的地面上，通常只有三只脚着地，放不稳，然而只需稍挪动几次，就可以使四只脚同时着地而放稳。这个看来似乎与数学无关的现象能用数学语言表述，并用数学工具来证实吗？让我们来试试看！ 对象分析">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-25T14:20:39.906Z">
+<meta property="og:updated_time" content="2019-03-27T01:02:17.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="椅子能在不平的地面上放稳吗">
 <meta name="twitter:description" content="问题把椅子放在不平的地面上，通常只有三只脚着地，放不稳，然而只需稍挪动几次，就可以使四只脚同时着地而放稳。这个看来似乎与数学无关的现象能用数学语言表述，并用数学工具来证实吗？让我们来试试看！ 再次读题把椅子 放在 不平的地面上，通常只有三只脚着地，放不稳，然而只需稍挪动几次，就可以使四只脚同时着地而放稳。这个看来似乎与数学无关的现象能用数学语言表述，并用数学工具来证实吗？让我们来试试看！ 对象分析">
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  494 字
+                  669 字
                 </span>
               
 
@@ -421,17 +421,22 @@
         <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>把椅子放在不平的地面上，通常只有三只脚着地，放不稳，然而只需稍挪动几次，就可以使四只脚同时着地而放稳。这个看来似乎与数学无关的现象能用数学语言表述，并用数学工具来证实吗？让我们来试试看！</p>
 <h1 id="再次读题"><a href="#再次读题" class="headerlink" title="再次读题"></a>再次读题</h1><p>把<strong>椅子</strong> <strong>放在</strong> <strong>不平的地面</strong>上，<strong>通常只有三只脚着地，放不稳</strong>，然而只需稍<strong>挪动</strong>几次，就可以使<strong>四只脚同时着地而放稳</strong>。这个看来似乎与数学无关的现象能<strong>用数学语言表述</strong>，并用数学工具来<strong>证实</strong>吗？让我们来试试看！</p>
 <h1 id="对象分析"><a href="#对象分析" class="headerlink" title="对象分析"></a>对象分析</h1><ul>
-<li>椅子     =》四个椅脚  =》与地面有四个接触点  =》正方形（本质应该是长方形）</li>
-<li>不平的地面  =》光滑曲面（光滑是根据讨论范围确定的，不连续的很陡的地面不在讨论范围之内）</li>
+<li>椅子$\Longrightarrow$四个椅脚$\Longrightarrow$与地面有四个接触点$\Longrightarrow​$正方形（本质应该是长方形）</li>
+<li>不平的地面$\Longrightarrow​$光滑曲面（光滑是根据讨论范围确定的，不连续的很陡的地面不在讨论范围之内）</li>
 </ul>
 <h1 id="条件分析"><a href="#条件分析" class="headerlink" title="条件分析"></a>条件分析</h1><ul>
-<li>通常只有三只脚着地，放不稳  =》假设至少三只脚着地 =》$F(\theta)*G(\theta)=0​$</li>
-<li>稍挪动几次  =》位置的变化  =》角度$\theta​$的变化</li>
+<li>通常只有三只脚着地，放不稳$\Longrightarrow$假设至少三只脚着地$\Longrightarrow$$F(\theta)*G(\theta)=0$</li>
+<li>稍挪动几次$\Longrightarrow$位置的变化$\Longrightarrow$角度$\theta$的变化</li>
 </ul>
 <h1 id="结论分析"><a href="#结论分析" class="headerlink" title="结论分析"></a>结论分析</h1><ul>
-<li>能不能  =》存在问题</li>
-<li>放稳  =》四个脚到地面距离都为0  =》两对 对角椅脚 离地面的高度之和$F(\theta)=G(\theta)=0​$</li>
+<li>能不能$\Longrightarrow​$存在问题，0和1</li>
+<li>放稳$\Longrightarrow$四个脚到地面距离都为0$\Longrightarrow$两对 对角椅脚 离地面的高度之和$F(\theta)=G(\theta)=0$</li>
 </ul>
+<p>2019.3.27补充：</p>
+<p>昨天上课学得，在某些问题中，结果为离散的0或1的问题可以转化为结果为连续值的问题。</p>
+<p>比如目标是得到最大产值，问题是A、B、C哪里需要建厂，这涉及到原料的生产、加工、运输，成品的销售等等。</p>
+<p>如果直接根据问题进行离散的计算，会有$2^3=8\,$种情况。</p>
+<p>如果进行连续的计算，将某地是否建厂转化为某地的原料产量。如果产量是0，则表示该地不建厂；如果产量大于0，则表示该地建厂。</p>
 <h1 id="数学模型"><a href="#数学模型" class="headerlink" title="数学模型"></a>数学模型</h1><p>已知F($\theta​$)、G($\theta​$)是$\theta​$的连续函数，对任意$\theta​$，$F(\theta){\times}G(\theta)=0​$，且$G(0)=F(\frac{\pi}{2})=0​$，$F(0)=G(\frac{\pi}{2})&gt;0​$，证明存在$\theta_0​$，使$F(\theta_0)=G(\theta_0)=0​$。</p>
 <h1 id="方法总结"><a href="#方法总结" class="headerlink" title="方法总结"></a>方法总结</h1><p>好好读题，根据题中所给信息，找到<strong>研究对象</strong>、<strong>条件</strong>、<strong>结论</strong>等现实元素转化为一个个数学元素。</p>
 <h1 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h1><p>关于旋转的变量除了$\theta$，转轴也可以算一个，另外还可以把正方形改为长方形进行讨论。</p>
@@ -570,7 +575,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -671,7 +676,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">23.6k</span>
+    <span title="Site words total count">24.2k</span>
   
 </div>
 
