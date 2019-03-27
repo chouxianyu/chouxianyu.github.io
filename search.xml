@@ -36,8 +36,8 @@
     <content type="text"><![CDATA[二维作图plot 简单控制语句 sin(x) &amp; cos(x)12345678910x = -2 * pi : 0.1 : 2*pi; % 切片y1 = sin(x);y2 = cos(x);plot(x, y1,'-b'); % - 实线 b 蓝色hold on % 保持当前画的图形不被覆盖掉plot(x, y2, '-r'); % - 实线 r 红色xlabel('x'); % x轴上加标签ylabel('y'); % y轴上加标签text(0, 0, '(0,0)'); % 在(0,0)加文本legend('sin x', 'cos x'); % 图例 two hearts12345678910t = 0 : pi/180 : 4*pi; % 切片x = 16*sin(t).^3; % x,y用参数为t的方程表示y = 13*cos(t) - 5*cos(2*t)... % 本行未结束 -2*cos(3*t) - cos(4*t);plot(x-3, y, '-r', x+3, y, '-b');xlabel('x'); % x轴上加标签ylabel('y'); % y轴上加标签axis([-20, 20, -20, 15]); % 坐标范围：x [-20,20] y [-20,15]title('Two Hearts'); % 标题legend('U', 'I'); % 图例 对数坐标loglog，双对数坐标。 semilogx，只有x是对数。 12345678x = 10*2.^[0:6];y = [100 150 225 340 ... 510 765 1150];loglog(x, y, '.-r'); % 点实线 红色xlim([0.5e1, 0.8e3]); % x坐标范围ylim([0.8e2, 1.4e3]); % y坐标范围xlabel('x'); ylabel('y'); 极坐标polar 123theta = 0 : pi/180 : 4*pi; % 角度r = 1- sin(theta); % 长度polar(theta, r, '-r'); % 实线 红色 三维作图plot312345678910t = 0 : pi/50 : 10*pi; % 2pi是一圈 10pi转5圈 x = sin(t);y = cos(t);z = t;plot3(x, y, z); % 3维title('Helix');xlabel('sin t');ylabel('cos t');zlabel('t');grid on % 打开网格 三维曲面meshgrid，生成绘制3D图形所需的网格数据。 [x, y]=meshgrid(1:3, 1:3) mesh，surf 12345678[x, y] = meshgrid(-pi:0.1:pi); % 生成数据z = sin(x) .* cos(y);mesh(x, y, z); % 作图surf(x, y, z); % 使有颜色xlabel('x'); ylabel('y');zlabel('z');title('sin x sin y'); 作者：@臭咸鱼 本文为作者原创，转载请注明出处：https://chouxianyu.github.io 欢迎讨论和交流!]]></content>
       <tags>
         <tag>Matlab</tag>
-        <tag>可视化</tag>
         <tag>数学建模</tag>
+        <tag>可视化</tag>
       </tags>
   </entry>
   <entry>
