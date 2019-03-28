@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[插值和线性回归]]></title>
+    <url>%2F2019%2F03%2F28%2F%E6%8F%92%E5%80%BC%E5%92%8C%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%2F</url>
+    <content type="text"><![CDATA[插值根据现有数据，插的值一定在曲线上。 interpl，一维插值函数。 线性回归regress $Y=b_0+b_1x_1+b_2x_2+\cdots+b_kx_k$ 拟合$x_1\ x_2\ \cdots\ x_k$与$Y$的关系 [B, Bint, R, Rint, Status]=regress(Y, X) B：回归得到的自变量系数 Bint：B的95%的置信区间矩阵 作者：@臭咸鱼 本文为作者原创，转载请注明出处：https://chouxianyu.github.io 欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>Matlab</tag>
+        <tag>数学建模</tag>
+        <tag>插值</tag>
+        <tag>线性回归</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[传染病模型]]></title>
+    <url>%2F2019%2F03%2F28%2F%E4%BC%A0%E6%9F%93%E7%97%85%E6%A8%A1%E5%9E%8B%2F</url>
+    <content type="text"><![CDATA[简介该模型在数学建模中可以解决很多问题。 该模型由三个微分方程构成。 建立模型定义变量假设系统中有三种人： 易感染的人 数量用$S$表示，刚开始所有人都是易感染的人 感染的人 数量用$I$表示 康复的人 数量用$R$表示（假设该传染病不致命） 微分方程$\begin{equation} \left\{ \begin{array}{r1} \frac{dS}{dt}=-\beta SI\\ \frac{dI}{dt}=\beta SI-\gamma I\\ \frac{dR}{dt}=\gamma I\\ \end{array} \right.\end{equation}$ 其中$\beta$是接触率，$\gamma$是康复率。 代码函数odesir123456789function dy = odesir(t, y, beta, gamma)% 根据传染病模型者中的y和t求出dy/dt% y=[S; I; R]dy =[ -beta*y(1)*y(2); % dS/dt beta*y(1)*y(2) - gamma*y(2); % dS/dt gamma*y(2); % dR/dt] 计算12345678910N = 100;beta = 0.01;gamma = 0.1;tspan = [0,50];y0 = [99,1,0];[t y] = ode45(@odesir, tspan, y0, [], bata, gamma);plot(t,y);xlabel('time');ylabel('population');legend('S', 'I', 'R'); ode23和ode45的区别：精度不一样，ode45精度高。 结果 作者：@臭咸鱼 本文为作者原创，转载请注明出处：https://chouxianyu.github.io 欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>Matlab</tag>
+        <tag>数学建模</tag>
+        <tag>微分方程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Runge-Kutta法解微分方程]]></title>
+    <url>%2F2019%2F03%2F28%2FRunge-Kutta%E6%B3%95%E8%A7%A3%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[连续问题，微分方程或偏微分方程一定能表示。比如疾病传染、新闻传播等。 离散问题，可以用差分方程或者类似于差分的算法。 一阶微分方程求解方程$y’=cos\ t$ 代码123456789clear,clc;f = @(t,y) cos(t); % 定义函数 f(t,y) = cos(t) 表示的就是dy/dt=cos(t)tspan = [0,2*pi]; % 时间t范围y0 = 2; % y的初值，用来处理积分得到的C[t,y] = ode23(f,tspan,y0); % 注意调用格式plot(t,y);xlabel('t');ylabel('y'); @表示句柄，当把一个函数作为参数传给另外一个函数，这时候必须要用句柄。这里是把函数f传给函数ode23。 结果 高阶微分方程求解方程$\begin{equation} \left\{ \begin{array}{r1} y’’=-sin\ y+sin\ 5t\\ y(0)=1\\ y’(0)=0\\ \end{array} \right.\end{equation}$ 可以将该高阶微分方程转化为两个一阶的微分方程：$\begin{equation} \left\{ \begin{array}{r1} y_1=y\\ y_2=y’\\ y’_1=y_2\\ y’_2=-sin\ y_1+sin\ 5t\\ y_1(0)=1\\ y_2(0)=0\\ \end{array} \right.\end{equation}$ 代码12345678910clear,clc;f = @(t, y) [ y(2); -sin( y(1) ) + sin( 5*t ) ]; % 两个参数分别是y1和y2的导数tspan = [ 0, 20 ]; % 时间t范围y0 = [ 1; 0 ]; % 初值，分别对应y1，y2的初值[t, y] = ode23(f, tspan, y0); % 注意调用格式plot(t,y);xlabel('t');ylabel('y');legend('y1','y2'); 结果​ 作者：@臭咸鱼 本文为作者原创，转载请注明出处：https://chouxianyu.github.io 欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>Matlab</tag>
+        <tag>数学建模</tag>
+        <tag>微分方程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[C/C++小课之类和对象]]></title>
     <url>%2F2019%2F03%2F27%2FC-C-%E5%B0%8F%E8%AF%BE%E4%B9%8B%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%2F</url>
     <content type="text"><![CDATA[简介如何理解类和对象？ 类是一种自定义数据类型，用类定义出来的变量就是对象。 格式： 数据类型 数据; int a; A a(); 这一章的主要问题就是如何设计、实现和使用类。 设计和实现分别对应类的抽象和封装；使用即最后一步，用类实现功能。 简单地说：面向对象就是将事物定义（包括抽象和封装）成类并使用。 类的抽象和封装抽象计算机软件开发采用的抽象方法主要有两种： 过程抽象 结果给出了函数的名称、接收的参数和能够提供的功能。 数据抽象 数据抽象是面向对象程序设计方法，以数据为中心。 结果形成某事物的类，其中包括成员变量和成员函数。 简单来说，就是找出一个类有哪些变量和功能，但不用封装。 比如这是一个点餐系统。 封装分为两部分： 接口 使用者看到的东西 实现 实现抽象出的类，写.cpp代码 简单地说，就是写代码。 比如：对老师来说，课代表就是接口，课代表怎么收作业就是实现。 提问12345678910111213141516class Cxy&#123;public: double height; void growTaller() &#123; cout &lt;&lt; "drinkMilk" &lt;&lt; endl; height+=2; &#125;;&#125;;int main()&#123; Cxy cbh; cbh.growtaller(); return 0;&#125; 请找出代码里的类、对象、抽象、封装。 成员函数常量成员函数C++中，为了禁止成员函数修改数据成员的值，可以使用常量成员函数。 语法： 123class X&#123; T f(T1, T1, ...) const;&#125;; 注意： 只有类的成员函数才能定义为常量函数，普通函数不能。 常量成员函数与const参数没有关系 对象 每个对象的数据成员都有自己独立的存储空间。就像int变量一样。 注意：一个类的成员函数只有一份，所有对象共用。 注意：类的static成员只有一份，它并不算对象的数据成员。 构造函数设计默认构造函数定义书上P97下边给的定义是最准确的。 想想之前讲的默认的含义。 简单来说：如果用类定义对象时，我们没有给参数的话，调用的就是默认构造函数。 分类默认构造函数有两种： 不带参数的构造函数 1A(); 可以是我们自己定义的，也可以是编译器合成的。 所有形参都提供了默认值的构造函数 这个当然是我们自己定义的。 构造函数与初始化列表初始化列表次序初始化列表中的成员初始化次序与他们在类中的声明次序相同，与初始化列表中的次序无关。 123456789class A&#123;public: int a; int b; int c; A(int aa,int bb,int cc):b(aa),a(bb),c(cc)&#123; cout &lt;&lt; "I am a handsome constructor yo" &lt;&lt; endl; &#125;&#125;; 提问：初始化次序是什么？ 初始化列表执行时间类内初始值$\rightarrow$构造函数初始化列表$\rightarrow$构造函数体 what必须采用初始化列表？C++11之前一个类的 常量成员 引用成员 类对象成员 子类构造函数对基类构造函数的调用 等等 必须通过初始化列表进行初始化。 C++11之后除了初始化列表，可以用类内初始值yo。 析构函数若有几个对象同时结束生存期，析构函数调用顺序与构造函数顺序相反。 静态成员关键字：static。 静态成员可以是变量，也可以是函数。 注意：静态成员函数不可以访问非静态成员。think why？ 意义表示这个成员是属于整个类的。 声明和定义示例： 123456class Boy&#123;public: static int boyNum; //男孩的数量&#125;;static int Boy::boyNum； //未初始化//static int Boy::boyNum = 0；//初始化 在类内static int number；，仅仅是声明， 原则上，定义必须写在类外：static int Boy::boyNum;，值默认为0，也可以进行初始化。 访问两种方式： 通过类名访问（非静态成员不能以这种这样访问） 1cout &lt;&lt; Boy::boyNum &lt;&lt; endl; 通过对象访问 12Boy cbh();cout &lt;&lt; cbhboyNum &lt;&lt; endl; 看看下边的this？ this指针含义this用来标识一个对象，是该对象的地址，类型是Boy* const，隐含在非静态成员函数的参数里。 应用静态成员函数没有this指针，所以不可以访问非静态成员。 常量成员函数的this，类型是const Boy *。 作者：@臭咸鱼 本文为作者原创，转载请注明出处：https://chouxianyu.github.io 欢迎讨论和交流!]]></content>
