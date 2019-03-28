@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[C/C++小课之指针悬挂]]></title>
+    <url>%2F2019%2F03%2F28%2FC-C-%E5%B0%8F%E8%AF%BE%E4%B9%8B%E6%8C%87%E9%92%88%E6%82%AC%E6%8C%82%2F</url>
+    <content type="text"><![CDATA[什么是指针悬挂指向非法内存的指针，也叫野指针。 非法内存即不能使用的内存。 123int* p = (int*)12345;//int* p; //p未初始化，p的值随机，一般都会指向非法内存cout &lt;&lt; *p; //运行这行代码会出错 随便让p指向一块内存（一般指向非法内存）。 运行时使用非法内存，会报错。 一些指针悬挂的情况课本中有两处提到指针悬挂，分别是：合成拷贝构造函数和合成赋值运算符函数。 如果类中有指针，这两个函数可能造成指针悬挂。（看完之后想想为什么只是可能？） 代码下面给出这两种函数造成指针悬挂的代码及注释： 12345678910111213141516171819202122232425#include &lt;iostream&gt;using namespace std;class MyClass&#123;public: int * p; MyClass()&#123; p = new int;&#125; ~MyClass()&#123; delete p;&#125; void print()&#123; cout &lt;&lt; p &lt;&lt; endl;&#125;&#125;;int main()&#123; MyClass a; MyClass b(a); //调用合成拷贝函数 //MyClass b = a; //调用合成赋值运算符 a.print(); b.print(); //据两行输出可知，两个指针指向同一块内存 return 0;&#125;//最后，B会先析构，然后A析构。//B析构会释放p指向的内存，同时这块内存变为非法内存，//此时A的指针p指向非法内存，造成指针悬挂。//A析构时delete p,使用了非法内存，这时出错 解决如果这两个函数造成指针悬挂，应显式提供这两个函数，将浅拷贝改为深拷贝。 作者：@臭咸鱼 转载请注明出处：https://chouxianyu.github.io 欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>C/C++</tag>
+        <tag>指针</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[插值和线性回归]]></title>
     <url>%2F2019%2F03%2F28%2F%E6%8F%92%E5%80%BC%E5%92%8C%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%2F</url>
     <content type="text"><![CDATA[插值根据现有数据，插的值一定在曲线上。 interpl，一维插值函数。 线性回归regress $Y=b_0+b_1x_1+b_2x_2+\cdots+b_kx_k$ 拟合$x_1\ x_2\ \cdots\ x_k$与$Y$的关系 [B, Bint, R, Rint, Status]=regress(Y, X) B：回归得到的自变量系数 Bint：B的95%的置信区间矩阵 作者：@臭咸鱼 本文为作者原创，转载请注明出处：https://chouxianyu.github.io 欢迎讨论和交流!]]></content>

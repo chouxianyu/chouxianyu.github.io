@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2019-03-28T11:29:20.220Z</updated>
+  <updated>2019-03-28T15:55:52.312Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C/C++小课之指针悬挂</title>
+    <link href="https://chouxianyu.github.io/2019/03/28/C-C-%E5%B0%8F%E8%AF%BE%E4%B9%8B%E6%8C%87%E9%92%88%E6%82%AC%E6%8C%82/"/>
+    <id>https://chouxianyu.github.io/2019/03/28/C-C-小课之指针悬挂/</id>
+    <published>2019-03-28T15:44:06.000Z</published>
+    <updated>2019-03-28T15:55:52.312Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="什么是指针悬挂"><a href="#什么是指针悬挂" class="headerlink" title="什么是指针悬挂"></a>什么是指针悬挂</h1><p><strong>指向非法内存的指针，也叫野指针。</strong></p><p>非法内存即不能使用的内存。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* p = (<span class="keyword">int</span>*)<span class="number">12345</span>;</span><br><span class="line"><span class="comment">//int* p;//p未初始化，p的值随机，一般都会指向非法内存</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *p;<span class="comment">//运行这行代码会出错</span></span><br></pre></td></tr></table></figure><p>随便让p指向一块内存（一般指向非法内存）。</p><p><strong>运行时使用非法内存，会报错。</strong></p><h1 id="一些指针悬挂的情况"><a href="#一些指针悬挂的情况" class="headerlink" title="一些指针悬挂的情况"></a>一些指针悬挂的情况</h1><p>课本中有两处提到指针悬挂，分别是：<strong>合成拷贝构造函数</strong>和<strong>合成赋值运算符函数</strong>。</p><p>如果类中有指针，这两个函数<strong>可能</strong>造成指针悬挂。（看完之后想想为什么只是可能？）</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>下面给出这两种函数造成指针悬挂的代码及注释：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="keyword">int</span> * p;</span><br><span class="line"></span><br><span class="line">MyClass()&#123;p = <span class="keyword">new</span> <span class="keyword">int</span>;&#125;</span><br><span class="line">~MyClass()&#123;<span class="keyword">delete</span> p;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;<span class="built_in">cout</span> &lt;&lt; p &lt;&lt; <span class="built_in">endl</span>;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">MyClass a;</span><br><span class="line"><span class="function">MyClass <span class="title">b</span><span class="params">(a)</span></span>;<span class="comment">//调用合成拷贝函数</span></span><br><span class="line"><span class="comment">//MyClass b = a;//调用合成赋值运算符</span></span><br><span class="line">a.print();</span><br><span class="line">b.print();<span class="comment">//据两行输出可知，两个指针指向同一块内存</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//最后，B会先析构，然后A析构。</span></span><br><span class="line"><span class="comment">//B析构会释放p指向的内存，同时这块内存变为非法内存，</span></span><br><span class="line"><span class="comment">//此时A的指针p指向非法内存，造成指针悬挂。</span></span><br><span class="line"><span class="comment">//A析构时delete p,使用了非法内存，这时出错</span></span><br></pre></td></tr></table></figure><h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>如果这两个函数造成指针悬挂，应显式提供这两个函数，将<strong>浅拷贝改为深拷贝</strong>。</p><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p><p>欢迎讨论和交流!</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;什么是指针悬挂&quot;&gt;&lt;a href=&quot;#什么是指针悬挂&quot; class=&quot;headerlink&quot; title=&quot;什么是指针悬挂&quot;&gt;&lt;/a&gt;什么是指针悬挂&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;指向非法内存的指针，也叫野指针。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;非法内存即不能使用
+      
+    
+    </summary>
+    
+    
+      <category term="C/C++" scheme="https://chouxianyu.github.io/tags/C-C/"/>
+    
+      <category term="指针" scheme="https://chouxianyu.github.io/tags/%E6%8C%87%E9%92%88/"/>
+    
+  </entry>
   
   <entry>
     <title>插值和线性回归</title>
@@ -518,30 +544,6 @@
         &lt;p&gt;子组件向父组件传值，一般要通过回调函数的参数。这也是&lt;/p&gt;
 &lt;p&gt;父组件定义一个回调函数，并&lt;strong&gt;将其传递给子组件&lt;/strong&gt;，然后子组件调用该函数，并&lt;strong&gt;将值通过回调函数的参数传给父组件&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;这说明了React数
-      
-    
-    </summary>
-    
-    
-      <category term="React" scheme="https://chouxianyu.github.io/tags/React/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>React学习（九）之React如何更新DOM</title>
-    <link href="https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B9%9D%EF%BC%89%E4%B9%8BReact%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0DOM/"/>
-    <id>https://chouxianyu.github.io/2019/01/19/React学习（九）之React如何更新DOM/</id>
-    <published>2019-01-19T06:41:46.000Z</published>
-    <updated>2019-03-22T17:31:17.748Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>React只重新渲染HTML页面中改变的部分</strong>。</p><h1 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h1><p>React有一个概念：虚拟DOM。</p><p>每次操作都会生成一个虚拟DOM，然后通过<code>diff</code>算法和上一次的虚拟DOM进行比较，通过比较可以找到需要重新渲染的组件，然后只重新渲染这些组件，其他不变。</p><h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><p>使用chrome浏览器，检查元素，按下图操作</p><p><a href="https://i.loli.net/2019/01/19/5c42c5eb46daf.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/19/5c42c5eb46daf.png" alt="rendering.png"></a></p><p>然后页面渲染的地方会被高亮（我这里是绿色）。</p><p>每次点击按钮，会发现<code>your name is Max,your age is XX</code>被高亮，而其他不变。</p><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>本文为作者原创，转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p><p>欢迎转发和评论!</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;strong&gt;React只重新渲染HTML页面中改变的部分&lt;/strong&gt;。&lt;/p&gt;
-&lt;h1 id=&quot;基本原理&quot;&gt;&lt;a href=&quot;#基本原理&quot; class=&quot;headerlink&quot; title=&quot;基本原理&quot;&gt;&lt;/a&gt;基本原理&lt;/h1&gt;&lt;p&gt;React有一个概念：虚拟D
       
     
     </summary>

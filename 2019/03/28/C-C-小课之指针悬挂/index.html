@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="C/C++,指针," />
 
 
 
@@ -81,17 +81,18 @@
 
 
 
-<meta name="description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
-<meta name="keywords" content="臭咸鱼">
-<meta property="og:type" content="website">
-<meta property="og:title" content="臭咸鱼的缺氧瓶">
-<meta property="og:url" content="https://chouxianyu.github.io/archives/2019/02/index.html">
+<meta name="description" content="什么是指针悬挂指向非法内存的指针，也叫野指针。 非法内存即不能使用的内存。 123int* p = (int*)12345;//int* p;	//p未初始化，p的值随机，一般都会指向非法内存cout &amp;lt;&amp;lt; *p;	//运行这行代码会出错 随便让p指向一块内存（一般指向非法内存）。 运行时使用非法内存，会报错。 一些指针悬挂的情况课本中有两处提到指针悬挂，分别是：合成拷贝构造函数和合成">
+<meta name="keywords" content="C&#x2F;C++,指针">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C&#x2F;C++小课之指针悬挂">
+<meta property="og:url" content="https://chouxianyu.github.io/2019/03/28/C-C-小课之指针悬挂/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
+<meta property="og:description" content="什么是指针悬挂指向非法内存的指针，也叫野指针。 非法内存即不能使用的内存。 123int* p = (int*)12345;//int* p;	//p未初始化，p的值随机，一般都会指向非法内存cout &amp;lt;&amp;lt; *p;	//运行这行代码会出错 随便让p指向一块内存（一般指向非法内存）。 运行时使用非法内存，会报错。 一些指针悬挂的情况课本中有两处提到指针悬挂，分别是：合成拷贝构造函数和合成">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-28T15:55:52.312Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="臭咸鱼的缺氧瓶">
-<meta name="twitter:description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
+<meta name="twitter:title" content="C&#x2F;C++小课之指针悬挂">
+<meta name="twitter:description" content="什么是指针悬挂指向非法内存的指针，也叫野指针。 非法内存即不能使用的内存。 123int* p = (int*)12345;//int* p;	//p未初始化，p的值随机，一般都会指向非法内存cout &amp;lt;&amp;lt; *p;	//运行这行代码会出错 随便让p指向一块内存（一般指向非法内存）。 运行时使用非法内存，会报错。 一些指针悬挂的情况课本中有两处提到指针悬挂，分别是：合成拷贝构造函数和合成">
 
 
 
@@ -121,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://chouxianyu.github.io/archives/2019/02/"/>
+  <link rel="canonical" href="https://chouxianyu.github.io/2019/03/28/C-C-小课之指针悬挂/"/>
 
 
 
 
 
-  <title>Archive | 臭咸鱼的缺氧瓶</title>
+  <title>C/C++小课之指针悬挂 | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -156,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -284,147 +285,219 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 40 posts in total. Keep on posting.
-      </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/03/28/C-C-小课之指针悬挂/">
 
-      
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h1 class="post-title" itemprop="name headline">C/C++小课之指针悬挂</h1>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-28T23:44:06+08:00">
+                2019-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/28/C-C-小课之指针悬挂/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/28/C-C-小课之指针悬挂/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
+             <span id="/2019/03/28/C-C-小课之指针悬挂/" class="leancloud_visitors" data-flag-title="C/C++小课之指针悬挂">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/18/PageRank/" itemprop="url">
+          
+
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">PageRank</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  425 字
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-18T15:58:08+08:00"
-              content="2019-02-18" >
-          02-18
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  2 分
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/16/多体问题/" itemprop="url">
-              
-                <span itemprop="name">多体问题</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-16T18:43:10+08:00"
-              content="2019-02-16" >
-          02-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/16/椅子能在不平的地面上放稳吗/" itemprop="url">
-              
-                <span itemprop="name">椅子能在不平的地面上放稳吗</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-16T18:42:29+08:00"
-              content="2019-02-16" >
-          02-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h1 id="什么是指针悬挂"><a href="#什么是指针悬挂" class="headerlink" title="什么是指针悬挂"></a>什么是指针悬挂</h1><p><strong>指向非法内存的指针，也叫野指针。</strong></p>
+<p>非法内存即不能使用的内存。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* p = (<span class="keyword">int</span>*)<span class="number">12345</span>;</span><br><span class="line"><span class="comment">//int* p;	//p未初始化，p的值随机，一般都会指向非法内存</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *p;	<span class="comment">//运行这行代码会出错</span></span><br></pre></td></tr></table></figure>
+<p>随便让p指向一块内存（一般指向非法内存）。</p>
+<p><strong>运行时使用非法内存，会报错。</strong></p>
+<h1 id="一些指针悬挂的情况"><a href="#一些指针悬挂的情况" class="headerlink" title="一些指针悬挂的情况"></a>一些指针悬挂的情况</h1><p>课本中有两处提到指针悬挂，分别是：<strong>合成拷贝构造函数</strong>和<strong>合成赋值运算符函数</strong>。</p>
+<p>如果类中有指针，这两个函数<strong>可能</strong>造成指针悬挂。（看完之后想想为什么只是可能？）</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>下面给出这两种函数造成指针悬挂的代码及注释：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">int</span> * p;</span><br><span class="line">	</span><br><span class="line">	MyClass()&#123;	p = <span class="keyword">new</span> <span class="keyword">int</span>;&#125;</span><br><span class="line">	~MyClass()&#123;	<span class="keyword">delete</span> p;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;	<span class="built_in">cout</span> &lt;&lt; p &lt;&lt; <span class="built_in">endl</span>;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	MyClass a;</span><br><span class="line">	<span class="function">MyClass <span class="title">b</span><span class="params">(a)</span></span>;	<span class="comment">//调用合成拷贝函数</span></span><br><span class="line">	<span class="comment">//MyClass b = a;	//调用合成赋值运算符</span></span><br><span class="line">	a.print();</span><br><span class="line">	b.print();	<span class="comment">//据两行输出可知，两个指针指向同一块内存</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//最后，B会先析构，然后A析构。</span></span><br><span class="line"><span class="comment">//B析构会释放p指向的内存，同时这块内存变为非法内存，</span></span><br><span class="line"><span class="comment">//此时A的指针p指向非法内存，造成指针悬挂。</span></span><br><span class="line"><span class="comment">//A析构时delete p,使用了非法内存，这时出错</span></span><br></pre></td></tr></table></figure>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>如果这两个函数造成指针悬挂，应显式提供这两个函数，将<strong>浅拷贝改为深拷贝</strong>。</p>
+<p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
+<p>欢迎讨论和交流!</p>
 
       
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          
+            <a href="/tags/指针/" rel="tag"># 指针</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/28/插值和线性回归/" rel="next" title="插值和线性回归">
+                <i class="fa fa-chevron-left"></i> 插值和线性回归
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -432,6 +505,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -452,8 +532,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -529,6 +618,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是指针悬挂"><span class="nav-number">1.</span> <span class="nav-text">什么是指针悬挂</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一些指针悬挂的情况"><span class="nav-number">2.</span> <span class="nav-text">一些指针悬挂的情况</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">2.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">2.2.</span> <span class="nav-text">解决</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -700,6 +805,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
