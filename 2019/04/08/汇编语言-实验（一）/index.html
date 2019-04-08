@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="汇编," />
+  <meta name="keywords" content="Bug,汇编," />
 
 
 
@@ -82,14 +82,14 @@
 
 
 <meta name="description" content="题目一问题在数据段DATA中有两个字数据X和Y, 假设X=1122H, Y=3344H, 编程求两个字的和,结果存放到Z单元中。 代码123456789101112131415161718192021222324252627282930313233;*********************************************************************data s">
-<meta name="keywords" content="汇编">
+<meta name="keywords" content="Bug,汇编">
 <meta property="og:type" content="article">
 <meta property="og:title" content="汇编语言-实验（一）">
 <meta property="og:url" content="https://chouxianyu.github.io/2019/04/08/汇编语言-实验（一）/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
 <meta property="og:description" content="题目一问题在数据段DATA中有两个字数据X和Y, 假设X=1122H, Y=3344H, 编程求两个字的和,结果存放到Z单元中。 代码123456789101112131415161718192021222324252627282930313233;*********************************************************************data s">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-08T03:27:21.965Z">
+<meta property="og:updated_time" content="2019-04-08T04:44:10.188Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="汇编语言-实验（一）">
 <meta name="twitter:description" content="题目一问题在数据段DATA中有两个字数据X和Y, 假设X=1122H, Y=3344H, 编程求两个字的和,结果存放到Z单元中。 代码123456789101112131415161718192021222324252627282930313233;*********************************************************************data s">
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  745 字
+                  882 字
                 </span>
               
 
@@ -424,6 +424,11 @@
 <h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">;*********************************************************************</span><br><span class="line">data segment					; 定义数据段</span><br><span class="line">	source_buffer db <span class="number">20</span> dup(<span class="string">'A'</span>); 串source_buffer，占<span class="number">20</span>个字节，内容是<span class="number">20</span>个字母A</span><br><span class="line">data ends</span><br><span class="line">;*********************************************************************</span><br><span class="line">extra segment					; 定义附加段</span><br><span class="line">	dest_buffer db <span class="number">20</span> dup(?)	; 串dest_buffer，占<span class="number">20</span>个字节，内容未确定</span><br><span class="line">extra ends</span><br><span class="line">;*********************************************************************</span><br><span class="line">code segment					; 定义代码段</span><br><span class="line">	assume cs:code,ds:data,es:extra</span><br><span class="line">;---------------------------------------------------------------------</span><br><span class="line">main proc far					; 程序的主部分</span><br><span class="line">start: </span><br><span class="line">; 为返回DOS做准备</span><br><span class="line">	push ds						; ds压栈</span><br><span class="line">	xor ax,ax					; (ax) &lt;- data</span><br><span class="line">	push ax						; ax压栈</span><br><span class="line">	</span><br><span class="line">; ds设为data</span><br><span class="line">	mov ax,data					; (ax) &lt;- data</span><br><span class="line">	mov ds,ax					; (ds) &lt;- (ax)</span><br><span class="line">	</span><br><span class="line">; es设为extra</span><br><span class="line">	mov ax,extra				; (ax) &lt;- extra</span><br><span class="line">	mov es,ax					; (es) &lt;- (ax)</span><br><span class="line"></span><br><span class="line">; 准备工作</span><br><span class="line">	lea si,source_buffer		; 存储源串首地址</span><br><span class="line">	lea di,dest_buffer			; 存储目的串首地址</span><br><span class="line">	cld							; 建立方向标志</span><br><span class="line">	mov cx,<span class="number">20</span>					; <span class="number">20</span>个字符</span><br><span class="line">; 移动串</span><br><span class="line">	rep movsb					; 移动串至CX为<span class="number">0</span>，即移动整个串</span><br><span class="line">	</span><br><span class="line">; 返回DOS环境</span><br><span class="line">	ret							; 返回DOS环境</span><br><span class="line">main  endp</span><br><span class="line">;---------------------------------------------------------------------</span><br><span class="line">code  ends</span><br><span class="line">;*********************************************************************</span><br><span class="line">	end start</span><br></pre></td></tr></table></figure>
 <h1 id="题目三"><a href="#题目三" class="headerlink" title="题目三"></a>题目三</h1><h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>从SOURCE_BUFFER单元开始存放了20个字母A, 编程将这20个字母A的字符串向下移10个单元。</p>
 <h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">;*********************************************************************</span><br><span class="line">extra segment					; 定义附加段</span><br><span class="line">	source_buffer db <span class="number">20</span> dup(<span class="string">'A'</span>); 串source_buffer，占<span class="number">20</span>个字节，内容是<span class="number">20</span>个字母A</span><br><span class="line">	dest_buffer=source_buffer+<span class="number">10</span>; 串dest_buffer，结果串的首地址</span><br><span class="line">extra ends</span><br><span class="line">;*********************************************************************</span><br><span class="line">code segment					; 定义代码段</span><br><span class="line">	assume cs:code,es:extra</span><br><span class="line">;---------------------------------------------------------------------</span><br><span class="line">main proc far					; 程序的主部分</span><br><span class="line">start: </span><br><span class="line">; 为返回DOS做准备</span><br><span class="line">	push ds						; ds压栈</span><br><span class="line">	xor ax,ax					; (ax) &lt;- <span class="number">0</span></span><br><span class="line">	push ax						; ax压栈</span><br><span class="line">	</span><br><span class="line">; es设为extra</span><br><span class="line">	mov ax,extra				; (ax) &lt;- extra</span><br><span class="line">	mov es,ax					; (es) &lt;- (ax)</span><br><span class="line">	</span><br><span class="line">; 准备工作</span><br><span class="line">	lea si,source_buffer+<span class="number">19</span>		; 存储源串末地址</span><br><span class="line">	lea di,dest_buffer+<span class="number">19</span>		; 存储目的串末地址</span><br><span class="line">	<span class="built_in">std</span>							; 建立方向标志</span><br><span class="line">	mov cx,<span class="number">20</span>					; <span class="number">20</span>个字符</span><br><span class="line">; 移动串</span><br><span class="line">	rep movs es:byte ptr[di],es:[di]	; 移动串至CX为<span class="number">0</span>，即移动整个串</span><br><span class="line">	</span><br><span class="line">; 返回DOS环境</span><br><span class="line">	ret							; 返回DOS环境</span><br><span class="line">main  endp</span><br><span class="line">;---------------------------------------------------------------------</span><br><span class="line">code  ends</span><br><span class="line">;*********************************************************************</span><br><span class="line">	end start</span><br></pre></td></tr></table></figure>
+<h2 id="BUG"><a href="#BUG" class="headerlink" title="BUG"></a>BUG</h2><p>不小心，上边代码写错了,<code>rep movs ds:byte ptr[di],ds:[di]</code>，源地址和目标地址不小心都用了di。</p>
+<p>按说这样不能进行后移，但却得到了正确的结果。</p>
+<p>经过调试，发现可能是编译环境自行将我的错误代码改成了正确代码，进行了优化。</p>
+<p>同时也发现：<code>rep movs ds:byte ptr[si],ds:[di]</code>，这个代码也是错的，但也得到了正确的结果。</p>
+<p>正确的代码应该是这样：<code>rep movs ds:byte ptr[di],ds:[si]</code>。</p>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
 <p>欢迎讨论和交流!</p>
@@ -443,6 +448,8 @@
     <footer class="post-footer">
       
         <div class="post-tags">
+          
+            <a href="/tags/Bug/" rel="tag"># Bug</a>
           
             <a href="/tags/汇编/" rel="tag"># 汇编</a>
           
@@ -622,7 +629,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目一"><span class="nav-number">1.</span> <span class="nav-text">题目一</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目二"><span class="nav-number">2.</span> <span class="nav-text">题目二</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-1"><span class="nav-number">2.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">2.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目三"><span class="nav-number">3.</span> <span class="nav-text">题目三</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-2"><span class="nav-number">3.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-2"><span class="nav-number">3.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目一"><span class="nav-number">1.</span> <span class="nav-text">题目一</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目二"><span class="nav-number">2.</span> <span class="nav-text">题目二</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-1"><span class="nav-number">2.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">2.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目三"><span class="nav-number">3.</span> <span class="nav-text">题目三</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-2"><span class="nav-number">3.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-2"><span class="nav-number">3.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BUG"><span class="nav-number">3.3.</span> <span class="nav-text">BUG</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -656,7 +663,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">27.4k</span>
+    <span title="Site words total count">27.5k</span>
   
 </div>
 
