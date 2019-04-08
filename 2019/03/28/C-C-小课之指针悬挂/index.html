@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
 <meta property="og:description" content="什么是指针悬挂指向非法内存的指针，也叫野指针。 非法内存即不能使用的内存。 123int* p = (int*)12345;//int* p;	//p未初始化，p的值随机，一般都会指向非法内存cout &amp;lt;&amp;lt; *p;	//运行这行代码会出错 随便让p指向一块内存（一般指向非法内存）。 运行时使用非法内存，会报错。 一些指针悬挂的情况课本中有两处提到指针悬挂，分别是：合成拷贝构造函数和合成">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-28T15:55:52.312Z">
+<meta property="og:updated_time" content="2019-03-28T15:58:33.934Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C&#x2F;C++小课之指针悬挂">
 <meta name="twitter:description" content="什么是指针悬挂指向非法内存的指针，也叫野指针。 非法内存即不能使用的内存。 123int* p = (int*)12345;//int* p;	//p未初始化，p的值随机，一般都会指向非法内存cout &amp;lt;&amp;lt; *p;	//运行这行代码会出错 随便让p指向一块内存（一般指向非法内存）。 运行时使用非法内存，会报错。 一些指针悬挂的情况课本中有两处提到指针悬挂，分别是：合成拷贝构造函数和合成">
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  425 字
+                  434 字
                 </span>
               
 
@@ -427,7 +427,7 @@
 <p>如果类中有指针，这两个函数<strong>可能</strong>造成指针悬挂。（看完之后想想为什么只是可能？）</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>下面给出这两种函数造成指针悬挂的代码及注释：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">int</span> * p;</span><br><span class="line">	</span><br><span class="line">	MyClass()&#123;	p = <span class="keyword">new</span> <span class="keyword">int</span>;&#125;</span><br><span class="line">	~MyClass()&#123;	<span class="keyword">delete</span> p;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;	<span class="built_in">cout</span> &lt;&lt; p &lt;&lt; <span class="built_in">endl</span>;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	MyClass a;</span><br><span class="line">	<span class="function">MyClass <span class="title">b</span><span class="params">(a)</span></span>;	<span class="comment">//调用合成拷贝函数</span></span><br><span class="line">	<span class="comment">//MyClass b = a;	//调用合成赋值运算符</span></span><br><span class="line">	a.print();</span><br><span class="line">	b.print();	<span class="comment">//据两行输出可知，两个指针指向同一块内存</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//最后，B会先析构，然后A析构。</span></span><br><span class="line"><span class="comment">//B析构会释放p指向的内存，同时这块内存变为非法内存，</span></span><br><span class="line"><span class="comment">//此时A的指针p指向非法内存，造成指针悬挂。</span></span><br><span class="line"><span class="comment">//A析构时delete p,使用了非法内存，这时出错</span></span><br></pre></td></tr></table></figure>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>如果这两个函数造成指针悬挂，应显式提供这两个函数，将<strong>浅拷贝改为深拷贝</strong>。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>如果这两个函数造成指针悬挂，应显式提供这两个函数，并将这两个合成函数的<strong>浅拷贝改为深拷贝</strong>。</p>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
 <p>欢迎讨论和交流!</p>
@@ -472,6 +472,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/08/汇编语言-实验（一）/" rel="prev" title="汇编语言-实验（一）">
+                汇编语言-实验（一） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -561,7 +565,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -574,7 +578,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -662,7 +666,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">26.6k</span>
+    <span title="Site words total count">27.4k</span>
   
 </div>
 
