@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="数学建模,算法," />
 
 
 
@@ -81,17 +81,18 @@
 
 
 
-<meta name="description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
-<meta name="keywords" content="臭咸鱼">
-<meta property="og:type" content="website">
-<meta property="og:title" content="臭咸鱼的缺氧瓶">
-<meta property="og:url" content="https://chouxianyu.github.io/tags/Matlab/index.html">
+<meta name="description" content="与贪心的区别出现较好的解就使用，发现不了就形成解。缺点：跳不出局部最优解 模拟退火：与贪心类似，但可以以一定的概率跳出局部最优解，通过两个式子实现，Metropolis准则。玻尔兹曼分布 模拟退火算法和物理退火过程的对应    模拟退火算法 物理退火过程     解 粒子状态   目标函数 能量   最优解 能量最低态   设定初温 设置加温到几度   扰动 热涨落   metropolis采样过">
+<meta name="keywords" content="数学建模,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模拟退火学习">
+<meta property="og:url" content="https://chouxianyu.github.io/2019/04/25/模拟退火学习/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
+<meta property="og:description" content="与贪心的区别出现较好的解就使用，发现不了就形成解。缺点：跳不出局部最优解 模拟退火：与贪心类似，但可以以一定的概率跳出局部最优解，通过两个式子实现，Metropolis准则。玻尔兹曼分布 模拟退火算法和物理退火过程的对应    模拟退火算法 物理退火过程     解 粒子状态   目标函数 能量   最优解 能量最低态   设定初温 设置加温到几度   扰动 热涨落   metropolis采样过">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-24T18:06:58.593Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="臭咸鱼的缺氧瓶">
-<meta name="twitter:description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
+<meta name="twitter:title" content="模拟退火学习">
+<meta name="twitter:description" content="与贪心的区别出现较好的解就使用，发现不了就形成解。缺点：跳不出局部最优解 模拟退火：与贪心类似，但可以以一定的概率跳出局部最优解，通过两个式子实现，Metropolis准则。玻尔兹曼分布 模拟退火算法和物理退火过程的对应    模拟退火算法 物理退火过程     解 粒子状态   目标函数 能量   最优解 能量最低态   设定初温 设置加温到几度   扰动 热涨落   metropolis采样过">
 
 
 
@@ -121,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://chouxianyu.github.io/tags/Matlab/"/>
+  <link rel="canonical" href="https://chouxianyu.github.io/2019/04/25/模拟退火学习/"/>
 
 
 
 
 
-  <title>Tag: Matlab | 臭咸鱼的缺氧瓶</title>
+  <title>模拟退火学习 | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -156,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -284,306 +285,301 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Matlab<small>Tag</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/04/25/模拟退火学习/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/03/28/插值和线性回归/" itemprop="url">
-              
-                <span itemprop="name">插值和线性回归</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">模拟退火学习</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-28T19:26:40+08:00"
-              content="2019-03-28" >
-          03-28
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-25T02:01:13+08:00">
+                2019-04-25
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/25/模拟退火学习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/25/模拟退火学习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/04/25/模拟退火学习/" class="leancloud_visitors" data-flag-title="模拟退火学习">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,309 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/28/传染病模型/" itemprop="url">
-              
-                <span itemprop="name">传染病模型</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-28T19:26:20+08:00"
-              content="2019-03-28" >
-          03-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/28/Runge-Kutta法解微分方程/" itemprop="url">
-              
-                <span itemprop="name">Runge-Kutta法解微分方程</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-28T19:25:59+08:00"
-              content="2019-03-28" >
-          03-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/27/美国人口指数增长模型拟合/" itemprop="url">
-              
-                <span itemprop="name">美国人口指数增长模型拟合</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-27T08:50:23+08:00"
-              content="2019-03-27" >
-          03-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/26/线性方程组求解/" itemprop="url">
-              
-                <span itemprop="name">线性方程组求解</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-26T09:03:41+08:00"
-              content="2019-03-26" >
-          03-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/25/线性和非线性拟合/" itemprop="url">
-              
-                <span itemprop="name">线性和非线性拟合</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-25T22:50:59+08:00"
-              content="2019-03-25" >
-          03-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/24/Matlab作图/" itemprop="url">
-              
-                <span itemprop="name">Matlab作图</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-24T22:45:05+08:00"
-              content="2019-03-24" >
-          03-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/24/Matlab基础/" itemprop="url">
-              
-                <span itemprop="name">Matlab基础</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-24T22:44:52+08:00"
-              content="2019-03-24" >
-          03-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/18/PageRank/" itemprop="url">
-              
-                <span itemprop="name">PageRank</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-18T15:58:08+08:00"
-              content="2019-02-18" >
-          02-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/16/多体问题/" itemprop="url">
-              
-                <span itemprop="name">多体问题</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-16T18:43:10+08:00"
-              content="2019-02-16" >
-          02-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <h1 id="与贪心的区别"><a href="#与贪心的区别" class="headerlink" title="与贪心的区别"></a>与贪心的区别</h1><p>出现较好的解就使用，发现不了就形成解。缺点：跳不出局部最优解</p>
+<p>模拟退火：与贪心类似，但可以以一定的概率跳出局部最优解，通过两个式子实现，Metropolis准则。玻尔兹曼分布</p>
+<h1 id="模拟退火算法和物理退火过程的对应"><a href="#模拟退火算法和物理退火过程的对应" class="headerlink" title="模拟退火算法和物理退火过程的对应"></a>模拟退火算法和物理退火过程的对应</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">模拟退火算法</th>
+<th style="text-align:center">物理退火过程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">解</td>
+<td style="text-align:center">粒子状态</td>
+</tr>
+<tr>
+<td style="text-align:center">目标函数</td>
+<td style="text-align:center">能量</td>
+</tr>
+<tr>
+<td style="text-align:center">最优解</td>
+<td style="text-align:center">能量最低态</td>
+</tr>
+<tr>
+<td style="text-align:center">设定初温</td>
+<td style="text-align:center">设置加温到几度</td>
+</tr>
+<tr>
+<td style="text-align:center">扰动</td>
+<td style="text-align:center">热涨落</td>
+</tr>
+<tr>
+<td style="text-align:center">metropolis采样过程</td>
+<td style="text-align:center">热平衡，粒子状态满足玻尔兹曼分布</td>
+</tr>
+<tr>
+<td style="text-align:center">控制参数的下降</td>
+<td style="text-align:center">冷却</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h1><p>缩进代表层级嵌套关系。</p>
+<ul>
+<li><p>构造一个初始解，令当前解为该解。</p>
+</li>
+<li><p>设置初始温度，初始温度要设得比较高。</p>
+</li>
+<li><p>主要算法，while循环：</p>
+<p>  循环条件可以是温度的阈值或者是解不怎么变化了</p>
+<ul>
+<li><p>for循环</p>
+<p>  平衡过程，在该温度下，使达到平衡（metropolis），恒温下1到$T_L$步</p>
+<ul>
+<li>根据当前解随机生成一个邻解，跟当前解非常接近（扰动，for循环就是多次扰动）</li>
+<li><p>计算邻解的目标函数（花费、路程、大小、钱数等等），减去当前解的目标函数，求得目标函数变化量</p>
+</li>
+<li><p>如果变化量小于0（即优化了），使用该邻近解；如果没有优化，则用metropolis准    则，看是不是要跳出坑，跳出则使用该邻解。</p>
+</li>
+</ul>
+</li>
+<li><p>平衡后设置新温度，即降温。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="模拟退火算法设计要素"><a href="#模拟退火算法设计要素" class="headerlink" title="模拟退火算法设计要素"></a>模拟退火算法设计要素</h1><h2 id="初始解的生成"><a href="#初始解的生成" class="headerlink" title="初始解的生成"></a>初始解的生成</h2><p>如果初始解比较好的话，收敛得就很快。</p>
+<p>通常以一个随机解作为初始解，并保证理论上能生成解空间中任意的解。（一般要多做几次模拟退火，即试用不同的初始解，再取最优的）</p>
+<p>也可以是一个挑出来的比较好的解。这种情况下，初始温度应当设置得较低。</p>
+<p>初始解不宜“太好”，否则很难从这个解的邻域中跳出。</p>
+<h2 id="邻解生成函数"><a href="#邻解生成函数" class="headerlink" title="邻解生成函数"></a>邻解生成函数</h2><p>应尽可能保证产生的候选解能遍布整个解空间。</p>
+<p>邻域应尽可能的小，能够在少量循环内充分探测，但每次的改变不应该引起太大的变化。</p>
+<h2 id="初始温度如何设定"><a href="#初始温度如何设定" class="headerlink" title="初始温度如何设定"></a>初始温度如何设定</h2><p>初始应该尽可能的高，以确保最终解不受初始解影响，但过高又会增加计算时间。</p>
+<p>均匀抽样一组状态，以各状态目标值的方差为初温。（随机生成一组解）</p>
+<p>等等</p>
+<p>※ 正式开始退火算法前，可进行一个升温过程确定初始温度：逐渐增加温度，直到所有尝试运动都被接受，将此时的温度设置为初始温度。</p>
+<p>等等</p>
+<h2 id="等温步数如何确定"><a href="#等温步数如何确定" class="headerlink" title="等温步数如何确定"></a>等温步数如何确定</h2><p>等温步数即同一个温度下，跑几个循环。</p>
+<p>等温步数也称Metropolis抽样稳定准则，用于决定在各温度下产生候选解的数目，通常取决于解空间和邻域的大小。如果解空间小，步数可以小一点。</p>
+<p>等温过程是为了让系统达到平衡，因此可通过检验目标函数的均值是否稳定（或连续若干步的目标值变化较小，这个可以写一个函数来检测）来确定等温步数。等温步数可以长，也就是多平衡一会而已。</p>
+<p>等温步数受温度的影响。高温时，等温步数可以较小；温度较小时，等温步数要大。随着温度降低，增加等温步数。（因为高温的时候比较混乱， 温度小的时候就在不停地收敛了），可以将等温步数设置成一个温度的函数。</p>
+<p>有时为了考虑方便，也可以直接按一定的步数抽样。不区分高温和低温时的等温步数，大一点就好啦。</p>
+<h2 id="如何降温"><a href="#如何降温" class="headerlink" title="如何降温"></a>如何降温</h2><p>经典模拟退火算法降温方式</p>
+<p>快速模拟退火算法降温方式</p>
+<p>常用的其他降温方式</p>
+<p>后边两种比较常用</p>
+<h2 id="花费函数"><a href="#花费函数" class="headerlink" title="花费函数"></a>花费函数</h2><p>不要太复杂，应该能被快速的计算，花费函数的计算是程序的可能瓶颈。</p>
+<p>一般用目标函数构造花费函数即可。目标函数、目标函数的倒数/相反数经常直接作为花费函数                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </p>
+<h2 id="终止条件"><a href="#终止条件" class="headerlink" title="终止条件"></a>终止条件</h2><p>理论上温度降为0才终止退火算法，因为此时没有概率跳出坑了。但实际温度较低时，尝试的接受概率就几乎为0了。</p>
+<p>设置终止温度的阈值，或设置外循环循环迭代次数。</p>
+<p>算法搜索到的最优值连续若干步保持不变。</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>有人说这就是遗传算法+梯度下降。老师说这个算法属于一种蒙特卡洛算法，和蒙特卡洛算法类似。国赛和美赛几乎不会考TSP，太简单了，小比赛才有可能让选手练手。</p>
+<p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
+<p>欢迎讨论和交流!</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数学建模/" rel="tag"># 数学建模</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/16/C-C-小课之继承（一）/" rel="next" title="C/C++小课之继承（一）">
+                <i class="fa fa-chevron-left"></i> C/C++小课之继承（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -591,6 +587,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -611,8 +614,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -688,6 +700,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#与贪心的区别"><span class="nav-number">1.</span> <span class="nav-text">与贪心的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模拟退火算法和物理退火过程的对应"><span class="nav-number">2.</span> <span class="nav-text">模拟退火算法和物理退火过程的对应</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#伪代码"><span class="nav-number">3.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模拟退火算法设计要素"><span class="nav-number">4.</span> <span class="nav-text">模拟退火算法设计要素</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始解的生成"><span class="nav-number">4.1.</span> <span class="nav-text">初始解的生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#邻解生成函数"><span class="nav-number">4.2.</span> <span class="nav-text">邻解生成函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始温度如何设定"><span class="nav-number">4.3.</span> <span class="nav-text">初始温度如何设定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#等温步数如何确定"><span class="nav-number">4.4.</span> <span class="nav-text">等温步数如何确定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何降温"><span class="nav-number">4.5.</span> <span class="nav-text">如何降温</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#花费函数"><span class="nav-number">4.6.</span> <span class="nav-text">花费函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#终止条件"><span class="nav-number">4.7.</span> <span class="nav-text">终止条件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-number">5.</span> <span class="nav-text">其他</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -859,6 +887,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

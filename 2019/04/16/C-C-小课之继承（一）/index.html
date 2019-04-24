@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="C/C++,继承," />
+  <meta name="keywords" content="C/C++,面向对象,继承," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="继承的概念继承源于生物界，指后代能够传承前代的特征和行为。 基类和子类继承使我们可以通过一个已有的类创建一个新类，新类自然获得已有类的全部功能。在某个继承关系中，已有的类在这个继承关系中作为基类、超类或父类，新类称为派生类或子类。 具体来讲，子类复制了基类的全体数据成员和成员函数。此外，子类还可以进行扩充、修改和重定义。 同一个类可以作为多个类的基类，一个子类也可以作为另一个类的基类。基类和子类是">
-<meta name="keywords" content="C&#x2F;C++,继承">
+<meta name="description" content="继承的概念继承源于生物界，指后代能够传承前代的特征和行为。 基类和子类继承使我们可以通过一个已有的类创建一个新类，新类自然获得已有类的全部功能。在某个继承关系中，已有的类在这个继承关系中作为基类、超类或父类，新类称为派生类或子类。 具体来讲，子类复制了基类的全体数据成员和成员函数。此外，子类还可以进行扩充、修改和重定义。 同一个类可以作为多个类的基类，一个子类也可以作为另一个类的基类。 基类和子类">
+<meta name="keywords" content="C&#x2F;C++,面向对象,继承">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C&#x2F;C++小课之继承（一）">
 <meta property="og:url" content="https://chouxianyu.github.io/2019/04/16/C-C-小课之继承（一）/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="继承的概念继承源于生物界，指后代能够传承前代的特征和行为。 基类和子类继承使我们可以通过一个已有的类创建一个新类，新类自然获得已有类的全部功能。在某个继承关系中，已有的类在这个继承关系中作为基类、超类或父类，新类称为派生类或子类。 具体来讲，子类复制了基类的全体数据成员和成员函数。此外，子类还可以进行扩充、修改和重定义。 同一个类可以作为多个类的基类，一个子类也可以作为另一个类的基类。基类和子类是">
+<meta property="og:description" content="继承的概念继承源于生物界，指后代能够传承前代的特征和行为。 基类和子类继承使我们可以通过一个已有的类创建一个新类，新类自然获得已有类的全部功能。在某个继承关系中，已有的类在这个继承关系中作为基类、超类或父类，新类称为派生类或子类。 具体来讲，子类复制了基类的全体数据成员和成员函数。此外，子类还可以进行扩充、修改和重定义。 同一个类可以作为多个类的基类，一个子类也可以作为另一个类的基类。 基类和子类">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-16T15:32:44.129Z">
+<meta property="og:updated_time" content="2019-04-24T17:50:40.062Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C&#x2F;C++小课之继承（一）">
-<meta name="twitter:description" content="继承的概念继承源于生物界，指后代能够传承前代的特征和行为。 基类和子类继承使我们可以通过一个已有的类创建一个新类，新类自然获得已有类的全部功能。在某个继承关系中，已有的类在这个继承关系中作为基类、超类或父类，新类称为派生类或子类。 具体来讲，子类复制了基类的全体数据成员和成员函数。此外，子类还可以进行扩充、修改和重定义。 同一个类可以作为多个类的基类，一个子类也可以作为另一个类的基类。基类和子类是">
+<meta name="twitter:description" content="继承的概念继承源于生物界，指后代能够传承前代的特征和行为。 基类和子类继承使我们可以通过一个已有的类创建一个新类，新类自然获得已有类的全部功能。在某个继承关系中，已有的类在这个继承关系中作为基类、超类或父类，新类称为派生类或子类。 具体来讲，子类复制了基类的全体数据成员和成员函数。此外，子类还可以进行扩充、修改和重定义。 同一个类可以作为多个类的基类，一个子类也可以作为另一个类的基类。 基类和子类">
 
 
 
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2,130 字
+                  2,185 字
                 </span>
               
 
@@ -421,7 +421,8 @@
         <h1 id="继承的概念"><a href="#继承的概念" class="headerlink" title="继承的概念"></a>继承的概念</h1><p>继承源于生物界，指后代能够传承前代的特征和行为。</p>
 <h2 id="基类和子类"><a href="#基类和子类" class="headerlink" title="基类和子类"></a>基类和子类</h2><p>继承使我们可以通过一个已有的类创建一个新类，新类自然获得已有类的全部功能。在<strong>某个继承关系</strong>中，已有的类在这个继承关系中作为<strong>基类</strong>、<strong>超类</strong>或<strong>父类</strong>，新类称为<strong>派生类</strong>或<strong>子类</strong>。</p>
 <p>具体来讲，子类复制了基类的全体数据成员和成员函数。此外，子类还可以进行扩充、修改和重定义。</p>
-<p>同一个类可以作为多个类的基类，一个子类也可以作为另一个类的基类。基类和子类是继承关系中的概念，并不是本质的概念，而是关系上的概念。</p>
+<p>同一个类可以作为多个类的基类，一个子类也可以作为另一个类的基类。</p>
+<p>基类和子类是继承关系中的概念，并不是本质的概念，而是关系上的概念。</p>
 <h2 id="继承与派生"><a href="#继承与派生" class="headerlink" title="继承与派生"></a>继承与派生</h2><p>A作为基类，B作为子类时，我们称：</p>
 <ul>
 <li>B继承A</li>
@@ -435,7 +436,7 @@
 <h2 id="public"><a href="#public" class="headerlink" title="public"></a>public</h2><p>语法正确的条件下，访问不受控制，在哪里都可以访问。</p>
 <h2 id="private"><a href="#private" class="headerlink" title="private"></a>private</h2><p>只能在<strong>类内</strong>、<strong>友元函数</strong>访问。</p>
 <h2 id="protected"><a href="#protected" class="headerlink" title="protected"></a>protected</h2><p>只能在<strong>类内</strong>、<strong>子类内</strong>、<strong>友元函数</strong>访问。</p>
-<h1 id="继承方式"><a href="#继承方式" class="headerlink" title="继承方式"></a>继承方式</h1><p><strong>注意</strong>：继承方式决定的是<strong>类成员访问权限如何继承</strong>。</p>
+<h1 id="继承方式"><a href="#继承方式" class="headerlink" title="继承方式"></a>继承方式</h1><p><strong>注意</strong>：继承方式决定的是<strong>子类如何继承基类成员的访问权限</strong>。</p>
 <p>不同继承方式会不同程度地<strong>改变基类成员在派生类中的访问权限</strong>。（个人觉得这句话不好，易让人误解）</p>
 <p>C++中继承方式默认为<code>private</code>。</p>
 <h2 id="public-1"><a href="#public-1" class="headerlink" title="public"></a>public</h2><p>基类成员的访问权限在派生类中保持<strong>不变</strong>。</p>
@@ -445,10 +446,10 @@
 <p><code>private</code>成员和<code>protected</code>成员的访问权限不变。</p>
 <h1 id="派生类对基类的扩展"><a href="#派生类对基类的扩展" class="headerlink" title="派生类对基类的扩展"></a>派生类对基类的扩展</h1><p>派生类<strong>可以</strong>：</p>
 <ul>
-<li>增加新的数据成员和成员函数</li>
-<li>重载从基类继承到的成员函数</li>
-<li>覆盖（重定义）从基类集成到的成员函数</li>
-<li>改变基类成员在派生类中的访问属性</li>
+<li><strong>增加</strong>新的数据成员和成员函数</li>
+<li><strong>重载</strong>从基类继承到的成员函数</li>
+<li>覆盖（<strong>重定义</strong>）从基类集成到的成员函数</li>
+<li>改变基类成员在派生类中的访问属性（通过继承方式实现）</li>
 </ul>
 <p>派生类<strong>不能</strong>继承基类的以下内容：</p>
 <ul>
@@ -464,8 +465,9 @@
 <p>静态成员为整个继承体系公有。</p>
 <p>C++11之前，派生类不能继承基类的构造函数，C++11之后可以。</p>
 <h2 id="成员函数的重定义、重载及隐藏"><a href="#成员函数的重定义、重载及隐藏" class="headerlink" title="成员函数的重定义、重载及隐藏"></a>成员函数的重定义、重载及隐藏</h2><p>派生类对继承到的基类成员函数的<strong>重定义</strong>或<strong>重载</strong>都会影响它们在派生类中的可见性。</p>
+<p>派生类对基类函数进行重定义或重载时，由于继承和类作用域的原因，导致了隐藏，解决隐藏有三种方法。</p>
 <p><strong>影响可见性</strong>：</p>
-<p>如果派生类<strong>重定义</strong>或者<strong>重载</strong>了基类中某个函数名为<code>func</code>的函数，则基类中的所有名字为<code>func</code>的函数都会被<strong>隐藏</strong>。（其中<strong>隐藏</strong>指的是在派生类中看不到这个函数。）</p>
+<p>如果派生类<strong>重定义</strong>或者<strong>重载</strong>了基类中某个函数名为<code>func</code>的函数，则基类中的所有名字为<code>func</code>的函数都会被<strong>隐藏</strong>。（其中<strong>隐藏</strong>指的是在派生类中不能直接看到这个函数。）</p>
 <p><strong>解决</strong>：</p>
 <ol>
 <li><p>通过基类名称访问被派生类<strong>重定义</strong>或<strong>重载</strong>隐藏的函数，</p>
@@ -479,13 +481,13 @@
 <p>前两种方法都很繁琐。</p>
 <p>而C++11提供了<code>using</code>使基类中被隐藏的函数在派生类中可见，具体使用在后边的<code>using</code>部分讲解。</p>
 <h3 id="重定义"><a href="#重定义" class="headerlink" title="重定义"></a>重定义</h3><h4 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h4><p><strong>覆盖</strong>也称为<strong>重定义</strong>、<strong>重写</strong>。</p>
-<p>重定义是指派生类可以定义与基类<strong>具有相同参数列表</strong>（即及参数表都相同）的同名成员函数。</p>
+<p>重定义是指派生类定义与基类<strong>具有相同参数列表</strong>的同名成员函数。</p>
 <p>（关于重定义的定义，我个人认为书上P147的说法是错的。）</p>
 <h4 id="隐藏及解决"><a href="#隐藏及解决" class="headerlink" title="隐藏及解决"></a>隐藏及解决</h4><p>代码如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Base::print()"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Base::print()......"</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> :</span><span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">print</span><span class="params">()</span>	<span class="comment">//重定义Base类的void print()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Derived::print()"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Base b1;</span><br><span class="line">	Derived d1;</span><br><span class="line"></span><br><span class="line">	b1.print();	<span class="comment">//Base类调用函数正常</span></span><br><span class="line">	b1.print(<span class="number">1</span>);<span class="comment">//Base类调用函数正常</span></span><br><span class="line"></span><br><span class="line">	d1.print();	<span class="comment">//Base类中的print()被隐藏，调用Derived类的print()</span></span><br><span class="line">	d1.print(<span class="number">1</span>);<span class="comment">//该行报错，编译不通过。原因是Derived类的int print()重定义了Base类的void print()，导致Base中所有同名函数被隐藏，即print(int)和print()被隐藏。</span></span><br><span class="line"></span><br><span class="line">	d1.Base::print();	<span class="comment">//调用Base类的print()</span></span><br><span class="line">	d1.Base::print(<span class="number">1</span>);	<span class="comment">//调用Base类的print(int)</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>将第34行注释后，输出结果如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Base::print()</span><br><span class="line">Base::print().....<span class="number">.1</span></span><br><span class="line">Derived::print()</span><br><span class="line">Base::print()</span><br><span class="line">Base::print().....<span class="number">.1</span></span><br></pre></td></tr></table></figure>
-<h3 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h3><h4 id="是什么-1"><a href="#是什么-1" class="headerlink" title="是什么"></a>是什么</h4><p>重载与重定义不同，重载要求成员函数<strong>具有不同的形参列表</strong>。</p>
+<h3 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h3><h4 id="是什么-1"><a href="#是什么-1" class="headerlink" title="是什么"></a>是什么</h4><p>重载与重定义不同，重载要求成员函数名称相同，但<strong>具有不同的参数列表</strong>。</p>
 <p>（关于重载的定义，我个人认为书上P147的说法是错的）</p>
 <h4 id="隐藏及解决-1"><a href="#隐藏及解决-1" class="headerlink" title="隐藏及解决"></a>隐藏及解决</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Base::print()"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Base::print()......"</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> :</span><span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">char</span> i)</span>	<span class="comment">//重载Base类的两个print函数，即print()、print(int i)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Derived::print()......"</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//int print(int i);//这个是重定义Base的void print(int i)，而非重载</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Base b1;</span><br><span class="line">	Derived d1;</span><br><span class="line"></span><br><span class="line">	b1.print();	<span class="comment">//Base类调用函数正常</span></span><br><span class="line">	b1.print(<span class="number">1</span>);<span class="comment">//Base类调用函数正常</span></span><br><span class="line"></span><br><span class="line">	d1.print();	<span class="comment">//该行报错，因为Derived的print(char i)重载了Base类的两个print函数，它们在Derived类中被隐藏了</span></span><br><span class="line">	d1.print(<span class="string">'A'</span>);<span class="comment">//调用Derived类的print(char i)</span></span><br><span class="line"></span><br><span class="line">	d1.Base::print();	<span class="comment">//调用Base类的print()</span></span><br><span class="line">	d1.Base::print(<span class="number">1</span>);	<span class="comment">//调用Base类的print(int)</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>将第33行注释后，输出结果如下：</p>
@@ -503,9 +505,9 @@
 <p>因此，在解析类成员名称时，如果在本类的作用域内没有找到，编译器会接着在外层的基类作用域内继续寻找该成员名称的定义。</p>
 <p>在这个寻找的过程中，一旦在某个作用域找到了，就停止查找，即使外层作用域内还有同名成员，也不找了。</p>
 <p>形式如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Base &#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span>)</span></span>&#123;&#125;</span><br><span class="line">    ...</span><br><span class="line">    Derived &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Base &#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span>)</span></span>&#123;&#125;</span><br><span class="line">    ...</span><br><span class="line">    Derived &#123;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>代码验证</strong>：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Base::print()......"</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived1</span> :</span><span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Derived::print()......"</span>  &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived2</span> :</span><span class="keyword">public</span> Derived1 &#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	</span><br><span class="line">	Derived2 d;</span><br><span class="line">	d.print(<span class="number">1</span>);	<span class="comment">//该行代码报错，因为在Derived1中找到同名函数void print()，不会再向外层找，又因为参数列表不匹配，所以报错</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Base::print()......"</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived1</span> :</span><span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Derived::print()......"</span>  &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived2</span> :</span><span class="keyword">public</span> Derived1 &#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Derived2 d;</span><br><span class="line">	d.print(<span class="number">1</span>);	<span class="comment">//该行代码报错，因为在Derived1中找到同名函数void print()，不会再向外层找，又因为参数列表不匹配，所以报错</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
 <p>欢迎讨论和交流!</p>
@@ -527,6 +529,8 @@
         <div class="post-tags">
           
             <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          
+            <a href="/tags/面向对象/" rel="tag"># 面向对象</a>
           
             <a href="/tags/继承/" rel="tag"># 继承</a>
           
@@ -550,6 +554,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/25/模拟退火学习/" rel="prev" title="模拟退火学习">
+                模拟退火学习 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -639,7 +647,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -740,7 +748,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">31.4k</span>
+    <span title="Site words total count">32.8k</span>
   
 </div>
 
