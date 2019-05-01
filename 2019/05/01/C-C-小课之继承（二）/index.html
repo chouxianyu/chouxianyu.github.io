@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="C/C++,面向对象,继承," />
 
 
 
@@ -81,17 +81,18 @@
 
 
 
-<meta name="description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
-<meta name="keywords" content="臭咸鱼">
-<meta property="og:type" content="website">
-<meta property="og:title" content="臭咸鱼的缺氧瓶">
-<meta property="og:url" content="https://chouxianyu.github.io/tags/指针/index.html">
+<meta name="description" content="构造函数与析构函数 派生类只能在构造函数初始化列表中为基类或对象成员进行初始化。  当基类没有默认构造函数的情况下，派生类必须定义构造函数，并通过它为基类构造函数提供初始化值。（编译器合成的构造函数也算默认构造函数）  子类构造函数只负责直接基类的初始化。   当存在虚基类时，所有虚基类都由最后的派生类负责初始化。如果没有，则报错。   子类继承基类的构造函数C++11允许子类继承基类的构造函数，">
+<meta name="keywords" content="C&#x2F;C++,面向对象,继承">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C&#x2F;C++小课之继承（二）">
+<meta property="og:url" content="https://chouxianyu.github.io/2019/05/01/C-C-小课之继承（二）/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
+<meta property="og:description" content="构造函数与析构函数 派生类只能在构造函数初始化列表中为基类或对象成员进行初始化。  当基类没有默认构造函数的情况下，派生类必须定义构造函数，并通过它为基类构造函数提供初始化值。（编译器合成的构造函数也算默认构造函数）  子类构造函数只负责直接基类的初始化。   当存在虚基类时，所有虚基类都由最后的派生类负责初始化。如果没有，则报错。   子类继承基类的构造函数C++11允许子类继承基类的构造函数，">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-01T05:42:16.824Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="臭咸鱼的缺氧瓶">
-<meta name="twitter:description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
+<meta name="twitter:title" content="C&#x2F;C++小课之继承（二）">
+<meta name="twitter:description" content="构造函数与析构函数 派生类只能在构造函数初始化列表中为基类或对象成员进行初始化。  当基类没有默认构造函数的情况下，派生类必须定义构造函数，并通过它为基类构造函数提供初始化值。（编译器合成的构造函数也算默认构造函数）  子类构造函数只负责直接基类的初始化。   当存在虚基类时，所有虚基类都由最后的派生类负责初始化。如果没有，则报错。   子类继承基类的构造函数C++11允许子类继承基类的构造函数，">
 
 
 
@@ -121,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://chouxianyu.github.io/tags/指针/"/>
+  <link rel="canonical" href="https://chouxianyu.github.io/2019/05/01/C-C-小课之继承（二）/"/>
 
 
 
 
 
-  <title>Tag: 指针 | 臭咸鱼的缺氧瓶</title>
+  <title>C/C++小课之继承（二） | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -156,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -284,110 +285,262 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>指针<small>Tag</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/05/01/C-C-小课之继承（二）/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/03/28/C-C-小课之指针悬挂/" itemprop="url">
-              
-                <span itemprop="name">C/C++小课之指针悬挂</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">C/C++小课之继承（二）</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-28T23:44:06+08:00"
-              content="2019-03-28" >
-          03-28
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-01T13:40:46+08:00">
+                2019-05-01
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/01/C-C-小课之继承（二）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/01/C-C-小课之继承（二）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/05/01/C-C-小课之继承（二）/" class="leancloud_visitors" data-flag-title="C/C++小课之继承（二）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,179 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/09/01/指针间的互相赋值/" itemprop="url">
-              
-                <span itemprop="name">指针间的互相赋值</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-01T21:40:11+08:00"
-              content="2018-09-01" >
-          09-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/26/常量指针与指针常量/" itemprop="url">
-              
-                <span itemprop="name">常量指针与指针常量</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-26T03:49:34+08:00"
-              content="2018-08-26" >
-          08-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <h1 id="构造函数与析构函数"><a href="#构造函数与析构函数" class="headerlink" title="构造函数与析构函数"></a>构造函数与析构函数</h1><ul>
+<li><p>派生类只能在构造函数初始化列表中为基类或对象成员进行初始化。</p>
+</li>
+<li><p>当基类没有默认构造函数的情况下，派生类必须定义构造函数，并通过它为基类构造函数提供初始化值。（编译器合成的构造函数也算默认构造函数）</p>
+</li>
+<li><p>子类构造函数只负责直接基类的初始化。</p>
+<p>  当存在虚基类时，所有虚基类都由最后的派生类负责初始化。如果没有，则报错。</p>
+</li>
+</ul>
+<h2 id="子类继承基类的构造函数"><a href="#子类继承基类的构造函数" class="headerlink" title="子类继承基类的构造函数"></a>子类继承基类的构造函数</h2><p>C++11允许子类继承基类的构造函数，带来的方便是：</p>
+<p>当基类构造函数有较多参数，而派生类没有数据成员需要初始化，但它必须提供构造函数，且唯一目的是为基类构造函数提供初始化值。在这种情况下，它只需要继承直接基类的构造函数就可以了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span>:</span><span class="keyword">public</span> Base&#123;</span><br><span class="line">    ...</span><br><span class="line">	<span class="keyword">using</span> Base::Base;	<span class="comment">//继承基类构造函数</span></span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这个<code>using</code>不受访问权限的控制，放在<code>public</code>、<code>private</code>和<code>protected</code>区域中没有区别。</p>
+<p>但这个<code>using</code>与另外两种用法（见继承第一讲）有不同之处：这个会使编译器在子类中生成代码，而用<code>using</code>声明基类成员时，并不生成代码。</p>
+<h2 id="构造函数和析构函数的调用次序"><a href="#构造函数和析构函数的调用次序" class="headerlink" title="构造函数和析构函数的调用次序"></a>构造函数和析构函数的调用次序</h2><p>基类构造函数$\rightarrow$对象成员构造函数$\rightarrow$子类构造函数（体）</p>
+<ul>
+<li>多继承时，基类构造函数调用次序为继承方式中声明次序。</li>
+<li>有多个对象成员时，按它们在子类中的声明次序调用其构造函数。</li>
+</ul>
+<p>析构函数与构造函数次序相反。</p>
+<p>这个次序要和之后出现虚拟继承后构造函数的次序进行结合，例题可看课本P173。</p>
+<h1 id="基类与继承类的使用"><a href="#基类与继承类的使用" class="headerlink" title="基类与继承类的使用"></a>基类与继承类的使用</h1><p>根据继承的定义，我们可知任何一个派生类对象的内部都包含一个基类子对象，所以可以通过<strong>截取</strong>的方法从派生类对象中<strong>复制</strong>其基类子对象并将之赋值给基类对象。</p>
+<h2 id="子类对象对基类对象的赋值和初始化"><a href="#子类对象对基类对象的赋值和初始化" class="headerlink" title="子类对象对基类对象的赋值和初始化"></a>子类对象对基类对象的赋值和初始化</h2><p>有两种情况：赋值和初始化。如下：</p>
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Derived d1;</span><br><span class="line">Base b1;</span><br><span class="line">b1=d1;</span><br></pre></td></tr></table></figure>
+<p>在把子类对象<strong>赋值</strong>给基类对象时调用基类的<strong>赋值运算符函数</strong>。</p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Derived d1;</span><br><span class="line">Base b1(d1);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(Base b)</span></span>;</span><br><span class="line"><span class="comment">//main中</span></span><br><span class="line">Derived d1;</span><br><span class="line">func(d1);</span><br></pre></td></tr></table></figure>
+<p>以上两种情况，在用子类对象<strong>初始化</strong>基类对象时，会调用基类的<strong>拷贝构造函数</strong>。</p>
+<h2 id="子类指针和基类指针"><a href="#子类指针和基类指针" class="headerlink" title="子类指针和基类指针"></a>子类指针和基类指针</h2><p>在这里，在逻辑上引用与指针等价。</p>
+<h3 id="基类指针可以指向子类对象"><a href="#基类指针可以指向子类对象" class="headerlink" title="基类指针可以指向子类对象"></a>基类指针可以指向子类对象</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Derived d1;</span><br><span class="line">Base* pb=&amp;d1;</span><br></pre></td></tr></table></figure>
+<h3 id="子类指针不能指向基类对象"><a href="#子类指针不能指向基类对象" class="headerlink" title="子类指针不能指向基类对象"></a>子类指针不能指向基类对象</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Base b1;</span><br><span class="line">Derived* pd=&amp;b1;	<span class="comment">//错误的</span></span><br></pre></td></tr></table></figure>
+<p>若想实现类似子类指针指向基类对象的功能，需要用强制类型转换，但也只能在逻辑上正确时才能使用，否则后续使用中绝对会出错的。如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Derived d1;</span><br><span class="line">Base* pb=&amp;d1;</span><br><span class="line">Derived* pd=<span class="keyword">static_cast</span>&lt;Derived*&gt;(pb);	<span class="comment">//这里是个模板函数</span></span><br></pre></td></tr></table></figure>
+<h1 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>多继承即一个类继承了多个类。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>:</span><span class="keyword">public</span> A, B,<span class="keyword">protected</span> C&#123;</span><br><span class="line">  ...  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="成员二义性"><a href="#成员二义性" class="headerlink" title="成员二义性"></a>成员二义性</h2><p>多继承情况下，当多个（1个以上）基类拥有同名成员时，会产生成员二义性。</p>
+<p>可以通过<strong>类域限定符</strong>解决该问题，明确指出成员所属的基类。</p>
+<h1 id="虚拟继承"><a href="#虚拟继承" class="headerlink" title="虚拟继承"></a>虚拟继承</h1><h2 id="虚拟继承引入的原因"><a href="#虚拟继承引入的原因" class="headerlink" title="虚拟继承引入的原因"></a>虚拟继承引入的原因</h2><p>解决多继承引出的二义性问题。</p>
+<p>如<code>Student</code>、<code>Employee</code>继承<code>Person</code>，<code>StuEmployee</code>继承了<code>Student</code>、<code>Employee</code>，这样<code>StuEmployee</code>的对象中就有两份不同的<code>Person</code>的数据成员。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>:</span> <span class="keyword">public</span> Person&#123;...&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span>:</span> <span class="keyword">public</span> Person&#123;...&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StuEmployee</span>:</span> <span class="keyword">public</span> Student,<span class="keyword">public</span> Employee,&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>:</span><span class="keyword">virtual</span> <span class="keyword">public</span> Person&#123;...&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span>:</span><span class="keyword">virtual</span> <span class="keyword">public</span> Person&#123;...&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StuEmployee</span>:</span> <span class="keyword">public</span> Student,<span class="keyword">public</span> Employee,&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="构造函数调用次序"><a href="#构造函数调用次序" class="headerlink" title="构造函数调用次序"></a>构造函数调用次序</h2><ol>
+<li><p>先调用虚基类的构造函数，再调用非虚基类的构造函数。</p>
+</li>
+<li><p>同一继承层次中有多个虚基类时，就按照它们声明次序进行构造。</p>
+<p> 若某个虚基类的构造函数已被调用，就不再调用。</p>
+</li>
+<li><p>若虚基类有非虚基类派生而来，则先调用该虚基类的构造函数，再调用该非虚基类的构造函数。</p>
+</li>
+</ol>
+<h2 id="成员函数优先级"><a href="#成员函数优先级" class="headerlink" title="成员函数优先级"></a>成员函数优先级</h2><p>继承层次中越靠下优先级越高。</p>
+<p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
+<p>欢迎讨论和交流!</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          
+            <a href="/tags/面向对象/" rel="tag"># 面向对象</a>
+          
+            <a href="/tags/继承/" rel="tag"># 继承</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/29/浙江理工大学数学建模校赛B题记录/" rel="next" title="浙江理工大学2019数学建模校赛B题记录">
+                <i class="fa fa-chevron-left"></i> 浙江理工大学2019数学建模校赛B题记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -395,6 +548,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -415,8 +575,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -492,6 +661,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#构造函数与析构函数"><span class="nav-number">1.</span> <span class="nav-text">构造函数与析构函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#子类继承基类的构造函数"><span class="nav-number">1.1.</span> <span class="nav-text">子类继承基类的构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造函数和析构函数的调用次序"><span class="nav-number">1.2.</span> <span class="nav-text">构造函数和析构函数的调用次序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基类与继承类的使用"><span class="nav-number">2.</span> <span class="nav-text">基类与继承类的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#子类对象对基类对象的赋值和初始化"><span class="nav-number">2.1.</span> <span class="nav-text">子类对象对基类对象的赋值和初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值"><span class="nav-number">2.1.1.</span> <span class="nav-text">赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">2.1.2.</span> <span class="nav-text">初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子类指针和基类指针"><span class="nav-number">2.2.</span> <span class="nav-text">子类指针和基类指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基类指针可以指向子类对象"><span class="nav-number">2.2.1.</span> <span class="nav-text">基类指针可以指向子类对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子类指针不能指向基类对象"><span class="nav-number">2.2.2.</span> <span class="nav-text">子类指针不能指向基类对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多继承"><span class="nav-number">3.</span> <span class="nav-text">多继承</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成员二义性"><span class="nav-number">3.2.</span> <span class="nav-text">成员二义性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟继承"><span class="nav-number">4.</span> <span class="nav-text">虚拟继承</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟继承引入的原因"><span class="nav-number">4.1.</span> <span class="nav-text">虚拟继承引入的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语法"><span class="nav-number">4.2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造函数调用次序"><span class="nav-number">4.3.</span> <span class="nav-text">构造函数调用次序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成员函数优先级"><span class="nav-number">4.4.</span> <span class="nav-text">成员函数优先级</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -663,6 +848,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
