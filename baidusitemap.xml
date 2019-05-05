@@ -4,6 +4,40 @@
 
     
   <url>
+    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B9%9D%EF%BC%89%E4%B9%8BReact%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0DOM/</loc>
+    <lastmod>2019-05-05T03:44:58.295Z</lastmod>
+    <data>
+        <display>
+        <title>React学习（九）之React如何更新DOM</title>
+        <pubTime>2019-01-19T06:41:47.000Z</pubTime>
+        
+        <tag>React</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2018/08/16/FirstWriting/</loc>
+    <lastmod>2019-05-05T03:18:00.187Z</lastmod>
+    <data>
+        <display>
+        <title>FirstWriting</title>
+        <pubTime>2018-08-16T07:53:07.000Z</pubTime>
+        
+        <tag>markdown</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chouxianyu.github.io/2019/05/05/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80-%E5%AE%9E%E9%AA%8C%EF%BC%88%E4%BA%8C%EF%BC%89/</loc>
     <lastmod>2019-05-05T03:02:31.110Z</lastmod>
     <data>
@@ -811,23 +845,6 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B9%9D%EF%BC%89%E4%B9%8BReact%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0DOM/</loc>
-    <lastmod>2019-03-22T17:31:17.748Z</lastmod>
-    <data>
-        <display>
-        <title>React学习（九）之React如何更新DOM</title>
-        <pubTime>2019-01-19T06:41:46.000Z</pubTime>
-        
-        <tag>React</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%BB%84%E4%BB%B6/</loc>
     <lastmod>2019-03-22T17:31:10.155Z</lastmod>
     <data>
@@ -910,23 +927,6 @@
         <pubTime>2018-08-10T12:24:19.691Z</pubTime>
         
         <tag>hexo</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2018/08/16/FirstWriting/</loc>
-    <lastmod>2019-03-22T17:29:01.158Z</lastmod>
-    <data>
-        <display>
-        <title>FirstWriting</title>
-        <pubTime>2018-08-16T07:53:07.000Z</pubTime>
-        
-        <tag>markdown</tag>
          
          
            

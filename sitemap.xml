@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B9%9D%EF%BC%89%E4%B9%8BReact%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0DOM/</loc>
+    
+    <lastmod>2019-05-05T03:44:58.295Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chouxianyu.github.io/2018/08/16/FirstWriting/</loc>
+    
+    <lastmod>2019-05-05T03:18:00.187Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chouxianyu.github.io/2019/05/05/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80-%E5%AE%9E%E9%AA%8C%EF%BC%88%E4%BA%8C%EF%BC%89/</loc>
     
     <lastmod>2019-05-05T03:02:31.110Z</lastmod>
@@ -303,13 +317,6 @@
   </url>
   
   <url>
-    <loc>https://chouxianyu.github.io/2019/01/19/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B9%9D%EF%BC%89%E4%B9%8BReact%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0DOM/</loc>
-    
-    <lastmod>2019-03-22T17:31:17.748Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://chouxianyu.github.io/2019/01/18/React%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89%E4%B9%8B%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%BB%84%E4%BB%B6/</loc>
     
     <lastmod>2019-03-22T17:31:10.155Z</lastmod>
@@ -341,13 +348,6 @@
     <loc>https://chouxianyu.github.io/2018/08/10/hello-world/</loc>
     
     <lastmod>2019-03-22T17:29:08.274Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chouxianyu.github.io/2018/08/16/FirstWriting/</loc>
-    
-    <lastmod>2019-03-22T17:29:01.158Z</lastmod>
     
   </url>
   
