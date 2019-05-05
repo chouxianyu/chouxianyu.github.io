@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="计算机组成原理," />
+  <meta name="keywords" content="汇编," />
 
 
 
@@ -81,18 +81,21 @@
 
 
 
-<meta name="description" content="之前看哈工大计组视频时的笔记。 计算机系统概论现代计算机由哪两部分组成？硬件计算机的实体，如主机、外设等。 软件由具有各类特殊功能的信息（程序）组成。 硬件通过每条指令的有序执行发挥作用。 系统软件管理整个计算机系统。 语言处理程序编译环境 操作系统管理软硬件资源、提供人机交互等。 服务性程序比如数学库。 数据库管理系统网络软件应用软件按照某个任务的需要编制成的各种程序。 硬件和软件逻辑关系硬件进">
-<meta name="keywords" content="计算机组成原理">
+<meta name="description" content="实验目的 掌握程序设计中的3种基本结构(顺序结构、选择程序、循环程序)。 熟练使用汇编语言的指令：数据传送类指令、数据运算类指令、逻辑判断类指令与转移指令、循环指令等。 初步了解系统功能调用的使用方法，尝试使用01H号功能调用进行字符输入的方法及使用02H号功能调用进行字符输出（显示）的方法。  程序说明 计算1+2+3+…+10，将结果显示在屏幕上。 利用01H号功能调用输入10个一位数字，并将">
+<meta name="keywords" content="汇编">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算机系统概论">
-<meta property="og:url" content="https://chouxianyu.github.io/2019/05/02/计算机系统概论/index.html">
+<meta property="og:title" content="汇编语言-实验（二）">
+<meta property="og:url" content="https://chouxianyu.github.io/2019/05/05/汇编语言-实验（二）/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="之前看哈工大计组视频时的笔记。 计算机系统概论现代计算机由哪两部分组成？硬件计算机的实体，如主机、外设等。 软件由具有各类特殊功能的信息（程序）组成。 硬件通过每条指令的有序执行发挥作用。 系统软件管理整个计算机系统。 语言处理程序编译环境 操作系统管理软硬件资源、提供人机交互等。 服务性程序比如数学库。 数据库管理系统网络软件应用软件按照某个任务的需要编制成的各种程序。 硬件和软件逻辑关系硬件进">
+<meta property="og:description" content="实验目的 掌握程序设计中的3种基本结构(顺序结构、选择程序、循环程序)。 熟练使用汇编语言的指令：数据传送类指令、数据运算类指令、逻辑判断类指令与转移指令、循环指令等。 初步了解系统功能调用的使用方法，尝试使用01H号功能调用进行字符输入的方法及使用02H号功能调用进行字符输出（显示）的方法。  程序说明 计算1+2+3+…+10，将结果显示在屏幕上。 利用01H号功能调用输入10个一位数字，并将">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-02T08:26:18.070Z">
+<meta property="og:image" content="https://i.loli.net/2019/05/05/5cce505e3f5cb.png">
+<meta property="og:image" content="https://i.loli.net/2019/05/05/5cce505e3a87c.png">
+<meta property="og:updated_time" content="2019-05-05T03:02:31.110Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="计算机系统概论">
-<meta name="twitter:description" content="之前看哈工大计组视频时的笔记。 计算机系统概论现代计算机由哪两部分组成？硬件计算机的实体，如主机、外设等。 软件由具有各类特殊功能的信息（程序）组成。 硬件通过每条指令的有序执行发挥作用。 系统软件管理整个计算机系统。 语言处理程序编译环境 操作系统管理软硬件资源、提供人机交互等。 服务性程序比如数学库。 数据库管理系统网络软件应用软件按照某个任务的需要编制成的各种程序。 硬件和软件逻辑关系硬件进">
+<meta name="twitter:title" content="汇编语言-实验（二）">
+<meta name="twitter:description" content="实验目的 掌握程序设计中的3种基本结构(顺序结构、选择程序、循环程序)。 熟练使用汇编语言的指令：数据传送类指令、数据运算类指令、逻辑判断类指令与转移指令、循环指令等。 初步了解系统功能调用的使用方法，尝试使用01H号功能调用进行字符输入的方法及使用02H号功能调用进行字符输出（显示）的方法。  程序说明 计算1+2+3+…+10，将结果显示在屏幕上。 利用01H号功能调用输入10个一位数字，并将">
+<meta name="twitter:image" content="https://i.loli.net/2019/05/05/5cce505e3f5cb.png">
 
 
 
@@ -122,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="https://chouxianyu.github.io/2019/05/02/计算机系统概论/"/>
+  <link rel="canonical" href="https://chouxianyu.github.io/2019/05/05/汇编语言-实验（二）/"/>
 
 
 
 
 
-  <title>计算机系统概论 | 臭咸鱼的缺氧瓶</title>
+  <title>汇编语言-实验（二） | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -299,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/05/02/计算机系统概论/">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/05/05/汇编语言-实验（二）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="臭咸鱼">
@@ -316,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">计算机系统概论</h1>
+          <h1 class="post-title" itemprop="name headline">汇编语言-实验（二）</h1>
         
 
         <div class="post-meta">
@@ -328,8 +331,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-02T16:24:39+08:00">
-                2019-05-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-05T10:57:58+08:00">
+                2019-05-05
               </time>
             
 
@@ -347,8 +350,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/02/计算机系统概论/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/02/计算机系统概论/" itemprop="commentCount"></span>
+                <a href="/2019/05/05/汇编语言-实验（二）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/05/汇编语言-实验（二）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -356,7 +359,7 @@
 
           
           
-             <span id="/2019/05/02/计算机系统概论/" class="leancloud_visitors" data-flag-title="计算机系统概论">
+             <span id="/2019/05/05/汇编语言-实验（二）/" class="leancloud_visitors" data-flag-title="汇编语言-实验（二）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -381,7 +384,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,150 字
+                  2,136 字
                 </span>
               
 
@@ -397,7 +400,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  4 分
+                  9 分
                 </span>
               
             </div>
@@ -418,60 +421,41 @@
       
 
       
-        <p>之前看哈工大计组视频时的笔记。</p>
-<h1 id="计算机系统概论"><a href="#计算机系统概论" class="headerlink" title="计算机系统概论"></a>计算机系统概论</h1><h2 id="现代计算机由哪两部分组成？"><a href="#现代计算机由哪两部分组成？" class="headerlink" title="现代计算机由哪两部分组成？"></a>现代计算机由哪两部分组成？</h2><h3 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h3><p>计算机的实体，如主机、外设等。</p>
-<h3 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h3><p>由具有各类特殊功能的信息（程序）组成。</p>
-<p>硬件通过每条指令的有序执行发挥作用。</p>
-<h4 id="系统软件"><a href="#系统软件" class="headerlink" title="系统软件"></a>系统软件</h4><p>管理整个计算机系统。</p>
-<h4 id="语言处理程序"><a href="#语言处理程序" class="headerlink" title="语言处理程序"></a>语言处理程序</h4><p>编译环境</p>
-<h4 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h4><p>管理软硬件资源、提供人机交互等。</p>
-<h4 id="服务性程序"><a href="#服务性程序" class="headerlink" title="服务性程序"></a>服务性程序</h4><p>比如数学库。</p>
-<h4 id="数据库管理系统"><a href="#数据库管理系统" class="headerlink" title="数据库管理系统"></a>数据库管理系统</h4><h4 id="网络软件"><a href="#网络软件" class="headerlink" title="网络软件"></a>网络软件</h4><h4 id="应用软件"><a href="#应用软件" class="headerlink" title="应用软件"></a>应用软件</h4><p>按照某个任务的需要编制成的各种程序。</p>
-<h3 id="硬件和软件逻辑关系"><a href="#硬件和软件逻辑关系" class="headerlink" title="硬件和软件逻辑关系"></a>硬件和软件逻辑关系</h3><p>硬件进行了相对的封装，为软件提供接口，比如指令集。</p>
-<p>应用软件使用系统软件提供的接口，系统软件使用硬件提供的接口。</p>
-<h2 id="计算机系统的层次结构"><a href="#计算机系统的层次结构" class="headerlink" title="计算机系统的层次结构"></a>计算机系统的层次结构</h2><p><a href="https://www.bilibili.com/video/av15123338/?p=3" target="_blank" rel="noopener">https://www.bilibili.com/video/av15123338/?p=3</a> 11分55秒</p>
-<p>物理抽象</p>
-<p>程序员角度抽象</p>
-<ol>
-<li>机器语言-实际机器M1-</li>
-<li>操作系统-虚拟机器M2-</li>
-<li>汇编语言-虚拟机器M3-</li>
-<li>高级语言-虚拟机器M4-用编译程序翻译成汇编语言程序</li>
-<li><p>微指令系统-微程序机器M0-</p>
-<p>一条机器语言指令也是很复杂的，将机器指令进行细化。</p>
-</li>
+        <h1 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h1><ol>
+<li>掌握程序设计中的3种基本结构(顺序结构、选择程序、循环程序)。</li>
+<li>熟练使用汇编语言的指令：数据传送类指令、数据运算类指令、逻辑判断类指令与转移指令、循环指令等。</li>
+<li>初步了解系统功能调用的使用方法，尝试使用<code>01H</code>号功能调用进行字符输入的方法及使用<code>02H</code>号功能调用进行字符输出（显示）的方法。</li>
 </ol>
-<h2 id="计算机组成和计算机系统结构的区别"><a href="#计算机组成和计算机系统结构的区别" class="headerlink" title="计算机组成和计算机系统结构的区别"></a>计算机组成和计算机系统结构的区别</h2><p>从研究内容上来说</p>
-<h3 id="计算机系统结构"><a href="#计算机系统结构" class="headerlink" title="计算机系统结构"></a>计算机系统结构</h3><p>计算机系统结构定义了计算机系统软硬件的交界面，定义了哪些功能由软件来实现吗，哪些功能由硬件来实现，提供上层软件进行编写的时候和硬件进行交互的接口。</p>
-<p>计算机系统结构指程序员（机器语言程序员）所见到的计算机系统的属性、概念性结构和功能特性。</p>
-<p>计算机系统属性：编写成能在计算机硬件系统上正确执行的程序他所必须了解的计算机系统的属性，比如指令集、寄存器文件的组织等等。</p>
-<h3 id="计算机组成"><a href="#计算机组成" class="headerlink" title="计算机组成"></a>计算机组成</h3><p>计算机组成设计人员的任务是实现计算机系统结构所体现的属性，即具体指令的实现。</p>
-<h1 id="计算机的基本组成"><a href="#计算机的基本组成" class="headerlink" title="计算机的基本组成"></a>计算机的基本组成</h1><h2 id="冯诺依曼计算机的特点"><a href="#冯诺依曼计算机的特点" class="headerlink" title="冯诺依曼计算机的特点"></a>冯诺依曼计算机的特点</h2><p>冯诺依曼计算机是存储程序型的计算机。</p>
-<p>问题是运算器是瓶颈和各部分的组成不具有层次化特征。</p>
-<h3 id="由五大部分组成"><a href="#由五大部分组成" class="headerlink" title="由五大部分组成"></a>由五大部分组成</h3><h4 id="运算器"><a href="#运算器" class="headerlink" title="运算器"></a>运算器</h4><p>算数运算和逻辑运算。</p>
-<p>计算机的功能主要是运算，比如加减乘除。</p>
-<h4 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h4><p>指挥程序的运行。</p>
-<p>控制器控制做什么运算。</p>
-<h4 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h4><p>存放数据和程序。</p>
-<p>指令和数据放在存储器中。（存储程序型的计算机）</p>
-<h4 id="输入设备"><a href="#输入设备" class="headerlink" title="输入设备"></a>输入设备</h4><p>将信息转换成机器能识别的形式。</p>
-<p>程序和数据输入到计算机中。</p>
-<h4 id="输出设备"><a href="#输出设备" class="headerlink" title="输出设备"></a>输出设备</h4><p>将结果转换成人们熟悉的形式。</p>
-<p>计算结果的输出。</p>
-<h3 id="指令和数据以同等地位存于存储器，可按地址访问"><a href="#指令和数据以同等地位存于存储器，可按地址访问" class="headerlink" title="指令和数据以同等地位存于存储器，可按地址访问"></a>指令和数据以同等地位存于存储器，可按地址访问</h3><h3 id="指令和数据用二进制表示"><a href="#指令和数据用二进制表示" class="headerlink" title="指令和数据用二进制表示"></a>指令和数据用二进制表示</h3><h3 id="指令由操作码和地址码组成"><a href="#指令由操作码和地址码组成" class="headerlink" title="指令由操作码和地址码组成"></a>指令由操作码和地址码组成</h3><p>操作码：做什么操作，指出寻址方式、指出操作数类型等等</p>
-<p>地址码：操作数在哪里</p>
-<h3 id="存储程序"><a href="#存储程序" class="headerlink" title="存储程序"></a>存储程序</h3><p>这是核心特征。程序存储在存储器中，具有存储程序的计算机都称为冯诺依曼计算机。</p>
-<h3 id="以运算器为中心"><a href="#以运算器为中心" class="headerlink" title="以运算器为中心"></a>以运算器为中心</h3><p>运算器非常地繁忙，成为计算机系统的瓶颈。</p>
-<h2 id="改进：以存储器为中心"><a href="#改进：以存储器为中心" class="headerlink" title="改进：以存储器为中心"></a>改进：以存储器为中心</h2><h2 id="现代计算机硬件框图"><a href="#现代计算机硬件框图" class="headerlink" title="现代计算机硬件框图"></a>现代计算机硬件框图</h2><h2 id="计算机的解题过程"><a href="#计算机的解题过程" class="headerlink" title="计算机的解题过程"></a>计算机的解题过程</h2><h3 id="存储器的基本组成"><a href="#存储器的基本组成" class="headerlink" title="存储器的基本组成"></a>存储器的基本组成</h3><h4 id="存储体"><a href="#存储体" class="headerlink" title="存储体"></a>存储体</h4><p>存储体由若干个存储单元组成。</p>
-<h5 id="存储单元"><a href="#存储单元" class="headerlink" title="存储单元"></a>存储单元</h5><p>存储单元由多个存储元件（0/1）组成。 </p>
-<p>指令存储在存储单元中。</p>
-<p>每个存储单元有个地址，存储单元按地址寻访。</p>
-<p><strong>存储字</strong>：一个存储单元中二进制代码的组合。</p>
-<h4 id="MAR"><a href="#MAR" class="headerlink" title="MAR"></a>MAR</h4><p>存储器地址寄存器：反映存储单元的个数，保存存储单元的地址（编号）。</p>
-<h4 id="MDR"><a href="#MDR" class="headerlink" title="MDR"></a>MDR</h4><p>存储器数据寄存器：反映存储字长。</p>
-<h5 id="存储字长"><a href="#存储字长" class="headerlink" title="存储字长"></a>存储字长</h5><p>存储单元中二进制代码的位数。</p>
-<h3 id="运算器的基本组成及操作过程"><a href="#运算器的基本组成及操作过程" class="headerlink" title="运算器的基本组成及操作过程"></a>运算器的基本组成及操作过程</h3><p>视频P8。</p>
-<h1 id="计算机硬件的主要技术指标"><a href="#计算机硬件的主要技术指标" class="headerlink" title="计算机硬件的主要技术指标"></a>计算机硬件的主要技术指标</h1><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<h1 id="程序说明"><a href="#程序说明" class="headerlink" title="程序说明"></a>程序说明</h1><ol>
+<li>计算1+2+3+…+10，将结果显示在屏幕上。</li>
+<li>利用<code>01H</code>号功能调用输入10个一位数字，并将其由ASCII码转换为二进制数，依此保存到变量<code>BUF</code>的10个字节中，变量<code>BUF</code>的形式为<code>BUF  DB  10  DUP（？）</code>。编程求出这10个数中的最大数和最小数，将最大数存入<code>MAX</code>单元、最小数存入<code>MIN</code>单元，并将其在屏幕上显示出来。</li>
+</ol>
+<h1 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h1><h2 id="题目一"><a href="#题目一" class="headerlink" title="题目一"></a>题目一</h2><p>如下图所示，首先通过循环求出1+2+…+10，然后调用子程序<code>display</code>显示<code>sum</code>。</p>
+<p><a href="https://i.loli.net/2019/05/05/5cce505e3f5cb.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/05/05/5cce505e3f5cb.png" alt="sum.png"></a></p>
+<h2 id="题目二"><a href="#题目二" class="headerlink" title="题目二"></a>题目二</h2><p>如下图所示，首先调用子程序<code>getinput</code>获取用户输入，同时存储进数组，并更新<code>max</code>和<code>min</code>，最后调用两次子程序<code>display</code>显示<code>max</code>和<code>min</code>。</p>
+<p><a href="https://i.loli.net/2019/05/05/5cce505e3a87c.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/05/05/5cce505e3a87c.png" alt="maxmin.png"></a></p>
+<h1 id="程序代码"><a href="#程序代码" class="headerlink" title="程序代码"></a>程序代码</h1><h2 id="题目一-1"><a href="#题目一-1" class="headerlink" title="题目一"></a>题目一</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">;*********************************************************************</span><br><span class="line"></span><br><span class="line">data segment				; 定义数据段</span><br><span class="line">	sum dw 0				; 存储和</span><br><span class="line">data ends</span><br><span class="line"></span><br><span class="line">;*********************************************************************</span><br><span class="line"></span><br><span class="line">code segment				; 定义代码段</span><br><span class="line">	assume cs:code,ds:data</span><br><span class="line">	</span><br><span class="line">;---------------------------------------------------------------------	</span><br><span class="line"></span><br><span class="line">main proc far				; 程序的主部分</span><br><span class="line">start:</span><br><span class="line">; 为返回DOS做准备</span><br><span class="line">	push ds					; ds压栈</span><br><span class="line">	xor ax,ax				; (ax) &lt;- data</span><br><span class="line">	push ax					; ax压栈</span><br><span class="line"></span><br><span class="line">; ds设为data</span><br><span class="line">	mov ax,data				; (ax) &lt;- data</span><br><span class="line">	mov ds,ax				; (ds) &lt;- (ax)</span><br><span class="line">	</span><br><span class="line">	mov cx,10				; 从10加到1</span><br><span class="line">	</span><br><span class="line">next:</span><br><span class="line">	add sum,cx;				; sum &lt;- sum+(cx)</span><br><span class="line">	loop next				; (cx) &lt;- (cx)-1</span><br><span class="line"></span><br><span class="line">	mov ax,sum				; (ax) &lt;- sum</span><br><span class="line">	call display			; 调用子程序以十进制显示(ax)</span><br><span class="line"></span><br><span class="line">; 返回DOS环境</span><br><span class="line">	ret						; 返回DOS环境</span><br><span class="line">main  endp</span><br><span class="line"></span><br><span class="line">;---------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">display proc near 		; 将(ax)以十进制形式输出</span><br><span class="line"></span><br><span class="line">; 保存寄存器</span><br><span class="line">	push ax</span><br><span class="line">	push bx</span><br><span class="line">	push cx</span><br><span class="line">	push dx</span><br><span class="line">	push si</span><br><span class="line">	</span><br><span class="line">; 初始化</span><br><span class="line">	mov si,0	; 数字的位数</span><br><span class="line">	mov bl,10	; 数字之后除以bx,即10</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">; 数字每位倒序压栈</span><br><span class="line">prepare:</span><br><span class="line">	div bl		; 被除数默认为(ax)，除以10。</span><br><span class="line">	add ah,30h	; (ah)为默认的余数寄存器，转换为ASCII码，字符0的ASCII码为48，即30h</span><br><span class="line">	push ax		; 存储最后一位</span><br><span class="line">	and ax,00ffh; (ah)&lt;-0	</span><br><span class="line">	mov cx,ax	; al为默认的商寄存器。ax=ah+al。当商为0时则跳出循环</span><br><span class="line">	inc si		; 更新数字位数</span><br><span class="line">	inc cx		; 如果为0，加一之后为1。loop判断前会将cx减一。</span><br><span class="line">	loop prepare; </span><br><span class="line"></span><br><span class="line">; 弹栈，并用十进制显示</span><br><span class="line">	mov cx,si	; si为数字位数，即循环运行次数</span><br><span class="line">show:</span><br><span class="line">	pop ax		; 获取要显示的数据</span><br><span class="line">	mov dl,ah	; 要显示的数据放在dl里</span><br><span class="line">	mov ah,2	; 2号功能</span><br><span class="line">	int 21h		; 调用DOS</span><br><span class="line">	loop show</span><br><span class="line"></span><br><span class="line">; 恢复寄存器</span><br><span class="line">	pop si</span><br><span class="line">	pop dx</span><br><span class="line">	pop cx</span><br><span class="line">	pop bx</span><br><span class="line">	pop ax</span><br><span class="line">	</span><br><span class="line">; 返回</span><br><span class="line">	ret</span><br><span class="line">	</span><br><span class="line">display endp 			; display子程序结束</span><br><span class="line"></span><br><span class="line">code  ends</span><br><span class="line">;*********************************************************************</span><br><span class="line">	end start</span><br></pre></td></tr></table></figure>
+<h2 id="题目二-1"><a href="#题目二-1" class="headerlink" title="题目二"></a>题目二</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line">;*********************************************************************</span><br><span class="line"></span><br><span class="line">data segment				; 定义数据段</span><br><span class="line">	buf db 10 dup(-1)		; 存储10个输进来的数字</span><br><span class="line">	max db 0				; 最大值，输入的数字一定大于等于0</span><br><span class="line">	min db 9				; 最小值，输入的数字一定小于等于9</span><br><span class="line">data ends</span><br><span class="line"></span><br><span class="line">;*********************************************************************</span><br><span class="line"></span><br><span class="line">code segment				; 定义代码段</span><br><span class="line">	assume cs:code,ds:data</span><br><span class="line"></span><br><span class="line">;---------------------------------------------------------------------	</span><br><span class="line"></span><br><span class="line">main proc far				; 程序的主部分</span><br><span class="line">start:</span><br><span class="line">; 为返回DOS做准备</span><br><span class="line">	push ds					; ds压栈</span><br><span class="line">	xor ax,ax				; (ax) &lt;- data</span><br><span class="line">	push ax					; ax压栈</span><br><span class="line"></span><br><span class="line">; ds设为data</span><br><span class="line">	mov ax,data				; (ax) &lt;- data</span><br><span class="line">	mov ds,ax				; (ds) &lt;- (ax)</span><br><span class="line">	</span><br><span class="line">; 获取用户输入并进行存储，记录最大值最小值</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	call getinput			; 数字存入al，显示一下</span><br><span class="line"></span><br><span class="line">; 显示最大值</span><br><span class="line">	mov al,max				; 显示最大值</span><br><span class="line">	and ax,00ffh			; (ah)&lt;-0 </span><br><span class="line">	call display			; 调用子程序以十进制显示(ax)</span><br><span class="line"></span><br><span class="line">; 显示最小值</span><br><span class="line">	mov al,min				; 显示最小值</span><br><span class="line">	and ax,00ffh			; (ah)&lt;-0</span><br><span class="line">	call display			; 调用子程序</span><br><span class="line">	</span><br><span class="line">; 返回DOS环境</span><br><span class="line">	ret						; 返回DOS环境</span><br><span class="line">main  endp</span><br><span class="line"></span><br><span class="line">;---------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">getinput proc near			; 获取用户输入并进行存储，记录最大值最小值</span><br><span class="line">; 保存寄存器</span><br><span class="line">	push ax</span><br><span class="line">	push bx</span><br><span class="line">	push cx</span><br><span class="line"></span><br><span class="line">; 初始化</span><br><span class="line">	mov cx,10				; 10个输入</span><br><span class="line">	lea bx,buf				; 存储数组地址，用来遍历数组</span><br><span class="line"></span><br><span class="line">; 获取用户输入</span><br><span class="line">savetoarray:</span><br><span class="line">	mov ah,1				; 1号功能，获取用户输入，保存至al</span><br><span class="line">	int 21h					; 调用DOS</span><br><span class="line"></span><br><span class="line">; 存入数组</span><br><span class="line">	sub al,30h				; (al)减去30h由ASCII码转为十进制数，在计算机内自动用二进制表示</span><br><span class="line">	mov [bx],al				; 存入数组，相对寻址方式</span><br><span class="line">	inc bx					; 数组地址加一</span><br><span class="line">	</span><br><span class="line">; 判断是否更新最大值</span><br><span class="line">updatemax:</span><br><span class="line">	cmp al,max				; (ax)&lt;-max</span><br><span class="line">	jl updatemin			; (ax)&lt;max，则不用更新</span><br><span class="line">	mov max,al				; 更新最大值</span><br><span class="line">	</span><br><span class="line">; 判断是否更新最小值</span><br><span class="line">updatemin:</span><br><span class="line">	cmp al,min				; (ax)&lt;-min</span><br><span class="line">	jg loopp				; (ax)&gt;min，则不用更新</span><br><span class="line">	mov min,al				; 更新最小值</span><br><span class="line">	</span><br><span class="line">; 循环savetoarray</span><br><span class="line">loopp:</span><br><span class="line">	loop savetoarray		; cx减一，循环至cx为0</span><br><span class="line">	</span><br><span class="line">; 恢复寄存器</span><br><span class="line">	pop cx</span><br><span class="line">	pop bx</span><br><span class="line">	pop ax</span><br><span class="line">	</span><br><span class="line">; 返回</span><br><span class="line">	ret</span><br><span class="line">	</span><br><span class="line">getinput endp 			; getinput子程序结束</span><br><span class="line"></span><br><span class="line">;---------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">display proc near 		; 将(ax)以十进制形式输出</span><br><span class="line"></span><br><span class="line">; 保存寄存器</span><br><span class="line">	push ax</span><br><span class="line">	push bx</span><br><span class="line">	push cx</span><br><span class="line">	push dx</span><br><span class="line">	push si</span><br><span class="line">	</span><br><span class="line">; 初始化</span><br><span class="line">	mov si,0	; 数字的位数</span><br><span class="line">	mov bl,10	; 数字之后除以bx,即10</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">; 数字每位倒序压栈</span><br><span class="line">prepare:</span><br><span class="line">	div bl		; 被除数默认为(ax)，除以10。</span><br><span class="line">	add ah,30h	; (ah)为默认的余数寄存器，转换为ASCII码，字符0的ASCII码为48，即30h</span><br><span class="line">	push ax		; 存储最后一位</span><br><span class="line">	and ax,00ffh; (ah)&lt;-0	</span><br><span class="line">	mov cx,ax	; al为默认的商寄存器。ax=ah+al。当商为0时则跳出循环</span><br><span class="line">	inc si		; 更新数字位数</span><br><span class="line">	inc cx		; 如果为0，加一之后为1。loop判断前会将cx减一。</span><br><span class="line">	loop prepare; </span><br><span class="line"></span><br><span class="line">; 弹栈，并用十进制显示</span><br><span class="line">	mov cx,si	; si为数字位数，即循环运行次数</span><br><span class="line">show:</span><br><span class="line">	pop ax		; 获取要显示的数据</span><br><span class="line">	mov dl,ah	; 要显示的数据放在dl里</span><br><span class="line">	mov ah,2	; 2号功能</span><br><span class="line">	int 21h		; 调用DOS</span><br><span class="line">	loop show</span><br><span class="line"></span><br><span class="line">; 恢复寄存器</span><br><span class="line">	pop si</span><br><span class="line">	pop dx</span><br><span class="line">	pop cx</span><br><span class="line">	pop bx</span><br><span class="line">	pop ax</span><br><span class="line">	</span><br><span class="line">; 返回</span><br><span class="line">	ret</span><br><span class="line">	</span><br><span class="line">display endp 			; display子程序结束</span><br><span class="line">code  ends</span><br><span class="line">;*********************************************************************</span><br><span class="line">	end start</span><br></pre></td></tr></table></figure>
+<h1 id="问题回答"><a href="#问题回答" class="headerlink" title="问题回答"></a>问题回答</h1><h2 id="设计的程序包含了几个段"><a href="#设计的程序包含了几个段" class="headerlink" title="设计的程序包含了几个段"></a>设计的程序包含了几个段</h2><p>题目一和题目二的程序各设计了两个段：数据段和代码段。</p>
+<h2 id="你的代码经过编译和链接之后，总共占用多少个字节"><a href="#你的代码经过编译和链接之后，总共占用多少个字节" class="headerlink" title="你的代码经过编译和链接之后，总共占用多少个字节"></a>你的代码经过编译和链接之后，总共占用多少个字节</h2><p>题目一和题目二程序编译链接后大小均为1KB。</p>
+<h2 id="调用DEBUG进行反汇编，查看程序的第一条指令的地址码是多少？最后一条指令的地址码是多少？"><a href="#调用DEBUG进行反汇编，查看程序的第一条指令的地址码是多少？最后一条指令的地址码是多少？" class="headerlink" title="调用DEBUG进行反汇编，查看程序的第一条指令的地址码是多少？最后一条指令的地址码是多少？"></a>调用DEBUG进行反汇编，查看程序的第一条指令的地址码是多少？最后一条指令的地址码是多少？</h2><ol>
+<li>题目一第一条指令的地址码为<code>076B:0000</code>，最后一条指令的地址码为<code>076B:0018</code>。因为使用了一个子程序，所以主程序较短。</li>
+<li>题目二第一条指令的地址码为<code>076B:0000</code>，最后一条指令的地址码为<code>076B:001E</code>。因为使用了两个子程序，所以主程序较短。</li>
+</ol>
+<h2 id="对于第2题，怎样修改程序可以同时实现将10个数字的累加功能"><a href="#对于第2题，怎样修改程序可以同时实现将10个数字的累加功能" class="headerlink" title="对于第2题，怎样修改程序可以同时实现将10个数字的累加功能"></a>对于第2题，怎样修改程序可以同时实现将10个数字的累加功能</h2><ol>
+<li>首先在数据段中定义变量，代码如：<code>sum db 0</code>；</li>
+<li>然后在<code>getinput</code>子程序中<code>savetoarray</code>中<code>sub al,30h</code>后添加代码<code>add sum,al</code>。</li>
+</ol>
+<h2 id="对于第2题，若要求输入的是两位数，又该怎么办？"><a href="#对于第2题，若要求输入的是两位数，又该怎么办？" class="headerlink" title="对于第2题，若要求输入的是两位数，又该怎么办？"></a>对于第2题，若要求输入的是两位数，又该怎么办？</h2><ol>
+<li>首先<code>(cx)</code>改为20；</li>
+<li>然后每两个数字一组：其中先得到的数字转换为十进制数字<code>A</code>暂存，后得到的数字转换成十进制数字<code>B</code>暂存；</li>
+<li>可知我们要操作的数字为<code>A*10+B</code>（可以通过乘法和加法实现）；</li>
+<li>其他程序不变。</li>
+</ol>
+<h1 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h1><h2 id="题目一-2"><a href="#题目一-2" class="headerlink" title="题目一"></a>题目一</h2><p>运行程序，可见输出了1+2+…+10=55。</p>
+<h2 id="题目二-2"><a href="#题目二-2" class="headerlink" title="题目二"></a>题目二</h2><p>运行程序，输入9876543210共10个数字，可见输出了最大值9和最小值0。</p>
+<p>查看数据段<code>dds:0</code>，结果如下，可知数字均已存入<code>buf</code>数组。</p>
+<p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
 <p>欢迎讨论和交流!</p>
 
@@ -491,7 +475,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/计算机组成原理/" rel="tag"># 计算机组成原理</a>
+            <a href="/tags/汇编/" rel="tag"># 汇编</a>
           
         </div>
       
@@ -504,8 +488,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/01/C-C-小课之继承（二）/" rel="next" title="C/C++小课之继承（二）">
-                <i class="fa fa-chevron-left"></i> C/C++小课之继承（二）
+              <a href="/2019/05/02/计算机组成原理课程介绍/" rel="next" title="计算机组成原理课程介绍">
+                <i class="fa fa-chevron-left"></i> 计算机组成原理课程介绍
               </a>
             
           </div>
@@ -513,10 +497,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/02/计算机组成原理课程介绍/" rel="prev" title="计算机组成原理课程介绍">
-                计算机组成原理课程介绍 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -673,7 +653,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机系统概论"><span class="nav-number">1.</span> <span class="nav-text">计算机系统概论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#现代计算机由哪两部分组成？"><span class="nav-number">1.1.</span> <span class="nav-text">现代计算机由哪两部分组成？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件"><span class="nav-number">1.1.1.</span> <span class="nav-text">硬件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软件"><span class="nav-number">1.1.2.</span> <span class="nav-text">软件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#系统软件"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">系统软件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#语言处理程序"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">语言处理程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作系统"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务性程序"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">服务性程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库管理系统"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">数据库管理系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络软件"><span class="nav-number">1.1.2.6.</span> <span class="nav-text">网络软件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用软件"><span class="nav-number">1.1.2.7.</span> <span class="nav-text">应用软件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件和软件逻辑关系"><span class="nav-number">1.1.3.</span> <span class="nav-text">硬件和软件逻辑关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机系统的层次结构"><span class="nav-number">1.2.</span> <span class="nav-text">计算机系统的层次结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机组成和计算机系统结构的区别"><span class="nav-number">1.3.</span> <span class="nav-text">计算机组成和计算机系统结构的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机系统结构"><span class="nav-number">1.3.1.</span> <span class="nav-text">计算机系统结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机组成"><span class="nav-number">1.3.2.</span> <span class="nav-text">计算机组成</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机的基本组成"><span class="nav-number">2.</span> <span class="nav-text">计算机的基本组成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#冯诺依曼计算机的特点"><span class="nav-number">2.1.</span> <span class="nav-text">冯诺依曼计算机的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#由五大部分组成"><span class="nav-number">2.1.1.</span> <span class="nav-text">由五大部分组成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#运算器"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">运算器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#控制器"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">控制器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存储器"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">存储器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输入设备"><span class="nav-number">2.1.1.4.</span> <span class="nav-text">输入设备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出设备"><span class="nav-number">2.1.1.5.</span> <span class="nav-text">输出设备</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令和数据以同等地位存于存储器，可按地址访问"><span class="nav-number">2.1.2.</span> <span class="nav-text">指令和数据以同等地位存于存储器，可按地址访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令和数据用二进制表示"><span class="nav-number">2.1.3.</span> <span class="nav-text">指令和数据用二进制表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令由操作码和地址码组成"><span class="nav-number">2.1.4.</span> <span class="nav-text">指令由操作码和地址码组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储程序"><span class="nav-number">2.1.5.</span> <span class="nav-text">存储程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以运算器为中心"><span class="nav-number">2.1.6.</span> <span class="nav-text">以运算器为中心</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改进：以存储器为中心"><span class="nav-number">2.2.</span> <span class="nav-text">改进：以存储器为中心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#现代计算机硬件框图"><span class="nav-number">2.3.</span> <span class="nav-text">现代计算机硬件框图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机的解题过程"><span class="nav-number">2.4.</span> <span class="nav-text">计算机的解题过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器的基本组成"><span class="nav-number">2.4.1.</span> <span class="nav-text">存储器的基本组成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#存储体"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">存储体</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#存储单元"><span class="nav-number">2.4.1.1.1.</span> <span class="nav-text">存储单元</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MAR"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">MAR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MDR"><span class="nav-number">2.4.1.3.</span> <span class="nav-text">MDR</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#存储字长"><span class="nav-number">2.4.1.3.1.</span> <span class="nav-text">存储字长</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算器的基本组成及操作过程"><span class="nav-number">2.4.2.</span> <span class="nav-text">运算器的基本组成及操作过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机硬件的主要技术指标"><span class="nav-number">3.</span> <span class="nav-text">计算机硬件的主要技术指标</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实验目的"><span class="nav-number">1.</span> <span class="nav-text">实验目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序说明"><span class="nav-number">2.</span> <span class="nav-text">程序说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设计思想"><span class="nav-number">3.</span> <span class="nav-text">设计思想</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目一"><span class="nav-number">3.1.</span> <span class="nav-text">题目一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目二"><span class="nav-number">3.2.</span> <span class="nav-text">题目二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序代码"><span class="nav-number">4.</span> <span class="nav-text">程序代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目一-1"><span class="nav-number">4.1.</span> <span class="nav-text">题目一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目二-1"><span class="nav-number">4.2.</span> <span class="nav-text">题目二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题回答"><span class="nav-number">5.</span> <span class="nav-text">问题回答</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设计的程序包含了几个段"><span class="nav-number">5.1.</span> <span class="nav-text">设计的程序包含了几个段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你的代码经过编译和链接之后，总共占用多少个字节"><span class="nav-number">5.2.</span> <span class="nav-text">你的代码经过编译和链接之后，总共占用多少个字节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调用DEBUG进行反汇编，查看程序的第一条指令的地址码是多少？最后一条指令的地址码是多少？"><span class="nav-number">5.3.</span> <span class="nav-text">调用DEBUG进行反汇编，查看程序的第一条指令的地址码是多少？最后一条指令的地址码是多少？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对于第2题，怎样修改程序可以同时实现将10个数字的累加功能"><span class="nav-number">5.4.</span> <span class="nav-text">对于第2题，怎样修改程序可以同时实现将10个数字的累加功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对于第2题，若要求输入的是两位数，又该怎么办？"><span class="nav-number">5.5.</span> <span class="nav-text">对于第2题，若要求输入的是两位数，又该怎么办？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结果分析"><span class="nav-number">6.</span> <span class="nav-text">结果分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目一-2"><span class="nav-number">6.1.</span> <span class="nav-text">题目一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目二-2"><span class="nav-number">6.2.</span> <span class="nav-text">题目二</span></a></li></ol></li></ol></div>
             
 
           </div>
