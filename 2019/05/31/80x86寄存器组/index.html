@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="React," />
+  <meta name="keywords" content="汇编," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="原理React传递数据是单向数据流，两个组件必须有关系才可以传值。 而兄弟组件间并无直接关系，所以需要借助父组件。 兄弟组件传值原理： 简单的逻辑是这样：子组件1传值给父组件，父组件再传给子组件2。  子组件1通过函数参数传值给父组件。 父组件利用子组件1传来的值改变自身state中的某个值。 由于父组件将自身state的那个值传给子组件2，而现在state发生改变 ，子组件2会重新渲染，实现子组">
-<meta name="keywords" content="React">
+<meta name="description" content="寄存器可以分为程序可见的寄存器和程序不可见的寄存器两大类。 程序可见的寄存器可以分为以下三类：  通用寄存器 专用寄存器 段寄存器  通用寄存器数据寄存器AX、BX、CX、DX可称为数据寄存器，用来暂时存放计算过程中所用到的操作数。它们是16位，但也可以按字节访问，比如AH（高位字节）和AL（低位字节）。 AX（accumulator），作为累加器用，所以是算术运算的主要寄存器。 BX（base）">
+<meta name="keywords" content="汇编">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React学习（十一）之兄弟组件间传值">
-<meta property="og:url" content="https://chouxianyu.github.io/2019/01/22/React学习（十一）之兄弟组件间传值/index.html">
+<meta property="og:title" content="80x86寄存器组">
+<meta property="og:url" content="https://chouxianyu.github.io/2019/05/31/80x86寄存器组/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="原理React传递数据是单向数据流，两个组件必须有关系才可以传值。 而兄弟组件间并无直接关系，所以需要借助父组件。 兄弟组件传值原理： 简单的逻辑是这样：子组件1传值给父组件，父组件再传给子组件2。  子组件1通过函数参数传值给父组件。 父组件利用子组件1传来的值改变自身state中的某个值。 由于父组件将自身state的那个值传给子组件2，而现在state发生改变 ，子组件2会重新渲染，实现子组">
+<meta property="og:description" content="寄存器可以分为程序可见的寄存器和程序不可见的寄存器两大类。 程序可见的寄存器可以分为以下三类：  通用寄存器 专用寄存器 段寄存器  通用寄存器数据寄存器AX、BX、CX、DX可称为数据寄存器，用来暂时存放计算过程中所用到的操作数。它们是16位，但也可以按字节访问，比如AH（高位字节）和AL（低位字节）。 AX（accumulator），作为累加器用，所以是算术运算的主要寄存器。 BX（base）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-22T17:31:51.513Z">
+<meta property="og:updated_time" content="2019-05-31T08:23:36.465Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="React学习（十一）之兄弟组件间传值">
-<meta name="twitter:description" content="原理React传递数据是单向数据流，两个组件必须有关系才可以传值。 而兄弟组件间并无直接关系，所以需要借助父组件。 兄弟组件传值原理： 简单的逻辑是这样：子组件1传值给父组件，父组件再传给子组件2。  子组件1通过函数参数传值给父组件。 父组件利用子组件1传来的值改变自身state中的某个值。 由于父组件将自身state的那个值传给子组件2，而现在state发生改变 ，子组件2会重新渲染，实现子组">
+<meta name="twitter:title" content="80x86寄存器组">
+<meta name="twitter:description" content="寄存器可以分为程序可见的寄存器和程序不可见的寄存器两大类。 程序可见的寄存器可以分为以下三类：  通用寄存器 专用寄存器 段寄存器  通用寄存器数据寄存器AX、BX、CX、DX可称为数据寄存器，用来暂时存放计算过程中所用到的操作数。它们是16位，但也可以按字节访问，比如AH（高位字节）和AL（低位字节）。 AX（accumulator），作为累加器用，所以是算术运算的主要寄存器。 BX（base）">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://chouxianyu.github.io/2019/01/22/React学习（十一）之兄弟组件间传值/"/>
+  <link rel="canonical" href="https://chouxianyu.github.io/2019/05/31/80x86寄存器组/"/>
 
 
 
 
 
-  <title>React学习（十一）之兄弟组件间传值 | 臭咸鱼的缺氧瓶</title>
+  <title>80x86寄存器组 | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -299,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/01/22/React学习（十一）之兄弟组件间传值/">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/05/31/80x86寄存器组/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="臭咸鱼">
@@ -316,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">React学习（十一）之兄弟组件间传值</h1>
+          <h1 class="post-title" itemprop="name headline">80x86寄存器组</h1>
         
 
         <div class="post-meta">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-22T14:45:43+08:00">
-                2019-01-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-31T16:23:12+08:00">
+                2019-05-31
               </time>
             
 
@@ -347,8 +347,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/01/22/React学习（十一）之兄弟组件间传值/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/22/React学习（十一）之兄弟组件间传值/" itemprop="commentCount"></span>
+                <a href="/2019/05/31/80x86寄存器组/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/31/80x86寄存器组/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -356,7 +356,7 @@
 
           
           
-             <span id="/2019/01/22/React学习（十一）之兄弟组件间传值/" class="leancloud_visitors" data-flag-title="React学习（十一）之兄弟组件间传值">
+             <span id="/2019/05/31/80x86寄存器组/" class="leancloud_visitors" data-flag-title="80x86寄存器组">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  937 字
+                  1,000 字
                 </span>
               
 
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  5 分
+                  4 分
                 </span>
               
             </div>
@@ -418,29 +418,80 @@
       
 
       
-        <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>React传递数据是单向数据流，两个组件必须有关系才可以传值。</p>
-<p>而兄弟组件间并无直接关系，所以需要借助父组件。</p>
-<p><strong>兄弟组件传值原理</strong>：</p>
-<p>简单的逻辑是这样：子组件1传值给父组件，父组件再传给子组件2。</p>
-<ol>
-<li>子组件1通过函数参数传值给父组件。</li>
-<li>父组件利用子组件1传来的值<strong>改变自身state中的某个值。</strong></li>
-<li>由于父组件<strong>将自身state的那个值传给</strong>子组件2，而现在<code>state</code>发生改变 ，子组件2会重新渲染，实现子组件1传值到</li>
-</ol>
-<p>这里用到了<code>state</code>和<code>更新dom</code>的知识，不知道的可以看看。前边的文章或百度。</p>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>现有三个组件，父组件<code>App</code>,子组件1<code>Header</code>，子组件2<code>Home</code>，<code>Home</code>比<code>Header</code>小2岁。</p>
-<p>实现功能：改变<code>Header</code>的年龄，且同步更新<code>Home</code>的年龄。</p>
-<h2 id="App-js"><a href="#App-js" class="headerlink" title="App.js"></a>App.js</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>; <span class="comment">//固定写法</span></span><br><span class="line"><span class="keyword">import</span> Header <span class="keyword">from</span> <span class="string">'./components/Header'</span>;</span><br><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">'./components/Home'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123; <span class="comment">//ES6写法</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>()&#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line">    <span class="keyword">this</span>.state=&#123;</span><br><span class="line">      homeAge:<span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  onGreet(headerAge)&#123;  <span class="comment">//父组件定义回调函数</span></span><br><span class="line">    alert(<span class="string">"App:Header is"</span>+headerAge+<span class="string">"years old!"</span>);</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      homeAge: headerAge<span class="number">-2</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">const</span> user=&#123;  <span class="comment">//定义一个对象，传给子组件Header</span></span><br><span class="line">      name: <span class="string">"Anna"</span>,</span><br><span class="line">      hobbies: [<span class="string">"Sports"</span>, <span class="string">"Reading"</span>]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;Header greet=&#123;<span class="keyword">this</span>.onGreet.bind(<span class="keyword">this</span>)&#125; name=&#123;<span class="string">"Max"</span>&#125; age=&#123;<span class="number">12</span>&#125; user=&#123;user&#125;&gt;</span><br><span class="line">            &lt;p&gt;I am Header<span class="string">'s children&lt;/p&gt;</span></span><br><span class="line"><span class="string">          &lt;/Header&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &lt;div&gt;</span></span><br><span class="line"><span class="string">          &lt;h1&gt;I am App&lt;/h1&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">      </span></span><br><span class="line"><span class="string">        &lt;div&gt;</span></span><br><span class="line"><span class="string">          &lt;Home homeAge=&#123;this.state.homeAge&#125;/&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">    );</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">export default App;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Header-js"><a href="#Header-js" class="headerlink" title="Header.js"></a>Header.js</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>; <span class="comment">//固定写法</span></span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Header</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123; <span class="comment">//ES6写法</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">constructor</span>(props)&#123;</span><br><span class="line">    <span class="keyword">super</span>(props);  <span class="comment">//执行父类构造方法</span></span><br><span class="line">    <span class="keyword">this</span>.state=&#123;</span><br><span class="line">      age:props.age</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//this.age=this.props.age;  </span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  onMakeOrder()&#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      age:<span class="keyword">this</span>.state.age+<span class="number">3</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">//this.age+=3;</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);  <span class="comment">//显示当前Header类的对象</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleGreet()&#123;</span><br><span class="line">    <span class="keyword">this</span>.props.greet(<span class="keyword">this</span>.state.age);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="comment">//console.log(this.props);  //显示父组件传来的参数</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;I am Header&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &lt;div&gt;</span></span><br><span class="line"><span class="regexp">          props'name is &#123;this.props.name&#125;,my age is &#123;this.state.age&#125;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">        &#123;<span class="comment">/*&lt;button onClick=&#123;() =&gt; this.onMakeOrder()&#125; className="btn btn-primary"&gt;make me older&lt;/button&gt;*/</span>&#125;</span><br><span class="line">        &lt;button onClick=&#123;<span class="keyword">this</span>.onMakeOrder.bind(<span class="keyword">this</span>)&#125; className=<span class="string">"btn btn-primary"</span>&gt;</span><br><span class="line">          make me older  </span><br><span class="line">        &lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &lt;br /</span>&gt;</span><br><span class="line"></span><br><span class="line">        &lt;button onClick=&#123;<span class="keyword">this</span>.handleGreet.bind(<span class="keyword">this</span>)&#125; className=<span class="string">"btn btn-primary"</span>&gt;</span><br><span class="line">          告诉App我几岁</span><br><span class="line">        &lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &lt;div&gt;</span></span><br><span class="line"><span class="regexp">          &lt;h4&gt;props'hobbies如下：&lt;/</span>h4&gt;</span><br><span class="line">          &lt;ul&gt;</span><br><span class="line">            &#123;<span class="keyword">this</span>.props.user.hobbies.map(<span class="function">(<span class="params">hobby,i</span>) =&gt;</span> &lt;li key=&#123;i&#125;&gt;&#123;hobby&#125;&lt;<span class="regexp">/li&gt;)&#125;</span></span><br><span class="line"><span class="regexp">          &lt;/u</span>l&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &lt;div&gt;props's children如下：&#123;this.props.children&#125;&lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">Header.propTypes=&#123;</span></span><br><span class="line"><span class="regexp">  name: PropTypes.string,</span></span><br><span class="line"><span class="regexp">  age: PropTypes.number,</span></span><br><span class="line"><span class="regexp">  user: PropTypes.object,</span></span><br><span class="line"><span class="regexp">  greet: PropTypes.function,</span></span><br><span class="line"><span class="regexp">  children: PropTypes.element.isRequired</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Header;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Home-js"><a href="#Home-js" class="headerlink" title="Home.js"></a>Home.js</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>; <span class="comment">//固定写法</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Home</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123; <span class="comment">//ES6写法</span></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">let</span> content=<span class="string">""</span>;</span><br><span class="line">    <span class="keyword">let</span> flag=<span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">      content=<span class="string">"cbh"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      content=<span class="string">"cxy"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;I am Home&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">        动态数据：&#123;content&#125;</span></span><br><span class="line"><span class="regexp">        &lt;h1&gt;I am &#123;this.props.homeAge&#125; year's old&lt;/</span>h1&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Home;</span></span><br></pre></td></tr></table></figure>
-<h1 id="具体过程"><a href="#具体过程" class="headerlink" title="具体过程"></a>具体过程</h1><p>两个子组件本来就是12岁和10岁，无法查看传值效果。</p>
-<p>所以先点击<code>makeolder</code>按钮，可以看到<code>Header</code>年龄变为15。</p>
-<p>再点击<code>告诉App我几岁</code>按钮。</p>
-<p>子组件1<code>Header</code>通过一个回调函数将自己的年龄传给父组件<code>App</code>，父组件再用<code>Header</code>传来的年龄更新自己的state；</p>
-<p>由于父组件<code>App</code>给子组件2<code>Home</code>传的参数是<code>state</code>中的一个值，所以子组件2变化的部分会重新渲染，实现子组件1传值给子组件2。</p>
+        <p>寄存器可以分为<strong>程序可见的寄存器</strong>和<strong>程序不可见的寄存器</strong>两大类。</p>
+<p>程序可见的寄存器可以分为以下三类：</p>
+<ul>
+<li>通用寄存器</li>
+<li>专用寄存器</li>
+<li>段寄存器</li>
+</ul>
+<h1 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h1><h2 id="数据寄存器"><a href="#数据寄存器" class="headerlink" title="数据寄存器"></a>数据寄存器</h2><p>AX、BX、CX、DX可称为数据寄存器，用来暂时存放计算过程中所用到的操作数。它们是16位，但也可以按字节访问，比如AH（高位字节）和AL（低位字节）。</p>
+<h3 id="AX"><a href="#AX" class="headerlink" title="AX"></a>AX</h3><p>（accumulator），作为累加器用，所以是算术运算的主要寄存器。</p>
+<h3 id="BX"><a href="#BX" class="headerlink" title="BX"></a>BX</h3><p>（base），在计算存储器地址时，常用作基址寄存器。</p>
+<h3 id="CX"><a href="#CX" class="headerlink" title="CX"></a>CX</h3><p>（count），常用来保存计数值，如在移位指令、循环指令和串处理指令中用作隐含的计数器。</p>
+<h3 id="DX"><a href="#DX" class="headerlink" title="DX"></a>DX</h3><p>（data），一般在作双字长运算时把DX和AX组合在一起存放一个双字长数，DX用来存放高位字。</p>
+<h2 id="指针寄存器"><a href="#指针寄存器" class="headerlink" title="指针寄存器"></a>指针寄存器</h2><p>可以存放操作数，但<strong>只能以字为单位</strong>使用。</p>
+<h3 id="SP"><a href="#SP" class="headerlink" title="SP"></a>SP</h3><p>（stack pointer），堆栈指针寄存器。</p>
+<h3 id="BP"><a href="#BP" class="headerlink" title="BP"></a>BP</h3><p>（base pointer），基址指针寄存器。可以和堆栈段寄存器SS联用来确定堆栈段中的某一存储单元的地址。</p>
+<h3 id="SI"><a href="#SI" class="headerlink" title="SI"></a>SI</h3><p>（source index），源变址寄存器，一般与数据段寄存器DS联用，用来确定数据段中某一存储单元的地址。</p>
+<h3 id="DI"><a href="#DI" class="headerlink" title="DI"></a>DI</h3><p>（destination index），目的变址寄存器，一般与数据段寄存器DS联用，用来确定数据段中某一存储单元的地址。</p>
+<p>※SI和DI有自动增量和自动减量的功能。</p>
+<p>在<strong>串处理指令</strong>中，SI和DI作为隐含的源变址和目的变址寄存器，此时SI和DS联用，DI和附加段寄存器ES联用，分别达到在数据段和附加段中寻址的目的。</p>
+<h1 id="专用寄存器"><a href="#专用寄存器" class="headerlink" title="专用寄存器"></a>专用寄存器</h1><h2 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h2><p>（instruction pointer），指令指针寄存器，它用来存放代码段中的偏移地址。</p>
+<p>在程序运行的过程中，它<strong>始终指向下一条指令</strong>的首地址，它<strong>与段寄存器CS联用</strong>确定下一条指令的物理地址。</p>
+<h2 id="SP-1"><a href="#SP-1" class="headerlink" title="SP"></a>SP</h2><p>（stack pointer），堆栈指针寄存器，存放<strong>栈顶的偏移地址</strong>，<strong>与堆栈段寄存器SS联用</strong>来确定堆栈段中栈顶的地址。</p>
+<h2 id="FLAGS"><a href="#FLAGS" class="headerlink" title="FLAGS"></a>FLAGS</h2><p>标志寄存器，又称为<strong>程序状态寄存器</strong>（program status word，PSW）。</p>
+<h3 id="条件标志"><a href="#条件标志" class="headerlink" title="条件标志"></a>条件标志</h3><ul>
+<li><p>溢出标志</p>
+<p>  （overflow flag，OF），运算溢出时为1，否则为0。</p>
+</li>
+<li><p>符号标志</p>
+<p>  （sign flag，SF），运算结果为负时为1，否则为0。</p>
+</li>
+<li><p>零标志</p>
+<p>  （zero flag，ZF），运算结果为0时为1，否则为0。</p>
+</li>
+<li><p>进位标志</p>
+<p>  （carry flag，CF），记录运算时从最高有效位产生的进位值。有进位时为1，否则为0。</p>
+</li>
+<li><p>辅助进位标志</p>
+<p>  （auxiliary carry flag，AF），..…</p>
+</li>
+<li><p>奇偶标志</p>
+<p>  （parity flag，PF），结果操作数中<strong>1的个数为偶数时为1</strong>，<strong>否则置0</strong>。</p>
+</li>
+</ul>
+<h3 id="控制标志"><a href="#控制标志" class="headerlink" title="控制标志"></a>控制标志</h3><p><strong>方向标志</strong>（direction flag），在串处理指令中控制处理信息的方向用。</p>
+<p>DF为1时，高地址到低地址，即倒着来。</p>
+<p>DF为0时，低地址到高地址，即正着来。</p>
+<h3 id="系统标志"><a href="#系统标志" class="headerlink" title="系统标志"></a>系统标志</h3><ul>
+<li><p>陷阱标志</p>
+<p>  （trap flag，TF），用于<strong>调试</strong>时的<strong>单步</strong>方式操作。</p>
+<p>  TF为1时，产生陷阱；否则不产生。</p>
+</li>
+<li><p>中断标志</p>
+<p>  （interrupt flag，IF），当其为1时，允许CPU响应中断；否则不允许。</p>
+</li>
+</ul>
+<h1 id="段寄存器"><a href="#段寄存器" class="headerlink" title="段寄存器"></a>段寄存器</h1><p>段寄存器也是一种专用寄存器，<strong>专用于存储器寻址</strong>，用来直接或间接<strong>存放段地址</strong>。</p>
+<ul>
+<li><p>代码段</p>
+<p>  （code segment，CS），存放当前正在运行的程序。</p>
+</li>
+<li><p>数据段</p>
+<p>  （data segment，DS），存放当前运行程序所用的数据。</p>
+<p>  如果程序使用了串处理指令，则其源操作数也存放在数据段里。</p>
+</li>
+<li><p>堆栈段</p>
+<p>  （stack segment，SS）</p>
+</li>
+<li><p>附加段</p>
+<p>  （extra segment，ES），附加的数据段，作为辅助的数据区，也是串处理指令的目的操作数存放区。</p>
+</li>
+</ul>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
-<p>本文为作者原创，转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
-<p>欢迎转发和评论!</p>
+<p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
+<p>欢迎讨论和交流!</p>
 
       
     </div>
@@ -458,7 +509,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/React/" rel="tag"># React</a>
+            <a href="/tags/汇编/" rel="tag"># 汇编</a>
           
         </div>
       
@@ -471,8 +522,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/22/阮一峰React入门教程学习笔记/" rel="next" title="阮一峰React入门教程学习笔记">
-                <i class="fa fa-chevron-left"></i> 阮一峰React入门教程学习笔记
+              <a href="/2019/05/31/请不要到处糊弄/" rel="next" title="请不要到处糊弄">
+                <i class="fa fa-chevron-left"></i> 请不要到处糊弄
               </a>
             
           </div>
@@ -481,8 +532,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/16/椅子能在不平的地面上放稳吗/" rel="prev" title="椅子能在不平的地面上放稳吗">
-                椅子能在不平的地面上放稳吗 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/31/80x86寻址方式/" rel="prev" title="80x86寻址方式">
+                80x86寻址方式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -640,7 +691,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#原理"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">2.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#App-js"><span class="nav-number">2.1.</span> <span class="nav-text">App.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Header-js"><span class="nav-number">2.2.</span> <span class="nav-text">Header.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Home-js"><span class="nav-number">2.3.</span> <span class="nav-text">Home.js</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体过程"><span class="nav-number">3.</span> <span class="nav-text">具体过程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通用寄存器"><span class="nav-number">1.</span> <span class="nav-text">通用寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据寄存器"><span class="nav-number">1.1.</span> <span class="nav-text">数据寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AX"><span class="nav-number">1.1.1.</span> <span class="nav-text">AX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BX"><span class="nav-number">1.1.2.</span> <span class="nav-text">BX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CX"><span class="nav-number">1.1.3.</span> <span class="nav-text">CX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DX"><span class="nav-number">1.1.4.</span> <span class="nav-text">DX</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针寄存器"><span class="nav-number">1.2.</span> <span class="nav-text">指针寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SP"><span class="nav-number">1.2.1.</span> <span class="nav-text">SP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BP"><span class="nav-number">1.2.2.</span> <span class="nav-text">BP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SI"><span class="nav-number">1.2.3.</span> <span class="nav-text">SI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DI"><span class="nav-number">1.2.4.</span> <span class="nav-text">DI</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#专用寄存器"><span class="nav-number">2.</span> <span class="nav-text">专用寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IP"><span class="nav-number">2.1.</span> <span class="nav-text">IP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SP-1"><span class="nav-number">2.2.</span> <span class="nav-text">SP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FLAGS"><span class="nav-number">2.3.</span> <span class="nav-text">FLAGS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件标志"><span class="nav-number">2.3.1.</span> <span class="nav-text">条件标志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制标志"><span class="nav-number">2.3.2.</span> <span class="nav-text">控制标志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统标志"><span class="nav-number">2.3.3.</span> <span class="nav-text">系统标志</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#段寄存器"><span class="nav-number">3.</span> <span class="nav-text">段寄存器</span></a></li></ol></div>
             
 
           </div>

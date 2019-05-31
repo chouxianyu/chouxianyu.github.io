@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="React," />
+  <meta name="keywords" content="汇编," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="原理React传递数据是单向数据流，两个组件必须有关系才可以传值。 而兄弟组件间并无直接关系，所以需要借助父组件。 兄弟组件传值原理： 简单的逻辑是这样：子组件1传值给父组件，父组件再传给子组件2。  子组件1通过函数参数传值给父组件。 父组件利用子组件1传来的值改变自身state中的某个值。 由于父组件将自身state的那个值传给子组件2，而现在state发生改变 ，子组件2会重新渲染，实现子组">
-<meta name="keywords" content="React">
+<meta name="description" content="与数据有关的寻址方式立即寻址方式操作数直接存放在指令中，这样的操作数称为立即数。  操作数=立即数 mov ax,3  注意：  立即寻址方式只能用于源操作数字段。 源操作数长度应与目的操作数长度一致。  寄存器寻址方式操作数存放在寄存器中，指令指定寄存器号。  mov ax,bx   操作数=指定寄存器中的内容 以上两种寻址方式都不涉及存储器。  以下各种寻址方式的操作数都存放在存储区中。 在8">
+<meta name="keywords" content="汇编">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React学习（十一）之兄弟组件间传值">
-<meta property="og:url" content="https://chouxianyu.github.io/2019/01/22/React学习（十一）之兄弟组件间传值/index.html">
+<meta property="og:title" content="80x86寻址方式">
+<meta property="og:url" content="https://chouxianyu.github.io/2019/05/31/80x86寻址方式/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="原理React传递数据是单向数据流，两个组件必须有关系才可以传值。 而兄弟组件间并无直接关系，所以需要借助父组件。 兄弟组件传值原理： 简单的逻辑是这样：子组件1传值给父组件，父组件再传给子组件2。  子组件1通过函数参数传值给父组件。 父组件利用子组件1传来的值改变自身state中的某个值。 由于父组件将自身state的那个值传给子组件2，而现在state发生改变 ，子组件2会重新渲染，实现子组">
+<meta property="og:description" content="与数据有关的寻址方式立即寻址方式操作数直接存放在指令中，这样的操作数称为立即数。  操作数=立即数 mov ax,3  注意：  立即寻址方式只能用于源操作数字段。 源操作数长度应与目的操作数长度一致。  寄存器寻址方式操作数存放在寄存器中，指令指定寄存器号。  mov ax,bx   操作数=指定寄存器中的内容 以上两种寻址方式都不涉及存储器。  以下各种寻址方式的操作数都存放在存储区中。 在8">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-22T17:31:51.513Z">
+<meta property="og:updated_time" content="2019-05-31T08:26:07.924Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="React学习（十一）之兄弟组件间传值">
-<meta name="twitter:description" content="原理React传递数据是单向数据流，两个组件必须有关系才可以传值。 而兄弟组件间并无直接关系，所以需要借助父组件。 兄弟组件传值原理： 简单的逻辑是这样：子组件1传值给父组件，父组件再传给子组件2。  子组件1通过函数参数传值给父组件。 父组件利用子组件1传来的值改变自身state中的某个值。 由于父组件将自身state的那个值传给子组件2，而现在state发生改变 ，子组件2会重新渲染，实现子组">
+<meta name="twitter:title" content="80x86寻址方式">
+<meta name="twitter:description" content="与数据有关的寻址方式立即寻址方式操作数直接存放在指令中，这样的操作数称为立即数。  操作数=立即数 mov ax,3  注意：  立即寻址方式只能用于源操作数字段。 源操作数长度应与目的操作数长度一致。  寄存器寻址方式操作数存放在寄存器中，指令指定寄存器号。  mov ax,bx   操作数=指定寄存器中的内容 以上两种寻址方式都不涉及存储器。  以下各种寻址方式的操作数都存放在存储区中。 在8">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://chouxianyu.github.io/2019/01/22/React学习（十一）之兄弟组件间传值/"/>
+  <link rel="canonical" href="https://chouxianyu.github.io/2019/05/31/80x86寻址方式/"/>
 
 
 
 
 
-  <title>React学习（十一）之兄弟组件间传值 | 臭咸鱼的缺氧瓶</title>
+  <title>80x86寻址方式 | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -299,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/01/22/React学习（十一）之兄弟组件间传值/">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/05/31/80x86寻址方式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="臭咸鱼">
@@ -316,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">React学习（十一）之兄弟组件间传值</h1>
+          <h1 class="post-title" itemprop="name headline">80x86寻址方式</h1>
         
 
         <div class="post-meta">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-22T14:45:43+08:00">
-                2019-01-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-31T16:24:27+08:00">
+                2019-05-31
               </time>
             
 
@@ -347,8 +347,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/01/22/React学习（十一）之兄弟组件间传值/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/22/React学习（十一）之兄弟组件间传值/" itemprop="commentCount"></span>
+                <a href="/2019/05/31/80x86寻址方式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/31/80x86寻址方式/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -356,7 +356,7 @@
 
           
           
-             <span id="/2019/01/22/React学习（十一）之兄弟组件间传值/" class="leancloud_visitors" data-flag-title="React学习（十一）之兄弟组件间传值">
+             <span id="/2019/05/31/80x86寻址方式/" class="leancloud_visitors" data-flag-title="80x86寻址方式">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  937 字
+                  1,020 字
                 </span>
               
 
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  5 分
+                  4 分
                 </span>
               
             </div>
@@ -418,29 +418,178 @@
       
 
       
-        <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>React传递数据是单向数据流，两个组件必须有关系才可以传值。</p>
-<p>而兄弟组件间并无直接关系，所以需要借助父组件。</p>
-<p><strong>兄弟组件传值原理</strong>：</p>
-<p>简单的逻辑是这样：子组件1传值给父组件，父组件再传给子组件2。</p>
-<ol>
-<li>子组件1通过函数参数传值给父组件。</li>
-<li>父组件利用子组件1传来的值<strong>改变自身state中的某个值。</strong></li>
-<li>由于父组件<strong>将自身state的那个值传给</strong>子组件2，而现在<code>state</code>发生改变 ，子组件2会重新渲染，实现子组件1传值到</li>
-</ol>
-<p>这里用到了<code>state</code>和<code>更新dom</code>的知识，不知道的可以看看。前边的文章或百度。</p>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>现有三个组件，父组件<code>App</code>,子组件1<code>Header</code>，子组件2<code>Home</code>，<code>Home</code>比<code>Header</code>小2岁。</p>
-<p>实现功能：改变<code>Header</code>的年龄，且同步更新<code>Home</code>的年龄。</p>
-<h2 id="App-js"><a href="#App-js" class="headerlink" title="App.js"></a>App.js</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>; <span class="comment">//固定写法</span></span><br><span class="line"><span class="keyword">import</span> Header <span class="keyword">from</span> <span class="string">'./components/Header'</span>;</span><br><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">'./components/Home'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123; <span class="comment">//ES6写法</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>()&#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line">    <span class="keyword">this</span>.state=&#123;</span><br><span class="line">      homeAge:<span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  onGreet(headerAge)&#123;  <span class="comment">//父组件定义回调函数</span></span><br><span class="line">    alert(<span class="string">"App:Header is"</span>+headerAge+<span class="string">"years old!"</span>);</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      homeAge: headerAge<span class="number">-2</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">const</span> user=&#123;  <span class="comment">//定义一个对象，传给子组件Header</span></span><br><span class="line">      name: <span class="string">"Anna"</span>,</span><br><span class="line">      hobbies: [<span class="string">"Sports"</span>, <span class="string">"Reading"</span>]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;Header greet=&#123;<span class="keyword">this</span>.onGreet.bind(<span class="keyword">this</span>)&#125; name=&#123;<span class="string">"Max"</span>&#125; age=&#123;<span class="number">12</span>&#125; user=&#123;user&#125;&gt;</span><br><span class="line">            &lt;p&gt;I am Header<span class="string">'s children&lt;/p&gt;</span></span><br><span class="line"><span class="string">          &lt;/Header&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &lt;div&gt;</span></span><br><span class="line"><span class="string">          &lt;h1&gt;I am App&lt;/h1&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">      </span></span><br><span class="line"><span class="string">        &lt;div&gt;</span></span><br><span class="line"><span class="string">          &lt;Home homeAge=&#123;this.state.homeAge&#125;/&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">    );</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">export default App;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Header-js"><a href="#Header-js" class="headerlink" title="Header.js"></a>Header.js</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>; <span class="comment">//固定写法</span></span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Header</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123; <span class="comment">//ES6写法</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">constructor</span>(props)&#123;</span><br><span class="line">    <span class="keyword">super</span>(props);  <span class="comment">//执行父类构造方法</span></span><br><span class="line">    <span class="keyword">this</span>.state=&#123;</span><br><span class="line">      age:props.age</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//this.age=this.props.age;  </span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  onMakeOrder()&#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      age:<span class="keyword">this</span>.state.age+<span class="number">3</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">//this.age+=3;</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);  <span class="comment">//显示当前Header类的对象</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleGreet()&#123;</span><br><span class="line">    <span class="keyword">this</span>.props.greet(<span class="keyword">this</span>.state.age);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="comment">//console.log(this.props);  //显示父组件传来的参数</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;I am Header&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &lt;div&gt;</span></span><br><span class="line"><span class="regexp">          props'name is &#123;this.props.name&#125;,my age is &#123;this.state.age&#125;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">        &#123;<span class="comment">/*&lt;button onClick=&#123;() =&gt; this.onMakeOrder()&#125; className="btn btn-primary"&gt;make me older&lt;/button&gt;*/</span>&#125;</span><br><span class="line">        &lt;button onClick=&#123;<span class="keyword">this</span>.onMakeOrder.bind(<span class="keyword">this</span>)&#125; className=<span class="string">"btn btn-primary"</span>&gt;</span><br><span class="line">          make me older  </span><br><span class="line">        &lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &lt;br /</span>&gt;</span><br><span class="line"></span><br><span class="line">        &lt;button onClick=&#123;<span class="keyword">this</span>.handleGreet.bind(<span class="keyword">this</span>)&#125; className=<span class="string">"btn btn-primary"</span>&gt;</span><br><span class="line">          告诉App我几岁</span><br><span class="line">        &lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &lt;div&gt;</span></span><br><span class="line"><span class="regexp">          &lt;h4&gt;props'hobbies如下：&lt;/</span>h4&gt;</span><br><span class="line">          &lt;ul&gt;</span><br><span class="line">            &#123;<span class="keyword">this</span>.props.user.hobbies.map(<span class="function">(<span class="params">hobby,i</span>) =&gt;</span> &lt;li key=&#123;i&#125;&gt;&#123;hobby&#125;&lt;<span class="regexp">/li&gt;)&#125;</span></span><br><span class="line"><span class="regexp">          &lt;/u</span>l&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &lt;div&gt;props's children如下：&#123;this.props.children&#125;&lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">Header.propTypes=&#123;</span></span><br><span class="line"><span class="regexp">  name: PropTypes.string,</span></span><br><span class="line"><span class="regexp">  age: PropTypes.number,</span></span><br><span class="line"><span class="regexp">  user: PropTypes.object,</span></span><br><span class="line"><span class="regexp">  greet: PropTypes.function,</span></span><br><span class="line"><span class="regexp">  children: PropTypes.element.isRequired</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Header;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Home-js"><a href="#Home-js" class="headerlink" title="Home.js"></a>Home.js</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>; <span class="comment">//固定写法</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Home</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123; <span class="comment">//ES6写法</span></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">let</span> content=<span class="string">""</span>;</span><br><span class="line">    <span class="keyword">let</span> flag=<span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">      content=<span class="string">"cbh"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      content=<span class="string">"cxy"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;I am Home&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">        动态数据：&#123;content&#125;</span></span><br><span class="line"><span class="regexp">        &lt;h1&gt;I am &#123;this.props.homeAge&#125; year's old&lt;/</span>h1&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Home;</span></span><br></pre></td></tr></table></figure>
-<h1 id="具体过程"><a href="#具体过程" class="headerlink" title="具体过程"></a>具体过程</h1><p>两个子组件本来就是12岁和10岁，无法查看传值效果。</p>
-<p>所以先点击<code>makeolder</code>按钮，可以看到<code>Header</code>年龄变为15。</p>
-<p>再点击<code>告诉App我几岁</code>按钮。</p>
-<p>子组件1<code>Header</code>通过一个回调函数将自己的年龄传给父组件<code>App</code>，父组件再用<code>Header</code>传来的年龄更新自己的state；</p>
-<p>由于父组件<code>App</code>给子组件2<code>Home</code>传的参数是<code>state</code>中的一个值，所以子组件2变化的部分会重新渲染，实现子组件1传值给子组件2。</p>
+        <h1 id="与数据有关的寻址方式"><a href="#与数据有关的寻址方式" class="headerlink" title="与数据有关的寻址方式"></a>与数据有关的寻址方式</h1><h2 id="立即寻址方式"><a href="#立即寻址方式" class="headerlink" title="立即寻址方式"></a>立即寻址方式</h2><p>操作数直接存放在指令中，这样的操作数称为<strong>立即数</strong>。</p>
+<script type="math/tex; mode=display">
+操作数=立即数</script><ul>
+<li><code>mov ax,3</code></li>
+</ul>
+<p><strong>注意</strong>：</p>
+<ul>
+<li>立即寻址方式只能用于源操作数字段。</li>
+<li>源操作数长度应与目的操作数长度一致。</li>
+</ul>
+<h2 id="寄存器寻址方式"><a href="#寄存器寻址方式" class="headerlink" title="寄存器寻址方式"></a>寄存器寻址方式</h2><p>操作数存放在寄存器中，<strong>指令指定寄存器号</strong>。</p>
+<ul>
+<li><code>mov ax,bx</code></li>
+</ul>
+<script type="math/tex; mode=display">
+操作数=指定寄存器中的内容</script><hr>
+<p>以上两种寻址方式都不涉及存储器。</p>
+<hr>
+<p>以下各种寻址方式的操作数都存放在存储区中。</p>
+<p>在80x86中，把操作数的偏移地址称为<strong>有效地址</strong>，<code>EA(Effective Address)</code>。</p>
+<p><strong>以下各种寻址方式通过不同途径求得操作数的有效地址</strong>，进而获得操作数。</p>
+<script type="math/tex; mode=display">
+有效地址=基址+变址\times比例因子+位移量</script><p>有效地址可以有以下四种成分组成：</p>
+<ul>
+<li><p><strong>位移量</strong></p>
+<p>  （displacement），是存放在<strong>指令中的数字</strong>，但它不是立即数，而是一个地址。</p>
+</li>
+<li><p><strong>基址</strong></p>
+<p>  （base），是存放在<strong>基址寄存器中的内容</strong>，通常用来指向数据段中数组或字符串的首地址。</p>
+</li>
+<li><p><strong>变址</strong></p>
+<p>  （index），是存放在<strong>变址寄存器中的内容</strong>，通常用来访问数组中的某个元素或字符串中的某个字符。</p>
+</li>
+<li><p>比例因子</p>
+<p>  （scale factor），其值可为1,2,4,8。（386及后继机型才有比例因子）\</p>
+</li>
+</ul>
+<pre><code>&lt;center&gt;表1 16/位寻址时有效地址三种成分的组成&lt;/center&gt;
+</code></pre><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">成分</th>
+<th style="text-align:center">16位寻址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">位移量</td>
+<td style="text-align:center">0,8,16位</td>
+</tr>
+<tr>
+<td style="text-align:center">基址寄存器</td>
+<td style="text-align:center">BX,BP</td>
+</tr>
+<tr>
+<td style="text-align:center">变址寄存器</td>
+<td style="text-align:center">SI,DI</td>
+</tr>
+</tbody>
+</table>
+</div>
+<center>表2 默认段选择规则</center>
+
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">访存类型</th>
+<th style="text-align:center">所用段及段寄存器</th>
+<th style="text-align:center">缺省规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">指令</td>
+<td style="text-align:center">代码段 CS</td>
+<td style="text-align:center">用于取指令</td>
+</tr>
+<tr>
+<td style="text-align:center">堆栈</td>
+<td style="text-align:center">堆栈段 SS</td>
+<td style="text-align:center">进出栈，ESP、BP或ESP作为基址寄存器</td>
+</tr>
+<tr>
+<td style="text-align:center">局部数据</td>
+<td style="text-align:center">数据段 DS</td>
+<td style="text-align:center">除堆栈和串指令的目的串之外</td>
+</tr>
+<tr>
+<td style="text-align:center">目的串</td>
+<td style="text-align:center">附加数据段 ES</td>
+<td style="text-align:center">串处理指令的目的串</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<p><strong>禁止使用段跨越前缀的三种情况</strong>：</p>
+<ul>
+<li>串处理指令的目的串必须使用ES段</li>
+<li>PUSH和POP指令的源必须使用SS段</li>
+<li>指令必须存放在CS段</li>
+</ul>
+<h2 id="直接寻址方式"><a href="#直接寻址方式" class="headerlink" title="直接寻址方式"></a>直接寻址方式</h2><script type="math/tex; mode=display">
+有效地址=位移量</script><ul>
+<li><code>mov ax,[0]</code></li>
+</ul>
+<p>位移量可以用符号地址（变量）表示。</p>
+<ul>
+<li><code>mov ax,table</code></li>
+<li><code>mov ax,[table]</code></li>
+</ul>
+<p>默认段寄存器为DS。</p>
+<p>该寻址方式适用于处理单个变量。</p>
+<h2 id="寄存器间接寻址方式"><a href="#寄存器间接寻址方式" class="headerlink" title="寄存器间接寻址方式"></a>寄存器间接寻址方式</h2><script type="math/tex; mode=display">
+有效地址=基址寄存器或变址寄存器的内容</script><ul>
+<li><code>mov ax,[bp]</code></li>
+<li><code>mov ax,[bx]</code></li>
+</ul>
+<p>有效地址就在某个寄存器<strong>（BX,BP,SI,DI）</strong>中。（不允许使用AX,CX,DX）</p>
+<p>BP的默认段寄存器为SS，其他寄存器的默认段为DS。</p>
+<h2 id="寄存器相对寻址方式"><a href="#寄存器相对寻址方式" class="headerlink" title="寄存器相对寻址方式"></a>寄存器相对寻址方式</h2><p>又称直接变址寻址方式。</p>
+<script type="math/tex; mode=display">
+有效地址=一个基址寄存器或变址寄存器的内容+位移量</script><p>默认段情况与寄存器间接寻址方式相同。</p>
+<ul>
+<li><code>mov ax,count[si]</code></li>
+<li><code>mov ax,[count+si]</code></li>
+</ul>
+<h2 id="基址变址寻址方式"><a href="#基址变址寻址方式" class="headerlink" title="基址变址寻址方式"></a>基址变址寻址方式</h2><script type="math/tex; mode=display">
+有效地址=一个基址寄存器的内容+一个变址寄存器的内容</script><p>默认段情况参看表1和表2。</p>
+<ul>
+<li><code>mov ax,[bx][di]</code></li>
+<li><code>mov ax,[bp][si]</code></li>
+<li><code>mov ax,[bx+di]</code></li>
+</ul>
+<h2 id="相对基址变址寻址方式"><a href="#相对基址变址寻址方式" class="headerlink" title="相对基址变址寻址方式"></a>相对基址变址寻址方式</h2><script type="math/tex; mode=display">
+有效地址=一个基址寄存器的内容+一个变址寄存器的内容+位移量</script><ul>
+<li><code>mov ax,mask[bx][si]</code></li>
+</ul>
+<hr>
+<h1 id="与转移地址有关的寻址方式"><a href="#与转移地址有关的寻址方式" class="headerlink" title="与转移地址有关的寻址方式"></a>与转移地址有关的寻址方式</h1><p>这种寻址方式用来确定转移指令与<code>CALL</code>指令的转向地址。</p>
+<h2 id="段内直接寻址"><a href="#段内直接寻址" class="headerlink" title="段内直接寻址"></a>段内直接寻址</h2><p><strong>有效地址</strong>=(IP)+位移量</p>
+<p><strong>近转移</strong>：</p>
+<p>位移量为16bit，如<code>jmp near ptr next</code>。</p>
+<p><strong>短转移</strong>：</p>
+<p>位移量为8bit，如<code>jmp short next</code>，看看其他寻址会与转移地址有关的寻址方式会发现只有<code>short</code>没有<code>ptr</code>。</p>
+<h2 id="段内间接寻址"><a href="#段内间接寻址" class="headerlink" title="段内间接寻址"></a>段内间接寻址</h2><p><strong>有效地址</strong>=寄存器或存储单元内容。</p>
+<p>该内容可以用除立即寻址方式以外的与数据有关的所有寻址方式。</p>
+<ul>
+<li><p><code>jmp bx</code></p>
+</li>
+<li><p><code>jmp word ptr[bp+table]</code></p>
+<p>  <code>word ptr</code>说明是一个字，所以是段内转移。</p>
+</li>
+</ul>
+<h2 id="段间直接寻址"><a href="#段间直接寻址" class="headerlink" title="段间直接寻址"></a>段间直接寻址</h2><p>指令中直接提供了转向<strong>段地址</strong>和<strong>偏移地址</strong>。</p>
+<ul>
+<li><code>jmp far ptr next</code></li>
+</ul>
+<h2 id="段间间接寻址"><a href="#段间间接寻址" class="headerlink" title="段间间接寻址"></a>段间间接寻址</h2><p>取存储器中的两个相继字取代IP和CS中的原始内容，以达到段间转移的目的。</p>
+<p>存储单元地址除立即寻址方式和寄存器方式外均可。</p>
+<ul>
+<li><p><code>jmp dowrd ptr[table+bx]</code>。</p>
+<p>  <code>dword</code>说明是双字，所以是段间转移。</p>
+</li>
+</ul>
+<hr>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
-<p>本文为作者原创，转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
-<p>欢迎转发和评论!</p>
+<p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
+<p>欢迎讨论和交流!</p>
+<hr>
 
       
     </div>
@@ -458,7 +607,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/React/" rel="tag"># React</a>
+            <a href="/tags/汇编/" rel="tag"># 汇编</a>
           
         </div>
       
@@ -471,8 +620,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/22/阮一峰React入门教程学习笔记/" rel="next" title="阮一峰React入门教程学习笔记">
-                <i class="fa fa-chevron-left"></i> 阮一峰React入门教程学习笔记
+              <a href="/2019/05/31/80x86寄存器组/" rel="next" title="80x86寄存器组">
+                <i class="fa fa-chevron-left"></i> 80x86寄存器组
               </a>
             
           </div>
@@ -480,10 +629,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/16/椅子能在不平的地面上放稳吗/" rel="prev" title="椅子能在不平的地面上放稳吗">
-                椅子能在不平的地面上放稳吗 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -640,7 +785,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#原理"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">2.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#App-js"><span class="nav-number">2.1.</span> <span class="nav-text">App.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Header-js"><span class="nav-number">2.2.</span> <span class="nav-text">Header.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Home-js"><span class="nav-number">2.3.</span> <span class="nav-text">Home.js</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体过程"><span class="nav-number">3.</span> <span class="nav-text">具体过程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#与数据有关的寻址方式"><span class="nav-number">1.</span> <span class="nav-text">与数据有关的寻址方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#立即寻址方式"><span class="nav-number">1.1.</span> <span class="nav-text">立即寻址方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寄存器寻址方式"><span class="nav-number">1.2.</span> <span class="nav-text">寄存器寻址方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接寻址方式"><span class="nav-number">1.3.</span> <span class="nav-text">直接寻址方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寄存器间接寻址方式"><span class="nav-number">1.4.</span> <span class="nav-text">寄存器间接寻址方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寄存器相对寻址方式"><span class="nav-number">1.5.</span> <span class="nav-text">寄存器相对寻址方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基址变址寻址方式"><span class="nav-number">1.6.</span> <span class="nav-text">基址变址寻址方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相对基址变址寻址方式"><span class="nav-number">1.7.</span> <span class="nav-text">相对基址变址寻址方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#与转移地址有关的寻址方式"><span class="nav-number">2.</span> <span class="nav-text">与转移地址有关的寻址方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#段内直接寻址"><span class="nav-number">2.1.</span> <span class="nav-text">段内直接寻址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#段内间接寻址"><span class="nav-number">2.2.</span> <span class="nav-text">段内间接寻址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#段间直接寻址"><span class="nav-number">2.3.</span> <span class="nav-text">段间直接寻址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#段间间接寻址"><span class="nav-number">2.4.</span> <span class="nav-text">段间间接寻址</span></a></li></ol></li></ol></div>
             
 
           </div>
