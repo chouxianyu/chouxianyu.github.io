@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2019-05-31T08:26:07.924Z</updated>
+  <updated>2019-06-05T11:42:12.632Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -17,25 +17,28 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>80x86寻址方式</title>
-    <link href="https://chouxianyu.github.io/2019/05/31/80x86%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F/"/>
-    <id>https://chouxianyu.github.io/2019/05/31/80x86寻址方式/</id>
-    <published>2019-05-31T08:24:27.000Z</published>
-    <updated>2019-05-31T08:26:07.924Z</updated>
+    <title>计算机网络-实验（三）ARP欺骗</title>
+    <link href="https://chouxianyu.github.io/2019/06/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%AE%9E%E9%AA%8C%EF%BC%88%E4%B8%89%EF%BC%89ARP%E6%AC%BA%E9%AA%97/"/>
+    <id>https://chouxianyu.github.io/2019/06/05/计算机网络-实验（三）ARP欺骗/</id>
+    <published>2019-06-05T11:41:40.000Z</published>
+    <updated>2019-06-05T11:42:12.632Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="与数据有关的寻址方式"><a href="#与数据有关的寻址方式" class="headerlink" title="与数据有关的寻址方式"></a>与数据有关的寻址方式</h1><h2 id="立即寻址方式"><a href="#立即寻址方式" class="headerlink" title="立即寻址方式"></a>立即寻址方式</h2><p>操作数直接存放在指令中，这样的操作数称为<strong>立即数</strong>。</p><script type="math/tex; mode=display">操作数=立即数</script><ul><li><code>mov ax,3</code></li></ul><p><strong>注意</strong>：</p><ul><li>立即寻址方式只能用于源操作数字段。</li><li>源操作数长度应与目的操作数长度一致。</li></ul><h2 id="寄存器寻址方式"><a href="#寄存器寻址方式" class="headerlink" title="寄存器寻址方式"></a>寄存器寻址方式</h2><p>操作数存放在寄存器中，<strong>指令指定寄存器号</strong>。</p><ul><li><code>mov ax,bx</code></li></ul><script type="math/tex; mode=display">操作数=指定寄存器中的内容</script><hr><p>以上两种寻址方式都不涉及存储器。</p><hr><p>以下各种寻址方式的操作数都存放在存储区中。</p><p>在80x86中，把操作数的偏移地址称为<strong>有效地址</strong>，<code>EA(Effective Address)</code>。</p><p><strong>以下各种寻址方式通过不同途径求得操作数的有效地址</strong>，进而获得操作数。</p><script type="math/tex; mode=display">有效地址=基址+变址\times比例因子+位移量</script><p>有效地址可以有以下四种成分组成：</p><ul><li><p><strong>位移量</strong></p><p>  （displacement），是存放在<strong>指令中的数字</strong>，但它不是立即数，而是一个地址。</p></li><li><p><strong>基址</strong></p><p>  （base），是存放在<strong>基址寄存器中的内容</strong>，通常用来指向数据段中数组或字符串的首地址。</p></li><li><p><strong>变址</strong></p><p>  （index），是存放在<strong>变址寄存器中的内容</strong>，通常用来访问数组中的某个元素或字符串中的某个字符。</p></li><li><p>比例因子</p><p>  （scale factor），其值可为1,2,4,8。（386及后继机型才有比例因子）\</p></li></ul><pre><code>&lt;center&gt;表1 16/位寻址时有效地址三种成分的组成&lt;/center&gt;</code></pre><div class="table-container"><table><thead><tr><th style="text-align:center">成分</th><th style="text-align:center">16位寻址</th></tr></thead><tbody><tr><td style="text-align:center">位移量</td><td style="text-align:center">0,8,16位</td></tr><tr><td style="text-align:center">基址寄存器</td><td style="text-align:center">BX,BP</td></tr><tr><td style="text-align:center">变址寄存器</td><td style="text-align:center">SI,DI</td></tr></tbody></table></div><center>表2 默认段选择规则</center><div class="table-container"><table><thead><tr><th style="text-align:center">访存类型</th><th style="text-align:center">所用段及段寄存器</th><th style="text-align:center">缺省规则</th></tr></thead><tbody><tr><td style="text-align:center">指令</td><td style="text-align:center">代码段 CS</td><td style="text-align:center">用于取指令</td></tr><tr><td style="text-align:center">堆栈</td><td style="text-align:center">堆栈段 SS</td><td style="text-align:center">进出栈，ESP、BP或ESP作为基址寄存器</td></tr><tr><td style="text-align:center">局部数据</td><td style="text-align:center">数据段 DS</td><td style="text-align:center">除堆栈和串指令的目的串之外</td></tr><tr><td style="text-align:center">目的串</td><td style="text-align:center">附加数据段 ES</td><td style="text-align:center">串处理指令的目的串</td></tr></tbody></table></div><hr><p><strong>禁止使用段跨越前缀的三种情况</strong>：</p><ul><li>串处理指令的目的串必须使用ES段</li><li>PUSH和POP指令的源必须使用SS段</li><li>指令必须存放在CS段</li></ul><h2 id="直接寻址方式"><a href="#直接寻址方式" class="headerlink" title="直接寻址方式"></a>直接寻址方式</h2><script type="math/tex; mode=display">有效地址=位移量</script><ul><li><code>mov ax,[0]</code></li></ul><p>位移量可以用符号地址（变量）表示。</p><ul><li><code>mov ax,table</code></li><li><code>mov ax,[table]</code></li></ul><p>默认段寄存器为DS。</p><p>该寻址方式适用于处理单个变量。</p><h2 id="寄存器间接寻址方式"><a href="#寄存器间接寻址方式" class="headerlink" title="寄存器间接寻址方式"></a>寄存器间接寻址方式</h2><script type="math/tex; mode=display">有效地址=基址寄存器或变址寄存器的内容</script><ul><li><code>mov ax,[bp]</code></li><li><code>mov ax,[bx]</code></li></ul><p>有效地址就在某个寄存器<strong>（BX,BP,SI,DI）</strong>中。（不允许使用AX,CX,DX）</p><p>BP的默认段寄存器为SS，其他寄存器的默认段为DS。</p><h2 id="寄存器相对寻址方式"><a href="#寄存器相对寻址方式" class="headerlink" title="寄存器相对寻址方式"></a>寄存器相对寻址方式</h2><p>又称直接变址寻址方式。</p><script type="math/tex; mode=display">有效地址=一个基址寄存器或变址寄存器的内容+位移量</script><p>默认段情况与寄存器间接寻址方式相同。</p><ul><li><code>mov ax,count[si]</code></li><li><code>mov ax,[count+si]</code></li></ul><h2 id="基址变址寻址方式"><a href="#基址变址寻址方式" class="headerlink" title="基址变址寻址方式"></a>基址变址寻址方式</h2><script type="math/tex; mode=display">有效地址=一个基址寄存器的内容+一个变址寄存器的内容</script><p>默认段情况参看表1和表2。</p><ul><li><code>mov ax,[bx][di]</code></li><li><code>mov ax,[bp][si]</code></li><li><code>mov ax,[bx+di]</code></li></ul><h2 id="相对基址变址寻址方式"><a href="#相对基址变址寻址方式" class="headerlink" title="相对基址变址寻址方式"></a>相对基址变址寻址方式</h2><script type="math/tex; mode=display">有效地址=一个基址寄存器的内容+一个变址寄存器的内容+位移量</script><ul><li><code>mov ax,mask[bx][si]</code></li></ul><hr><h1 id="与转移地址有关的寻址方式"><a href="#与转移地址有关的寻址方式" class="headerlink" title="与转移地址有关的寻址方式"></a>与转移地址有关的寻址方式</h1><p>这种寻址方式用来确定转移指令与<code>CALL</code>指令的转向地址。</p><h2 id="段内直接寻址"><a href="#段内直接寻址" class="headerlink" title="段内直接寻址"></a>段内直接寻址</h2><p><strong>有效地址</strong>=(IP)+位移量</p><p><strong>近转移</strong>：</p><p>位移量为16bit，如<code>jmp near ptr next</code>。</p><p><strong>短转移</strong>：</p><p>位移量为8bit，如<code>jmp short next</code>，看看其他寻址会与转移地址有关的寻址方式会发现只有<code>short</code>没有<code>ptr</code>。</p><h2 id="段内间接寻址"><a href="#段内间接寻址" class="headerlink" title="段内间接寻址"></a>段内间接寻址</h2><p><strong>有效地址</strong>=寄存器或存储单元内容。</p><p>该内容可以用除立即寻址方式以外的与数据有关的所有寻址方式。</p><ul><li><p><code>jmp bx</code></p></li><li><p><code>jmp word ptr[bp+table]</code></p><p>  <code>word ptr</code>说明是一个字，所以是段内转移。</p></li></ul><h2 id="段间直接寻址"><a href="#段间直接寻址" class="headerlink" title="段间直接寻址"></a>段间直接寻址</h2><p>指令中直接提供了转向<strong>段地址</strong>和<strong>偏移地址</strong>。</p><ul><li><code>jmp far ptr next</code></li></ul><h2 id="段间间接寻址"><a href="#段间间接寻址" class="headerlink" title="段间间接寻址"></a>段间间接寻址</h2><p>取存储器中的两个相继字取代IP和CS中的原始内容，以达到段间转移的目的。</p><p>存储单元地址除立即寻址方式和寄存器方式外均可。</p><ul><li><p><code>jmp dowrd ptr[table+bx]</code>。</p><p>  <code>dword</code>说明是双字，所以是段间转移。</p></li></ul><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
+    <content type="html"><![CDATA[<h1 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h1><ol><li>掌握常见ARP欺骗类型和手段</li><li>掌握ARP协议工作原理和格式</li><li>掌握防范ARP地址欺骗的方法和措施</li><li>掌握Sniffer Pro软件的使用</li></ol><h1 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h1><ul><li><p>硬件</p><p>  交换机1 台、路由器1台、计算机数台</p></li><li><p>软件</p><p>  <code>Sinffer pro</code></p></li></ul><h1 id="实验原理"><a href="#实验原理" class="headerlink" title="实验原理"></a>实验原理</h1><h2 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><code>ARP(Address Resolve Protocol)</code>，地址解析协议。</p><p><strong>用途</strong>：用于寻找和IP 地址相对应的MAC地址。</p><p><strong>ARP消息类型</strong>：</p><ul><li><p>ARP request</p><p>  即ARP请求分组，用于请求某IP主机的硬件地址。</p><p>  <strong>广播</strong>。</p></li><li><p>ARP response</p><p>  即ARP响应分组，用于指出某IP主机的硬件地址。</p><p>  单播。</p></li></ul><h3 id="ARP报文中各字段的意义"><a href="#ARP报文中各字段的意义" class="headerlink" title="ARP报文中各字段的意义"></a>ARP报文中各字段的意义</h3><ul><li><p>硬件类型</p><p>  以太网接口类型为1。</p></li><li><p>协议类型</p><p>  IP协议类型为080016。</p></li><li><p>操作</p><p>  ARP请求分组为1，ARP响应分组为2。</p></li><li><p>硬件地址长度</p><p>  MAC地址长度为6BH。</p></li><li><p>协议地址长度</p><p>  IP地址长度为4BH。</p></li><li><p><strong>源MAC地址</strong></p><p>  发送方的MAC地址。</p></li><li><p><strong>源IP地址</strong></p><p>  发送方的IP地址。</p></li><li><p><strong>目的MAC 地址</strong></p><p>  ARP 请求分组中该字段没有意义；ARP 响应分组中为接收方的MAC地址。</p></li><li><p><strong>目的IP 地址</strong></p><p>  ARP 请求分组中为请求解析的IP 地址；ARP 响应分组中为接收方的IP地址。</p></li></ul><h2 id="ARP欺骗原理"><a href="#ARP欺骗原理" class="headerlink" title="ARP欺骗原理"></a>ARP欺骗原理</h2><p><strong>ARP请求分组</strong>以<strong>广播</strong>形式发送，网络上的主机可以自主发送ARP应答消息；</p><p>当其他主机收到<strong>ARP响应分组</strong>时，不会检测该报文的真实性，直接将其记录在本地的MAC地址转换表。</p><p>就可以发送伪ARP响应分组，从而篡改本地的MAC地址表。</p><p>举例：</p><p>攻击者<strong>甲</strong>通过冒充某IP主机<strong>丙</strong>，给出错误的物理地址，并向另一主机<strong>乙</strong>单播一个ARP响应分组，这样<strong>乙</strong>接收到这个错误的IP与物理地址的映射，更新了ARP缓存表。</p><p>之后，主机<strong>乙</strong>使用ARP缓存表中该项时，则会出现错误。</p><h1 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h1><h2 id="设置账户"><a href="#设置账户" class="headerlink" title="设置账户"></a>设置账户</h2><p>控制面板——用户账户——设置用户名为<code>ligong</code>，并设置密码。</p><h2 id="设置FTP站点"><a href="#设置FTP站点" class="headerlink" title="设置FTP站点"></a>设置FTP站点</h2><p>控制面板——Internet信息服务——FTP站点——硬件——安全账户——浏览——高级——选中<code>ligong</code>——允许匿名——应用、确定。</p><h2 id="禁止网络保护"><a href="#禁止网络保护" class="headerlink" title="禁止网络保护"></a>禁止网络保护</h2><p>右击屏幕右下角盾牌，取消<code>Enable Auto Protection</code>。</p><h2 id="所用主机说明"><a href="#所用主机说明" class="headerlink" title="所用主机说明"></a>所用主机说明</h2><p>我们需要三台主机，分别为甲、乙、丙。</p><p><strong>甲</strong>为监听并攻击者，<strong>乙</strong>为<code>Ping</code>命令/<code>FTP</code>命令操作者，<strong>丙</strong>为IP地址提供者。</p><p><strong>甲</strong>实现ARP欺骗后，<strong>乙</strong>无法<code>Ping</code>或无法通过<code>FTP</code>连接<strong>丙</strong>。</p><h2 id="进行ARP欺骗"><a href="#进行ARP欺骗" class="headerlink" title="进行ARP欺骗"></a>进行ARP欺骗</h2><p>在<strong>甲</strong>主机上进行操作。</p><ol><li><p>打开<code>Sniffer Pro</code>，选中本机的网卡，并选中<code>Log Off</code>，点击确定。</p></li><li><p>点击菜单栏中<code>File</code>中的<code>Log On</code>，登录网卡。</p></li><li><p>打开菜单栏中<code>display</code>中的<code>Define Filter</code>；</p><p> 选中<code>Address</code>选项卡，将<code>Station1</code>和<code>Station2</code>设置为<code>Any</code>（这样将监听网络上的所有消息，个人觉得可以只监听乙和丙）；</p><p> 选中<code>Advanced</code>选项卡，选中<code>ARP</code>、<code>IP</code>、<code>IP ARP</code>、<code>TCP</code>、<code>UDP</code>和<code>FTP</code>。</p></li><li><p>打开菜单栏中<code>Capture</code>中的<code>Start</code>，开始监听。</p></li><li><p>点击左侧<code>Connection</code>，点击下侧的<code>Objects</code>选项。</p></li><li><p>在右侧找到<strong>乙</strong>对<strong>丙</strong>的<code>ARP</code>信息包，双击，再选择<code>Decode</code>选项，可以看到<code>ARP</code>分组的结构，我们对<strong>丙</strong>的MAC地址进行修改（右击——<code>Edit</code>）。</p></li><li><p>打开菜单栏中<code>Tools</code>中的<code>Trace Route</code>，实现ARP欺骗。</p></li></ol><h2 id="结果检验"><a href="#结果检验" class="headerlink" title="结果检验"></a>结果检验</h2><p><strong>甲</strong>实现ARP欺骗后，<strong>乙</strong><code>Ping</code>或通过<code>ftp</code>连接<strong>丙</strong>则会失败。</p><p>因为<strong>甲</strong>通过广播发出了错误的<strong>丙</strong>的物理地址，而<strong>乙</strong>接收到了这个错误的信息，在连接<strong>丙</strong>时则会使用这个错误的物理地址，造成无法连接。</p><h1 id="实验心得"><a href="#实验心得" class="headerlink" title="实验心得"></a>实验心得</h1><p>ARP是建立在网络中各个主机互相信任的基础上的。</p><p>ARP欺骗可以导致计算机通信失败，更严重的是可以导致通信重定向，攻击者可以窃取被攻击者通信的数据，存在极大的安全隐患。</p><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1 id=&quot;与数据有关的寻址方式&quot;&gt;&lt;a href=&quot;#与数据有关的寻址方式&quot; class=&quot;headerlink&quot; title=&quot;与数据有关的寻址方式&quot;&gt;&lt;/a&gt;与数据有关的寻址方式&lt;/h1&gt;&lt;h2 id=&quot;立即寻址方式&quot;&gt;&lt;a href=&quot;#立即寻址方式&quot; class=&quot;
+        &lt;h1 id=&quot;实验目的&quot;&gt;&lt;a href=&quot;#实验目的&quot; class=&quot;headerlink&quot; title=&quot;实验目的&quot;&gt;&lt;/a&gt;实验目的&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;掌握常见ARP欺骗类型和手段&lt;/li&gt;
+&lt;li&gt;掌握ARP协议工作原理和格式&lt;/li&gt;
+&lt;li&gt;掌握防范ARP地
       
     
     </summary>
     
     
-      <category term="汇编" scheme="https://chouxianyu.github.io/tags/%E6%B1%87%E7%BC%96/"/>
+      <category term="计算机网络" scheme="https://chouxianyu.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
@@ -211,9 +214,9 @@
     
       <category term="C/C++" scheme="https://chouxianyu.github.io/tags/C-C/"/>
     
-      <category term="面向对象" scheme="https://chouxianyu.github.io/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
-    
       <category term="继承" scheme="https://chouxianyu.github.io/tags/%E7%BB%A7%E6%89%BF/"/>
+    
+      <category term="面向对象" scheme="https://chouxianyu.github.io/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
     
   </entry>
   
@@ -313,9 +316,9 @@
     
       <category term="C/C++" scheme="https://chouxianyu.github.io/tags/C-C/"/>
     
-      <category term="面向对象" scheme="https://chouxianyu.github.io/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
-    
       <category term="继承" scheme="https://chouxianyu.github.io/tags/%E7%BB%A7%E6%89%BF/"/>
+    
+      <category term="面向对象" scheme="https://chouxianyu.github.io/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
     
   </entry>
   
