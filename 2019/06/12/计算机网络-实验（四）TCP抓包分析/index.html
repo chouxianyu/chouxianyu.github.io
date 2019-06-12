@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="计算机网络," />
 
 
 
@@ -81,17 +81,20 @@
 
 
 
-<meta name="description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
-<meta name="keywords" content="臭咸鱼">
-<meta property="og:type" content="website">
-<meta property="og:title" content="臭咸鱼的缺氧瓶">
-<meta property="og:url" content="https://chouxianyu.github.io/tags/Matlab/index.html">
+<meta name="description" content="实验内容 学会安装使用自由软件SNORT 截获以太网数据包，并描述以太网数据包的各层的帧结构。 截获ARP，TCP协议数据包并进行分析  实验步骤实验需要两个主机A(192.168.1.104)和B(192.168.1.105)，A访问B，B进行TCP和ARP抓包，本实验报告为抓包主机B视角。 环境配置主机B需要进行环境配置：设置账户密码、打开FTP站点 设置账户密码控制面板——用户账户——设置密">
+<meta name="keywords" content="计算机网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络-实验（四）TCP抓包分析">
+<meta property="og:url" content="https://chouxianyu.github.io/2019/06/12/计算机网络-实验（四）TCP抓包分析/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
+<meta property="og:description" content="实验内容 学会安装使用自由软件SNORT 截获以太网数据包，并描述以太网数据包的各层的帧结构。 截获ARP，TCP协议数据包并进行分析  实验步骤实验需要两个主机A(192.168.1.104)和B(192.168.1.105)，A访问B，B进行TCP和ARP抓包，本实验报告为抓包主机B视角。 环境配置主机B需要进行环境配置：设置账户密码、打开FTP站点 设置账户密码控制面板——用户账户——设置密">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2019/06/06/5cf7f404924bd20321.png">
+<meta property="og:updated_time" content="2019-06-12T14:44:31.805Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="臭咸鱼的缺氧瓶">
-<meta name="twitter:description" content="Cxy与Bug的前世今生，Cxy与Life的深度摩擦。">
+<meta name="twitter:title" content="计算机网络-实验（四）TCP抓包分析">
+<meta name="twitter:description" content="实验内容 学会安装使用自由软件SNORT 截获以太网数据包，并描述以太网数据包的各层的帧结构。 截获ARP，TCP协议数据包并进行分析  实验步骤实验需要两个主机A(192.168.1.104)和B(192.168.1.105)，A访问B，B进行TCP和ARP抓包，本实验报告为抓包主机B视角。 环境配置主机B需要进行环境配置：设置账户密码、打开FTP站点 设置账户密码控制面板——用户账户——设置密">
+<meta name="twitter:image" content="https://i.loli.net/2019/06/06/5cf7f404924bd20321.png">
 
 
 
@@ -121,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="https://chouxianyu.github.io/tags/Matlab/"/>
+  <link rel="canonical" href="https://chouxianyu.github.io/2019/06/12/计算机网络-实验（四）TCP抓包分析/"/>
 
 
 
 
 
-  <title>Tag: Matlab | 臭咸鱼的缺氧瓶</title>
+  <title>计算机网络-实验（四）TCP抓包分析 | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -156,7 +159,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -284,306 +287,288 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Matlab<small>Tag</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/06/12/计算机网络-实验（四）TCP抓包分析/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/03/28/插值和线性回归/" itemprop="url">
-              
-                <span itemprop="name">插值和线性回归</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">计算机网络-实验（四）TCP抓包分析</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-28T19:26:40+08:00"
-              content="2019-03-28" >
-          03-28
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-12T22:40:43+08:00">
+                2019-06-12
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/06/12/计算机网络-实验（四）TCP抓包分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/12/计算机网络-实验（四）TCP抓包分析/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/06/12/计算机网络-实验（四）TCP抓包分析/" class="leancloud_visitors" data-flag-title="计算机网络-实验（四）TCP抓包分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,740 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  7 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/28/传染病模型/" itemprop="url">
-              
-                <span itemprop="name">传染病模型</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-28T19:26:20+08:00"
-              content="2019-03-28" >
-          03-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/28/Runge-Kutta法解微分方程/" itemprop="url">
-              
-                <span itemprop="name">Runge-Kutta法解微分方程</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-28T19:25:59+08:00"
-              content="2019-03-28" >
-          03-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/27/美国人口指数增长模型拟合/" itemprop="url">
-              
-                <span itemprop="name">美国人口指数增长模型拟合</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-27T08:50:23+08:00"
-              content="2019-03-27" >
-          03-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/26/线性方程组求解/" itemprop="url">
-              
-                <span itemprop="name">线性方程组求解</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-26T09:03:41+08:00"
-              content="2019-03-26" >
-          03-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/25/线性和非线性拟合/" itemprop="url">
-              
-                <span itemprop="name">线性和非线性拟合</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-25T22:50:59+08:00"
-              content="2019-03-25" >
-          03-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/24/Matlab作图/" itemprop="url">
-              
-                <span itemprop="name">Matlab作图</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-24T22:45:05+08:00"
-              content="2019-03-24" >
-          03-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/24/Matlab基础/" itemprop="url">
-              
-                <span itemprop="name">Matlab基础</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-24T22:44:52+08:00"
-              content="2019-03-24" >
-          03-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/18/PageRank/" itemprop="url">
-              
-                <span itemprop="name">PageRank</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-18T15:58:08+08:00"
-              content="2019-02-18" >
-          02-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/16/多体问题/" itemprop="url">
-              
-                <span itemprop="name">多体问题</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-16T18:43:10+08:00"
-              content="2019-02-16" >
-          02-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <h1 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h1><ul>
+<li>学会安装使用自由软件SNORT</li>
+<li>截获以太网数据包，并描述以太网数据包的各层的帧结构。</li>
+<li>截获ARP，TCP协议数据包并进行分析</li>
+</ul>
+<h1 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h1><p>实验需要两个主机A(192.168.1.104)和B(192.168.1.105)，A访问B，B进行TCP和ARP抓包，本实验报告为抓包主机B视角。</p>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>主机B需要进行环境配置：设置账户密码、打开FTP站点</p>
+<h3 id="设置账户密码"><a href="#设置账户密码" class="headerlink" title="设置账户密码"></a>设置账户密码</h3><p>控制面板——用户账户——设置密码</p>
+<h3 id="打开FTP站点"><a href="#打开FTP站点" class="headerlink" title="打开FTP站点"></a>打开FTP站点</h3><p>控制面板——管理工具——Internet信息服务——FTP站点——属性——用户名——浏览——查找账户——选择<code>ligong</code>——应用——确认</p>
+<h2 id="A访问B"><a href="#A访问B" class="headerlink" title="A访问B"></a>A访问B</h2><ul>
+<li><code>ftp</code></li>
+<li><code>open 192.168.1.105</code></li>
+<li>输入用户名(<code>ligong</code>)和密码(<code>123</code>，也就是刚才设置的密码)</li>
+<li>一些操作，如<code>dir</code></li>
+<li><code>quit</code>，退出，断开连接</li>
+</ul>
+<h2 id="B进行抓包"><a href="#B进行抓包" class="headerlink" title="B进行抓包"></a>B进行抓包</h2><p>使用<code>Snort</code>软件进行抓包，进入<code>D:/snort/bin</code>目录。</p>
+<p>输入<code>snort -dev -l /snort/log</code>，开始抓包，按下<code>Ctrl+C</code>停止抓包。</p>
+<p>如果主机B抓到了A发出的FTP请求，在<code>D:/snort/log</code>目录下可以找到文件夹<code>192.168.104</code>，在其中可以看到名如<code>TCP_1980-21.ids</code>的文件，21为端口号。</p>
+<h1 id="数据包分析"><a href="#数据包分析" class="headerlink" title="数据包分析"></a>数据包分析</h1><p>ARP抓包失败，原因未知，其他同学似乎也未抓到，抓到的都是3号机器广播的ARP包。下边进队TCP数据包进行分析。</p>
+<h2 id="TCP数据包分析"><a href="#TCP数据包分析" class="headerlink" title="TCP数据包分析"></a>TCP数据包分析</h2><ul>
+<li><p>TCP是面向连接的协议，所以TCP运输连接的建立和释放时每一次通信中必不可少的过程。</p>
+</li>
+<li><p>运输连接分为三个阶段：<strong>连接建立</strong>、<strong>数据传送</strong>、<strong>连接释放</strong>。</p>
+<p>  每一次握手大概包括以下内容：</p>
+<p>  第一行数据包括了时间戳、源物理地址、目的物理地址、类型、长度；</p>
+<p>  第二行数据包括了源IP、目的IP、TCP、TTL、TOS、ID、IP长度、Dgm长度；</p>
+<p>  第三行数据包括SYN位、ACK位、序号、确认号、窗口大小、TCP长度；</p>
+<p>  第四行信息包括TCP选项等。</p>
+</li>
+</ul>
+<p>以下主要选取TCP数据包中连接建立（三次握手）和连接释放（四次握手）的相关内容进行分析。</p>
+<h3 id="连接建立"><a href="#连接建立" class="headerlink" title="连接建立"></a>连接建立</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">01</span>/<span class="number">01</span><span class="number">-01</span>:<span class="number">40</span>:<span class="number">15.948470</span> <span class="number">0</span>:<span class="number">16</span>:EC:D2:<span class="number">50</span>:<span class="number">7</span>D -&gt; <span class="number">0</span>:<span class="number">19</span>:<span class="number">21</span>:<span class="number">57</span>:<span class="number">7</span>:<span class="number">85</span> type:<span class="number">0x800</span> len:<span class="number">0x3E</span></span><br><span class="line"><span class="number">192.168</span><span class="number">.1</span><span class="number">.104</span>:<span class="number">1980</span> -&gt; <span class="number">192.168</span><span class="number">.1</span><span class="number">.105</span>:<span class="number">21</span> TCP TTL:<span class="number">128</span> TOS:<span class="number">0x0</span> ID:<span class="number">11743</span> IpLen:<span class="number">20</span> DgmLen:<span class="number">48</span> DF</span><br><span class="line">******S* Seq: <span class="number">0x75C7623D</span>  Ack: <span class="number">0x0</span>  Win: <span class="number">0xFFFF</span>  TcpLen: <span class="number">28</span></span><br><span class="line"><span class="function">TCP <span class="title">Options</span> <span class="params">(<span class="number">4</span>)</span> </span>=&gt; MSS: <span class="number">1460</span> NOP NOP SackOK </span><br><span class="line"></span><br><span class="line">=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+</span><br></pre></td></tr></table></figure>
+<p>上边为连接建立的<strong>第一次握手</strong>，可以看到数据包从主机A（104）发往主机B（105）的21号端口；</p>
+<p>SYN位设置为1；</p>
+<p>序号为<code>0x75C7623D</code>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">01</span>/<span class="number">01</span><span class="number">-01</span>:<span class="number">40</span>:<span class="number">15.948524</span> <span class="number">0</span>:<span class="number">19</span>:<span class="number">21</span>:<span class="number">57</span>:<span class="number">7</span>:<span class="number">85</span> -&gt; <span class="number">0</span>:<span class="number">16</span>:EC:D2:<span class="number">50</span>:<span class="number">7</span>D type:<span class="number">0x800</span> len:<span class="number">0x3E</span></span><br><span class="line"><span class="number">192.168</span><span class="number">.1</span><span class="number">.105</span>:<span class="number">21</span> -&gt; <span class="number">192.168</span><span class="number">.1</span><span class="number">.104</span>:<span class="number">1980</span> TCP TTL:<span class="number">128</span> TOS:<span class="number">0x0</span> ID:<span class="number">11647</span> IpLen:<span class="number">20</span> DgmLen:<span class="number">48</span> DF</span><br><span class="line">***A**S* Seq: <span class="number">0xF085016</span>  Ack: <span class="number">0x75C7623E</span>  Win: <span class="number">0xFFFF</span>  TcpLen: <span class="number">28</span></span><br><span class="line"><span class="function">TCP <span class="title">Options</span> <span class="params">(<span class="number">4</span>)</span> </span>=&gt; MSS: <span class="number">1460</span> NOP NOP SackOK </span><br><span class="line"></span><br><span class="line">=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+</span><br></pre></td></tr></table></figure>
+<p>上边为连接建立的<strong>第二次握手</strong>，可以看到数据包从105发往104，</p>
+<p>SYN位设置为1；</p>
+<p>ACK位设为1；</p>
+<p>序号为<code>0xF085016</code>；</p>
+<p>确认号为<code>0x75C7623E</code>，即<strong>确认号为上一次握手序号+1的值</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">01</span>/<span class="number">01</span><span class="number">-01</span>:<span class="number">40</span>:<span class="number">15.948661</span> <span class="number">0</span>:<span class="number">16</span>:EC:D2:<span class="number">50</span>:<span class="number">7</span>D -&gt; <span class="number">0</span>:<span class="number">19</span>:<span class="number">21</span>:<span class="number">57</span>:<span class="number">7</span>:<span class="number">85</span> type:<span class="number">0x800</span> len:<span class="number">0x3C</span></span><br><span class="line"><span class="number">192.168</span><span class="number">.1</span><span class="number">.104</span>:<span class="number">1980</span> -&gt; <span class="number">192.168</span><span class="number">.1</span><span class="number">.105</span>:<span class="number">21</span> TCP TTL:<span class="number">128</span> TOS:<span class="number">0x0</span> ID:<span class="number">11744</span> IpLen:<span class="number">20</span> DgmLen:<span class="number">40</span> DF</span><br><span class="line">***A**** Seq: <span class="number">0x75C7623E</span>  Ack: <span class="number">0xF085017</span>  Win: <span class="number">0xFFFF</span>  TcpLen: <span class="number">20</span></span><br><span class="line"></span><br><span class="line">=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+</span><br></pre></td></tr></table></figure>
+<p>上边为连接建立的<strong>第三次握手</strong>，可以看到数据包从104发往105，</p>
+<p>ACK位设为1；</p>
+<p>序号为<code>0x75C7623E</code>，即<strong>序号为上一次握手的确认号</strong>，本质是A上一次向B发出的请求的序号+1；</p>
+<p>确认号为<code>0xF085017</code>，即<strong>确认号为上一次握手序号+1的值</strong>。</p>
+<h3 id="数据传送"><a href="#数据传送" class="headerlink" title="数据传送"></a>数据传送</h3><p><img src="https://i.loli.net/2019/06/06/5cf7f404924bd20321.png" alt="TCP数据包.png"></p>
+<h3 id="连接释放"><a href="#连接释放" class="headerlink" title="连接释放"></a>连接释放</h3><p><strong>注意</strong>：这里是<strong>服务器主动释放连接</strong>，与教材上写的客户机主动释放情况不同。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">01</span>/<span class="number">01</span><span class="number">-01</span>:<span class="number">40</span>:<span class="number">25.769622</span> <span class="number">0</span>:<span class="number">19</span>:<span class="number">21</span>:<span class="number">57</span>:<span class="number">7</span>:<span class="number">85</span> -&gt; <span class="number">0</span>:<span class="number">16</span>:EC:D2:<span class="number">50</span>:<span class="number">7</span>D type:<span class="number">0x800</span> len:<span class="number">0x36</span></span><br><span class="line"><span class="number">192.168</span><span class="number">.1</span><span class="number">.105</span>:<span class="number">21</span> -&gt; <span class="number">192.168</span><span class="number">.1</span><span class="number">.104</span>:<span class="number">1980</span> TCP TTL:<span class="number">128</span> TOS:<span class="number">0x0</span> ID:<span class="number">11666</span> IpLen:<span class="number">20</span> DgmLen:<span class="number">40</span> DF</span><br><span class="line">***A***F Seq: <span class="number">0xF085092</span>  Ack: <span class="number">0x75C7625B</span>  Win: <span class="number">0xFFE2</span>  TcpLen: <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<p>上边为连接释放的<strong>第一次握手</strong>，可以看到数据包从105发往104，</p>
+<p>ACK位设为1；</p>
+<p>FIN位设为1；</p>
+<p>序号为<code>0xF085092</code>；</p>
+<p>确认号为<code>0x75C7625B</code>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">01</span>/<span class="number">01</span><span class="number">-01</span>:<span class="number">40</span>:<span class="number">25.769759</span> <span class="number">0</span>:<span class="number">16</span>:EC:D2:<span class="number">50</span>:<span class="number">7</span>D -&gt; <span class="number">0</span>:<span class="number">19</span>:<span class="number">21</span>:<span class="number">57</span>:<span class="number">7</span>:<span class="number">85</span> type:<span class="number">0x800</span> len:<span class="number">0x3C</span></span><br><span class="line"><span class="number">192.168</span><span class="number">.1</span><span class="number">.104</span>:<span class="number">1980</span> -&gt; <span class="number">192.168</span><span class="number">.1</span><span class="number">.105</span>:<span class="number">21</span> TCP TTL:<span class="number">128</span> TOS:<span class="number">0x0</span> ID:<span class="number">11763</span> IpLen:<span class="number">20</span> DgmLen:<span class="number">40</span> DF</span><br><span class="line">***A**** Seq: <span class="number">0x75C7625B</span>  Ack: <span class="number">0xF085093</span>  Win: <span class="number">0xFF84</span>  TcpLen: <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<p>上边为连接释放的<strong>第二次握手</strong>，可以看到数据包从104发往105，</p>
+<p>ACK位设为1；</p>
+<p>序号为<code>0x75C7625B</code>，即<strong>序号等于上次握手确认号</strong>；</p>
+<p>确认号为<code>0xF085093</code>，即<strong>确认号等于上次握手序号+1</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">01</span>/<span class="number">01</span><span class="number">-01</span>:<span class="number">40</span>:<span class="number">25.771844</span> <span class="number">0</span>:<span class="number">16</span>:EC:D2:<span class="number">50</span>:<span class="number">7</span>D -&gt; <span class="number">0</span>:<span class="number">19</span>:<span class="number">21</span>:<span class="number">57</span>:<span class="number">7</span>:<span class="number">85</span> type:<span class="number">0x800</span> len:<span class="number">0x3C</span></span><br><span class="line"><span class="number">192.168</span><span class="number">.1</span><span class="number">.104</span>:<span class="number">1980</span> -&gt; <span class="number">192.168</span><span class="number">.1</span><span class="number">.105</span>:<span class="number">21</span> TCP TTL:<span class="number">128</span> TOS:<span class="number">0x0</span> ID:<span class="number">11764</span> IpLen:<span class="number">20</span> DgmLen:<span class="number">40</span> DF</span><br><span class="line">***A***F Seq: <span class="number">0x75C7625B</span>  Ack: <span class="number">0xF085093</span>  Win: <span class="number">0xFF84</span>  TcpLen: <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<p>上边为连接释放的<strong>第三次握手</strong>，可以看到数据包从104发往105，</p>
+<p>ACK位设为1；</p>
+<p>FIN位设置为1；</p>
+<p>序号为<code>0x75C7625B</code>，即<strong>序号等于上次握手序号</strong>；</p>
+<p>确认号为<code>0xF085093</code>，即<strong>确认号等于上次握手确认号</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">01</span>/<span class="number">01</span><span class="number">-01</span>:<span class="number">40</span>:<span class="number">25.771894</span> <span class="number">0</span>:<span class="number">19</span>:<span class="number">21</span>:<span class="number">57</span>:<span class="number">7</span>:<span class="number">85</span> -&gt; <span class="number">0</span>:<span class="number">16</span>:EC:D2:<span class="number">50</span>:<span class="number">7</span>D type:<span class="number">0x800</span> len:<span class="number">0x36</span></span><br><span class="line"><span class="number">192.168</span><span class="number">.1</span><span class="number">.105</span>:<span class="number">21</span> -&gt; <span class="number">192.168</span><span class="number">.1</span><span class="number">.104</span>:<span class="number">1980</span> TCP TTL:<span class="number">128</span> TOS:<span class="number">0x0</span> ID:<span class="number">11667</span> IpLen:<span class="number">20</span> DgmLen:<span class="number">40</span> DF</span><br><span class="line">***A**** Seq: <span class="number">0xF085093</span>  Ack: <span class="number">0x75C7625C</span>  Win: <span class="number">0xFFE2</span>  TcpLen: <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<p>上边为连接释放的<strong>第四次握手</strong>，可以看到数据包从105发往104，</p>
+<p>ACK位设为1；</p>
+<p>序号为<code>0xF085093</code>，即<strong>序号等于上次握手确认号</strong>；</p>
+<p>确认号为<code>0x75C7625C</code>，即<strong>确认号等于上次握手序号+1</strong>。</p>
+<h1 id="心得体会"><a href="#心得体会" class="headerlink" title="心得体会"></a>心得体会</h1><p>本次实验前在计算机网络课堂上还并没有学过TCP的连接过程如何建立与释放，仅仅听说过三次握手和四次握手。</p>
+<p>通过这次实验，更加直观、具体地看到了TCP建立和释放连接的过程。在实验之后，又通过学习，对三次握手和四次握手的原理有了进一步的了解。</p>
+<p>问：为什么建立连接是三次握手，释放连接是四次握手？</p>
+<p>答：</p>
+<ul>
+<li>建立连接时，服务器收到客户的SYN连接请求报文，可以直接发送SYN+ACK报文，其中ACK报文是用来应答的，SYN报文是用来同步的。</li>
+<li>当释放连接时，当服务器收到FIN报文时，很可能并不会立即关闭SOCKET，所以只能先回复一个ACK报文，告诉客户端：“你发的FIN报文我收到了”。只有等到服务器所有的报文都发送完了，它才能发送FIN报文，因此ACK报文和FIN报文不能一起发送，故需要四步握手。</li>
+</ul>
+<hr>
+<p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
+<p>欢迎讨论和交流!</p>
+<hr>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机网络/" rel="tag"># 计算机网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/05/计算机网络-实验（三）ARP欺骗/" rel="next" title="计算机网络-实验（三）ARP欺骗">
+                <i class="fa fa-chevron-left"></i> 计算机网络-实验（三）ARP欺骗
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -591,6 +576,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -611,8 +603,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -688,6 +689,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实验内容"><span class="nav-number">1.</span> <span class="nav-text">实验内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验步骤"><span class="nav-number">2.</span> <span class="nav-text">实验步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境配置"><span class="nav-number">2.1.</span> <span class="nav-text">环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置账户密码"><span class="nav-number">2.1.1.</span> <span class="nav-text">设置账户密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打开FTP站点"><span class="nav-number">2.1.2.</span> <span class="nav-text">打开FTP站点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A访问B"><span class="nav-number">2.2.</span> <span class="nav-text">A访问B</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B进行抓包"><span class="nav-number">2.3.</span> <span class="nav-text">B进行抓包</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据包分析"><span class="nav-number">3.</span> <span class="nav-text">数据包分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP数据包分析"><span class="nav-number">3.1.</span> <span class="nav-text">TCP数据包分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#连接建立"><span class="nav-number">3.1.1.</span> <span class="nav-text">连接建立</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据传送"><span class="nav-number">3.1.2.</span> <span class="nav-text">数据传送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接释放"><span class="nav-number">3.1.3.</span> <span class="nav-text">连接释放</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#心得体会"><span class="nav-number">4.</span> <span class="nav-text">心得体会</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -859,6 +876,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
