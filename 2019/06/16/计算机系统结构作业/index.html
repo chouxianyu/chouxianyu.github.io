@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="计算机系统结构," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="臭咸鱼的缺氧瓶" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="说明： 大二下学期计算机系统结构课程课后作业，题目来源：课后题 1.1题目解释下列术语 层次结构；计算机系统结构；计算机组成；计算机实现；透明性；由上往下设计；由下往上设计；系列机；软件兼容；兼容机；模拟；仿真；虚拟机；宿主机；指令流；数据流；Amdahl定律；CPI；MIPS；MFLOPS 答层次结构 定义   层次结构在这里指计算机系统层次结构。计算机系统系统由硬件和软件组成，按功能划分为7级">
+<meta name="keywords" content="计算机系统结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机系统结构作业">
+<meta property="og:url" content="https://chouxianyu.github.io/2019/06/16/计算机系统结构作业/index.html">
+<meta property="og:site_name" content="臭咸鱼的缺氧瓶">
+<meta property="og:description" content="说明： 大二下学期计算机系统结构课程课后作业，题目来源：课后题 1.1题目解释下列术语 层次结构；计算机系统结构；计算机组成；计算机实现；透明性；由上往下设计；由下往上设计；系列机；软件兼容；兼容机；模拟；仿真；虚拟机；宿主机；指令流；数据流；Amdahl定律；CPI；MIPS；MFLOPS 答层次结构 定义   层次结构在这里指计算机系统层次结构。计算机系统系统由硬件和软件组成，按功能划分为7级">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2019/06/04/5cf6539fdabb486032.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/05/5cf7a8f64290e16462.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/10/5cfe3490e48be63689.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/10/5cfe6ca49a8ed59514.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/11/5cfe888f4485d73192.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/06/11/5cfe888edcf9b62399.jpg">
+<meta property="og:updated_time" content="2019-06-19T02:38:21.213Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机系统结构作业">
+<meta name="twitter:description" content="说明： 大二下学期计算机系统结构课程课后作业，题目来源：课后题 1.1题目解释下列术语 层次结构；计算机系统结构；计算机组成；计算机实现；透明性；由上往下设计；由下往上设计；系列机；软件兼容；兼容机；模拟；仿真；虚拟机；宿主机；指令流；数据流；Amdahl定律；CPI；MIPS；MFLOPS 答层次结构 定义   层次结构在这里指计算机系统层次结构。计算机系统系统由硬件和软件组成，按功能划分为7级">
+<meta name="twitter:image" content="https://i.loli.net/2019/06/04/5cf6539fdabb486032.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chouxianyu.github.io/2019/06/16/计算机系统结构作业/"/>
+
+
+
+
+
+  <title>计算机系统结构作业 | 臭咸鱼的缺氧瓶</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5706c34297d4762ba8c6d799a54234b9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">臭咸鱼的缺氧瓶</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快给我氧气！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/06/16/计算机系统结构作业/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">计算机系统结构作业</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-16T18:02:00+08:00">
+                2019-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/06/16/计算机系统结构作业/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/16/计算机系统结构作业/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/06/16/计算机系统结构作业/" class="leancloud_visitors" data-flag-title="计算机系统结构作业">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  4,818 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  17 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>说明</strong>：</p>
+<p>大二下学期计算机系统结构课程课后作业，题目来源：课后题</p>
+<h1 id="1-1"><a href="#1-1" class="headerlink" title="1.1"></a>1.1</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>解释下列术语</p>
+<p>层次结构；计算机系统结构；计算机组成；计算机实现；透明性；由上往下设计；由下往上设计；系列机；软件兼容；兼容机；模拟；仿真；虚拟机；宿主机；指令流；数据流；Amdahl定律；CPI；MIPS；MFLOPS</p>
+<h2 id="答"><a href="#答" class="headerlink" title="答"></a>答</h2><h3 id="层次结构"><a href="#层次结构" class="headerlink" title="层次结构"></a>层次结构</h3><ul>
+<li><p>定义</p>
+<p>  层次结构在这里指计算机系统层次结构。计算机系统系统由硬件和软件组成，<strong>按功能划分</strong>为7级层次结构。</p>
+<p>  每一级对应一种<strong>机器</strong>（虚拟机器由软件实现，实际机器由硬件实现），从第0级到第6级，级数越低越靠近<strong>硬件</strong>，级数越高越靠近<strong>软件</strong>。</p>
+<p>  在某层次的观察者视角中，他只是通过该层次的语言了解和使用计算机，不必关心低层次的那些机器的工作原理，也就是对于高层来说低层是<strong>透明</strong>的。</p>
+</li>
+<li><p><strong>个人理解</strong></p>
+<p>  计算机系统层次结构是计算机领域<strong>分层思想</strong>的一种应用，计算机网络的体系结构（OSI七层协议等）也是。在层次结构中，每层负责解决一定的问题，即具有一定的功能。一般来说，底层为高层提供一定的服务。</p>
+</li>
+<li><p>示意图</p>
+<p>  <a href="https://i.loli.net/2019/06/04/5cf6539fdabb486032.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/04/5cf6539fdabb486032.png" alt="计算机系统层次结构.png"></a></p>
+</li>
+</ul>
+<h3 id="计算机系统结构"><a href="#计算机系统结构" class="headerlink" title="计算机系统结构"></a>计算机系统结构</h3><ul>
+<li><p>定义</p>
+<p>  “计算机系统结构”这个名词来源于英文<code>computer architecture</code>，目前并无统一定义，现以<strong>Amdahl定义</strong>举例。</p>
+<p>  Amdahl等人在1964年提出计算机系统结构这个名词，他们将其定义为程序设计者所看到的一个计算机系统（也就是上边提到的机器）的属性，即<strong>概念性结构</strong>和<strong>功能特性</strong>，这是程序员为了使其编写的程序能在机器上正确运行，需要了解和遵循的计算机属性。</p>
+<p>  计算机系统结构主要研究软件、硬件功能分配和对软件、硬件界面的确定，即哪些功能由软件完成、哪些功能由硬件完成。</p>
+<p>  Amdahl等人对计算机系统结构定义的主要内容是<strong>指令系统</strong>及其<strong>执行模型</strong>，然而随着新器件的出现，计算机系统结构的定义还应包括<strong>功能模块的设计</strong>。</p>
+</li>
+<li><p><strong>个人理解</strong></p>
+<p>  如果把计算机这门科学涉及的知识进行分层，计算机系统结构则是软件和硬件的交界处，硬件是计算机组成原理的主要内容，软件则是操作系统等。</p>
+</li>
+<li><p>分类方法</p>
+<ul>
+<li><p>Flynn分类法</p>
+<p>  按照指令流和数据流的不同组织方式进行分类，分为以下四类：</p>
+<ul>
+<li>单指令流单数据流SISD</li>
+<li>单指令流多数据流SIMD</li>
+<li>多指令流单数据流MISD</li>
+<li>多指令流多数据流MIMD</li>
+</ul>
+</li>
+<li><p>冯氏分类法</p>
+<p>  冯泽云提出用最大并行度对计算机系统结构进行分类，分为以下四类：</p>
+<ul>
+<li>字串位串WSBS</li>
+<li>字并位串WPBS</li>
+<li>字串位并WSBP</li>
+<li>字并位并WPBP</li>
+</ul>
+</li>
+<li><p>Handler分类法</p>
+<p>  Wolfgan Handler在1977年根据并行度和流水线提出了一种分类法，其将计算机的硬件结构分为三个层次，并分别考虑它们的可并行-流水处理程度，以下为三个层次：</p>
+<ol>
+<li>程序控制部件的个数</li>
+<li>算术逻辑部件或处理部件的个数</li>
+<li>每个算术逻辑部件包含基本逻辑线路的套数</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="计算机组成"><a href="#计算机组成" class="headerlink" title="计算机组成"></a>计算机组成</h3><p>计算机组成是<strong>计算机系统结构的逻辑实现</strong>，包括机器内部的数据流和控制流的组成以及逻辑设计等。</p>
+<p>其<strong>任务</strong>是在计算机系统结构确定分配给硬件子系统的功能及其概念结构之后，研究各组成部分的内部构造和相互联系，以实现机器指令级的各种功能和特性。</p>
+<h3 id="计算机实现"><a href="#计算机实现" class="headerlink" title="计算机实现"></a>计算机实现</h3><p>计算机实现是指<strong>计算机组成的物理实现</strong>。</p>
+<h3 id="透明性"><a href="#透明性" class="headerlink" title="透明性"></a>透明性</h3><p>透明指的是本来存在的事物和属性，从某种角度来看，它是不存在的。</p>
+<p><strong>个人理解</strong>：</p>
+<p>计算机网络中物理层的实现对于网络层来说就是透明的，网络层并不知道物理层的内部实现，仅知道物理层的外部接口而已。</p>
+<p>就像课堂上老师要收作业，他不知道课代表是怎么收的，课代表怎么收作业对于老师来说就是透明的。</p>
+<h3 id="由上往下设计"><a href="#由上往下设计" class="headerlink" title="由上往下设计"></a>由上往下设计</h3><p>与由下往上设计对应，根据计算机系统结构的分成，从最高层开始设计每层的功能与实现。</p>
+<h3 id="由下往上设计"><a href="#由下往上设计" class="headerlink" title="由下往上设计"></a>由下往上设计</h3><p>根据计算机系统结构的分层，从最低层开始设计每层的功能与实现。</p>
+<p>这种方法以前较为适宜，因为那时硬件成本昂贵，硬件技术水平低，软件技术和硬件技术相比往往处于被动地位。</p>
+<h3 id="系列机"><a href="#系列机" class="headerlink" title="系列机"></a>系列机</h3><p>系列机是指在<strong>一个厂家</strong>内生产的具有<strong>相同的系统结构</strong>，但具有<strong>不同组成和实现</strong>的一系列不同型号的机器。</p>
+<h3 id="软件兼容"><a href="#软件兼容" class="headerlink" title="软件兼容"></a>软件兼容</h3><p>同一个软件可以不加修改地运行于系统结构相同的各档机器，可获得相同的结果，差别只在于不同的运行时间。</p>
+<p>系列机的软件兼容分为向上兼容、向下兼容、向左兼容、向右兼容。</p>
+<h3 id="兼容机"><a href="#兼容机" class="headerlink" title="兼容机"></a>兼容机</h3><p><strong>不同厂家</strong>生产的具有相同系统结构的计算机称为<strong>兼容机</strong>。它的思想与系列机的思想是一致的。</p>
+<h3 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h3><p>模拟指用软件方法在一台现有的计算机上实现另一台计算机的指令系统。</p>
+<p>通过<strong>解释</strong>方法把B机器的每一条指令用A机器的指令进行解释执行。</p>
+<p>A机器称为<strong>宿主机</strong>，B机器称为<strong>虚拟机</strong>。</p>
+<h3 id="仿真"><a href="#仿真" class="headerlink" title="仿真"></a>仿真</h3><p>用微程序直接解释另一种机器指令系统的方法称为<strong>仿真</strong>。</p>
+<h3 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h3><p>模拟中已介绍。</p>
+<h3 id="宿主机"><a href="#宿主机" class="headerlink" title="宿主机"></a>宿主机</h3><p>模拟中已介绍。</p>
+<h3 id="指令流"><a href="#指令流" class="headerlink" title="指令流"></a>指令流</h3><p>机器执行的指令序列。</p>
+<h3 id="数据流"><a href="#数据流" class="headerlink" title="数据流"></a>数据流</h3><p>由指令流调用的数据序列，包括输入数据和中间结果。</p>
+<h3 id="Amdahl定律"><a href="#Amdahl定律" class="headerlink" title="Amdahl定律"></a>Amdahl定律</h3><p>系统中某一部件由于采用某种更快的执行方式后整个系统性能的提高与这种执行方式的使用频率或占总执行时间的比例有关。</p>
+<h3 id="CPI"><a href="#CPI" class="headerlink" title="CPI"></a>CPI</h3><p>每条指令的平均时钟周期。</p>
+<script type="math/tex; mode=display">
+CPI=CPU时钟周期数目/IC</script><h3 id="MIPS"><a href="#MIPS" class="headerlink" title="MIPS"></a>MIPS</h3><p>每秒百万条指令数。</p>
+<script type="math/tex; mode=display">
+MIPS=\frac{指令条数}{执行时间\times10^6}=\frac{时钟频率}{CPI\times10^6}</script><h3 id="MFLOPS"><a href="#MFLOPS" class="headerlink" title="MFLOPS"></a>MFLOPS</h3><p>每秒百万次浮点操作次数。</p>
+<script type="math/tex; mode=display">
+MFLOPS=\frac{程序中的浮点操作次数}{执行时间\times10^6}</script><h1 id="1-5"><a href="#1-5" class="headerlink" title="1.5"></a>1.5</h1><h2 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h2><p>硬件和软件在什么意义上是等效的？在什么意义上又是不等效的？试举例说明</p>
+<h2 id="答-1"><a href="#答-1" class="headerlink" title="答"></a>答</h2><ul>
+<li><p><strong>个人理解</strong></p>
+<p>  计算机系统结构的设计主要在<strong>功能</strong>这一层次上考虑问题。</p>
+<p>  在<strong>功能</strong>这个层次上考虑，软件和硬件是<strong>等效</strong>的，即软件和硬件都实现了同样的功能。</p>
+<p>  从<strong>功能实现的原理</strong>这个层次上考虑，软件和硬件是<strong>不等效</strong>的，两者的实现方式是不同的，成本、效率等指标也会有不同。</p>
+</li>
+<li><p><strong>举例</strong></p>
+<p>  比如存储器管理，不管用硬件还是软件，都可以实现相同的存储器管理功能，但两者的实现方法和性能都是不同的。</p>
+</li>
+</ul>
+<h1 id="1-6"><a href="#1-6" class="headerlink" title="1.6"></a>1.6</h1><h2 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a>题目</h2><p>试以实例说明计算机系统结构、计算机组成与计算机实现之间的相互关系和相互影响。</p>
+<h2 id="答-2"><a href="#答-2" class="headerlink" title="答"></a>答</h2><ul>
+<li><p><strong>相互关系</strong></p>
+<ul>
+<li><p>一种系统结构可以有多种组成</p>
+<p>  比如系列机系统结构相同，指令的执行顺序既可以是顺序执行，又可以是重叠、流水线等执行顺序。</p>
+</li>
+<li><p>一种组成可以有多种物理实现</p>
+<p>  比如同样的组成，主存既可以使用双极型，又可以使用MOS型。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>相互影响</strong></p>
+<p>  系统结构不同，采用的计算机组成也不同，同样计算机组成也会影响系统结构。</p>
+</li>
+</ul>
+<h1 id="1-12"><a href="#1-12" class="headerlink" title="1.12"></a>1.12</h1><h2 id="题目-3"><a href="#题目-3" class="headerlink" title="题目"></a>题目</h2><p>如果某一计算任务用向量方式求解比用标量方式求解快20倍，称可用向量方式求解部分所花时间占总的时间的百分比为可向量化百分比。</p>
+<p>画出加速比与向量化比例两者关系的曲线。</p>
+<h2 id="答-3"><a href="#答-3" class="headerlink" title="答"></a>答</h2><p>该题考察Amdahl定律，</p>
+<script type="math/tex; mode=display">
+S_n=\frac{T_0}{T_n}=\frac{1}{(1-Fe)+\frac{Fe}{Se}}</script><p>上式中$Sn$为加速比；</p>
+<p>$Fe$为$\frac{可改进部分占用时间}{改进前整个任务的执行时间}$；</p>
+<p>$Se$为$\frac{改进前改进部分的执行时间}{改进后改进部分的执行时间}$。</p>
+<p>可知可向量化百分比即为$Fe$，且$Se=\frac{20}{1}=20$。（虽说快20倍，这里应该是21的，为简化计算，就这样吧..…）</p>
+<p>由上，可得下式：</p>
+<script type="math/tex; mode=display">
+S_n=\frac{1}{1-0.95Fe}</script><p>MATLAB代码：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Fe=<span class="number">0</span>:<span class="number">0.02</span>:<span class="number">1</span>;</span><br><span class="line">Sn=<span class="number">1.</span>/(<span class="number">1</span><span class="number">-0.95</span>*Fe);</span><br><span class="line">plot(Fe,Sn);</span><br><span class="line">grid minor;</span><br><span class="line">xlabel(<span class="string">'加速比Sn'</span>);</span><br><span class="line">ylabel(<span class="string">'向量化比例Fe'</span>);</span><br></pre></td></tr></table></figure>
+<p>作图如下：</p>
+<p><a href="https://i.loli.net/2019/06/05/5cf7a8f64290e16462.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/05/5cf7a8f64290e16462.png" alt="向量化比例与加速比关系.png"></a></p>
+<h1 id="1-13"><a href="#1-13" class="headerlink" title="1.13"></a>1.13</h1><h2 id="题目-4"><a href="#题目-4" class="headerlink" title="题目"></a>题目</h2><p>题1.12中为达到加速比2，可向量化的百分比应是多少？</p>
+<h2 id="答-4"><a href="#答-4" class="headerlink" title="答"></a>答</h2><p>解下式：</p>
+<script type="math/tex; mode=display">
+2=\frac{1}{1-0.95Fe}</script><p>得$Fe\approx0.526$。</p>
+<h1 id="2-14"><a href="#2-14" class="headerlink" title="2.14"></a>2.14</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>一台模型机共有7条指令，各指令的使用频度分别为35%，25%，20%，10%，5%，3%，2%，有8个通用数据寄存器，2个变址寄存器。问题如下：</p>
+<ol>
+<li>要求操作码的平均长度最短，请设计操作码的编码，并设计所设计操作码的平均长度。</li>
+<li>设计8位字长的寄存器-寄存器型指令3条，16位字长的寄存器-存储器型变址寻址方式指令4条，变址范围不小于正、负127。请设计指令格式，并给出各字段的长度和操作码的编码。</li>
+</ol>
+<h2 id="答-5"><a href="#答-5" class="headerlink" title="答"></a>答</h2><h3 id="第1问"><a href="#第1问" class="headerlink" title="第1问"></a>第1问</h3><p>由题可知，要求操作码平均长度最短，所以应使用哈夫曼编码，指令使用频度越高，其操作码长度应越短。</p>
+<p><a href="https://i.loli.net/2019/06/10/5cfe3490e48be63689.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/10/5cfe3490e48be63689.png" alt="huffman.png"></a></p>
+<p>指令操作码设计如下</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">指令序号</th>
+<th style="text-align:center">使用频度</th>
+<th style="text-align:center">Huffman编码</th>
+<th style="text-align:center">操作码长度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0.35</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0.25</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0.20</td>
+<td style="text-align:center">110</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">0.10</td>
+<td style="text-align:center">1110</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">0.05</td>
+<td style="text-align:center">11110</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">0.03</td>
+<td style="text-align:center">111110</td>
+<td style="text-align:center">6</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">0.02</td>
+<td style="text-align:center">111111</td>
+<td style="text-align:center">6</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>指令操作码平均长度为：</p>
+<script type="math/tex; mode=display">
+H=0.35\times1+0.25\times2+0.20\times3+0.10\times4+0.05\times5+0.03\times6+0.02\times6=2.4</script><h3 id="第2问"><a href="#第2问" class="headerlink" title="第2问"></a>第2问</h3><ul>
+<li><strong>寄存器-寄存器型指令</strong></li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">指令序号</th>
+<th style="text-align:center">编码（2位）</th>
+<th style="text-align:center">通用寄存器（3位）</th>
+<th style="text-align:center">通用寄存器（3位）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">00</td>
+<td style="text-align:center">R</td>
+<td style="text-align:center">R</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">01</td>
+<td style="text-align:center">R</td>
+<td style="text-align:center">R</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">R</td>
+<td style="text-align:center">R</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><strong>寄存器-存储器型变址寻址方式指令</strong></li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">指令序号</th>
+<th style="text-align:center">编码（4位）</th>
+<th style="text-align:center">通用寄存器（3位）</th>
+<th style="text-align:center">变址寄存器（1位）</th>
+<th style="text-align:center">地址偏移量（8位）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1100</td>
+<td style="text-align:center">R</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">A</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1101</td>
+<td style="text-align:center">R</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">A</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1110</td>
+<td style="text-align:center">R</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">A</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">1111</td>
+<td style="text-align:center">R</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">A</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="2-17"><a href="#2-17" class="headerlink" title="2.17"></a>2.17</h1><h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>在一般通用计算机中，按照指令所完成的功能来划分，应该有哪几类指令？各类指令的主要任务是什么？</p>
+<h2 id="答-6"><a href="#答-6" class="headerlink" title="答"></a>答</h2><p>一般来说，要有<strong>5类基本指令</strong>：数据传输类指令、运算类指令、程序控制类指令、输入输出指令、处理机控制和调试指令。</p>
+<h3 id="数据传送类指令"><a href="#数据传送类指令" class="headerlink" title="数据传送类指令"></a>数据传送类指令</h3><ul>
+<li><p><strong>主要任务</strong></p>
+<p>  在相同或不同的数据存储设备之间传送数据。</p>
+</li>
+<li><p>数据传输指令的种类有如下<strong>三个主要因素</strong>决定：</p>
+<ul>
+<li>数据存储设备的种类</li>
+<li>数据传送的单位</li>
+<li>采用的寻址方式</li>
+</ul>
+</li>
+</ul>
+<h3 id="运算类指令"><a href="#运算类指令" class="headerlink" title="运算类指令"></a>运算类指令</h3><ul>
+<li><p><strong>主要任务</strong></p>
+<p>  承担计算机的主要任务：运算（包括数据计算和符号处理）</p>
+</li>
+<li><p>设计运算类指令时主要考虑如下四个因素的组合</p>
+<ul>
+<li>操作种类</li>
+<li>数据表示</li>
+<li>数据长度</li>
+<li>数据存储设备</li>
+</ul>
+</li>
+</ul>
+<h3 id="程序控制指令"><a href="#程序控制指令" class="headerlink" title="程序控制指令"></a>程序控制指令</h3><ul>
+<li><p><strong>主要任务</strong></p>
+<p>  实现流程控制</p>
+</li>
+<li><p>程序控制指令主要包括三类</p>
+<ul>
+<li>转移指令（包括无条件转移和有条件转移）</li>
+<li>程序调用和返回指令</li>
+<li>循环控制指令</li>
+</ul>
+</li>
+</ul>
+<h3 id="输入输出指令"><a href="#输入输出指令" class="headerlink" title="输入输出指令"></a>输入输出指令</h3><ul>
+<li><strong>主要任务</strong><ul>
+<li>启动、停止、测试设备</li>
+<li>数据输入、输出</li>
+<li>对设备进行控制</li>
+<li>等等</li>
+</ul>
+</li>
+</ul>
+<h3 id="处理机控制和调试指令"><a href="#处理机控制和调试指令" class="headerlink" title="处理机控制和调试指令"></a>处理机控制和调试指令</h3><p>一般计算机系统中，处理机有两个状态：管态和用户态，或称主态和从态。这两个状态需要相互切换，而且这两个状态下所能使用的指令应该有所区别</p>
+<ul>
+<li><p><strong>主要任务</strong></p>
+<p>  对不同状态的处理机进行控制</p>
+</li>
+</ul>
+<h1 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h1><h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>一个页式虚拟存储器的虚存空间大小为4GB，页面大小为4KB，每个页表存储字要占用4个字节。</p>
+<ol>
+<li>计算这个页式虚拟存储器需要采用几级页表？</li>
+<li>如果要求页表所占的主存页面数最少，请分配每一级页表的实际存储容量各为多少字节？</li>
+<li>页表的哪些部分必须存放在主存中？哪些可以存放在辅存中？</li>
+</ol>
+<h2 id="答-7"><a href="#答-7" class="headerlink" title="答"></a>答</h2><h3 id="第1问-1"><a href="#第1问-1" class="headerlink" title="第1问"></a>第1问</h3><p>由题可知</p>
+<p>$N_v=4GB$，$N_p=4KB$，$N_d=4B$</p>
+<p>可得页表级数：</p>
+<script type="math/tex; mode=display">
+g=\lceil\frac{log_2N_v-log_2N_p}{log_2N_p-log_2N_d}\rceil=\lceil\frac{32-12}{12-2}\rceil=2</script><p>所以需要<strong>采用2级页表</strong></p>
+<h3 id="第2问-1"><a href="#第2问-1" class="headerlink" title="第2问"></a>第2问</h3><p>一个页可存储的页表存储字的个数为：$\frac{N_p}{N_d}=1K=2^{10}$</p>
+<p>虚拟空间的总页数为：$\frac{N_v}{N_p}=1M=2^{20}$</p>
+<p>设第一级页表要用N个页表存储字</p>
+<p>由第1问可得，使用2级页表，则$N\times\frac{N_p}{N_d}=\frac{N_v}{N_p}$，得$N=2^{10}$，</p>
+<p>由上可得</p>
+<p><strong>第一级页表占用一个页面的大小</strong>，即$N_d\times\frac{N_p}{N_d}=4KB$。</p>
+<p><strong>第二级页表占用1K个页面的大小</strong>，即$N_d\times\frac{N_v}{N_p}=4MB$。</p>
+<h3 id="第3问"><a href="#第3问" class="headerlink" title="第3问"></a>第3问</h3><p>为节省内存空间，第一级页表必须存放在主存中，第二级页表只需要把正在运行的程序的相关页表放在主存中，其他的可以放在外存中。</p>
+<h1 id="3-11"><a href="#3-11" class="headerlink" title="3.11"></a>3.11</h1><h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>一个页式虚拟存储器按字节编址，页面大小为1K个字节，每个数据的字长为4个字节。现有一个程序的页表如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">虚页号</th>
+<th style="text-align:center">装入标志</th>
+<th style="text-align:center">主存（实）页号</th>
+<th style="text-align:center">修改标志</th>
+<th style="text-align:center">访问方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">RW</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">R</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">R</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">X</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">RW</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">R</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">X</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>表中的装入标志为‘1’表示该虚页已经装入主存，为‘0’则表示还未装入主存。修改标志为‘0’表示该页还没有被修改过，为‘1’则表示该页已经被修改过。访问方式‘RW’表示该页可以读可以写，但不能作为指令来执行；‘R’表该页只能读，不能写和执行；‘X’表示该页只能作为指令来执行，不能读和写。</p>
+<p>虚地址经变址寻址和基址寻址（B）+（X）+D形成。现有一个程序，出现下列访问主存的操作：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th style="text-align:center">操作</th>
+<th style="text-align:center">（B）</th>
+<th style="text-align:center">（X）</th>
+<th style="text-align:center">D</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">取数</td>
+<td style="text-align:center">124</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">50</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">取数</td>
+<td style="text-align:center">2000</td>
+<td style="text-align:center">1000</td>
+<td style="text-align:center">60</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">存数</td>
+<td style="text-align:center">4000</td>
+<td style="text-align:center">2000</td>
+<td style="text-align:center">600</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">存数</td>
+<td style="text-align:center">1200</td>
+<td style="text-align:center">4600</td>
+<td style="text-align:center">60</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">取数</td>
+<td style="text-align:center">3000</td>
+<td style="text-align:center">640</td>
+<td style="text-align:center">100</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">取数</td>
+<td style="text-align:center">4096</td>
+<td style="text-align:center">500</td>
+<td style="text-align:center">20</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">加并存数</td>
+<td style="text-align:center">400</td>
+<td style="text-align:center">1200</td>
+<td style="text-align:center">80</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">加并存数</td>
+<td style="text-align:center">36</td>
+<td style="text-align:center">360</td>
+<td style="text-align:center">64</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">转移</td>
+<td style="text-align:center">2500</td>
+<td style="text-align:center">600</td>
+<td style="text-align:center">100</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">转移</td>
+<td style="text-align:center">3600</td>
+<td style="text-align:center">1200</td>
+<td style="text-align:center">56</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li>列出产生主存页面失效的操作序号</li>
+<li>如果不发生主存页面失效的话，计算访问主存的物理地址</li>
+<li>列出被修改过的主存页面号</li>
+<li>列出非法操作的序号</li>
+</ol>
+<h2 id="答-8"><a href="#答-8" class="headerlink" title="答"></a>答</h2><p>由题可知，该页式虚拟存储器<strong>按字节编址</strong>，<strong>页面大小为1K个字节</strong>，<strong>每个数据的字长为4个字节</strong>。</p>
+<p>地址0-999是0号虚/实页，地址1000~1999是1号虚/实页，以此类推</p>
+<p>实页内的偏移地址和虚页内的偏移地址相同</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作序号</th>
+<th style="text-align:center">虚地址</th>
+<th style="text-align:center">虚页号</th>
+<th style="text-align:center">实页号</th>
+<th style="text-align:center">页内偏移</th>
+<th style="text-align:center">实（物理）地址</th>
+<th style="text-align:center">操作</th>
+<th style="text-align:center">合法性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">204</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">2098</td>
+<td style="text-align:center">未改</td>
+<td style="text-align:center">合法</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3060</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">60</td>
+<td style="text-align:center">1084</td>
+<td style="text-align:center">未改</td>
+<td style="text-align:center">非法</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">6600</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">未装入</td>
+<td style="text-align:center">600</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center">失效</td>
+<td style="text-align:center">无</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">5860</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">60</td>
+<td style="text-align:center">0060</td>
+<td style="text-align:center">未改</td>
+<td style="text-align:center">非法</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">3740</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">100</td>
+<td style="text-align:center">1124</td>
+<td style="text-align:center">未改</td>
+<td style="text-align:center">非法</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">4616</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">未装入</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center">失效</td>
+<td style="text-align:center">无</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">1680</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">80</td>
+<td style="text-align:center">3116</td>
+<td style="text-align:center">未改</td>
+<td style="text-align:center">非法</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">460</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">64</td>
+<td style="text-align:center">2128</td>
+<td style="text-align:center">修改</td>
+<td style="text-align:center">合法</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">3200</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">100</td>
+<td style="text-align:center">1124</td>
+<td style="text-align:center">未改</td>
+<td style="text-align:center">合法</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">4856</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">未装入</td>
+<td style="text-align:center">56</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center">失效</td>
+<td style="text-align:center">无</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="第1问-2"><a href="#第1问-2" class="headerlink" title="第1问"></a>第1问</h3><p>3、6、10</p>
+<h3 id="第2问-2"><a href="#第2问-2" class="headerlink" title="第2问"></a>第2问</h3><p>表中已计算</p>
+<h3 id="第3问-1"><a href="#第3问-1" class="headerlink" title="第3问"></a>第3问</h3><p>2</p>
+<h3 id="第4问"><a href="#第4问" class="headerlink" title="第4问"></a>第4问</h3><p>2、4、5、7</p>
+<h1 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h1><h2 id="问题-4"><a href="#问题-4" class="headerlink" title="问题"></a>问题</h2><p>在页式虚拟存储器中，一个程序由P1~P5共5个页面组成。在程序执行过程中依次访问到的页面如下：</p>
+<p>P2，P3，P2，P1，P5，P2，P4，P5，P3，P2，P5，P2</p>
+<p>假设系统分配给这个程序的主存有3个页面，分别采用FIFO、LFU、OPT三种页面替换算法对这3页主存进行调度。</p>
+<ol>
+<li>画出主存页面调入、替换和命中的情况表。</li>
+<li>统计三种页面替换算法的页命中率。</li>
+</ol>
+<h2 id="答-9"><a href="#答-9" class="headerlink" title="答"></a>答</h2><ul>
+<li><p>FIFO</p>
+<p>  把最先进来的替换走。</p>
+<p>  方法：向每行回看，出现次数最多的指令待换出</p>
+</li>
+<li><p>LFU</p>
+<p>  把最久没有使用的替换掉。</p>
+<p>  方法：向页地址流回看，最后出现的指令待换出</p>
+</li>
+<li><p>OPT</p>
+<p>  把最晚要使用的替换掉。</p>
+<p>  方法：向页地址流后看，最后访问的指令待换出</p>
+</li>
+</ul>
+<p><a href="https://i.loli.net/2019/06/10/5cfe6ca49a8ed59514.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/10/5cfe6ca49a8ed59514.png" alt="替换算法.png"></a></p>
+<h1 id="4-4"><a href="#4-4" class="headerlink" title="4.4"></a>4.4</h1><h2 id="问题-5"><a href="#问题-5" class="headerlink" title="问题"></a>问题</h2><p>有5个中断源D1、D2、D3、D4和D5，它们的中断优先级从高到低分别是1级、2级、3级、4级和5级。这些中断源的中断优先级、正常情况下的中断屏蔽码和改变后的中断屏蔽码见下表。每个中断源有5位中断屏蔽码，其中，‘1’表示该中断源被屏蔽，‘0’表示该中断源开放。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">中断源名称</th>
+<th style="text-align:center">中断优先级</th>
+<th style="text-align:center">正常的中断屏蔽码D1 D2 D3 D4 D5</th>
+<th style="text-align:center">改变后的中断屏蔽码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">D1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1 1 1 1 1</td>
+<td style="text-align:center">1 0 0 0 0</td>
+</tr>
+<tr>
+<td style="text-align:center">D2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0 1 1 1 1</td>
+<td style="text-align:center">0 1 0 0 0</td>
+</tr>
+<tr>
+<td style="text-align:center">D3</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0 0 1 1 1</td>
+<td style="text-align:center">1 0 1 0 0</td>
+</tr>
+<tr>
+<td style="text-align:center">D4</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">0 0 0 1 1</td>
+<td style="text-align:center">1 1 0 1 1</td>
+</tr>
+<tr>
+<td style="text-align:center">D5</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">0 0 0 0 1</td>
+<td style="text-align:center">1 1 1 0 1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li>当使用正常的中断屏蔽码时，处理机响应各中断源的中断服务请求的先后次序是什么？实际的中断处理次序是什么？</li>
+<li>当使用改变后的中断屏蔽码时，处理机响应各中断源的中断服务请求的先后次序是什么？实际上中断处理的次序是什么？</li>
+<li>如果采用改变后的中断屏蔽码，当D1、D2、D3、D4和D5这5个中断源同时请求中断服务时，画出处理机响应中断源的中断服务请求和实际运行中断服务程序过程的示意图。</li>
+<li>假设从处理机响应中断源的中断服务请求开始，到运行中断服务程序中第一次开中断所用的时间为1个单位时间，处理机运行中断服务程序的其他部分所用的时间为4个单位时间。当处理机在执行主程序时，中断源D3、D4和D5同时发出中断服务请求，过3个单位时间之后，中断源D1和D2同时发出中断服务请求。采用改变后的中断屏蔽码，画出处理机响应各中断源的中断服务请求和实际运行中断服务程序过程的示意图。</li>
+</ol>
+<h2 id="答-10"><a href="#答-10" class="headerlink" title="答"></a>答</h2><h3 id="第1问-3"><a href="#第1问-3" class="headerlink" title="第1问"></a>第1问</h3><p><strong>使用正常的中断屏蔽码，处理机的中断服务顺序将严格按照中断源的中断优先级进行。</strong></p>
+<p>中断服务请求的响应顺序是D1、D2、D3、D4、D5。</p>
+<p>实际的中断处理次序是D1、D2、D3、D4、D5。</p>
+<h3 id="第2问-3"><a href="#第2问-3" class="headerlink" title="第2问"></a>第2问</h3><p>中断服务请求的响应顺序是D1、D2、D3、D4、D5。</p>
+<p>实际的中断处理次序是D4、D5、D3、D2、D1。</p>
+<h3 id="第3问-2"><a href="#第3问-2" class="headerlink" title="第3问"></a>第3问</h3><p><a href="https://i.loli.net/2019/06/11/5cfe888f4485d73192.jpg" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/11/5cfe888f4485d73192.jpg" alt="中断过程1.jpg"></a></p>
+<h3 id="第4问-1"><a href="#第4问-1" class="headerlink" title="第4问"></a>第4问</h3><p><a href="https://i.loli.net/2019/06/11/5cfe888edcf9b62399.jpg" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/11/5cfe888edcf9b62399.jpg" alt="中断过程2.jpg"></a></p>
+<hr>
+<p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
+<p>欢迎讨论和交流!</p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机系统结构/" rel="tag"># 计算机系统结构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/12/计算机网络-实验（四）TCP抓包分析/" rel="next" title="计算机网络-实验（四）TCP抓包分析">
+                <i class="fa fa-chevron-left"></i> 计算机网络-实验（四）TCP抓包分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/19/双缝干涉/" rel="prev" title="双缝干涉">
+                双缝干涉 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg"
+                alt="臭咸鱼" />
+            
+              <p class="site-author-name" itemprop="name">臭咸鱼</p>
+              <p class="site-description motion-element" itemprop="description">Cxy与Bug的前世今生，Cxy与Life的深度摩擦。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://maluguang.com" title="Road Wide's Blog" target="_blank">Road Wide's Blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-1"><span class="nav-number">1.</span> <span class="nav-text">1.1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">1.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#答"><span class="nav-number">1.2.</span> <span class="nav-text">答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#层次结构"><span class="nav-number">1.2.1.</span> <span class="nav-text">层次结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机系统结构"><span class="nav-number">1.2.2.</span> <span class="nav-text">计算机系统结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机组成"><span class="nav-number">1.2.3.</span> <span class="nav-text">计算机组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机实现"><span class="nav-number">1.2.4.</span> <span class="nav-text">计算机实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#透明性"><span class="nav-number">1.2.5.</span> <span class="nav-text">透明性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#由上往下设计"><span class="nav-number">1.2.6.</span> <span class="nav-text">由上往下设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#由下往上设计"><span class="nav-number">1.2.7.</span> <span class="nav-text">由下往上设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系列机"><span class="nav-number">1.2.8.</span> <span class="nav-text">系列机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软件兼容"><span class="nav-number">1.2.9.</span> <span class="nav-text">软件兼容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#兼容机"><span class="nav-number">1.2.10.</span> <span class="nav-text">兼容机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模拟"><span class="nav-number">1.2.11.</span> <span class="nav-text">模拟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#仿真"><span class="nav-number">1.2.12.</span> <span class="nav-text">仿真</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机"><span class="nav-number">1.2.13.</span> <span class="nav-text">虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#宿主机"><span class="nav-number">1.2.14.</span> <span class="nav-text">宿主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令流"><span class="nav-number">1.2.15.</span> <span class="nav-text">指令流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据流"><span class="nav-number">1.2.16.</span> <span class="nav-text">数据流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Amdahl定律"><span class="nav-number">1.2.17.</span> <span class="nav-text">Amdahl定律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPI"><span class="nav-number">1.2.18.</span> <span class="nav-text">CPI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MIPS"><span class="nav-number">1.2.19.</span> <span class="nav-text">MIPS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MFLOPS"><span class="nav-number">1.2.20.</span> <span class="nav-text">MFLOPS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-5"><span class="nav-number">2.</span> <span class="nav-text">1.5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目-1"><span class="nav-number">2.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#答-1"><span class="nav-number">2.2.</span> <span class="nav-text">答</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-6"><span class="nav-number">3.</span> <span class="nav-text">1.6</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目-2"><span class="nav-number">3.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#答-2"><span class="nav-number">3.2.</span> <span class="nav-text">答</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-12"><span class="nav-number">4.</span> <span class="nav-text">1.12</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目-3"><span class="nav-number">4.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#答-3"><span class="nav-number">4.2.</span> <span class="nav-text">答</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-13"><span class="nav-number">5.</span> <span class="nav-text">1.13</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目-4"><span class="nav-number">5.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#答-4"><span class="nav-number">5.2.</span> <span class="nav-text">答</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-14"><span class="nav-number">6.</span> <span class="nav-text">2.14</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">6.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#答-5"><span class="nav-number">6.2.</span> <span class="nav-text">答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第1问"><span class="nav-number">6.2.1.</span> <span class="nav-text">第1问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第2问"><span class="nav-number">6.2.2.</span> <span class="nav-text">第2问</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-17"><span class="nav-number">7.</span> <span class="nav-text">2.17</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-1"><span class="nav-number">7.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#答-6"><span class="nav-number">7.2.</span> <span class="nav-text">答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据传送类指令"><span class="nav-number">7.2.1.</span> <span class="nav-text">数据传送类指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算类指令"><span class="nav-number">7.2.2.</span> <span class="nav-text">运算类指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序控制指令"><span class="nav-number">7.2.3.</span> <span class="nav-text">程序控制指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入输出指令"><span class="nav-number">7.2.4.</span> <span class="nav-text">输入输出指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理机控制和调试指令"><span class="nav-number">7.2.5.</span> <span class="nav-text">处理机控制和调试指令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-9"><span class="nav-number">8.</span> <span class="nav-text">3.9</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-2"><span class="nav-number">8.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#答-7"><span class="nav-number">8.2.</span> <span class="nav-text">答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第1问-1"><span class="nav-number">8.2.1.</span> <span class="nav-text">第1问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第2问-1"><span class="nav-number">8.2.2.</span> <span class="nav-text">第2问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第3问"><span class="nav-number">8.2.3.</span> <span class="nav-text">第3问</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-11"><span class="nav-number">9.</span> <span class="nav-text">3.11</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-3"><span class="nav-number">9.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#答-8"><span class="nav-number">9.2.</span> <span class="nav-text">答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第1问-2"><span class="nav-number">9.2.1.</span> <span class="nav-text">第1问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第2问-2"><span class="nav-number">9.2.2.</span> <span class="nav-text">第2问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第3问-1"><span class="nav-number">9.2.3.</span> <span class="nav-text">第3问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第4问"><span class="nav-number">9.2.4.</span> <span class="nav-text">第4问</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-14"><span class="nav-number">10.</span> <span class="nav-text">3.14</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-4"><span class="nav-number">10.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#答-9"><span class="nav-number">10.2.</span> <span class="nav-text">答</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-4"><span class="nav-number">11.</span> <span class="nav-text">4.4</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-5"><span class="nav-number">11.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#答-10"><span class="nav-number">11.2.</span> <span class="nav-text">答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第1问-3"><span class="nav-number">11.2.1.</span> <span class="nav-text">第1问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第2问-3"><span class="nav-number">11.2.2.</span> <span class="nav-text">第2问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第3问-2"><span class="nav-number">11.2.3.</span> <span class="nav-text">第3问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第4问-1"><span class="nav-number">11.2.4.</span> <span class="nav-text">第4问</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">臭咸鱼</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">91.0k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz',
+        appKey: 'Si7hBxIAVOGbu6Pot7HHaVBB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz", "Si7hBxIAVOGbu6Pot7HHaVBB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>

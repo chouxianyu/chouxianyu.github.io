@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="汇编," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="臭咸鱼的缺氧瓶" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="寒假看B站小甲鱼视频的笔记一 前言汇编语言特点机器语言以外最底层的语言所有语言中效率最高学习目标了解CPU、内存和其他硬件如何配合用计算机的思维操作计算机。研究重点：计算机思维如何利用硬件系统的编程结构和指令集有效灵活地控制系统进行工作，重在思维。 机器语言机器语言是机器指令的集合机器语言是机器指令的集合。 机器指令是01串机器指令是计算机（CPU）唯一懂的指令，由0和1组成。 指令的三种表示方法">
+<meta name="keywords" content="汇编">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇编基础（一）">
+<meta property="og:url" content="https://chouxianyu.github.io/2019/06/22/汇编基础（一）/index.html">
+<meta property="og:site_name" content="臭咸鱼的缺氧瓶">
+<meta property="og:description" content="寒假看B站小甲鱼视频的笔记一 前言汇编语言特点机器语言以外最底层的语言所有语言中效率最高学习目标了解CPU、内存和其他硬件如何配合用计算机的思维操作计算机。研究重点：计算机思维如何利用硬件系统的编程结构和指令集有效灵活地控制系统进行工作，重在思维。 机器语言机器语言是机器指令的集合机器语言是机器指令的集合。 机器指令是01串机器指令是计算机（CPU）唯一懂的指令，由0和1组成。 指令的三种表示方法">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2019/02/09/5c5e86697bacc.png">
+<meta property="og:image" content="https://i.loli.net/2019/02/09/5c5eba758bfd3.png">
+<meta property="og:image" content="https://i.loli.net/2019/02/09/5c5eba6d377a9.png">
+<meta property="og:updated_time" content="2019-06-22T06:15:13.777Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="汇编基础（一）">
+<meta name="twitter:description" content="寒假看B站小甲鱼视频的笔记一 前言汇编语言特点机器语言以外最底层的语言所有语言中效率最高学习目标了解CPU、内存和其他硬件如何配合用计算机的思维操作计算机。研究重点：计算机思维如何利用硬件系统的编程结构和指令集有效灵活地控制系统进行工作，重在思维。 机器语言机器语言是机器指令的集合机器语言是机器指令的集合。 机器指令是01串机器指令是计算机（CPU）唯一懂的指令，由0和1组成。 指令的三种表示方法">
+<meta name="twitter:image" content="https://i.loli.net/2019/02/09/5c5e86697bacc.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chouxianyu.github.io/2019/06/22/汇编基础（一）/"/>
+
+
+
+
+
+  <title>汇编基础（一） | 臭咸鱼的缺氧瓶</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5706c34297d4762ba8c6d799a54234b9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">臭咸鱼的缺氧瓶</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快给我氧气！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/06/22/汇编基础（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">汇编基础（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-22T14:03:23+08:00">
+                2019-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/06/22/汇编基础（一）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/22/汇编基础（一）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/06/22/汇编基础（一）/" class="leancloud_visitors" data-flag-title="汇编基础（一）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,378 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  8 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>寒假看B站小甲鱼视频的笔记一</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="汇编语言特点"><a href="#汇编语言特点" class="headerlink" title="汇编语言特点"></a>汇编语言特点</h2><h3 id="机器语言以外最底层的语言"><a href="#机器语言以外最底层的语言" class="headerlink" title="机器语言以外最底层的语言"></a>机器语言以外最底层的语言</h3><h3 id="所有语言中效率最高"><a href="#所有语言中效率最高" class="headerlink" title="所有语言中效率最高"></a>所有语言中效率最高</h3><h2 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h2><h3 id="了解CPU、内存和其他硬件如何配合"><a href="#了解CPU、内存和其他硬件如何配合" class="headerlink" title="了解CPU、内存和其他硬件如何配合"></a>了解CPU、内存和其他硬件如何配合</h3><h3 id="用计算机的思维操作计算机。"><a href="#用计算机的思维操作计算机。" class="headerlink" title="用计算机的思维操作计算机。"></a>用<strong>计算机的思维</strong>操作计算机。</h3><h2 id="研究重点：计算机思维"><a href="#研究重点：计算机思维" class="headerlink" title="研究重点：计算机思维"></a>研究重点：计算机思维</h2><p>如何利用硬件系统的编程结构和指令集有效灵活地控制系统进行工作，<strong>重在思维</strong>。</p>
+<h1 id="机器语言"><a href="#机器语言" class="headerlink" title="机器语言"></a>机器语言</h1><h2 id="机器语言是机器指令的集合"><a href="#机器语言是机器指令的集合" class="headerlink" title="机器语言是机器指令的集合"></a>机器语言是机器指令的集合</h2><p>机器语言是机器指令的集合。</p>
+<h2 id="机器指令是01串"><a href="#机器指令是01串" class="headerlink" title="机器指令是01串"></a>机器指令是01串</h2><p>机器指令是计算机（CPU）<strong>唯一懂</strong>的指令，由0和1组成。</p>
+<h2 id="指令的三种表示方法"><a href="#指令的三种表示方法" class="headerlink" title="指令的三种表示方法"></a>指令的三种表示方法</h2><h3 id="机器指令"><a href="#机器指令" class="headerlink" title="机器指令"></a>机器指令</h3><p>01010000</p>
+<h3 id="汇编语言"><a href="#汇编语言" class="headerlink" title="汇编语言"></a>汇编语言</h3><p>PUSH AX</p>
+<h3 id="电平脉冲"><a href="#电平脉冲" class="headerlink" title="电平脉冲"></a>电平脉冲</h3><p>按次序的8个脉冲</p>
+<h1 id="汇编语言的产生"><a href="#汇编语言的产生" class="headerlink" title="汇编语言的产生"></a>汇编语言的产生</h1><h2 id="汇编指令和机器指令的差别在于指令的表示方法"><a href="#汇编指令和机器指令的差别在于指令的表示方法" class="headerlink" title="汇编指令和机器指令的差别在于指令的表示方法"></a>汇编指令和机器指令的差别在于指令的表示方法</h2><p>汇编指令和机器指令的差别在于指令的表示方法。</p>
+<p>汇编语言是符号语言，和机器语言之间的对应关系基本上是一一对应的。</p>
+<p>一条机器语言的指令对应一条汇编语言的指令。 </p>
+<p><code>ollydbg</code></p>
+<h2 id="汇编语言作用过程"><a href="#汇编语言作用过程" class="headerlink" title="汇编语言作用过程"></a>汇编语言作用过程</h2><p>汇编指令，经过编译器处理（类似于替换作用，不完全是替换），变成机器码，交给计算机。</p>
+<h1 id="汇编语言的组成"><a href="#汇编语言的组成" class="headerlink" title="汇编语言的组成"></a>汇编语言的组成</h1><p>汇编语言的核心是汇编指令，它决定了汇编语言的特性。</p>
+<p>伪指令和其他符号可以归为一类。</p>
+<h2 id="汇编指令"><a href="#汇编指令" class="headerlink" title="汇编指令"></a>汇编指令</h2><p>机器指令的助记符。</p>
+<h2 id="伪指令"><a href="#伪指令" class="headerlink" title="伪指令"></a>伪指令</h2><p>由编译器执行。</p>
+<h2 id="其他符号"><a href="#其他符号" class="headerlink" title="其他符号"></a>其他符号</h2><p>由编译器识别。</p>
+<h1 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h1><h2 id="CPU的作用：控制整个计算机并进行运算"><a href="#CPU的作用：控制整个计算机并进行运算" class="headerlink" title="CPU的作用：控制整个计算机并进行运算"></a>CPU的作用：控制整个计算机并进行运算</h2><p>CPU是计算机的核心部件，它<strong>控制整个计算机的运作</strong>并<strong>进行运算</strong>。</p>
+<h2 id="CPU工作的信息要求：指令-数据"><a href="#CPU工作的信息要求：指令-数据" class="headerlink" title="CPU工作的信息要求：指令+数据"></a>CPU工作的信息要求：指令+数据</h2><p>要想让一个CPU工作，就必须向它提供<strong>指令和数据</strong>。</p>
+<h3 id="提供指令"><a href="#提供指令" class="headerlink" title="提供指令"></a>提供指令</h3><h3 id="提供数据"><a href="#提供数据" class="headerlink" title="提供数据"></a>提供数据</h3><h2 id="CPU对存储器进行读写的信息要求"><a href="#CPU对存储器进行读写的信息要求" class="headerlink" title="CPU对存储器进行读写的信息要求"></a>CPU对存储器进行读写的信息要求</h2><p>CPU要进行数据的读写，必须和外部器件（标准说法是芯片）进行三类信息的交互：</p>
+<h3 id="地址信息"><a href="#地址信息" class="headerlink" title="地址信息"></a>地址信息</h3><p>存储单元的<strong>序号</strong>（地址）。</p>
+<h3 id="控制信息"><a href="#控制信息" class="headerlink" title="控制信息"></a>控制信息</h3><p>器件的选择，读或写命令。</p>
+<h3 id="数据信息"><a href="#数据信息" class="headerlink" title="数据信息"></a>数据信息</h3><p>读或写的数据。</p>
+<h2 id="存储器的分类"><a href="#存储器的分类" class="headerlink" title="存储器的分类"></a>存储器的分类</h2><h3 id="按读写属性分类：RAM和ROM"><a href="#按读写属性分类：RAM和ROM" class="headerlink" title="按读写属性分类：RAM和ROM"></a>按读写属性分类：RAM和ROM</h3><h4 id="随机存储器RAM"><a href="#随机存储器RAM" class="headerlink" title="随机存储器RAM"></a>随机存储器RAM</h4><h4 id="只读存储器ROM"><a href="#只读存储器ROM" class="headerlink" title="只读存储器ROM"></a>只读存储器ROM</h4><h4 id="RAM和ROM的区别"><a href="#RAM和ROM的区别" class="headerlink" title="RAM和ROM的区别"></a>RAM和ROM的区别</h4><p>断电后，RAM中的数据将会遗失，而ROM中的数据不会。</p>
+<h3 id="按功能和连接分类："><a href="#按功能和连接分类：" class="headerlink" title="按功能和连接分类："></a>按功能和连接分类：</h3><h4 id="随机存储器RAM-1"><a href="#随机存储器RAM-1" class="headerlink" title="随机存储器RAM"></a>随机存储器RAM</h4><h4 id="装有BIOS的ROM"><a href="#装有BIOS的ROM" class="headerlink" title="装有BIOS的ROM"></a>装有BIOS的ROM</h4><h4 id="接口卡上的RAM"><a href="#接口卡上的RAM" class="headerlink" title="接口卡上的RAM"></a>接口卡上的RAM</h4><h2 id="BIOS"><a href="#BIOS" class="headerlink" title="BIOS"></a>BIOS</h2><h3 id="BIOS是基本IO系统"><a href="#BIOS是基本IO系统" class="headerlink" title="BIOS是基本IO系统"></a>BIOS是基本IO系统</h3><p>Basic Input/Output System，基本输入输出系统。</p>
+<p>BIOS是由<strong>主板和各类接口卡</strong>（显卡、网卡等）厂商提供的软件系统。</p>
+<p>主板和接口卡的知识在后边。</p>
+<h3 id="BIOS在主板和某些接口卡的ROM中"><a href="#BIOS在主板和某些接口卡的ROM中" class="headerlink" title="BIOS在主板和某些接口卡的ROM中"></a>BIOS在主板和某些接口卡的ROM中</h3><p><strong>不止主板才有BIOS</strong>，在主板和某些接口卡上插有存储相应BIOS的ROM。</p>
+<h3 id="BIOS的作用"><a href="#BIOS的作用" class="headerlink" title="BIOS的作用"></a>BIOS的作用</h3><p>可以通过BIOS利用对应硬件设备进行最基本的输入输出。</p>
+<p>开机时看到的界面就是BIOS在发生作用，它在检测CPU、内存、硬盘、键盘等等有没有插好。</p>
+<p>如果病毒进入BIOS，杀毒软件也杀不掉的。</p>
+<h2 id="内部存储器"><a href="#内部存储器" class="headerlink" title="内部存储器"></a>内部存储器</h2><h3 id="内部存储器是内存，一个大的RAM"><a href="#内部存储器是内存，一个大的RAM" class="headerlink" title="内部存储器是内存，一个大的RAM"></a>内部存储器是内存，一个大的RAM</h3><p>平常所说的内存条、内存就是内部存储器，一个大的RAM。</p>
+<h3 id="内部存储器的作用"><a href="#内部存储器的作用" class="headerlink" title="内部存储器的作用"></a>内部存储器的作用</h3><p>PC机中内存的作用仅次于CPU，离开内存，再好的CPU也无法工作。</p>
+<p>磁盘不同于内存，磁盘上的数据或程序如果不读到内存中，就无法被CPU使用。</p>
+<p>显卡、网卡、BIOS等都是有它的（存储器）内存的。</p>
+<p>CPU和内存读写很快，内存和磁盘读写的速度比较慢。</p>
+<h2 id="存储器存储的内容及其作用"><a href="#存储器存储的内容及其作用" class="headerlink" title="存储器存储的内容及其作用"></a>存储器存储的内容及其作用</h2><p>存储器存储了指令和数据。</p>
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>指令告诉CPU<strong>怎么操作</strong>。</p>
+<h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><p>数据告诉CPU<strong>什么</strong>操作<strong>什么</strong>。</p>
+<h3 id="指令和数据的关系"><a href="#指令和数据的关系" class="headerlink" title="指令和数据的关系"></a>指令和数据的关系</h3><ul>
+<li>指令和数据是应用上的概念。</li>
+<li>在内存或磁盘中，指令和数据没有任何区别，都是二进制信息。</li>
+</ul>
+<p><strong>根据程序员如何应用</strong>，CPU处理的二进制信息 可以是汇编代码（指令），也可以是数据，如下：</p>
+<ul>
+<li><p>1000100111011000</p>
+<ul>
+<li><p>89D8H</p>
+<p>  数据，末尾的H表示Hex，十六进制。B表示二进制，十进制没有后缀。</p>
+</li>
+<li><p><code>MOV AX,BX</code></p>
+<p>  程序，将寄存器BX的内容粘贴到寄存器AX中。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h1><p>寄存器是CPU中可以存储数据的器件，一个CPU中有多个寄存器。</p>
+<p>寄存器是一种比内存和二级缓存更低一层，更接近CPU的存储器。</p>
+<h1 id="存储单元"><a href="#存储单元" class="headerlink" title="存储单元"></a>存储单元</h1><h2 id="存储单元是存储器的一个个部分"><a href="#存储单元是存储器的一个个部分" class="headerlink" title="存储单元是存储器的一个个部分"></a>存储单元是存储器的一个个部分</h2><p>存储器被划分为若干个存储单元。</p>
+<h2 id="每个存储单元存储一个字节"><a href="#每个存储单元存储一个字节" class="headerlink" title="每个存储单元存储一个字节"></a>每个存储单元存储一个字节</h2><p>每个存储单元存储一个字节。</p>
+<p>1字节（Byte）= 8位（bit） 1B=8b</p>
+<h2 id="存储单元从0开始编号"><a href="#存储单元从0开始编号" class="headerlink" title="存储单元从0开始编号"></a>存储单元从0开始编号</h2><p>存储单元从0开始顺序编号。计算机都从0开始计数。</p>
+<p>例如：</p>
+<p>一个存储器有128个存储单元。编号0-127。</p>
+<p>显卡里面有个内存，叫显存，数据存在显存里面，显卡里的GPU把显存中的数据映射到屏幕上。GPU的速度比CPU快多了。3D游戏对于显卡的要求是很高的。</p>
+<h1 id="总线"><a href="#总线" class="headerlink" title="总线"></a>总线</h1><p>计算机传输、处理的信息都是<strong>电信号</strong>，电信号要用导线传送。</p>
+<p>计算机中专门有连接CPU和其他芯片的导线，称作总线。</p>
+<h2 id="总线分类"><a href="#总线分类" class="headerlink" title="总线分类"></a>总线分类</h2><p>在物理层次上，总线是一根根导线的集合。</p>
+<p>逻辑上的分类：</p>
+<h3 id="地址总线"><a href="#地址总线" class="headerlink" title="地址总线"></a>地址总线</h3><p>CPU是通过地址总线来指定存储器单元的。所以地址总线能传送多少个不同的信息，CPU就可以对多少个存储单元进行寻址。</p>
+<p>一个CPU有$N$根地址总线，则其地址总线宽度为$N$，它可以寻找$2^N$个内存单元。</p>
+<h4 id="寻址能力"><a href="#寻址能力" class="headerlink" title="寻址能力"></a>寻址能力</h4><p>寻址能力为8KB，即能寻找到8*1024个字节，总线宽度为13。</p>
+<h3 id="数据总线"><a href="#数据总线" class="headerlink" title="数据总线"></a>数据总线</h3><p>有几根数据总线就最多可以传几位。</p>
+<h3 id="控制总线"><a href="#控制总线" class="headerlink" title="控制总线"></a>控制总线</h3><p>控制总线是一些不同控制线的集合。CPU通过控制总线控制外部器件。</p>
+<p>有多少根控制总线就意味着CPU提供了对外部器件的多少种控制。 </p>
+<p><img src="https://i.loli.net/2019/02/09/5c5e86697bacc.png" alt="总线的逻辑划分.png">内存不只是内存条，还有显存，网卡内存等，它们线性排列。</p>
+<h1 id="主板"><a href="#主板" class="headerlink" title="主板"></a>主板</h1><p>每个PC机，都有一个主板。</p>
+<p>主板上有核心器件（CPU、内存）和一些主要器件，这些器件通过总线（地址总线、数据总线、控制总线）相连。</p>
+<h1 id="接口卡"><a href="#接口卡" class="headerlink" title="接口卡"></a>接口卡</h1><p>计算机系统中，所有可用程序控制其工作的设备，必须受到CPU的控制。</p>
+<p>CPU对外部设备不能直接控制，如显示器、音箱、打印机等。</p>
+<p>直接控制这些设备进行工作的是插在扩展插槽上的接口卡。</p>
+<h1 id="内存地址空间"><a href="#内存地址空间" class="headerlink" title="内存地址空间"></a>内存地址空间</h1><p>不同的计算机系统的内存地址空间分配情况是不同的。</p>
+<h2 id="各类存储器逻辑相同点"><a href="#各类存储器逻辑相同点" class="headerlink" title="各类存储器逻辑相同点"></a>各类存储器逻辑相同点</h2><p>各类存储器在物理上是独立的器件：</p>
+<p><img src="https://i.loli.net/2019/02/09/5c5eba758bfd3.png" alt="PC机各类存储器的逻辑连接.png"></p>
+<p>但它们在逻辑上有两点相同：</p>
+<h3 id="都和CPU总线相连"><a href="#都和CPU总线相连" class="headerlink" title="都和CPU总线相连"></a>都和CPU总线相连</h3><h3 id="CPU对它们进行读或写的时候都通过控制总线发出内存读写命令"><a href="#CPU对它们进行读或写的时候都通过控制总线发出内存读写命令" class="headerlink" title="CPU对它们进行读或写的时候都通过控制总线发出内存读写命令"></a>CPU对它们进行读或写的时候都通过控制总线发出内存读写命令</h3><h2 id="什么是内存地址空间"><a href="#什么是内存地址空间" class="headerlink" title="什么是内存地址空间"></a>什么是内存地址空间</h2><p>一个CPU的地址总线宽度为10，那个可以寻址1024个内存单元，这1024个可寻到的内存单元就构成这个CPU的内存地址空间。</p>
+<p>将<strong>各类存储器在逻辑上合并成一个存储器</strong>：</p>
+<p><img src="https://i.loli.net/2019/02/09/5c5eba6d377a9.png" alt="把各类存储器看做一个逻辑存储器.png"></p>
+<p>对CPU来讲，系统中各类存储器中的存储单元都处于一个统一的逻辑存储器中，它的容量受CPU寻址能力的限制。这个逻辑上统一的存储器就是我们说的内存地址空间。</p>
+<p>每个物理上的存储器在逻辑上占有一段地址段，CPU对其段进行操作，就是对物理存储进行操作。</p>
+<p>最终运行程序的是CPU，我们用汇编语言编程时，必须要从CPU角度考虑问题。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ol>
+<li>汇编指令是机器指令的助记符，同机器指令一一对应。</li>
+<li>每一种CPU都有自己的汇编指令集。</li>
+<li>CPU可以直接使用的信息在存储器中存放。</li>
+<li>在存储器中指令和数据没有任何区别，都是二进制信息。</li>
+<li>存储单元从0开始顺序编号。</li>
+<li>一个存储单元可以存储一个字节，即8个bit（8b）、8位二进制。</li>
+<li>1GB = 1024MB         1MB = 1024KB         1KB = 1024Byte         1Byte = 8bit</li>
+<li>每个CPU芯片都有许多管脚，这些管脚和总线相连。也可以说这些管脚引出总线。一个CPU可以引出三种总线的宽度标志了CPU的不同方面的性能。<ul>
+<li>地址总线宽度决定CPU寻址能力</li>
+<li>数据总线宽度决定CPU与其他器件进行一次数据传输时的数据传输量</li>
+<li>控制总线宽度决定CPU对系统中其他器件的控制能力</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
+<p>欢迎讨论和交流!</p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/汇编/" rel="tag"># 汇编</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/19/双缝干涉/" rel="next" title="双缝干涉">
+                <i class="fa fa-chevron-left"></i> 双缝干涉
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/22/汇编基础（二）/" rel="prev" title="汇编基础（二）">
+                汇编基础（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg"
+                alt="臭咸鱼" />
+            
+              <p class="site-author-name" itemprop="name">臭咸鱼</p>
+              <p class="site-description motion-element" itemprop="description">Cxy与Bug的前世今生，Cxy与Life的深度摩擦。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://maluguang.com" title="Road Wide's Blog" target="_blank">Road Wide's Blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#汇编语言特点"><span class="nav-number">1.1.</span> <span class="nav-text">汇编语言特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#机器语言以外最底层的语言"><span class="nav-number">1.1.1.</span> <span class="nav-text">机器语言以外最底层的语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#所有语言中效率最高"><span class="nav-number">1.1.2.</span> <span class="nav-text">所有语言中效率最高</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习目标"><span class="nav-number">1.2.</span> <span class="nav-text">学习目标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#了解CPU、内存和其他硬件如何配合"><span class="nav-number">1.2.1.</span> <span class="nav-text">了解CPU、内存和其他硬件如何配合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用计算机的思维操作计算机。"><span class="nav-number">1.2.2.</span> <span class="nav-text">用计算机的思维操作计算机。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究重点：计算机思维"><span class="nav-number">1.3.</span> <span class="nav-text">研究重点：计算机思维</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#机器语言"><span class="nav-number">2.</span> <span class="nav-text">机器语言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#机器语言是机器指令的集合"><span class="nav-number">2.1.</span> <span class="nav-text">机器语言是机器指令的集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机器指令是01串"><span class="nav-number">2.2.</span> <span class="nav-text">机器指令是01串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令的三种表示方法"><span class="nav-number">2.3.</span> <span class="nav-text">指令的三种表示方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#机器指令"><span class="nav-number">2.3.1.</span> <span class="nav-text">机器指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#汇编语言"><span class="nav-number">2.3.2.</span> <span class="nav-text">汇编语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电平脉冲"><span class="nav-number">2.3.3.</span> <span class="nav-text">电平脉冲</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#汇编语言的产生"><span class="nav-number">3.</span> <span class="nav-text">汇编语言的产生</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#汇编指令和机器指令的差别在于指令的表示方法"><span class="nav-number">3.1.</span> <span class="nav-text">汇编指令和机器指令的差别在于指令的表示方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#汇编语言作用过程"><span class="nav-number">3.2.</span> <span class="nav-text">汇编语言作用过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#汇编语言的组成"><span class="nav-number">4.</span> <span class="nav-text">汇编语言的组成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#汇编指令"><span class="nav-number">4.1.</span> <span class="nav-text">汇编指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伪指令"><span class="nav-number">4.2.</span> <span class="nav-text">伪指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他符号"><span class="nav-number">4.3.</span> <span class="nav-text">其他符号</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储器"><span class="nav-number">5.</span> <span class="nav-text">存储器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU的作用：控制整个计算机并进行运算"><span class="nav-number">5.1.</span> <span class="nav-text">CPU的作用：控制整个计算机并进行运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU工作的信息要求：指令-数据"><span class="nav-number">5.2.</span> <span class="nav-text">CPU工作的信息要求：指令+数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#提供指令"><span class="nav-number">5.2.1.</span> <span class="nav-text">提供指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提供数据"><span class="nav-number">5.2.2.</span> <span class="nav-text">提供数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU对存储器进行读写的信息要求"><span class="nav-number">5.3.</span> <span class="nav-text">CPU对存储器进行读写的信息要求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#地址信息"><span class="nav-number">5.3.1.</span> <span class="nav-text">地址信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制信息"><span class="nav-number">5.3.2.</span> <span class="nav-text">控制信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据信息"><span class="nav-number">5.3.3.</span> <span class="nav-text">数据信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储器的分类"><span class="nav-number">5.4.</span> <span class="nav-text">存储器的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#按读写属性分类：RAM和ROM"><span class="nav-number">5.4.1.</span> <span class="nav-text">按读写属性分类：RAM和ROM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#随机存储器RAM"><span class="nav-number">5.4.1.1.</span> <span class="nav-text">随机存储器RAM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#只读存储器ROM"><span class="nav-number">5.4.1.2.</span> <span class="nav-text">只读存储器ROM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RAM和ROM的区别"><span class="nav-number">5.4.1.3.</span> <span class="nav-text">RAM和ROM的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按功能和连接分类："><span class="nav-number">5.4.2.</span> <span class="nav-text">按功能和连接分类：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#随机存储器RAM-1"><span class="nav-number">5.4.2.1.</span> <span class="nav-text">随机存储器RAM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#装有BIOS的ROM"><span class="nav-number">5.4.2.2.</span> <span class="nav-text">装有BIOS的ROM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#接口卡上的RAM"><span class="nav-number">5.4.2.3.</span> <span class="nav-text">接口卡上的RAM</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BIOS"><span class="nav-number">5.5.</span> <span class="nav-text">BIOS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BIOS是基本IO系统"><span class="nav-number">5.5.1.</span> <span class="nav-text">BIOS是基本IO系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BIOS在主板和某些接口卡的ROM中"><span class="nav-number">5.5.2.</span> <span class="nav-text">BIOS在主板和某些接口卡的ROM中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BIOS的作用"><span class="nav-number">5.5.3.</span> <span class="nav-text">BIOS的作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内部存储器"><span class="nav-number">5.6.</span> <span class="nav-text">内部存储器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内部存储器是内存，一个大的RAM"><span class="nav-number">5.6.1.</span> <span class="nav-text">内部存储器是内存，一个大的RAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部存储器的作用"><span class="nav-number">5.6.2.</span> <span class="nav-text">内部存储器的作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储器存储的内容及其作用"><span class="nav-number">5.7.</span> <span class="nav-text">存储器存储的内容及其作用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指令"><span class="nav-number">5.7.1.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据"><span class="nav-number">5.7.2.</span> <span class="nav-text">数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令和数据的关系"><span class="nav-number">5.7.3.</span> <span class="nav-text">指令和数据的关系</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#寄存器"><span class="nav-number">6.</span> <span class="nav-text">寄存器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储单元"><span class="nav-number">7.</span> <span class="nav-text">存储单元</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#存储单元是存储器的一个个部分"><span class="nav-number">7.1.</span> <span class="nav-text">存储单元是存储器的一个个部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#每个存储单元存储一个字节"><span class="nav-number">7.2.</span> <span class="nav-text">每个存储单元存储一个字节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储单元从0开始编号"><span class="nav-number">7.3.</span> <span class="nav-text">存储单元从0开始编号</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总线"><span class="nav-number">8.</span> <span class="nav-text">总线</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总线分类"><span class="nav-number">8.1.</span> <span class="nav-text">总线分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#地址总线"><span class="nav-number">8.1.1.</span> <span class="nav-text">地址总线</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#寻址能力"><span class="nav-number">8.1.1.1.</span> <span class="nav-text">寻址能力</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据总线"><span class="nav-number">8.1.2.</span> <span class="nav-text">数据总线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制总线"><span class="nav-number">8.1.3.</span> <span class="nav-text">控制总线</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主板"><span class="nav-number">9.</span> <span class="nav-text">主板</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#接口卡"><span class="nav-number">10.</span> <span class="nav-text">接口卡</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内存地址空间"><span class="nav-number">11.</span> <span class="nav-text">内存地址空间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#各类存储器逻辑相同点"><span class="nav-number">11.1.</span> <span class="nav-text">各类存储器逻辑相同点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#都和CPU总线相连"><span class="nav-number">11.1.1.</span> <span class="nav-text">都和CPU总线相连</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU对它们进行读或写的时候都通过控制总线发出内存读写命令"><span class="nav-number">11.1.2.</span> <span class="nav-text">CPU对它们进行读或写的时候都通过控制总线发出内存读写命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是内存地址空间"><span class="nav-number">11.2.</span> <span class="nav-text">什么是内存地址空间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">12.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">臭咸鱼</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">91.0k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz',
+        appKey: 'Si7hBxIAVOGbu6Pot7HHaVBB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz", "Si7hBxIAVOGbu6Pot7HHaVBB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>

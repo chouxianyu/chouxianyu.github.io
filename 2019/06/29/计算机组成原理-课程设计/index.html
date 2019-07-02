@@ -1,0 +1,2405 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="计算机组成原理," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="臭咸鱼的缺氧瓶" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="目的与要求​    深入了解计算机各种指令的执行过程，以及控制器的组成，指令系统微程序设计的具体知识，进一步理解和掌握动态微程序设计的概念；完成微程序控制的特定功能计算机的指令系统设计和调试。 ​    要进行这项大型实验，必须清楚地懂得：  TEC-2机的功能部件及其连接关系； TEC-2机每个功能部件的功能与具体组成； TEC-2机支持的指令格式； TEC-2机的微指令格式，AM2910芯片的">
+<meta name="keywords" content="计算机组成原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机组成原理-课程设计">
+<meta property="og:url" content="https://chouxianyu.github.io/2019/06/29/计算机组成原理-课程设计/index.html">
+<meta property="og:site_name" content="臭咸鱼的缺氧瓶">
+<meta property="og:description" content="目的与要求​    深入了解计算机各种指令的执行过程，以及控制器的组成，指令系统微程序设计的具体知识，进一步理解和掌握动态微程序设计的概念；完成微程序控制的特定功能计算机的指令系统设计和调试。 ​    要进行这项大型实验，必须清楚地懂得：  TEC-2机的功能部件及其连接关系； TEC-2机每个功能部件的功能与具体组成； TEC-2机支持的指令格式； TEC-2机的微指令格式，AM2910芯片的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2019/06/21/5d0cddbba492b14679.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/21/5d0cddbc13dbd27187.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/21/5d0cddbc11e9d48798.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/21/5d0cddbc1435171281.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/21/5d0cddbc13ed899415.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/21/5d0cddbc142d818038.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/22/5d0d96d08694544002.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/22/5d0d96ccdb05229094.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/21/5d0cddbbb584732965.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/22/5d0d96d27564178096.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/22/5d0d96cc0eda569856.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/21/5d0cdeeba4c4559040.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/21/5d0cdeebbf81988317.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/21/5d0cdeec78a4046521.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/22/5d0d96d48c64257612.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/22/5d0d96d0d65a585568.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/22/5d0d96d491b2e57530.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/22/5d0d96d07a6d178706.png">
+<meta property="og:updated_time" content="2019-06-29T11:59:30.699Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机组成原理-课程设计">
+<meta name="twitter:description" content="目的与要求​    深入了解计算机各种指令的执行过程，以及控制器的组成，指令系统微程序设计的具体知识，进一步理解和掌握动态微程序设计的概念；完成微程序控制的特定功能计算机的指令系统设计和调试。 ​    要进行这项大型实验，必须清楚地懂得：  TEC-2机的功能部件及其连接关系； TEC-2机每个功能部件的功能与具体组成； TEC-2机支持的指令格式； TEC-2机的微指令格式，AM2910芯片的">
+<meta name="twitter:image" content="https://i.loli.net/2019/06/21/5d0cddbba492b14679.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chouxianyu.github.io/2019/06/29/计算机组成原理-课程设计/"/>
+
+
+
+
+
+  <title>计算机组成原理-课程设计 | 臭咸鱼的缺氧瓶</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5706c34297d4762ba8c6d799a54234b9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">臭咸鱼的缺氧瓶</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快给我氧气！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/06/29/计算机组成原理-课程设计/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">计算机组成原理-课程设计</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-29T19:58:10+08:00">
+                2019-06-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/06/29/计算机组成原理-课程设计/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/29/计算机组成原理-课程设计/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/06/29/计算机组成原理-课程设计/" class="leancloud_visitors" data-flag-title="计算机组成原理-课程设计">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  5,270 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  21 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="目的与要求"><a href="#目的与要求" class="headerlink" title="目的与要求"></a>目的与要求</h1><p>​    深入了解计算机各种指令的执行过程，以及控制器的组成，指令系统微程序设计的具体知识，进一步理解和掌握动态微程序设计的概念；完成微程序控制的特定功能计算机的指令系统设计和调试。</p>
+<p>​    要进行这项大型实验，必须清楚地懂得：</p>
+<ol>
+<li>TEC-2机的功能部件及其连接关系；</li>
+<li>TEC-2机每个功能部件的功能与具体组成；</li>
+<li>TEC-2机支持的指令格式；</li>
+<li>TEC-2机的微指令格式，AM2910芯片的用法；</li>
+<li>已实现的典型指令的执行实例，即相应的微指令与其执行次序的安排与衔接；</li>
+<li>要实现的新指令的格式与功能。</li>
+</ol>
+<h1 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h1><p>$TEC-2$模拟机</p>
+<h1 id="具体内容"><a href="#具体内容" class="headerlink" title="具体内容"></a>具体内容</h1><p>请选定指令格式、操作码，按照要求，设计三条指令。</p>
+<h2 id="指令一"><a href="#指令一" class="headerlink" title="指令一"></a>指令一</h2><ul>
+<li><p><strong>说明</strong></p>
+<p>  把用绝对地址表示的内存单元<code>ADDR1</code>中的内容与内存单元<code>ADDR2</code>中的内容相减，结果存于内存单元<code>ADDR1</code>中。</p>
+<p>  三字指令（控存入口<code>110H</code>）。</p>
+</li>
+<li><p><strong>格式</strong></p>
+<p>  <code>D8××,ADDR1,ADDR2</code></p>
+</li>
+<li><p><strong>功能</strong></p>
+<p>  <code>[ADDR1]=[ADDR1]-[ADDR2]</code></p>
+</li>
+</ul>
+<h3 id="微程序设计与实现"><a href="#微程序设计与实现" class="headerlink" title="微程序设计与实现"></a>微程序设计与实现</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">执行顺序</th>
+<th style="text-align:center">微指令</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">$PC\to AR,PC+1 \to PC$</td>
+<td style="text-align:center">为读取第1个操作数的地址做准备</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">$MEM \to R6$</td>
+<td style="text-align:center">读取第1个操作数的地址送入$R_6$</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">$PC \to AR,PC+1 \to PC$</td>
+<td style="text-align:center">为读取第2个操作数的地址做准备</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">$MEM \to AR$</td>
+<td style="text-align:center">读取第2个操作数的地址送入$AR$</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">$R6 \to AR,MEM \to R6$</td>
+<td style="text-align:center">第1个操作数地址送$AR$，读取第2个操作数送入$R_6$</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">$MEM-R6\to R6$</td>
+<td style="text-align:center">第1个操作数-第2个操作数送入$R_6$</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">$R6 \to MEM$</td>
+<td style="text-align:center">$R_6$送第1个操作数所在存储单元</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li>$PC\to AR,PC+1 \to PC$</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0000</span> <span class="number">0E00</span> A0B5 <span class="number">5402</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://i.loli.net/2019/06/21/5d0cddbba492b14679.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/21/5d0cddbba492b14679.png" alt="微指令11.png"></a></p>
+<ul>
+<li><p>七</p>
+<p>  顺序执行，下址字段任意取值即可</p>
+</li>
+<li><p>六</p>
+<p>  $AM2910$命令码为14，即14号指令，顺序执行</p>
+</li>
+<li><p>五</p>
+<ul>
+<li><p>$SCC、SC$</p>
+<p>  顺序执行时不需要条件测试，不需要使用$\bar{CC}$，所以这4位任意取值</p>
+</li>
+<li><p>$SST$</p>
+<p>  此时并非真正的运算，并且第6条微指令才是真正的运算，所以这3位任意即可</p>
+</li>
+</ul>
+</li>
+<li><p>四、三</p>
+<ul>
+<li><p>$\bar{MIO}、REQ、\bar{WE}$</p>
+<p>  不需要读写存储器或输入输出设备，所以为<code>10X</code></p>
+</li>
+<li><p>$MI_{8-6}$</p>
+<p>  运算结果送$B$口，运算器Y输出$A$口</p>
+</li>
+<li><p>$MI_{5-3}$</p>
+<p>  选择加法运算</p>
+</li>
+<li><p>$MI_{2-0}$</p>
+<p>  运算数选择$B$口和0,（选$A$口和0也可以，因为$A$口和$B$口是同一个寄存器）</p>
+</li>
+<li><p>$A$口</p>
+<p>  选$PC$，即$R_5$</p>
+</li>
+</ul>
+</li>
+<li><p>二</p>
+<ul>
+<li><p>$B$口</p>
+<p>  选$PC$，即$R_5$</p>
+</li>
+<li><p>$SCI$</p>
+<p>  最低位进位设置为1</p>
+</li>
+<li><p>$SSH$</p>
+<p>  不移位</p>
+</li>
+</ul>
+</li>
+<li><p>一</p>
+<ul>
+<li><p>$SA、SB$</p>
+<p>  选微指令中的$A$口、$B$口地址</p>
+</li>
+<li><p>$DC1$</p>
+<p>  因为$AR$只能接收来自运算器的结果输出信号，所以$DC1$可以任意</p>
+</li>
+<li><p>$DC2$</p>
+<p>  运算器输出送$AR$</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>$MEM \to R6$</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0000</span> <span class="number">0E00</span> <span class="number">30F</span>0 <span class="number">6000</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://i.loli.net/2019/06/21/5d0cddbc13dbd27187.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/21/5d0cddbc13dbd27187.png" alt="微指令12.png"></a></p>
+<ul>
+<li><p>七</p>
+<p>  顺序执行，下址字段任意取值即可</p>
+</li>
+<li><p>六</p>
+<p>  $AM2910$命令码为14，即14号指令，顺序执行</p>
+</li>
+<li><p>五</p>
+<ul>
+<li><p>$SCC、SC$</p>
+<p>  顺序执行时不需要条件测试，不需要使用$\bar{CC}$，所以这4位任意取值</p>
+</li>
+<li><p>$SST$</p>
+<p>  此时并非真正的运算，并且第6条微指令才是真正的运算，所以这3位任意即可</p>
+</li>
+</ul>
+</li>
+<li><p>四、三</p>
+<ul>
+<li><p>$\bar{MIO}、REQ、\bar{WE}$</p>
+<p>  读存储器</p>
+</li>
+<li><p>$MI_{8-6}$</p>
+<p>  运算结果送$B$口，运算器Y输出运算结果（并没有使用）</p>
+</li>
+<li><p>$MI_{5-3}$</p>
+<p>  选择加法运算</p>
+</li>
+<li><p>$MI_{2-0}$</p>
+<p>  运算数选择$D$和0</p>
+</li>
+<li><p>$A$口</p>
+<p>  任意</p>
+</li>
+</ul>
+</li>
+<li><p>二</p>
+<ul>
+<li><p>$B$口</p>
+<p>  选$R6$</p>
+</li>
+<li><p>$SCI$</p>
+<p>  最低位进位设置为0</p>
+</li>
+<li><p>$SSH$</p>
+<p>  不移位</p>
+</li>
+</ul>
+</li>
+<li><p>一</p>
+<ul>
+<li><p>$SA、SB$</p>
+<p>  $A$口任意，因为不使用$A$口；选择微指令中的$B$口地址</p>
+</li>
+<li><p>$DC1$</p>
+<p>  任意</p>
+</li>
+<li><p>$DC2$</p>
+<p>  不控制</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>$PC \to AR,PC+1 \to PC$</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0000</span> <span class="number">0E00</span> A0B5 <span class="number">5402</span></span><br></pre></td></tr></table></figure>
+<p>这条微指令和本机器指令的第一条微指令完全一样，不再做解释说明</p>
+<ol>
+<li>$MEM \to AR$</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0000</span> <span class="number">0E00</span> <span class="number">10F</span>0 <span class="number">0002</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://i.loli.net/2019/06/21/5d0cddbc11e9d48798.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/21/5d0cddbc11e9d48798.png" alt="微指令14.png"></a></p>
+<ul>
+<li><p>七</p>
+<p>  顺序执行，下址字段任意取值即可</p>
+</li>
+<li><p>六</p>
+<p>  $AM2910$命令码为14，即14号指令，顺序执行</p>
+</li>
+<li><p>五</p>
+<ul>
+<li><p>$SCC、SC$</p>
+<p>  顺序执行时不需要条件测试，不需要使用$\bar{CC}$，所以这4位任意取值</p>
+</li>
+<li><p>$SST$</p>
+<p>  此时并非真正的运算，并且第6条微指令才是真正的运算，所以这3位任意即可</p>
+</li>
+</ul>
+</li>
+<li><p>四、三</p>
+<ul>
+<li><p>$\bar{MIO}、REQ、\bar{WE}$</p>
+<p>  读存储器</p>
+</li>
+<li><p>$MI_{8-6}$</p>
+<p>  运算结果不送寄存器，运算器Y输出运算结果送$AR$</p>
+</li>
+<li><p>$MI_{5-3}$</p>
+<p>  选择加法运算</p>
+</li>
+<li><p>$MI_{2-0}$</p>
+<p>  运算数选择$D$和0</p>
+</li>
+<li><p>$A$口</p>
+<p>  任意</p>
+</li>
+</ul>
+</li>
+<li><p>二</p>
+<ul>
+<li><p>$B$口</p>
+<p>  任意</p>
+</li>
+<li><p>$SCI$</p>
+<p>  最低位进位设置为0</p>
+</li>
+<li><p>$SSH$</p>
+<p>  不移位</p>
+</li>
+</ul>
+</li>
+<li><p>一</p>
+<ul>
+<li><p>$SA、SB$</p>
+<p>  都任意，因为不使用$A$口和$B$口</p>
+</li>
+<li><p>$DC1$</p>
+<p>  任意</p>
+</li>
+<li><p>$DC2$</p>
+<p>  运算器输出送$AR$</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>$R6 \to AR,MEM \to R6$</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0000</span> <span class="number">0E00</span> <span class="number">20F</span>6 <span class="number">6002</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://i.loli.net/2019/06/21/5d0cddbc1435171281.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/21/5d0cddbc1435171281.png" alt="微指令15.png"></a></p>
+<ul>
+<li><p>七</p>
+<p>  顺序执行，下址字段任意取值即可</p>
+</li>
+<li><p>六</p>
+<p>  $AM2910$命令码为14，即14号指令，顺序执行</p>
+</li>
+<li><p>五</p>
+<ul>
+<li><p>$SCC、SC$</p>
+<p>  顺序执行时不需要条件测试，不需要使用$\bar{CC}$，所以这4位任意取值</p>
+</li>
+<li><p>$SST$</p>
+<p>  此时并非真正的运算，并且第6条微指令才是真正的运算，所以这3位任意即可</p>
+</li>
+</ul>
+</li>
+<li><p>四、三</p>
+<ul>
+<li><p>$\bar{MIO}、REQ、\bar{WE}$</p>
+<p>  读存储器</p>
+</li>
+<li><p>$MI_{8-6}$</p>
+<p>  运算结果送$B$口，运算器Y输出$A$口</p>
+</li>
+<li><p>$MI_{5-3}$</p>
+<p>  选择加法运算</p>
+</li>
+<li><p>$MI_{2-0}$</p>
+<p>  运算数选择$D$和0</p>
+</li>
+<li><p>$A$口</p>
+<p>  $R_6$</p>
+</li>
+</ul>
+</li>
+<li><p>二</p>
+<ul>
+<li><p>$B$口</p>
+<p>  $R_6$</p>
+</li>
+<li><p>$SCI$</p>
+<p>  最低位进位设置为0</p>
+</li>
+<li><p>$SSH$</p>
+<p>  不移位</p>
+</li>
+</ul>
+</li>
+<li><p>一</p>
+<ul>
+<li><p>$SA、SB$</p>
+<p>  使用微指令中的$A$口和$B$口</p>
+</li>
+<li><p>$DC1$</p>
+<p>  任意</p>
+</li>
+<li><p>$DC2$</p>
+<p>  运算器输出送$AR$</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>$MEM-R6\to R6$</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0000</span> <span class="number">0E01</span> <span class="number">22</span>D6 <span class="number">6000</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://i.loli.net/2019/06/21/5d0cddbc13ed899415.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/21/5d0cddbc13ed899415.png" alt="微指令16.png"></a></p>
+<ul>
+<li><p>七</p>
+<p>  顺序执行，下址字段任意取值即可</p>
+</li>
+<li><p>六</p>
+<p>  $AM2910$命令码为14，即14号指令，顺序执行</p>
+</li>
+<li><p>五</p>
+<ul>
+<li><p>$SCC、SC$</p>
+<p>  顺序执行时不需要条件测试，不需要使用$\bar{CC}$，所以这4位任意取值</p>
+</li>
+<li><p>$SST$</p>
+<p>  此时是真正的运算，设置标志位</p>
+</li>
+</ul>
+</li>
+<li><p>四、三</p>
+<ul>
+<li><p>$\bar{MIO}、REQ、\bar{WE}$</p>
+<p>  读存储器</p>
+</li>
+<li><p>$MI_{8-6}$</p>
+<p>  运算结果送$B$口；运算器Y输出$A$口（并没有使用）</p>
+</li>
+<li><p>$MI_{5-3}$</p>
+<p>  选择减法运算</p>
+</li>
+<li><p>$MI_{2-0}$</p>
+<p>  运算数选择$D$和$A$口</p>
+</li>
+<li><p>$A$口</p>
+<p>  $R_6$</p>
+</li>
+</ul>
+</li>
+<li><p>二</p>
+<ul>
+<li><p>$B$口</p>
+<p>  $R_6$</p>
+</li>
+<li><p>$SCI$</p>
+<p>  最低位进位设置为0</p>
+</li>
+<li><p>$SSH$</p>
+<p>  不移位</p>
+</li>
+</ul>
+</li>
+<li><p>一</p>
+<ul>
+<li><p>$SA、SB$</p>
+<p>  使用微指令中的$A$口和$B$口</p>
+</li>
+<li><p>$DC1$</p>
+<p>  任意</p>
+</li>
+<li><p>$DC2$</p>
+<p>  不控制</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>$R6 \to MEM$</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0029</span> <span class="number">0300</span> <span class="number">1046</span> <span class="number">0010</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://i.loli.net/2019/06/21/5d0cddbc142d818038.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/21/5d0cddbc142d818038.png" alt="微指令17.png"></a></p>
+<ul>
+<li><p>七</p>
+<p>  这是最后一条微指令，下一条微指令是<code>A4H</code>。</p>
+</li>
+<li><p>六</p>
+<p>  $AM2910$命令码为3，即3号指令，条件转移</p>
+</li>
+<li><p>五</p>
+<ul>
+<li><p>$SCC、SC$</p>
+<p>  $\bar{CC}$设为0，进行转移</p>
+</li>
+<li><p>$SST$</p>
+<p>  此时并不是运算，所以标志位不变</p>
+</li>
+</ul>
+</li>
+<li><p>四、三</p>
+<ul>
+<li><p>$\bar{MIO}、REQ、\bar{WE}$</p>
+<p>  写存储器</p>
+</li>
+<li><p>$MI_{8-6}$</p>
+<p>  运算结果不送寄存器；运算器Y输出​$A$口</p>
+</li>
+<li><p>$MI_{5-3}$</p>
+<p>  选择加法运算</p>
+</li>
+<li><p>$MI_{2-0}$</p>
+<p>  运算数选择0和$A$口</p>
+</li>
+<li><p>$A$口</p>
+<p>  $R_6$</p>
+</li>
+</ul>
+</li>
+<li><p>二</p>
+<ul>
+<li><p>$B$口</p>
+<p>  任意</p>
+</li>
+<li><p>$SCI$</p>
+<p>  最低位进位设置为0</p>
+</li>
+<li><p>$SSH$</p>
+<p>  不移位</p>
+</li>
+</ul>
+</li>
+<li><p>一</p>
+<ul>
+<li><p>$SA、SB$</p>
+<p>  使用微指令中的$A$口；$B$口任意</p>
+</li>
+<li><p>$DC1$</p>
+<p>  运算器输出送$IB$</p>
+</li>
+<li><p>$DC2$</p>
+<p>  不控制</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="指令测试"><a href="#指令测试" class="headerlink" title="指令测试"></a>指令测试</h3><p>如下图所示，<code>[A00H]</code>存储单元（$ADDR1$）存储了<code>0045H</code>，<code>[A01H]</code>存储单元（$ADDR2$）存储了<code>0023H</code>，最终指令运行后<code>[A00H]</code>为<code>0022H</code>，实现<code>[ADDR1]=[ADDR1]-[ADDR2]</code>。</p>
+<p><a href="https://i.loli.net/2019/06/22/5d0d96d08694544002.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/22/5d0d96d08694544002.png" alt="指令测试11.png"></a></p>
+<p><a href="https://i.loli.net/2019/06/22/5d0d96ccdb05229094.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/22/5d0d96ccdb05229094.png" alt="指令测试12.png"></a></p>
+<h2 id="指令二"><a href="#指令二" class="headerlink" title="指令二"></a>指令二</h2><ul>
+<li><p><strong>说明</strong></p>
+<p>  将一通用寄存器内容加上某内存单元内容，结果放在另一寄存器中。</p>
+<p>  双字指令（控存入口<code>130H</code>），$SR$和$DR$分别为源、目的寄存器（各4位）。</p>
+</li>
+<li><p><strong>格式</strong></p>
+<p>  <code>E0 DR SR,ADDR</code></p>
+</li>
+<li><p><strong>功能</strong></p>
+<p>  <code>DR=SR+ [ADDR]</code> </p>
+</li>
+</ul>
+<h3 id="微程序设计与实现-1"><a href="#微程序设计与实现-1" class="headerlink" title="微程序设计与实现"></a>微程序设计与实现</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">执行顺序</th>
+<th style="text-align:center">微指令</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">$PC\to AR,PC+1 \to PC$</td>
+<td style="text-align:center">为读取操作数的地址做准备</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">$MEM \to AR$</td>
+<td style="text-align:center">操作数的地址送入$AR$</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">$SR+MEM \to DR$</td>
+<td style="text-align:center">计算$SR$与操作数的和存入$DR$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li>$PC\to AR,PC+1 \to PC$</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0000</span> <span class="number">0E00</span> A0B5 <span class="number">5402</span></span><br></pre></td></tr></table></figure>
+<p>这条微指令和第一条机器指令的第一条微指令完全一样，不再做解释说明</p>
+<ol>
+<li>$MEM \to AR$</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0000</span> <span class="number">0E00</span> <span class="number">10F</span>0 <span class="number">0002</span></span><br></pre></td></tr></table></figure>
+<p>这条微指令和第一条机器指令的第四条微指令完全一样，不再做解释说明</p>
+<ol>
+<li>$SR+MEM \to DR$</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0029</span> <span class="number">0301</span> <span class="number">30</span>D0 <span class="number">0088</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://i.loli.net/2019/06/21/5d0cddbbb584732965.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/21/5d0cddbbb584732965.png" alt="微指令23.png"></a></p>
+<ul>
+<li><p>七</p>
+<p>  这是最后一条微指令，下一条微指令是<code>A4H</code>。</p>
+</li>
+<li><p>六</p>
+<p>  $AM2910$命令码为3，即3号指令，条件转移</p>
+</li>
+<li><p>五</p>
+<ul>
+<li><p>$SCC、SC$</p>
+<p>  $\bar{CC}$设为0，进行转移</p>
+</li>
+<li><p>$SST$</p>
+<p>  此时进行了运算，需要对标志位进行设置</p>
+</li>
+</ul>
+</li>
+<li><p>四、三</p>
+<ul>
+<li><p>$\bar{MIO}、REQ、\bar{WE}$</p>
+<p>  读存储器</p>
+</li>
+<li><p>$MI_{8-6}$</p>
+<p>  运算结果送$B$口；运算器Y输出​运算结果（并没有使用）</p>
+</li>
+<li><p>$MI_{5-3}$</p>
+<p>  选择加法运算</p>
+</li>
+<li><p>$MI_{2-0}$</p>
+<p>  运算数选择$D$和$A$口</p>
+</li>
+<li><p>$A$口</p>
+<p>  使用机器指令中设置的$SR$，微指令中不需要给$A$口地址</p>
+</li>
+</ul>
+</li>
+<li><p>二</p>
+<ul>
+<li><p>$B$口</p>
+<p>  使用机器指令中设置的$DR$，微指令中不需要给$B$口地址</p>
+</li>
+<li><p>$SCI$</p>
+<p>  最低位进位设置为0</p>
+</li>
+<li><p>$SSH$</p>
+<p>  不移位</p>
+</li>
+</ul>
+</li>
+<li><p>一</p>
+<ul>
+<li><p>$SA、SB$</p>
+<p>  使用机器指令中的$SR、DR$</p>
+</li>
+<li><p>$DC1$</p>
+<p>  任意</p>
+</li>
+<li><p>$DC2$</p>
+<p>  不控制</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="指令测试-1"><a href="#指令测试-1" class="headerlink" title="指令测试"></a>指令测试</h3><p>如图示，$R_0$（$SR$）为<code>0023H</code>，<code>A00H</code>（$ADDR$）存储<code>0023H</code>，程序运行后$R_1$（$DR$）为<code>0046H</code>，实现<code>DR=SR+ [ADDR]</code> 。</p>
+<p><a href="https://i.loli.net/2019/06/22/5d0d96d27564178096.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/22/5d0d96d27564178096.png" alt="指令测试21.png"></a></p>
+<p><a href="https://i.loli.net/2019/06/22/5d0d96cc0eda569856.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/22/5d0d96cc0eda569856.png" alt="指令测试22.png"></a></p>
+<h2 id="指令三"><a href="#指令三" class="headerlink" title="指令三"></a>指令三</h2><ul>
+<li><p><strong>说明</strong></p>
+<ul>
+<li><p>转移指令</p>
+<p>  判断两个通用寄存器内容是否相等，若相等则转移到指定绝对地址，否则顺序执行。</p>
+</li>
+<li><p>双字指令（控存入口<code>140H</code>），<code>SR</code>和<code>DR</code>分别为源、目的寄存器（各4位），<code>ADDR</code>为绝对地址。</p>
+</li>
+<li><p>提示</p>
+<p>  利用指令的<code>CND</code>字段，即$IR_{10-8}$，令$IR_{10-8}=101$，即$\bar{CC}=Z$。</p>
+<p>  当<code>DR==SR​</code>时<code>Z=1</code>，微程序不跳转，接着执行$MEM \to PC$（即$ADDR\to PC$）；</p>
+<p>  而当<code>DR!=SR​</code>时<code>Z=0​</code>，微程序跳转至<code>A4H</code>。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>格式</strong></p>
+<p>  <code>E5 DR SR,ADDR</code></p>
+</li>
+<li><p><strong>功能</strong></p>
+<p>  <code>if DR==SR goto ADDR</code> <code>else　顺序执行</code></p>
+</li>
+</ul>
+<h3 id="微程序设计与实现-2"><a href="#微程序设计与实现-2" class="headerlink" title="微程序设计与实现"></a>微程序设计与实现</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">执行顺序</th>
+<th style="text-align:center">微指令</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">$SR-DR$</td>
+<td style="text-align:center">测试$SR$与$DR$是否相等</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">$PC \to AR,PC+1 \to PC，\ $如果$Z=0，$则微程序跳转到$A4H$</td>
+<td style="text-align:center">为读取转移地址做准备</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">$MEM \to PC$</td>
+<td style="text-align:center">程序转移到指定地址</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li>$SR-DR$</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0000</span> <span class="number">0E01</span> <span class="number">9210</span> <span class="number">0088</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://i.loli.net/2019/06/21/5d0cdeeba4c4559040.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/21/5d0cdeeba4c4559040.png" alt="微指令31.png"></a></p>
+<ul>
+<li><p>七</p>
+<p>  顺序执行，下址字段任意</p>
+</li>
+<li><p>六</p>
+<p>  $AM2910$命令码为14，即14号指令，顺序执行</p>
+</li>
+<li><p>五</p>
+<ul>
+<li><p>$SCC、SC$</p>
+<p>  顺序执行，不需要条件测试</p>
+</li>
+<li><p>$SST$</p>
+<p>  此时进行了运算，需要对标志位进行设置，来判断$SR$和$DR$是否相等</p>
+</li>
+</ul>
+</li>
+<li><p>四、三</p>
+<ul>
+<li><p>$\bar{MIO}、REQ、\bar{WE}$</p>
+<p>  不进行存储器或IO操作</p>
+</li>
+<li><p>$MI_{8-6}$</p>
+<p>  运算结果不送寄存器；运算器Y输出​运算结果（并没有使用）</p>
+</li>
+<li><p>$MI_{5-3}$</p>
+<p>  选择减法运算</p>
+</li>
+<li><p>$MI_{2-0}$</p>
+<p>  运算数选择$A$口和$B$口</p>
+</li>
+<li><p>$A$口</p>
+<p>  使用机器指令中设置的$SR$，微指令中不需要给$A$口地址</p>
+</li>
+</ul>
+</li>
+<li><p>二</p>
+<ul>
+<li><p>$B$口</p>
+<p>  使用机器指令中设置的$DR$，微指令中不需要给$B$口地址</p>
+</li>
+<li><p>$SCI$</p>
+<p>  最低位进位设置为0</p>
+</li>
+<li><p>$SSH$</p>
+<p>  不移位</p>
+</li>
+</ul>
+</li>
+<li><p>一</p>
+<ul>
+<li><p>$SA、SB$</p>
+<p>  使用机器指令中的$SR、DR$</p>
+</li>
+<li><p>$DC1$</p>
+<p>  任意</p>
+</li>
+<li><p>$DC2$</p>
+<p>  不控制</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>$PC \to AR,PC+1 \to PC$，如果$Z=0$，则微程序跳转到$A4H$</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0029</span> <span class="number">03E0</span> A045 <span class="number">5412</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://i.loli.net/2019/06/21/5d0cdeebbf81988317.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/21/5d0cdeebbf81988317.png" alt="微指令32.png"></a></p>
+<ul>
+<li><p>七</p>
+<p>  微程序转移，下址字段为<code>A4H</code></p>
+</li>
+<li><p>六</p>
+<p>  $AM2910$命令码为3，即3号指令，条件转移</p>
+</li>
+<li><p>五</p>
+<ul>
+<li><p>$SCC、SC$</p>
+<p>  测试条件设置为$IR_{10-8}$，指令中将$IR_{10-8}$设为5，即$\bar{CC}=Z$</p>
+</li>
+<li><p>$SST$</p>
+<p>  此时并不是计算，状态位保持即可</p>
+</li>
+</ul>
+</li>
+<li><p>四、三</p>
+<ul>
+<li><p>$\bar{MIO}、REQ、\bar{WE}$</p>
+<p>  不进行存储器或IO操作</p>
+</li>
+<li><p>$MI_{8-6}$</p>
+<p>  运算结果送$B$口；运算器Y输出$A$口</p>
+</li>
+<li><p>$MI_{5-3}$</p>
+<p>  选择加法运算</p>
+</li>
+<li><p>$MI_{2-0}$</p>
+<p>  运算数选择$A$口和0</p>
+</li>
+<li><p>$A$口</p>
+<p>  $A$口设置为$PC$，即$R_5$。</p>
+</li>
+</ul>
+</li>
+<li><p>二</p>
+<ul>
+<li><p>$B$口</p>
+<p>  $B$口设置为$PC$，即$R_5$。</p>
+</li>
+<li><p>$SCI$</p>
+<p>  最低位进位设置为1</p>
+</li>
+<li><p>$SSH$</p>
+<p>  不移位</p>
+</li>
+</ul>
+</li>
+<li><p>一</p>
+<ul>
+<li><p>$SA、SB$</p>
+<p>  使用微指令中的$A$口和$B$口地址</p>
+</li>
+<li><p>$DC1$</p>
+<p>  由于是写$AR$，这里把运算器输出送$IB$。经过前两条机器指令的试验，实际上$DC1$可以任意。</p>
+</li>
+<li><p>$DC2$</p>
+<p>  写$AR$</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>$MEM \to PC$</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0029</span> <span class="number">0300</span> <span class="number">30F</span>0 <span class="number">5000</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://i.loli.net/2019/06/21/5d0cdeec78a4046521.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/21/5d0cdeec78a4046521.png" alt="微指令33.png"></a></p>
+<ul>
+<li><p>七</p>
+<p>  微程序转移，下址字段为<code>A4H</code></p>
+</li>
+<li><p>六</p>
+<p>  $AM2910$命令码为3，即3号指令，条件转移</p>
+</li>
+<li><p>五</p>
+<ul>
+<li><p>$SCC、SC$</p>
+<p>  测试条件设置为0，一定转移</p>
+</li>
+<li><p>$SST$</p>
+<p>  此时并不是计算，状态位保持即可</p>
+</li>
+</ul>
+</li>
+<li><p>四、三</p>
+<ul>
+<li><p>$\bar{MIO}、REQ、\bar{WE}$</p>
+<p>  读存储器</p>
+</li>
+<li><p>$MI_{8-6}$</p>
+<p>  运算结果送$B$口；运算器Y输出运算结果（并没有使用）</p>
+</li>
+<li><p>$MI_{5-3}$</p>
+<p>  选择加法运算</p>
+</li>
+<li><p>$MI_{2-0}$</p>
+<p>  运算数选择$D$和0</p>
+</li>
+<li><p>$A$口</p>
+<p>  $A$口任意，并不使用。</p>
+</li>
+</ul>
+</li>
+<li><p>二</p>
+<ul>
+<li><p>$B$口</p>
+<p>  $B$口设置为$PC$，即$R_5$。</p>
+</li>
+<li><p>$SCI$</p>
+<p>  最低位进位设置为0</p>
+</li>
+<li><p>$SSH$</p>
+<p>  不移位</p>
+</li>
+</ul>
+</li>
+<li><p>一</p>
+<ul>
+<li><p>$SA、SB$</p>
+<p>  使用微指令中的$B$口地址，$A$口任意（因为不使用$A$口）。</p>
+</li>
+<li><p>$DC1$</p>
+<p>  任意</p>
+</li>
+<li><p>$DC2$</p>
+<p>  不控制</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="指令测试-2"><a href="#指令测试-2" class="headerlink" title="指令测试"></a>指令测试</h3><p>当$R_1$（$SR$）存储<code>0023H</code>、$R_2$（$DR$）存储<code>0026H</code>时，即$DR \neq SR$时，程序顺序执行，运行了<code>MOV R1,0026</code>，所以程序运行后$R_1$为<code>0026H</code>。</p>
+<p>当$R_1$（$SR$）存储<code>0023H</code>、$R_2$（$DR$）存储<code>0023H</code>时，即$DR = SR$时，程序跳转至<code>828H</code>（$ADDR$），所以未运行<code>MOV R1,0026</code>，所以程序运行后$R_1$仍为<code>0023H</code>。</p>
+<ul>
+<li>$DR \neq SR$时</li>
+</ul>
+<p><a href="https://i.loli.net/2019/06/22/5d0d96d48c64257612.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/22/5d0d96d48c64257612.png" alt="指令测试31_1.png"></a></p>
+<p><a href="https://i.loli.net/2019/06/22/5d0d96d0d65a585568.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/22/5d0d96d0d65a585568.png" alt="指令测试31_2.png"></a></p>
+<ul>
+<li>$DR = SR$时</li>
+</ul>
+<p><a href="https://i.loli.net/2019/06/22/5d0d96d491b2e57530.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/22/5d0d96d491b2e57530.png" alt="指令测试32_1.png"></a></p>
+<p><a href="https://i.loli.net/2019/06/22/5d0d96d07a6d178706.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/22/5d0d96d07a6d178706.png" alt="指令测试32_2.png"></a></p>
+<h1 id="实验心得"><a href="#实验心得" class="headerlink" title="实验心得"></a>实验心得</h1><ol>
+<li>磨刀不误砍柴工。在设计微程序前，我把实验书看了一遍，有些地方不是很懂；之后着手去设计微程序，然后再去看书，理解到的更多了；最终微程序设计完之后，我又把书看了一遍，又发现了很多之前理解不到位的地方，正所谓温故而知新。我想这最能说明实践和理论的关系吧，多动手多动脑，才能巩固对知识的理解。</li>
+<li>通过本次对微指令码一位位的设计，我对于计算机的底层实现有了更深的理解，更进一步地了解了计算机的工作原理，特别是运算器、控制器、内存、寄存器等部件之间的协作。本学期也学了汇编语言，它几乎是最靠近计算机硬件的编程语言了，在本次课程设计中，自主设计硬件间的协作，又算是直接接触了硬件，巩固了汇编和计组两门学科的知识与其联系。</li>
+<li>通过本次课程设计，我巩固了微程序设计的方法与思想，比如微指令、微操作、微命令、水平型微指令、微控存等基本概念，了解了微程序层次上程序员所看到的的计算机系统结构，加深了对程序员一词的理解。不同层次的程序员由于工作的“机器”不同，所以面对的问题以及其实现往往也是极为不同的。</li>
+</ol>
+<h1 id="附加材料"><a href="#附加材料" class="headerlink" title="附加材料"></a>附加材料</h1><p><strong>以下为$TEC-2$部分知识点总结。</strong></p>
+<h2 id="字长"><a href="#字长" class="headerlink" title="字长"></a>字长</h2><p>$TEC-2$机字长为16位，运算器、主存、数据与地址总线均为16位。</p>
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><p>$TEC-2$机指令有6位操作码，故支持64条指令，其中53条已实现，用于写出该机的监控程序。</p>
+<p>$IR$：指令寄存器，存储当前正在执行的指令。</p>
+<p>指令最高6位（$IR_{15-10}$）是操作码，之后两位$IR_{9-8}$是条件码，把它用作条件转移指令的判断条件，因此可以认为这两位是指令的扩展操作码。除条件转移指令之外，其余指令不使用这两位。</p>
+<h2 id="主存"><a href="#主存" class="headerlink" title="主存"></a>主存</h2><p>主存支持$64K$字，$4K\times8$的$ROM(2732)$存放监控程序，$2K\times8$的$RAM(2716)$存放用户数据及数据。</p>
+<h2 id="运算器"><a href="#运算器" class="headerlink" title="运算器"></a>运算器</h2><p>运算器主要由4片$AM2901$级联而成，可实现8种运算功能，16个双端口（$A$、$B$）读出、单端口（$B$）写入的通用寄存器（$R_{0-15}$，其中$R_{4-6}$作为$SP$、$PC$、$IP$），另配有1片$AM2902$实现快速进位。</p>
+<ul>
+<li><p>$IP$</p>
+<p>  保存当前正在运行的指令的地址，<strong>用于转移变址的目的</strong>。</p>
+<p>  所以在课设第一条指令中可以使用$R_6$暂存数据，因为此时不需要转移变址，用不到$IP$。</p>
+</li>
+<li><p>$I_{8-6}$</p>
+<p>  进行寄存器结果选择和Y输出选择</p>
+</li>
+<li><p>$I_{5-3}$</p>
+<p>  进行运算功能选择</p>
+</li>
+<li><p>$I_{2-0}$</p>
+<p>  进行数据来源选择</p>
+</li>
+</ul>
+<h3 id="引脚信号"><a href="#引脚信号" class="headerlink" title="引脚信号"></a>引脚信号</h3><ul>
+<li><p>$D_{3-0}$</p>
+<p>  外部送给$AM2901$的数据信号，比如从内存读出来的数据</p>
+</li>
+<li><p>$Y_{3-0}$</p>
+<p>  $AM2901$向外送出的数据，受​$\bar{OE}$控制。但在​$TEC-2$中，​$\bar{OE}$已接地</p>
+</li>
+<li><p>$A、B$</p>
+<p>  选择寄存器组中的源与目的寄存器。</p>
+<p>  当$A$、$B$同值时，被选中的同一个寄存器的内容将被同时送到$A$、$B$两个数据输出端口</p>
+</li>
+</ul>
+<h2 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h2><ul>
+<li>控制器主要由一片$AM2910$、7片$6116(RAM,2K\times8)$（微控存）、16位的指令寄存器$IR$和2片$2716$（存储用于实现53条机器指令的微程序，加电后读取送入微控存）等组成。</li>
+<li>程序计数器$PC$用运算器中的通用寄存器$R_5$代替，保存下一条指令的地址。</li>
+<li>指令地址寄存器$IP$由运算器中的$R_6$代替。</li>
+<li>控存字长56位，已实现的53条指令的微程序存放在2片单独的8位$ROM$中，加电的过程自动调入控存（装入微码）。</li>
+<li>地址总线的输入信号仅有一组，即地址寄存器（$AR$），而<strong>AR只能接收来自运算器的结果输出信号</strong>。</li>
+</ul>
+<h3 id="AM2910"><a href="#AM2910" class="headerlink" title="$AM2910$"></a>$AM2910$</h3><p>$AM2910$，微程序定序器，<strong>作用：形成下一条微指令的地址</strong>。</p>
+<h4 id="三个输出使能信号"><a href="#三个输出使能信号" class="headerlink" title="三个输出使能信号"></a>三个输出使能信号</h4><p><strong>作用：决定直接输入D的来源</strong></p>
+<ul>
+<li><p>$\bar{MAP}$</p>
+<p>  当其有效时，$D$来源于$MAPROM$，用于实现从机器指令到相应的微程序段的转移。</p>
+</li>
+<li><p>$\bar{VECT}$</p>
+<p>  当其有效时，原意为$D$来源于中断向量，现用于接收手拨微地址。</p>
+</li>
+<li><p>$\bar{PL}$</p>
+<p>  当其有效时，$D$来源于微指令的下地址字段，用于实现微程序转移。</p>
+</li>
+</ul>
+<h4 id="引脚定义"><a href="#引脚定义" class="headerlink" title="引脚定义"></a>引脚定义</h4><ul>
+<li><p>$\bar{CC}$</p>
+<p>  条件测试，当其为低电平时，测试成功，转移（使用下址字段）；否则，顺序执行。</p>
+</li>
+<li><p>$\bar{OE}$</p>
+<p>  Y输出允许信号，低电平有效，已接地</p>
+</li>
+<li><p>$\bar{CCEN}$</p>
+<p>  $\bar{CC}$允许信号，已接地</p>
+</li>
+</ul>
+<h4 id="16条命令"><a href="#16条命令" class="headerlink" title="16条命令"></a>16条命令</h4><ul>
+<li><p>2号命令</p>
+<p>  指令功能分支，无条件转$MAP$</p>
+</li>
+<li><p>3号命令</p>
+<p>  条件转移，条件测试$\bar{CC}$为1时顺序执行，否则按下地址$D$转移。</p>
+</li>
+<li><p>14号命令</p>
+<p>  顺序执行下一条微指令</p>
+</li>
+</ul>
+<h2 id="微程序"><a href="#微程序" class="headerlink" title="微程序"></a>微程序</h2><h3 id="微指令格式"><a href="#微指令格式" class="headerlink" title="微指令格式"></a>微指令格式</h3><p>每位的用处已在EXCEL表格中说明。</p>
+<ul>
+<li><p>$DC1$和$DC2$</p>
+<p>  关于这两个控制位我还有两个问题</p>
+<ul>
+<li><p>$DC2$为​$2$时</p>
+<p>  写$AR$时应把$DC2$设为2，即$AR$接收来自$IB$的数据；但$DC1$课本上都是设为0，即微型开关送$IB$。</p>
+<p>  这样不就是把微型开关送到了$AR$嘛？这不太对啊！？以下是我的猜测：</p>
+<p>  我猜在这里$DC1$应该是任意的。因为$AR$只能接收运算器的输出，所以当$DC2$设置为写$AR$时，就忽略$DC1$的设置，硬件应该可以实现。</p>
+</li>
+<li><p>$DC2$为​$0$时</p>
+<p>  此时代表$NC$，即无寄存器接收$IB$的数据，所以此时$DC1$应该也是任意，书上写的是0。</p>
+</li>
+</ul>
+</li>
+<li><p>$SSH$</p>
+</li>
+</ul>
+<h3 id="常用微指令"><a href="#常用微指令" class="headerlink" title="常用微指令"></a>常用微指令</h3><ul>
+<li><p>19H</p>
+<p>  取指令，$PC$增量。</p>
+<p>  该条微指令公用于所有指令。</p>
+</li>
+<li><p>1AH</p>
+<p>  按新取来的指令的操作码找到该条指令本身的微程序段的入口地址。</p>
+<p>  19H之后一定是1AH。</p>
+</li>
+<li><p>A4H</p>
+<p>  根据有无中断请求，决定是进入中断处理过程，还是顺序执行。</p>
+<p>  任何一条机器指令执行完都要去A4H检测中断</p>
+</li>
+</ul>
+<h2 id="程序调试"><a href="#程序调试" class="headerlink" title="程序调试"></a>程序调试</h2><p>以第一条指令为例</p>
+<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><ol>
+<li><p>$S_2S_1S_0$</p>
+<p> 设为<code>100</code></p>
+</li>
+<li><p>$FS_1FS_2FS_3FS_4$</p>
+<p> 设为<code>1010</code></p>
+</li>
+<li><p>$STEP/CONT$</p>
+<p> 设为<code>CONT</code></p>
+</li>
+</ol>
+<h3 id="输入并查看微码"><a href="#输入并查看微码" class="headerlink" title="输入并查看微码"></a>输入并查看微码</h3><ol>
+<li><p><code>E900</code></p>
+<p> 将微码输入到<code>900H</code>开始的内存单元中</p>
+</li>
+<li><p><code>D900</code></p>
+<p> 查看内存</p>
+</li>
+</ol>
+<h3 id="将微码加载到微控存"><a href="#将微码加载到微控存" class="headerlink" title="将微码加载到微控存"></a>将微码加载到微控存</h3><ol>
+<li><p><code>A800</code></p>
+<p> 输入加载微码的程序</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0800: MOV R1,900	; 900是微码在内存中地址</span><br><span class="line">0802: MOV R2,7		; 共7条微指令</span><br><span class="line">0804: MOV R3,110	; 微码在微控存中的首地址</span><br><span class="line">0806: LDMC			;加载微码</span><br><span class="line">0807: RET</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>G800</code></p>
+<p> 运行上边的代码，把微码装入微控存<code>110H</code>开始的单元中</p>
+</li>
+</ol>
+<h3 id="测试指令"><a href="#测试指令" class="headerlink" title="测试指令"></a>测试指令</h3><ol>
+<li><p><code>A820</code></p>
+<p> 输入测试指令的程序到<code>820H</code>开始的内存单元中</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">0820: MOV R0,0045	</span><br><span class="line">0822: MOV [A00],R0	; [A00]单元存储45H</span><br><span class="line">0824: MOV R1,0023</span><br><span class="line">0826: MOV [A01],R1	; [A01]单元存储23H</span><br><span class="line">0828: NOP			; 占一个字</span><br><span class="line">0829: NOP</span><br><span class="line">082A: NOP</span><br><span class="line">082B: RET</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>E826</code></p>
+<p> 把新指令写到<code>826H</code>开始的内存单元</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0828    0000:D800  0000:0A00  0000:0A01</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>U820</code></p>
+<p> 反汇编，查看我们输入的测试指令的程序</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">0820: 2C00 0045  MOV    R0,     0045</span><br><span class="line">0822: 3400 0A00  MOV    [0A00], R0</span><br><span class="line">0824: 2C10 0023  MOV    R1,     0023</span><br><span class="line">0826: 3401 0A01  MOV    [0A01], R1</span><br><span class="line">0828: D800       DW     D800</span><br><span class="line">0829: 0A00       ADC    R0,     R0	; 高8位为000010XX，对应指令为ADC，实际上是我们自己设计的指令</span><br><span class="line">082A: 0A01       ADC    R0,     R1</span><br><span class="line">082B: AC00       RET</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>G820</code></p>
+<p> 运行从<code>820H</code>开始的程序</p>
+</li>
+</ol>
+<h3 id="观察运算结果"><a href="#观察运算结果" class="headerlink" title="观察运算结果"></a>观察运算结果</h3><p><code>DA00</code></p>
+<hr>
+<p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
+<p>欢迎讨论和交流!</p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机组成原理/" rel="tag"># 计算机组成原理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/28/计算机组成原理-第七章复习/" rel="next" title="计算机组成原理-第七章复习">
+                <i class="fa fa-chevron-left"></i> 计算机组成原理-第七章复习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg"
+                alt="臭咸鱼" />
+            
+              <p class="site-author-name" itemprop="name">臭咸鱼</p>
+              <p class="site-description motion-element" itemprop="description">Cxy与Bug的前世今生，Cxy与Life的深度摩擦。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://maluguang.com" title="Road Wide's Blog" target="_blank">Road Wide's Blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目的与要求"><span class="nav-number">1.</span> <span class="nav-text">目的与要求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验环境"><span class="nav-number">2.</span> <span class="nav-text">实验环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体内容"><span class="nav-number">3.</span> <span class="nav-text">具体内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#指令一"><span class="nav-number">3.1.</span> <span class="nav-text">指令一</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#微程序设计与实现"><span class="nav-number">3.1.1.</span> <span class="nav-text">微程序设计与实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令测试"><span class="nav-number">3.1.2.</span> <span class="nav-text">指令测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令二"><span class="nav-number">3.2.</span> <span class="nav-text">指令二</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#微程序设计与实现-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">微程序设计与实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令测试-1"><span class="nav-number">3.2.2.</span> <span class="nav-text">指令测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令三"><span class="nav-number">3.3.</span> <span class="nav-text">指令三</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#微程序设计与实现-2"><span class="nav-number">3.3.1.</span> <span class="nav-text">微程序设计与实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令测试-2"><span class="nav-number">3.3.2.</span> <span class="nav-text">指令测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验心得"><span class="nav-number">4.</span> <span class="nav-text">实验心得</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附加材料"><span class="nav-number">5.</span> <span class="nav-text">附加材料</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字长"><span class="nav-number">5.1.</span> <span class="nav-text">字长</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令"><span class="nav-number">5.2.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主存"><span class="nav-number">5.3.</span> <span class="nav-text">主存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算器"><span class="nav-number">5.4.</span> <span class="nav-text">运算器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引脚信号"><span class="nav-number">5.4.1.</span> <span class="nav-text">引脚信号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制器"><span class="nav-number">5.5.</span> <span class="nav-text">控制器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AM2910"><span class="nav-number">5.5.1.</span> <span class="nav-text">$AM2910$</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#三个输出使能信号"><span class="nav-number">5.5.1.1.</span> <span class="nav-text">三个输出使能信号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引脚定义"><span class="nav-number">5.5.1.2.</span> <span class="nav-text">引脚定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#16条命令"><span class="nav-number">5.5.1.3.</span> <span class="nav-text">16条命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微程序"><span class="nav-number">5.6.</span> <span class="nav-text">微程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#微指令格式"><span class="nav-number">5.6.1.</span> <span class="nav-text">微指令格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用微指令"><span class="nav-number">5.6.2.</span> <span class="nav-text">常用微指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序调试"><span class="nav-number">5.7.</span> <span class="nav-text">程序调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备"><span class="nav-number">5.7.1.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入并查看微码"><span class="nav-number">5.7.2.</span> <span class="nav-text">输入并查看微码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将微码加载到微控存"><span class="nav-number">5.7.3.</span> <span class="nav-text">将微码加载到微控存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试指令"><span class="nav-number">5.7.4.</span> <span class="nav-text">测试指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#观察运算结果"><span class="nav-number">5.7.5.</span> <span class="nav-text">观察运算结果</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">臭咸鱼</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">91.0k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz',
+        appKey: 'Si7hBxIAVOGbu6Pot7HHaVBB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz", "Si7hBxIAVOGbu6Pot7HHaVBB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>

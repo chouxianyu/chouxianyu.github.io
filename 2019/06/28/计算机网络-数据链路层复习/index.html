@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="计算机网络," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="臭咸鱼的缺氧瓶" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="网桥在数据链路层进行互连。 数据链路层研究的问题在同一个局域网中，分组怎么从一台主机传送到另一台主机上（不经过路由器转发）。 分组是网络层的协议数据单元，数据链路层的协议数据单元是帧。 链路和数据链路链路也叫物理链路。 一个结点到相邻结点的一段物理线路，而没有其他的交换结点。 数据链路也叫逻辑链路。 链路加上实现协议的硬件和软件形成数据链路。 常用方法： 网络适配器，即网卡，既有软件，又包括硬件，">
+<meta name="keywords" content="计算机网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络-数据链路层复习">
+<meta property="og:url" content="https://chouxianyu.github.io/2019/06/28/计算机网络-数据链路层复习/index.html">
+<meta property="og:site_name" content="臭咸鱼的缺氧瓶">
+<meta property="og:description" content="网桥在数据链路层进行互连。 数据链路层研究的问题在同一个局域网中，分组怎么从一台主机传送到另一台主机上（不经过路由器转发）。 分组是网络层的协议数据单元，数据链路层的协议数据单元是帧。 链路和数据链路链路也叫物理链路。 一个结点到相邻结点的一段物理线路，而没有其他的交换结点。 数据链路也叫逻辑链路。 链路加上实现协议的硬件和软件形成数据链路。 常用方法： 网络适配器，即网卡，既有软件，又包括硬件，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-28T13:35:48.594Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机网络-数据链路层复习">
+<meta name="twitter:description" content="网桥在数据链路层进行互连。 数据链路层研究的问题在同一个局域网中，分组怎么从一台主机传送到另一台主机上（不经过路由器转发）。 分组是网络层的协议数据单元，数据链路层的协议数据单元是帧。 链路和数据链路链路也叫物理链路。 一个结点到相邻结点的一段物理线路，而没有其他的交换结点。 数据链路也叫逻辑链路。 链路加上实现协议的硬件和软件形成数据链路。 常用方法： 网络适配器，即网卡，既有软件，又包括硬件，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chouxianyu.github.io/2019/06/28/计算机网络-数据链路层复习/"/>
+
+
+
+
+
+  <title>计算机网络-数据链路层复习 | 臭咸鱼的缺氧瓶</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5706c34297d4762ba8c6d799a54234b9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">臭咸鱼的缺氧瓶</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快给我氧气！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/06/28/计算机网络-数据链路层复习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">计算机网络-数据链路层复习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-28T21:33:54+08:00">
+                2019-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/06/28/计算机网络-数据链路层复习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/28/计算机网络-数据链路层复习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/06/28/计算机网络-数据链路层复习/" class="leancloud_visitors" data-flag-title="计算机网络-数据链路层复习">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,501 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  9 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>网桥在数据链路层进行互连。</p>
+<h1 id="数据链路层研究的问题"><a href="#数据链路层研究的问题" class="headerlink" title="数据链路层研究的问题"></a>数据链路层研究的问题</h1><p>在同一个局域网中，<strong>分组</strong>怎么从一台主机传送到另一台主机上（不经过路由器转发）。</p>
+<p><strong>分组是网络层的协议数据单元</strong>，数据链路层的协议数据单元是<strong>帧</strong>。</p>
+<h1 id="链路和数据链路"><a href="#链路和数据链路" class="headerlink" title="链路和数据链路"></a>链路和数据链路</h1><h2 id="链路"><a href="#链路" class="headerlink" title="链路"></a>链路</h2><p>也叫物理链路。</p>
+<p>一个结点到相邻结点的一段<strong>物理线路</strong>，而没有其他的交换结点。</p>
+<h2 id="数据链路"><a href="#数据链路" class="headerlink" title="数据链路"></a>数据链路</h2><p>也叫逻辑链路。</p>
+<p><strong>链路</strong>加上实现协议的<strong>硬件</strong>和<strong>软件</strong>形成数据链路。</p>
+<p>常用方法：</p>
+<p>网络适配器，即网卡，既有软件，又包括硬件，其一般包括物理层和数据链路层两层的功能。</p>
+<h2 id="链路和数据链路有什么区别？“电路接通了”和“数据链路接通了”的区别在哪？"><a href="#链路和数据链路有什么区别？“电路接通了”和“数据链路接通了”的区别在哪？" class="headerlink" title="链路和数据链路有什么区别？“电路接通了”和“数据链路接通了”的区别在哪？"></a>链路和数据链路有什么区别？“电路接通了”和“数据链路接通了”的区别在哪？</h2><p>所谓<strong>链路就是从一个结点到相邻结点的一段物理线路，而中间没有任何其他的交换结点</strong>。在进行数据通信时，两个计算机之间的通信路径往往要经过许多段这样的链路。可见链路只是一条路径的组成部分。</p>
+<p>数据链路则是另外一个概念。这是因为<strong>当需要在一条线路上传输数据时，除了必须有一条物理线路外，还必须有一些必要的通信协议来控制这些数据的传输。若把实现这些协议的硬件和软件加到链路上，就构成了数据链路</strong>。现在最常用的方法是使用网络适配器（如拨号上网使用拨号适配器，以及通过以太网上网使用局域网适配器）来实现这些协议的硬件和软件。一般的适配器都包括了数据链路层和物理层这两层的功能。</p>
+<p>也可以把链路分为物理链路和逻辑链路。物理链路就是上面说的链路，而逻辑链路就是上面的数据链路，是物理链路加上必要的通信协议。</p>
+<p><strong>“电路接通了”表明物理连接已经能够传输比特流了</strong>。</p>
+<p><strong>而“数据链路接通了”是指在物理连通的基础上，建立数据链路，实现封装成帧、透明传输、差错检测等功能</strong>。</p>
+<h1 id="帧"><a href="#帧" class="headerlink" title="帧"></a>帧</h1><p>数据链路层的<strong>协议数据单元</strong>。</p>
+<h1 id="数据链路层三个基本问题"><a href="#数据链路层三个基本问题" class="headerlink" title="数据链路层三个基本问题"></a>数据链路层三个基本问题</h1><h2 id="封装成帧"><a href="#封装成帧" class="headerlink" title="封装成帧"></a>封装成帧</h2><p>数据链路层在网络层交下来的IP数据报（即分组）前后分别添加<strong>首部</strong>和<strong>尾部</strong>形成<strong>帧</strong>。（OSI的数据链路层把传输的比特流划分成帧。）</p>
+<p><strong>只有数据链路层会添加尾部，除物理层外，即应用层、传输层、网络层、数据链路层都会为上边传下来的数据添加首部</strong>。</p>
+<p>首部和尾部包括许多必要的控制信息（如同步信息、地址信息、差错控制等），</p>
+<h3 id="问题来源"><a href="#问题来源" class="headerlink" title="问题来源"></a>问题来源</h3><p>为使接收端能从收到的比特流中准确地找到帧的开始和结束位置。</p>
+<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>首部和尾部的一个重要作用就是<strong>帧定界</strong>（即确定帧的界限）：</p>
+<p>SOH（Start Of Header），放在帧的最前边，表示帧的开始。</p>
+<p>EOT（End Of Transmission），放在帧的最后边，表示帧的结束。</p>
+<h2 id="透明传输"><a href="#透明传输" class="headerlink" title="透明传输"></a>透明传输</h2><h3 id="问题来源-1"><a href="#问题来源-1" class="headerlink" title="问题来源"></a>问题来源</h3><p>由于帧开始和结束的标记使用专门指明的控制字符，所传输的数据中不能出现8比特的组合和用作帧定界的控制字符的比特编码一样，否则会出现<strong>帧定界错误</strong>。</p>
+<h3 id="解决问题-1"><a href="#解决问题-1" class="headerlink" title="解决问题"></a>解决问题</h3><ul>
+<li>解决方法：<strong>字节填充</strong></li>
+</ul>
+<p>发送端的数据链路层在<strong>数据中控制字符和转义字符</strong>的前边插入一个<strong>转义字符</strong>ESC；</p>
+<p>接收端的数据链路层在把数据送往网络层之前删除这个插入的转义字符ESC。</p>
+<p>简单来说，（要注意：添加和删除ESC是对于<strong>数据中的</strong>ESC、SOH、EOT来说的）</p>
+<p><strong>发送端的数据链路层在数据中的ESC、SOH、EOT前添加ESC</strong>，</p>
+<p><strong>接收端的数据链路层把数据中ESC、SOH、EOT前的ESC去掉</strong></p>
+<h2 id="差错检测"><a href="#差错检测" class="headerlink" title="差错检测"></a>差错检测</h2><h3 id="问题来源-2"><a href="#问题来源-2" class="headerlink" title="问题来源"></a>问题来源</h3><ul>
+<li><strong>比特差错</strong></li>
+</ul>
+<p>现实的通信链路不是理想的，传输过程中可能出现<strong>比特差错</strong>（1变成0，或0变成1）。</p>
+<p><strong>比特差错并不是传输差错</strong>。</p>
+<p>为保证数据传输的可靠性，必须进行差错检测。</p>
+<h3 id="CRC"><a href="#CRC" class="headerlink" title="CRC"></a>CRC</h3><p>数据链路层广泛使用了<strong>循环冗余校验码CRC</strong>的检错技术。</p>
+<p>若数据链路层<strong>仅仅</strong>使用CRC，则只能实现<strong>无差错接受</strong>、<strong>无比特差错</strong>的传输，这并不是<strong>可靠传输</strong>。</p>
+<p>==CRC可参考计组复习笔记，超链接==</p>
+<ul>
+<li>CRC和FCS不同</li>
+</ul>
+<p><strong>帧检验序列FCS</strong>，是数据后边的<strong>冗余码</strong>；而CRC是一种检错方法。</p>
+<ul>
+<li>编码方法</li>
+</ul>
+<p>数据左移几位（P的位数-1）后模2除以生成多项式P，则得应在数据后添加的余数</p>
+<ul>
+<li>检错方法</li>
+</ul>
+<p>拿到的数据加冗余码，模2除生成多项式P，求得余数</p>
+<p>若余数为0，则无误，接受；</p>
+<p>若不为0，则有误，就<strong>丢弃</strong>。</p>
+<h2 id="为什么三个问题必须加以解决"><a href="#为什么三个问题必须加以解决" class="headerlink" title="为什么三个问题必须加以解决"></a>为什么三个问题必须加以解决</h2><p><strong>封装成帧就是在一段数据的前后分别添加首部和尾部</strong>（在首部和尾部里面有许多必要的控制信息），这样就构成了一个帧。接收端在收到物理层上交的比特流，就能根据首部和尾部的标记，从收到的比特流中识别帧的开始和结束。<strong>首部和尾部的一个重要作用就是帧定界，如果不进行封装成帧，那么数据链路层在收到一些数据时，就无法知道对方传输的数据中哪些是数据，哪些是控制信息，甚至数据中有没有差错也不知道，也无法知道数据传送结束了没有，因此不知道应该在什么时候把收到的数据给上一层。</strong></p>
+<p><strong>上层交下来的数据，不管是什么形式的比特组合，都必须能够正确传送</strong>。由于帧的开始和结束的标记是使用专门指明的控制字符，因此，所传输的数据中的任何比特组合一定不允许和用作帧定界的控制字符的比特编码一样，否则就会出现帧定界的错误。<strong>数据链路层不应对传送的数据提出限制，即不应当规定某种形式的比特组合不能够传送。如果没有透明传输，就可能会出现帧定界错误</strong>。</p>
+<p>如果数据链路层没有<strong>差错检测</strong>，那么当目的主机收到其他主机发送来的数据时，在交给高层后，<strong>如果应用程序要求收到的数据必须正确无误</strong>，那么目的主机的高层软件可以对收到的数据进行差错检测。如果发现数据中有差错，就可以请求源主机<strong>重传</strong>这些数据。这样做就可以达到正确接收数据的目的。但这种工作方式有一个很大的缺点，就是<strong>一些在传输过程中出现了错误的数据（这些已经是没有用处的数据）还会继续在网络中传送，这样就浪费了网络的资源</strong>。</p>
+<h1 id="点对点协议PPP"><a href="#点对点协议PPP" class="headerlink" title="点对点协议PPP"></a>点对点协议PPP</h1><p>PPP协议<strong>面向连接</strong>。</p>
+<p>PPP控制字符：<code>0x7E</code></p>
+<h2 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h2><p>简单</p>
+<h2 id="字节填充"><a href="#字节填充" class="headerlink" title="字节填充"></a>字节填充</h2><p>PPP使用异步传输时，转义符定义为<code>0x7D</code>，使用字节填充</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">处理情况</th>
+<th style="text-align:center">填充前</th>
+<th style="text-align:center">填充后</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">控制字符</td>
+<td style="text-align:center">0x7E</td>
+<td style="text-align:center">(0x7D,0x5E)</td>
+</tr>
+<tr>
+<td style="text-align:center">转义字符</td>
+<td style="text-align:center">0x7D</td>
+<td style="text-align:center">(0x7D,0x5D)</td>
+</tr>
+<tr>
+<td style="text-align:center">ASCII码控制字符(小于0x20)</td>
+<td style="text-align:center">0x03</td>
+<td style="text-align:center">(0x7D,0x23)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="零比特填充"><a href="#零比特填充" class="headerlink" title="零比特填充"></a>零比特填充</h2><p>PPP使用同步传输时</p>
+<p>保证<strong>信息字段中</strong>不会出现连续6个1，方法如下</p>
+<ul>
+<li><p>发送端</p>
+<p>  扫描<strong>信息字段</strong>，发现<strong>连续5个1</strong>，在其后边添1个0</p>
+</li>
+<li><p>接收端</p>
+<p>  扫描<strong>信息字段</strong>，发现<strong>连续5个1</strong>，则删除其后边的1个0</p>
+</li>
+</ul>
+<h1 id="局域网的数据链路层"><a href="#局域网的数据链路层" class="headerlink" title="局域网的数据链路层"></a>局域网的数据链路层</h1><p><strong>局域网的协议结构一般不包括网络层</strong>。</p>
+<h2 id="以太网"><a href="#以太网" class="headerlink" title="以太网"></a>以太网</h2><p>以太网是典型的局域网，几乎成了局域网的同义词。</p>
+<p>为了通信的简便，以太网采取了以下两种措施：</p>
+<ul>
+<li><strong>无连接、不可靠</strong></li>
+<li>以太网发送的数据都使用<strong>曼彻斯特编码</strong></li>
+</ul>
+<h2 id="截断二进制指数退避算法"><a href="#截断二进制指数退避算法" class="headerlink" title="截断二进制指数退避算法"></a>截断二进制指数退避算法</h2><p>以太网使用截断二进制指数退避算法来确定碰撞后重传的时机。</p>
+<p>设碰撞次数为$k$，则$k=Min[重传次数，10]$，重传时间为$0$到$2^k-1$个时间片</p>
+<h2 id="局域网主要特点"><a href="#局域网主要特点" class="headerlink" title="局域网主要特点"></a>局域网主要特点</h2><ul>
+<li>网络为一个单位所拥有</li>
+<li>地理范围和站点数目均有限</li>
+</ul>
+<h2 id="网络拓扑"><a href="#网络拓扑" class="headerlink" title="网络拓扑"></a>网络拓扑</h2><h3 id="星形网"><a href="#星形网" class="headerlink" title="星形网"></a>星形网</h3><p>现在主要用这个，</p>
+<p><strong>集线器星型拓扑</strong>：</p>
+<ul>
+<li>易维护，物理上是星形，逻辑上是总线型</li>
+<li><strong>集线器工作在物理层</strong></li>
+</ul>
+<h3 id="环形网"><a href="#环形网" class="headerlink" title="环形网"></a>环形网</h3><p>一个电脑出问题，会影响整个局域网。</p>
+<h3 id="总线网"><a href="#总线网" class="headerlink" title="总线网"></a>总线网</h3><p>所有的主机都连在一根总线上。</p>
+<ul>
+<li><p>广播</p>
+<p>  一台计算机发送数据，总线上所有计算机都能检测到这个数据</p>
+</li>
+<li><p>一对一</p>
+<p>  给每个适配器一个独一无二的MAC地址，在发送数据帧时，在帧的首部写明接收站的地址。</p>
+<p>  当数据帧中的目的地址与适配器ROM中存放的MAC地址一致时，该适配器才接受这个数据帧，否则丢弃。</p>
+</li>
+</ul>
+<h2 id="CSMA-CD协议"><a href="#CSMA-CD协议" class="headerlink" title="CSMA/CD协议"></a>CSMA/CD协议</h2><p>载波监听多路访问/碰撞检测，协议的实质是载波监听和碰撞检测。</p>
+<h1 id="以太网扩展"><a href="#以太网扩展" class="headerlink" title="以太网扩展"></a>以太网扩展</h1><hr>
+<p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
+<p>欢迎讨论和交流!</p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机网络/" rel="tag"># 计算机网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/28/计算机网络-物理层复习/" rel="next" title="计算机网络-物理层复习">
+                <i class="fa fa-chevron-left"></i> 计算机网络-物理层复习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/28/计算机网络-网络层复习/" rel="prev" title="计算机网络-网络层复习">
+                计算机网络-网络层复习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg"
+                alt="臭咸鱼" />
+            
+              <p class="site-author-name" itemprop="name">臭咸鱼</p>
+              <p class="site-description motion-element" itemprop="description">Cxy与Bug的前世今生，Cxy与Life的深度摩擦。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://maluguang.com" title="Road Wide's Blog" target="_blank">Road Wide's Blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据链路层研究的问题"><span class="nav-number">1.</span> <span class="nav-text">数据链路层研究的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链路和数据链路"><span class="nav-number">2.</span> <span class="nav-text">链路和数据链路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#链路"><span class="nav-number">2.1.</span> <span class="nav-text">链路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据链路"><span class="nav-number">2.2.</span> <span class="nav-text">数据链路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链路和数据链路有什么区别？“电路接通了”和“数据链路接通了”的区别在哪？"><span class="nav-number">2.3.</span> <span class="nav-text">链路和数据链路有什么区别？“电路接通了”和“数据链路接通了”的区别在哪？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#帧"><span class="nav-number">3.</span> <span class="nav-text">帧</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据链路层三个基本问题"><span class="nav-number">4.</span> <span class="nav-text">数据链路层三个基本问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#封装成帧"><span class="nav-number">4.1.</span> <span class="nav-text">封装成帧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题来源"><span class="nav-number">4.1.1.</span> <span class="nav-text">问题来源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决问题"><span class="nav-number">4.1.2.</span> <span class="nav-text">解决问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#透明传输"><span class="nav-number">4.2.</span> <span class="nav-text">透明传输</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题来源-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">问题来源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决问题-1"><span class="nav-number">4.2.2.</span> <span class="nav-text">解决问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#差错检测"><span class="nav-number">4.3.</span> <span class="nav-text">差错检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题来源-2"><span class="nav-number">4.3.1.</span> <span class="nav-text">问题来源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CRC"><span class="nav-number">4.3.2.</span> <span class="nav-text">CRC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么三个问题必须加以解决"><span class="nav-number">4.4.</span> <span class="nav-text">为什么三个问题必须加以解决</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#点对点协议PPP"><span class="nav-number">5.</span> <span class="nav-text">点对点协议PPP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要特点"><span class="nav-number">5.1.</span> <span class="nav-text">主要特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字节填充"><span class="nav-number">5.2.</span> <span class="nav-text">字节填充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#零比特填充"><span class="nav-number">5.3.</span> <span class="nav-text">零比特填充</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#局域网的数据链路层"><span class="nav-number">6.</span> <span class="nav-text">局域网的数据链路层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#以太网"><span class="nav-number">6.1.</span> <span class="nav-text">以太网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#截断二进制指数退避算法"><span class="nav-number">6.2.</span> <span class="nav-text">截断二进制指数退避算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#局域网主要特点"><span class="nav-number">6.3.</span> <span class="nav-text">局域网主要特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络拓扑"><span class="nav-number">6.4.</span> <span class="nav-text">网络拓扑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#星形网"><span class="nav-number">6.4.1.</span> <span class="nav-text">星形网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环形网"><span class="nav-number">6.4.2.</span> <span class="nav-text">环形网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总线网"><span class="nav-number">6.4.3.</span> <span class="nav-text">总线网</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSMA-CD协议"><span class="nav-number">6.5.</span> <span class="nav-text">CSMA/CD协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#以太网扩展"><span class="nav-number">7.</span> <span class="nav-text">以太网扩展</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">臭咸鱼</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">91.0k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz',
+        appKey: 'Si7hBxIAVOGbu6Pot7HHaVBB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz", "Si7hBxIAVOGbu6Pot7HHaVBB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>

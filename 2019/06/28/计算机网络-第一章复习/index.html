@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="计算机网络," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="臭咸鱼的缺氧瓶" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Internet如何翻译有两种翻译方式： 因特网国家推荐 互联网现实中大多使用这个词。 互联网的重要特点连通性世界各地的用户都可以交换信息，好像彼此之间直接连通一样。 共享即资源共享，如信息、软件、硬件共享等。 两个认识互联网的角度应用工作原理课本是从这个角度来讲解的，我们从这个角度来学习。 计算机网络的组成定义：计算机网络由若干结点（node）和连接这些结点的链路（link）组成。 结点可以是计">
+<meta name="keywords" content="计算机网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络-第一章复习">
+<meta property="og:url" content="https://chouxianyu.github.io/2019/06/28/计算机网络-第一章复习/index.html">
+<meta property="og:site_name" content="臭咸鱼的缺氧瓶">
+<meta property="og:description" content="Internet如何翻译有两种翻译方式： 因特网国家推荐 互联网现实中大多使用这个词。 互联网的重要特点连通性世界各地的用户都可以交换信息，好像彼此之间直接连通一样。 共享即资源共享，如信息、软件、硬件共享等。 两个认识互联网的角度应用工作原理课本是从这个角度来讲解的，我们从这个角度来学习。 计算机网络的组成定义：计算机网络由若干结点（node）和连接这些结点的链路（link）组成。 结点可以是计">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2019/06/17/5d06f3764b59848351.jpg">
+<meta property="og:updated_time" content="2019-06-28T13:35:19.188Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机网络-第一章复习">
+<meta name="twitter:description" content="Internet如何翻译有两种翻译方式： 因特网国家推荐 互联网现实中大多使用这个词。 互联网的重要特点连通性世界各地的用户都可以交换信息，好像彼此之间直接连通一样。 共享即资源共享，如信息、软件、硬件共享等。 两个认识互联网的角度应用工作原理课本是从这个角度来讲解的，我们从这个角度来学习。 计算机网络的组成定义：计算机网络由若干结点（node）和连接这些结点的链路（link）组成。 结点可以是计">
+<meta name="twitter:image" content="https://i.loli.net/2019/06/17/5d06f3764b59848351.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chouxianyu.github.io/2019/06/28/计算机网络-第一章复习/"/>
+
+
+
+
+
+  <title>计算机网络-第一章复习 | 臭咸鱼的缺氧瓶</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5706c34297d4762ba8c6d799a54234b9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">臭咸鱼的缺氧瓶</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快给我氧气！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/06/28/计算机网络-第一章复习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">计算机网络-第一章复习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-28T21:33:39+08:00">
+                2019-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/06/28/计算机网络-第一章复习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/28/计算机网络-第一章复习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/06/28/计算机网络-第一章复习/" class="leancloud_visitors" data-flag-title="计算机网络-第一章复习">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,579 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  9 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Internet如何翻译"><a href="#Internet如何翻译" class="headerlink" title="Internet如何翻译"></a>Internet如何翻译</h1><p>有两种翻译方式：</p>
+<h2 id="因特网"><a href="#因特网" class="headerlink" title="因特网"></a>因特网</h2><p>国家推荐</p>
+<h2 id="互联网"><a href="#互联网" class="headerlink" title="互联网"></a>互联网</h2><p>现实中大多使用这个词。</p>
+<h1 id="互联网的重要特点"><a href="#互联网的重要特点" class="headerlink" title="互联网的重要特点"></a>互联网的重要特点</h1><h2 id="连通性"><a href="#连通性" class="headerlink" title="连通性"></a>连通性</h2><p>世界各地的用户都可以交换信息，好像彼此之间直接连通一样。</p>
+<h2 id="共享"><a href="#共享" class="headerlink" title="共享"></a>共享</h2><p>即资源共享，如信息、软件、硬件共享等。</p>
+<h1 id="两个认识互联网的角度"><a href="#两个认识互联网的角度" class="headerlink" title="两个认识互联网的角度"></a>两个认识互联网的角度</h1><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>课本是从这个角度来讲解的，我们从这个角度来学习。</p>
+<h1 id="计算机网络的组成"><a href="#计算机网络的组成" class="headerlink" title="计算机网络的组成"></a>计算机网络的组成</h1><p>定义：计算机网络由若干<strong>结点</strong>（node）和连接这些结点的<strong>链路</strong>（link）组成。</p>
+<h2 id="结点"><a href="#结点" class="headerlink" title="结点"></a>结点</h2><p>可以是计算机、集线器、路由器、交换机等。</p>
+<h2 id="链路"><a href="#链路" class="headerlink" title="链路"></a>链路</h2><h1 id="互连网与互联网"><a href="#互连网与互联网" class="headerlink" title="互连网与互联网"></a>互连网与互联网</h1><h2 id="互连网"><a href="#互连网" class="headerlink" title="互连网"></a>互连网</h2><p>internet</p>
+<ul>
+<li><p>定义</p>
+<p>  通用名词，泛指通过路由器将网络连起来形成的网络。</p>
+</li>
+<li><p>其中网络间的通信协议可以是<strong>任意</strong>的。</p>
+</li>
+<li><p>互连不仅是物理上，还要通过软件连接。</p>
+</li>
+</ul>
+<h2 id="互联网-1"><a href="#互联网-1" class="headerlink" title="互联网"></a>互联网</h2><p>Internet</p>
+<ul>
+<li><p>定义</p>
+<p>  互联网是全球最大的、开放的、由众多网络相互连接而成的特定互连网。</p>
+</li>
+<li><p>采用<strong>TCP/IP协议族</strong>作为通信规则。</p>
+</li>
+<li><p>前身是美国的ARPANET。</p>
+</li>
+</ul>
+<h1 id="三层ISP结构"><a href="#三层ISP结构" class="headerlink" title="三层ISP结构"></a>三层ISP结构</h1><p>ISP，互联网服务提供者。</p>
+<p>互联网现在采用三层ISP结构。</p>
+<h2 id="本地ISP"><a href="#本地ISP" class="headerlink" title="本地ISP"></a>本地ISP</h2><h2 id="地区ISP"><a href="#地区ISP" class="headerlink" title="地区ISP"></a>地区ISP</h2><h2 id="主干ISP"><a href="#主干ISP" class="headerlink" title="主干ISP"></a>主干ISP</h2><h1 id="IXP"><a href="#IXP" class="headerlink" title="IXP"></a>IXP</h1><p>允许两个网络直接相连并交换信息。</p>
+<h1 id="互联网的组成"><a href="#互联网的组成" class="headerlink" title="互联网的组成"></a>互联网的组成</h1><h2 id="边缘部分"><a href="#边缘部分" class="headerlink" title="边缘部分"></a>边缘部分</h2><p>与网络相连的计算机常称为主机。</p>
+<ul>
+<li><p>定义</p>
+<p>  连接在互联网上的所有主机。</p>
+</li>
+<li><p>由用户（个人、公司）控制。</p>
+</li>
+<li><p><strong>进行通信和资源共享</strong>。</p>
+</li>
+</ul>
+<h3 id="主机通信方式"><a href="#主机通信方式" class="headerlink" title="主机通信方式"></a>主机通信方式</h3><ul>
+<li><p>对象</p>
+<p>  计算机通信的对象是应用层中的<strong>进程</strong>。</p>
+</li>
+</ul>
+<h4 id="客户-服务器方式"><a href="#客户-服务器方式" class="headerlink" title="客户/服务器方式"></a>客户/服务器方式</h4><p>即C/S方式。</p>
+<ul>
+<li><p>客户和服务器指通信中所涉及的两个应用<strong>进程</strong>。</p>
+</li>
+<li><p>客户/服务器模式描述的是进程之间服务和被服务的<strong>关系</strong>。</p>
+<p>  客户是服务请求方，服务器是服务提供方。</p>
+</li>
+<li><p>客户和服务器都要使用互联网核心部分提供的服务。</p>
+</li>
+<li><p><strong>客户必须知道服务器程序的地址，服务器不需要知道客户程序的地址。</strong></p>
+</li>
+</ul>
+<h4 id="对等连接方式"><a href="#对等连接方式" class="headerlink" title="对等连接方式"></a>对等连接方式</h4><p>对等连接（peer to peer），P2P。</p>
+<ul>
+<li><p>定义</p>
+<p>  两台主机在通信时并不区分谁是客户或服务器。</p>
+</li>
+<li><p>本质上还是C/S方式。</p>
+</li>
+</ul>
+<h2 id="核心部分"><a href="#核心部分" class="headerlink" title="核心部分"></a>核心部分</h2><ul>
+<li><p>定义</p>
+<p>  由大量<strong>网络</strong>和连接这些网络的<strong>路由器</strong>组成。</p>
+</li>
+<li><p>由ISP控制。</p>
+</li>
+<li><p>为边缘部分提供服务。</p>
+</li>
+</ul>
+<h3 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h3><p>核心部分的工作方式就是路由器的工作方式。</p>
+<ul>
+<li>存储转发</li>
+<li>路由器间不断交换路由信息</li>
+</ul>
+<h1 id="三种交换方式"><a href="#三种交换方式" class="headerlink" title="三种交换方式"></a>三种交换方式</h1><ul>
+<li>严格来讲，分组交换也是可以面向连接的</li>
+<li>现在用的是分组交换</li>
+</ul>
+<h2 id="电路交换"><a href="#电路交换" class="headerlink" title="电路交换"></a>电路交换</h2><ul>
+<li><p>并不是真正意义上的交换</p>
+</li>
+<li><p>主要特点：<strong>面向连接</strong></p>
+<ul>
+<li>建立连接、通信、释放连接</li>
+<li><strong>在通信的全部时间内，通信的两个用户始终占用端到端的通信资源。</strong></li>
+</ul>
+</li>
+<li><p>优点</p>
+<p>  静态分配传输带宽，只要建立了连接，网络发生拥塞也不会影响通信质量。</p>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>计算机通信时，数据具有突发性，线路上真正用来传送数据的时间往往不到10%，造成通信线路资源的浪费。</li>
+<li>如果通信链路是由多段链路组成的，只要有一段链路出现故障，就不能通信。</li>
+</ul>
+</li>
+</ul>
+<h2 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h2><ul>
+<li><p>主要特点：采用<strong>存储转发</strong>技术</p>
+<ul>
+<li>将报文拆分成多个分组，<strong>加上头部</strong></li>
+<li>通过路由器以分组为单位进行存储转发</li>
+<li>在接收端将分组组装成报文</li>
+</ul>
+</li>
+<li><p>优点</p>
+<ul>
+<li><p>高效</p>
+<p>  动态分配传输带宽，<strong>逐段占用通信链路</strong>。</p>
+</li>
+<li><p>灵活</p>
+<p>  为每一个分组独立地选择最合适的转发路由。</p>
+</li>
+<li><p>迅速</p>
+<p>  <strong>不需要建立连接就可以向其他主机发送分组</strong>。</p>
+</li>
+<li><p>可靠</p>
+<ol>
+<li><strong>保证可靠性的网络协议、分布式多路由的分组交换网</strong>使网络有很好的生存性。</li>
+<li>某个结点或者链路出现故障时，<strong>分组传送的路由可以自适应地动态改变</strong>。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>存储转发时需排队，造成一定<strong>时延</strong>。当网络拥塞非常严重时，整个网络也可能会瘫痪。</li>
+<li>分组的首部造成一定<strong>开销</strong>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="报文交换"><a href="#报文交换" class="headerlink" title="报文交换"></a>报文交换</h2><ul>
+<li>主要特点：<ul>
+<li>采用存储转发技术，但报文不分组</li>
+<li><strong>适用于间歇式轻负载</strong></li>
+</ul>
+</li>
+</ul>
+<p>与分组交换相比：</p>
+<ul>
+<li>优点<ul>
+<li>省去了划分分组的步骤</li>
+<li>省去了接收端组装分组的步骤</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>灵活性不如分组交换</li>
+</ul>
+</li>
+</ul>
+<h2 id="哪个交换方式最好？"><a href="#哪个交换方式最好？" class="headerlink" title="哪个交换方式最好？"></a>哪个交换方式最好？</h2><p>不能说哪个方式一定好或坏</p>
+<ul>
+<li>若需<strong>连续传送大量数据</strong>，且其<strong>发送时间远大于连接建立时间</strong>，则电路交换的传输速率较快。</li>
+<li>报文交换和分组交换不需要预先分配传输带宽，在传送突发数据时可提高整个网络的<strong>信道利用率</strong>。</li>
+<li>由于一个分组的长度远远小于整个报文的长度，因此分组交换比报文交换的时延小；同时也具有更好的灵活性。</li>
+</ul>
+<h1 id="计算机网络性能指标"><a href="#计算机网络性能指标" class="headerlink" title="计算机网络性能指标"></a>计算机网络性能指标</h1><h2 id="速率"><a href="#速率" class="headerlink" title="速率"></a>速率</h2><ul>
+<li><p>也称为数据率（data rate）或比特率（bit rate）。</p>
+</li>
+<li><p>定义</p>
+<p>  连接在计算机网络上的<strong>主机</strong>在数字<strong>信道</strong>上<strong>传输数据</strong>的速率。</p>
+</li>
+<li><p>单位是b/s，kb/s，Mb/s，Gb/s</p>
+</li>
+</ul>
+<p>==信道：一个发送端，一个接收端==</p>
+<h2 id="带宽"><a href="#带宽" class="headerlink" title="带宽"></a>带宽</h2><ul>
+<li><p>定义</p>
+<p>  数字信道所能传输的<strong>最高</strong>速率。</p>
+</li>
+<li><p>毫无疑问，带宽单位和速率一样。</p>
+</li>
+</ul>
+<h2 id="吞吐量"><a href="#吞吐量" class="headerlink" title="吞吐量"></a>吞吐量</h2><ul>
+<li><p>定义</p>
+<p>  <strong>单位时间内</strong>通过某个网络（或信道、接口）的<strong>实际的数据量</strong>。</p>
+</li>
+<li><p>单位是b，Mb等。</p>
+</li>
+</ul>
+<h2 id="时延"><a href="#时延" class="headerlink" title="时延"></a>时延</h2><p>$总时延=发送时延+传播时延+处理时延+排队时延$</p>
+<ul>
+<li><p>一般来说，小时延的网络优于大时延的网络</p>
+<p>  一个低速率、小时延的网络可以优于一个高速率、大时延的网络。</p>
+</li>
+<li><p>在总时延中，哪一种时延占主导地位，必须具体分析。</p>
+</li>
+</ul>
+<h3 id="发送时延"><a href="#发送时延" class="headerlink" title="发送时延"></a>发送时延</h3><p>又叫传输时延，发送速率又叫传输速率。</p>
+<p>$发送时延=\frac{数据帧长度(bit)}{发送速率(bit/s)}$</p>
+<p>可见发送时延并非固定不变。</p>
+<p>对于高速网络链路，我们提高的仅仅是数据的发送速率，而不是比特在链路上的传播速率。</p>
+<h3 id="传播时延"><a href="#传播时延" class="headerlink" title="传播时延"></a>传播时延</h3><p>$传播时延=\frac{信道长度(m)}{电磁波在信道上的传播速率(m/s)}$</p>
+<p><strong>光纤与铜线相比降低了发送时延，光纤的传播速度反而不如铜线传播速度快</strong>。</p>
+<h3 id="处理时延"><a href="#处理时延" class="headerlink" title="处理时延"></a>处理时延</h3><p>主机或路由器在收到分组时要花费一定时间进行处理。</p>
+<h3 id="排队时延"><a href="#排队时延" class="headerlink" title="排队时延"></a>排队时延</h3><p>分组在路由器中可能要排队。</p>
+<h2 id="时延带宽积"><a href="#时延带宽积" class="headerlink" title="时延带宽积"></a>时延带宽积</h2><p>时延带宽积又称为以比特为单位的链路长度。</p>
+<p>$时延带宽积=传播时延\times带宽$</p>
+<p>时延带宽积反映传输时线路上数据的多少，即<strong>线路上的比特数</strong>。</p>
+<p>传播时延决定线路的长度</p>
+<p>带宽决定每位的长度</p>
+<h2 id="往返时间RTT"><a href="#往返时间RTT" class="headerlink" title="往返时间RTT"></a>往返时间RTT</h2><p>定义：双向交互一次所需的时间。</p>
+<p>从发送方发送数据开始，到发送方收到接收方的确认。</p>
+<p><code>ping www.baidu.com</code></p>
+<h2 id="利用率"><a href="#利用率" class="headerlink" title="利用率"></a>利用率</h2><ul>
+<li><p><strong>信道利用率并非越高越好</strong></p>
+<p>  信道或网络的<strong>利用率</strong>过高会产生非常大的<strong>时延</strong>。</p>
+</li>
+</ul>
+<p>令$D_0$表示网络空闲时的时延，$D$表示网络当前的时延，$U$为网络利用率，</p>
+<p>则$D=\frac{D_0}{1-U}$。</p>
+<h3 id="信道利用率"><a href="#信道利用率" class="headerlink" title="信道利用率"></a>信道利用率</h3><p>$信道利用率=\frac{有数据通过时间}{总时间}$</p>
+<h3 id="网络利用率"><a href="#网络利用率" class="headerlink" title="网络利用率"></a>网络利用率</h3><p>定义：信道利用率加权平均值</p>
+<h1 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h1><h2 id="分层思想"><a href="#分层思想" class="headerlink" title="分层思想"></a>分层思想</h2><ul>
+<li><p>相互通信的两个计算机系统必须高度协调，而这种协调是十分复杂的。</p>
+<p>  分层可将庞大而复杂的问题，转化为若干较小的局部问题，而这些较小的局部问题就比较易于研究和处理。</p>
+</li>
+</ul>
+<h2 id="三种分层方法"><a href="#三种分层方法" class="headerlink" title="三种分层方法"></a>三种分层方法</h2><p>OSI是法律上的国际标准，TCP/IP是事实上的国际标准。</p>
+<p><a href="https://i.loli.net/2019/06/17/5d06f3764b59848351.jpg" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/06/17/5d06f3764b59848351.jpg" alt="计算机网络体系结构.jpg"></a></p>
+<ul>
+<li><p>七层协议：OSI</p>
+<p>  <strong>概念清楚</strong>，理论较为完整。</p>
+<p>  但既复杂又不实用。</p>
+</li>
+<li><p>四层协议：TCP/IP </p>
+<p>  简洁，<strong>得到广泛应用</strong>。</p>
+<p>  实质内容只有上三层，网络接口层并没有什么具体内容。</p>
+</li>
+<li><p>五层协议</p>
+<p>  综合七层协议和四层协议的优点：既简洁又能将概念阐述清楚。</p>
+</li>
+</ul>
+<h2 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h2><p>5个</p>
+<ul>
+<li><p>各层间是独立的</p>
+<p>  <strong>每一层只实现一种相对独立的功能</strong>，上层仅知道下层的接口，而不需知道其如何实现。</p>
+</li>
+<li><p>灵活性好</p>
+<p>  只要层间接口关系保持不变，可以对各层进行修改。</p>
+</li>
+<li><p>结构上可分割开</p>
+<p>  各层都可以采用最<strong>合适</strong>的技术实现</p>
+</li>
+<li><p>易于实现和维护</p>
+<p>  整个系统被分解为若干个<strong>相对独立的子系统</strong>，每个子系统都易于实现和维护</p>
+</li>
+<li><p>能促进标准化工作</p>
+<p>  每一层的功能及其所提供的服务都已有了<strong>精确的说明</strong></p>
+</li>
+</ul>
+<h2 id="坏处"><a href="#坏处" class="headerlink" title="坏处"></a>坏处</h2><p>分层应使每一层的<strong>功能非常明确</strong>，所以层次的划分并不容易。</p>
+<p>层数太少，会使每一层的协议太复杂；</p>
+<p>层数太多，会使各层在功能上有重叠，造成额外开销。</p>
+<h2 id="对等层"><a href="#对等层" class="headerlink" title="对等层"></a>对等层</h2><p>在OSI参考模型中，位于同一水平行（同一层）上的系统构成了OSI的对等层。</p>
+<h1 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h1><p><strong>定义</strong>：<strong>在ISO/OSI参考模型中，同层对等实体间信息交换时必须遵守的规则。</strong></p>
+<p>每层都有协议，有的层只能有一个协议，有的层可以有多个协议。</p>
+<p>网络协议主要由以下<strong>三个要素</strong>构成：</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>数据与控制信息的<strong>结构和格式</strong></p>
+<h2 id="语义"><a href="#语义" class="headerlink" title="语义"></a>语义</h2><p>需要发出<strong>何种</strong>控制信息，完成<strong>何种</strong>动作以及做出<strong>何种</strong>响应</p>
+<h2 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h2><p><strong>事件实现顺序</strong>的详细说明</p>
+<hr>
+<p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
+<p>欢迎讨论和交流!</p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机网络/" rel="tag"># 计算机网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/25/计算机网络概述/" rel="next" title="计算机网络概述">
+                <i class="fa fa-chevron-left"></i> 计算机网络概述
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/28/计算机网络-物理层复习/" rel="prev" title="计算机网络-物理层复习">
+                计算机网络-物理层复习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg"
+                alt="臭咸鱼" />
+            
+              <p class="site-author-name" itemprop="name">臭咸鱼</p>
+              <p class="site-description motion-element" itemprop="description">Cxy与Bug的前世今生，Cxy与Life的深度摩擦。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://maluguang.com" title="Road Wide's Blog" target="_blank">Road Wide's Blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Internet如何翻译"><span class="nav-number">1.</span> <span class="nav-text">Internet如何翻译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#因特网"><span class="nav-number">1.1.</span> <span class="nav-text">因特网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#互联网"><span class="nav-number">1.2.</span> <span class="nav-text">互联网</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#互联网的重要特点"><span class="nav-number">2.</span> <span class="nav-text">互联网的重要特点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#连通性"><span class="nav-number">2.1.</span> <span class="nav-text">连通性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享"><span class="nav-number">2.2.</span> <span class="nav-text">共享</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#两个认识互联网的角度"><span class="nav-number">3.</span> <span class="nav-text">两个认识互联网的角度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">3.1.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作原理"><span class="nav-number">3.2.</span> <span class="nav-text">工作原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机网络的组成"><span class="nav-number">4.</span> <span class="nav-text">计算机网络的组成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#结点"><span class="nav-number">4.1.</span> <span class="nav-text">结点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链路"><span class="nav-number">4.2.</span> <span class="nav-text">链路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#互连网与互联网"><span class="nav-number">5.</span> <span class="nav-text">互连网与互联网</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#互连网"><span class="nav-number">5.1.</span> <span class="nav-text">互连网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#互联网-1"><span class="nav-number">5.2.</span> <span class="nav-text">互联网</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三层ISP结构"><span class="nav-number">6.</span> <span class="nav-text">三层ISP结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地ISP"><span class="nav-number">6.1.</span> <span class="nav-text">本地ISP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地区ISP"><span class="nav-number">6.2.</span> <span class="nav-text">地区ISP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主干ISP"><span class="nav-number">6.3.</span> <span class="nav-text">主干ISP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IXP"><span class="nav-number">7.</span> <span class="nav-text">IXP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#互联网的组成"><span class="nav-number">8.</span> <span class="nav-text">互联网的组成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#边缘部分"><span class="nav-number">8.1.</span> <span class="nav-text">边缘部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主机通信方式"><span class="nav-number">8.1.1.</span> <span class="nav-text">主机通信方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#客户-服务器方式"><span class="nav-number">8.1.1.1.</span> <span class="nav-text">客户/服务器方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对等连接方式"><span class="nav-number">8.1.1.2.</span> <span class="nav-text">对等连接方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心部分"><span class="nav-number">8.2.</span> <span class="nav-text">核心部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工作方式"><span class="nav-number">8.2.1.</span> <span class="nav-text">工作方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三种交换方式"><span class="nav-number">9.</span> <span class="nav-text">三种交换方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#电路交换"><span class="nav-number">9.1.</span> <span class="nav-text">电路交换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分组交换"><span class="nav-number">9.2.</span> <span class="nav-text">分组交换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#报文交换"><span class="nav-number">9.3.</span> <span class="nav-text">报文交换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哪个交换方式最好？"><span class="nav-number">9.4.</span> <span class="nav-text">哪个交换方式最好？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机网络性能指标"><span class="nav-number">10.</span> <span class="nav-text">计算机网络性能指标</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#速率"><span class="nav-number">10.1.</span> <span class="nav-text">速率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带宽"><span class="nav-number">10.2.</span> <span class="nav-text">带宽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#吞吐量"><span class="nav-number">10.3.</span> <span class="nav-text">吞吐量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时延"><span class="nav-number">10.4.</span> <span class="nav-text">时延</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#发送时延"><span class="nav-number">10.4.1.</span> <span class="nav-text">发送时延</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传播时延"><span class="nav-number">10.4.2.</span> <span class="nav-text">传播时延</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理时延"><span class="nav-number">10.4.3.</span> <span class="nav-text">处理时延</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排队时延"><span class="nav-number">10.4.4.</span> <span class="nav-text">排队时延</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时延带宽积"><span class="nav-number">10.5.</span> <span class="nav-text">时延带宽积</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#往返时间RTT"><span class="nav-number">10.6.</span> <span class="nav-text">往返时间RTT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用率"><span class="nav-number">10.7.</span> <span class="nav-text">利用率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信道利用率"><span class="nav-number">10.7.1.</span> <span class="nav-text">信道利用率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络利用率"><span class="nav-number">10.7.2.</span> <span class="nav-text">网络利用率</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分层"><span class="nav-number">11.</span> <span class="nav-text">分层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分层思想"><span class="nav-number">11.1.</span> <span class="nav-text">分层思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三种分层方法"><span class="nav-number">11.2.</span> <span class="nav-text">三种分层方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#好处"><span class="nav-number">11.3.</span> <span class="nav-text">好处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坏处"><span class="nav-number">11.4.</span> <span class="nav-text">坏处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对等层"><span class="nav-number">11.5.</span> <span class="nav-text">对等层</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#协议"><span class="nav-number">12.</span> <span class="nav-text">协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#语法"><span class="nav-number">12.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语义"><span class="nav-number">12.2.</span> <span class="nav-text">语义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步"><span class="nav-number">12.3.</span> <span class="nav-text">同步</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">臭咸鱼</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">91.0k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz',
+        appKey: 'Si7hBxIAVOGbu6Pot7HHaVBB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz", "Si7hBxIAVOGbu6Pot7HHaVBB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>

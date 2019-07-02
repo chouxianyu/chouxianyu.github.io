@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
 <meta property="og:description" content="我们今天讨论数组名是什么东西，理解它有助于我们进一步理解和使用指针。 因为它涉及到了内存地址。 问题数组名是什么？含义是什么？ 思路前提一个值+1之后的变化可以反映出它的意义/含义。 前提的证明其实不证自明，计算机中就是这样的。  生活中   一个苹果+1，结果是两个，增加了一个苹果。   一箱苹果+1，结果是两箱，个数是2*每箱苹果数，增加了一箱苹果。  计算机中   int型变量的地址+1，增">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-24T08:10:05.435Z">
+<meta property="og:updated_time" content="2019-06-19T02:30:46.834Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C&#x2F;C++小课之数组名">
 <meta name="twitter:description" content="我们今天讨论数组名是什么东西，理解它有助于我们进一步理解和使用指针。 因为它涉及到了内存地址。 问题数组名是什么？含义是什么？ 思路前提一个值+1之后的变化可以反映出它的意义/含义。 前提的证明其实不证自明，计算机中就是这样的。  生活中   一个苹果+1，结果是两个，增加了一个苹果。   一箱苹果+1，结果是两箱，个数是2*每箱苹果数，增加了一箱苹果。  计算机中   int型变量的地址+1，增">
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,136 字
+                  1,151 字
                 </span>
               
 
@@ -436,7 +436,7 @@
 <h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>根据前提，通过将数组名或数组名相关的值+1来判断它的含义。</p>
 <h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><p>编程中要了解一个东西，大多时候我们可以通过输出它来了解它。</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//注释指出array代表什么</span></span><br><span class="line">	<span class="keyword">int</span> <span class="built_in">array</span>[<span class="number">5</span>] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"    &amp;array[0] =  %p\n"</span>, &amp;<span class="built_in">array</span>[<span class="number">0</span>]);		<span class="comment">//首元素</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"        array =  %p\n"</span>, <span class="built_in">array</span>);			<span class="comment">//数组</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"      array+1 =  %p\n"</span>, <span class="built_in">array</span> + <span class="number">1</span>);		<span class="comment">//数组</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"  &amp;array[0]+1 =  %p\n"</span>, &amp;<span class="built_in">array</span>[<span class="number">0</span>] + <span class="number">1</span>);	<span class="comment">//首元素</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"       &amp;array =  %p\n"</span>, &amp;<span class="built_in">array</span>);	    <span class="comment">//数组</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"     &amp;array+1 =  %p\n"</span>, &amp;<span class="built_in">array</span> + <span class="number">1</span>);	<span class="comment">//数组</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"sizeof(array) =  %zd\n"</span>, <span class="keyword">sizeof</span>(<span class="built_in">array</span>));<span class="comment">//数组</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>为什么用printf不是cout？用cout其实也行，printf更方便。</p>
+<p>为什么用printf不是cout？用cout其实也行，printf可能更方便，而且我忘了cout怎么控制位数了。</p>
 <h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    &amp;<span class="built_in">array</span>[<span class="number">0</span>] =  <span class="number">0000002</span>A433FF628</span><br><span class="line">        <span class="built_in">array</span> =  <span class="number">0000002</span>A433FF628</span><br><span class="line">      <span class="built_in">array</span>+<span class="number">1</span> =  <span class="number">0000002</span>A433FF62C</span><br><span class="line">  &amp;<span class="built_in">array</span>[<span class="number">0</span>]+<span class="number">1</span> =  <span class="number">0000002</span>A433FF62C</span><br><span class="line">       &amp;<span class="built_in">array</span> =  <span class="number">0000002</span>A433FF628</span><br><span class="line">     &amp;<span class="built_in">array</span>+<span class="number">1</span> =  <span class="number">0000002</span>A433FF63C</span><br><span class="line"><span class="keyword">sizeof</span>(<span class="built_in">array</span>) =  <span class="number">20</span></span><br></pre></td></tr></table></figure>
 <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><h2 id="数组名是什么，有什么含义"><a href="#数组名是什么，有什么含义" class="headerlink" title="数组名是什么，有什么含义"></a>数组名是什么，有什么含义</h2><p><del>数组名是一个常量（所以不能被赋值），是一个地址。</del>（<code>&amp;array</code>中array并不是地址，因为地址是一个值，我们并不能取一个值的地址吧）</p>
 <p>在不同情况下，有着不同的含义。</p>
@@ -494,7 +494,7 @@
 <p>写代码时遇到waring一定要处理，不然很容易出问题。</p>
 <h2 id="混合编程"><a href="#混合编程" class="headerlink" title="混合编程"></a>混合编程</h2><p>C和C++还是不一样的。特别是函数的使用，如果要动态申请一个类对象的内存，可别用malloc，它和new还是不一样的。</p>
 <h2 id="一些重要名词"><a href="#一些重要名词" class="headerlink" title="一些重要名词"></a>一些重要名词</h2><h3 id="值"><a href="#值" class="headerlink" title="值"></a>值</h3><p>生活、编程中出现的数字、字符串、字符等等，都是值。</p>
-<p>比如1,2,3，我爱你等等。</p>
+<p>比如<code>1</code>,<code>2</code>,<code>3</code>，<code>我爱你</code>等等。</p>
 <h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量算是对值的一个<strong>替代</strong>（或者说抽象）吧，提高复用性。</p>
 <h3 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h3><p>地址是个值。</p>
 <p>计算机有存储空间。我们将其一个个地编号，也就是给了它一个地址。</p>
@@ -505,9 +505,11 @@
 <p>计算机中有字节这个单位。1个字节等于8位。</p>
 <p>多个<strong>字节</strong>组成<strong>字</strong>。</p>
 <p>我们平常说的电脑32位，64位指的就是字长。</p>
+<hr>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>本文为作者原创，转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
 <p>欢迎讨论和交流!</p>
+<hr>
 
       
     </div>
@@ -642,7 +644,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -655,7 +657,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -743,7 +745,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">51.5k</span>
+    <span title="Site words total count">91.0k</span>
   
 </div>
 

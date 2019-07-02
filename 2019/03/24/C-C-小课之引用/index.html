@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
 <meta property="og:description" content="关于引用，讲一个同学问的题目。 代码123456789101112131415161718192021222324252627#include &amp;lt;iostream&amp;gt;using std::endl;	//域限定符using std::cout;	//域限定符int &amp;amp;f(int&amp;amp; a, int b = 20)//定义函数，为了规范，应该在main前边写函数声明，main后">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-24T08:08:52.302Z">
+<meta property="og:updated_time" content="2019-06-19T02:22:13.764Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C&#x2F;C++小课之引用">
 <meta name="twitter:description" content="关于引用，讲一个同学问的题目。 代码123456789101112131415161718192021222324252627#include &amp;lt;iostream&amp;gt;using std::endl;	//域限定符using std::cout;	//域限定符int &amp;amp;f(int&amp;amp; a, int b = 20)//定义函数，为了规范，应该在main前边写函数声明，main后">
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  689 字
+                  701 字
                 </span>
               
 
@@ -443,19 +443,21 @@
 <h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><h3 id="相关名词"><a href="#相关名词" class="headerlink" title="相关名词"></a>相关名词</h3><p>谈到这个，相关的名词有两个：</p>
 <ul>
 <li><p>堆</p>
-<p>  <code>new</code>出来的内存就在堆里</p>
+<p>  <code>new</code>出来的内存空间是在<strong>堆</strong>中的</p>
 </li>
 <li><p>（堆）栈</p>
-<p>  如果在main函数中定义一个<code>int</code>，它就存储在栈里。</p>
+<p>  如果在main函数中定义一个<code>int</code>变量，这个变量就存储在<strong>栈</strong>里。</p>
 </li>
 </ul>
 <p>在学数据结构时，会学到栈和堆，它们是两种数据结构。</p>
-<h3 id="栈和函数"><a href="#栈和函数" class="headerlink" title="栈和函数"></a>栈和函数</h3><p>栈有一个应用就是处理函数的<strong>嵌套</strong>，比较典型的就是递归。</p>
+<h3 id="栈和函数"><a href="#栈和函数" class="headerlink" title="栈和函数"></a>栈和函数</h3><p>栈有一个应用就是处理函数的<strong>嵌套</strong>，比较典型的函数嵌套就是递归。</p>
 <p>比如上边代码中的main运行到f函数时，先要保存现在main函数的状态（变量、代码执行到的位置等），将其压栈（PUSH）；然后再进入f函数，栈顶即为f函数的内容，f函数执行完后，出栈（POP）；然后继续执行main函数。</p>
 <p>在调试时就可以看到函数调用栈。</p>
+<hr>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>本文为作者原创，转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
 <p>欢迎讨论和交流!</p>
+<hr>
 
       
     </div>
@@ -590,7 +592,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -603,7 +605,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -691,7 +693,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">51.5k</span>
+    <span title="Site words total count">91.0k</span>
   
 </div>
 
