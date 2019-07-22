@@ -107,7 +107,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/06/22/5d0d96d0d65a585568.png">
 <meta property="og:image" content="https://i.loli.net/2019/06/22/5d0d96d491b2e57530.png">
 <meta property="og:image" content="https://i.loli.net/2019/06/22/5d0d96d07a6d178706.png">
-<meta property="og:updated_time" content="2019-06-29T11:59:30.699Z">
+<meta property="og:updated_time" content="2019-07-17T14:15:28.738Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机组成原理-课程设计">
 <meta name="twitter:description" content="目的与要求​    深入了解计算机各种指令的执行过程，以及控制器的组成，指令系统微程序设计的具体知识，进一步理解和掌握动态微程序设计的概念；完成微程序控制的特定功能计算机的指令系统设计和调试。 ​    要进行这项大型实验，必须清楚地懂得：  TEC-2机的功能部件及其连接关系； TEC-2机每个功能部件的功能与具体组成； TEC-2机支持的指令格式； TEC-2机的微指令格式，AM2910芯片的">
@@ -1447,8 +1447,8 @@
 </ol>
 <h3 id="将微码加载到微控存"><a href="#将微码加载到微控存" class="headerlink" title="将微码加载到微控存"></a>将微码加载到微控存</h3><ol>
 <li><p><code>A800</code></p>
-<p> 输入加载微码的程序</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0800: MOV R1,900	; 900是微码在内存中地址</span><br><span class="line">0802: MOV R2,7		; 共7条微指令</span><br><span class="line">0804: MOV R3,110	; 微码在微控存中的首地址</span><br><span class="line">0806: LDMC			;加载微码</span><br><span class="line">0807: RET</span><br></pre></td></tr></table></figure>
+<p>输入加载微码的程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0800: MOV R1,900	; 900是微码在内存中地址</span><br><span class="line">0802: MOV R2,7		; 共7条微指令</span><br><span class="line">0804: MOV R3,110	; 微码在微控存中的首地址</span><br><span class="line">0806: LDMC			;加载微码</span><br><span class="line">0807: RET</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>G800</code></p>
 <p> 运行上边的代码，把微码装入微控存<code>110H</code>开始的单元中</p>
@@ -1456,16 +1456,16 @@
 </ol>
 <h3 id="测试指令"><a href="#测试指令" class="headerlink" title="测试指令"></a>测试指令</h3><ol>
 <li><p><code>A820</code></p>
-<p> 输入测试指令的程序到<code>820H</code>开始的内存单元中</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">0820: MOV R0,0045	</span><br><span class="line">0822: MOV [A00],R0	; [A00]单元存储45H</span><br><span class="line">0824: MOV R1,0023</span><br><span class="line">0826: MOV [A01],R1	; [A01]单元存储23H</span><br><span class="line">0828: NOP			; 占一个字</span><br><span class="line">0829: NOP</span><br><span class="line">082A: NOP</span><br><span class="line">082B: RET</span><br></pre></td></tr></table></figure>
+<p>输入测试指令的程序到<code>820H</code>开始的内存单元中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">0820: MOV R0,0045	</span><br><span class="line">0822: MOV [A00],R0	; [A00]单元存储45H</span><br><span class="line">0824: MOV R1,0023</span><br><span class="line">0826: MOV [A01],R1	; [A01]单元存储23H</span><br><span class="line">0828: NOP			; 占一个字</span><br><span class="line">0829: NOP</span><br><span class="line">082A: NOP</span><br><span class="line">082B: RET</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>E826</code></p>
-<p> 把新指令写到<code>826H</code>开始的内存单元</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0828    0000:D800  0000:0A00  0000:0A01</span><br></pre></td></tr></table></figure>
+<p>把新指令写到<code>826H</code>开始的内存单元</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0828    0000:D800  0000:0A00  0000:0A01</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>U820</code></p>
-<p> 反汇编，查看我们输入的测试指令的程序</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">0820: 2C00 0045  MOV    R0,     0045</span><br><span class="line">0822: 3400 0A00  MOV    [0A00], R0</span><br><span class="line">0824: 2C10 0023  MOV    R1,     0023</span><br><span class="line">0826: 3401 0A01  MOV    [0A01], R1</span><br><span class="line">0828: D800       DW     D800</span><br><span class="line">0829: 0A00       ADC    R0,     R0	; 高8位为000010XX，对应指令为ADC，实际上是我们自己设计的指令</span><br><span class="line">082A: 0A01       ADC    R0,     R1</span><br><span class="line">082B: AC00       RET</span><br></pre></td></tr></table></figure>
+<p>反汇编，查看我们输入的测试指令的程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">0820: 2C00 0045  MOV    R0,     0045</span><br><span class="line">0822: 3400 0A00  MOV    [0A00], R0</span><br><span class="line">0824: 2C10 0023  MOV    R1,     0023</span><br><span class="line">0826: 3401 0A01  MOV    [0A01], R1</span><br><span class="line">0828: D800       DW     D800</span><br><span class="line">0829: 0A00       ADC    R0,     R0	; 高8位为000010XX，对应指令为ADC，实际上是我们自己设计的指令</span><br><span class="line">082A: 0A01       ADC    R0,     R1</span><br><span class="line">082B: AC00       RET</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>G820</code></p>
 <p> 运行从<code>820H</code>开始的程序</p>
@@ -1516,6 +1516,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/04/和数据库的初次相遇/" rel="prev" title="和数据库的初次相遇">
+                和数据库的初次相遇 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -1595,7 +1599,7 @@
                 alt="臭咸鱼" />
             
               <p class="site-author-name" itemprop="name">臭咸鱼</p>
-              <p class="site-description motion-element" itemprop="description">Cxy与Bug的前世今生，Cxy与Life的深度摩擦。</p>
+              <p class="site-description motion-element" itemprop="description">祝你天天开心啊！</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -1605,7 +1609,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1618,7 +1622,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1706,7 +1710,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">91.0k</span>
+    <span title="Site words total count">99.5k</span>
   
 </div>
 
