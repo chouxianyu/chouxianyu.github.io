@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
 <meta property="og:description" content="与贪心的区别出现较好的解就使用，发现不了就形成解。缺点：跳不出局部最优解 模拟退火：与贪心类似，但可以以一定的概率跳出局部最优解，通过两个式子实现，Metropolis准则。玻尔兹曼分布 模拟退火算法和物理退火过程的对应    模拟退火算法 物理退火过程     解 粒子状态   目标函数 能量   最优解 能量最低态   设定初温 设置加温到几度   扰动 热涨落   metropolis采样过">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-21T07:50:07.201Z">
+<meta property="og:updated_time" content="2019-07-24T09:17:39.481Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="模拟退火学习">
 <meta name="twitter:description" content="与贪心的区别出现较好的解就使用，发现不了就形成解。缺点：跳不出局部最优解 模拟退火：与贪心类似，但可以以一定的概率跳出局部最优解，通过两个式子实现，Metropolis准则。玻尔兹曼分布 模拟退火算法和物理退火过程的对应    模拟退火算法 物理退火过程     解 粒子状态   目标函数 能量   最优解 能量最低态   设定初温 设置加温到几度   扰动 热涨落   metropolis采样过">
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,309 字
+                  1,349 字
                 </span>
               
 
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  4 分
+                  5 分
                 </span>
               
             </div>
@@ -469,13 +469,13 @@
 <li><p>主要算法，while循环：</p>
 <p>  循环条件可以是温度的阈值或者是解不怎么变化了</p>
 <ul>
-<li><p>for循环</p>
+<li><p>for循环，设置一个步长</p>
 <p>  平衡过程，在该温度下，使达到平衡（metropolis），恒温下1到$T_L$步</p>
 <ul>
 <li>根据当前解随机生成一个邻解，跟当前解非常接近（扰动，for循环就是多次扰动）</li>
 <li><p>计算邻解的目标函数（花费、路程、大小、钱数等等），减去当前解的目标函数，求得目标函数变化量</p>
 </li>
-<li><p>如果变化量小于0（即优化了），使用该邻近解；如果没有优化，则用metropolis准    则，看是不是要跳出坑，跳出则使用该邻解。</p>
+<li><p>如果变化量小于0（即优化了），使用该邻近解；如果没有优化，则用metropolis准则，看是不是要跳出坑，跳出则使用该邻解。（温度越高越容易跳出坑）</p>
 </li>
 </ul>
 </li>
@@ -486,21 +486,22 @@
 </ul>
 <h1 id="模拟退火算法设计要素"><a href="#模拟退火算法设计要素" class="headerlink" title="模拟退火算法设计要素"></a>模拟退火算法设计要素</h1><h2 id="初始解的生成"><a href="#初始解的生成" class="headerlink" title="初始解的生成"></a>初始解的生成</h2><p>如果初始解比较好的话，收敛得就很快。</p>
 <p>通常以一个随机解作为初始解，并保证理论上能生成解空间中任意的解。（一般要多做几次模拟退火，即试用不同的初始解，再取最优的）</p>
-<p>也可以是一个挑出来的比较好的解。这种情况下，初始温度应当设置得较低。</p>
+<p>也可以是一个挑出来的比较好的解。这种情况下，初始温度应当设置得较低（降低它扰动到其他不好的解的概率）。</p>
 <p>初始解不宜“太好”，否则很难从这个解的邻域中跳出。</p>
 <h2 id="邻解生成函数"><a href="#邻解生成函数" class="headerlink" title="邻解生成函数"></a>邻解生成函数</h2><p>应尽可能保证产生的候选解能遍布整个解空间。</p>
-<p>邻域应尽可能的小，能够在少量循环内充分探测，但每次的改变不应该引起太大的变化。</p>
-<h2 id="初始温度如何设定"><a href="#初始温度如何设定" class="headerlink" title="初始温度如何设定"></a>初始温度如何设定</h2><p>初始应该尽可能的高，以确保最终解不受初始解影响，但过高又会增加计算时间。</p>
+<p><strong>邻域应尽可能的小</strong>，能够在少量循环内充分探测，但每次的改变不应该引起太大的变化。</p>
+<h2 id="初始温度如何设定"><a href="#初始温度如何设定" class="headerlink" title="初始温度如何设定"></a>初始温度如何设定</h2><p>初始温度应该尽可能的高，以确保最终解不受初始解影响，但过高又会增加计算时间。</p>
 <p>均匀抽样一组状态，以各状态目标值的方差为初温。（随机生成一组解）</p>
 <p>等等</p>
 <p>※ 正式开始退火算法前，可进行一个升温过程确定初始温度：逐渐增加温度，直到所有尝试运动都被接受，将此时的温度设置为初始温度。</p>
 <p>等等</p>
 <h2 id="等温步数如何确定"><a href="#等温步数如何确定" class="headerlink" title="等温步数如何确定"></a>等温步数如何确定</h2><p>等温步数即同一个温度下，跑几个循环。</p>
-<p>等温步数也称Metropolis抽样稳定准则，用于决定在各温度下产生候选解的数目，通常取决于解空间和邻域的大小。如果解空间小，步数可以小一点。</p>
+<p>等温步数也称Metropolis抽样稳定准则，用于决定在各温度下产生候选解的数目，通常取决于解空间和邻域的大小。<strong>如果解空间小，步数可以小一点</strong>。</p>
 <p>等温过程是为了让系统达到平衡，因此可通过检验目标函数的均值是否稳定（或连续若干步的目标值变化较小，这个可以写一个函数来检测）来确定等温步数。等温步数可以长，也就是多平衡一会而已。</p>
-<p>等温步数受温度的影响。高温时，等温步数可以较小；温度较小时，等温步数要大。随着温度降低，增加等温步数。（因为高温的时候比较混乱， 温度小的时候就在不停地收敛了），可以将等温步数设置成一个温度的函数。</p>
+<p>等温步数受温度的影响。高温时，等温步数可以较小；温度较小时，等温步数要大。<strong>随着温度降低，增加等温步数</strong>。（因为高温的时候比较混乱， 温度小的时候就在不停地收敛了），可以将等温步数设置成一个温度的函数。</p>
 <p>有时为了考虑方便，也可以直接按一定的步数抽样。不区分高温和低温时的等温步数，大一点就好啦。</p>
-<h2 id="如何降温"><a href="#如何降温" class="headerlink" title="如何降温"></a>如何降温</h2><p>经典模拟退火算法降温方式</p>
+<h2 id="如何降温"><a href="#如何降温" class="headerlink" title="如何降温"></a>如何降温</h2><p>一般要慢慢地降</p>
+<p>经典模拟退火算法降温方式</p>
 <p>快速模拟退火算法降温方式</p>
 <p>常用的其他降温方式</p>
 <p>后边两种比较常用</p>
@@ -649,7 +650,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">91</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -695,6 +696,10 @@
                 
                   <li class="links-of-blogroll-item">
                     <a href="https://maluguang.com" title="Road Wide's Blog" target="_blank">Road Wide's Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/chouxianyu/" title="Chou Xianyu's CNBlog" target="_blank">Chou Xianyu's CNBlog</a>
                   </li>
                 
               </ul>
@@ -750,7 +755,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">99.5k</span>
+    <span title="Site words total count">99.9k</span>
   
 </div>
 
