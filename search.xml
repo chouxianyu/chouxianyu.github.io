@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[PAT乙级1033]]></title>
+    <url>%2F2019%2F08%2F09%2FPAT%E4%B9%99%E7%BA%A71033%2F</url>
+    <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805260223102976/problems/994805288530460672 题解刚开始没有理解到，如果上档键坏的话，所有大写字母都不行（My bad），后来改代码思路就很乱，甚至还考虑过_和+是否输出之类的……所以理解题意很重要吧。这个题弄得我脑袋很累。 考虑到上档键坏的话，所有大写字母都不行之后，还是会有一个测试点不过。 另外有个坑是第一行可能是空行，即所有键都是可以使用的。 123456789101112131415161718192021222324252627282930313233343536// PAT BasicLevel 1033// https://pintia.cn/problem-sets/994805260223102976/problems/994805288530460672#include &lt;iostream&gt;#include &lt;string&gt;using namespace std;int main()&#123; // 用户输入的字符串、输出的字符串、坏掉的键（字符串形式） string strIn,wrongKeys; getline(cin, wrongKeys); cin &gt;&gt; strIn; // 上档键（大写）是否可用 bool upIsWrong = (wrongKeys.find('+') == string::npos) ? false : true; // 生成输出字符串 for(int i=0;i&lt;strIn.length();++i)&#123; // 处理坏掉的键导致对应键无法输出 if (wrongKeys.find(toupper(strIn[i]))!=string::npos)&#123; continue; &#125; // 处理上档键坏掉导致大写无法输出 if (isupper(strIn[i]) &amp;&amp; upIsWrong)&#123; continue; &#125; // 这个键没有问题 cout &lt;&lt; strIn[i]; &#125; //system("pause"); return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>PAT</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[PAT乙级1032]]></title>
+    <url>%2F2019%2F08%2F08%2FPAT%E4%B9%99%E7%BA%A71032%2F</url>
+    <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805260223102976/problems/994805289432236032 题解用数组的下标表示学校，数组元素表示分数。统计各校分数后，遍历求最大就好了。 做这道题遇到一个memset初始化数组元素的问题，具体见https://www.cnblogs.com/chouxianyu/p/11322984.html 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748// PAT BasicLevel 1032// https://pintia.cn/problem-sets/994805260223102976/problems/994805289432236032#include &lt;iostream&gt;#include &lt;cstring&gt;using namespace std;int main()&#123; // n个参赛者 int n; cin &gt;&gt; n; // 最多n个学校 int* scores=new int[n+1]; // 各学校（下标为0的学校是无效的学校）分数初始化为-1，因为是百分制，有可能所以参赛者都是零分且是同一个学校 memset(scores, -1, sizeof(int) * (n + 1)); // 统计n个学校分数 int index,score; for(int i=0;i&lt;n;i++)&#123; cin &gt;&gt; index &gt;&gt; score; scores[index] += score; &#125; // 有效的学校最低分数是0，所以遍历后结果肯定不会是下标为0的那个学校 int maxIndex=0,maxScore=scores[maxIndex]; for(int i=1;i&lt;n+1;++i)&#123; // 处理-1 scores[i]++; // 更新最大值 if (scores[i] &gt; maxScore)&#123; maxScore = scores[i]; maxIndex = i; &#125; &#125; // 输出结果 cout &lt;&lt; maxIndex &lt;&lt; ' ' &lt;&lt; maxScore; // 释放内存 delete[] scores; //system("pause"); return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>PAT</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[memset初始化数组的坑]]></title>
+    <url>%2F2019%2F08%2F08%2Fmemset%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E7%BB%84%E7%9A%84%E5%9D%91%2F</url>
+    <content type="text"><![CDATA[memset函数常被我们用来初始化数组，然而有个坑可能会被我们踩到。 静态数组初始化一般情形是这样的： 12345678910111213141516#include &lt;cstring&gt;int main()&#123; // 静态数组arr int arr[10]; // 将数组所有元素初始化为0 memset(arr,0,sizeof(arr)); // 遍历输出数组元素 for(int i=0;i&lt;10;++i)&#123; cout &lt;&lt; arr[i] &lt;&lt; endl; &#125; return 0;&#125; 这样做是正确的，通过输出可以看到正确结果。 注意：这份代码中arr是个静态数组。 动态数组初始化12345678910111213141516#include &lt;cstring&gt;int main()&#123; // 动态数组arr int* arr=new int[10]; // 将数组所有元素初始化为0 memset(arr,0,sizeof(arr)); // 遍历输出数组元素 for(int i=0;i&lt;10;++i)&#123; cout &lt;&lt; arr[i] &lt;&lt; endl; &#125; return 0;&#125; 这份代码运行后，我们发现memset并没有把数组元素全部初始化为0。 注意：arr是个动态数组 原因如下： 我们可以在上面两份代码中输出sizeof(arr)，可以发现结果是不一样的。 因为在第一份代码中arr代表一个数组，第二份代码中arr代表一个指针。（关于数组名是什么这个问题可以参考我的另一篇文章：https://www.cnblogs.com/chouxianyu/p/11322951.html，其实这个问题我觉得是编译原理应该会学到的） 解决方案初始化数组（静态动态均可）时，把代码改成memset(arr,0,sizeof(int)*10);，int是数组元素的类型，10是数组元素个数。 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>C/C++</tag>
+        <tag>数组</tag>
+        <tag>Bug</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[PAT乙级1031]]></title>
     <url>%2F2019%2F08%2F07%2FPAT%E4%B9%99%E7%BA%A71031%2F</url>
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805260223102976/problems/994805290334011392 题解emmm。对于每个身份证号，判断前17位是否合法，并计算其与对应权重积之和，最后判断校验位是否合法。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768// PAT BasicLevel 1031// https://pintia.cn/problem-sets/994805260223102976/problems/994805290334011392#include &lt;iostream&gt;#include &lt;string&gt;using namespace std;int main()&#123; // 正确校验码 char M[] = &#123; '1','0','X','9','8','7','6','5','4','3','2'&#125;; // 前17位的比重 int weight[] = &#123;7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2&#125;; // 身份证号个数 int n; cin &gt;&gt; n; // 前17位乘以权重之和 int sum; // 合法身份证号的个数 int legalCount=0; // 当前身份证号是否合法 bool isLegal; // 当前身份证号 string str; // 获取每个身份证号并判断 for(int i=0;i&lt;n;++i)&#123; cin &gt;&gt; str; // 初始化 sum=0; isLegal=true; // 计算前17位乘以权重之和并判断前17位合法性 for(int i=0;i&lt;17;++i)&#123; if (isdigit(str[i]))&#123; sum += (str[i] - '0')*weight[i]; &#125; // 出现非数字，非法，结束sum的计算 else&#123; isLegal=false; break; &#125; &#125; // 如果前17位合法，判断校验码是否合法 if(isLegal)&#123; isLegal = (M[sum % 11]==str[17]); &#125; // 身份证号非法则输出 if(!isLegal)&#123; cout &lt;&lt; str &lt;&lt; endl; &#125; // 合法则计数 else&#123; legalCount++; &#125; &#125; // 全部身份证号合法 if(legalCount==n)&#123; cout &lt;&lt; "All passed"; &#125; //system("pause"); return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
