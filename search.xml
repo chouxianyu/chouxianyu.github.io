@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[机器学习-线性回归与梯度下降]]></title>
+    <url>%2F2019%2F09%2F23%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E4%B8%8E%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%2F</url>
+    <content type="text"><![CDATA[线性回归linear regression 符号定义notation，仅为本教程中的符号定义。 $m$ 训练集中样本的数量 $x$ 输入值，features。 $x^{(i)}$，表示第$i$个样本的features $y$ 输出值，target $y^{(i)}$，表示第$i$个样本的label $\theta_i$ parameters，第$i$个模型参数 $h_\theta$ hypothesis（假设），这是一个在早期被用于机器学习的名称算法得到的函数（$x$到$y$） $h_\theta(x)=\theta_0+\theta_1x$ $(x,y)$代表一个样本，$(x^{(i)},y^{(i)})$代表第$i$个样本 代价函数cost function，有很多种。 符号是$J(\theta_1,\theta_2)$。 平方误差函数 square error function，最小二乘法。 对于大多数问题，特别是回归问题，平方误差函数都是一个合理的选择。 梯度下降gradient descent，可以用梯度下降法使各种各样的代价函数$J$最小化 它不仅被用在线性回归上，实际上被广泛地应用于机器学习的众多领域。 符号定义 $:=$ 赋值 $=$ 相等 $\alpha$ 是个数字，叫做学习速率，它控制以多大的幅度更新参数$\theta$ 注意 多个$\theta$需要同时更新（如果不同时，可能也能得到答案，但就并不是人们所指的梯度下降了，而是其他性质的其它算法），所以应该先计算，最后再同时更新$\theta$ 在梯度下降法中，当我们接近局部最低点时，梯度下降法会自动采取更小的幅度。 因为当我们接近局部最低点时，导数会变得越来越小，所以梯度下降将自动采取较小的幅度。 据上，可知实际上没有必要在接近局部最低点的时候减小$\alpha$。 梯度下降法求得的可能是局部最优解 但线性回归的成本函数总是一个凸函数（convex function），凸函数使用梯度下降法求得最小值就是全局最小值。 “Batch” Gradient Descent“Batch”指的是梯度下降的每一步都使用所有的训练样本。 矩阵和向量向量指的是列向量，4维的向量指的就是4行1列的矩阵。 按照惯例，通常用大写字母表示矩阵，用小写字母表示数字、标量或向量。 多元线性回归符号定义 $n$ 特征的数量，形成一个$m$行$n$列的矩阵 特征缩放features scaling 处理不同feature之间的数量级差异，使梯度下降收敛速度更快，否则可能会收敛得很慢 方法有很多种： $\frac{x}{x_{max}}$ $\frac{x-x_{mean}}{x_{max}}$ $\frac{x-x_{mean}}{标准差}$ $\frac{x-x_{mean}}{x_{max}-x_{min}}$ 学习率学习率$\alpha$的选取是十分重要的。 学习率太小，收敛会很慢；学习率太大，代价函数的值可能不会每步都在减小，或者无法收敛。 学习率一般都是试出来的。 可以用自动收敛测试来判断代价函数是否已经收敛；也可以以迭代次数为横轴，代价函数的最小值为纵轴作图，通过观察判断。 自动收敛测试当某步时，代价函数的减小值很小（比如小于$10^{-3}$，这个阈值也是不好确定的）时，则认为代价函数已经收敛。 多项式回归基于已有特征构造新的特征（乘积或次方） 正规方程nomal equation 线性方程组有解的话，使用该方法即可，可以一次性求得最优解，不需使用梯度下降法之类的迭代算法，求得的是解析解。 正规方程法不需要特征缩放。 \theta=(X^TX)^{-1}X^Ty$X^TX$不可逆的情况很少出现，如果不可逆，就用它的伪逆。 梯度下降与正规方程对比 梯度下降 正规方程 不需要选择学习率 需要选择学习率 需要多次迭代 不需要迭代 $n$很大时效果也很好 需要计算矩阵的逆，$n$很大时速度很慢 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[机器学习-绪论]]></title>
+    <url>%2F2019%2F09%2F23%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BB%AA%E8%AE%BA%2F</url>
+    <content type="text"><![CDATA[简介机器学习是一门多领域交叉学科，涉及概率论、统计学、逼近论等多门学科。它是人工智能的核心。 机器学习暂无一个被广泛认可的定义来准确定义机器学习是什么或不是什么。 机器学习算法的分类按照学习方式来分，主要可以分为两类（这两类算法也是最常使用的）： 监督学习（supervised learning） 会教计算机如何去完成任务 无监督学习（unsupervised learning） 让计算机自己学习如何完成任务 其他学习方法还有强化学习（reinforcement learning）和推荐系统（recommender systems）等。 监督学习监督学习：数据集中的每个样本的正确答案（label）是有给出的。 回归问题regression problem，预测一个连续的输出值 分类问题classification problem，预测一个离散的输出值 （支持向量机可以处理无限多的features） 无监督学习无监督学习：数据集中的每个样本是没有正确答案（label）的。 聚类算法cluster algorithm 将个例分为几类，比如新闻的专题分类、基因分类、组织计算机集群、社交网络分析、市场细分和天文数据分析等。 聚类只是无监督学习的一种。 鸡尾酒会算法cocktail party problem algorithm 两个声源同时发声，两个收音器收音，用算法分离两个声源发出的声音。 利用Octave和Matlab这样的软件，一行代码就可以实现这样的算法。 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[PAT乙级1043]]></title>
     <url>%2F2019%2F08%2F11%2FPAT%E4%B9%99%E7%BA%A71043%2F</url>
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805260223102976/problems/994805280074743808 题解这次再次体会到题意理解的正确性，理解正确的话其实就是用代码实现自己的想法。 难的是，刚开始想错了，然后再去改，这样完全没有思路，很麻烦的。 这道题的意思是：按照PATest的顺序去字符串里找，找得到就输出，找不到就找下一个，直至字符串里找不到PATest中的任意一个字符。 123456789101112131415161718192021222324252627282930313233// PAT BasicLevel 1043// https://pintia.cn/problem-sets/994805260223102976/problems/994805280074743808#include &lt;iostream&gt;#include &lt;string&gt;using namespace std;int main()&#123; // 用户输入 string str,PATest="PATest"; cin &gt;&gt;str; int i=0; int notFoundCount=0; while (notFoundCount &lt; 6)&#123; // 找到了想要的字符 if (str.find_first_of(PATest[i]) != string::npos)&#123; cout &lt;&lt; PATest[i]; str.erase(str.begin() + str.find_first_of(PATest[i])); notFoundCount = 0; &#125; // 找不到该字符 else &#123; notFoundCount++; &#125; // 找下一个 i = (i + 1) % 6; &#125; //system("pause"); return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
