@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="臭咸鱼的缺氧瓶" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="这是之前刷PAT时看胡凡的《算法笔记》时做的一点笔记，后来没时间，就没看完。 emmm，刚开始看的内容都很基础。现在想想这样从头到尾地学确实没必要，可能当时的目标也和现在不一样吧。 第一章 如何使用本书在线评测系统PAT是“单点测试”。 常见的评测结果==整理常见的测评结果== 第二章 C/C++快速入门cin和cout消耗的时间比scanf和printf多得多，很多题目可能输入还没结束就超时了。">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《算法笔记》阅读笔记">
+<meta property="og:url" content="https://chouxianyu.github.io/2020/01/29/《算法笔记》阅读笔记/index.html">
+<meta property="og:site_name" content="臭咸鱼的缺氧瓶">
+<meta property="og:description" content="这是之前刷PAT时看胡凡的《算法笔记》时做的一点笔记，后来没时间，就没看完。 emmm，刚开始看的内容都很基础。现在想想这样从头到尾地学确实没必要，可能当时的目标也和现在不一样吧。 第一章 如何使用本书在线评测系统PAT是“单点测试”。 常见的评测结果==整理常见的测评结果== 第二章 C/C++快速入门cin和cout消耗的时间比scanf和printf多得多，很多题目可能输入还没结束就超时了。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-01-29T05:52:39.903Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《算法笔记》阅读笔记">
+<meta name="twitter:description" content="这是之前刷PAT时看胡凡的《算法笔记》时做的一点笔记，后来没时间，就没看完。 emmm，刚开始看的内容都很基础。现在想想这样从头到尾地学确实没必要，可能当时的目标也和现在不一样吧。 第一章 如何使用本书在线评测系统PAT是“单点测试”。 常见的评测结果==整理常见的测评结果== 第二章 C/C++快速入门cin和cout消耗的时间比scanf和printf多得多，很多题目可能输入还没结束就超时了。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chouxianyu.github.io/2020/01/29/《算法笔记》阅读笔记/"/>
+
+
+
+
+
+  <title>《算法笔记》阅读笔记 | 臭咸鱼的缺氧瓶</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5706c34297d4762ba8c6d799a54234b9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">臭咸鱼的缺氧瓶</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快给我氧气！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2020/01/29/《算法笔记》阅读笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《算法笔记》阅读笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-29T13:46:25+08:00">
+                2020-01-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/01/29/《算法笔记》阅读笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/01/29/《算法笔记》阅读笔记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/01/29/《算法笔记》阅读笔记/" class="leancloud_visitors" data-flag-title="《算法笔记》阅读笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  6,530 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  26 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这是之前刷PAT时看胡凡的《算法笔记》时做的一点笔记，后来没时间，就没看完。</p>
+<p>emmm，刚开始看的内容都很基础。现在想想这样从头到尾地学确实没必要，可能当时的目标也和现在不一样吧。</p>
+<h1 id="第一章-如何使用本书"><a href="#第一章-如何使用本书" class="headerlink" title="第一章 如何使用本书"></a>第一章 如何使用本书</h1><h2 id="在线评测系统"><a href="#在线评测系统" class="headerlink" title="在线评测系统"></a>在线评测系统</h2><p>PAT是“单点测试”。</p>
+<h2 id="常见的评测结果"><a href="#常见的评测结果" class="headerlink" title="常见的评测结果"></a>常见的评测结果</h2><p>==整理常见的测评结果==</p>
+<h1 id="第二章-C-C-快速入门"><a href="#第二章-C-C-快速入门" class="headerlink" title="第二章 C/C++快速入门"></a>第二章 C/C++快速入门</h1><p><code>cin</code>和<code>cout</code>消耗的时间比<code>scanf</code>和<code>printf</code>多得多，很多题目可能输入还没结束就超时了。……。请不要同时在一个程序中使用<code>cout</code>和<code>printf</code>，有时候会出问题。</p>
+<p>头文件的<code>h</code>是<code>head</code>的缩写</p>
+<p>C++向下兼容C</p>
+<p>==整理一下向下兼容、向上兼容、向前、向后==</p>
+<h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><p><code>int</code>：$-2^{31}\sim+(2^{31}-1)$，大致范围是$-2\times10^9\sim2\times10^9$，绝对值在$10^9$以内的整数都可以定义成<code>int</code>型。</p>
+<p><code>long long</code>：$-2^{63}\sim+(2^{63}-1)$，大致范围是$-9\times10^{18}\sim9\times10^{18}$。</p>
+<p>浮点型都用<code>double</code>来存储。</p>
+<p>小写字母比大写字母的ASCII码大32。</p>
+<p><code>\0</code>代表空字符NULL，其ASCII码为0，请注意<code>\0</code>不是空格。</p>
+<p>整型常量在赋值给布尔型变量时会自动转换为<code>true</code>（非零）和<code>false</code>（零）。</p>
+<p>宏定义是直接将对应的部分替换，然后才进行编译和运行。</p>
+<h2 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a>输入和输出</h2><p>类似于<code>13:45:20</code>这种<code>hh:mm:ss</code>的时间需要输入，可以使用下边的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> hh,mm,ss;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d:%d:%d"</span>,&amp;hh,&amp;mm,&amp;ss);</span><br></pre></td></tr></table></figure>
+<p><code>scanf</code>的双引号内的内容其实就是整个输入，只不过把数据换成它们对应的格式符并把变量的地址按次序写在后面而已。</p>
+<p>除了<code>%c</code>以外（<code>scanf</code>的<code>%c</code>格式是可以读入空格和换行的），<code>scanf</code>对其他格式符（如<code>%d</code>）的输入是以空白符（即空格、Tab）为结束判断标志的，字符数组使用<code>%s</code>读入的时候以空格和换行为读入结束的标志。</p>
+<p><code>double</code>输出格式为<code>%f</code>，输入格式为<code>%lf</code>。</p>
+<p><code>%.mf</code>保留$m$位小数，这个“保留”使用的是精度的“四舍六入五成双”规则。</p>
+<p><code>getchar</code>可以识别换行符。</p>
+<h2 id="常用数学函数"><a href="#常用数学函数" class="headerlink" title="常用数学函数"></a>常用数学函数</h2><p><code>round</code>函数，四舍五入。</p>
+<p>==整理常用数学函数==</p>
+<h2 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h2><p>条件判断中<code>n!=0</code>可以改为<code>n</code>，<code>n==0</code>可以改为<code>!n</code>。</p>
+<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><p><code>do...while</code>会先执行循环体一次，然后才去判断循环条件是否为真，这就使得<code>do...while</code>语句的实用性远不如<code>while</code>，因为用户碰到的大部分情况都需要能处理在某些数据下不允许进入循环的情况。</p>
+<p>C语言中不允许随时定义临时变量，C++可以。</p>
+<h2 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h2><p>数组大小必须是整数常量，不可以是变量。</p>
+<p>如果只初始化了一维数组的一部分元素，后面未被初始化的元素将会由不同编译器内部实现的不同而被赋以不同的初值，而一般情况默认初值为0。所以可以通过下面的代码实现整个数组赋初值0</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>]=&#123;&#125;;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>]=&#123;<span class="number">0</span>&#125;;</span><br></pre></td></tr></table></figure>
+<p>递推可以分为顺推和逆推两种。</p>
+<p>冒泡排序的本质在于交换，即<strong>每次通过交换的方式把当前剩余元素的最大值移动到一端，当剩余元素数量减少为0时，排序结束</strong>。代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义含5个元素的数组</span></span><br><span class="line"><span class="keyword">int</span> a[]=&#123;<span class="number">3</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">2</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> n=<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 冒泡排序（从小到大）</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;++i)&#123;	<span class="comment">//5-1趟</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n-i;++j)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[j]&gt;a[j+<span class="number">1</span>])&#123;	<span class="comment">// 交换</span></span><br><span class="line">            <span class="keyword">int</span> temp=a[j];</span><br><span class="line">            a[j]=a[j+<span class="number">1</span>];</span><br><span class="line">            a[j+<span class="number">1</span>]=temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出数组元素</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;++i)&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d "</span>,a[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><p>可以把二维数组当作一维数组的每一个元素都是一个一维数组。</p>
+<p>二维数组初始化（下面的代码中未被初始化的元素一般默认为0）：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">5</span>][<span class="number">6</span>]=&#123;&#123;<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>&#125;,&#123;<span class="number">8</span>,<span class="number">4</span>&#125;,&#123;&#125;,&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;&#125;;</span><br></pre></td></tr></table></figure>
+<p>如果数组大小较大（大概$10^6$级别），则需要定义在主函数外边。原因是函数内部申请的局部变量来自系统栈，允许申请的空间较小。而函数外部申请的全局变量来自静态存储区，允许申请的空间较大。</p>
+<h2 id="memset"><a href="#memset" class="headerlink" title="memset"></a>memset</h2><p>一般用函数<code>memset</code>和<code>fill</code>给数组中每一个元素赋相同的值。</p>
+<p>使用<code>memset</code>需要使用头文件<code>string.h</code>，使用<code>fill</code>需要使用STL中的头文件<code>algorithm</code>。</p>
+<p><code>memset</code>格式如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">memset</span>(数组名，值，<span class="keyword">sizeof</span>(数组名));</span><br></pre></td></tr></table></figure>
+<p>只建议初学者使用<code>memset</code>赋0和-1，因为<code>memset</code>是按字节赋值，即对每个字节赋同样的值，0的二进制补码为全0，-1的二进制补码为全1，不容易弄错。如果要对数组赋其它值，请使用<code>fill</code>函数（但<code>memset</code>的执行速度快）。</p>
+<h2 id="字符数组"><a href="#字符数组" class="headerlink" title="字符数组"></a>字符数组</h2><p>可以使用字符串对字符数组进行初始化，但也仅限于初始化。</p>
+<p><code>%c</code>能够识别空格和换行并将其输入，%s`通过空格或换行来识别一个字符串的结束。</p>
+<p><code>gets</code>识别换行符作为输入结束（并会将其读取走），因此<code>scanf</code>完一个整数后，如果要用<code>gets</code>，需要用<code>getchar</code>接受整数后的换行符。</p>
+<p>一维字符数组的末尾都会有一个<code>\0</code>，表示字符串的结束。使用<code>gets</code>和<code>scanf</code>时会自动在字符串后边添加<code>\0</code>，<code>puts</code>和<code>printf</code>也通过识别<code>\0</code>作为字符串的结尾来输出字符串。</p>
+<h2 id="string-h"><a href="#string-h" class="headerlink" title="string.h"></a>string.h</h2><ul>
+<li><p><code>strlen(字符数组1)</code></p>
+<p>  得到字符数组<code>\0</code>前边的字符数</p>
+</li>
+<li><p><code>strcmp(字符数组1,字符数组2)</code></p>
+<p>  按照字典序比较两个字符串的大小，返回一个整数（负数，0，正数），符号和<code>字符串1-字符串2</code>相同。</p>
+</li>
+<li><p><code>strcpy(字符数组1，字符数组2)</code></p>
+<p>  把字符串2（第二个参数）赋值给字符串1（第一个参数）</p>
+</li>
+<li><p><code>strcat(字符数组1,字符数组2)</code></p>
+<p>  把字符数组2接到字符数组1后边</p>
+</li>
+<li><p><code>sscanf(字符数组,&quot;%d&quot;,&amp;n)</code></p>
+<p>  从字符数组中读</p>
+</li>
+<li><p><code>sprintf(字符数组,&quot;%d&quot;,n)</code></p>
+<p>  往字符数组中写</p>
+</li>
+</ul>
+<h2 id="数组作为函数参数"><a href="#数组作为函数参数" class="headerlink" title="数组作为函数参数"></a>数组作为函数参数</h2><p>数组作为参数时，参数中数组的第一维不需要填写长度（如果是二维数组，那么第二维需要填写长度），实际调用时</p>
+<h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><p>指针是一个<code>unsigned</code>类型的整数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* p1,p2;	<span class="comment">//p1是int型指针 p2是int型变量</span></span><br><span class="line"><span class="keyword">int</span>* p1,*p2;	<span class="comment">//p1和p2都是int型指针</span></span><br></pre></td></tr></table></figure>
+<h2 id="cin"><a href="#cin" class="headerlink" title="cin"></a>cin</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str1[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">cin</span>.getline(str1,<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> str2;</span><br><span class="line">getline(<span class="built_in">cin</span>,str2);</span><br></pre></td></tr></table></figure>
+<h2 id="浮点数的比较"><a href="#浮点数的比较" class="headerlink" title="浮点数的比较"></a>浮点数的比较</h2><p>由于计算机采用有限位的二进制编码，因此浮点数在计算机的存储并不总是精确的，于是需要引入一个极小的<strong>EPS</strong>来对这种误差进行修正。</p>
+<p>==待补充：通过EPS进行浮点数的比较==</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><ul>
+<li><p>时间复杂度</p>
+<p>  <strong>在时间复杂度中，高等级的幂次会覆盖低等级的幂次。</strong>当有些算法实现较为复杂时，其常数会比较大，这时即便时间复杂度（一般讲时间复杂度是不带系数的）相同，其性能也会有较大差距。</p>
+<p>  <strong>对一般的OJ系统来说，1秒能承受的运算次数大概是$10^7\sim10^8$</strong>，因此$O(n^2)$的算法当n的规模是1000时是可以承受的，而当n的规模为100000时则是不可承受的。</p>
+</li>
+<li><p>空间复杂度</p>
+<p>  在一般的应用中，一般来说空间都是足够使用的（只要不开好几个$10^7$以上的数组即可，例如<code>int A[10000][10000]</code>的定义就是不合适的）。</p>
+<p>  $O(1)$的空间复杂度指的是算法消耗的空间不随数据规模的增大而增大。</p>
+<p>  考虑到空间一般够用，因此常常采用以空间换时间的策略。</p>
+</li>
+<li><p>编码复杂度</p>
+<p>  编码复杂度是一个定性的概念，并没有什么量化的标准。</p>
+</li>
+</ul>
+<h2 id="黑盒测试"><a href="#黑盒测试" class="headerlink" title="黑盒测试"></a>黑盒测试</h2><p>黑盒测试是指：系统后台会准备若干组输入数据，然后将其输到提交的程序中，如果输出的结果与正确答案完全相同（字符串意义上的比较），那么就称通过了这道题的黑盒测试，否则会根据错误类型而返回不同的结果。</p>
+<p>根据黑盒测试是否对每组输入数据都单独测试或是一次性测试所有测试数据，又可以分为<strong>单点测试</strong>和<strong>多点测试</strong>。</p>
+<p>==整理多点测试的几种类型==</p>
+<h1 id="第三章-入门篇（1）——入门模拟"><a href="#第三章-入门篇（1）——入门模拟" class="headerlink" title="第三章 入门篇（1）——入门模拟"></a>第三章 入门篇（1）——入门模拟</h1><p>无</p>
+<h1 id="第四章-入门篇（2）——算法初步"><a href="#第四章-入门篇（2）——算法初步" class="headerlink" title="第四章 入门篇（2）——算法初步"></a>第四章 入门篇（2）——算法初步</h1><h2 id="简单选择排序"><a href="#简单选择排序" class="headerlink" title="简单选择排序"></a>简单选择排序</h2><p>选择排序是最简单的排序算法之一，本节介绍众多选择排序方法中最常用的<strong>简单选择排序</strong>。</p>
+<p>将数组分为前后两部分：有序部分和无序部分。遍历数组，每次选择最小的值放在数组前边（有序部分），时间复杂度为$O(n^2)$</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义含5个元素的数组</span></span><br><span class="line"><span class="keyword">int</span> a[]=&#123;<span class="number">3</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">2</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> n=<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择排序（从小到大）</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;++i)&#123;</span><br><span class="line">	<span class="keyword">int</span> k=i;	<span class="comment">// 默认当前待排序的第一个值是最小值</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;n;j++)&#123;	<span class="comment">// 遍历之后的待排序的值，寻找最小值</span></span><br><span class="line">        <span class="keyword">if</span>(a[j]&lt;a[k])&#123;	<span class="comment">// 更新待排序的最小值的下标</span></span><br><span class="line">            k=j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 交换</span></span><br><span class="line">    <span class="keyword">int</span> temp=a[i];</span><br><span class="line">    a[i]=a[k];</span><br><span class="line">    a[k]=temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出数组元素</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;++i)&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d "</span>,a[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>插入排序也是最简单的一类排序方法，本节主要介绍众多插入排序方法中最直观的<strong>直接插入排序</strong>。</p>
+<p>把序列分为左右两部分：有序（左）和无序（右），从无序的部分取出元素，插入有序序列对应位置。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义含5个元素的数组</span></span><br><span class="line"><span class="keyword">int</span> a[]=&#123;<span class="number">3</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">2</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> n=<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接插入排序（从小到大）</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;++i)&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 记录要插入的值</span></span><br><span class="line">	<span class="keyword">int</span> temp=a[i],j=i;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 有序元素后移</span></span><br><span class="line">    <span class="keyword">while</span>(j&gt;<span class="number">0</span>&amp;&amp;temp&gt;a[j<span class="number">-1</span>])&#123;</span><br><span class="line">        a[j]=a[j<span class="number">-1</span>];</span><br><span class="line">        j--;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 插入</span></span><br><span class="line">    a[j]=temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出数组元素</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;++i)&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d "</span>,a[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="散列的定义和整数散列"><a href="#散列的定义和整数散列" class="headerlink" title="散列的定义和整数散列"></a>散列的定义和整数散列</h2><p>散列（hash）是常见的算法思想之一，在很多程序中都会有意无意地使用到。</p>
+<p>若给出$N$个正整数，再给出$M$个正整数，问这M个数中的每个数分别是在$N$个数出现过，其中$N,M\leq10^5$，且所有正整数均不超过$10^5$。</p>
+<p>对这个问题，最直接的思路是：对每个欲查询的正整数$x$，遍历$N$个数，看是否有一个数与x相等。这种做法的时间复杂度是$O(NM)$，当$N$和$M$都很大（$10^5$级别）时，显然是无法承受的。</p>
+<p>不妨用空间换时间，即设定一个<code>bool</code>型数组<code>hashTable[100010]</code>，其中<code>hashTable[x]==true</code>表示正整数$x$在$n$个正整数中出现过。这样就可以在一开始读入$N$个正整数时就对<code>hashTable</code>进行赋值，于是对于$M$个欲查询的数，就能直接通过<code>hashTable</code>判断出每个数是否出现过。显然这种做法的时间复杂度为$O(M+N)$。</p>
+<p>同样的，如果题目要求统计次数而非是否出现，就把数组改成<code>int</code>型，这两个问题的解法都有一个特点，那就是直接把输入的数作为数组的下标来对这个数的性质进行统计（<strong>这种做法非常实用，请务必掌握</strong>）。这是一个很好的用空间换时间的策略，因为它将查询的复杂度降到了$O(1)$级别。</p>
+<p>但这个策略暂时还有一个问题——上面的题目中出现的每个数都不会超过$10^5$，因此直接作为数组下标是可行的，但是如果输入可能是$10^9$大小的整数，或者甚至是一个字符串，就不能将它们直接作为数组下标了。</p>
+<p>这时可以使用<strong>散列</strong>。一般来说，散列可以浓缩成“<strong>将元素通过一个函数转换为整数，使得改正数可以尽量唯一地代表这个元素</strong>”，其中把这个转换函数称为<strong>散列函数H</strong>，也就是说，如果元素在转换前为<code>key</code>，那么转换后就是一个整数<code>H(key)</code>。</p>
+<p>对于<code>key</code>是整数的情况来说，<strong>常用的散列函数</strong>有直接定址法、平方取中法、除留余数法。</p>
+<p><code>H(key1)==H(key2)</code>，这种情况叫作<strong>冲突</strong>。<strong>常用的解决冲突的方法</strong>有线性探查法、平方探查法和链地址法，其中前两种都计算了新的hash值，又称为开放定址法。</p>
+<p>在写代码时，这种散列的功能可以用STL中的<code>map</code>代替。</p>
+<h2 id="字符串hash初步"><a href="#字符串hash初步" class="headerlink" title="字符串hash初步"></a>字符串hash初步</h2><p>一个点$P$的坐标$(x,y)$可以用下面的散列函数进行处理：</p>
+<p>$H(P)=x\times Range+y$，这样对数据范围内的任意两个整点$P_1$和$P_2$，$H(P_1)$都不会等于$H(P_2)$。</p>
+<p><strong>字符串hash</strong>是指将一个字符串$S$转换为一个整数,使得该整数可以尽可能地唯一地代表字符串$S$。本节只讨论将字符串转换为唯一的整数。</p>
+<p>假设字符串$S$由大写字母$A \sim Z$构成。在这个假设下，可以把26个大写字母视为$0\sim25$，进而转换为二十六进制，再转换为十进制，可得一唯一整数。只是$S$的长度并不可太长。</p>
+<p>在上面的假设下，假如还可以由$a\sim z$组成，可以再把$a\sim z$对应为$26\sim51$，进而转换为五十二进制，再转换为十进制。</p>
+<h2 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h2><p>分治法（divide and conquer）将原问题划分成若干个规模较小而结构与原问题相同或相似的子问题，然后分别地解决这些子问题，最后合并子问题的解，即可得到原问题的解。</p>
+<p>分治法的三个步骤：</p>
+<ol>
+<li><p>分解</p>
+<p> 将原问题分解为若干和原问题拥有相同或相似结构的子问题</p>
+</li>
+<li><p>解决</p>
+<p> 递归求解所有子问题。如果存在子问题的规模小到可以直接解决，就直接解决它。</p>
+</li>
+<li><p>合并</p>
+<p> 将子问题的解合并成原问题的解。</p>
+</li>
+</ol>
+<p>分治法分解出的子问题应当是相互独立、没有交叉的。如果存在两个子问题有相交部分，那么不应当使用分治法解决。</p>
+<p>广义上来讲，分治法分解成的子问题个数只要大于0即可。从严格的定义上讲，一般把子问题的个数为1的情况称为<strong>减治</strong>，而把子问题个数大于1的情况称为分治。</p>
+<p>分治法作为一种算法思想，既可以使用递归的手段去实现，也可以通过非递归的手段去实现。</p>
+<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><p>递归有两个重要概念：</p>
+<ol>
+<li>递归边界</li>
+<li>递归式</li>
+</ol>
+<p>求$n$的阶乘体现了减治的思想，求$Fibonacci$数列的第$n$项体现了分治的思想。</p>
+<p>一般把$1\sim n$这$n$个整数按某个顺序摆放的结果称为这$n$个整数的一个排列，而全排列指这$n$个整数能形成的所有排列。</p>
+<p>$n$皇后问题就可以使用解决全排列问题的方法去解决。</p>
+<p>如果在到达递归边界前的某层，由于一些事实导致已经不需要往任何一个子问题递归，就可以直接返回上一层。一般把这种做法称为<strong>回溯法</strong>。</p>
+<h2 id="简单贪心"><a href="#简单贪心" class="headerlink" title="简单贪心"></a>简单贪心</h2><p><strong>贪心法</strong>是求解一类最优化问题的方法，它总是考虑当前状态下<strong>局部最优</strong>（或较优）的策略，来使全局的结果达到最优（或较优）。</p>
+<p>可以使用贪心法的问题一定满足<strong>最优子结构</strong>性质，即一个问题的最优解可以由它的子问题的最优解构造出来。</p>
+<p>要获得全局最优解，则要求中间的每步策略都是最优的，因此严谨使用贪心法来求解最优哈问题需要对采取的策略进行证明。证明的一般思路是使用反证法及数学归纳法，即假设策略不能导致最优解，然后通过一系列推导来得到矛盾，以此证明策略是最优的，最后用数学归纳法保证全局最优。不过对于平常来说，不太容易对想到的策略进行严谨的证明（贪心的证明往往比贪心本身更难），<strong>如果在想到某个似乎可行的策略，并且自己无法举出反例，那就勇敢地实现它。</strong></p>
+<h2 id="区间贪心"><a href="#区间贪心" class="headerlink" title="区间贪心"></a>区间贪心</h2><p>区间不相交问题和区间选点</p>
+<h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p>二分查找是基于有序序列的查找算法，二分查找的高效之处在于，每一步都可以去除当前区间中的一半元素，因此其时间复杂度是$O(logn)$。</p>
+<p><strong>如果序列是严格递增</strong>：</p>
+<ul>
+<li>递归方法</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>* arr,<span class="keyword">int</span> left,<span class="keyword">int</span> right,<span class="keyword">int</span> key)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 定义含10个元素的升序数组</span></span><br><span class="line">    <span class="keyword">int</span> a[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">10</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 查询key</span></span><br><span class="line">    <span class="keyword">int</span> key=<span class="number">15</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, binarySearch(a, <span class="number">0</span>, n<span class="number">-1</span>, key));</span><br><span class="line"></span><br><span class="line">    system(<span class="string">"pause"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在数组arr的[left,right]中寻找key，找到则返回key在数组中的位置，否则返回-1</span></span><br><span class="line"><span class="comment">// 初始区间一般是[0,n-1]</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span> *arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 区间正确</span></span><br><span class="line">    <span class="keyword">if</span>(left&lt;=right)&#123;</span><br><span class="line">        <span class="comment">// 设置区间中间下标</span></span><br><span class="line">        <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 找到</span></span><br><span class="line">        <span class="keyword">if</span> (key == arr[mid])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 左半区间查找</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (key &lt; arr[mid])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> binarySearch(arr, left, mid - <span class="number">1</span>, key);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 右半区间查找</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> binarySearch(arr, mid+<span class="number">1</span>,right, key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 区间错误</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>非递归方法</li>
+</ul>
+<p>在程序设计时，更多采用的是非递归的写法。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>* arr,<span class="keyword">int</span> left,<span class="keyword">int</span> right,<span class="keyword">int</span> key)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 定义含10个元素的升序数组</span></span><br><span class="line">    <span class="keyword">int</span> a[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">10</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 查询key</span></span><br><span class="line">    <span class="keyword">int</span> key=<span class="number">19</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, binarySearch(a, <span class="number">0</span>, n<span class="number">-1</span>, key));</span><br><span class="line"></span><br><span class="line">    system(<span class="string">"pause"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在数组arr的[left,right]中寻找key，找到则返回key在数组中的位置，否则返回-1</span></span><br><span class="line"><span class="comment">// 初始区间一般是[0,n-1]</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span> *arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mid;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//当可以形成区间时，进行查找</span></span><br><span class="line">    <span class="keyword">while</span>(left&lt;=right)&#123;</span><br><span class="line">        <span class="comment">// 设置区间中间下标</span></span><br><span class="line">        mid = (left + right) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 找到，返回对应位置</span></span><br><span class="line">        <span class="keyword">if</span> (key==arr[mid])&#123;</span><br><span class="line">            <span class="keyword">return</span> mid; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// key在左半区间，更新right</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(key&lt;arr[mid])&#123;</span><br><span class="line">            right=mid<span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// key在右半区间，更新left</span></span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            left=mid+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 未寻找到</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>如果序列是严格递减</strong>：</p>
+<p>只需要把<code>if(key&lt;arr[mid])</code>语句中的<code>&lt;</code>改成<code>&gt;</code>就好了。</p>
+<p><strong>如果序列是非严格递增（即递增，但元素可能重复）</strong>：</p>
+<p>如何求出序列中第一个大于等于<code>key</code>的元素的位置<code>L</code>和第一个大于<code>key</code>的元素的位置<code>R</code>，这样元素<code>key</code>在序列中的存在区间就是左闭右开区间$[L,R)$。显然，如果序列中没有<code>key</code>，那么<code>L</code>和<code>R</code>可以理解为假设序列中存在<code>key</code>，<code>key</code>应该在的位置。</p>
+<p>上面有两个问题：</p>
+<ul>
+<li>求<code>L</code></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lowerBound</span><span class="params">(<span class="keyword">int</span> *arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> key)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 定义含10个元素的升序数组</span></span><br><span class="line">    <span class="keyword">int</span> a[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">10</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 查询key</span></span><br><span class="line">    <span class="keyword">int</span> key=<span class="number">4</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, lowerBound(a, <span class="number">0</span>, n, key));</span><br><span class="line"></span><br><span class="line">    system(<span class="string">"pause"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在非严格递增数组arr的[left,right]中寻找第一个大于等于key的值的位置，如果不存在则返回该值应该在的位置（即最后一个元素后边）</span></span><br><span class="line"><span class="comment">// 初始区间一般是[0,n]</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lowerBound</span><span class="params">(<span class="keyword">int</span> *arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mid;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当left==right时，刚好求出大于等于key的第一个数字的位置</span></span><br><span class="line">    <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">        <span class="comment">// 设置区间中间下标</span></span><br><span class="line">        <span class="comment">//mid = (left + right) / 2;</span></span><br><span class="line">        mid=left+(right-left)/<span class="number">2</span>;    <span class="comment">// 避免溢出</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// key在左半区间，更新right</span></span><br><span class="line">        <span class="keyword">if</span>(key&lt;=arr[mid])&#123;</span><br><span class="line">            right=mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// key在右半区间，更新left</span></span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            left=mid+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 未寻找到</span></span><br><span class="line">    <span class="keyword">return</span> left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>求<code>R</code></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">upperBound</span><span class="params">(<span class="keyword">int</span> *arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> key)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 定义含10个元素的升序数组</span></span><br><span class="line">    <span class="keyword">int</span> a[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">10</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 查询key</span></span><br><span class="line">    <span class="keyword">int</span> key=<span class="number">4</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, upperBound(a, <span class="number">0</span>, n, key));</span><br><span class="line"></span><br><span class="line">    system(<span class="string">"pause"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在非严格递增数组arr的[left,right]中寻找第一个大于key的值的位置，如果不存在则返回该值应该在的位置（即最后一个元素后边）</span></span><br><span class="line"><span class="comment">// 初始区间一般是[0,n]</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">upperBound</span><span class="params">(<span class="keyword">int</span> *arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mid;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当left==right时，刚好求出大于等于key的第一个数字的位置</span></span><br><span class="line">    <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">        <span class="comment">// 设置区间中间下标</span></span><br><span class="line">        <span class="comment">//mid = (left + right) / 2;</span></span><br><span class="line">        mid=left+(right-left)/<span class="number">2</span>;    <span class="comment">// 避免溢出</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// key在左半区间，更新right</span></span><br><span class="line">        <span class="keyword">if</span>(key&lt;arr[mid])&#123;</span><br><span class="line">            right=mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// key在右半区间，更新left</span></span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            left=mid+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 未寻找到</span></span><br><span class="line">    <span class="keyword">return</span> left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对比<code>lowerBound</code>和<code>upperBound</code>的代码可知，<code>upperBound</code>函数只是把代码中的<code>if(key&lt;=arr[mid])</code>改成<code>if(key&lt;arr[mid])</code>，其他完全相同，这启发我们去寻找它们的共同点。</p>
+<p>可以发现，两者都在解决这样一个问题：寻找有序序列中第一个满足某条件<code>C</code>的元素的位置。这是一个非常重要且经典的问题，平常能碰到的大部分二分法问题都可以归结于这个问题。显然，所谓的条件<code>C</code>在序列中一定是从左到右先不满足，然后满足的。该类问题代码模板如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mid;</span><br><span class="line">    <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">        mid=left+(right-left)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(C成立)&#123;</span><br><span class="line">        	right=mid;    </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            left=mid+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>若想寻找<strong>最后一个</strong>满足条件<code>C</code>的元素的位置，则可以先求第一个满足条件<code>!c</code>的元素的位置，然后将该位置减1即可。</p>
+<p>如果目的是判断有序序列中是否存在满足某条件的元素，使用刚开始的二分最合适。</p>
+<h2 id="二分法的其他应用"><a href="#二分法的其他应用" class="headerlink" title="二分法的其他应用"></a>二分法的其他应用</h2><p>上面讲了二分查找，事实上二分法的应用远不止如此。</p>
+<h3 id="估算-sqrt-2"><a href="#估算-sqrt-2" class="headerlink" title="估算$\sqrt{2}$"></a>估算$\sqrt{2}$</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 误差</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">double</span> eps=<span class="number">10e-5</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// </span></span><br><span class="line">    <span class="keyword">double</span> left=<span class="number">1</span>,right=<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">double</span> mid;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 逼近2^0.5</span></span><br><span class="line">    <span class="keyword">while</span>(right-left&gt;eps)&#123;</span><br><span class="line">        <span class="comment">// 计算mid</span></span><br><span class="line">        mid = left+(right - left) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="number">2</span>&gt;mid * mid)&#123;</span><br><span class="line">            left=mid;            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(<span class="number">2</span>&lt;mid*mid)&#123;</span><br><span class="line">            right=mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 输出结果</span></span><br><span class="line">    mid = left+(right - left) / <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%f\n"</span>,mid);</span><br><span class="line"></span><br><span class="line">    system(<span class="string">"pause"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="装水问题"><a href="#装水问题" class="headerlink" title="装水问题"></a>装水问题</h3><p>有一个侧面看上去是半圆的储水装置，该半圆的半径是$R$，要求往里面装入高度为$h$的水，使其在侧面看去的面积与半圆面积的比例恰好为$r$。已知$r$，求$h$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 一些常量</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">double</span> eps=<span class="number">10e-5</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">double</span> r=<span class="number">0.5</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">double</span> R=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">double</span> pi=<span class="number">3.1415926535</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// </span></span><br><span class="line">    <span class="keyword">double</span> left=<span class="number">0</span>,right=R;</span><br><span class="line">    <span class="keyword">double</span> mid,alpha,L,S1,S2=pi*R*R/<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 逼近</span></span><br><span class="line">    <span class="keyword">while</span>(right-left&gt;eps)&#123;</span><br><span class="line">        <span class="comment">// 计算mid</span></span><br><span class="line">        mid = left+(right - left) / <span class="number">2</span>;</span><br><span class="line">        alpha=<span class="number">2</span>*<span class="built_in">acos</span>((R-mid)/R);</span><br><span class="line">        L = <span class="number">2</span> * <span class="built_in">sqrt</span>(R * R - (R - mid) * (R - mid));</span><br><span class="line">        S1 = alpha*R*R/<span class="number">2</span>-L*(R-mid)/<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (r&gt;S1/S2)&#123;</span><br><span class="line">            left=mid;            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (r &lt; S1 / S2)&#123;</span><br><span class="line">            right=mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 输出结果</span></span><br><span class="line">    mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%f\n"</span>,mid);</span><br><span class="line"></span><br><span class="line">    system(<span class="string">"pause"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="木棒切割"><a href="#木棒切割" class="headerlink" title="木棒切割"></a>木棒切割</h3><p>给出$N$根木棒，长度均已知，现在希望通过切割它们来得到至少$K$段长度相等的木棒（长度必须是整数），问这些长度相等的木棒最长能有多长。例如对于三根长度分别为10、24、15的木棒来说，假设$K=7$，即至少需要7段长度相等的木棒，那么可以得到的最大长度为6（$(10+24+15)/7=7$），在这种情况下，第一根木棒可以提供$10/6=1$段、第二根木棒可以提供$24/6=4$根、第三根木棒可以提供$15/6=2$根，达到了7根的要求。</p>
+<p>对于这道题，我们可以注意到一个结论：如果长度相等的木棒的长度$L$越长，那么热可以得到的木棒段数$k$越小。</p>
+<p>==P142==</p>
+<hr>
+<p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p>
+<p>欢迎讨论和交流!</p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/02/LOAD-DATA-INFILE读取CSV中一千万条数据至mysql/" rel="next" title="LOAD DATA INFILE读取CSV中一千万条数据至mysql">
+                <i class="fa fa-chevron-left"></i> LOAD DATA INFILE读取CSV中一千万条数据至mysql
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg"
+                alt="臭咸鱼" />
+            
+              <p class="site-author-name" itemprop="name">臭咸鱼</p>
+              <p class="site-description motion-element" itemprop="description">祝你天天开心啊！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">138</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://maluguang.com" title="Road Wide's Blog" target="_blank">Road Wide's Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/chouxianyu/" title="Chou Xianyu's CNBlog" target="_blank">Chou Xianyu's CNBlog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章-如何使用本书"><span class="nav-number">1.</span> <span class="nav-text">第一章 如何使用本书</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在线评测系统"><span class="nav-number">1.1.</span> <span class="nav-text">在线评测系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的评测结果"><span class="nav-number">1.2.</span> <span class="nav-text">常见的评测结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章-C-C-快速入门"><span class="nav-number">2.</span> <span class="nav-text">第二章 C/C++快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本数据类型"><span class="nav-number">2.1.</span> <span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入和输出"><span class="nav-number">2.2.</span> <span class="nav-text">输入和输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用数学函数"><span class="nav-number">2.3.</span> <span class="nav-text">常用数学函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件判断"><span class="nav-number">2.4.</span> <span class="nav-text">条件判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环语句"><span class="nav-number">2.5.</span> <span class="nav-text">循环语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一维数组"><span class="nav-number">2.6.</span> <span class="nav-text">一维数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二维数组"><span class="nav-number">2.7.</span> <span class="nav-text">二维数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#memset"><span class="nav-number">2.8.</span> <span class="nav-text">memset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符数组"><span class="nav-number">2.9.</span> <span class="nav-text">字符数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#string-h"><span class="nav-number">2.10.</span> <span class="nav-text">string.h</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组作为函数参数"><span class="nav-number">2.11.</span> <span class="nav-text">数组作为函数参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针"><span class="nav-number">2.12.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cin"><span class="nav-number">2.13.</span> <span class="nav-text">cin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浮点数的比较"><span class="nav-number">2.14.</span> <span class="nav-text">浮点数的比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复杂度"><span class="nav-number">2.15.</span> <span class="nav-text">复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#黑盒测试"><span class="nav-number">2.16.</span> <span class="nav-text">黑盒测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三章-入门篇（1）——入门模拟"><span class="nav-number">3.</span> <span class="nav-text">第三章 入门篇（1）——入门模拟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-入门篇（2）——算法初步"><span class="nav-number">4.</span> <span class="nav-text">第四章 入门篇（2）——算法初步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单选择排序"><span class="nav-number">4.1.</span> <span class="nav-text">简单选择排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序"><span class="nav-number">4.2.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#散列的定义和整数散列"><span class="nav-number">4.3.</span> <span class="nav-text">散列的定义和整数散列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串hash初步"><span class="nav-number">4.4.</span> <span class="nav-text">字符串hash初步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分治"><span class="nav-number">4.5.</span> <span class="nav-text">分治</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归"><span class="nav-number">4.6.</span> <span class="nav-text">递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单贪心"><span class="nav-number">4.7.</span> <span class="nav-text">简单贪心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区间贪心"><span class="nav-number">4.8.</span> <span class="nav-text">区间贪心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二分查找"><span class="nav-number">4.9.</span> <span class="nav-text">二分查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二分法的其他应用"><span class="nav-number">4.10.</span> <span class="nav-text">二分法的其他应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#估算-sqrt-2"><span class="nav-number">4.10.1.</span> <span class="nav-text">估算$\sqrt{2}$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装水问题"><span class="nav-number">4.10.2.</span> <span class="nav-text">装水问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#木棒切割"><span class="nav-number">4.10.3.</span> <span class="nav-text">木棒切割</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">臭咸鱼</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">132.8k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz',
+        appKey: 'Si7hBxIAVOGbu6Pot7HHaVBB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz", "Si7hBxIAVOGbu6Pot7HHaVBB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>

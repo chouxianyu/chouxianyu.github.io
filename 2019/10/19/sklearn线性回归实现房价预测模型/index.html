@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,python,sklearn,线性回归," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="臭咸鱼的缺氧瓶" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="题目要求建立房价预测模型：利用ex1data1.txt（单特征）和ex1data2.txt（多特征）中的数据，进行线性回归和预测。 作散点图可知，数据大致符合线性关系，故暂不研究其他形式的回归。 两份数据放在最后。 单特征线性回归ex1data1.txt中的数据是单特征，作一个简单的线性回归即可：$y=ax+b$。 根据是否分割数据，产生两种方案：方案一，所有样本都用来训练和预测；方案二，一部分样">
+<meta name="keywords" content="机器学习,python,sklearn,线性回归">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sklearn线性回归实现房价预测模型">
+<meta property="og:url" content="https://chouxianyu.github.io/2019/10/19/sklearn线性回归实现房价预测模型/index.html">
+<meta property="og:site_name" content="臭咸鱼的缺氧瓶">
+<meta property="og:description" content="题目要求建立房价预测模型：利用ex1data1.txt（单特征）和ex1data2.txt（多特征）中的数据，进行线性回归和预测。 作散点图可知，数据大致符合线性关系，故暂不研究其他形式的回归。 两份数据放在最后。 单特征线性回归ex1data1.txt中的数据是单特征，作一个简单的线性回归即可：$y=ax+b$。 根据是否分割数据，产生两种方案：方案一，所有样本都用来训练和预测；方案二，一部分样">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2019/10/19/q1nRIceKBXrLt3P.png">
+<meta property="og:image" content="https://i.loli.net/2019/10/19/B23Ga4cetvqFQAJ.png">
+<meta property="og:image" content="https://i.loli.net/2019/10/19/kMKdfpgbwF4EXhR.png">
+<meta property="og:updated_time" content="2019-10-21T17:01:02.729Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sklearn线性回归实现房价预测模型">
+<meta name="twitter:description" content="题目要求建立房价预测模型：利用ex1data1.txt（单特征）和ex1data2.txt（多特征）中的数据，进行线性回归和预测。 作散点图可知，数据大致符合线性关系，故暂不研究其他形式的回归。 两份数据放在最后。 单特征线性回归ex1data1.txt中的数据是单特征，作一个简单的线性回归即可：$y=ax+b$。 根据是否分割数据，产生两种方案：方案一，所有样本都用来训练和预测；方案二，一部分样">
+<meta name="twitter:image" content="https://i.loli.net/2019/10/19/q1nRIceKBXrLt3P.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chouxianyu.github.io/2019/10/19/sklearn线性回归实现房价预测模型/"/>
+
+
+
+
+
+  <title>sklearn线性回归实现房价预测模型 | 臭咸鱼的缺氧瓶</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5706c34297d4762ba8c6d799a54234b9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">臭咸鱼的缺氧瓶</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快给我氧气！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/10/19/sklearn线性回归实现房价预测模型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">sklearn线性回归实现房价预测模型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-19T17:58:50+08:00">
+                2019-10-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/19/sklearn线性回归实现房价预测模型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/19/sklearn线性回归实现房价预测模型/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/10/19/sklearn线性回归实现房价预测模型/" class="leancloud_visitors" data-flag-title="sklearn线性回归实现房价预测模型">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,898 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  10 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h1><p>建立房价预测模型：利用<code>ex1data1.txt</code>（<strong>单特征</strong>）和<code>ex1data2.txt</code>（<strong>多特征</strong>）中的数据，进行线性回归和预测。</p>
+<p>作散点图可知，数据大致符合线性关系，故暂不研究其他形式的回归。</p>
+<p>两份数据放在最后。</p>
+<h1 id="单特征线性回归"><a href="#单特征线性回归" class="headerlink" title="单特征线性回归"></a>单特征线性回归</h1><p><code>ex1data1.txt</code>中的数据是单特征，作一个简单的线性回归即可：$y=ax+b$。</p>
+<p>根据是否分割数据，产生两种方案：方案一，所有样本都用来训练和预测；方案二，一部分样本用来训练，一部分用来检验模型。</p>
+<h2 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h2><p><strong>对ex1data1.txt中的数据进行线性回归，所有样本都用来训练和预测。</strong></p>
+<p><strong>代码实现如下：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">    对ex1data1.txt中的数据进行线性回归，所有样本都用来训练和预测</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error, r2_score</span><br><span class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">'SimHei'</span>]  <span class="comment"># 用来正常显示中文标签</span></span><br><span class="line">plt.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="keyword">False</span>  <span class="comment"># 用来正常显示负号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据格式：城市人口,食品经销商利润</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取数据</span></span><br><span class="line">data = np.loadtxt(<span class="string">'ex1data1.txt'</span>, delimiter=<span class="string">','</span>)</span><br><span class="line">data_X = data[:, <span class="number">0</span>]</span><br><span class="line">data_y = data[:, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练模型</span></span><br><span class="line">model = LinearRegression()</span><br><span class="line">model.fit(data_X.reshape([<span class="number">-1</span>, <span class="number">1</span>]), data_y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 利用模型进行预测</span></span><br><span class="line">y_predict = model.predict(data_X.reshape([<span class="number">-1</span>, <span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果可视化</span></span><br><span class="line">plt.scatter(data_X, data_y, color=<span class="string">'red'</span>)</span><br><span class="line">plt.plot(data_X, y_predict, color=<span class="string">'blue'</span>, linewidth=<span class="number">3</span>)</span><br><span class="line">plt.xlabel(<span class="string">'城市人口'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'食品经销商利润'</span>)</span><br><span class="line">plt.title(<span class="string">'线性回归——城市人口与食品经销商利润的关系'</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模型参数</span></span><br><span class="line">print(model.coef_)</span><br><span class="line">print(model.intercept_)</span><br><span class="line"><span class="comment"># MSE</span></span><br><span class="line">print(mean_squared_error(data_y, y_predict))</span><br><span class="line"><span class="comment"># R^2</span></span><br><span class="line">print(r2_score(data_y, y_predict))</span><br></pre></td></tr></table></figure>
+<p><strong>结果如下：</strong></p>
+<p>由下可知函数形式以及$R^2$为0.70</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1.19303364</span>]</span><br><span class="line"><span class="number">-3.89578087831185</span></span><br><span class="line"><span class="number">8.953942751950358</span></span><br><span class="line"><span class="number">0.7020315537841397</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2019/10/19/q1nRIceKBXrLt3P.png" alt="ex1data1_1.png"></p>
+<h2 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h2><p><strong>对ex1data1.txt中的数据进行线性回归，部分样本用来训练，部分样本用来预测。</strong></p>
+<p><strong>实现如下：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">    对ex1data1.txt中的数据进行线性回归，部分样本用来训练，部分样本用来预测</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error, r2_score</span><br><span class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">'SimHei'</span>]  <span class="comment"># 用来正常显示中文标签</span></span><br><span class="line">plt.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="keyword">False</span>  <span class="comment"># 用来正常显示负号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据格式：城市人口,食品经销商利润</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取数据</span></span><br><span class="line">data = np.loadtxt(<span class="string">'ex1data1.txt'</span>, delimiter=<span class="string">','</span>)</span><br><span class="line">data_X = data[:, <span class="number">0</span>]</span><br><span class="line">data_y = data[:, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据分割</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(data_X, data_y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练模型</span></span><br><span class="line">model = LinearRegression()</span><br><span class="line">model.fit(X_train.reshape([<span class="number">-1</span>, <span class="number">1</span>]), y_train)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 利用模型进行预测</span></span><br><span class="line">y_predict = model.predict(X_test.reshape([<span class="number">-1</span>, <span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果可视化</span></span><br><span class="line">plt.scatter(X_test, y_test, color=<span class="string">'red'</span>)  <span class="comment"># 测试样本</span></span><br><span class="line">plt.plot(X_test, y_predict, color=<span class="string">'blue'</span>, linewidth=<span class="number">3</span>)</span><br><span class="line">plt.xlabel(<span class="string">'城市人口'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'食品经销商利润'</span>)</span><br><span class="line">plt.title(<span class="string">'线性回归——城市人口与食品经销商利润的关系'</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模型参数</span></span><br><span class="line">print(model.coef_)</span><br><span class="line">print(model.intercept_)</span><br><span class="line"><span class="comment"># MSE</span></span><br><span class="line">print(mean_squared_error(y_test, y_predict))</span><br><span class="line"><span class="comment"># R^2</span></span><br><span class="line">print(r2_score(y_test, y_predict))</span><br></pre></td></tr></table></figure>
+<p><strong>结果如下</strong>：</p>
+<p>由下可知函数形式以及$R^2$为0.80</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1.21063939</span>]</span><br><span class="line"><span class="number">-4.195481965945055</span></span><br><span class="line"><span class="number">5.994362667047617</span></span><br><span class="line"><span class="number">0.8095125123727652</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2019/10/19/B23Ga4cetvqFQAJ.png" alt="ex1data1_2.png"></p>
+<h1 id="多特征线性回归"><a href="#多特征线性回归" class="headerlink" title="多特征线性回归"></a>多特征线性回归</h1><p><code>ex1data2.txt</code>中的数据是二个特征，作一个最简单的多元（在此为二元）线性回归即可：$y=a_1x_1+a_2x_2+b$。</p>
+<p><strong>对ex1data2.txt中的数据进行线性回归，所有样本都用来训练和预测。</strong></p>
+<p><strong>代码实现如下：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">    对ex1data2.txt中的数据进行线性回归，所有样本都用来训练和预测</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D  <span class="comment"># 不要去掉这个import</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error, r2_score</span><br><span class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">'SimHei'</span>]  <span class="comment"># 用来正常显示中文标签</span></span><br><span class="line">plt.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="keyword">False</span>  <span class="comment"># 用来正常显示负号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据格式：城市人口,房间数目,房价</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取数据</span></span><br><span class="line">data = np.loadtxt(<span class="string">'ex1data2.txt'</span>, delimiter=<span class="string">','</span>)</span><br><span class="line">data_X = data[:, <span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">data_y = data[:, <span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练模型</span></span><br><span class="line">model = LinearRegression()</span><br><span class="line">model.fit(data_X, data_y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 利用模型进行预测</span></span><br><span class="line">y_predict = model.predict(data_X)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果可视化</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax = fig.gca(projection=<span class="string">'3d'</span>)</span><br><span class="line">ax.scatter(data_X[:, <span class="number">0</span>], data_X[:, <span class="number">1</span>], data_y, color=<span class="string">'red'</span>)</span><br><span class="line">ax.plot(data_X[:, <span class="number">0</span>], data_X[:, <span class="number">1</span>], y_predict, color=<span class="string">'blue'</span>)</span><br><span class="line">ax.set_xlabel(<span class="string">'城市人口'</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">'房间数目'</span>)</span><br><span class="line">ax.set_zlabel(<span class="string">'房价'</span>)</span><br><span class="line">plt.title(<span class="string">'线性回归——城市人口、房间数目与房价的关系'</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模型参数</span></span><br><span class="line">print(model.coef_)</span><br><span class="line">print(model.intercept_)</span><br><span class="line"><span class="comment"># MSE</span></span><br><span class="line">print(mean_squared_error(data_y, y_predict))</span><br><span class="line"><span class="comment"># R^2</span></span><br><span class="line">print(r2_score(data_y, y_predict))</span><br></pre></td></tr></table></figure>
+<p><strong>结果如下：</strong></p>
+<p>由下可知函数形式以及$R^2$为0.73</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[  <span class="number">139.21067402</span> <span class="number">-8738.01911233</span>]</span><br><span class="line"><span class="number">89597.90954279748</span></span><br><span class="line"><span class="number">4086560101.205658</span></span><br><span class="line"><span class="number">0.7329450180289141</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2019/10/19/kMKdfpgbwF4EXhR.png" alt="ex1data2.png"></p>
+<h1 id="两份数据"><a href="#两份数据" class="headerlink" title="两份数据"></a>两份数据</h1><h2 id="ex1data1-txt"><a href="#ex1data1-txt" class="headerlink" title="ex1data1.txt"></a>ex1data1.txt</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6.1101</span>,<span class="number">17.592</span></span><br><span class="line"><span class="number">5.5277</span>,<span class="number">9.1302</span></span><br><span class="line"><span class="number">8.5186</span>,<span class="number">13.662</span></span><br><span class="line"><span class="number">7.0032</span>,<span class="number">11.854</span></span><br><span class="line"><span class="number">5.8598</span>,<span class="number">6.8233</span></span><br><span class="line"><span class="number">8.3829</span>,<span class="number">11.886</span></span><br><span class="line"><span class="number">7.4764</span>,<span class="number">4.3483</span></span><br><span class="line"><span class="number">8.5781</span>,<span class="number">12</span></span><br><span class="line"><span class="number">6.4862</span>,<span class="number">6.5987</span></span><br><span class="line"><span class="number">5.0546</span>,<span class="number">3.8166</span></span><br><span class="line"><span class="number">5.7107</span>,<span class="number">3.2522</span></span><br><span class="line"><span class="number">14.164</span>,<span class="number">15.505</span></span><br><span class="line"><span class="number">5.734</span>,<span class="number">3.1551</span></span><br><span class="line"><span class="number">8.4084</span>,<span class="number">7.2258</span></span><br><span class="line"><span class="number">5.6407</span>,<span class="number">0.71618</span></span><br><span class="line"><span class="number">5.3794</span>,<span class="number">3.5129</span></span><br><span class="line"><span class="number">6.3654</span>,<span class="number">5.3048</span></span><br><span class="line"><span class="number">5.1301</span>,<span class="number">0.56077</span></span><br><span class="line"><span class="number">6.4296</span>,<span class="number">3.6518</span></span><br><span class="line"><span class="number">7.0708</span>,<span class="number">5.3893</span></span><br><span class="line"><span class="number">6.1891</span>,<span class="number">3.1386</span></span><br><span class="line"><span class="number">20.27</span>,<span class="number">21.767</span></span><br><span class="line"><span class="number">5.4901</span>,<span class="number">4.263</span></span><br><span class="line"><span class="number">6.3261</span>,<span class="number">5.1875</span></span><br><span class="line"><span class="number">5.5649</span>,<span class="number">3.0825</span></span><br><span class="line"><span class="number">18.945</span>,<span class="number">22.638</span></span><br><span class="line"><span class="number">12.828</span>,<span class="number">13.501</span></span><br><span class="line"><span class="number">10.957</span>,<span class="number">7.0467</span></span><br><span class="line"><span class="number">13.176</span>,<span class="number">14.692</span></span><br><span class="line"><span class="number">22.203</span>,<span class="number">24.147</span></span><br><span class="line"><span class="number">5.2524</span>,<span class="number">-1.22</span></span><br><span class="line"><span class="number">6.5894</span>,<span class="number">5.9966</span></span><br><span class="line"><span class="number">9.2482</span>,<span class="number">12.134</span></span><br><span class="line"><span class="number">5.8918</span>,<span class="number">1.8495</span></span><br><span class="line"><span class="number">8.2111</span>,<span class="number">6.5426</span></span><br><span class="line"><span class="number">7.9334</span>,<span class="number">4.5623</span></span><br><span class="line"><span class="number">8.0959</span>,<span class="number">4.1164</span></span><br><span class="line"><span class="number">5.6063</span>,<span class="number">3.3928</span></span><br><span class="line"><span class="number">12.836</span>,<span class="number">10.117</span></span><br><span class="line"><span class="number">6.3534</span>,<span class="number">5.4974</span></span><br><span class="line"><span class="number">5.4069</span>,<span class="number">0.55657</span></span><br><span class="line"><span class="number">6.8825</span>,<span class="number">3.9115</span></span><br><span class="line"><span class="number">11.708</span>,<span class="number">5.3854</span></span><br><span class="line"><span class="number">5.7737</span>,<span class="number">2.4406</span></span><br><span class="line"><span class="number">7.8247</span>,<span class="number">6.7318</span></span><br><span class="line"><span class="number">7.0931</span>,<span class="number">1.0463</span></span><br><span class="line"><span class="number">5.0702</span>,<span class="number">5.1337</span></span><br><span class="line"><span class="number">5.8014</span>,<span class="number">1.844</span></span><br><span class="line"><span class="number">11.7</span>,<span class="number">8.0043</span></span><br><span class="line"><span class="number">5.5416</span>,<span class="number">1.0179</span></span><br><span class="line"><span class="number">7.5402</span>,<span class="number">6.7504</span></span><br><span class="line"><span class="number">5.3077</span>,<span class="number">1.8396</span></span><br><span class="line"><span class="number">7.4239</span>,<span class="number">4.2885</span></span><br><span class="line"><span class="number">7.6031</span>,<span class="number">4.9981</span></span><br><span class="line"><span class="number">6.3328</span>,<span class="number">1.4233</span></span><br><span class="line"><span class="number">6.3589</span>,<span class="number">-1.4211</span></span><br><span class="line"><span class="number">6.2742</span>,<span class="number">2.4756</span></span><br><span class="line"><span class="number">5.6397</span>,<span class="number">4.6042</span></span><br><span class="line"><span class="number">9.3102</span>,<span class="number">3.9624</span></span><br><span class="line"><span class="number">9.4536</span>,<span class="number">5.4141</span></span><br><span class="line"><span class="number">8.8254</span>,<span class="number">5.1694</span></span><br><span class="line"><span class="number">5.1793</span>,<span class="number">-0.74279</span></span><br><span class="line"><span class="number">21.279</span>,<span class="number">17.929</span></span><br><span class="line"><span class="number">14.908</span>,<span class="number">12.054</span></span><br><span class="line"><span class="number">18.959</span>,<span class="number">17.054</span></span><br><span class="line"><span class="number">7.2182</span>,<span class="number">4.8852</span></span><br><span class="line"><span class="number">8.2951</span>,<span class="number">5.7442</span></span><br><span class="line"><span class="number">10.236</span>,<span class="number">7.7754</span></span><br><span class="line"><span class="number">5.4994</span>,<span class="number">1.0173</span></span><br><span class="line"><span class="number">20.341</span>,<span class="number">20.992</span></span><br><span class="line"><span class="number">10.136</span>,<span class="number">6.6799</span></span><br><span class="line"><span class="number">7.3345</span>,<span class="number">4.0259</span></span><br><span class="line"><span class="number">6.0062</span>,<span class="number">1.2784</span></span><br><span class="line"><span class="number">7.2259</span>,<span class="number">3.3411</span></span><br><span class="line"><span class="number">5.0269</span>,<span class="number">-2.6807</span></span><br><span class="line"><span class="number">6.5479</span>,<span class="number">0.29678</span></span><br><span class="line"><span class="number">7.5386</span>,<span class="number">3.8845</span></span><br><span class="line"><span class="number">5.0365</span>,<span class="number">5.7014</span></span><br><span class="line"><span class="number">10.274</span>,<span class="number">6.7526</span></span><br><span class="line"><span class="number">5.1077</span>,<span class="number">2.0576</span></span><br><span class="line"><span class="number">5.7292</span>,<span class="number">0.47953</span></span><br><span class="line"><span class="number">5.1884</span>,<span class="number">0.20421</span></span><br><span class="line"><span class="number">6.3557</span>,<span class="number">0.67861</span></span><br><span class="line"><span class="number">9.7687</span>,<span class="number">7.5435</span></span><br><span class="line"><span class="number">6.5159</span>,<span class="number">5.3436</span></span><br><span class="line"><span class="number">8.5172</span>,<span class="number">4.2415</span></span><br><span class="line"><span class="number">9.1802</span>,<span class="number">6.7981</span></span><br><span class="line"><span class="number">6.002</span>,<span class="number">0.92695</span></span><br><span class="line"><span class="number">5.5204</span>,<span class="number">0.152</span></span><br><span class="line"><span class="number">5.0594</span>,<span class="number">2.8214</span></span><br><span class="line"><span class="number">5.7077</span>,<span class="number">1.8451</span></span><br><span class="line"><span class="number">7.6366</span>,<span class="number">4.2959</span></span><br><span class="line"><span class="number">5.8707</span>,<span class="number">7.2029</span></span><br><span class="line"><span class="number">5.3054</span>,<span class="number">1.9869</span></span><br><span class="line"><span class="number">8.2934</span>,<span class="number">0.14454</span></span><br><span class="line"><span class="number">13.394</span>,<span class="number">9.0551</span></span><br><span class="line"><span class="number">5.4369</span>,<span class="number">0.61705</span></span><br></pre></td></tr></table></figure>
+<h2 id="ex1data2-txt"><a href="#ex1data2-txt" class="headerlink" title="ex1data2.txt"></a>ex1data2.txt</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2104</span>,<span class="number">3</span>,<span class="number">399900</span></span><br><span class="line"><span class="number">1600</span>,<span class="number">3</span>,<span class="number">329900</span></span><br><span class="line"><span class="number">2400</span>,<span class="number">3</span>,<span class="number">369000</span></span><br><span class="line"><span class="number">1416</span>,<span class="number">2</span>,<span class="number">232000</span></span><br><span class="line"><span class="number">3000</span>,<span class="number">4</span>,<span class="number">539900</span></span><br><span class="line"><span class="number">1985</span>,<span class="number">4</span>,<span class="number">299900</span></span><br><span class="line"><span class="number">1534</span>,<span class="number">3</span>,<span class="number">314900</span></span><br><span class="line"><span class="number">1427</span>,<span class="number">3</span>,<span class="number">198999</span></span><br><span class="line"><span class="number">1380</span>,<span class="number">3</span>,<span class="number">212000</span></span><br><span class="line"><span class="number">1494</span>,<span class="number">3</span>,<span class="number">242500</span></span><br><span class="line"><span class="number">1940</span>,<span class="number">4</span>,<span class="number">239999</span></span><br><span class="line"><span class="number">2000</span>,<span class="number">3</span>,<span class="number">347000</span></span><br><span class="line"><span class="number">1890</span>,<span class="number">3</span>,<span class="number">329999</span></span><br><span class="line"><span class="number">4478</span>,<span class="number">5</span>,<span class="number">699900</span></span><br><span class="line"><span class="number">1268</span>,<span class="number">3</span>,<span class="number">259900</span></span><br><span class="line"><span class="number">2300</span>,<span class="number">4</span>,<span class="number">449900</span></span><br><span class="line"><span class="number">1320</span>,<span class="number">2</span>,<span class="number">299900</span></span><br><span class="line"><span class="number">1236</span>,<span class="number">3</span>,<span class="number">199900</span></span><br><span class="line"><span class="number">2609</span>,<span class="number">4</span>,<span class="number">499998</span></span><br><span class="line"><span class="number">3031</span>,<span class="number">4</span>,<span class="number">599000</span></span><br><span class="line"><span class="number">1767</span>,<span class="number">3</span>,<span class="number">252900</span></span><br><span class="line"><span class="number">1888</span>,<span class="number">2</span>,<span class="number">255000</span></span><br><span class="line"><span class="number">1604</span>,<span class="number">3</span>,<span class="number">242900</span></span><br><span class="line"><span class="number">1962</span>,<span class="number">4</span>,<span class="number">259900</span></span><br><span class="line"><span class="number">3890</span>,<span class="number">3</span>,<span class="number">573900</span></span><br><span class="line"><span class="number">1100</span>,<span class="number">3</span>,<span class="number">249900</span></span><br><span class="line"><span class="number">1458</span>,<span class="number">3</span>,<span class="number">464500</span></span><br><span class="line"><span class="number">2526</span>,<span class="number">3</span>,<span class="number">469000</span></span><br><span class="line"><span class="number">2200</span>,<span class="number">3</span>,<span class="number">475000</span></span><br><span class="line"><span class="number">2637</span>,<span class="number">3</span>,<span class="number">299900</span></span><br><span class="line"><span class="number">1839</span>,<span class="number">2</span>,<span class="number">349900</span></span><br><span class="line"><span class="number">1000</span>,<span class="number">1</span>,<span class="number">169900</span></span><br><span class="line"><span class="number">2040</span>,<span class="number">4</span>,<span class="number">314900</span></span><br><span class="line"><span class="number">3137</span>,<span class="number">3</span>,<span class="number">579900</span></span><br><span class="line"><span class="number">1811</span>,<span class="number">4</span>,<span class="number">285900</span></span><br><span class="line"><span class="number">1437</span>,<span class="number">3</span>,<span class="number">249900</span></span><br><span class="line"><span class="number">1239</span>,<span class="number">3</span>,<span class="number">229900</span></span><br><span class="line"><span class="number">2132</span>,<span class="number">4</span>,<span class="number">345000</span></span><br><span class="line"><span class="number">4215</span>,<span class="number">4</span>,<span class="number">549000</span></span><br><span class="line"><span class="number">2162</span>,<span class="number">4</span>,<span class="number">287000</span></span><br><span class="line"><span class="number">1664</span>,<span class="number">2</span>,<span class="number">368500</span></span><br><span class="line"><span class="number">2238</span>,<span class="number">3</span>,<span class="number">329900</span></span><br><span class="line"><span class="number">2567</span>,<span class="number">4</span>,<span class="number">314000</span></span><br><span class="line"><span class="number">1200</span>,<span class="number">3</span>,<span class="number">299000</span></span><br><span class="line"><span class="number">852</span>,<span class="number">2</span>,<span class="number">179900</span></span><br><span class="line"><span class="number">1852</span>,<span class="number">4</span>,<span class="number">299900</span></span><br><span class="line"><span class="number">1203</span>,<span class="number">3</span>,<span class="number">239500</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p>
+<p>欢迎讨论和交流!</p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/sklearn/" rel="tag"># sklearn</a>
+          
+            <a href="/tags/线性回归/" rel="tag"># 线性回归</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/18/python-mysql-实现一千万条数据插入数据库/" rel="next" title="python+mysql:实现一千万条数据插入数据库">
+                <i class="fa fa-chevron-left"></i> python+mysql:实现一千万条数据插入数据库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/22/sklearn逻辑回归实战/" rel="prev" title="sklearn逻辑回归实战">
+                sklearn逻辑回归实战 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg"
+                alt="臭咸鱼" />
+            
+              <p class="site-author-name" itemprop="name">臭咸鱼</p>
+              <p class="site-description motion-element" itemprop="description">祝你天天开心啊！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">138</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://maluguang.com" title="Road Wide's Blog" target="_blank">Road Wide's Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/chouxianyu/" title="Chou Xianyu's CNBlog" target="_blank">Chou Xianyu's CNBlog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目要求"><span class="nav-number">1.</span> <span class="nav-text">题目要求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单特征线性回归"><span class="nav-number">2.</span> <span class="nav-text">单特征线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方案一"><span class="nav-number">2.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方案二"><span class="nav-number">2.2.</span> <span class="nav-text">方案二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多特征线性回归"><span class="nav-number">3.</span> <span class="nav-text">多特征线性回归</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#两份数据"><span class="nav-number">4.</span> <span class="nav-text">两份数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ex1data1-txt"><span class="nav-number">4.1.</span> <span class="nav-text">ex1data1.txt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ex1data2-txt"><span class="nav-number">4.2.</span> <span class="nav-text">ex1data2.txt</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">臭咸鱼</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">132.8k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz',
+        appKey: 'Si7hBxIAVOGbu6Pot7HHaVBB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz", "Si7hBxIAVOGbu6Pot7HHaVBB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>

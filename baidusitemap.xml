@@ -4,6 +4,124 @@
 
     
   <url>
+    <loc>https://chouxianyu.github.io/2020/01/29/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2020-01-29T05:52:39.903Z</lastmod>
+    <data>
+        <display>
+        <title>《算法笔记》阅读笔记</title>
+        <pubTime>2020-01-29T05:46:25.000Z</pubTime>
+        
+        <tag>算法</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/11/02/LOAD-DATA-INFILE%E8%AF%BB%E5%8F%96CSV%E4%B8%AD%E4%B8%80%E5%8D%83%E4%B8%87%E6%9D%A1%E6%95%B0%E6%8D%AE%E8%87%B3mysql/</loc>
+    <lastmod>2019-11-10T08:51:19.371Z</lastmod>
+    <data>
+        <display>
+        <title>LOAD DATA INFILE读取CSV中一千万条数据至mysql</title>
+        <pubTime>2019-11-01T16:00:34.000Z</pubTime>
+        
+        <tag>数据库</tag>
+         
+        <tag>python</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/10/18/python-mysql-%E5%AE%9E%E7%8E%B0%E4%B8%80%E5%8D%83%E4%B8%87%E6%9D%A1%E6%95%B0%E6%8D%AE%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2019-11-10T08:48:37.418Z</lastmod>
+    <data>
+        <display>
+        <title>python+mysql:实现一千万条数据插入数据库</title>
+        <pubTime>2019-10-17T19:05:49.000Z</pubTime>
+        
+        <tag>数据库</tag>
+         
+        <tag>python</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/10/22/L1%E4%B8%8EL2%E6%AD%A3%E5%88%99%E5%8C%96/</loc>
+    <lastmod>2019-10-21T17:06:59.206Z</lastmod>
+    <data>
+        <display>
+        <title>L1与L2正则化</title>
+        <pubTime>2019-10-21T17:06:13.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/10/22/sklearn%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E5%AE%9E%E6%88%98/</loc>
+    <lastmod>2019-10-21T17:04:21.171Z</lastmod>
+    <data>
+        <display>
+        <title>sklearn逻辑回归实战</title>
+        <pubTime>2019-10-21T17:02:12.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>python</tag>
+         
+        <tag>sklearn</tag>
+         
+        <tag>逻辑回归</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2019/10/19/sklearn%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B/</loc>
+    <lastmod>2019-10-21T17:01:02.729Z</lastmod>
+    <data>
+        <display>
+        <title>sklearn线性回归实现房价预测模型</title>
+        <pubTime>2019-10-19T09:58:50.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>python</tag>
+         
+        <tag>sklearn</tag>
+         
+        <tag>线性回归</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chouxianyu.github.io/2019/10/16/PAT%E4%B9%99%E7%BA%A71005/</loc>
     <lastmod>2019-10-16T16:51:04.014Z</lastmod>
     <data>
@@ -1898,9 +2016,9 @@
          
         <tag>数学建模</tag>
          
-        <tag>插值</tag>
-         
         <tag>线性回归</tag>
+         
+        <tag>插值</tag>
          
          
            
@@ -2138,9 +2256,9 @@
         <title>Java字节流read函数</title>
         <pubTime>2018-09-22T14:50:12.000Z</pubTime>
         
-        <tag>Bug</tag>
-         
         <tag>Java</tag>
+         
+        <tag>Bug</tag>
          
          
            
@@ -2350,9 +2468,9 @@
         <title>java.util.NoSuchElementException</title>
         <pubTime>2018-11-03T02:23:02.000Z</pubTime>
         
-        <tag>Bug</tag>
-         
         <tag>Java</tag>
+         
+        <tag>Bug</tag>
          
          
            
@@ -2369,9 +2487,9 @@
         <title>JAI丢包掉帧处理</title>
         <pubTime>2018-08-22T05:34:40.000Z</pubTime>
         
-        <tag>JAI</tag>
-         
         <tag>Bug</tag>
+         
+        <tag>JAI</tag>
          
          
            
