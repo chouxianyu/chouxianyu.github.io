@@ -90,7 +90,7 @@
 <meta property="og:description" content="题目现有一产品数据库，该数据库模式由四个关系组成，这四个关系的模式如下：$Product(maker,model,type)$$PC(model,speed,ram,hd,price)$$Laptop(model,speed,ram,id,hd,screen,price)$$Printer(model,color,type,price)$试写出下列查询的关系代数表达式，并针对下面数据样例，给出查询">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/10/05/dXTYNUulj1bkO5M.jpg">
-<meta property="og:updated_time" content="2019-10-12T13:54:27.834Z">
+<meta property="og:updated_time" content="2020-03-20T04:30:56.429Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库-关系代数作业">
 <meta name="twitter:description" content="题目现有一产品数据库，该数据库模式由四个关系组成，这四个关系的模式如下：$Product(maker,model,type)$$PC(model,speed,ram,hd,price)$$Laptop(model,speed,ram,id,hd,screen,price)$$Printer(model,color,type,price)$试写出下列查询的关系代数表达式，并针对下面数据样例，给出查询">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2,615 字
+                  2,831 字
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  11 分
+                  12 分
                 </span>
               
             </div>
@@ -542,7 +542,8 @@
 </tbody>
 </table>
 </div>
-<h1 id="e-查询那些只出售笔记本电脑，不出售PC的厂商。"><a href="#e-查询那些只出售笔记本电脑，不出售PC的厂商。" class="headerlink" title="e)查询那些只出售笔记本电脑，不出售PC的厂商。"></a>e)查询那些只出售笔记本电脑，不出售PC的厂商。</h1><h2 id="1-要操作的表：-Product-、-PC-、-Laptop"><a href="#1-要操作的表：-Product-、-PC-、-Laptop" class="headerlink" title="1.要操作的表：$Product$、$PC$、$Laptop$"></a>1.要操作的表：$Product$、$PC$、$Laptop$</h2><h2 id="2-要进行的操作：自然连接、投影、差"><a href="#2-要进行的操作：自然连接、投影、差" class="headerlink" title="2.要进行的操作：自然连接、投影、差"></a>2.要进行的操作：自然连接、投影、差</h2><h2 id="3-各操作的对象和顺序-4"><a href="#3-各操作的对象和顺序-4" class="headerlink" title="3.各操作的对象和顺序"></a>3.各操作的对象和顺序</h2><ol>
+<h1 id="e-查询那些只出售笔记本电脑，不出售PC的厂商。"><a href="#e-查询那些只出售笔记本电脑，不出售PC的厂商。" class="headerlink" title="e)查询那些只出售笔记本电脑，不出售PC的厂商。"></a>e)查询那些只出售笔记本电脑，不出售PC的厂商。</h1><p><strong>20200320更新：经网友<a href="https://www.cnblogs.com/mmjjww/" target="_blank" rel="noopener">@我要我觉得</a>提醒，发现下边的$R_1$和$R_2$有点错误，具体可看本文评论和我修改后的答案（想看修改后的答案的话继续往下看就找到了）</strong></p>
+<h2 id="1-要操作的表：-Product-、-PC-、-Laptop"><a href="#1-要操作的表：-Product-、-PC-、-Laptop" class="headerlink" title="1.要操作的表：$Product$、$PC$、$Laptop$"></a>1.要操作的表：$Product$、$PC$、$Laptop$</h2><h2 id="2-要进行的操作：自然连接、投影、差"><a href="#2-要进行的操作：自然连接、投影、差" class="headerlink" title="2.要进行的操作：自然连接、投影、差"></a>2.要进行的操作：自然连接、投影、差</h2><h2 id="3-各操作的对象和顺序-4"><a href="#3-各操作的对象和顺序-4" class="headerlink" title="3.各操作的对象和顺序"></a>3.各操作的对象和顺序</h2><ol>
 <li>将关系$Product$与关系$Laptop$<strong>自然连接</strong>：$R_1:=Product\bowtie Laptop$</li>
 <li>将关系$Product$与关系$PC$<strong>自然连接</strong>：$R_2:=Product\bowtie PC$</li>
 <li>将关系$R_1$<strong>投影</strong>到属性$maker$上：$R_3:=\pi_{maker}(R_1)$</li>
@@ -556,7 +557,7 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:center">$model$</th>
+<th style="text-align:center">$maker$</th>
 </tr>
 </thead>
 <tbody>
@@ -569,7 +570,35 @@
 </tbody>
 </table>
 </div>
-<h1 id="f-查询在一种或者两种PC机中出现过的硬盘的容量。"><a href="#f-查询在一种或者两种PC机中出现过的硬盘的容量。" class="headerlink" title="f)查询在一种或者两种PC机中出现过的硬盘的容量。"></a>f)查询在一种或者两种PC机中出现过的硬盘的容量。</h1><h2 id="1-要操作的表：-PC-1"><a href="#1-要操作的表：-PC-1" class="headerlink" title="1.要操作的表：$PC$"></a>1.要操作的表：$PC$</h2><h2 id="2-要进行的操作：重命名、-theta-连接、投影、差"><a href="#2-要进行的操作：重命名、-theta-连接、投影、差" class="headerlink" title="2.要进行的操作：重命名、$\theta$连接、投影、差"></a>2.要进行的操作：重命名、$\theta$连接、投影、差</h2><h2 id="3-各操作的对象和顺序-5"><a href="#3-各操作的对象和顺序-5" class="headerlink" title="3.各操作的对象和顺序"></a>3.各操作的对象和顺序</h2><ol>
+<p><strong>20200320将$R_1$和$R_2$的错误修改后，正确答案应该如下：</strong></p>
+<h2 id="1-要操作的表：-Product"><a href="#1-要操作的表：-Product" class="headerlink" title="1.要操作的表：$Product$"></a>1.要操作的表：$Product$</h2><h2 id="2-要进行的操作：选择、投影、差"><a href="#2-要进行的操作：选择、投影、差" class="headerlink" title="2.要进行的操作：选择、投影、差"></a>2.要进行的操作：选择、投影、差</h2><h2 id="3-各操作的对象和顺序-5"><a href="#3-各操作的对象和顺序-5" class="headerlink" title="3.各操作的对象和顺序"></a>3.各操作的对象和顺序</h2><ol>
+<li><strong>选择</strong>属性$type$的值为$laptop$的$Product$：$R_1:=\sigma_{type=laptop}(Product)$</li>
+<li><strong>选择</strong>属性$type$的值为$pc$的$Product$：$R_2:=\sigma_{type=pc}(Product)$</li>
+<li>将关系$R_1$<strong>投影</strong>到属性$maker$上：$R_3:=\pi_{maker}(R_1)$</li>
+<li>将关系$R_2$<strong>投影</strong>到属性$maker$上：$R_4:=\pi_{maker}(R_2)$</li>
+<li>求关系$R_3$和$R_4$的<strong>差</strong>：$R_5:=R_3-R_4$</li>
+</ol>
+<h2 id="4-关系代数表达式-5"><a href="#4-关系代数表达式-5" class="headerlink" title="4.关系代数表达式"></a>4.关系代数表达式</h2><ul>
+<li>$\pi_{maker}(\sigma_{type=laptop}(Product))-\pi_{maker}(\sigma_{type=pc}(Product))$</li>
+</ul>
+<h2 id="5-数据样例查询结果-5"><a href="#5-数据样例查询结果-5" class="headerlink" title="5.数据样例查询结果"></a>5.数据样例查询结果</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">$maker$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">F</td>
+</tr>
+<tr>
+<td style="text-align:center">G</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="f-查询在一种或者两种PC机中出现过的硬盘的容量。"><a href="#f-查询在一种或者两种PC机中出现过的硬盘的容量。" class="headerlink" title="f)查询在一种或者两种PC机中出现过的硬盘的容量。"></a>f)查询在一种或者两种PC机中出现过的硬盘的容量。</h1><h2 id="1-要操作的表：-PC-1"><a href="#1-要操作的表：-PC-1" class="headerlink" title="1.要操作的表：$PC$"></a>1.要操作的表：$PC$</h2><h2 id="2-要进行的操作：重命名、-theta-连接、投影、差"><a href="#2-要进行的操作：重命名、-theta-连接、投影、差" class="headerlink" title="2.要进行的操作：重命名、$\theta$连接、投影、差"></a>2.要进行的操作：重命名、$\theta$连接、投影、差</h2><h2 id="3-各操作的对象和顺序-6"><a href="#3-各操作的对象和顺序-6" class="headerlink" title="3.各操作的对象和顺序"></a>3.各操作的对象和顺序</h2><ol>
 <li><p>将关系$PC$通过<strong>重命名</strong>复制：$R_1:=\rho_{PC1(model_1,speed,ram,hd,price)}(PC)$</p>
 </li>
 <li><p>将关系$PC$通过<strong>重命名</strong>复制：$R_2:=\rho_{PC2(model_2,speed,ram,hd,price)}(PC)$</p>
@@ -585,10 +614,10 @@
 <li><p>求关系$R_6$和$R_5$的<strong>差</strong>：$R_7:=R_6-R_5$</p>
 </li>
 </ol>
-<h2 id="4-关系代数表达式-5"><a href="#4-关系代数表达式-5" class="headerlink" title="4.关系代数表达式"></a>4.关系代数表达式</h2><ul>
+<h2 id="4-关系代数表达式-6"><a href="#4-关系代数表达式-6" class="headerlink" title="4.关系代数表达式"></a>4.关系代数表达式</h2><ul>
 <li>$R_7$，该关系代数表达式展开长度太长，略</li>
 </ul>
-<h2 id="5-数据样例查询结果-5"><a href="#5-数据样例查询结果-5" class="headerlink" title="5.数据样例查询结果"></a>5.数据样例查询结果</h2><div class="table-container">
+<h2 id="5-数据样例查询结果-6"><a href="#5-数据样例查询结果-6" class="headerlink" title="5.数据样例查询结果"></a>5.数据样例查询结果</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -614,16 +643,16 @@
 </tbody>
 </table>
 </div>
-<h1 id="g-查询有同样处理速度和同样内存大小的PC对。"><a href="#g-查询有同样处理速度和同样内存大小的PC对。" class="headerlink" title="g)查询有同样处理速度和同样内存大小的PC对。"></a>g)查询有同样处理速度和同样内存大小的PC对。</h1><h2 id="1-要操作的表：-PC-2"><a href="#1-要操作的表：-PC-2" class="headerlink" title="1.要操作的表：$PC$"></a>1.要操作的表：$PC$</h2><h2 id="2-要进行的操作：重命名、-theta-连接、投影"><a href="#2-要进行的操作：重命名、-theta-连接、投影" class="headerlink" title="2.要进行的操作：重命名、$\theta$连接、投影"></a>2.要进行的操作：重命名、$\theta$连接、投影</h2><h2 id="3-各操作的对象和顺序-6"><a href="#3-各操作的对象和顺序-6" class="headerlink" title="3.各操作的对象和顺序"></a>3.各操作的对象和顺序</h2><ol>
+<h1 id="g-查询有同样处理速度和同样内存大小的PC对。"><a href="#g-查询有同样处理速度和同样内存大小的PC对。" class="headerlink" title="g)查询有同样处理速度和同样内存大小的PC对。"></a>g)查询有同样处理速度和同样内存大小的PC对。</h1><h2 id="1-要操作的表：-PC-2"><a href="#1-要操作的表：-PC-2" class="headerlink" title="1.要操作的表：$PC$"></a>1.要操作的表：$PC$</h2><h2 id="2-要进行的操作：重命名、-theta-连接、投影"><a href="#2-要进行的操作：重命名、-theta-连接、投影" class="headerlink" title="2.要进行的操作：重命名、$\theta$连接、投影"></a>2.要进行的操作：重命名、$\theta$连接、投影</h2><h2 id="3-各操作的对象和顺序-7"><a href="#3-各操作的对象和顺序-7" class="headerlink" title="3.各操作的对象和顺序"></a>3.各操作的对象和顺序</h2><ol>
 <li>将关系$PC$通过<strong>重命名</strong>复制：$R_1:=\rho_{PC1(model_1,speed,ram,hd,price)}(PC)$</li>
 <li>将关系$PC$通过<strong>重命名</strong>复制：$R_2:=\rho_{PC2(model_2,speed,ram,hd,price)}(PC)$</li>
 <li>将关系$R_1$和$R_2$进行$\theta$<strong>连接</strong>：$R_3:=R_1\bowtie_{R_1.speed=R_2.speed\wedge R_1.ram=R_2.ram\wedge R_1.model_1\neq R_2.model_2}R_2$</li>
 <li>将关系$R_3$<strong>投影</strong>到属性组$\{ model_1,model_2 \}$上：$R_4:=\pi_{model_1,model_2}(R_3)$</li>
 </ol>
-<h2 id="4-关系代数表达式-6"><a href="#4-关系代数表达式-6" class="headerlink" title="4.关系代数表达式"></a>4.关系代数表达式</h2><ul>
+<h2 id="4-关系代数表达式-7"><a href="#4-关系代数表达式-7" class="headerlink" title="4.关系代数表达式"></a>4.关系代数表达式</h2><ul>
 <li>$R_4$，该关系代数表达式展开长度太长，略</li>
 </ul>
-<h2 id="5-数据样例查询结果-6"><a href="#5-数据样例查询结果-6" class="headerlink" title="5.数据样例查询结果"></a>5.数据样例查询结果</h2><div class="table-container">
+<h2 id="5-数据样例查询结果-7"><a href="#5-数据样例查询结果-7" class="headerlink" title="5.数据样例查询结果"></a>5.数据样例查询结果</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -639,7 +668,7 @@
 </tbody>
 </table>
 </div>
-<h1 id="h-查询那些至少生产两种处理速度大于2-80的PC或者笔记本电脑的厂商。"><a href="#h-查询那些至少生产两种处理速度大于2-80的PC或者笔记本电脑的厂商。" class="headerlink" title="h)查询那些至少生产两种处理速度大于2.80的PC或者笔记本电脑的厂商。"></a>h)查询那些至少生产两种处理速度大于2.80的PC或者笔记本电脑的厂商。</h1><h2 id="1-要操作的表：-PC-3"><a href="#1-要操作的表：-PC-3" class="headerlink" title="1.要操作的表：$PC$"></a>1.要操作的表：$PC$</h2><h2 id="2-要进行的操作：选择、并、投影、自然连接、重命名、-theta-连接"><a href="#2-要进行的操作：选择、并、投影、自然连接、重命名、-theta-连接" class="headerlink" title="2.要进行的操作：选择、并、投影、自然连接、重命名、$\theta$连接"></a>2.要进行的操作：选择、并、投影、自然连接、重命名、$\theta$连接</h2><h2 id="3-各操作的对象和顺序-7"><a href="#3-各操作的对象和顺序-7" class="headerlink" title="3.各操作的对象和顺序"></a>3.各操作的对象和顺序</h2><ol>
+<h1 id="h-查询那些至少生产两种处理速度大于2-80的PC或者笔记本电脑的厂商。"><a href="#h-查询那些至少生产两种处理速度大于2-80的PC或者笔记本电脑的厂商。" class="headerlink" title="h)查询那些至少生产两种处理速度大于2.80的PC或者笔记本电脑的厂商。"></a>h)查询那些至少生产两种处理速度大于2.80的PC或者笔记本电脑的厂商。</h1><h2 id="1-要操作的表：-PC-3"><a href="#1-要操作的表：-PC-3" class="headerlink" title="1.要操作的表：$PC$"></a>1.要操作的表：$PC$</h2><h2 id="2-要进行的操作：选择、并、投影、自然连接、重命名、-theta-连接"><a href="#2-要进行的操作：选择、并、投影、自然连接、重命名、-theta-连接" class="headerlink" title="2.要进行的操作：选择、并、投影、自然连接、重命名、$\theta$连接"></a>2.要进行的操作：选择、并、投影、自然连接、重命名、$\theta$连接</h2><h2 id="3-各操作的对象和顺序-8"><a href="#3-各操作的对象和顺序-8" class="headerlink" title="3.各操作的对象和顺序"></a>3.各操作的对象和顺序</h2><ol>
 <li><strong>选择</strong>关系$PC$中属性$speed&gt;2.80$的元组：$R_1:=\sigma_{speed&gt;2.80}(PC)$</li>
 <li><strong>选择</strong>关系$Laptop$中属性$speed&gt;2.80$的元组：$R_2:=\sigma_{speed&gt;2.80}(Laptop)$</li>
 <li>将关系$R_1$和$R_2$<strong>并</strong>起来，并求其在属性$model$上的<strong>投影</strong>：$R_3=\pi_{model}(R_1\cup R_2)$</li>
@@ -649,32 +678,8 @@
 <li>将关系$R_5$和$R_6$进行$\theta$<strong>连接</strong>：$R_7:=R_5\bowtie_{R_5.maker=R_6.maker\wedge R_5.model_5\neq R_6.model_6}R_6$</li>
 <li>将关系$R_7$<strong>投影</strong>到属性$maker$上：$R_8:=\pi_{maker}(R_7)$</li>
 </ol>
-<h2 id="4-关系代数表达式-7"><a href="#4-关系代数表达式-7" class="headerlink" title="4.关系代数表达式"></a>4.关系代数表达式</h2><ul>
-<li>$R_8$，该关系代数表达式展开长度太长，略</li>
-</ul>
-<h2 id="5-数据样例查询结果-7"><a href="#5-数据样例查询结果-7" class="headerlink" title="5.数据样例查询结果"></a>5.数据样例查询结果</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">$maker$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">B</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="i-查询平均处理速度（PC或者是笔记本电脑）最高的所有厂商。"><a href="#i-查询平均处理速度（PC或者是笔记本电脑）最高的所有厂商。" class="headerlink" title="i)查询平均处理速度（PC或者是笔记本电脑）最高的所有厂商。"></a>i)查询平均处理速度（PC或者是笔记本电脑）最高的所有厂商。</h1><h2 id="1-要操作的表：-PC-、-Laptop-、-Product"><a href="#1-要操作的表：-PC-、-Laptop-、-Product" class="headerlink" title="1.要操作的表：$PC$、$Laptop$、$Product$"></a>1.要操作的表：$PC$、$Laptop$、$Product$</h2><h2 id="2-要进行的操作：投影、重命名、-theta-连接、差、自然连接"><a href="#2-要进行的操作：投影、重命名、-theta-连接、差、自然连接" class="headerlink" title="2.要进行的操作：投影、重命名、$\theta$连接、差、自然连接"></a>2.要进行的操作：投影、重命名、$\theta$连接、差、自然连接</h2><h2 id="3-各操作的对象和顺序-8"><a href="#3-各操作的对象和顺序-8" class="headerlink" title="3.各操作的对象和顺序"></a>3.各操作的对象和顺序</h2><ol>
-<li>将关系$PC$和$Laptop$<strong>投影</strong>到属性组$\{ model,speed \}$上并将两者<strong>并</strong>起来：$R_1:=\pi_{model,speed}(PC)\cup\pi_{model,speed}(Laptop)$</li>
-<li>通过<strong>重命名</strong>复制关系$R_1$：$R_2:=\rho_{R_2}(R_1)$</li>
-<li>关系$R_1$和$R_2$进行$\theta$<strong>连接</strong>：$R_3:=R_1\bowtie_{R_1.speed&lt;R_2.speed} R_2$，求出$speed$小于最大值的元组</li>
-<li>求关系$R_1$和$R_3$的<strong>差</strong>：$R_4:=R_1-R_3$</li>
-<li>关系$R_4$和$Product$<strong>自然连接</strong>：$R_5:=R_4\bowtie Product$</li>
-</ol>
 <h2 id="4-关系代数表达式-8"><a href="#4-关系代数表达式-8" class="headerlink" title="4.关系代数表达式"></a>4.关系代数表达式</h2><ul>
-<li>$R_5$，该关系代数表达式展开长度太长，略</li>
+<li>$R_8$，该关系代数表达式展开长度太长，略</li>
 </ul>
 <h2 id="5-数据样例查询结果-8"><a href="#5-数据样例查询结果-8" class="headerlink" title="5.数据样例查询结果"></a>5.数据样例查询结果</h2><div class="table-container">
 <table>
@@ -690,7 +695,31 @@
 </tbody>
 </table>
 </div>
-<h1 id="j-查询至少生产三种不同处理速度电脑的厂商。"><a href="#j-查询至少生产三种不同处理速度电脑的厂商。" class="headerlink" title="j)查询至少生产三种不同处理速度电脑的厂商。"></a>j)查询至少生产三种不同处理速度电脑的厂商。</h1><h2 id="1-要操作的表：-PC-、-Product"><a href="#1-要操作的表：-PC-、-Product" class="headerlink" title="1.要操作的表：$PC$、$Product$"></a>1.要操作的表：$PC$、$Product$</h2><h2 id="2-要进行的操作：自然连接、投影、重命名、-theta-连接"><a href="#2-要进行的操作：自然连接、投影、重命名、-theta-连接" class="headerlink" title="2.要进行的操作：自然连接、投影、重命名、$\theta$连接"></a>2.要进行的操作：自然连接、投影、重命名、$\theta$连接</h2><h2 id="3-各操作的对象和顺序-9"><a href="#3-各操作的对象和顺序-9" class="headerlink" title="3.各操作的对象和顺序"></a>3.各操作的对象和顺序</h2><ol>
+<h1 id="i-查询平均处理速度（PC或者是笔记本电脑）最高的所有厂商。"><a href="#i-查询平均处理速度（PC或者是笔记本电脑）最高的所有厂商。" class="headerlink" title="i)查询平均处理速度（PC或者是笔记本电脑）最高的所有厂商。"></a>i)查询平均处理速度（PC或者是笔记本电脑）最高的所有厂商。</h1><h2 id="1-要操作的表：-PC-、-Laptop-、-Product"><a href="#1-要操作的表：-PC-、-Laptop-、-Product" class="headerlink" title="1.要操作的表：$PC$、$Laptop$、$Product$"></a>1.要操作的表：$PC$、$Laptop$、$Product$</h2><h2 id="2-要进行的操作：投影、重命名、-theta-连接、差、自然连接"><a href="#2-要进行的操作：投影、重命名、-theta-连接、差、自然连接" class="headerlink" title="2.要进行的操作：投影、重命名、$\theta$连接、差、自然连接"></a>2.要进行的操作：投影、重命名、$\theta$连接、差、自然连接</h2><h2 id="3-各操作的对象和顺序-9"><a href="#3-各操作的对象和顺序-9" class="headerlink" title="3.各操作的对象和顺序"></a>3.各操作的对象和顺序</h2><ol>
+<li>将关系$PC$和$Laptop$<strong>投影</strong>到属性组$\{ model,speed \}$上并将两者<strong>并</strong>起来：$R_1:=\pi_{model,speed}(PC)\cup\pi_{model,speed}(Laptop)$</li>
+<li>通过<strong>重命名</strong>复制关系$R_1$：$R_2:=\rho_{R_2}(R_1)$</li>
+<li>关系$R_1$和$R_2$进行$\theta$<strong>连接</strong>：$R_3:=R_1\bowtie_{R_1.speed&lt;R_2.speed} R_2$，求出$speed$小于最大值的元组</li>
+<li>求关系$R_1$和$R_3$的<strong>差</strong>：$R_4:=R_1-R_3$</li>
+<li>关系$R_4$和$Product$<strong>自然连接</strong>：$R_5:=R_4\bowtie Product$</li>
+</ol>
+<h2 id="4-关系代数表达式-9"><a href="#4-关系代数表达式-9" class="headerlink" title="4.关系代数表达式"></a>4.关系代数表达式</h2><ul>
+<li>$R_5$，该关系代数表达式展开长度太长，略</li>
+</ul>
+<h2 id="5-数据样例查询结果-9"><a href="#5-数据样例查询结果-9" class="headerlink" title="5.数据样例查询结果"></a>5.数据样例查询结果</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">$maker$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">B</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="j-查询至少生产三种不同处理速度电脑的厂商。"><a href="#j-查询至少生产三种不同处理速度电脑的厂商。" class="headerlink" title="j)查询至少生产三种不同处理速度电脑的厂商。"></a>j)查询至少生产三种不同处理速度电脑的厂商。</h1><h2 id="1-要操作的表：-PC-、-Product"><a href="#1-要操作的表：-PC-、-Product" class="headerlink" title="1.要操作的表：$PC$、$Product$"></a>1.要操作的表：$PC$、$Product$</h2><h2 id="2-要进行的操作：自然连接、投影、重命名、-theta-连接"><a href="#2-要进行的操作：自然连接、投影、重命名、-theta-连接" class="headerlink" title="2.要进行的操作：自然连接、投影、重命名、$\theta$连接"></a>2.要进行的操作：自然连接、投影、重命名、$\theta$连接</h2><h2 id="3-各操作的对象和顺序-10"><a href="#3-各操作的对象和顺序-10" class="headerlink" title="3.各操作的对象和顺序"></a>3.各操作的对象和顺序</h2><ol>
 <li>关系$Product$和$PC$<strong>自然连接</strong>并<strong>投影</strong>到属性组$\{ maker,speed \}$上：$R_1:=\pi_{maker,speed}(Procuct\bowtie PC)$</li>
 <li>复制并<strong>重命名</strong>关系$R_1$：$R_2:=\rho_{R_2(maker,speed_2)}(R_1)$</li>
 <li>复制并<strong>重命名</strong>关系$R_1$：$R_3:=\rho_{R_3(marker,speed_3)}(R_1)$</li>
@@ -698,10 +727,10 @@
 <li>关系$R_3$和$R_4$进行$\theta$<strong>连接</strong>：$R_5:=R_3\bowtie_{R_3.maker=R_4.maker\wedge R_4.speed\neq R_3.speed_3 /wedge R_4.speed_2\neq R_3.speed_3}R_4$</li>
 <li>将关系$R_5$<strong>投影</strong>到属性$maker$上：$R_6:=\pi_{maker}(R_5)$</li>
 </ol>
-<h2 id="4-关系代数表达式-9"><a href="#4-关系代数表达式-9" class="headerlink" title="4.关系代数表达式"></a>4.关系代数表达式</h2><ul>
+<h2 id="4-关系代数表达式-10"><a href="#4-关系代数表达式-10" class="headerlink" title="4.关系代数表达式"></a>4.关系代数表达式</h2><ul>
 <li>$R_5$，该关系代数表达式展开长度太长，略</li>
 </ul>
-<h2 id="5-数据样例查询结果-9"><a href="#5-数据样例查询结果-9" class="headerlink" title="5.数据样例查询结果"></a>5.数据样例查询结果</h2><div class="table-container">
+<h2 id="5-数据样例查询结果-10"><a href="#5-数据样例查询结果-10" class="headerlink" title="5.数据样例查询结果"></a>5.数据样例查询结果</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -721,7 +750,7 @@
 </tbody>
 </table>
 </div>
-<h1 id="k-查询恰好出售三种型号的PC厂商。"><a href="#k-查询恰好出售三种型号的PC厂商。" class="headerlink" title="k)查询恰好出售三种型号的PC厂商。"></a>k)查询恰好出售三种型号的PC厂商。</h1><h2 id="1-要操作的表：-PC-、-Product-1"><a href="#1-要操作的表：-PC-、-Product-1" class="headerlink" title="1.要操作的表：$PC$、$Product$"></a>1.要操作的表：$PC$、$Product$</h2><h2 id="2-要进行的操作：自然连接、投影、重命名、-theta-连接、差"><a href="#2-要进行的操作：自然连接、投影、重命名、-theta-连接、差" class="headerlink" title="2.要进行的操作：自然连接、投影、重命名、$\theta$连接、差"></a>2.要进行的操作：自然连接、投影、重命名、$\theta$连接、差</h2><h2 id="3-各操作的对象和顺序-10"><a href="#3-各操作的对象和顺序-10" class="headerlink" title="3.各操作的对象和顺序"></a>3.各操作的对象和顺序</h2><ol>
+<h1 id="k-查询恰好出售三种型号的PC厂商。"><a href="#k-查询恰好出售三种型号的PC厂商。" class="headerlink" title="k)查询恰好出售三种型号的PC厂商。"></a>k)查询恰好出售三种型号的PC厂商。</h1><h2 id="1-要操作的表：-PC-、-Product-1"><a href="#1-要操作的表：-PC-、-Product-1" class="headerlink" title="1.要操作的表：$PC$、$Product$"></a>1.要操作的表：$PC$、$Product$</h2><h2 id="2-要进行的操作：自然连接、投影、重命名、-theta-连接、差"><a href="#2-要进行的操作：自然连接、投影、重命名、-theta-连接、差" class="headerlink" title="2.要进行的操作：自然连接、投影、重命名、$\theta$连接、差"></a>2.要进行的操作：自然连接、投影、重命名、$\theta$连接、差</h2><h2 id="3-各操作的对象和顺序-11"><a href="#3-各操作的对象和顺序-11" class="headerlink" title="3.各操作的对象和顺序"></a>3.各操作的对象和顺序</h2><ol>
 <li>关系$Product$和$PC$<strong>自然连接</strong>并<strong>投影</strong>到属性组$\{ maker,model \}$上：$R_1:=\pi_{maker,model}(Procuct\bowtie PC)$</li>
 <li>复制并<strong>重命名</strong>关系$R_1$：$R_2:=\rho_{R_2(maker,model_2)}(R_1)$</li>
 <li>复制并<strong>重命名</strong>关系$R_1$：$R_3:=\rho_{R_3(marker,model_3)}(R_1)$</li>
@@ -732,10 +761,10 @@
 <li>求关系$R_6$和$R_7$的<strong>差</strong>：$R_8:=R_6-R_7$</li>
 <li>将关系$R_8$<strong>投影</strong>到属性$maker$上：$R_8:=\pi_{maker}(R_8)$</li>
 </ol>
-<h2 id="4-关系代数表达式-10"><a href="#4-关系代数表达式-10" class="headerlink" title="4.关系代数表达式"></a>4.关系代数表达式</h2><ul>
+<h2 id="4-关系代数表达式-11"><a href="#4-关系代数表达式-11" class="headerlink" title="4.关系代数表达式"></a>4.关系代数表达式</h2><ul>
 <li>$R_8$，该关系代数表达式展开长度太长，略</li>
 </ul>
-<h2 id="5-数据样例查询结果-10"><a href="#5-数据样例查询结果-10" class="headerlink" title="5.数据样例查询结果"></a>5.数据样例查询结果</h2><div class="table-container">
+<h2 id="5-数据样例查询结果-11"><a href="#5-数据样例查询结果-11" class="headerlink" title="5.数据样例查询结果"></a>5.数据样例查询结果</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -966,7 +995,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#a-哪种PC模型具有最少3-00的速度？"><span class="nav-number">2.</span> <span class="nav-text">a)哪种PC模型具有最少3.00的速度？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-PC"><span class="nav-number">2.1.</span> <span class="nav-text">1.要操作的表：$PC$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：选择、投影"><span class="nav-number">2.2.</span> <span class="nav-text">2.要进行的操作：选择、投影</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序"><span class="nav-number">2.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式"><span class="nav-number">2.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果"><span class="nav-number">2.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#b-哪个生产厂商的笔记本电脑（笔记本）的硬盘容量至少100GB？"><span class="nav-number">3.</span> <span class="nav-text">b)哪个生产厂商的笔记本电脑（笔记本）的硬盘容量至少100GB？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-Laptop-、-Product"><span class="nav-number">3.1.</span> <span class="nav-text">1.要操作的表：$Laptop$、$Product$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：选择、自然连接、投影、差"><span class="nav-number">3.2.</span> <span class="nav-text">2.要进行的操作：选择、自然连接、投影、差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-1"><span class="nav-number">3.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-1"><span class="nav-number">3.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-1"><span class="nav-number">3.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#c-查询厂商B生产的所有产品的型号和价格。"><span class="nav-number">4.</span> <span class="nav-text">c)查询厂商B生产的所有产品的型号和价格。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-Product-、-PC-、-Laptop-、-Printer"><span class="nav-number">4.1.</span> <span class="nav-text">1.要操作的表：$Product$、$PC$、$Laptop$、$Printer$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：选择、投影、自然连接、并"><span class="nav-number">4.2.</span> <span class="nav-text">2.要进行的操作：选择、投影、自然连接、并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-2"><span class="nav-number">4.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-2"><span class="nav-number">4.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-2"><span class="nav-number">4.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#d-查询所有彩色激光打印机的型号。"><span class="nav-number">5.</span> <span class="nav-text">d)查询所有彩色激光打印机的型号。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-Printer"><span class="nav-number">5.1.</span> <span class="nav-text">1.要操作的表：$Printer$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：选择、投影-1"><span class="nav-number">5.2.</span> <span class="nav-text">2.要进行的操作：选择、投影</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-3"><span class="nav-number">5.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-3"><span class="nav-number">5.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-3"><span class="nav-number">5.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#e-查询那些只出售笔记本电脑，不出售PC的厂商。"><span class="nav-number">6.</span> <span class="nav-text">e)查询那些只出售笔记本电脑，不出售PC的厂商。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-Product-、-PC-、-Laptop"><span class="nav-number">6.1.</span> <span class="nav-text">1.要操作的表：$Product$、$PC$、$Laptop$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：自然连接、投影、差"><span class="nav-number">6.2.</span> <span class="nav-text">2.要进行的操作：自然连接、投影、差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-4"><span class="nav-number">6.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-4"><span class="nav-number">6.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-4"><span class="nav-number">6.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#f-查询在一种或者两种PC机中出现过的硬盘的容量。"><span class="nav-number">7.</span> <span class="nav-text">f)查询在一种或者两种PC机中出现过的硬盘的容量。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-PC-1"><span class="nav-number">7.1.</span> <span class="nav-text">1.要操作的表：$PC$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：重命名、-theta-连接、投影、差"><span class="nav-number">7.2.</span> <span class="nav-text">2.要进行的操作：重命名、$\theta$连接、投影、差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-5"><span class="nav-number">7.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-5"><span class="nav-number">7.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-5"><span class="nav-number">7.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#g-查询有同样处理速度和同样内存大小的PC对。"><span class="nav-number">8.</span> <span class="nav-text">g)查询有同样处理速度和同样内存大小的PC对。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-PC-2"><span class="nav-number">8.1.</span> <span class="nav-text">1.要操作的表：$PC$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：重命名、-theta-连接、投影"><span class="nav-number">8.2.</span> <span class="nav-text">2.要进行的操作：重命名、$\theta$连接、投影</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-6"><span class="nav-number">8.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-6"><span class="nav-number">8.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-6"><span class="nav-number">8.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#h-查询那些至少生产两种处理速度大于2-80的PC或者笔记本电脑的厂商。"><span class="nav-number">9.</span> <span class="nav-text">h)查询那些至少生产两种处理速度大于2.80的PC或者笔记本电脑的厂商。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-PC-3"><span class="nav-number">9.1.</span> <span class="nav-text">1.要操作的表：$PC$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：选择、并、投影、自然连接、重命名、-theta-连接"><span class="nav-number">9.2.</span> <span class="nav-text">2.要进行的操作：选择、并、投影、自然连接、重命名、$\theta$连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-7"><span class="nav-number">9.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-7"><span class="nav-number">9.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-7"><span class="nav-number">9.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#i-查询平均处理速度（PC或者是笔记本电脑）最高的所有厂商。"><span class="nav-number">10.</span> <span class="nav-text">i)查询平均处理速度（PC或者是笔记本电脑）最高的所有厂商。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-PC-、-Laptop-、-Product"><span class="nav-number">10.1.</span> <span class="nav-text">1.要操作的表：$PC$、$Laptop$、$Product$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：投影、重命名、-theta-连接、差、自然连接"><span class="nav-number">10.2.</span> <span class="nav-text">2.要进行的操作：投影、重命名、$\theta$连接、差、自然连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-8"><span class="nav-number">10.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-8"><span class="nav-number">10.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-8"><span class="nav-number">10.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#j-查询至少生产三种不同处理速度电脑的厂商。"><span class="nav-number">11.</span> <span class="nav-text">j)查询至少生产三种不同处理速度电脑的厂商。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-PC-、-Product"><span class="nav-number">11.1.</span> <span class="nav-text">1.要操作的表：$PC$、$Product$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：自然连接、投影、重命名、-theta-连接"><span class="nav-number">11.2.</span> <span class="nav-text">2.要进行的操作：自然连接、投影、重命名、$\theta$连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-9"><span class="nav-number">11.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-9"><span class="nav-number">11.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-9"><span class="nav-number">11.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#k-查询恰好出售三种型号的PC厂商。"><span class="nav-number">12.</span> <span class="nav-text">k)查询恰好出售三种型号的PC厂商。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-PC-、-Product-1"><span class="nav-number">12.1.</span> <span class="nav-text">1.要操作的表：$PC$、$Product$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：自然连接、投影、重命名、-theta-连接、差"><span class="nav-number">12.2.</span> <span class="nav-text">2.要进行的操作：自然连接、投影、重命名、$\theta$连接、差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-10"><span class="nav-number">12.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-10"><span class="nav-number">12.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-10"><span class="nav-number">12.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#a-哪种PC模型具有最少3-00的速度？"><span class="nav-number">2.</span> <span class="nav-text">a)哪种PC模型具有最少3.00的速度？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-PC"><span class="nav-number">2.1.</span> <span class="nav-text">1.要操作的表：$PC$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：选择、投影"><span class="nav-number">2.2.</span> <span class="nav-text">2.要进行的操作：选择、投影</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序"><span class="nav-number">2.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式"><span class="nav-number">2.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果"><span class="nav-number">2.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#b-哪个生产厂商的笔记本电脑（笔记本）的硬盘容量至少100GB？"><span class="nav-number">3.</span> <span class="nav-text">b)哪个生产厂商的笔记本电脑（笔记本）的硬盘容量至少100GB？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-Laptop-、-Product"><span class="nav-number">3.1.</span> <span class="nav-text">1.要操作的表：$Laptop$、$Product$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：选择、自然连接、投影、差"><span class="nav-number">3.2.</span> <span class="nav-text">2.要进行的操作：选择、自然连接、投影、差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-1"><span class="nav-number">3.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-1"><span class="nav-number">3.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-1"><span class="nav-number">3.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#c-查询厂商B生产的所有产品的型号和价格。"><span class="nav-number">4.</span> <span class="nav-text">c)查询厂商B生产的所有产品的型号和价格。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-Product-、-PC-、-Laptop-、-Printer"><span class="nav-number">4.1.</span> <span class="nav-text">1.要操作的表：$Product$、$PC$、$Laptop$、$Printer$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：选择、投影、自然连接、并"><span class="nav-number">4.2.</span> <span class="nav-text">2.要进行的操作：选择、投影、自然连接、并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-2"><span class="nav-number">4.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-2"><span class="nav-number">4.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-2"><span class="nav-number">4.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#d-查询所有彩色激光打印机的型号。"><span class="nav-number">5.</span> <span class="nav-text">d)查询所有彩色激光打印机的型号。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-Printer"><span class="nav-number">5.1.</span> <span class="nav-text">1.要操作的表：$Printer$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：选择、投影-1"><span class="nav-number">5.2.</span> <span class="nav-text">2.要进行的操作：选择、投影</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-3"><span class="nav-number">5.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-3"><span class="nav-number">5.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-3"><span class="nav-number">5.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#e-查询那些只出售笔记本电脑，不出售PC的厂商。"><span class="nav-number">6.</span> <span class="nav-text">e)查询那些只出售笔记本电脑，不出售PC的厂商。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-Product-、-PC-、-Laptop"><span class="nav-number">6.1.</span> <span class="nav-text">1.要操作的表：$Product$、$PC$、$Laptop$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：自然连接、投影、差"><span class="nav-number">6.2.</span> <span class="nav-text">2.要进行的操作：自然连接、投影、差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-4"><span class="nav-number">6.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-4"><span class="nav-number">6.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-4"><span class="nav-number">6.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-Product"><span class="nav-number">6.6.</span> <span class="nav-text">1.要操作的表：$Product$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：选择、投影、差"><span class="nav-number">6.7.</span> <span class="nav-text">2.要进行的操作：选择、投影、差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-5"><span class="nav-number">6.8.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-5"><span class="nav-number">6.9.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-5"><span class="nav-number">6.10.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#f-查询在一种或者两种PC机中出现过的硬盘的容量。"><span class="nav-number">7.</span> <span class="nav-text">f)查询在一种或者两种PC机中出现过的硬盘的容量。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-PC-1"><span class="nav-number">7.1.</span> <span class="nav-text">1.要操作的表：$PC$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：重命名、-theta-连接、投影、差"><span class="nav-number">7.2.</span> <span class="nav-text">2.要进行的操作：重命名、$\theta$连接、投影、差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-6"><span class="nav-number">7.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-6"><span class="nav-number">7.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-6"><span class="nav-number">7.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#g-查询有同样处理速度和同样内存大小的PC对。"><span class="nav-number">8.</span> <span class="nav-text">g)查询有同样处理速度和同样内存大小的PC对。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-PC-2"><span class="nav-number">8.1.</span> <span class="nav-text">1.要操作的表：$PC$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：重命名、-theta-连接、投影"><span class="nav-number">8.2.</span> <span class="nav-text">2.要进行的操作：重命名、$\theta$连接、投影</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-7"><span class="nav-number">8.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-7"><span class="nav-number">8.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-7"><span class="nav-number">8.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#h-查询那些至少生产两种处理速度大于2-80的PC或者笔记本电脑的厂商。"><span class="nav-number">9.</span> <span class="nav-text">h)查询那些至少生产两种处理速度大于2.80的PC或者笔记本电脑的厂商。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-PC-3"><span class="nav-number">9.1.</span> <span class="nav-text">1.要操作的表：$PC$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：选择、并、投影、自然连接、重命名、-theta-连接"><span class="nav-number">9.2.</span> <span class="nav-text">2.要进行的操作：选择、并、投影、自然连接、重命名、$\theta$连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-8"><span class="nav-number">9.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-8"><span class="nav-number">9.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-8"><span class="nav-number">9.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#i-查询平均处理速度（PC或者是笔记本电脑）最高的所有厂商。"><span class="nav-number">10.</span> <span class="nav-text">i)查询平均处理速度（PC或者是笔记本电脑）最高的所有厂商。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-PC-、-Laptop-、-Product"><span class="nav-number">10.1.</span> <span class="nav-text">1.要操作的表：$PC$、$Laptop$、$Product$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：投影、重命名、-theta-连接、差、自然连接"><span class="nav-number">10.2.</span> <span class="nav-text">2.要进行的操作：投影、重命名、$\theta$连接、差、自然连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-9"><span class="nav-number">10.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-9"><span class="nav-number">10.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-9"><span class="nav-number">10.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#j-查询至少生产三种不同处理速度电脑的厂商。"><span class="nav-number">11.</span> <span class="nav-text">j)查询至少生产三种不同处理速度电脑的厂商。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-PC-、-Product"><span class="nav-number">11.1.</span> <span class="nav-text">1.要操作的表：$PC$、$Product$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：自然连接、投影、重命名、-theta-连接"><span class="nav-number">11.2.</span> <span class="nav-text">2.要进行的操作：自然连接、投影、重命名、$\theta$连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-10"><span class="nav-number">11.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-10"><span class="nav-number">11.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-10"><span class="nav-number">11.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#k-查询恰好出售三种型号的PC厂商。"><span class="nav-number">12.</span> <span class="nav-text">k)查询恰好出售三种型号的PC厂商。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-要操作的表：-PC-、-Product-1"><span class="nav-number">12.1.</span> <span class="nav-text">1.要操作的表：$PC$、$Product$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-要进行的操作：自然连接、投影、重命名、-theta-连接、差"><span class="nav-number">12.2.</span> <span class="nav-text">2.要进行的操作：自然连接、投影、重命名、$\theta$连接、差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各操作的对象和顺序-11"><span class="nav-number">12.3.</span> <span class="nav-text">3.各操作的对象和顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数表达式-11"><span class="nav-number">12.4.</span> <span class="nav-text">4.关系代数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据样例查询结果-11"><span class="nav-number">12.5.</span> <span class="nav-text">5.数据样例查询结果</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1000,7 +1029,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">132.8k</span>
+    <span title="Site words total count">133.0k</span>
   
 </div>
 
