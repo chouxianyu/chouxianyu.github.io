@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2020-01-29T05:52:39.903Z</updated>
+  <updated>2020-03-25T12:53:52.318Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>查看pip缓存路径</title>
+    <link href="https://chouxianyu.github.io/2020/03/25/%E6%9F%A5%E7%9C%8Bpip%E7%BC%93%E5%AD%98%E8%B7%AF%E5%BE%84/"/>
+    <id>https://chouxianyu.github.io/2020/03/25/查看pip缓存路径/</id>
+    <published>2020-03-25T12:37:14.000Z</published>
+    <updated>2020-03-25T12:53:52.318Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我们在安装python第三方库时，经常遇到下载速度慢的问题，即使换了源也不行。</p><p>好不容易下载到第三方库的文件（比如whl）后，我们可以把这些文件（比如whl）保存下来，然后可以发给同学、队友（团队开发时环境最好一致），还可以方便自己之后的重新安装。</p><p>那<code>pip</code>安装python第三方库时的缓存路径在哪呢？</p><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>在安装一个库时，我注意到了<code>pip</code>的缓存路径，如下。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Cxy\AppData\Local\pip\cache</span><br></pre></td></tr></table></figure><p>其中<code>Cxy</code>是我电脑的用户名，在你自己的电脑上的话需要改成你自己的用户名（比如<code>Administrator</code>）</p><p>这个路径应该是<code>pip</code>的默认缓存路径，这个路径应该也是可以修改的，有兴趣的小伙伴可以研究一下。</p><p>该路径下有两个文件夹，一个是<code>http</code>，一个是<code>wheels</code>；还有一个文件<code>selfcheck.json</code>。</p><p>我没研究文件夹<code>http</code>和文件<code>selfcheck.json</code>是什么，有兴趣的小伙伴可以研究一下。</p><p>经过查看，发现文件夹<code>wheels</code>里面是<code>.whl</code>文件，不过这个文件夹里面的目录结构和命名我们一般看不懂，我没有具体研究，有兴趣的小伙伴可以研究一下。</p><p>为了找到我们想要的<code>.whl</code>文件，我们在<code>wheels</code>文件夹里直接搜索就好了，不需要第三方库的全名，只需要输入第三方库名称中的一些词就行了。</p><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;我们在安装python第三方库时，经常遇到下载速度慢的问题，即使换了源也不行。&lt;/p&gt;
+&lt;p&gt;好不容易下载到第三方库的文件（比如whl）后，
+      
+    
+    </summary>
+    
+    
+      <category term="python" scheme="https://chouxianyu.github.io/tags/python/"/>
+    
+      <category term="pip" scheme="https://chouxianyu.github.io/tags/pip/"/>
+    
+  </entry>
   
   <entry>
     <title>《算法笔记》阅读笔记</title>
@@ -477,31 +503,6 @@
     <updated>2019-08-10T11:45:43.549Z</updated>
     
     <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://pintia.cn/problem-sets/994805260223102976/problems/994805285812551680" target="_blank" rel="noopener">https://pintia.cn/problem-sets/994805260223102976/problems/994805285812551680</a></p><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>啊有个难题（1034）不会，自闭了，来刷个简单题。这题可简单了，注意一个四舍五入就行。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PAT BasicLevel 1036</span></span><br><span class="line"><span class="comment">// https://pintia.cn/problem-sets/994805260223102976/problems/994805285812551680</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 边长（列数）和字符</span></span><br><span class="line">    <span class="keyword">int</span> column;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; column &gt;&gt; c;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 行数</span></span><br><span class="line">    <span class="keyword">int</span> row = column * <span class="number">1.0</span> / <span class="number">2</span> + <span class="number">0.5</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输出第一行</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;column;++i)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; c;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输出中间的几行</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;row<span class="number">-2</span>;++i)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; c;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;column<span class="number">-2</span>;++j)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; c &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输出最后一行</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; column; ++i)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; c;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://pintia.cn/problem-sets/994805260223102976/pro
-      
-    
-    </summary>
-    
-    
-      <category term="PAT" scheme="https://chouxianyu.github.io/tags/PAT/"/>
-    
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT乙级1033</title>
-    <link href="https://chouxianyu.github.io/2019/08/09/PAT%E4%B9%99%E7%BA%A71033/"/>
-    <id>https://chouxianyu.github.io/2019/08/09/PAT乙级1033/</id>
-    <published>2019-08-08T16:20:38.000Z</published>
-    <updated>2019-08-08T16:21:23.636Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://pintia.cn/problem-sets/994805260223102976/problems/994805288530460672" target="_blank" rel="noopener">https://pintia.cn/problem-sets/994805260223102976/problems/994805288530460672</a></p><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>刚开始没有理解到，如果上档键坏的话，所有大写字母都不行（My bad），后来改代码思路就很乱，甚至还考虑过<code>_</code>和<code>+</code>是否输出之类的……所以理解题意很重要吧。这个题弄得我脑袋很累。</p><p>考虑到上档键坏的话，所有大写字母都不行之后，还是会有一个测试点不过。</p><p>另外有个坑是第一行可能是空行，即所有键都是可以使用的。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PAT BasicLevel 1033</span></span><br><span class="line"><span class="comment">// https://pintia.cn/problem-sets/994805260223102976/problems/994805288530460672</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 用户输入的字符串、输出的字符串、坏掉的键（字符串形式）</span></span><br><span class="line">    <span class="built_in">string</span> strIn,wrongKeys;</span><br><span class="line">    getline(<span class="built_in">cin</span>, wrongKeys);</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; strIn;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 上档键（大写）是否可用</span></span><br><span class="line">    <span class="keyword">bool</span> upIsWrong = (wrongKeys.find(<span class="string">'+'</span>) == <span class="built_in">string</span>::npos) ? <span class="literal">false</span> : <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 生成输出字符串</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;strIn.length();++i)&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 处理坏掉的键导致对应键无法输出</span></span><br><span class="line">        <span class="keyword">if</span> (wrongKeys.find(<span class="built_in">toupper</span>(strIn[i]))!=<span class="built_in">string</span>::npos)&#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 处理上档键坏掉导致大写无法输出</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">isupper</span>(strIn[i]) &amp;&amp; upIsWrong)&#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 这个键没有问题</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; strIn[i];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
     
     <summary type="html">
     

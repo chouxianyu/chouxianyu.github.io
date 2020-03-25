@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>https://chouxianyu.github.io/2020/03/25/%E6%9F%A5%E7%9C%8Bpip%E7%BC%93%E5%AD%98%E8%B7%AF%E5%BE%84/</loc>
+    <lastmod>2020-03-25T12:53:52.318Z</lastmod>
+    <data>
+        <display>
+        <title>查看pip缓存路径</title>
+        <pubTime>2020-03-25T12:37:14.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>pip</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chouxianyu.github.io/2019/10/12/%E6%95%B0%E6%8D%AE%E5%BA%93-%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0%E4%BD%9C%E4%B8%9A/</loc>
     <lastmod>2020-03-20T04:30:56.429Z</lastmod>
     <data>
@@ -986,9 +1005,9 @@
         <title>模拟退火学习</title>
         <pubTime>2019-04-24T18:01:13.000Z</pubTime>
         
-        <tag>数学建模</tag>
-         
         <tag>算法</tag>
+         
+        <tag>数学建模</tag>
          
         <tag>模拟退火</tag>
          
@@ -2119,11 +2138,11 @@
         <title>PageRank</title>
         <pubTime>2019-02-18T07:58:08.000Z</pubTime>
         
+        <tag>算法</tag>
+         
         <tag>Matlab</tag>
          
         <tag>数学建模</tag>
-         
-        <tag>算法</tag>
          
         <tag>PageRank</tag>
          
