@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chouxianyu.github.io/2020/03/27/linux%E4%B8%ADnohup%E8%BF%90%E8%A1%8Cpython%E7%A8%8B%E5%BA%8F%E6%97%A0%E5%90%8E%E5%8F%B0%E8%BE%93%E5%87%BA/</loc>
+    
+    <lastmod>2020-03-27T02:48:36.857Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chouxianyu.github.io/2019/07/22/mingw%E6%8E%A7%E5%88%B6%E5%8F%B0%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</loc>
+    
+    <lastmod>2020-03-26T05:06:55.660Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chouxianyu.github.io/2020/03/26/PyTorch%E4%BD%99%E5%BC%A6%E5%AD%A6%E4%B9%A0%E7%8E%87%E8%A1%B0%E5%87%8F/</loc>
     
     <lastmod>2020-03-26T04:51:45.156Z</lastmod>
@@ -390,13 +404,6 @@
     <loc>https://chouxianyu.github.io/2019/07/22/PAT%E4%B9%99%E7%BA%A71004/</loc>
     
     <lastmod>2019-07-22T10:22:54.610Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chouxianyu.github.io/2019/07/22/mingw%E6%8E%A7%E5%88%B6%E5%8F%B0%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</loc>
-    
-    <lastmod>2019-07-22T06:34:50.105Z</lastmod>
     
   </url>
   
