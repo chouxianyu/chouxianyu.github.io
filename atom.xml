@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2020-03-31T10:03:47.028Z</updated>
+  <updated>2020-04-01T08:27:49.879Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Ubuntu中BaiduPCS-Go的安装及简单使用</title>
+    <link href="https://chouxianyu.github.io/2020/04/01/Ubuntu%E4%B8%ADBaiduPCS-Go%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/"/>
+    <id>https://chouxianyu.github.io/2020/04/01/Ubuntu中BaiduPCS-Go的安装及简单使用/</id>
+    <published>2020-04-01T08:25:02.000Z</published>
+    <updated>2020-04-01T08:27:49.879Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天用服务器训练模型时，服务器突然关机了，然后我的文件突然没了…昨天刚训练好的呀！</p><p>没办法，只能把数据再传到服务器上，但是文件很大，用Xftp传肯定很慢，所以用了百度云。（后来发现文件没有丢，重新挂载一下文件夹就好了，但我这个过程记录也写好了…）</p><p>下面记录了Ubuntu上如何安装<a href="https://github.com/iikira/BaiduPCS-Go" target="_blank" rel="noopener">BaiduPCS-Go</a>并用其下载百度网盘文件，安装成功后的具体使用方法请参考Github中的说明（Github里讲得比较详细了）。</p><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><ol><li><p>下载对应的<a href="https://github.com/iikira/BaiduPCS-Go/releases" target="_blank" rel="noopener">BaiduPCS-Go Release</a>，我用的下面这个，命令如下：</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/iikira/BaiduPCS-Go/releases/download/v3.6.1/BaiduPCS-Go-v3.6.1-linux-amd64.zip</span><br></pre></td></tr></table></figure><p> 注意是下载发行版，而不是git clone。</p></li><li><p>解压上一步下载到的zip到当前文件夹，命令如下：</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip BaiduPCS-Go-v3.6.1-linux-amd64.zip</span><br></pre></td></tr></table></figure></li><li><p>删除zip文件（也可以不删除该zip文件），命令如下：</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm BaiduPCS-Go-v3.6.1-linux-amd64.zip</span><br></pre></td></tr></table></figure></li><li><p>进入解压得到的文件夹，命令如下：</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd BaiduPCS-Go-v3.6.1-linux-amd64/</span><br></pre></td></tr></table></figure></li><li><p>查看文件夹中的内容（也可以不查看），命令如下：</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls</span><br></pre></td></tr></table></figure></li><li><p><strong>运行BaiduPCS-Go，命令如下：</strong></p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BaiduPCS-Go</span><br></pre></td></tr></table></figure></li><li><p>登录并进入百度云盘中的某个目录（步骤请参考Github中的说明）</p></li><li><p>下载文件<code>labels.zip</code>并保存至当前文件夹，命令如下：</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d labels.zip --saveto ./</span><br></pre></td></tr></table></figure></li></ol><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;今天用服务器训练模型时，服务器突然关机了，然后我的文件突然没了…昨天刚训练好的呀！&lt;/p&gt;
+&lt;p&gt;没办法，只能把数据再传到服务器上，但是文件
+      
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://chouxianyu.github.io/tags/linux/"/>
+    
+      <category term="BaiduPCS-Go" scheme="https://chouxianyu.github.io/tags/BaiduPCS-Go/"/>
+    
+  </entry>
   
   <entry>
     <title>IDEA滚轮控制字体大小</title>
@@ -267,9 +293,9 @@
     </summary>
     
     
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="python" scheme="https://chouxianyu.github.io/tags/python/"/>
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="sklearn" scheme="https://chouxianyu.github.io/tags/sklearn/"/>
     
@@ -296,9 +322,9 @@
     </summary>
     
     
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="python" scheme="https://chouxianyu.github.io/tags/python/"/>
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="sklearn" scheme="https://chouxianyu.github.io/tags/sklearn/"/>
     
@@ -485,31 +511,6 @@
     <updated>2019-08-11T14:15:40.352Z</updated>
     
     <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://pintia.cn/problem-sets/994805260223102976/problems/994805280074743808" target="_blank" rel="noopener">https://pintia.cn/problem-sets/994805260223102976/problems/994805280074743808</a></p><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>这次再次体会到题意理解的正确性，理解正确的话其实就是用代码实现自己的想法。</p><p>难的是，刚开始想错了，然后再去改，这样完全没有思路，很麻烦的。</p><p>这道题的意思是：按照<code>PATest</code>的顺序去字符串里找，找得到就输出，找不到就找下一个，直至字符串里找不到<code>PATest</code>中的任意一个字符。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PAT BasicLevel 1043</span></span><br><span class="line"><span class="comment">// https://pintia.cn/problem-sets/994805260223102976/problems/994805280074743808</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 用户输入</span></span><br><span class="line">    <span class="built_in">string</span> str,PATest=<span class="string">"PATest"</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt;str;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> notFoundCount=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (notFoundCount &lt; <span class="number">6</span>)&#123;</span><br><span class="line">        <span class="comment">// 找到了想要的字符</span></span><br><span class="line">        <span class="keyword">if</span> (str.find_first_of(PATest[i]) != <span class="built_in">string</span>::npos)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; PATest[i];</span><br><span class="line">            str.erase(str.begin() + str.find_first_of(PATest[i]));</span><br><span class="line">            notFoundCount = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 找不到该字符</span></span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            notFoundCount++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 找下一个</span></span><br><span class="line">        i = (i + <span class="number">1</span>) % <span class="number">6</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://pintia.cn/problem-sets/994805260223102976/pro
-      
-    
-    </summary>
-    
-    
-      <category term="PAT" scheme="https://chouxianyu.github.io/tags/PAT/"/>
-    
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT乙级1042</title>
-    <link href="https://chouxianyu.github.io/2019/08/10/PAT%E4%B9%99%E7%BA%A71042/"/>
-    <id>https://chouxianyu.github.io/2019/08/10/PAT乙级1042/</id>
-    <published>2019-08-10T11:44:34.000Z</published>
-    <updated>2019-08-10T11:46:14.169Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://pintia.cn/problem-sets/994805260223102976/problems/994805280817135616" target="_blank" rel="noopener">https://pintia.cn/problem-sets/994805260223102976/problems/994805280817135616</a></p><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>用数组<code>count</code>存储字母出现次数，数组下标代表字母，数组元素是次数。遍历字符串，统计各字母出现次数，最后遍历<code>count</code>寻找出现次数最多的字母。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PAT BasicLevel 1042</span></span><br><span class="line"><span class="comment">// https://pintia.cn/problem-sets/994805260223102976/problems/994805280817135616</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 26个字母计数</span></span><br><span class="line">    <span class="keyword">int</span> count[<span class="number">26</span>];</span><br><span class="line">    fill(count,count+<span class="number">26</span>,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取字符串</span></span><br><span class="line">    <span class="built_in">string</span> str;</span><br><span class="line">    getline(<span class="built_in">cin</span>, str);  <span class="comment">// 字符串可能包含空格</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 统计字符出现次数</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;str.length();++i)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">isalpha</span>(str[i]))&#123;</span><br><span class="line">            count[<span class="built_in">tolower</span>(str[i])-<span class="string">'a'</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 寻找出现最频繁的英文字母（其实可以在统计的时候进行）</span></span><br><span class="line">    <span class="keyword">int</span> maxCount=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> maxIndex=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;++i)&#123;</span><br><span class="line">        <span class="keyword">if</span>(count[i]&gt;maxCount)&#123;  <span class="comment">// 用于实现数量并列则输出字母序最小的那个字母</span></span><br><span class="line">            maxCount = count[i];</span><br><span class="line">            maxIndex = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输出结果</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">char</span>(<span class="string">'a'</span> + maxIndex)&lt;&lt; <span class="string">' '</span> &lt;&lt; maxCount;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
     
     <summary type="html">
     

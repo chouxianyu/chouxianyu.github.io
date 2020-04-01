@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>https://chouxianyu.github.io/2020/04/01/Ubuntu%E4%B8%ADBaiduPCS-Go%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2020-04-01T08:27:49.879Z</lastmod>
+    <data>
+        <display>
+        <title>Ubuntu中BaiduPCS-Go的安装及简单使用</title>
+        <pubTime>2020-04-01T08:25:02.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+        <tag>BaiduPCS-Go</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chouxianyu.github.io/2020/03/31/IDEA%E6%BB%9A%E8%BD%AE%E6%8E%A7%E5%88%B6%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F/</loc>
     <lastmod>2020-03-31T10:03:47.028Z</lastmod>
     <data>
@@ -237,9 +256,9 @@
         <title>sklearn逻辑回归实战</title>
         <pubTime>2019-10-21T17:02:12.000Z</pubTime>
         
-        <tag>机器学习</tag>
-         
         <tag>python</tag>
+         
+        <tag>机器学习</tag>
          
         <tag>sklearn</tag>
          
@@ -260,9 +279,9 @@
         <title>sklearn线性回归实现房价预测模型</title>
         <pubTime>2019-10-19T09:58:50.000Z</pubTime>
         
-        <tag>机器学习</tag>
-         
         <tag>python</tag>
+         
+        <tag>机器学习</tag>
          
         <tag>sklearn</tag>
          
@@ -1123,9 +1142,9 @@
         <title>模拟退火学习</title>
         <pubTime>2019-04-24T18:01:13.000Z</pubTime>
         
-        <tag>数学建模</tag>
-         
         <tag>算法</tag>
+         
+        <tag>数学建模</tag>
          
         <tag>模拟退火</tag>
          
@@ -1290,9 +1309,9 @@
         
         <tag>C/C++</tag>
          
-        <tag>继承</tag>
-         
         <tag>面向对象</tag>
+         
+        <tag>继承</tag>
          
          
            
@@ -1969,9 +1988,9 @@
         
         <tag>C/C++</tag>
          
-        <tag>继承</tag>
-         
         <tag>面向对象</tag>
+         
+        <tag>继承</tag>
          
          
            
@@ -2233,11 +2252,11 @@
         <title>PageRank</title>
         <pubTime>2019-02-18T07:58:08.000Z</pubTime>
         
+        <tag>算法</tag>
+         
         <tag>Matlab</tag>
          
         <tag>数学建模</tag>
-         
-        <tag>算法</tag>
          
         <tag>PageRank</tag>
          
@@ -2370,9 +2389,9 @@
         <title>Java字节流read函数</title>
         <pubTime>2018-09-22T14:50:12.000Z</pubTime>
         
-        <tag>Bug</tag>
-         
         <tag>Java</tag>
+         
+        <tag>Bug</tag>
          
          
            
@@ -2582,9 +2601,9 @@
         <title>java.util.NoSuchElementException</title>
         <pubTime>2018-11-03T02:23:02.000Z</pubTime>
         
-        <tag>Bug</tag>
-         
         <tag>Java</tag>
+         
+        <tag>Bug</tag>
          
          
            
@@ -2601,9 +2620,9 @@
         <title>JAI丢包掉帧处理</title>
         <pubTime>2018-08-22T05:34:40.000Z</pubTime>
         
-        <tag>JAI</tag>
-         
         <tag>Bug</tag>
+         
+        <tag>JAI</tag>
          
          
            
