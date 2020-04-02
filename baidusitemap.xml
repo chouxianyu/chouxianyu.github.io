@@ -4,11 +4,30 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2020/04/01/Ubuntu%E4%B8%ADBaiduPCS-Go%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2020-04-01T08:27:49.879Z</lastmod>
+    <loc>https://chouxianyu.github.io/2020/04/02/TensorBoard%E4%B8%ADHISTOGRAMS%E5%92%8CDISTRIBUTIONS%E5%9B%BE%E5%BD%A2%E7%9A%84%E5%90%AB%E4%B9%89/</loc>
+    <lastmod>2020-04-02T13:13:19.520Z</lastmod>
     <data>
         <display>
-        <title>Ubuntu中BaiduPCS-Go的安装及简单使用</title>
+        <title>TensorBoard中HISTOGRAMS和DISTRIBUTIONS图形的含义</title>
+        <pubTime>2020-04-02T12:50:25.000Z</pubTime>
+        
+        <tag>深度学习</tag>
+         
+        <tag>TensorBoard</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/04/01/Ubuntu%E4%B8%AD%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98BaiduPCS-Go%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2020-04-02T12:57:18.519Z</lastmod>
+    <data>
+        <display>
+        <title>Ubuntu中百度网盘BaiduPCS-Go的安装及简单使用</title>
         <pubTime>2020-04-01T08:25:02.000Z</pubTime>
         
         <tag>linux</tag>
@@ -256,9 +275,9 @@
         <title>sklearn逻辑回归实战</title>
         <pubTime>2019-10-21T17:02:12.000Z</pubTime>
         
-        <tag>python</tag>
-         
         <tag>机器学习</tag>
+         
+        <tag>python</tag>
          
         <tag>sklearn</tag>
          
@@ -279,9 +298,9 @@
         <title>sklearn线性回归实现房价预测模型</title>
         <pubTime>2019-10-19T09:58:50.000Z</pubTime>
         
-        <tag>python</tag>
-         
         <tag>机器学习</tag>
+         
+        <tag>python</tag>
          
         <tag>sklearn</tag>
          
@@ -1142,9 +1161,9 @@
         <title>模拟退火学习</title>
         <pubTime>2019-04-24T18:01:13.000Z</pubTime>
         
-        <tag>算法</tag>
-         
         <tag>数学建模</tag>
+         
+        <tag>算法</tag>
          
         <tag>模拟退火</tag>
          
@@ -2252,11 +2271,11 @@
         <title>PageRank</title>
         <pubTime>2019-02-18T07:58:08.000Z</pubTime>
         
-        <tag>算法</tag>
-         
         <tag>Matlab</tag>
          
         <tag>数学建模</tag>
+         
+        <tag>算法</tag>
          
         <tag>PageRank</tag>
          
@@ -2389,9 +2408,9 @@
         <title>Java字节流read函数</title>
         <pubTime>2018-09-22T14:50:12.000Z</pubTime>
         
-        <tag>Java</tag>
-         
         <tag>Bug</tag>
+         
+        <tag>Java</tag>
          
          
            
@@ -2601,9 +2620,9 @@
         <title>java.util.NoSuchElementException</title>
         <pubTime>2018-11-03T02:23:02.000Z</pubTime>
         
-        <tag>Java</tag>
-         
         <tag>Bug</tag>
+         
+        <tag>Java</tag>
          
          
            

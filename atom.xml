@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2020-04-01T08:27:49.879Z</updated>
+  <updated>2020-04-02T13:13:19.520Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Ubuntu中BaiduPCS-Go的安装及简单使用</title>
-    <link href="https://chouxianyu.github.io/2020/04/01/Ubuntu%E4%B8%ADBaiduPCS-Go%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/"/>
-    <id>https://chouxianyu.github.io/2020/04/01/Ubuntu中BaiduPCS-Go的安装及简单使用/</id>
+    <title>TensorBoard中HISTOGRAMS和DISTRIBUTIONS图形的含义</title>
+    <link href="https://chouxianyu.github.io/2020/04/02/TensorBoard%E4%B8%ADHISTOGRAMS%E5%92%8CDISTRIBUTIONS%E5%9B%BE%E5%BD%A2%E7%9A%84%E5%90%AB%E4%B9%89/"/>
+    <id>https://chouxianyu.github.io/2020/04/02/TensorBoard中HISTOGRAMS和DISTRIBUTIONS图形的含义/</id>
+    <published>2020-04-02T12:50:25.000Z</published>
+    <updated>2020-04-02T13:13:19.520Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前我都是用TensorBoard记录训练过程中的Loss、mAP等标量，很容易就知道TensorBoard里的SCALARS（标量）图是怎么看的（其中横纵轴的含义、Smoothing等）。</p><p>最近在尝试模型压缩，其中的一个步骤是对模型进行稀疏训练。</p><p>稀疏训练时需要记录模型中BN层的Gamma值的<strong>分布情况</strong>（取哪些值，这些值出现的次数/频度），这时用TensorBoard里的SCALARS之类的图就不合适了，而是应该用TensorBoard里的<strong>HISTOGRAMS</strong>（直方图）和<strong>DISTRIBUTIONS</strong>（暂未找到合适的译文）。</p><p>所以我昨天学习、了解了一点HISTOGRAMS和DISTRIBUTIONS，今天做了一部分简单记录，具体见下文。</p><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>HISTOGRAMS和DISTRIBUTIONS这两种图的数据源是相同的，只是从不同的视角、以不同的方式来表示数据的分布情况。</p><p>下面先介绍HISTOGRAMS，再介绍DISTRIBUTIONS。</p><h2 id="HISTOGRAMS"><a href="#HISTOGRAMS" class="headerlink" title="HISTOGRAMS"></a>HISTOGRAMS</h2><p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_200402115112HISTOGRAMS.jpg" alt="HISTOGRAMS"></p><p>上图是TensorBoard生成的一个直方图（OFFEST模式），下面介绍图中几个元素的含义。</p><ul><li><strong>数据源</strong><ul><li>数据源是<strong>多</strong>个<strong>一维数组</strong><ul><li>也在别处看到有人说可以是多维数组，但会被压缩成一维数组，有兴趣的小伙伴可以具体研究一下</li><li>如果你只有1个数组，也是可以的</li></ul></li></ul></li><li><strong>当鼠标放在图上时出现的一条黑线和数字</strong><ul><li>鼠标放在图上出现的一条黑线，就对应数据源里的<strong>一个一维数组</strong></li><li>上图中显示的黑线对应我的第41个数组的所有元素（index为40，因为index从0开始计数的）的取值的分布情况</li></ul></li><li><strong>图下方的横轴</strong><ul><li>横轴的值和数组内元素的取值对应</li></ul></li><li><strong>图右方的纵轴</strong><ul><li>纵轴的值对应着是哪一个数组，或者说对应了数组的id、index（上边提到的40）</li></ul></li><li><strong>颜色</strong><ul><li>可以看到上图中的颜色是渐变的，靠上（id小）的颜色深，靠下（id大）的颜色浅</li></ul></li><li>上面的用词比较“学术化”，如果看不懂，就看下边的这个解释吧<ul><li>我的数据有99个数组，index从0到98，但右侧的纵轴值只标到了90</li><li>数组元素的分布范围是横轴上的数字，可以看出我的每个数组中的元素的取值大约集中在0到0.2，超过1.5的元素很少</li><li>我的第40个数组（说法不严谨，准确地说是id为40）中大约有505个元素的值为0.536左右</li></ul></li><li>如果还是不懂的话，建议先去看看直方图是什么</li></ul><h2 id="DISTRIBUTIONS"><a href="#DISTRIBUTIONS" class="headerlink" title="DISTRIBUTIONS"></a>DISTRIBUTIONS</h2><p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_200402115157DISTRIBUTIONS.jpg" alt="DISTRIBUTIONS"></p><p>把HISTOGRAMS搞懂后，这个图就很好懂的，因为这个图的数据源和HISTOGRAMS一样。</p><ul><li><strong>横轴</strong><ul><li>横轴是对应哪个数组</li></ul></li><li><strong>纵轴</strong><ul><li>数组中元素的取值</li></ul></li><li><strong>颜色</strong><ul><li>颜色深代表对应值出现的频数高</li></ul></li><li>如上图，我的99个数组从0到98，数组中元素的取值慢慢地趋近于0</li></ul><h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><h2 id="剪枝Github"><a href="#剪枝Github" class="headerlink" title="剪枝Github"></a>剪枝Github</h2><p><a href="https://github.com/tanluren/yolov3-channel-and-layer-pruning" target="_blank" rel="noopener">https://github.com/tanluren/yolov3-channel-and-layer-pruning</a></p><h2 id="HISTOGRAMS和DISTRIBUTIONS"><a href="#HISTOGRAMS和DISTRIBUTIONS" class="headerlink" title="HISTOGRAMS和DISTRIBUTIONS"></a>HISTOGRAMS和DISTRIBUTIONS</h2><p><a href="https://www.cnblogs.com/rainydayfmb/p/7944224.html" target="_blank" rel="noopener">https://www.cnblogs.com/rainydayfmb/p/7944224.html</a></p><p><a href="https://vimsky.com/article/3645.html" target="_blank" rel="noopener">https://vimsky.com/article/3645.html</a></p><p><a href="https://www.jianshu.com/p/8fdc43e48c86" target="_blank" rel="noopener">https://www.jianshu.com/p/8fdc43e48c86</a></p><p><a href="https://blog.csdn.net/wgj99991111/article/details/84708255" target="_blank" rel="noopener">https://blog.csdn.net/wgj99991111/article/details/84708255</a></p><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;之前我都是用TensorBoard记录训练过程中的Loss、mAP等标量，很容易就知道TensorBoard里的SCALARS（标量）图是怎
+      
+    
+    </summary>
+    
+    
+      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="TensorBoard" scheme="https://chouxianyu.github.io/tags/TensorBoard/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu中百度网盘BaiduPCS-Go的安装及简单使用</title>
+    <link href="https://chouxianyu.github.io/2020/04/01/Ubuntu%E4%B8%AD%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98BaiduPCS-Go%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/"/>
+    <id>https://chouxianyu.github.io/2020/04/01/Ubuntu中百度网盘BaiduPCS-Go的安装及简单使用/</id>
     <published>2020-04-01T08:25:02.000Z</published>
-    <updated>2020-04-01T08:27:49.879Z</updated>
+    <updated>2020-04-02T12:57:18.519Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天用服务器训练模型时，服务器突然关机了，然后我的文件突然没了…昨天刚训练好的呀！</p><p>没办法，只能把数据再传到服务器上，但是文件很大，用Xftp传肯定很慢，所以用了百度云。（后来发现文件没有丢，重新挂载一下文件夹就好了，但我这个过程记录也写好了…）</p><p>下面记录了Ubuntu上如何安装<a href="https://github.com/iikira/BaiduPCS-Go" target="_blank" rel="noopener">BaiduPCS-Go</a>并用其下载百度网盘文件，安装成功后的具体使用方法请参考Github中的说明（Github里讲得比较详细了）。</p><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><ol><li><p>下载对应的<a href="https://github.com/iikira/BaiduPCS-Go/releases" target="_blank" rel="noopener">BaiduPCS-Go Release</a>，我用的下面这个，命令如下：</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/iikira/BaiduPCS-Go/releases/download/v3.6.1/BaiduPCS-Go-v3.6.1-linux-amd64.zip</span><br></pre></td></tr></table></figure><p> 注意是下载发行版，而不是git clone。</p></li><li><p>解压上一步下载到的zip到当前文件夹，命令如下：</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip BaiduPCS-Go-v3.6.1-linux-amd64.zip</span><br></pre></td></tr></table></figure></li><li><p>删除zip文件（也可以不删除该zip文件），命令如下：</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm BaiduPCS-Go-v3.6.1-linux-amd64.zip</span><br></pre></td></tr></table></figure></li><li><p>进入解压得到的文件夹，命令如下：</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd BaiduPCS-Go-v3.6.1-linux-amd64/</span><br></pre></td></tr></table></figure></li><li><p>查看文件夹中的内容（也可以不查看），命令如下：</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls</span><br></pre></td></tr></table></figure></li><li><p><strong>运行BaiduPCS-Go，命令如下：</strong></p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BaiduPCS-Go</span><br></pre></td></tr></table></figure></li><li><p>登录并进入百度云盘中的某个目录（步骤请参考Github中的说明）</p></li><li><p>下载文件<code>labels.zip</code>并保存至当前文件夹，命令如下：</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d labels.zip --saveto ./</span><br></pre></td></tr></table></figure></li></ol><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
     
@@ -293,9 +318,9 @@
     </summary>
     
     
-      <category term="python" scheme="https://chouxianyu.github.io/tags/python/"/>
-    
       <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="python" scheme="https://chouxianyu.github.io/tags/python/"/>
     
       <category term="sklearn" scheme="https://chouxianyu.github.io/tags/sklearn/"/>
     
@@ -322,9 +347,9 @@
     </summary>
     
     
-      <category term="python" scheme="https://chouxianyu.github.io/tags/python/"/>
-    
       <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="python" scheme="https://chouxianyu.github.io/tags/python/"/>
     
       <category term="sklearn" scheme="https://chouxianyu.github.io/tags/sklearn/"/>
     
@@ -500,31 +525,6 @@
     
     
       <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT乙级1043</title>
-    <link href="https://chouxianyu.github.io/2019/08/11/PAT%E4%B9%99%E7%BA%A71043/"/>
-    <id>https://chouxianyu.github.io/2019/08/11/PAT乙级1043/</id>
-    <published>2019-08-11T14:15:04.000Z</published>
-    <updated>2019-08-11T14:15:40.352Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://pintia.cn/problem-sets/994805260223102976/problems/994805280074743808" target="_blank" rel="noopener">https://pintia.cn/problem-sets/994805260223102976/problems/994805280074743808</a></p><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>这次再次体会到题意理解的正确性，理解正确的话其实就是用代码实现自己的想法。</p><p>难的是，刚开始想错了，然后再去改，这样完全没有思路，很麻烦的。</p><p>这道题的意思是：按照<code>PATest</code>的顺序去字符串里找，找得到就输出，找不到就找下一个，直至字符串里找不到<code>PATest</code>中的任意一个字符。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PAT BasicLevel 1043</span></span><br><span class="line"><span class="comment">// https://pintia.cn/problem-sets/994805260223102976/problems/994805280074743808</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 用户输入</span></span><br><span class="line">    <span class="built_in">string</span> str,PATest=<span class="string">"PATest"</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt;str;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> notFoundCount=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (notFoundCount &lt; <span class="number">6</span>)&#123;</span><br><span class="line">        <span class="comment">// 找到了想要的字符</span></span><br><span class="line">        <span class="keyword">if</span> (str.find_first_of(PATest[i]) != <span class="built_in">string</span>::npos)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; PATest[i];</span><br><span class="line">            str.erase(str.begin() + str.find_first_of(PATest[i]));</span><br><span class="line">            notFoundCount = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 找不到该字符</span></span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            notFoundCount++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 找下一个</span></span><br><span class="line">        i = (i + <span class="number">1</span>) % <span class="number">6</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://pintia.cn/problem-sets/994805260223102976/pro
-      
-    
-    </summary>
-    
-    
-      <category term="PAT" scheme="https://chouxianyu.github.io/tags/PAT/"/>
-    
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
