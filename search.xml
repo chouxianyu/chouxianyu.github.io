@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[HostwindsVPS购买、支付宝支付相关]]></title>
+    <url>%2F2020%2F04%2F03%2FHostwindsVPS%E8%B4%AD%E4%B9%B0%E3%80%81%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E7%9B%B8%E5%85%B3%2F</url>
+    <content type="text"><![CDATA[前言我前几天买了Hostwinds的VPS，当时买的时候支付宝支付就出了问题，最近这两天用支付宝支付又出了问题。 所以想记录一下Hostwinds支付宝支付的相关问题及解决方法，顺便也记录一下关于Hostwinds VPS的更多内容。 正文支付宝支付 我在第一次用支付宝支付（购买VPS）时的操作没有错误，但没有支付成功，最后发现原因是支付宝余额不足…暴露出自己的贫穷 解决方法：支付宝充钱就行，然后再支付 当时是看了这篇文章才知道的 https://www.vps234.com/usa-vps-hostwinds-alipay-paid-failed/ 这个网站中还是有很多关于VPS的知识的，挺好用的 正常情况下，如果开通了支付宝自动支付，那之后每个月（其实是我们选择的付费周期，我选的是每月）到时间的话会自动支付，如果余额够，一般不会出问题的。 我们选了付费周期之后，比如说是按月付费，3月2日、4月2日……，这里的日期其实是最后期限（Due Date），我们是可以提前付款的 在每一个付费周期内，大概中间的那天（比如3月19日）会生成Invoice（中文是发票、费用清单），订单生成后你就可以付费了。 这是后来和客服交流时才发现的，问客服之前我以为只能在3月2日、4月2日付费。 这两天又遇到支付宝无法支付的问题，我的支付宝里是有钱的，暂时不知道真正原因（可能是由于我提前支付了）。 然后我去问客服，客服说现在不要用支付宝的自动支付，而是手动支付，具体来说就是用Account Credits支付，在这个情景中的意思是存入金额，就像充Q币一样，然后用你充值后账号里的钱去支付。 很奇怪的是，充Account Credits时我也是用支付宝支付哈哈，这不是套娃了吗？ 虽然套娃了，但我用支付宝充值成功了，然后用Account Credits支付了这个无法用支付宝自动支付的Invoice。 Hostwinds中的支付宝不支持二次支付（Recurring Agreement），Alipay is unsupported for recurring payments，这是客服说的 We do not support recurring Alipay payments. All invoices through Alipay must be manually processed each billing cycle. 这一点似乎可以比较合理地解释上一个事情 不确定是什么原因（估计是因为我提前支付了）一个订单在用我的支付宝自动支付时出了问题。当我发现自动支付失败时，再去用支付宝支付，这就是二次支付了，客服说不支持。 当账户里有余额，也开通了支付宝的自动付费的话。每个付费周期的付费会先使用账户里的余额。 总结来说，使用支付宝支付时注意以下几点 确保支付宝里余额充足 Hostwinds网站里显示的付费日期是最后期限（Due Date），可以在订单（Invoice）生成后手动支付 如果支付宝自动支付时付费失败，可以手动充值，然后用账户余额付费 当账户里有余额，也开通了支付宝的自动付费的话。每个付费周期的付费会先使用账户里的余额。 客服 Hostwinds的客服似乎是24小时在线的。我个人觉得客服质量和态度还不错，每次去问问题都会有人给我比较及时的回复。 如果我问的问题比较简单，客服会直接回答我；如果是稍难一点的问题，客服会Open一个Ticket，让对应部门的人解决我的问题 ISP Block 客服说要想解决这个问题只能通过’Fix IP Block’，会给我们换一个IP 出现ISP Block问题主要还是由于自己的操作不当 我刚开始使用SS时，VPS的IP和端口经常被封 后来经@roadwide推荐，使用了v2RayN，IP和端口就没有被封过 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>Hostwinds</tag>
+        <tag>VPS</tag>
+        <tag>支付宝</tag>
+        <tag>ISP Block</tag>
+        <tag>v2rayN</tag>
+        <tag>shadowsocks</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[TensorBoard中HISTOGRAMS和DISTRIBUTIONS图形的含义]]></title>
     <url>%2F2020%2F04%2F02%2FTensorBoard%E4%B8%ADHISTOGRAMS%E5%92%8CDISTRIBUTIONS%E5%9B%BE%E5%BD%A2%E7%9A%84%E5%90%AB%E4%B9%89%2F</url>
     <content type="text"><![CDATA[前言之前我都是用TensorBoard记录训练过程中的Loss、mAP等标量，很容易就知道TensorBoard里的SCALARS（标量）图是怎么看的（其中横纵轴的含义、Smoothing等）。 最近在尝试模型压缩，其中的一个步骤是对模型进行稀疏训练。 稀疏训练时需要记录模型中BN层的Gamma值的分布情况（取哪些值，这些值出现的次数/频度），这时用TensorBoard里的SCALARS之类的图就不合适了，而是应该用TensorBoard里的HISTOGRAMS（直方图）和DISTRIBUTIONS（暂未找到合适的译文）。 所以我昨天学习、了解了一点HISTOGRAMS和DISTRIBUTIONS，今天做了一部分简单记录，具体见下文。 正文HISTOGRAMS和DISTRIBUTIONS这两种图的数据源是相同的，只是从不同的视角、以不同的方式来表示数据的分布情况。 下面先介绍HISTOGRAMS，再介绍DISTRIBUTIONS。 HISTOGRAMS 上图是TensorBoard生成的一个直方图（OFFEST模式），下面介绍图中几个元素的含义。 数据源 数据源是多个一维数组 也在别处看到有人说可以是多维数组，但会被压缩成一维数组，有兴趣的小伙伴可以具体研究一下 如果你只有1个数组，也是可以的 当鼠标放在图上时出现的一条黑线和数字 鼠标放在图上出现的一条黑线，就对应数据源里的一个一维数组 上图中显示的黑线对应我的第41个数组的所有元素（index为40，因为index从0开始计数的）的取值的分布情况 图下方的横轴 横轴的值和数组内元素的取值对应 图右方的纵轴 纵轴的值对应着是哪一个数组，或者说对应了数组的id、index（上边提到的40） 颜色 可以看到上图中的颜色是渐变的，靠上（id小）的颜色深，靠下（id大）的颜色浅 上面的用词比较“学术化”，如果看不懂，就看下边的这个解释吧 我的数据有99个数组，index从0到98，但右侧的纵轴值只标到了90 数组元素的分布范围是横轴上的数字，可以看出我的每个数组中的元素的取值大约集中在0到0.2，超过1.5的元素很少 我的第40个数组（说法不严谨，准确地说是id为40）中大约有505个元素的值为0.536左右 如果还是不懂的话，建议先去看看直方图是什么 DISTRIBUTIONS 把HISTOGRAMS搞懂后，这个图就很好懂的，因为这个图的数据源和HISTOGRAMS一样。 横轴 横轴是对应哪个数组 纵轴 数组中元素的取值 颜色 颜色深代表对应值出现的频数高 如上图，我的99个数组从0到98，数组中元素的取值慢慢地趋近于0 参考链接剪枝Githubhttps://github.com/tanluren/yolov3-channel-and-layer-pruning HISTOGRAMS和DISTRIBUTIONShttps://www.cnblogs.com/rainydayfmb/p/7944224.html https://vimsky.com/article/3645.html https://www.jianshu.com/p/8fdc43e48c86 https://blog.csdn.net/wgj99991111/article/details/84708255 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
@@ -1258,8 +1271,8 @@
     <url>%2F2018%2F08%2F22%2FJAI%E4%B8%A2%E5%8C%85%E6%8E%89%E5%B8%A7%E5%A4%84%E7%90%86%2F</url>
     <content type="text"><![CDATA[问题时间戳停止变化/图像停止更新 描述本小白刚刚接触JAI，有很多不懂的地方。这次遇到问题是请教了YZ大哥（不知道年龄，暂时这么称呼），很感谢YZ大哥的耐心指导。因为我不仅不知道怎么调，连在哪里调也不知道╭(╯^╰)╮。以下是此次问题解决步骤，是YZ大哥跟我说怎么做，然后我照做，过程中又遇到问题，下边也给出了碰到的问题以及相应的解决方法。（8.21更） 刚刚又看了下JAI SDK Getting Started Guide，发现YZ讲的方法就是文档里那部分我觉得可以先跳过的内容，出现问题应该也是因为我没有按照文档进行配置…..可能我写的这个会有错误、遗漏、表述模糊，具体操作还可参加文档说明（8.22更） 4.4=》设置接收缓冲区 4.5=》设置中断调整 4.6=》打开巨型帧 4.7=》计算和设置包延迟 出现问题原因图像传输时丢包（掉帧） 解决方法使用 JAI Control Tool 采集图像 防止丢包如何使用JAI Control Tool 采集图像 如何查看是否丢包？ 除了通过搜索，也可以找到GigE Image Acquisition-Total missing packets其实观察刚开始采集图像时图片是否有撕裂的情况（出现水平黑线） 如果丢包 设置相机据包为8000左右（我是8196）如何设置相机数据包 设置相机数据包后用JAI Control Tool采图时黑屏，查看黑屏是是否有帧率如何查看帧率 有帧率则调整网卡巨型帧等如何找到相机连接的网卡网络和共享中心-以太网（就是相机那条网线）-属性-由勾选EBUS设置为不勾选EBUS 同时可以看到连接时使用的网卡 找到网卡右击-属性-高级-巨型帧（由关闭设为9KB MTU）接收缓冲区设为最大（我的最大只有512，只能这样了） 提醒：文档中指出当巨型帧打开的时候，相机数据包大小就可以大于1500bytes，但相机数据包必须小于巨型帧大小。 提醒：文档中指出典型的接收缓冲区最大值为2048，标准默认值为256，请结合自己的实际情况 是不是我的网卡太菜了，众筹给我买个好的可以吗？？？ 如果仍丢包则根据文档设置延时直至成功如何设置延时？参照文档设置延时（主要是帧率）我的Max Fps是2.00 ，Band Width是90% 修改最大帧率，调整带宽，点击calculate，点击ok。（文档指出当数据包大小或者像素格式改变时，数据包延迟都需要重新计算） 最后查看是否丢包 如有丢包可以再次调整数据包大小和延迟。另外有一点是，图像的传输是和你整个电脑的运行都有关系的，而不只是网卡和相机设置。]]></content>
       <tags>
-        <tag>Bug</tag>
         <tag>JAI</tag>
+        <tag>Bug</tag>
       </tags>
   </entry>
   <entry>

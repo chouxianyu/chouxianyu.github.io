@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2020-04-02T13:13:19.520Z</updated>
+  <updated>2020-04-03T03:22:43.672Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HostwindsVPS购买、支付宝支付相关</title>
+    <link href="https://chouxianyu.github.io/2020/04/03/HostwindsVPS%E8%B4%AD%E4%B9%B0%E3%80%81%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E7%9B%B8%E5%85%B3/"/>
+    <id>https://chouxianyu.github.io/2020/04/03/HostwindsVPS购买、支付宝支付相关/</id>
+    <published>2020-04-03T03:09:06.000Z</published>
+    <updated>2020-04-03T03:22:43.672Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我前几天买了<a href="https://www.hostwinds.com/" target="_blank" rel="noopener">Hostwinds</a>的VPS，当时买的时候支付宝支付就出了问题，最近这两天用支付宝支付又出了问题。</p><p>所以想记录一下Hostwinds支付宝支付的相关问题及解决方法，顺便也记录一下关于Hostwinds VPS的更多内容。</p><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="支付宝支付"><a href="#支付宝支付" class="headerlink" title="支付宝支付"></a>支付宝支付</h2><ul><li><p>我在第一次用支付宝支付（购买VPS）时的操作没有错误，但没有支付成功，最后发现原因是<strong>支付宝余额不足</strong>…暴露出自己的贫穷</p><ul><li><p>解决方法：支付宝充钱就行，然后再支付</p></li><li><p>当时是看了这篇文章才知道的</p><p>  <a href="https://www.vps234.com/usa-vps-hostwinds-alipay-paid-failed/" target="_blank" rel="noopener">https://www.vps234.com/usa-vps-hostwinds-alipay-paid-failed/</a></p><p>  这个网站中还是有很多关于VPS的知识的，挺好用的</p></li></ul></li><li><p>正常情况下，如果开通了支付宝自动支付，那之后每个月（其实是我们选择的付费周期，我选的是每月）到时间的话会自动支付，如果余额够，一般不会出问题的。</p></li><li><p>我们选了付费周期之后，比如说是按月付费，3月2日、4月2日……，这里的日期其实是最后期限（Due Date），我们是可以<strong>提前付款</strong>的</p><ul><li>在每一个付费周期内，大概中间的那天（比如3月19日）会生成Invoice（中文是发票、费用清单），订单生成后你就可以付费了。</li><li>这是后来和客服交流时才发现的，问客服之前我以为只能在3月2日、4月2日付费。</li></ul></li><li><p>这两天又遇到支付宝无法支付的问题，我的支付宝里是有钱的，暂时不知道真正原因（可能是由于我提前支付了）。</p><ul><li>然后我去问客服，客服说<strong>现在不要用支付宝的自动支付，而是手动支付</strong>，具体来说就是<strong>用Account Credits支付</strong>，在这个情景中的意思是存入金额，就像充Q币一样，然后用你充值后账号里的钱去支付。</li><li>很奇怪的是，充Account Credits时我也是用支付宝支付哈哈，这不是套娃了吗？<ul><li>虽然套娃了，但我用支付宝充值成功了，然后用Account Credits支付了这个无法用支付宝自动支付的Invoice。</li></ul></li></ul></li><li><p>Hostwinds中的<strong>支付宝不支持二次支付（Recurring Agreement），Alipay is unsupported for recurring payments</strong>，这是客服说的</p><ul><li><p>We do not support recurring Alipay payments. All invoices through Alipay must be manually processed each billing cycle.</p></li><li><p>这一点似乎可以比较合理地解释上一个事情</p><p>  不确定是什么原因（估计是因为我提前支付了）一个订单在用我的支付宝自动支付时出了问题。当我发现自动支付失败时，再去用支付宝支付，这就是二次支付了，客服说不支持。</p></li></ul></li><li><p>当账户里有余额，也开通了支付宝的自动付费的话。每个付费周期的付费会先使用账户里的余额。</p></li></ul><p><strong>总结来说，使用支付宝支付时注意以下几点</strong></p><ul><li>确保支付宝里余额充足</li><li>Hostwinds网站里显示的付费日期是最后期限（Due Date），可以在订单（Invoice）生成后手动支付</li><li>如果支付宝自动支付时付费失败，可以手动充值，然后用账户余额付费</li><li>当账户里有余额，也开通了支付宝的自动付费的话。每个付费周期的付费会先使用账户里的余额。</li></ul><h2 id="客服"><a href="#客服" class="headerlink" title="客服"></a>客服</h2><ul><li>Hostwinds的客服似乎是24小时在线的。我个人觉得客服质量和态度还不错，每次去问问题都会有人给我比较及时的回复。</li><li>如果我问的问题比较简单，客服会直接回答我；如果是稍难一点的问题，客服会Open一个Ticket，让对应部门的人解决我的问题</li></ul><h2 id="ISP-Block"><a href="#ISP-Block" class="headerlink" title="ISP Block"></a>ISP Block</h2><ul><li><p>客服说要想解决这个问题只能通过’Fix IP Block’，会给我们换一个IP</p><p>  出现ISP Block问题主要还是由于自己的操作不当</p></li><li><p>我刚开始使用<a href="https://github.com/shadowsocks/shadowsocks-windows" target="_blank" rel="noopener">SS</a>时，VPS的IP和端口经常被封</p></li><li><p>后来经<a href="https://www.cnblogs.com/roadwide/" target="_blank" rel="noopener">@roadwide</a>推荐，使用了<a href="https://github.com/2dust/v2rayN" target="_blank" rel="noopener">v2RayN</a>，IP和端口就没有被封过</p></li></ul><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;我前几天买了&lt;a href=&quot;https://www.hostwinds.com/&quot; target=&quot;_blank&quot; rel=&quot;noopen
+      
+    
+    </summary>
+    
+    
+      <category term="Hostwinds" scheme="https://chouxianyu.github.io/tags/Hostwinds/"/>
+    
+      <category term="VPS" scheme="https://chouxianyu.github.io/tags/VPS/"/>
+    
+      <category term="支付宝" scheme="https://chouxianyu.github.io/tags/%E6%94%AF%E4%BB%98%E5%AE%9D/"/>
+    
+      <category term="ISP Block" scheme="https://chouxianyu.github.io/tags/ISP-Block/"/>
+    
+      <category term="v2rayN" scheme="https://chouxianyu.github.io/tags/v2rayN/"/>
+    
+      <category term="shadowsocks" scheme="https://chouxianyu.github.io/tags/shadowsocks/"/>
+    
+  </entry>
   
   <entry>
     <title>TensorBoard中HISTOGRAMS和DISTRIBUTIONS图形的含义</title>
@@ -495,30 +528,6 @@
       
         &lt;h1 id=&quot;线性回归&quot;&gt;&lt;a href=&quot;#线性回归&quot; class=&quot;headerlink&quot; title=&quot;线性回归&quot;&gt;&lt;/a&gt;线性回归&lt;/h1&gt;&lt;p&gt;linear regression&lt;/p&gt;
 &lt;h2 id=&quot;符号定义&quot;&gt;&lt;a href=&quot;#符号定义&quot; class=&quot;hea
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>机器学习-绪论</title>
-    <link href="https://chouxianyu.github.io/2019/09/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BB%AA%E8%AE%BA/"/>
-    <id>https://chouxianyu.github.io/2019/09/23/机器学习-绪论/</id>
-    <published>2019-09-23T12:12:33.000Z</published>
-    <updated>2019-09-23T12:15:57.162Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>机器学习是一门多领域交叉学科，涉及概率论、统计学、逼近论等多门学科。它是人工智能的核心。</p><p>机器学习暂无一个被广泛认可的定义来准确定义机器学习是什么或不是什么。</p><h1 id="机器学习算法的分类"><a href="#机器学习算法的分类" class="headerlink" title="机器学习算法的分类"></a>机器学习算法的分类</h1><p>按照学习方式来分，主要可以分为两类（这两类算法也是最常使用的）：</p><ul><li><p>监督学习（supervised learning）</p><p>  会教计算机如何去完成任务</p></li><li><p>无监督学习（unsupervised learning）</p><p>  让计算机自己学习如何完成任务</p></li></ul><p>其他学习方法还有强化学习（reinforcement learning）和推荐系统（recommender systems）等。</p><h1 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h1><p>监督学习：数据集中的每个样本的正确答案（label）是有给出的。</p><h2 id="回归问题"><a href="#回归问题" class="headerlink" title="回归问题"></a>回归问题</h2><p>regression problem，预测一个连续的输出值</p><h2 id="分类问题"><a href="#分类问题" class="headerlink" title="分类问题"></a>分类问题</h2><p>classification problem，预测一个离散的输出值</p><p>（支持向量机可以处理无限多的features）</p><h1 id="无监督学习"><a href="#无监督学习" class="headerlink" title="无监督学习"></a>无监督学习</h1><p>无监督学习：数据集中的每个样本是没有正确答案（label）的。</p><h2 id="聚类算法"><a href="#聚类算法" class="headerlink" title="聚类算法"></a>聚类算法</h2><p>cluster algorithm</p><p>将个例分为几类，比如新闻的专题分类、基因分类、组织计算机集群、社交网络分析、市场细分和天文数据分析等。</p><p>聚类只是无监督学习的一种。</p><h2 id="鸡尾酒会算法"><a href="#鸡尾酒会算法" class="headerlink" title="鸡尾酒会算法"></a>鸡尾酒会算法</h2><p>cocktail party problem algorithm</p><p>两个声源同时发声，两个收音器收音，用算法分离两个声源发出的声音。</p><p>利用Octave和Matlab这样的软件，一行代码就可以实现这样的算法。</p><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;机器学习是一门多领域交叉学科，涉及概率论、统计学、逼近论等多门学科。它是人工智能的核心。&lt;/p&gt;
-&lt;p&gt;机器学习暂无一个被广泛认可的定义来准
       
     
     </summary>
