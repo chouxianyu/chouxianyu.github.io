@@ -4,6 +4,109 @@
 
     
   <url>
+    <loc>https://chouxianyu.github.io/2020/04/04/%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A%E8%BF%87%E7%A8%8B%E5%8F%8A%E5%85%B6%E9%97%AE%E9%A2%98%E7%9A%84%E8%AE%B0%E5%BD%95%EF%BC%9Amysql%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%81%E5%BB%BA%E8%A1%A8%E3%80%81%E6%9F%A5%E8%AF%A2%E5%92%8C%E6%8F%92%E5%85%A5%E7%AD%89/</loc>
+    <lastmod>2020-04-05T03:02:02.948Z</lastmod>
+    <data>
+        <display>
+        <title>作业过程及其问题的记录：mysql建立数据库、建表、查询和插入等</title>
+        <pubTime>2020-04-04T14:42:24.000Z</pubTime>
+        
+        <tag>数据库</tag>
+         
+        <tag>mysql</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/04/05/%E7%94%A8pymysql%E5%92%8CFlask%E6%90%AD%E5%BB%BA%E5%90%8E%E7%AB%AF%EF%BC%8C%E5%93%8D%E5%BA%94%E5%89%8D%E7%AB%AFPOST%E5%92%8CGET%E8%AF%B7%E6%B1%82/</loc>
+    <lastmod>2020-04-05T02:53:46.846Z</lastmod>
+    <data>
+        <display>
+        <title>用pymysql和Flask搭建后端，响应前端POST和GET请求</title>
+        <pubTime>2020-04-05T02:14:03.000Z</pubTime>
+        
+        <tag>数据库</tag>
+         
+        <tag>mysql</tag>
+         
+        <tag>Flask</tag>
+         
+        <tag>Web</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/04/04/%E5%85%B3%E4%BA%8EPython%E7%9A%84TypeError-not-all-arguments-converted-during-string-formatting/</loc>
+    <lastmod>2020-04-04T02:54:45.228Z</lastmod>
+    <data>
+        <display>
+        <title>关于Python的TypeError not all arguments converted during string formatting</title>
+        <pubTime>2020-04-04T02:38:36.000Z</pubTime>
+        
+        <tag>Bug</tag>
+         
+        <tag>python</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/04/04/%E8%A7%A3%E5%86%B3GPU%E6%98%BE%E5%AD%98%E6%9C%AA%E9%87%8A%E6%94%BE%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2020-04-04T02:34:55.526Z</lastmod>
+    <data>
+        <display>
+        <title>解决GPU显存未释放问题</title>
+        <pubTime>2020-04-04T00:02:21.000Z</pubTime>
+        
+        <tag>Bug</tag>
+         
+        <tag>PyTorch</tag>
+         
+        <tag>linux</tag>
+         
+        <tag>GPU</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/03/30/VSCode%E7%94%9F%E6%88%90HTML%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/</loc>
+    <lastmod>2020-04-03T09:16:46.664Z</lastmod>
+    <data>
+        <display>
+        <title>VSCode生成HTML代码模板</title>
+        <pubTime>2020-03-30T10:30:53.000Z</pubTime>
+        
+        <tag>VSCode</tag>
+         
+        <tag>HTML</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chouxianyu.github.io/2020/04/03/HostwindsVPS%E8%B4%AD%E4%B9%B0%E3%80%81%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E7%9B%B8%E5%85%B3/</loc>
     <lastmod>2020-04-03T03:22:43.672Z</lastmod>
     <data>
@@ -96,25 +199,6 @@
         <tag>IDEA</tag>
          
         <tag>Bug</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2020/03/30/VSCode%E7%94%9F%E6%88%90HTML%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/</loc>
-    <lastmod>2020-03-30T10:36:02.364Z</lastmod>
-    <data>
-        <display>
-        <title>VSCode生成HTML代码模板</title>
-        <pubTime>2020-03-30T10:30:53.000Z</pubTime>
-        
-        <tag>VSCode</tag>
-         
-        <tag>HTML</tag>
          
          
            
@@ -1188,9 +1272,9 @@
         <title>模拟退火学习</title>
         <pubTime>2019-04-24T18:01:13.000Z</pubTime>
         
-        <tag>数学建模</tag>
-         
         <tag>算法</tag>
+         
+        <tag>数学建模</tag>
          
         <tag>模拟退火</tag>
          
@@ -1355,9 +1439,9 @@
         
         <tag>C/C++</tag>
          
-        <tag>面向对象</tag>
-         
         <tag>继承</tag>
+         
+        <tag>面向对象</tag>
          
          
            
@@ -2034,9 +2118,9 @@
         
         <tag>C/C++</tag>
          
-        <tag>面向对象</tag>
-         
         <tag>继承</tag>
+         
+        <tag>面向对象</tag>
          
          
            
@@ -2298,11 +2382,11 @@
         <title>PageRank</title>
         <pubTime>2019-02-18T07:58:08.000Z</pubTime>
         
+        <tag>算法</tag>
+         
         <tag>Matlab</tag>
          
         <tag>数学建模</tag>
-         
-        <tag>算法</tag>
          
         <tag>PageRank</tag>
          

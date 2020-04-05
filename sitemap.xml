@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chouxianyu.github.io/2020/04/04/%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A%E8%BF%87%E7%A8%8B%E5%8F%8A%E5%85%B6%E9%97%AE%E9%A2%98%E7%9A%84%E8%AE%B0%E5%BD%95%EF%BC%9Amysql%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%81%E5%BB%BA%E8%A1%A8%E3%80%81%E6%9F%A5%E8%AF%A2%E5%92%8C%E6%8F%92%E5%85%A5%E7%AD%89/</loc>
+    
+    <lastmod>2020-04-05T03:02:02.948Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chouxianyu.github.io/2020/04/05/%E7%94%A8pymysql%E5%92%8CFlask%E6%90%AD%E5%BB%BA%E5%90%8E%E7%AB%AF%EF%BC%8C%E5%93%8D%E5%BA%94%E5%89%8D%E7%AB%AFPOST%E5%92%8CGET%E8%AF%B7%E6%B1%82/</loc>
+    
+    <lastmod>2020-04-05T02:53:46.846Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chouxianyu.github.io/2020/04/04/%E5%85%B3%E4%BA%8EPython%E7%9A%84TypeError-not-all-arguments-converted-during-string-formatting/</loc>
+    
+    <lastmod>2020-04-04T02:54:45.228Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chouxianyu.github.io/2020/04/04/%E8%A7%A3%E5%86%B3GPU%E6%98%BE%E5%AD%98%E6%9C%AA%E9%87%8A%E6%94%BE%E9%97%AE%E9%A2%98/</loc>
+    
+    <lastmod>2020-04-04T02:34:55.526Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://chouxianyu.github.io/2020/03/30/VSCode%E7%94%9F%E6%88%90HTML%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/</loc>
+    
+    <lastmod>2020-04-03T09:16:46.664Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://chouxianyu.github.io/2020/04/03/HostwindsVPS%E8%B4%AD%E4%B9%B0%E3%80%81%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E7%9B%B8%E5%85%B3/</loc>
     
     <lastmod>2020-04-03T03:22:43.672Z</lastmod>
@@ -33,13 +68,6 @@
     <loc>https://chouxianyu.github.io/2020/03/31/IDEA%E6%8F%92%E4%BB%B6%E6%90%9C%E7%B4%A2%E5%A4%B1%E8%B4%A5/</loc>
     
     <lastmod>2020-03-31T04:36:33.107Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://chouxianyu.github.io/2020/03/30/VSCode%E7%94%9F%E6%88%90HTML%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/</loc>
-    
-    <lastmod>2020-03-30T10:36:02.364Z</lastmod>
     
   </url>
   
