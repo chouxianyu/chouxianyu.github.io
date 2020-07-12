@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2020-07-11T09:54:18.354Z</updated>
+  <updated>2020-07-12T15:43:27.651Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,68 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode144二叉树前序遍历</title>
+    <link href="https://chouxianyu.github.io/2020/07/12/LeetCode144%E4%BA%8C%E5%8F%89%E6%A0%91%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86/"/>
+    <id>https://chouxianyu.github.io/2020/07/12/LeetCode144二叉树前序遍历/</id>
+    <published>2020-07-12T15:40:38.000Z</published>
+    <updated>2020-07-12T15:43:27.651Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode-cn.com/problems/binary-tree-preorder-traversal/description/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/binary-tree-preorder-traversal/description/</a></p><h1 id="题解一：递归"><a href="#题解一：递归" class="headerlink" title="题解一：递归"></a>题解一：递归</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 144</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/binary-tree-preorder-traversal/description/</span></span><br><span class="line"><span class="comment">// Tags: Tree Recursion Stack</span></span><br><span class="line"><span class="comment">// Difficulty: Medium</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> x):val(x), left(<span class="literal">nullptr</span>), right(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(TreeNode* root, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; result)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            result.push_back(root-&gt;val);</span><br><span class="line">            func(root-&gt;left, result);</span><br><span class="line">            func(root-&gt;right, result);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; preorderTraversal(TreeNode* root)&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">        func(root, result);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"helloworld"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="题解二：非递归"><a href="#题解二：非递归" class="headerlink" title="题解二：非递归"></a>题解二：非递归</h1><ul><li>需要用到栈</li><li>注意循环条件</li><li>注意是先把右子树存入栈中</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 144</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/binary-tree-preorder-traversal/description/</span></span><br><span class="line"><span class="comment">// Tags: Tree Recursion Stack</span></span><br><span class="line"><span class="comment">// Difficulty: Medium</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> x):val(x), left(<span class="literal">nullptr</span>), right(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; preorderTraversal(TreeNode* root)&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">        <span class="built_in">stack</span>&lt;TreeNode*&gt; nodes;</span><br><span class="line">        nodes.push(root);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(!nodes.empty())&#123;</span><br><span class="line">            root = nodes.top();</span><br><span class="line">            nodes.pop();</span><br><span class="line">            <span class="keyword">if</span>(root!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">                result.push_back(root-&gt;val);</span><br><span class="line">                nodes.push(root-&gt;right);</span><br><span class="line">                nodes.push(root-&gt;left);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"helloworld"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/binary-tree-preorder
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
+    
+      <category term="树" scheme="https://chouxianyu.github.io/tags/%E6%A0%91/"/>
+    
+      <category term="栈" scheme="https://chouxianyu.github.io/tags/%E6%A0%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode83</title>
+    <link href="https://chouxianyu.github.io/2020/07/12/LeetCode83/"/>
+    <id>https://chouxianyu.github.io/2020/07/12/LeetCode83/</id>
+    <published>2020-07-12T08:43:58.000Z</published>
+    <updated>2020-07-12T08:44:55.091Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/" target="_blank" rel="noopener">https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/</a></p><h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><ul><li>链表已排序</li></ul><h1 id="题解一：迭代"><a href="#题解一：迭代" class="headerlink" title="题解一：迭代"></a>题解一：迭代</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>遍历链表，如果发现重复元素就删除。</p><p>注意发现重复时遍历链表用的指针不要后移，不重复时才后移。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 83</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/description/</span></span><br><span class="line"><span class="comment">// Tags: Linked List Recursion Iteration</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode* next;</span><br><span class="line">    ListNode(): val(<span class="number">0</span>), next(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x): val(x), next(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x, ListNode* next) : val(x), next(next) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">deleteDuplicates</span><span class="params">(ListNode* head)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="literal">nullptr</span> == head)&#123;<span class="keyword">return</span> head;&#125;</span><br><span class="line">        ListNode *next = <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* ret = head; <span class="comment">// 用于返回</span></span><br><span class="line">        <span class="keyword">while</span>(head-&gt;next !=  <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            next = head-&gt;next;</span><br><span class="line">            <span class="comment">// 元素重复</span></span><br><span class="line">            <span class="keyword">if</span> (head-&gt;val == next-&gt;val)&#123;</span><br><span class="line">                head-&gt;next = next-&gt;next;</span><br><span class="line">                <span class="keyword">delete</span> next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 元素未重复</span></span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                head = next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="题解二：递归"><a href="#题解二：递归" class="headerlink" title="题解二：递归"></a>题解二：递归</h1><h2 id="关于递归"><a href="#关于递归" class="headerlink" title="关于递归"></a>关于递归</h2><p>又摸到一个递归函数套路（有可能仅针对这道题）：</p><ol><li>递归出口（包括边界）</li><li>递归调用</li><li>手工拼接？（这一步可能直接融合到第二步）</li></ol><h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><ul><li>递归函数的功能是将一个链表去重</li><li>思路是取出head然后剩下的链表通过递归去重，然后手动去重</li></ul><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 83</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/description/</span></span><br><span class="line"><span class="comment">// Tags: Linked List Recursion Iteration</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode* next;</span><br><span class="line">    ListNode(): val(<span class="number">0</span>), next(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x): val(x), next(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x, ListNode* next) : val(x), next(next) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">deleteDuplicates</span><span class="params">(ListNode* head)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="literal">nullptr</span> == head || <span class="literal">nullptr</span> == head-&gt;next)&#123;</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 取出head然后剩下的链表通过递归去重</span></span><br><span class="line">        head-&gt;next = deleteDuplicates(head-&gt;next);</span><br><span class="line">        <span class="comment">// 手动去重</span></span><br><span class="line">        <span class="keyword">if</span>(head-&gt;val == head-&gt;next-&gt;val)&#123;</span><br><span class="line">            ListNode* ret = head-&gt;next;</span><br><span class="line">            <span class="keyword">delete</span> head;</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode.com/problems/remove-duplicates-from-
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
+    
+      <category term="链表" scheme="https://chouxianyu.github.io/tags/%E9%93%BE%E8%A1%A8/"/>
+    
+      <category term="迭代" scheme="https://chouxianyu.github.io/tags/%E8%BF%AD%E4%BB%A3/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode21</title>
@@ -35,13 +97,13 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="链表" scheme="https://chouxianyu.github.io/tags/%E9%93%BE%E8%A1%A8/"/>
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
+    
+      <category term="链表" scheme="https://chouxianyu.github.io/tags/%E9%93%BE%E8%A1%A8/"/>
     
       <category term="迭代" scheme="https://chouxianyu.github.io/tags/%E8%BF%AD%E4%BB%A3/"/>
     
@@ -66,13 +128,13 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="链表" scheme="https://chouxianyu.github.io/tags/%E9%93%BE%E8%A1%A8/"/>
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
+    
+      <category term="链表" scheme="https://chouxianyu.github.io/tags/%E9%93%BE%E8%A1%A8/"/>
     
       <category term="迭代" scheme="https://chouxianyu.github.io/tags/%E8%BF%AD%E4%BB%A3/"/>
     
@@ -97,9 +159,9 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="链表" scheme="https://chouxianyu.github.io/tags/%E9%93%BE%E8%A1%A8/"/>
     
@@ -230,6 +292,8 @@
     </summary>
     
     
+      <category term="Java" scheme="https://chouxianyu.github.io/tags/Java/"/>
+    
       <category term="软件测试" scheme="https://chouxianyu.github.io/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/"/>
     
       <category term="白盒测试" scheme="https://chouxianyu.github.io/tags/%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95/"/>
@@ -237,8 +301,6 @@
       <category term="基本路径测试" scheme="https://chouxianyu.github.io/tags/%E5%9F%BA%E6%9C%AC%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95/"/>
     
       <category term="JUnit" scheme="https://chouxianyu.github.io/tags/JUnit/"/>
-    
-      <category term="Java" scheme="https://chouxianyu.github.io/tags/Java/"/>
     
   </entry>
   
@@ -512,60 +574,6 @@
       <category term="VSCode" scheme="https://chouxianyu.github.io/tags/VSCode/"/>
     
       <category term="HTML" scheme="https://chouxianyu.github.io/tags/HTML/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>linux中nohup运行python程序无后台输出</title>
-    <link href="https://chouxianyu.github.io/2020/03/27/linux%E4%B8%ADnohup%E8%BF%90%E8%A1%8Cpython%E7%A8%8B%E5%BA%8F%E6%97%A0%E5%90%8E%E5%8F%B0%E8%BE%93%E5%87%BA/"/>
-    <id>https://chouxianyu.github.io/2020/03/27/linux中nohup运行python程序无后台输出/</id>
-    <published>2020-03-27T02:47:56.000Z</published>
-    <updated>2020-03-27T02:48:36.857Z</updated>
-    
-    <content type="html"><![CDATA[<p>之前，我都是使用下面这条命令在linux上运行python程序，并将程序输出（print）的内容存放至文件。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python helloworld.py &gt; helloworld.log  2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure><p>一般情况下，这条命令是可以将python程序的输出存放至指定文件的。</p><p>但我发现，用这条语句运行程序，偶尔会出现没有输出至指定文件（该文件被创建，但长时间不更新内容）的情况。</p><p>经过查询，我发现原因是：</p><p>默认情况下，python程序在执行时是有输出缓冲的（没有细究，个人理解是需要等输出的内容达到一定量才会输出，有兴趣的小伙伴可以研究一下）</p><p>解决该问题的一个方法是：使用python的<code>-u</code>参数，如下所示。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python -u helloworld.py &gt; helloworld.log  2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;之前，我都是使用下面这条命令在linux上运行python程序，并将程序输出（print）的内容存放至文件。&lt;/p&gt;
-&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class
-      
-    
-    </summary>
-    
-    
-      <category term="python" scheme="https://chouxianyu.github.io/tags/python/"/>
-    
-      <category term="linux" scheme="https://chouxianyu.github.io/tags/linux/"/>
-    
-      <category term="nohup" scheme="https://chouxianyu.github.io/tags/nohup/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PyTorch余弦学习率衰减</title>
-    <link href="https://chouxianyu.github.io/2020/03/26/PyTorch%E4%BD%99%E5%BC%A6%E5%AD%A6%E4%B9%A0%E7%8E%87%E8%A1%B0%E5%87%8F/"/>
-    <id>https://chouxianyu.github.io/2020/03/26/PyTorch余弦学习率衰减/</id>
-    <published>2020-03-26T04:45:13.000Z</published>
-    <updated>2020-03-26T04:51:45.156Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天用到了PyTorch里的CosineAnnealingLR，也就是用余弦函数进行学习率的衰减。</p><p>下面讲讲定义CosineAnnealingLR这个类的对象时输入的几个参数是什么，代码示例就不放了。</p><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max, eta_min=<span class="number">0</span>, last_epoch=<span class="number">-1</span>)</span><br></pre></td></tr></table></figure><ul><li><p><code>optimizer</code></p><p>  需要进行学习率衰减的优化器变量</p></li><li><p><code>T_max</code></p><p>  Cosine是个周期函数嘛，这里的<code>T_max</code>就是这个周期的一半</p><p>  如果你将<code>T_max</code>设置为10，则学习率衰减的周期是20个epoch，其中前10个epoch从学习率的初值（也是最大值）下降到最低值，后10个epoch从学习率的最低值上升到最大值</p></li><li><p><code>eta_min</code></p><p>  学习率衰减时的最小值，默认值为0</p></li><li><p><code>last_epoch</code></p><p>  （上次训练）最后一个epoch的索引值，默认值为-1。</p><p>  我没有测试，猜测是：如果你将其设置为20，那定义出来的scheduler的第一次step就会到第21个epoch对应的学习率。</p></li></ul><h1 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h1><p>我的参数是：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># optimizer学习率初值为0.0005，100个epoch，从第1个epoch（索引为0）开始训练</span></span><br><span class="line">scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=<span class="number">10</span>, eta_min=<span class="number">5e-6</span>)</span><br></pre></td></tr></table></figure><p>效果图如下：</p><p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_200326042806CosineAnnealingLR.png" alt="CosineAnnealingLR"></p><h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="https://pytorch.org/docs/stable/optim.html?highlight=cosine#torch.optim.lr_scheduler.CosineAnnealingLR" target="_blank" rel="noopener">https://pytorch.org/docs/stable/optim.html?highlight=cosine#torch.optim.lr_scheduler.CosineAnnealingLR</a></p><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;今天用到了PyTorch里的CosineAnnealingLR，也就是用余弦函数进行学习率的衰减。&lt;/p&gt;
-&lt;p&gt;下面讲讲定义CosineA
-      
-    
-    </summary>
-    
-    
-      <category term="PyTorch" scheme="https://chouxianyu.github.io/tags/PyTorch/"/>
-    
-      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
