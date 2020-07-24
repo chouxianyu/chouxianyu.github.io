@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Bug,linux,PyTorch,GPU," />
+  <meta name="keywords" content="Bug,PyTorch,linux,GPU," />
 
 
 
@@ -82,7 +82,7 @@
 
 
 <meta name="description" content="前言今早我想用多块GPU测试模型，于是就用了PyTorch里的torch.nn.parallel.DistributedDataParallel来支持用多块GPU的同时使用（下面简称其为Dist）。 程序运行时，由于程序中其他部分的代码（与Dist无关的代码）出现了错误，导致程序退出。这次使用Dist时没有考虑和处理这种程序崩溃的情况，因此在程序退出前没有用Dist关闭生成的所有进程，最终导致本次">
-<meta name="keywords" content="Bug,linux,PyTorch,GPU">
+<meta name="keywords" content="Bug,PyTorch,linux,GPU">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决GPU显存未释放问题">
 <meta property="og:url" content="https://chouxianyu.github.io/2020/04/04/解决GPU显存未释放问题/index.html">
@@ -467,9 +467,9 @@
           
             <a href="/tags/Bug/" rel="tag"># Bug</a>
           
-            <a href="/tags/linux/" rel="tag"># linux</a>
-          
             <a href="/tags/PyTorch/" rel="tag"># PyTorch</a>
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
           
             <a href="/tags/GPU/" rel="tag"># GPU</a>
           
@@ -586,7 +586,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">164</span>
+                  <span class="site-state-item-count">165</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -599,7 +599,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -691,7 +691,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">150.9k</span>
+    <span title="Site words total count">151.4k</span>
   
 </div>
 
