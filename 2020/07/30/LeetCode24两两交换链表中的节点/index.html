@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="题目链接https://leetcode-cn.com/problems/swap-nodes-in-pairs/ 题解 递归解法，我自己写的 要明确函数的功能 函数中需手动处理空链表和链表中只有1个节点的情况；多个节点时，先手动交换前两个节点，然后通过递归交换其它节点  1234567891011121314151617181920212223242526// Problem: LeetCode">
+<meta name="description" content="题目链接https://leetcode-cn.com/problems/swap-nodes-in-pairs/ 题解 递归解法，我自己写的 要明确函数的功能 函数中需手动处理空链表和链表中只有1个结点的情况；多个结点时，先手动交换前两个结点，然后通过递归交换其它结点  1234567891011121314151617181920212223242526// Problem: LeetCode">
 <meta name="keywords" content="算法,LeetCode,递归,单向链表">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode24两两交换链表中的节点">
+<meta property="og:title" content="LeetCode24两两交换链表中的结点">
 <meta property="og:url" content="https://chouxianyu.github.io/2020/07/30/LeetCode24两两交换链表中的节点/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="题目链接https://leetcode-cn.com/problems/swap-nodes-in-pairs/ 题解 递归解法，我自己写的 要明确函数的功能 函数中需手动处理空链表和链表中只有1个节点的情况；多个节点时，先手动交换前两个节点，然后通过递归交换其它节点  1234567891011121314151617181920212223242526// Problem: LeetCode">
+<meta property="og:description" content="题目链接https://leetcode-cn.com/problems/swap-nodes-in-pairs/ 题解 递归解法，我自己写的 要明确函数的功能 函数中需手动处理空链表和链表中只有1个结点的情况；多个结点时，先手动交换前两个结点，然后通过递归交换其它结点  1234567891011121314151617181920212223242526// Problem: LeetCode">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-30T13:18:42.149Z">
+<meta property="og:updated_time" content="2020-08-01T02:38:41.167Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode24两两交换链表中的节点">
-<meta name="twitter:description" content="题目链接https://leetcode-cn.com/problems/swap-nodes-in-pairs/ 题解 递归解法，我自己写的 要明确函数的功能 函数中需手动处理空链表和链表中只有1个节点的情况；多个节点时，先手动交换前两个节点，然后通过递归交换其它节点  1234567891011121314151617181920212223242526// Problem: LeetCode">
+<meta name="twitter:title" content="LeetCode24两两交换链表中的结点">
+<meta name="twitter:description" content="题目链接https://leetcode-cn.com/problems/swap-nodes-in-pairs/ 题解 递归解法，我自己写的 要明确函数的功能 函数中需手动处理空链表和链表中只有1个结点的情况；多个结点时，先手动交换前两个结点，然后通过递归交换其它结点  1234567891011121314151617181920212223242526// Problem: LeetCode">
 
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>LeetCode24两两交换链表中的节点 | 臭咸鱼的缺氧瓶</title>
+  <title>LeetCode24两两交换链表中的结点 | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -316,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">LeetCode24两两交换链表中的节点</h1>
+          <h1 class="post-title" itemprop="name headline">LeetCode24两两交换链表中的结点</h1>
         
 
         <div class="post-meta">
@@ -356,7 +356,7 @@
 
           
           
-             <span id="/2020/07/30/LeetCode24两两交换链表中的节点/" class="leancloud_visitors" data-flag-title="LeetCode24两两交换链表中的节点">
+             <span id="/2020/07/30/LeetCode24两两交换链表中的节点/" class="leancloud_visitors" data-flag-title="LeetCode24两两交换链表中的结点">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -422,9 +422,9 @@
 <h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><ul>
 <li>递归解法，我自己写的</li>
 <li>要明确函数的功能</li>
-<li>函数中需手动处理空链表和链表中只有1个节点的情况；多个节点时，先手动交换前两个节点，然后通过递归交换其它节点</li>
+<li>函数中需手动处理空链表和链表中只有1个结点的情况；多个结点时，先手动交换前两个结点，然后通过递归交换其它结点</li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 24</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/swap-nodes-in-pairs/</span></span><br><span class="line"><span class="comment">// Tags: Linked List Recursion</span></span><br><span class="line"><span class="comment">// Difficulty: Medium</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode* next;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">swapPairs</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 空链表或只有1个节点</span></span><br><span class="line">        <span class="keyword">if</span> (head==<span class="literal">nullptr</span> || head-&gt;next==<span class="literal">nullptr</span>) <span class="keyword">return</span> head;</span><br><span class="line">        <span class="comment">// 取第2和3个节点</span></span><br><span class="line">        ListNode *newHead=head-&gt;next, *subHead = head-&gt;next-&gt;next;</span><br><span class="line">        <span class="comment">// 交换第1个节点和第2个节点，递归交换其它节点并进行连接</span></span><br><span class="line">        newHead-&gt;next = head;</span><br><span class="line">        head-&gt;next = swapPairs(subHead);</span><br><span class="line">        <span class="keyword">return</span> newHead;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 24</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/swap-nodes-in-pairs/</span></span><br><span class="line"><span class="comment">// Tags: Linked List Recursion</span></span><br><span class="line"><span class="comment">// Difficulty: Medium</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode* next;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">swapPairs</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 空链表或只有1个结点</span></span><br><span class="line">        <span class="keyword">if</span> (head==<span class="literal">nullptr</span> || head-&gt;next==<span class="literal">nullptr</span>) <span class="keyword">return</span> head;</span><br><span class="line">        <span class="comment">// 取第2和3个结点</span></span><br><span class="line">        ListNode *newHead=head-&gt;next, *subHead = head-&gt;next-&gt;next;</span><br><span class="line">        <span class="comment">// 交换第1个结点和第2个结点，递归交换其它结点并进行连接</span></span><br><span class="line">        newHead-&gt;next = head;</span><br><span class="line">        head-&gt;next = swapPairs(subHead);</span><br><span class="line">        <span class="keyword">return</span> newHead;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p>
@@ -466,8 +466,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/30/LeetCode19删除链表的倒数第N个节点/" rel="next" title="LeetCode19删除链表的倒数第N个节点">
-                <i class="fa fa-chevron-left"></i> LeetCode19删除链表的倒数第N个节点
+              <a href="/2020/07/30/LeetCode19删除链表的倒数第N个节点/" rel="next" title="LeetCode19删除链表的倒数第N个结点">
+                <i class="fa fa-chevron-left"></i> LeetCode19删除链表的倒数第N个结点
               </a>
             
           </div>
@@ -568,7 +568,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">188</span>
+                  <span class="site-state-item-count">190</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -581,7 +581,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">83</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -673,7 +673,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">161.1k</span>
+    <span title="Site words total count">160.2k</span>
   
 </div>
 

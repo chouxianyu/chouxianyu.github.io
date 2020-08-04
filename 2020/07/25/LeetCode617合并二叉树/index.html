@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="算法,LeetCode,递归,二叉树," />
+  <meta name="keywords" content="算法,LeetCode,二叉树,递归," />
 
 
 
@@ -82,14 +82,14 @@
 
 
 <meta name="description" content="题目链接https://leetcode-cn.com/problems/merge-two-binary-trees/ 题解 递归解法 解法见代码注释  123456789101112131415161718192021222324252627282930313233343536373839404142434445// Problem: LeetCode 617// URL: https://l">
-<meta name="keywords" content="算法,LeetCode,递归,二叉树">
+<meta name="keywords" content="算法,LeetCode,二叉树,递归">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode617合并二叉树">
 <meta property="og:url" content="https://chouxianyu.github.io/2020/07/25/LeetCode617合并二叉树/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
 <meta property="og:description" content="题目链接https://leetcode-cn.com/problems/merge-two-binary-trees/ 题解 递归解法 解法见代码注释  123456789101112131415161718192021222324252627282930313233343536373839404142434445// Problem: LeetCode 617// URL: https://l">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-25T10:01:34.765Z">
+<meta property="og:updated_time" content="2020-08-01T02:38:41.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode617合并二叉树">
 <meta name="twitter:description" content="题目链接https://leetcode-cn.com/problems/merge-two-binary-trees/ 题解 递归解法 解法见代码注释  123456789101112131415161718192021222324252627282930313233343536373839404142434445// Problem: LeetCode 617// URL: https://l">
@@ -423,7 +423,7 @@
 <li>递归解法</li>
 <li>解法见代码注释</li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 617</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/merge-two-binary-trees/</span></span><br><span class="line"><span class="comment">// Tags: Tree Recursion</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> x):val(x),left(<span class="literal">nullptr</span>),right(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 将树t1和t2合并至t1，并返回t1</span></span><br><span class="line">    <span class="function">TreeNode* <span class="title">heleper</span><span class="params">(TreeNode* t1, TreeNode* t2)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 两个空树，返回null</span></span><br><span class="line">        <span class="keyword">if</span>(t1==<span class="literal">nullptr</span> &amp;&amp; t2==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="comment">// 仅t2为空树，不需合并，直接返回t1即可</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(t1!=<span class="literal">nullptr</span> &amp;&amp; t2==<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> t1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 仅t1为空树，不需合并，直接返回t2即可</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(t1==<span class="literal">nullptr</span> &amp;&amp; t2!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> t2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// t1和t2均非空</span></span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            t1-&gt;val += t2-&gt;val;  <span class="comment">// 合并根节点</span></span><br><span class="line">            t1-&gt;left = heleper(t1-&gt;left, t2-&gt;left);  <span class="comment">// 合并左子树</span></span><br><span class="line">            t1-&gt;right = heleper(t1-&gt;right, t2-&gt;right);  <span class="comment">// 合并右子树</span></span><br><span class="line">            <span class="keyword">delete</span> t2;  <span class="comment">// 释放结点</span></span><br><span class="line">            <span class="keyword">return</span> t1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">mergeTrees</span><span class="params">(TreeNode* t1, TreeNode* t2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> heleper(t1,t2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 617</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/merge-two-binary-trees/</span></span><br><span class="line"><span class="comment">// Tags: Tree Recursion</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> x):val(x),left(<span class="literal">nullptr</span>),right(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 将树t1和t2合并至t1，并返回t1</span></span><br><span class="line">    <span class="function">TreeNode* <span class="title">heleper</span><span class="params">(TreeNode* t1, TreeNode* t2)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 两个空树，返回null</span></span><br><span class="line">        <span class="keyword">if</span>(t1==<span class="literal">nullptr</span> &amp;&amp; t2==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="comment">// 仅t2为空树，不需合并，直接返回t1即可</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(t1!=<span class="literal">nullptr</span> &amp;&amp; t2==<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> t1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 仅t1为空树，不需合并，直接返回t2即可</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(t1==<span class="literal">nullptr</span> &amp;&amp; t2!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> t2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// t1和t2均非空</span></span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            t1-&gt;val += t2-&gt;val;  <span class="comment">// 合并根结点</span></span><br><span class="line">            t1-&gt;left = heleper(t1-&gt;left, t2-&gt;left);  <span class="comment">// 合并左子树</span></span><br><span class="line">            t1-&gt;right = heleper(t1-&gt;right, t2-&gt;right);  <span class="comment">// 合并右子树</span></span><br><span class="line">            <span class="keyword">delete</span> t2;  <span class="comment">// 释放结点</span></span><br><span class="line">            <span class="keyword">return</span> t1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">mergeTrees</span><span class="params">(TreeNode* t1, TreeNode* t2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> heleper(t1,t2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p>
@@ -450,9 +450,9 @@
           
             <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
           
-            <a href="/tags/递归/" rel="tag"># 递归</a>
-          
             <a href="/tags/二叉树/" rel="tag"># 二叉树</a>
+          
+            <a href="/tags/递归/" rel="tag"># 递归</a>
           
         </div>
       
@@ -567,7 +567,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">188</span>
+                  <span class="site-state-item-count">190</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -580,7 +580,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">83</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -672,7 +672,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">161.1k</span>
+    <span title="Site words total count">160.2k</span>
   
 </div>
 

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="算法,LeetCode,递归,二叉树,DFS," />
+  <meta name="keywords" content="算法,LeetCode,二叉树,递归,DFS," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="题目链接https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/ 题解 递归解法 路径：一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。 这道题和LeetCode687最长同值路径和LeetCode543二叉树的直径很相似，都很难，每个题都做了很久 三道题的共性是dfs函数并非直接实现了目标">
-<meta name="keywords" content="算法,LeetCode,递归,二叉树,DFS">
+<meta name="description" content="题目链接https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/ 题解 递归解法 路径：一条从树中任意结点出发，达到任意结点的序列。该路径至少包含一个结点，且不一定经过根结点。 这道题和LeetCode687最长同值路径和LeetCode543二叉树的直径很相似，都很难，每个题都做了很久 三道题的共性是dfs函数并非直接实现了目标">
+<meta name="keywords" content="算法,LeetCode,二叉树,递归,DFS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode124二叉树中的最大路径和">
 <meta property="og:url" content="https://chouxianyu.github.io/2020/07/27/LeetCode124二叉树中的最大路径和/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="题目链接https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/ 题解 递归解法 路径：一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。 这道题和LeetCode687最长同值路径和LeetCode543二叉树的直径很相似，都很难，每个题都做了很久 三道题的共性是dfs函数并非直接实现了目标">
+<meta property="og:description" content="题目链接https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/ 题解 递归解法 路径：一条从树中任意结点出发，达到任意结点的序列。该路径至少包含一个结点，且不一定经过根结点。 这道题和LeetCode687最长同值路径和LeetCode543二叉树的直径很相似，都很难，每个题都做了很久 三道题的共性是dfs函数并非直接实现了目标">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-27T09:17:50.891Z">
+<meta property="og:updated_time" content="2020-08-01T02:38:41.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode124二叉树中的最大路径和">
-<meta name="twitter:description" content="题目链接https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/ 题解 递归解法 路径：一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。 这道题和LeetCode687最长同值路径和LeetCode543二叉树的直径很相似，都很难，每个题都做了很久 三道题的共性是dfs函数并非直接实现了目标">
+<meta name="twitter:description" content="题目链接https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/ 题解 递归解法 路径：一条从树中任意结点出发，达到任意结点的序列。该路径至少包含一个结点，且不一定经过根结点。 这道题和LeetCode687最长同值路径和LeetCode543二叉树的直径很相似，都很难，每个题都做了很久 三道题的共性是dfs函数并非直接实现了目标">
 
 
 
@@ -421,15 +421,15 @@
         <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/</a></p>
 <h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><ul>
 <li>递归解法</li>
-<li>路径：一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。</li>
+<li>路径：一条从树中任意结点出发，达到任意结点的序列。该路径至少包含一个结点，且不一定经过根结点。</li>
 <li>这道题和<a href="https://www.cnblogs.com/chouxianyu/p/13385101.html" target="_blank" rel="noopener">LeetCode687最长同值路径</a>和<a href="https://www.cnblogs.com/chouxianyu/p/13376411.html" target="_blank" rel="noopener">LeetCode543二叉树的直径</a>很相似，都很难，每个题都做了很久<ul>
-<li>三道题的共性是dfs函数并非直接实现了目标功能，而是将目标功能拆解，实现目标功能的一部分，然后再利用某种关系（根节点、左子树、右子树之间的关系，需要结合题意）拼接出目标功能（求目标值）</li>
+<li>三道题的共性是dfs函数并非直接实现了目标功能，而是将目标功能拆解，实现目标功能的一部分，然后再利用某种关系（根结点、左子树、右子树之间的关系，需要结合题意）拼接出目标功能（求目标值）</li>
 </ul>
 </li>
 <li>思路见代码注释</li>
 <li>需要高度注意dfs函数的功能</li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 124</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/</span></span><br><span class="line"><span class="comment">// Tags: Tree Recursion DFS</span></span><br><span class="line"><span class="comment">// Difficulty: Hard</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> maxSum = INT_MIN; <span class="comment">// 全局最大路径和</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 功能：求一颗树的最大路径和，要求从根节点开始，在左子树或右子树结束，也可不经过左子树和右子树，即至多经过一个子树</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(TreeNode *root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> left = dfs(root-&gt;left);</span><br><span class="line">        <span class="keyword">int</span> right = dfs(root-&gt;right);</span><br><span class="line">        <span class="comment">// 过程中更新全局最大路径和：根节点必须经过，左右子树可经过可不经过</span></span><br><span class="line">        maxSum = max(maxSum, root-&gt;val + max(left, <span class="number">0</span>) + max(right, <span class="number">0</span>));</span><br><span class="line">        <span class="comment">// 从根节点开始，在左子树或右子树结束，也可不经过左子树和右子树，即至多经过一个子树</span></span><br><span class="line">        <span class="keyword">return</span> max(root-&gt;val, root-&gt;val + max(max(left, right), <span class="number">0</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 求一颗树的最大路径和，不要求经过根节点，起始和终止节点任意</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxPathSum</span><span class="params">(TreeNode *root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        dfs(root);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;maxSum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 124</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/</span></span><br><span class="line"><span class="comment">// Tags: Tree Recursion DFS</span></span><br><span class="line"><span class="comment">// Difficulty: Hard</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> maxSum = INT_MIN; <span class="comment">// 全局最大路径和</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 功能：求一颗树的最大路径和，要求从根结点开始，在左子树或右子树结束，也可不经过左子树和右子树，即至多经过一个子树</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(TreeNode *root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> left = dfs(root-&gt;left);</span><br><span class="line">        <span class="keyword">int</span> right = dfs(root-&gt;right);</span><br><span class="line">        <span class="comment">// 过程中更新全局最大路径和：根结点必须经过，左右子树可经过可不经过</span></span><br><span class="line">        maxSum = max(maxSum, root-&gt;val + max(left, <span class="number">0</span>) + max(right, <span class="number">0</span>));</span><br><span class="line">        <span class="comment">// 从根结点开始，在左子树或右子树结束，也可不经过左子树和右子树，即至多经过一个子树</span></span><br><span class="line">        <span class="keyword">return</span> max(root-&gt;val, root-&gt;val + max(max(left, right), <span class="number">0</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 求一颗树的最大路径和，不要求经过根结点，起始和终止结点任意</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxPathSum</span><span class="params">(TreeNode *root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        dfs(root);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;maxSum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p>
@@ -456,9 +456,9 @@
           
             <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
           
-            <a href="/tags/递归/" rel="tag"># 递归</a>
-          
             <a href="/tags/二叉树/" rel="tag"># 二叉树</a>
+          
+            <a href="/tags/递归/" rel="tag"># 递归</a>
           
             <a href="/tags/DFS/" rel="tag"># DFS</a>
           
@@ -575,7 +575,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">188</span>
+                  <span class="site-state-item-count">190</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -588,7 +588,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">83</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -680,7 +680,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">161.1k</span>
+    <span title="Site words total count">160.2k</span>
   
 </div>
 

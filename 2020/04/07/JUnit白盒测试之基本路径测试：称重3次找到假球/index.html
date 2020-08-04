@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_200407051334JUnit基本路径测试2.png">
 <meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_200407051324JUnit基本路径测试1.jpg">
-<meta property="og:updated_time" content="2020-04-07T07:36:18.657Z">
+<meta property="og:updated_time" content="2020-08-01T02:36:35.068Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JUnit白盒测试之基本路径测试：称重3次找到假球">
 <meta name="twitter:description" content="前言记录一次软件测试课程的课后作业，作业内容是白盒测试中的基本路径测试，步骤如下  分析程序的控制流 计算环形复杂度 找出基本路径 设计测试用例 执行测试用例（要求使用JUnit）  作业要求使用白盒测试用例设计方法为下面的程序设计测试用例（基本路径测试）并用JUnit测试：  程序要求   10个铅球中有一个假球（比其他铅球的重量要轻），用天平三次称出假球。  程序设计思路   第一次使用天平分">
@@ -442,11 +442,11 @@
 </li>
 </ul>
 <h1 id="程序代码及控制流图"><a href="#程序代码及控制流图" class="headerlink" title="程序代码及控制流图"></a>程序代码及控制流图</h1><h2 id="程序代码"><a href="#程序代码" class="headerlink" title="程序代码"></a>程序代码</h2><p>文件<code>SearchBall.java</code>内容如下。</p>
-<p>注意不要让代码的行号变动，程序流图中节点的编号是根据这份代码里每条执行语句里的行号对应的。</p>
+<p>注意不要让代码的行号变动，程序流图中结点的编号是根据这份代码里每条执行语句里的行号对应的。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> <span class="keyword">module</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SearchBall</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> x[]=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SearchBall</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBWeight</span><span class="params">(<span class="keyword">int</span> w[])</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;w.length;i++)&#123;</span><br><span class="line">             x[i]=w[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">BeginSearch</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(x[<span class="number">0</span>]+x[<span class="number">1</span>]+x[<span class="number">2</span>]+x[<span class="number">3</span>]+x[<span class="number">4</span>]&lt;x[<span class="number">5</span>]+x[<span class="number">6</span>]+x[<span class="number">7</span>]+x[<span class="number">8</span>]+x[<span class="number">9</span>])&#123;</span><br><span class="line">            <span class="keyword">if</span>(x[<span class="number">1</span>]+x[<span class="number">2</span>]==x[<span class="number">3</span>]+x[<span class="number">4</span>])&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"1号是假球"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(x[<span class="number">1</span>]+x[<span class="number">2</span>]&lt;x[<span class="number">3</span>]+x[<span class="number">4</span>])&#123;</span><br><span class="line">                <span class="keyword">if</span> (x[<span class="number">1</span>]&lt;x[<span class="number">2</span>]) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="string">"2号是假球"</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="string">"3号是假球"</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (x[<span class="number">3</span>]&lt;x[<span class="number">4</span>])&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="string">"4号是假球"</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="string">"5号是假球"</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(x[<span class="number">6</span>]+x[<span class="number">7</span>]==x[<span class="number">8</span>]+x[<span class="number">9</span>])&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"6号是假球"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(x[<span class="number">6</span>]+x[<span class="number">7</span>]&lt;x[<span class="number">8</span>]+x[<span class="number">9</span>]) &#123;</span><br><span class="line">            	<span class="keyword">if</span> (x[<span class="number">6</span>]&lt;x[<span class="number">7</span>]) &#123;</span><br><span class="line">            		<span class="keyword">return</span> <span class="string">"7号是假球"</span>;</span><br><span class="line">            	&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            		<span class="keyword">return</span> <span class="string">"8号是假球"</span>;</span><br><span class="line">            	&#125;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            	<span class="keyword">if</span> (x[<span class="number">8</span>]&lt;x[<span class="number">9</span>]) &#123;</span><br><span class="line">            		<span class="keyword">return</span> <span class="string">"9号是假球"</span>;</span><br><span class="line">            	&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            		<span class="keyword">return</span> <span class="string">"10号是假球"</span>;</span><br><span class="line">            	&#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="程序控制流图"><a href="#程序控制流图" class="headerlink" title="程序控制流图"></a>程序控制流图</h2><p>下图中<strong>节点</strong>中的数字是对应可执行语句在上面代码中的行号；<strong>边</strong>上的Y代表判定结果为真，N代表判定结果为假。</p>
+<h2 id="程序控制流图"><a href="#程序控制流图" class="headerlink" title="程序控制流图"></a>程序控制流图</h2><p>下图中<strong>结点</strong>中的数字是对应可执行语句在上面代码中的行号；<strong>边</strong>上的Y代表判定结果为真，N代表判定结果为假。</p>
 <p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_200407051334JUnit基本路径测试2.png" alt="程序控制流图"></p>
-<h1 id="计算环形复杂度"><a href="#计算环形复杂度" class="headerlink" title="计算环形复杂度"></a>计算环形复杂度</h1><p>控制流图$G$的环形复杂度计算公式：$V(G)=E-N+2$，其中$E$为控制流图中边的数量，$N$是控制流图中的节点数量。</p>
+<h1 id="计算环形复杂度"><a href="#计算环形复杂度" class="headerlink" title="计算环形复杂度"></a>计算环形复杂度</h1><p>控制流图$G$的环形复杂度计算公式：$V(G)=E-N+2$，其中$E$为控制流图中边的数量，$N$是控制流图中的结点数量。</p>
 <p>函数<code>BeginSearch()</code>的控制流图的环形复杂度为</p>
 <script type="math/tex; mode=display">
 V(G)=18-19+2=1</script><h1 id="基本路径"><a href="#基本路径" class="headerlink" title="基本路径"></a>基本路径</h1><p>从程序流图中可知，共有10条基本路径，具体如下</p>
@@ -455,7 +455,7 @@ V(G)=18-19+2=1</script><h1 id="基本路径"><a href="#基本路径" class="head
 <thead>
 <tr>
 <th style="text-align:center"><strong>路径编号</strong></th>
-<th style="text-align:center"><strong>经过节点</strong></th>
+<th style="text-align:center"><strong>经过结点</strong></th>
 </tr>
 </thead>
 <tbody>
@@ -717,7 +717,7 @@ V(G)=18-19+2=1</script><h1 id="基本路径"><a href="#基本路径" class="head
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">188</span>
+                  <span class="site-state-item-count">190</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -730,7 +730,7 @@ V(G)=18-19+2=1</script><h1 id="基本路径"><a href="#基本路径" class="head
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">83</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -822,7 +822,7 @@ V(G)=18-19+2=1</script><h1 id="基本路径"><a href="#基本路径" class="head
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">161.1k</span>
+    <span title="Site words total count">160.2k</span>
   
 </div>
 

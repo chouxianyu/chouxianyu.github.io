@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="算法,LeetCode,递归,单向链表,迭代," />
+  <meta name="keywords" content="算法,LeetCode,二叉树,递归,DFS,BST," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="题目链接https://leetcode-cn.com/problems/merge-two-sorted-lists/description/ 题目分析 两个链表已排序 新链表应该是两个链表拼接起来的，而非new出来的 链表中头结点的val应该是有意义的  题解一：迭代思路 先new一个无意义的头结点，方便建立新链表 同时遍历两个链表并拼接至新链表，每取一个结点就更新其所在链表的指针和新链表指针">
-<meta name="keywords" content="算法,LeetCode,递归,单向链表,迭代">
+<meta name="description" content="题目链接https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/ 题解 递归解法 根据BST的性质，中序遍历BST得到的结点序列为结点的升序序列，序列中第k个元素就是第k小的元素。 所以可以中序遍历BST生成升序序列，找到第k个元素则停止遍历。  12345678910111213141516171819202122232425">
+<meta name="keywords" content="算法,LeetCode,二叉树,递归,DFS,BST">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode21">
-<meta property="og:url" content="https://chouxianyu.github.io/2020/07/11/LeetCode21/index.html">
+<meta property="og:title" content="LeetCode230二叉搜索树中第K小的元素">
+<meta property="og:url" content="https://chouxianyu.github.io/2020/08/01/LeetCode230二叉搜索树中第K小的元素/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="题目链接https://leetcode-cn.com/problems/merge-two-sorted-lists/description/ 题目分析 两个链表已排序 新链表应该是两个链表拼接起来的，而非new出来的 链表中头结点的val应该是有意义的  题解一：迭代思路 先new一个无意义的头结点，方便建立新链表 同时遍历两个链表并拼接至新链表，每取一个结点就更新其所在链表的指针和新链表指针">
+<meta property="og:description" content="题目链接https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/ 题解 递归解法 根据BST的性质，中序遍历BST得到的结点序列为结点的升序序列，序列中第k个元素就是第k小的元素。 所以可以中序遍历BST生成升序序列，找到第k个元素则停止遍历。  12345678910111213141516171819202122232425">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-13T06:55:16.269Z">
+<meta property="og:updated_time" content="2020-08-01T06:17:25.710Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode21">
-<meta name="twitter:description" content="题目链接https://leetcode-cn.com/problems/merge-two-sorted-lists/description/ 题目分析 两个链表已排序 新链表应该是两个链表拼接起来的，而非new出来的 链表中头结点的val应该是有意义的  题解一：迭代思路 先new一个无意义的头结点，方便建立新链表 同时遍历两个链表并拼接至新链表，每取一个结点就更新其所在链表的指针和新链表指针">
+<meta name="twitter:title" content="LeetCode230二叉搜索树中第K小的元素">
+<meta name="twitter:description" content="题目链接https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/ 题解 递归解法 根据BST的性质，中序遍历BST得到的结点序列为结点的升序序列，序列中第k个元素就是第k小的元素。 所以可以中序遍历BST生成升序序列，找到第k个元素则停止遍历。  12345678910111213141516171819202122232425">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://chouxianyu.github.io/2020/07/11/LeetCode21/"/>
+  <link rel="canonical" href="https://chouxianyu.github.io/2020/08/01/LeetCode230二叉搜索树中第K小的元素/"/>
 
 
 
 
 
-  <title>LeetCode21 | 臭咸鱼的缺氧瓶</title>
+  <title>LeetCode230二叉搜索树中第K小的元素 | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -299,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2020/07/11/LeetCode21/">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2020/08/01/LeetCode230二叉搜索树中第K小的元素/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="臭咸鱼">
@@ -316,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">LeetCode21</h1>
+          <h1 class="post-title" itemprop="name headline">LeetCode230二叉搜索树中第K小的元素</h1>
         
 
         <div class="post-meta">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-11T17:53:16+08:00">
-                2020-07-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-01T14:13:09+08:00">
+                2020-08-01
               </time>
             
 
@@ -347,8 +347,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/07/11/LeetCode21/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/07/11/LeetCode21/" itemprop="commentCount"></span>
+                <a href="/2020/08/01/LeetCode230二叉搜索树中第K小的元素/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/08/01/LeetCode230二叉搜索树中第K小的元素/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -356,7 +356,7 @@
 
           
           
-             <span id="/2020/07/11/LeetCode21/" class="leancloud_visitors" data-flag-title="LeetCode21">
+             <span id="/2020/08/01/LeetCode230二叉搜索树中第K小的元素/" class="leancloud_visitors" data-flag-title="LeetCode230二叉搜索树中第K小的元素">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  973 字
+                  331 字
                 </span>
               
 
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  4 分
+                  2 分
                 </span>
               
             </div>
@@ -418,48 +418,13 @@
       
 
       
-        <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode-cn.com/problems/merge-two-sorted-lists/description/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/merge-two-sorted-lists/description/</a></p>
-<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><ul>
-<li>两个链表已排序</li>
-<li>新链表应该是两个链表拼接起来的，而非new出来的</li>
-<li>链表中头结点的val应该是有意义的</li>
+        <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/</a></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><ul>
+<li>递归解法</li>
+<li>根据BST的性质，中序遍历BST得到的结点序列为结点的升序序列，序列中第k个元素就是第k小的元素。</li>
+<li>所以可以中序遍历BST生成升序序列，找到第k个元素则停止遍历。</li>
 </ul>
-<h1 id="题解一：迭代"><a href="#题解一：迭代" class="headerlink" title="题解一：迭代"></a>题解一：迭代</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
-<li>先new一个无意义的头结点，方便建立新链表</li>
-<li>同时遍历两个链表并拼接至新链表，每取一个结点就更新其所在链表的指针和新链表指针，直至两个链表中的某一个遍历结束</li>
-<li>将未遍历完的链表拼接至新链表</li>
-<li>delete无意义的头结点，释放内存，返回其next</li>
-</ol>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 21</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/merge-two-sorted-lists/description/</span></span><br><span class="line"><span class="comment">// Tags: Linked List Recursion Iteration</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode* next;</span><br><span class="line">    ListNode(): val(<span class="number">0</span>), next(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x): val(x), next(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x, ListNode* next): val(x), next(next)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeTwoLists</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定义头结点，方便建立新链表</span></span><br><span class="line">        ListNode *head = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</span><br><span class="line">        <span class="comment">// 遍历链表用的指针</span></span><br><span class="line">        ListNode *l3 = head;</span><br><span class="line">        <span class="comment">// 同时遍历两个链表并拼接值较小的结点到新链表中，同步更新链表指针，直至某个链表遍历结束</span></span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="literal">nullptr</span> &amp;&amp; l2 != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span> (l1-&gt;val &lt; l2-&gt;val)&#123;</span><br><span class="line">                l3-&gt;next = l1;</span><br><span class="line">                l1 = l1-&gt;next;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                l3-&gt;next = l2;</span><br><span class="line">                l2 = l2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            l3 = l3-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 将未遍历完的链表拼接至新链表</span></span><br><span class="line">        <span class="keyword">if</span>(l1!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            l3-&gt;next = l1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (l2 != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            l3-&gt;next = l2;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 释放无意义头结点并返回其next</span></span><br><span class="line">        l3 = head-&gt;next;</span><br><span class="line">        <span class="keyword">delete</span> head;</span><br><span class="line">        <span class="keyword">return</span> l3;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="题解二：递归"><a href="#题解二：递归" class="headerlink" title="题解二：递归"></a>题解二：递归</h1><h2 id="再思递归"><a href="#再思递归" class="headerlink" title="再思递归"></a>再思递归</h2><p>昨天也做了一个<a href="https://www.cnblogs.com/chouxianyu/p/13284071.html" target="_blank" rel="noopener">递归</a>题，今天这道题也可以用递归，我又有了一些关于递归的想法：</p>
-<ul>
-<li>递归表达式<ul>
-<li>其实就是函数，要求明确几点：输入、输出、功能、拼接公式，有时候还需要知道函数运行对各个变量的影响（比如昨天那道题从代码二修改至代码三）</li>
-</ul>
-</li>
-<li>递归出口（也包括边界）<ul>
-<li>一定要最小化</li>
-<li>要求能够处理递归表达式的已知情况，即输入取特定值（因题目而不同）时的情况</li>
-</ul>
-</li>
-</ul>
-<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><ul>
-<li><p>递归表达式</p>
-<ul>
-<li>输入：两个链表的头指针</li>
-<li>输出：两个链表拼接后的头指针</li>
-<li>功能：将两个链表拼接</li>
-</ul>
-</li>
-<li><p>递归出口</p>
-<p>  链表指针为null时。如果出口是next为null，这个出口并不是最小化的</p>
-</li>
-</ul>
-<p>递归函数实现的功能和思路为：</p>
-<p>递归函数拿到了两个链表A和B，取出两个链表中值较小的那个头结点N，然后通过递归拼接剩下的两个链表返回M，然后手动拼接N和M。</p>
-<p>思路模拟：</p>
-<p>假设是链表A的头结点N的值比较小，那我取出其头结点N后形成一个新的链表A1（不包括头结点），然后通过递归拼接A1和B返回M，然后手工拼接N和M（即<code>N-&gt;next=M;</code>）。</p>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 21</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/merge-two-sorted-lists/description/</span></span><br><span class="line"><span class="comment">// Tags: Linked List Recursion Iteration</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode* next;</span><br><span class="line">    ListNode(): val(<span class="number">0</span>), next(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x): val(x), next(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x, ListNode* next): val(x), next(next)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeTwoLists</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 边界和递归出口</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="literal">nullptr</span>==l1)&#123;<span class="keyword">return</span> l2;&#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="literal">nullptr</span>==l2)&#123;<span class="keyword">return</span> l1;&#125;</span><br><span class="line">        <span class="comment">// 递归表达式</span></span><br><span class="line">        <span class="keyword">if</span>(l1-&gt;val&lt;l2-&gt;val)&#123;</span><br><span class="line">            l1-&gt;next = mergeTwoLists(l1-&gt;next, l2);</span><br><span class="line">            <span class="keyword">return</span> l1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            l2-&gt;next = mergeTwoLists(l2-&gt;next, l1);</span><br><span class="line">            <span class="keyword">return</span> l2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 230</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/</span></span><br><span class="line"><span class="comment">// Tags: Tree BST Recursion DFS</span></span><br><span class="line"><span class="comment">// Difficulty: Medium</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vals;</span><br><span class="line">    <span class="keyword">int</span> k;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 中序遍历</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inorder</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root==<span class="literal">nullptr</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">// 遍历左子树</span></span><br><span class="line">        inorder(root-&gt;left);</span><br><span class="line">        <span class="comment">// 剪枝：如果已经遍历到第K个元素，则不用再遍历</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>-&gt;vals.size() &gt;= <span class="keyword">this</span>-&gt;k) <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">// 遍历当前根结点</span></span><br><span class="line">        <span class="keyword">this</span>-&gt;vals.push_back(root-&gt;val);</span><br><span class="line">        <span class="comment">// 遍历右子树</span></span><br><span class="line">        inorder(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取BST中第k小的元素</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">kthSmallest</span><span class="params">(TreeNode* root, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;k = k;</span><br><span class="line">        <span class="comment">// 中序遍历生成元素的升序序列</span></span><br><span class="line">        inorder(root);</span><br><span class="line">        <span class="comment">// 结果为升序序列中的第k个元素，下面的两行代码都可以</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;vals[k - <span class="number">1</span>]; <span class="comment">// return this-&gt;vals.back();</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p>
@@ -486,11 +451,13 @@
           
             <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
           
+            <a href="/tags/二叉树/" rel="tag"># 二叉树</a>
+          
             <a href="/tags/递归/" rel="tag"># 递归</a>
           
-            <a href="/tags/单向链表/" rel="tag"># 单向链表</a>
+            <a href="/tags/DFS/" rel="tag"># DFS</a>
           
-            <a href="/tags/迭代/" rel="tag"># 迭代</a>
+            <a href="/tags/BST/" rel="tag"># BST</a>
           
         </div>
       
@@ -503,8 +470,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/11/LeetCode206/" rel="next" title="LeetCode206">
-                <i class="fa fa-chevron-left"></i> LeetCode206
+              <a href="/2020/08/01/LeetCode669修剪二叉搜索树/" rel="next" title="LeetCode669修剪二叉搜索树">
+                <i class="fa fa-chevron-left"></i> LeetCode669修剪二叉搜索树
               </a>
             
           </div>
@@ -513,8 +480,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/07/12/LeetCode83/" rel="prev" title="LeetCode83">
-                LeetCode83 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/08/04/PAT甲级1152Google-Recruitment/" rel="prev" title="PAT甲级1152Google Recruitment">
+                PAT甲级1152Google Recruitment <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -605,7 +572,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">188</span>
+                  <span class="site-state-item-count">190</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -618,7 +585,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">83</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -676,7 +643,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目链接"><span class="nav-number">1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目分析"><span class="nav-number">2.</span> <span class="nav-text">题目分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解一：迭代"><span class="nav-number">3.</span> <span class="nav-text">题解一：迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">3.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解二：递归"><span class="nav-number">4.</span> <span class="nav-text">题解二：递归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#再思递归"><span class="nav-number">4.1.</span> <span class="nav-text">再思递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路-1"><span class="nav-number">4.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">4.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目链接"><span class="nav-number">1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a></li></ol></div>
             
 
           </div>
@@ -710,7 +677,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">161.1k</span>
+    <span title="Site words total count">160.2k</span>
   
 </div>
 

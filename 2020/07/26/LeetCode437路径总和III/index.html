@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="算法,LeetCode,递归,二叉树,DFS," />
+  <meta name="keywords" content="算法,LeetCode,二叉树,递归,DFS," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="题目链接https://leetcode-cn.com/problems/path-sum-iii/ 题解 两个DFS，两个DFS作用不一样  我写的，其它人的题解大概也是这个思路  这道题是昨天那道题(点击查看)的扩展，建议先看一下昨天那道题的题解二。  昨天那道题中的路径是根节点到叶子节点之间的路径 今天这道题中的路径是任意节点到任意节点之间的路径，只要求是向下的（即从父节点到子节点）   可">
-<meta name="keywords" content="算法,LeetCode,递归,二叉树,DFS">
+<meta name="description" content="题目链接https://leetcode-cn.com/problems/path-sum-iii/ 题解 两个DFS，两个DFS作用不一样  我写的，其它人的题解大概也是这个思路  这道题是昨天那道题(点击查看)的扩展，建议先看一下昨天那道题的题解二。  昨天那道题中的路径是根结点到叶子结点之间的路径 今天这道题中的路径是任意结点到任意结点之间的路径，只要求是向下的（即从父结点到子结点）   可">
+<meta name="keywords" content="算法,LeetCode,二叉树,递归,DFS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode437路径总和III">
 <meta property="og:url" content="https://chouxianyu.github.io/2020/07/26/LeetCode437路径总和III/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="题目链接https://leetcode-cn.com/problems/path-sum-iii/ 题解 两个DFS，两个DFS作用不一样  我写的，其它人的题解大概也是这个思路  这道题是昨天那道题(点击查看)的扩展，建议先看一下昨天那道题的题解二。  昨天那道题中的路径是根节点到叶子节点之间的路径 今天这道题中的路径是任意节点到任意节点之间的路径，只要求是向下的（即从父节点到子节点）   可">
+<meta property="og:description" content="题目链接https://leetcode-cn.com/problems/path-sum-iii/ 题解 两个DFS，两个DFS作用不一样  我写的，其它人的题解大概也是这个思路  这道题是昨天那道题(点击查看)的扩展，建议先看一下昨天那道题的题解二。  昨天那道题中的路径是根结点到叶子结点之间的路径 今天这道题中的路径是任意结点到任意结点之间的路径，只要求是向下的（即从父结点到子结点）   可">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-26T05:42:27.946Z">
+<meta property="og:updated_time" content="2020-08-01T02:38:41.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode437路径总和III">
-<meta name="twitter:description" content="题目链接https://leetcode-cn.com/problems/path-sum-iii/ 题解 两个DFS，两个DFS作用不一样  我写的，其它人的题解大概也是这个思路  这道题是昨天那道题(点击查看)的扩展，建议先看一下昨天那道题的题解二。  昨天那道题中的路径是根节点到叶子节点之间的路径 今天这道题中的路径是任意节点到任意节点之间的路径，只要求是向下的（即从父节点到子节点）   可">
+<meta name="twitter:description" content="题目链接https://leetcode-cn.com/problems/path-sum-iii/ 题解 两个DFS，两个DFS作用不一样  我写的，其它人的题解大概也是这个思路  这道题是昨天那道题(点击查看)的扩展，建议先看一下昨天那道题的题解二。  昨天那道题中的路径是根结点到叶子结点之间的路径 今天这道题中的路径是任意结点到任意结点之间的路径，只要求是向下的（即从父结点到子结点）   可">
 
 
 
@@ -426,22 +426,22 @@
 </li>
 <li><p>这道题是<a href="https://www.cnblogs.com/chouxianyu/p/13377753.html" target="_blank" rel="noopener">昨天那道题(点击查看)</a>的扩展，建议先看一下昨天那道题的题解二。</p>
 <ul>
-<li>昨天那道题中的路径是<strong>根节点到叶子节点</strong>之间的路径</li>
-<li>今天这道题中的路径是<strong>任意节点到任意节点</strong>之间的路径，只要求是向下的（即从父节点到子节点）</li>
+<li>昨天那道题中的路径是<strong>根结点到叶子结点</strong>之间的路径</li>
+<li>今天这道题中的路径是<strong>任意结点到任意结点</strong>之间的路径，只要求是向下的（即从父结点到子结点）</li>
 </ul>
 </li>
 <li><p>可以按照下面2步修改昨天那道题，即可得到今天这道题并求解</p>
 <ol>
-<li><p><strong>Step1</strong>：求<strong>根节点到任意节点（而非叶子节点）</strong>之间的路径</p>
+<li><p><strong>Step1</strong>：求<strong>根结点到任意结点（而非叶子结点）</strong>之间的路径</p>
 <p> 处理这一差异，只需要将昨天那道题判断语句中的叶子结点条件删除即可，即只判断路径长度是否相等，不管是不是叶子结点</p>
 </li>
-<li><p><strong>Step2</strong>：求<strong>任意结点（而非根节点）到任意节点</strong>之间的路径</p>
-<p> 处理这一差异，只需基于昨天那道题的解法，再套一层递归，即不止求根节点，还要递归求解其左右子树并将路径数相加</p>
+<li><p><strong>Step2</strong>：求<strong>任意结点（而非根结点）到任意结点</strong>之间的路径</p>
+<p> 处理这一差异，只需基于昨天那道题的解法，再套一层递归，即不止求根结点，还要递归求解其左右子树并将路径数相加</p>
 </li>
 </ol>
 </li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 437</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/path-sum-iii/</span></span><br><span class="line"><span class="comment">// Tags: Tree Recursion DFS</span></span><br><span class="line"><span class="comment">// Difficulty: Medium</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> x):val(x),left(<span class="literal">nullptr</span>),right(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// Step1：搜索当前子树中节点到根节点之间距离等于sum的路径数</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(TreeNode* root, <span class="keyword">int</span> sum)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val == sum)</span><br><span class="line">            count++;</span><br><span class="line">        <span class="keyword">return</span> count + dfs(root-&gt;left, sum - root-&gt;val) + dfs(root-&gt;right, sum - root-&gt;val);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> sum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// Step2：结果为：以当前节点为根节点时的路径数+以左子节点为根节点时的路径数+以右子节点为根节点时的路径数；</span></span><br><span class="line">        <span class="keyword">return</span> dfs(root, sum) + pathSum(root-&gt;left, sum) + pathSum(root-&gt;right, sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 437</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/path-sum-iii/</span></span><br><span class="line"><span class="comment">// Tags: Tree Recursion DFS</span></span><br><span class="line"><span class="comment">// Difficulty: Medium</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> x):val(x),left(<span class="literal">nullptr</span>),right(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// Step1：搜索当前子树中结点到根结点之间距离等于sum的路径数</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(TreeNode* root, <span class="keyword">int</span> sum)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val == sum)</span><br><span class="line">            count++;</span><br><span class="line">        <span class="keyword">return</span> count + dfs(root-&gt;left, sum - root-&gt;val) + dfs(root-&gt;right, sum - root-&gt;val);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> sum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// Step2：结果为：以当前结点为根结点时的路径数+以左子结点为根结点时的路径数+以右子结点为根结点时的路径数；</span></span><br><span class="line">        <span class="keyword">return</span> dfs(root, sum) + pathSum(root-&gt;left, sum) + pathSum(root-&gt;right, sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p>
@@ -468,9 +468,9 @@
           
             <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
           
-            <a href="/tags/递归/" rel="tag"># 递归</a>
-          
             <a href="/tags/二叉树/" rel="tag"># 二叉树</a>
+          
+            <a href="/tags/递归/" rel="tag"># 递归</a>
           
             <a href="/tags/DFS/" rel="tag"># DFS</a>
           
@@ -587,7 +587,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">188</span>
+                  <span class="site-state-item-count">190</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -600,7 +600,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">83</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -692,7 +692,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">161.1k</span>
+    <span title="Site words total count">160.2k</span>
   
 </div>
 

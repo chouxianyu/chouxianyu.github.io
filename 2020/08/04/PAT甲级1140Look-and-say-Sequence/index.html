@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="算法,LeetCode,单向链表," />
+  <meta name="keywords" content="算法,PAT,字符串," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="题目链接https://leetcode-cn.com/problems/intersection-of-two-linked-lists/ 初次读题初次读题可知  两个指针相同即需要求得的结果 链表长度可能不同 两个链表可能没有交叉点，此时返回NULL 不可修改链表结构 链表中无循环  我第一次读题时看的是英文版，并且我刚开始做LeetCode对题目风格也不熟悉，同时这道题的Example也是很">
-<meta name="keywords" content="算法,LeetCode,单向链表">
+<meta name="description" content="题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805344490864640 题解一英语 corresponding to   与…相一致，我之前似乎记成了“根据……”   思路、注意点和代码 题目：第n+1个数字是第n个数字的一种描述 第n+1个串是第n个串中各个数字的统计 统计规则是不好描述，我就不描述了。看">
+<meta name="keywords" content="算法,PAT,字符串">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode160">
-<meta property="og:url" content="https://chouxianyu.github.io/2020/07/10/LeetCode160/index.html">
+<meta property="og:title" content="PAT甲级1140Look-and-say Sequence">
+<meta property="og:url" content="https://chouxianyu.github.io/2020/08/04/PAT甲级1140Look-and-say-Sequence/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="题目链接https://leetcode-cn.com/problems/intersection-of-two-linked-lists/ 初次读题初次读题可知  两个指针相同即需要求得的结果 链表长度可能不同 两个链表可能没有交叉点，此时返回NULL 不可修改链表结构 链表中无循环  我第一次读题时看的是英文版，并且我刚开始做LeetCode对题目风格也不熟悉，同时这道题的Example也是很">
+<meta property="og:description" content="题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805344490864640 题解一英语 corresponding to   与…相一致，我之前似乎记成了“根据……”   思路、注意点和代码 题目：第n+1个数字是第n个数字的一种描述 第n+1个串是第n个串中各个数字的统计 统计规则是不好描述，我就不描述了。看">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-13T06:55:52.036Z">
+<meta property="og:updated_time" content="2020-08-04T13:52:12.298Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode160">
-<meta name="twitter:description" content="题目链接https://leetcode-cn.com/problems/intersection-of-two-linked-lists/ 初次读题初次读题可知  两个指针相同即需要求得的结果 链表长度可能不同 两个链表可能没有交叉点，此时返回NULL 不可修改链表结构 链表中无循环  我第一次读题时看的是英文版，并且我刚开始做LeetCode对题目风格也不熟悉，同时这道题的Example也是很">
+<meta name="twitter:title" content="PAT甲级1140Look-and-say Sequence">
+<meta name="twitter:description" content="题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805344490864640 题解一英语 corresponding to   与…相一致，我之前似乎记成了“根据……”   思路、注意点和代码 题目：第n+1个数字是第n个数字的一种描述 第n+1个串是第n个串中各个数字的统计 统计规则是不好描述，我就不描述了。看">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://chouxianyu.github.io/2020/07/10/LeetCode160/"/>
+  <link rel="canonical" href="https://chouxianyu.github.io/2020/08/04/PAT甲级1140Look-and-say-Sequence/"/>
 
 
 
 
 
-  <title>LeetCode160 | 臭咸鱼的缺氧瓶</title>
+  <title>PAT甲级1140Look-and-say Sequence | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -299,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2020/07/10/LeetCode160/">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2020/08/04/PAT甲级1140Look-and-say-Sequence/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="臭咸鱼">
@@ -316,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">LeetCode160</h1>
+          <h1 class="post-title" itemprop="name headline">PAT甲级1140Look-and-say Sequence</h1>
         
 
         <div class="post-meta">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-10T21:25:22+08:00">
-                2020-07-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-04T21:47:41+08:00">
+                2020-08-04
               </time>
             
 
@@ -347,8 +347,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/07/10/LeetCode160/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/07/10/LeetCode160/" itemprop="commentCount"></span>
+                <a href="/2020/08/04/PAT甲级1140Look-and-say-Sequence/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/08/04/PAT甲级1140Look-and-say-Sequence/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -356,7 +356,7 @@
 
           
           
-             <span id="/2020/07/10/LeetCode160/" class="leancloud_visitors" data-flag-title="LeetCode160">
+             <span id="/2020/08/04/PAT甲级1140Look-and-say-Sequence/" class="leancloud_visitors" data-flag-title="PAT甲级1140Look-and-say Sequence">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  597 字
+                  873 字
                 </span>
               
 
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  3 分
+                  4 分
                 </span>
               
             </div>
@@ -418,25 +418,36 @@
       
 
       
-        <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/intersection-of-two-linked-lists/</a></p>
-<h1 id="初次读题"><a href="#初次读题" class="headerlink" title="初次读题"></a>初次读题</h1><p>初次读题可知</p>
-<ul>
-<li>两个指针相同即需要求得的结果</li>
-<li>链表长度可能不同</li>
-<li>两个链表可能没有交叉点，此时返回NULL</li>
-<li>不可修改链表结构</li>
-<li>链表中无循环</li>
+        <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805344490864640" target="_blank" rel="noopener">https://pintia.cn/problem-sets/994805342720868352/problems/994805344490864640</a></p>
+<h1 id="题解一"><a href="#题解一" class="headerlink" title="题解一"></a>题解一</h1><h2 id="英语"><a href="#英语" class="headerlink" title="英语"></a>英语</h2><ul>
+<li><p>corresponding to</p>
+<p>  与…相一致，我之前似乎记成了“根据……”</p>
+</li>
 </ul>
-<p>我第一次读题时看的是英文版，并且我刚开始做LeetCode对题目风格也不熟悉，同时这道题的Example也是很神奇，我一下子没有理解题意，看了中文版的题目和题解后才明白这个题是怎么做的。</p>
-<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><p>根据这道题的代码模板和最终答案可知，最终我们需要找到交叉结点的指针。</p>
-<p>在Example1中，val为1的两个结点虽然内容相同，但不是交叉点，因为交叉点的定义是同时存在于两个链表中。</p>
-<h1 id="题解一"><a href="#题解一" class="headerlink" title="题解一"></a>题解一</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>假如两个链表有交叉点（intersection），则可以设两个链表彼此不重复的结点个数分别为d1和d2，重复的结点个数为d。如果一个链表遍历完则使其从另外一个链表的头部重新开始，这样形成一个式子：<code>d1+d+d2=d2+d+d1</code>。</p>
-<p>假如两个链表没有交叉点，这也只是<code>d=0</code>的一个特例，因此只要实现上述思路即可。</p>
-<p>关于思路，可以看看这个题的一个视频题解：</p>
-<p><a href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/lian-biao-xiang-jiao-shuang-zhi-zhen-onshi-jian-fu/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/lian-biao-xiang-jiao-shuang-zhi-zhen-onshi-jian-fu/</a></p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: Leetcode 160</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/intersection-of-two-linked-lists/</span></span><br><span class="line"><span class="comment">// Tags: Linked List</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode* next;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x):val(x),next(<span class="literal">NULL</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">getIntersectionNode</span><span class="params">(ListNode *headA, ListNode *headB)</span></span>&#123;</span><br><span class="line">        <span class="comment">// Deal with the border "nullptr"</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="literal">nullptr</span>==headA || <span class="literal">nullptr</span>==headB)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *ptrA = headA;</span><br><span class="line">        ListNode *ptrB = headB;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// d1+d+d2=d2+d+d1</span></span><br><span class="line">        <span class="keyword">while</span> (ptrA != ptrB)&#123;</span><br><span class="line">            ptrA = <span class="literal">nullptr</span> == ptrA ? headB : ptrA-&gt;next;</span><br><span class="line">            ptrB = <span class="literal">nullptr</span> == ptrB ? headA : ptrB-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ptrA;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="题解二"><a href="#题解二" class="headerlink" title="题解二"></a>题解二</h1><p>也看到有人讲这个思路：</p>
-<p>遍历链表A并将每个结点的指针存入set，然后遍历链表B并判断每个结点指针是否存在于set中。</p>
+<h2 id="思路、注意点和代码"><a href="#思路、注意点和代码" class="headerlink" title="思路、注意点和代码"></a>思路、注意点和代码</h2><ul>
+<li>题目：第n+1个数字是第n个数字的一种描述<ul>
+<li>第n+1个串是第n个串中各个数字的统计</li>
+<li>统计规则是不好描述，我就不描述了。看样例或者代码就能看出来了</li>
+</ul>
+</li>
+<li>注意点：<ul>
+<li>按照我的解法的话，要注意处理一种情况：第3个字符串D111的情况</li>
+<li>首先D出现了1次，得到D1；然后从第一个1开始统计，直到下标大于字符串长度，这时已经不用再遍历字符串，应保证遍历结束</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: PAT Advanced 1140</span></span><br><span class="line"><span class="comment">// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805344490864640</span></span><br><span class="line"><span class="comment">// Tags: String</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">generateNext</span><span class="params">(<span class="built_in">string</span> str)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 字符串长度</span></span><br><span class="line">    <span class="keyword">int</span> len = str.length();</span><br><span class="line">    <span class="comment">// 生成下一个字符串</span></span><br><span class="line">    <span class="built_in">stringstream</span> next;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">        <span class="comment">// 获取key</span></span><br><span class="line">        <span class="keyword">char</span> key = str[i];</span><br><span class="line">        <span class="comment">// 统计key出现的次数</span></span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">1</span>;  <span class="comment">// key出现的次数</span></span><br><span class="line">        <span class="keyword">int</span> j = i + <span class="number">1</span>;  <span class="comment">// 作为下标用来循环</span></span><br><span class="line">        <span class="keyword">while</span> (j &lt; len)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (key == str[j])</span><br><span class="line">                count += <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">// 发现了和key不一样的字符str[j]，即该key的数量统计结束，且外层循环应接着从j开始</span></span><br><span class="line">                <span class="comment">// i=j-1而非i=j，是因为外层循环结束后i还要++</span></span><br><span class="line">                i = j - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 将该key及其次数保存至新字符串</span></span><br><span class="line">        next &lt;&lt; key;</span><br><span class="line">        next &lt;&lt; count;</span><br><span class="line">        <span class="comment">// 处理样例中第3个字符串D111的情况，即内层循环不是通过break结束而是一直循环至j==len的情况</span></span><br><span class="line">        <span class="comment">// 这种情况则不用再进行外层循环了，因为最后一个key一直延续到了串的结尾</span></span><br><span class="line">        <span class="keyword">if</span> (j == len)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> next.str();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// D是0到9</span></span><br><span class="line">    <span class="comment">// 第n+1个数字是第n个数字的一种描述</span></span><br><span class="line">    <span class="built_in">string</span> s;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; s &gt;&gt; n;</span><br><span class="line"></span><br><span class="line">    n -= <span class="number">1</span>; <span class="comment">// 用户输入的其实就是第1个串</span></span><br><span class="line">    <span class="keyword">while</span> (n--)&#123;</span><br><span class="line">        <span class="comment">// cout &lt;&lt; s &lt;&lt; endl;</span></span><br><span class="line">        s = generateNext(s);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="题解二"><a href="#题解二" class="headerlink" title="题解二"></a>题解二</h1><ul>
+<li>参考了柳婼的代码，妙啊，她的代码和我上面写的题解一相比，有以下不同：<ul>
+<li>用<code>j-i</code>实现计数功能，而非像我一样定义变量count进行计数</li>
+<li>把<code>s[i]==s[j]</code>放在内层循环的判断条件中，而非像我一样使用<code>if+break</code>语句</li>
+<li>外层循环结束后不是<code>i++</code>，而是直接<code>i=j</code>（前提是<code>j</code>此时是下一个待统计字符的下标）</li>
+<li>内存循环<code>j</code>从<code>i</code>开始，而非像我一样从<code>i+1</code>开始。这一点是我的想法比较好</li>
+</ul>
+</li>
+</ul>
+<p>参考她的思路后，代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: PAT Advanced 1140</span></span><br><span class="line"><span class="comment">// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805344490864640</span></span><br><span class="line"><span class="comment">// Tags: String</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> s;  <span class="comment">// 用户输入的数字，最终结果</span></span><br><span class="line">    <span class="keyword">int</span> n, j;  <span class="comment">// 第n个字符串，循环遍历</span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; s &gt;&gt; n;</span><br><span class="line"></span><br><span class="line">    n -= <span class="number">1</span>; <span class="comment">// 用户输入的其实就是第1个串</span></span><br><span class="line">    <span class="keyword">while</span> (n--)&#123;</span><br><span class="line">        <span class="built_in">string</span> t = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i=j)&#123;</span><br><span class="line">            <span class="keyword">for</span> (j = i+<span class="number">1</span>; j &lt; s.length() &amp;&amp; s[i] == s[j]; j++);</span><br><span class="line">            t += s[i];</span><br><span class="line">            t += to_string(j - i);</span><br><span class="line">        &#125;</span><br><span class="line">        s = t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p>
@@ -461,9 +472,9 @@
           
             <a href="/tags/算法/" rel="tag"># 算法</a>
           
-            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+            <a href="/tags/PAT/" rel="tag"># PAT</a>
           
-            <a href="/tags/单向链表/" rel="tag"># 单向链表</a>
+            <a href="/tags/字符串/" rel="tag"># 字符串</a>
           
         </div>
       
@@ -476,8 +487,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/04/28/计算某天的下一天：黑盒测试之等价类划分-JUnit参数化测试/" rel="next" title="计算某天的下一天：黑盒测试之等价类划分+JUnit参数化测试">
-                <i class="fa fa-chevron-left"></i> 计算某天的下一天：黑盒测试之等价类划分+JUnit参数化测试
+              <a href="/2020/08/04/PAT甲级1152Google-Recruitment/" rel="next" title="PAT甲级1152Google Recruitment">
+                <i class="fa fa-chevron-left"></i> PAT甲级1152Google Recruitment
               </a>
             
           </div>
@@ -485,10 +496,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/07/11/LeetCode206/" rel="prev" title="LeetCode206">
-                LeetCode206 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -578,7 +585,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">188</span>
+                  <span class="site-state-item-count">190</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -591,7 +598,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">83</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -649,7 +656,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目链接"><span class="nav-number">1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初次读题"><span class="nav-number">2.</span> <span class="nav-text">初次读题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意点"><span class="nav-number">3.</span> <span class="nav-text">注意点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解一"><span class="nav-number">4.</span> <span class="nav-text">题解一</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">4.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解二"><span class="nav-number">5.</span> <span class="nav-text">题解二</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目链接"><span class="nav-number">1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解一"><span class="nav-number">2.</span> <span class="nav-text">题解一</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#英语"><span class="nav-number">2.1.</span> <span class="nav-text">英语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路、注意点和代码"><span class="nav-number">2.2.</span> <span class="nav-text">思路、注意点和代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解二"><span class="nav-number">3.</span> <span class="nav-text">题解二</span></a></li></ol></div>
             
 
           </div>
@@ -683,7 +690,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">161.1k</span>
+    <span title="Site words total count">160.2k</span>
   
 </div>
 

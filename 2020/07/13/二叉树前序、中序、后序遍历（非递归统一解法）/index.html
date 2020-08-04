@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="递归,二叉树,栈," />
+  <meta name="keywords" content="二叉树,递归,栈," />
 
 
 
@@ -82,14 +82,14 @@
 
 
 <meta name="description" content="前言昨天和今天复习了二叉树的前序遍历、中序遍历和后序遍历，找到了一种统一的非递归的方法（即使用一个思路非递归实现二叉树的前序、中序和后序遍历）。 思路思路本质上还是递归，只不过不通过递归函数显式递归，而是通过栈模拟递归。 具体思路：https://leetcode-cn.com/problems/binary-tree-postorder-traversal/solution/mo-fang-di">
-<meta name="keywords" content="递归,二叉树,栈">
+<meta name="keywords" content="二叉树,递归,栈">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二叉树前序、中序、后序遍历（非递归统一解法）">
 <meta property="og:url" content="https://chouxianyu.github.io/2020/07/13/二叉树前序、中序、后序遍历（非递归统一解法）/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
 <meta property="og:description" content="前言昨天和今天复习了二叉树的前序遍历、中序遍历和后序遍历，找到了一种统一的非递归的方法（即使用一个思路非递归实现二叉树的前序、中序和后序遍历）。 思路思路本质上还是递归，只不过不通过递归函数显式递归，而是通过栈模拟递归。 具体思路：https://leetcode-cn.com/problems/binary-tree-postorder-traversal/solution/mo-fang-di">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-13T07:21:08.328Z">
+<meta property="og:updated_time" content="2020-08-01T02:52:58.987Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二叉树前序、中序、后序遍历（非递归统一解法）">
 <meta name="twitter:description" content="前言昨天和今天复习了二叉树的前序遍历、中序遍历和后序遍历，找到了一种统一的非递归的方法（即使用一个思路非递归实现二叉树的前序、中序和后序遍历）。 思路思路本质上还是递归，只不过不通过递归函数显式递归，而是通过栈模拟递归。 具体思路：https://leetcode-cn.com/problems/binary-tree-postorder-traversal/solution/mo-fang-di">
@@ -423,14 +423,14 @@
 <p>具体思路：<a href="https://leetcode-cn.com/problems/binary-tree-postorder-traversal/solution/mo-fang-di-gui-zhi-bian-yi-xing-by-sonp/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/binary-tree-postorder-traversal/solution/mo-fang-di-gui-zhi-bian-yi-xing-by-sonp/</a></p>
 <p><strong>注意：</strong></p>
 <ul>
-<li><p>非空的树节点指针才能存入栈中</p>
-<p>  因为使用<code>nullptr</code>作为递归函数结束的标志，所以在栈中存储树节点指针时必须要检查是否非空。</p>
+<li><p>非空的树结点指针才能存入栈中</p>
+<p>  因为使用<code>nullptr</code>作为递归函数结束的标志，所以在栈中存储树结点指针时必须要检查是否非空。</p>
 </li>
 <li><p>遍历顺序和入栈顺序相反</p>
 </li>
 </ul>
 <h1 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h1><p>LeetCode题目：<a href="https://www.cnblogs.com/chouxianyu/p/13290758.html" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/p/13290758.html</a></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; preorderTraversal(TreeNode* root)&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; nodes;</span><br><span class="line">    <span class="keyword">if</span>(root!=<span class="literal">nullptr</span>)</span><br><span class="line">        nodes.push(root);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(!nodes.empty())&#123;</span><br><span class="line">        <span class="comment">// 取出节点</span></span><br><span class="line">        root = nodes.top();</span><br><span class="line">        nodes.pop();</span><br><span class="line">        <span class="comment">// 将节点对应的树拆解成前序，模拟递归解法中的函数调用</span></span><br><span class="line">        <span class="keyword">if</span>(root!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(root-&gt;right!=<span class="literal">nullptr</span>)</span><br><span class="line">                nodes.push(root-&gt;right);</span><br><span class="line">            <span class="keyword">if</span>(root-&gt;left!=<span class="literal">nullptr</span>)</span><br><span class="line">                nodes.push(root-&gt;left);</span><br><span class="line">            nodes.push(root);</span><br><span class="line">            nodes.push(<span class="literal">nullptr</span>);  <span class="comment">// 设置nullptr标志</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// nullptr代表栈顶对应的树（根、左子树、右子树）已按照指定顺序遍历，一层递归函数运行结束</span></span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            result.push_back(nodes.top()-&gt;val);</span><br><span class="line">            nodes.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; preorderTraversal(TreeNode* root)&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; nodes;</span><br><span class="line">    <span class="keyword">if</span>(root!=<span class="literal">nullptr</span>)</span><br><span class="line">        nodes.push(root);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(!nodes.empty())&#123;</span><br><span class="line">        <span class="comment">// 取出结点</span></span><br><span class="line">        root = nodes.top();</span><br><span class="line">        nodes.pop();</span><br><span class="line">        <span class="comment">// 将结点对应的树拆解成前序，模拟递归解法中的函数调用</span></span><br><span class="line">        <span class="keyword">if</span>(root!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(root-&gt;right!=<span class="literal">nullptr</span>)</span><br><span class="line">                nodes.push(root-&gt;right);</span><br><span class="line">            <span class="keyword">if</span>(root-&gt;left!=<span class="literal">nullptr</span>)</span><br><span class="line">                nodes.push(root-&gt;left);</span><br><span class="line">            nodes.push(root);</span><br><span class="line">            nodes.push(<span class="literal">nullptr</span>);  <span class="comment">// 设置nullptr标志</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// nullptr代表栈顶对应的树（根、左子树、右子树）已按照指定顺序遍历，一层递归函数运行结束</span></span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            result.push_back(nodes.top()-&gt;val);</span><br><span class="line">            nodes.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h1><p>LeetCode题目：<a href="https://www.cnblogs.com/chouxianyu/p/13293153.html" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/p/13293153.html</a></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; inorderTraversal(TreeNode* root) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; nodes;</span><br><span class="line">    <span class="keyword">if</span>(root!=<span class="literal">nullptr</span>)</span><br><span class="line">        nodes.push(root);</span><br><span class="line">    <span class="keyword">while</span>(!nodes.empty())&#123;</span><br><span class="line">        root = nodes.top();</span><br><span class="line">        nodes.pop();</span><br><span class="line">        <span class="comment">// 模拟调用递归函数</span></span><br><span class="line">        <span class="keyword">if</span>(root!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(root-&gt;right!=<span class="literal">nullptr</span>)</span><br><span class="line">                nodes.push(root-&gt;right);</span><br><span class="line">            nodes.push(root);</span><br><span class="line">            nodes.push(<span class="literal">nullptr</span>);</span><br><span class="line">            <span class="keyword">if</span>(root-&gt;left!=<span class="literal">nullptr</span>)</span><br><span class="line">                nodes.push(root-&gt;left);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 一层递归函数结束</span></span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            result.push_back(nodes.top()-&gt;val);</span><br><span class="line">            nodes.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h1><p>LeetCode题目：<a href="https://www.cnblogs.com/chouxianyu/p/13293152.html" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/p/13293152.html</a></p>
@@ -457,9 +457,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/递归/" rel="tag"># 递归</a>
-          
             <a href="/tags/二叉树/" rel="tag"># 二叉树</a>
+          
+            <a href="/tags/递归/" rel="tag"># 递归</a>
           
             <a href="/tags/栈/" rel="tag"># 栈</a>
           
@@ -576,7 +576,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">188</span>
+                  <span class="site-state-item-count">190</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -589,7 +589,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">83</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -681,7 +681,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">161.1k</span>
+    <span title="Site words total count">160.2k</span>
   
 </div>
 

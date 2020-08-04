@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="随笔," />
+  <meta name="keywords" content="算法,LeetCode,单向链表," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="现在是凌晨三点，我并不想熬夜的，但我真的睡不着。 提交成果后，我觉得在这道题的参赛者中我是很有希望拿第一的。因为我花了很大的精力，从正确性、效率和适用性这三个层面上来看，做得很不错了，几乎完美。这并不是傲慢，仅仅是基于现实情况对自己能力和成果的肯定。 后来成绩出了，结果和想象中有点差距，我有些失望，第一反应是想知道各组的成绩，这样可以看到差距有多大和自己是差在哪里，问了问，无果。 今天，知道了另外">
-<meta name="keywords" content="随笔">
+<meta name="description" content="题目链接https://leetcode-cn.com/problems/intersection-of-two-linked-lists/ 初次读题初次读题可知  两个指针相同即需要求得的结果 链表长度可能不同 两个链表可能没有交叉点，此时返回NULL 不可修改链表结构 链表中无循环  我第一次读题时看的是英文版，并且我刚开始做LeetCode对题目风格也不熟悉，同时这道题的Example也是很">
+<meta name="keywords" content="算法,LeetCode,单向链表">
 <meta property="og:type" content="article">
-<meta property="og:title" content="请不要到处糊弄">
-<meta property="og:url" content="https://chouxianyu.github.io/2019/05/31/请不要到处糊弄/index.html">
+<meta property="og:title" content="LeetCode160">
+<meta property="og:url" content="https://chouxianyu.github.io/2020/07/10/LeetCode160相交链表/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="现在是凌晨三点，我并不想熬夜的，但我真的睡不着。 提交成果后，我觉得在这道题的参赛者中我是很有希望拿第一的。因为我花了很大的精力，从正确性、效率和适用性这三个层面上来看，做得很不错了，几乎完美。这并不是傲慢，仅仅是基于现实情况对自己能力和成果的肯定。 后来成绩出了，结果和想象中有点差距，我有些失望，第一反应是想知道各组的成绩，这样可以看到差距有多大和自己是差在哪里，问了问，无果。 今天，知道了另外">
+<meta property="og:description" content="题目链接https://leetcode-cn.com/problems/intersection-of-two-linked-lists/ 初次读题初次读题可知  两个指针相同即需要求得的结果 链表长度可能不同 两个链表可能没有交叉点，此时返回NULL 不可修改链表结构 链表中无循环  我第一次读题时看的是英文版，并且我刚开始做LeetCode对题目风格也不熟悉，同时这道题的Example也是很">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-21T02:35:14.697Z">
+<meta property="og:updated_time" content="2020-08-01T02:57:42.401Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="请不要到处糊弄">
-<meta name="twitter:description" content="现在是凌晨三点，我并不想熬夜的，但我真的睡不着。 提交成果后，我觉得在这道题的参赛者中我是很有希望拿第一的。因为我花了很大的精力，从正确性、效率和适用性这三个层面上来看，做得很不错了，几乎完美。这并不是傲慢，仅仅是基于现实情况对自己能力和成果的肯定。 后来成绩出了，结果和想象中有点差距，我有些失望，第一反应是想知道各组的成绩，这样可以看到差距有多大和自己是差在哪里，问了问，无果。 今天，知道了另外">
+<meta name="twitter:title" content="LeetCode160">
+<meta name="twitter:description" content="题目链接https://leetcode-cn.com/problems/intersection-of-two-linked-lists/ 初次读题初次读题可知  两个指针相同即需要求得的结果 链表长度可能不同 两个链表可能没有交叉点，此时返回NULL 不可修改链表结构 链表中无循环  我第一次读题时看的是英文版，并且我刚开始做LeetCode对题目风格也不熟悉，同时这道题的Example也是很">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://chouxianyu.github.io/2019/05/31/请不要到处糊弄/"/>
+  <link rel="canonical" href="https://chouxianyu.github.io/2020/07/10/LeetCode160相交链表/"/>
 
 
 
 
 
-  <title>请不要到处糊弄 | 臭咸鱼的缺氧瓶</title>
+  <title>LeetCode160 | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -299,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2019/05/31/请不要到处糊弄/">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2020/07/10/LeetCode160相交链表/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="臭咸鱼">
@@ -316,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">请不要到处糊弄</h1>
+          <h1 class="post-title" itemprop="name headline">LeetCode160</h1>
         
 
         <div class="post-meta">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-31T04:47:51+08:00">
-                2019-05-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-10T21:25:22+08:00">
+                2020-07-10
               </time>
             
 
@@ -347,8 +347,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/31/请不要到处糊弄/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/31/请不要到处糊弄/" itemprop="commentCount"></span>
+                <a href="/2020/07/10/LeetCode160相交链表/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/07/10/LeetCode160相交链表/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -356,7 +356,7 @@
 
           
           
-             <span id="/2019/05/31/请不要到处糊弄/" class="leancloud_visitors" data-flag-title="请不要到处糊弄">
+             <span id="/2020/07/10/LeetCode160相交链表/" class="leancloud_visitors" data-flag-title="LeetCode160">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,388 字
+                  597 字
                 </span>
               
 
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  5 分
+                  3 分
                 </span>
               
             </div>
@@ -418,40 +418,30 @@
       
 
       
-        <p>现在是凌晨三点，我并不想熬夜的，但我<strong>真的睡不着</strong>。</p>
-<p>提交成果后，我觉得在这道题的参赛者中我是很有希望拿第一的。因为我花了很大的精力，从正确性、效率和适用性这三个层面上来看，做得很不错了，几乎完美。这并不是傲慢，仅仅是基于现实情况对自己能力和成果的肯定。</p>
-<p>后来成绩出了，结果和想象中有点差距，我<strong>有些失望</strong>，第一反应是想知道各组的成绩，这样可以看到差距有多大和自己是差在哪里，问了问，无果。</p>
-<p>今天，知道了另外一件事，<strong>更加失望</strong>，想象中是第一，然而现实却是这样。</p>
-<p>我做得这么差吗？那以后好好努力吧。加油..…</p>
-<p>凌晨一点左右，结合老师的评价，我看了名次好的同学的成果，嗯..….，结果稍微不太一样哈，嗯，再看看，看看结果的图片吧，这不是一样吗？</p>
-<p>奥奥，他算出来某神秘物体S的个数是3，我算的是6啊（这个数字是少一点比较好的）。诶，我验证过3是不可能的啊，嗯，再看看..…</p>
-<p>emm？那几个怎么没算上？他也是6啊。而且用他自己的理论都能把他说倒，这几个是S，另外几个怎么就不是S呢？</p>
-<p>我再去查查资料吧。嗯嗯，果然是当时我遇到的一个问题：是否使用L距离。这个问题只是表象，计算方法而已，并非实质，但它影响了S的定义，进而影响了3或6这个数字。如果按资料里的假设，这篇论文还可以，就是没明确写出来假设，S的定义也没有明确指出，所以刚才那个问题还是存在的。</p>
-<p>在我的假设下，使用欧式距离，S也有明确定义，结果也是正确的，跟他们相比差别就在L距离了，书上都是说假设用L距离，而非一定是L距离，L距离并不是该类问题的固定假设，严格来讲，我这个并不是个所谓的问题。</p>
+        <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/intersection-of-two-linked-lists/</a></p>
+<h1 id="初次读题"><a href="#初次读题" class="headerlink" title="初次读题"></a>初次读题</h1><p>初次读题可知</p>
+<ul>
+<li>两个指针相同即需要求得的结果</li>
+<li>链表长度可能不同</li>
+<li>两个链表可能没有交叉点，此时返回NULL</li>
+<li>不可修改链表结构</li>
+<li>链表中无循环</li>
+</ul>
+<p>我第一次读题时看的是英文版，并且我刚开始做LeetCode对题目风格也不熟悉，同时这道题的Example也是很神奇，我一下子没有理解题意，看了中文版的题目和题解后才明白这个题是怎么做的。</p>
+<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><p>根据这道题的代码模板和最终答案可知，最终我们需要找到交叉结点的指针。</p>
+<p>在Example1中，val为1的两个结点虽然内容相同，但不是交叉点，因为交叉点的定义是同时存在于两个链表中。</p>
+<h1 id="题解一"><a href="#题解一" class="headerlink" title="题解一"></a>题解一</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>假如两个链表有交叉点（intersection），则可以设两个链表彼此不重复的结点个数分别为d1和d2，重复的结点个数为d。如果一个链表遍历完则使其从另外一个链表的头部重新开始，这样形成一个式子：<code>d1+d+d2=d2+d+d1</code>。</p>
+<p>假如两个链表没有交叉点，这也只是<code>d=0</code>的一个特例，因此只要实现上述思路即可。</p>
+<p>关于思路，可以看看这个题的一个视频题解：</p>
+<p><a href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/lian-biao-xiang-jiao-shuang-zhi-zhen-onshi-jian-fu/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/lian-biao-xiang-jiao-shuang-zhi-zhen-onshi-jian-fu/</a></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: Leetcode 160</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/intersection-of-two-linked-lists/</span></span><br><span class="line"><span class="comment">// Tags: Linked List</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode* next;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x):val(x),next(<span class="literal">NULL</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">getIntersectionNode</span><span class="params">(ListNode *headA, ListNode *headB)</span></span>&#123;</span><br><span class="line">        <span class="comment">// Deal with the border "nullptr"</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="literal">nullptr</span>==headA || <span class="literal">nullptr</span>==headB)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *ptrA = headA;</span><br><span class="line">        ListNode *ptrB = headB;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// d1+d+d2=d2+d+d1</span></span><br><span class="line">        <span class="keyword">while</span> (ptrA != ptrB)&#123;</span><br><span class="line">            ptrA = <span class="literal">nullptr</span> == ptrA ? headB : ptrA-&gt;next;</span><br><span class="line">            ptrB = <span class="literal">nullptr</span> == ptrB ? headA : ptrB-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ptrA;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="题解二"><a href="#题解二" class="headerlink" title="题解二"></a>题解二</h1><p>也看到有人讲这个思路：</p>
+<p>遍历链表A并将每个结点的指针存入set，然后遍历链表B并判断每个结点指针是否存在于set中。</p>
 <hr>
-<p>看下来，好像评委也没认真研究这个题目吧？都没看出来两种方法的区别吧？</p>
-<p>这就让我<strong>很震惊、很气愤</strong>了。（或许是我真的菜吧，没真的懂这个问题？）</p>
-<p>作为学习、研究学问的人，老师和学生都糊弄？这样糊弄哪来学问。</p>
-<hr>
-<p>以下才算是正文。我就想这么写，写一堆一堆的废话。</p>
-<p>这个比赛糊弄，其他的比赛也有糊弄的，昨天得知我刚树立好的目标也在糊弄，emmm真的多..…</p>
-<p>我知道比赛是有评委的嘛，评委没有多少时间看，你得知道他想看什么，你要做得让他舒服。</p>
-<p>这我当然不否认，各种各样的合作是需要让别人舒服，但我想讨论的是糊弄。</p>
-<p>比赛之外，再算上其他时候遇见的糊弄..…..…啊，wsl，这也是我为什么睡不着了。</p>
-<p><strong>我们都懒，偶尔懒一懒、跑跑神还是可以的啊，但也别啥都糊弄</strong></p>
-<p>上课不听，玩游戏刷微博看小说，上课下课了自豪地说：我啥都没听懂，这老师讲得真烂；他讲的我听不懂，所以我才玩儿的；我书跟新买的一样干净哈哈哈。</p>
-<p>上课你去得早，上课前你在玩游戏等着上课，上课你又不听，反正还是打游戏，那你刚才等啥呢？</p>
-<p>上实验课前边10分钟老师在讲，你坐那儿玩手机，到做实验了你就开始活跃了，我们要干嘛？怎么做？带带我？</p>
-<p>作业什么的有个问题问你，你是做出来了，但是问你你就不知道，在背答案呢还是做作业打工呢..…..…</p>
-<p>让给你讲东西，给你讲了你说别扯了，你听不懂，不想听。</p>
-<p>遇到的那些问题，随便想想办法都可以自己解决的。上边说的都是糊弄学习什么的，我是比较喜欢思考和科学的，有人说他不喜欢学习，当然可以啊。</p>
-<p>emm那你问过你自己喜欢什么吗？你真的喜欢它吗？你了解它吗？为什么？这样可以吗？不喜欢学是不是你不想学的借口啊？自己现在过得充实有意义吗？</p>
-<p>要是你说，人生的每一次选择都是最好的，人生怎么样过都可以，那也行，你有这样的乐观、自信和准备就好。</p>
-<p><strong>如果你能跟自己说说话</strong>，多上一层思考，多想想自己的内核逻辑，换点思考内容，事情多问几个真的吗？是吗？为什么？怎么弄的？我的原因？他的原因？谁的原因？我做得还可以吗？他说的对嘛？他为什么这样想？我为什么这样想？我应该怎么想？这样做是否符合社会主义核心价值观？这样是最有效的方式吗？我在想什么？哈哈哈哈哈哈</p>
-<p>以上内容个人觉得口吻过于讽刺，不要对号入座，<strong>看看就好，别天天糊弄着过就好了</strong>。</p>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
-<p>转载请注明出处：<a href="https://chouxianyu.github.io">https://chouxianyu.github.io</a></p>
+<p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p>
 <p>欢迎讨论和交流!</p>
+<hr>
 
       
     </div>
@@ -469,7 +459,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随笔/" rel="tag"># 随笔</a>
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          
+            <a href="/tags/单向链表/" rel="tag"># 单向链表</a>
           
         </div>
       
@@ -482,8 +476,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/27/汇编语言-实验（三）/" rel="next" title="汇编语言-实验（三）">
-                <i class="fa fa-chevron-left"></i> 汇编语言-实验（三）
+              <a href="/2020/04/28/计算某天的下一天：黑盒测试之等价类划分-JUnit参数化测试/" rel="next" title="计算某天的下一天：黑盒测试之等价类划分+JUnit参数化测试">
+                <i class="fa fa-chevron-left"></i> 计算某天的下一天：黑盒测试之等价类划分+JUnit参数化测试
               </a>
             
           </div>
@@ -492,8 +486,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/31/汇编语言-80x86寄存器组/" rel="prev" title="汇编语言-80x86寄存器组">
-                汇编语言-80x86寄存器组 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/07/11/LeetCode206反转链表/" rel="prev" title="LeetCode206反转链表">
+                LeetCode206反转链表 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -555,8 +549,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -575,7 +578,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">188</span>
+                  <span class="site-state-item-count">190</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -588,7 +591,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">83</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -637,6 +640,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目链接"><span class="nav-number">1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初次读题"><span class="nav-number">2.</span> <span class="nav-text">初次读题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意点"><span class="nav-number">3.</span> <span class="nav-text">注意点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解一"><span class="nav-number">4.</span> <span class="nav-text">题解一</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">4.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解二"><span class="nav-number">5.</span> <span class="nav-text">题解二</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -664,7 +683,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">161.1k</span>
+    <span title="Site words total count">160.2k</span>
   
 </div>
 

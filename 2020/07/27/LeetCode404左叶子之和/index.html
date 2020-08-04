@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="算法,LeetCode,递归,二叉树," />
+  <meta name="keywords" content="算法,LeetCode,二叉树,递归," />
 
 
 
@@ -82,14 +82,14 @@
 
 
 <meta name="description" content="题目链接https://leetcode-cn.com/problems/sum-of-left-leaves/ 题解 自己写的 递归解法 思路见代码注释  12345678910111213141516171819202122232425262728293031323334353637// Problem: LeetCode 404// URL: https://leetcode-cn.com/">
-<meta name="keywords" content="算法,LeetCode,递归,二叉树">
+<meta name="keywords" content="算法,LeetCode,二叉树,递归">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode404左叶子之和">
 <meta property="og:url" content="https://chouxianyu.github.io/2020/07/27/LeetCode404左叶子之和/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
 <meta property="og:description" content="题目链接https://leetcode-cn.com/problems/sum-of-left-leaves/ 题解 自己写的 递归解法 思路见代码注释  12345678910111213141516171819202122232425262728293031323334353637// Problem: LeetCode 404// URL: https://leetcode-cn.com/">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-27T02:15:37.384Z">
+<meta property="og:updated_time" content="2020-08-01T02:38:41.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode404左叶子之和">
 <meta name="twitter:description" content="题目链接https://leetcode-cn.com/problems/sum-of-left-leaves/ 题解 自己写的 递归解法 思路见代码注释  12345678910111213141516171819202122232425262728293031323334353637// Problem: LeetCode 404// URL: https://leetcode-cn.com/">
@@ -424,7 +424,7 @@
 <li>递归解法</li>
 <li>思路见代码注释</li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 404</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/sum-of-left-leaves/</span></span><br><span class="line"><span class="comment">// Tags: Tree Recursion</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 判断一个节点是否为叶子节点：该节点非空且左右孩子为空</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isLeaf</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left==<span class="literal">nullptr</span> &amp;&amp; root-&gt;right==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 得到一颗树的所有左叶子节点的值的总和</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumOfLeftLeaves</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 如果左孩子是叶子，则该树的结果为左孩子的值+右子树的结果</span></span><br><span class="line">        <span class="keyword">if</span>(isLeaf(root-&gt;left))</span><br><span class="line">            <span class="keyword">return</span> root-&gt;left-&gt;val + sumOfLeftLeaves(root-&gt;right);</span><br><span class="line">        <span class="comment">// 如果左孩子不是叶子，则该树对应的值为左子树的结果+右子树的结果</span></span><br><span class="line">        <span class="keyword">return</span> sumOfLeftLeaves(root-&gt;left) + sumOfLeftLeaves(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 404</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/sum-of-left-leaves/</span></span><br><span class="line"><span class="comment">// Tags: Tree Recursion</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 判断一个结点是否为叶子结点：该结点非空且左右孩子为空</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isLeaf</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left==<span class="literal">nullptr</span> &amp;&amp; root-&gt;right==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 得到一颗树的所有左叶子结点的值的总和</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumOfLeftLeaves</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 如果左孩子是叶子，则该树的结果为左孩子的值+右子树的结果</span></span><br><span class="line">        <span class="keyword">if</span>(isLeaf(root-&gt;left))</span><br><span class="line">            <span class="keyword">return</span> root-&gt;left-&gt;val + sumOfLeftLeaves(root-&gt;right);</span><br><span class="line">        <span class="comment">// 如果左孩子不是叶子，则该树对应的值为左子树的结果+右子树的结果</span></span><br><span class="line">        <span class="keyword">return</span> sumOfLeftLeaves(root-&gt;left) + sumOfLeftLeaves(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p>
@@ -451,9 +451,9 @@
           
             <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
           
-            <a href="/tags/递归/" rel="tag"># 递归</a>
-          
             <a href="/tags/二叉树/" rel="tag"># 二叉树</a>
+          
+            <a href="/tags/递归/" rel="tag"># 递归</a>
           
         </div>
       
@@ -568,7 +568,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">188</span>
+                  <span class="site-state-item-count">190</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -581,7 +581,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">83</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -673,7 +673,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">161.1k</span>
+    <span title="Site words total count">160.2k</span>
   
 </div>
 

@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="题目链接https://leetcode-cn.com/problems/odd-even-linked-list/ 题解 我自己写的 思路是：首先建立两个链表（奇数号节点链表和偶数号节点链表），然后遍历整个链表并通过尾插法构造这两个链表，最后将偶数号节点链表连接到奇数号节点链表尾部即可。 时间复杂度是$O(n)$，空间复杂度是$O(1)$ 具体思路见代码注释  12345678910111213">
+<meta name="description" content="题目链接https://leetcode-cn.com/problems/odd-even-linked-list/ 题解 我自己写的 思路是：首先建立两个链表（奇数号结点链表和偶数号结点链表），然后遍历整个链表并通过尾插法构造这两个链表，最后将偶数号结点链表连接到奇数号结点链表尾部即可。 时间复杂度是$O(n)$，空间复杂度是$O(1)$ 具体思路见代码注释  12345678910111213">
 <meta name="keywords" content="算法,LeetCode,单向链表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode328奇偶链表">
 <meta property="og:url" content="https://chouxianyu.github.io/2020/07/31/LeetCode328奇偶链表/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="题目链接https://leetcode-cn.com/problems/odd-even-linked-list/ 题解 我自己写的 思路是：首先建立两个链表（奇数号节点链表和偶数号节点链表），然后遍历整个链表并通过尾插法构造这两个链表，最后将偶数号节点链表连接到奇数号节点链表尾部即可。 时间复杂度是$O(n)$，空间复杂度是$O(1)$ 具体思路见代码注释  12345678910111213">
+<meta property="og:description" content="题目链接https://leetcode-cn.com/problems/odd-even-linked-list/ 题解 我自己写的 思路是：首先建立两个链表（奇数号结点链表和偶数号结点链表），然后遍历整个链表并通过尾插法构造这两个链表，最后将偶数号结点链表连接到奇数号结点链表尾部即可。 时间复杂度是$O(n)$，空间复杂度是$O(1)$ 具体思路见代码注释  12345678910111213">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-31T15:21:42.831Z">
+<meta property="og:updated_time" content="2020-08-01T02:38:41.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode328奇偶链表">
-<meta name="twitter:description" content="题目链接https://leetcode-cn.com/problems/odd-even-linked-list/ 题解 我自己写的 思路是：首先建立两个链表（奇数号节点链表和偶数号节点链表），然后遍历整个链表并通过尾插法构造这两个链表，最后将偶数号节点链表连接到奇数号节点链表尾部即可。 时间复杂度是$O(n)$，空间复杂度是$O(1)$ 具体思路见代码注释  12345678910111213">
+<meta name="twitter:description" content="题目链接https://leetcode-cn.com/problems/odd-even-linked-list/ 题解 我自己写的 思路是：首先建立两个链表（奇数号结点链表和偶数号结点链表），然后遍历整个链表并通过尾插法构造这两个链表，最后将偶数号结点链表连接到奇数号结点链表尾部即可。 时间复杂度是$O(n)$，空间复杂度是$O(1)$ 具体思路见代码注释  12345678910111213">
 
 
 
@@ -421,11 +421,11 @@
         <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode-cn.com/problems/odd-even-linked-list/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/odd-even-linked-list/</a></p>
 <h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><ul>
 <li>我自己写的</li>
-<li>思路是：首先建立两个链表（奇数号节点链表和偶数号节点链表），然后遍历整个链表并通过尾插法构造这两个链表，最后将偶数号节点链表连接到奇数号节点链表尾部即可。</li>
+<li>思路是：首先建立两个链表（奇数号结点链表和偶数号结点链表），然后遍历整个链表并通过尾插法构造这两个链表，最后将偶数号结点链表连接到奇数号结点链表尾部即可。</li>
 <li>时间复杂度是$O(n)$，空间复杂度是$O(1)$</li>
 <li>具体思路见代码注释</li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 328</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/odd-even-linked-list/</span></span><br><span class="line"><span class="comment">// Tags: Linked List</span></span><br><span class="line"><span class="comment">// Difficulty: Medium</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode* next;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">oddEvenList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 处理0个、1个或者2个节点的情况</span></span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">nullptr</span> || head-&gt;next == <span class="literal">nullptr</span> || head-&gt;next-&gt;next == <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        <span class="comment">// 奇数号节点链表首尾</span></span><br><span class="line">        ListNode *oddHead = head, *oddTail = oddHead;</span><br><span class="line">        <span class="comment">// 偶数号节点链表首尾</span></span><br><span class="line">        ListNode *evenHead = head-&gt;next, *evenTail = evenHead;</span><br><span class="line">        <span class="comment">// 当前节点是第奇数个还是偶数个，true则为第奇数个，false则为第偶数个</span></span><br><span class="line">        <span class="keyword">bool</span> oddFlag = <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">// 从第三个节点开始遍历</span></span><br><span class="line">        head = head-&gt;next-&gt;next;</span><br><span class="line">        <span class="comment">// 遍历链表，将链表分为奇数号节点链表和偶数号节点链表</span></span><br><span class="line">        <span class="keyword">while</span>(head != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(oddFlag==<span class="literal">true</span>)&#123;</span><br><span class="line">                oddTail-&gt;next = head;</span><br><span class="line">                oddTail = oddTail-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                evenTail-&gt;next = head;</span><br><span class="line">                evenTail = evenTail-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            oddFlag = !oddFlag;</span><br><span class="line">            head = head-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 连接奇数号节点链表和偶数号节点链表</span></span><br><span class="line">        oddTail-&gt;next = evenHead;</span><br><span class="line">        evenTail-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">return</span> oddHead;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 328</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/odd-even-linked-list/</span></span><br><span class="line"><span class="comment">// Tags: Linked List</span></span><br><span class="line"><span class="comment">// Difficulty: Medium</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode* next;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">oddEvenList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 处理0个、1个或者2个结点的情况</span></span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">nullptr</span> || head-&gt;next == <span class="literal">nullptr</span> || head-&gt;next-&gt;next == <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        <span class="comment">// 奇数号结点链表首尾</span></span><br><span class="line">        ListNode *oddHead = head, *oddTail = oddHead;</span><br><span class="line">        <span class="comment">// 偶数号结点链表首尾</span></span><br><span class="line">        ListNode *evenHead = head-&gt;next, *evenTail = evenHead;</span><br><span class="line">        <span class="comment">// 当前结点是第奇数个还是偶数个，true则为第奇数个，false则为第偶数个</span></span><br><span class="line">        <span class="keyword">bool</span> oddFlag = <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">// 从第三个结点开始遍历</span></span><br><span class="line">        head = head-&gt;next-&gt;next;</span><br><span class="line">        <span class="comment">// 遍历链表，将链表分为奇数号结点链表和偶数号结点链表</span></span><br><span class="line">        <span class="keyword">while</span>(head != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(oddFlag==<span class="literal">true</span>)&#123;</span><br><span class="line">                oddTail-&gt;next = head;</span><br><span class="line">                oddTail = oddTail-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                evenTail-&gt;next = head;</span><br><span class="line">                evenTail = evenTail-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            oddFlag = !oddFlag;</span><br><span class="line">            head = head-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 连接奇数号结点链表和偶数号结点链表</span></span><br><span class="line">        oddTail-&gt;next = evenHead;</span><br><span class="line">        evenTail-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">return</span> oddHead;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p>
@@ -474,6 +474,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/01/LeetCode669修剪二叉搜索树/" rel="prev" title="LeetCode669修剪二叉搜索树">
+                LeetCode669修剪二叉搜索树 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -563,7 +567,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">188</span>
+                  <span class="site-state-item-count">190</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -576,7 +580,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">83</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -668,7 +672,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">161.1k</span>
+    <span title="Site words total count">160.2k</span>
   
 </div>
 
