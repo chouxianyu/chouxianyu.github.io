@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2020-08-04T13:52:12.298Z</updated>
+  <updated>2020-08-05T15:20:20.868Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PAT甲级1148Werewolf - Simple Version</title>
+    <link href="https://chouxianyu.github.io/2020/08/05/PAT%E7%94%B2%E7%BA%A71148Werewolf-Simple-Version/"/>
+    <id>https://chouxianyu.github.io/2020/08/05/PAT甲级1148Werewolf-Simple-Version/</id>
+    <published>2020-08-05T15:19:12.000Z</published>
+    <updated>2020-08-05T15:20:20.868Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://pintia.cn/problem-sets/994805342720868352/problems/1038429808099098624" target="_blank" rel="noopener">https://pintia.cn/problem-sets/994805342720868352/problems/1038429808099098624</a></p><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><p>N（5到100）个玩家，其中2个狼人，只有1个狼人在撒谎（题目里说至少有1个狼人在撒谎但不是所有狼人都在撒谎……直接讲只有1个狼人在撒谎不行吗……），共有2人撒谎，请找出两个狼人</p><p>描述中+则是人类，-则是狼人</p><p>如果有解，请按增序输出狼人</p><p>如果多个解，则输出最小的</p><p>没有讲解则输出”No Solution” </p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>刚看完题时没啥思路……特别是有多个解的情况，让我以为要求出所有解，我似乎还想过枚举是谁在撒谎（得到谁在撒谎并不能很有效地得到答案……）</p><p>可以枚举狼人是谁的情况，如果与题目和输入相符（1个狼人和1个人在撒谎），则直接输出狼人（如果有多个解，从小到大枚举狼人求得的第一个解就是多个解中最小的解）</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: PAT Advanced 1148</span></span><br><span class="line"><span class="comment">// URL: https://pintia.cn/problem-sets/994805342720868352/problems/1038429808099098624</span></span><br><span class="line"><span class="comment">// Tags: Math</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 获取输入</span></span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; statements(n+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; statements[i];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt;= n; j++)&#123;</span><br><span class="line">            <span class="comment">// 枚举2个狼人是i和j</span></span><br><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; identities(n+<span class="number">1</span>, <span class="number">1</span>); <span class="comment">// 玩家身份：1代表人类，-1代表狼人</span></span><br><span class="line">            identities[i] = identities[j] = <span class="number">-1</span>; <span class="comment">// i和j是狼人</span></span><br><span class="line">            <span class="comment">// 寻找撒谎的玩家</span></span><br><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; liars;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt; statements.size(); k++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (statements[k] * identities[<span class="built_in">abs</span>(statements[k])] &lt; <span class="number">0</span>)</span><br><span class="line">                    liars.push_back(k);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 判断当前枚举的狼人i和j是否符合题目要求和输入</span></span><br><span class="line">            <span class="keyword">if</span> (liars.size() == <span class="number">2</span> &amp;&amp; identities[liars[<span class="number">0</span>]] + identities[liars[<span class="number">1</span>]] == <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span> &lt;&lt; j;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"No Solution"</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://pintia.cn/problem-sets/994805342720868352/pro
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="PAT" scheme="https://chouxianyu.github.io/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级1136A Delayed Palindrome</title>
+    <link href="https://chouxianyu.github.io/2020/08/05/PAT%E7%94%B2%E7%BA%A71136A-Delayed-Palindrome/"/>
+    <id>https://chouxianyu.github.io/2020/08/05/PAT甲级1136A-Delayed-Palindrome/</id>
+    <published>2020-08-05T07:49:08.000Z</published>
+    <updated>2020-08-05T07:52:46.517Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805345732378624" target="_blank" rel="noopener">https://pintia.cn/problem-sets/994805342720868352/problems/994805345732378624</a></p><h1 id="题解一"><a href="#题解一" class="headerlink" title="题解一"></a>题解一</h1><h2 id="英语"><a href="#英语" class="headerlink" title="英语"></a>英语</h2><ul><li><p>notation</p><p>  标记法</p></li><li><p>palindromic</p><p>  回文的</p></li><li><p>palindrome</p><p>  回文</p></li><li><p>be paired with</p><p>  与……配对</p></li></ul><h2 id="思路、注意点和代码"><a href="#思路、注意点和代码" class="headerlink" title="思路、注意点和代码"></a>思路、注意点和代码</h2><ul><li>要实现回文数判断</li><li>要实现字符串逆序</li><li>整体思路就是题目描述的那样：判断是不是回文数，不是的话就逆序后和原数相加，重复这一过程直至得到回文数或者超过10次迭代</li></ul><p>下面是我刚开始时写的代码，结果是Partially Accepted，得了14分。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: PAT Advanced 1136</span></span><br><span class="line"><span class="comment">// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805345732378624</span></span><br><span class="line"><span class="comment">// Tags: String</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isPalindromic</span><span class="params">(<span class="built_in">string</span> s)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = s.length();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len/<span class="number">2</span>; i++)</span><br><span class="line">        <span class="keyword">if</span>(s[i] != s[len<span class="number">-1</span>-i])</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> a_str, b_str, c_str;</span><br><span class="line">    <span class="keyword">int</span> a, b, c;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; a_str;</span><br><span class="line">    <span class="keyword">int</span> N = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">while</span> (N--)&#123;</span><br><span class="line">        b_str = <span class="built_in">string</span>(a_str.rbegin(), a_str.rend());</span><br><span class="line">        c_str = to_string(stoi(a_str) + stoi(b_str));</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; a_str &lt;&lt; <span class="string">" + "</span> &lt;&lt; b_str &lt;&lt; <span class="string">" = "</span> &lt;&lt; c_str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">if</span> (isPalindromic(c_str))&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; c_str &lt;&lt; <span class="string">" is a palindromic number."</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        a_str = c_str;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Not found in 10 iterations."</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="题解二"><a href="#题解二" class="headerlink" title="题解二"></a>题解二</h1><p>看了下柳婼的代码，和我写的题解一相比，她的代码有以下不同：</p><ul><li><p>她考虑了输入就是回文数的<strong>边界情况</strong>，我没有考虑，这个测试点占4分</p></li><li><p>回文数的判断方法不同，她是判断逆序后是否相等，我是遍历判断</p></li><li><p>她手动实现了字符串数字的加法，而我是将字符串转成数字进而相加，这里我忽略了<strong>数值范围</strong>，这个测试点占2分</p><p>  题目说不超过1000位，就算使用longlong也不行，所以必须手动实现字符串相加</p></li></ul><p>基于我刚开始写的题解一和上面分析的内容，正确代码如下</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: PAT Advanced 1136</span></span><br><span class="line"><span class="comment">// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805345732378624</span></span><br><span class="line"><span class="comment">// Tags: String Palindrome</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isPalindromic</span><span class="params">(<span class="built_in">string</span> s)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = s.length();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len/<span class="number">2</span>; i++)</span><br><span class="line">        <span class="keyword">if</span>(s[i] != s[len<span class="number">-1</span>-i])</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">addString</span><span class="params">(<span class="built_in">string</span> a, <span class="built_in">string</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> carry = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> sum;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = a.length() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        sum = a[i] - <span class="string">'0'</span> + b[i] - <span class="string">'0'</span> + carry;  <span class="comment">// 注意进位和'0'</span></span><br><span class="line">        a[i] = sum % <span class="number">10</span> + <span class="string">'0'</span>;  <span class="comment">// 注意'0'</span></span><br><span class="line">        carry = sum / <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (carry == <span class="number">1</span>)</span><br><span class="line">        a = <span class="string">"1"</span> + a;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> a_str, b_str, c_str;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; a_str;</span><br><span class="line">    <span class="keyword">if</span> (isPalindromic(a_str))&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; a_str &lt;&lt; <span class="string">" is a palindromic number."</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> N = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">while</span> (N--)&#123;</span><br><span class="line">        b_str = <span class="built_in">string</span>(a_str.rbegin(), a_str.rend());</span><br><span class="line">        c_str = addString(a_str, b_str);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; a_str &lt;&lt; <span class="string">" + "</span> &lt;&lt; b_str &lt;&lt; <span class="string">" = "</span> &lt;&lt; c_str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">if</span> (isPalindromic(c_str))&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; c_str &lt;&lt; <span class="string">" is a palindromic number."</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        a_str = c_str;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Not found in 10 iterations."</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://pintia.cn/problem-sets/994805342720868352/pro
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="PAT" scheme="https://chouxianyu.github.io/tags/PAT/"/>
+    
+      <category term="字符串" scheme="https://chouxianyu.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="回文数" scheme="https://chouxianyu.github.io/tags/%E5%9B%9E%E6%96%87%E6%95%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>PAT甲级1140Look-and-say Sequence</title>
@@ -91,9 +145,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -124,9 +178,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -157,9 +211,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="单向链表" scheme="https://chouxianyu.github.io/tags/%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/"/>
     
@@ -184,9 +238,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="单向链表" scheme="https://chouxianyu.github.io/tags/%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/"/>
     
@@ -211,9 +265,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
     
@@ -242,9 +296,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
     
@@ -273,9 +327,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
     
@@ -302,9 +356,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
     
@@ -333,9 +387,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -364,9 +418,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -395,9 +449,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -426,9 +480,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -457,9 +511,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -488,9 +542,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -519,9 +573,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -548,71 +602,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
-      <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-      <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
-    
-      <category term="DFS" scheme="https://chouxianyu.github.io/tags/DFS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode101对称二叉树</title>
-    <link href="https://chouxianyu.github.io/2020/07/26/LeetCode101%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    <id>https://chouxianyu.github.io/2020/07/26/LeetCode101对称二叉树/</id>
-    <published>2020-07-26T06:36:56.000Z</published>
-    <updated>2020-08-01T02:38:41.161Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode-cn.com/problems/symmetric-tree/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/symmetric-tree/</a></p><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><ul><li>我写的</li><li>递归解法</li><li>具体方法见代码注释</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 101</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/symmetric-tree/</span></span><br><span class="line"><span class="comment">// Tags: Tree Recursion DFS</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 判断两个树s和t是否互相对称</span></span><br><span class="line">    <span class="comment">// 有3个要求：</span></span><br><span class="line">    <span class="comment">// ①根结点值相等</span></span><br><span class="line">    <span class="comment">// ②s的左子树和t的右子树互相对称</span></span><br><span class="line">    <span class="comment">// ③s的右子树和t的左子树互相对称</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isSymmetric</span><span class="params">(TreeNode* s, TreeNode* t)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s==<span class="literal">nullptr</span> &amp;&amp; t==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(s==<span class="literal">nullptr</span> || t==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(s-&gt;val == t-&gt;val)</span><br><span class="line">            <span class="keyword">return</span> isSymmetric(s-&gt;left, t-&gt;right) &amp;&amp; isSymmetric(s-&gt;right, t-&gt;left);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isSymmetric</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 如果该树为空，则为对称的</span></span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">// 左子树和右子树对称</span></span><br><span class="line">        <span class="keyword">return</span> isSymmetric(root-&gt;left, root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/symmetric-tree/&quot; tar
-      
-    
-    </summary>
-    
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
-      <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-      <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
-    
-      <category term="DFS" scheme="https://chouxianyu.github.io/tags/DFS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode572另一个树的子树</title>
-    <link href="https://chouxianyu.github.io/2020/07/26/LeetCode572%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%A0%91%E7%9A%84%E5%AD%90%E6%A0%91/"/>
-    <id>https://chouxianyu.github.io/2020/07/26/LeetCode572另一个树的子树/</id>
-    <published>2020-07-26T06:05:52.000Z</published>
-    <updated>2020-08-01T02:38:41.168Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p><a href="https://leetcode-cn.com/problems/subtree-of-another-tree/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/subtree-of-another-tree/</a></p><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><ul><li>我写的</li><li>两层DFS、双重DFS</li><li>其它题解一般也是这个思路</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 572</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/subtree-of-another-tree/</span></span><br><span class="line"><span class="comment">// Tags: Tree Recursion DFS</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 判断s和t两个树是否相同（同质）</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isSametree</span><span class="params">(TreeNode* s, TreeNode* t)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 两个树均为空</span></span><br><span class="line">        <span class="keyword">if</span>(s==<span class="literal">nullptr</span> &amp;&amp; t==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">// 一个树为空</span></span><br><span class="line">        <span class="keyword">if</span>(s==<span class="literal">nullptr</span> || t==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">// 两个树都不为空</span></span><br><span class="line">        <span class="keyword">if</span>(s-&gt;val==t-&gt;val)</span><br><span class="line">            <span class="comment">// 如果根结点的val都相同，则递归比较子树</span></span><br><span class="line">            <span class="keyword">return</span> isSametree(s-&gt;left, t-&gt;left) &amp;&amp; isSametree(s-&gt;right, t-&gt;right);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 判断t是否为s的子树</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isSubtree</span><span class="params">(TreeNode* s, TreeNode* t)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 如果s是空树，则t不可能是s的子树</span></span><br><span class="line">        <span class="keyword">if</span>(s==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">// t为s的子树有3种可能：s==t、t是s左子树的子树、t是s右子树的子树</span></span><br><span class="line">        <span class="keyword">return</span> isSametree(s, t) || isSubtree(s-&gt;left, t) || isSubtree(s-&gt;right, t);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/subtree-of-another-t
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
