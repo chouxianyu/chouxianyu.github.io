@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2020-08-05T15:20:20.868Z</updated>
+  <updated>2020-08-06T15:42:51.140Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PAT甲级1144The Missing Number</title>
+    <link href="https://chouxianyu.github.io/2020/08/06/PAT%E7%94%B2%E7%BA%A71144The-Missing-Number/"/>
+    <id>https://chouxianyu.github.io/2020/08/06/PAT甲级1144The-Missing-Number/</id>
+    <published>2020-08-06T15:41:28.000Z</published>
+    <updated>2020-08-06T15:42:51.140Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805343463260160" target="_blank" rel="noopener">https://pintia.cn/problem-sets/994805342720868352/problems/994805343463260160</a></p><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><p>给n（小于1e5）个int，找到最小的不在这些数字里的正整数</p><h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><ul><li><p>map未创建某元素时，如果直接访问，则其value是一个默认值</p></li><li><p>根据输入样例可知n个数字中可以有重复数字</p></li><li><p>map会按照key自动升序排列</p></li><li><p>这道题也可以暴力解，创建一个int数组，因为最后要求<strong>正</strong>整数，所以可以不统计负数</p><p>  如果这么做，要注意一个边界情况：不缺数字，比如输入了5个数字，分别是1 2 3 4 5</p></li></ul><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: PAT Advanced 1144</span></span><br><span class="line"><span class="comment">// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805343463260160</span></span><br><span class="line"><span class="comment">// Tags: map</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; numCount;</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; num;</span><br><span class="line">        numCount[num]++; <span class="comment">// 计数，根据输入样例可知n个数字中可以有重复数字</span></span><br><span class="line">    &#125;</span><br><span class="line">    num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (++num)</span><br><span class="line">        <span class="comment">// map未创建某元素时，如果直接访问，则其value是一个默认值</span></span><br><span class="line">        <span class="keyword">if</span> (numCount[num] == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; num;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://pintia.cn/problem-sets/994805342720868352/pro
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="PAT" scheme="https://chouxianyu.github.io/tags/PAT/"/>
+    
+      <category term="map" scheme="https://chouxianyu.github.io/tags/map/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级1132Cut Integer</title>
+    <link href="https://chouxianyu.github.io/2020/08/06/PAT%E7%94%B2%E7%BA%A71132Cut-Integer/"/>
+    <id>https://chouxianyu.github.io/2020/08/06/PAT甲级1132Cut-Integer/</id>
+    <published>2020-08-06T10:12:19.000Z</published>
+    <updated>2020-08-06T10:13:19.499Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805347145859072" target="_blank" rel="noopener">https://pintia.cn/problem-sets/994805342720868352/problems/994805347145859072</a></p><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>给n个k位（k为偶数）的整数z，将其分成a和b，判断z/(a*b)是不是一个整数即可</p><p>这里要注意a和b是否为0，这是个<strong>边界情况</strong>，如果没有处理这个边界情况，有2个测试点不能过，只能得14分</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: PAT Advanced 1132</span></span><br><span class="line"><span class="comment">// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805347145859072</span></span><br><span class="line"><span class="comment">// Tags: Math</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">while</span> (n--)&#123;</span><br><span class="line">        <span class="built_in">string</span> z;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; z;</span><br><span class="line">        <span class="built_in">string</span> a = z.substr(<span class="number">0</span>, z.length() / <span class="number">2</span>), b = z.substr(z.length() / <span class="number">2</span>, z.length() / <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">int</span> mul = stoi(a) * stoi(b);</span><br><span class="line">        <span class="keyword">if</span> (mul != <span class="number">0</span> &amp;&amp; stoi(z) % mul == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Yes\n"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"No\n"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://pintia.cn/problem-sets/994805342720868352/pro
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="PAT" scheme="https://chouxianyu.github.io/tags/PAT/"/>
+    
+  </entry>
   
   <entry>
     <title>PAT甲级1148Werewolf - Simple Version</title>
@@ -145,9 +197,9 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -178,9 +230,9 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -211,9 +263,9 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="单向链表" scheme="https://chouxianyu.github.io/tags/%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/"/>
     
@@ -238,9 +290,9 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="单向链表" scheme="https://chouxianyu.github.io/tags/%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/"/>
     
@@ -265,9 +317,9 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
     
@@ -296,9 +348,9 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
     
@@ -327,9 +379,9 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
     
@@ -356,9 +408,9 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
     
@@ -387,9 +439,9 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -418,9 +470,9 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -449,9 +501,9 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -480,9 +532,9 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -511,9 +563,9 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -542,69 +594,9 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-      <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
-    
-      <category term="DFS" scheme="https://chouxianyu.github.io/tags/DFS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode404左叶子之和</title>
-    <link href="https://chouxianyu.github.io/2020/07/27/LeetCode404%E5%B7%A6%E5%8F%B6%E5%AD%90%E4%B9%8B%E5%92%8C/"/>
-    <id>https://chouxianyu.github.io/2020/07/27/LeetCode404左叶子之和/</id>
-    <published>2020-07-27T02:13:34.000Z</published>
-    <updated>2020-08-01T02:38:41.167Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode-cn.com/problems/sum-of-left-leaves/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/sum-of-left-leaves/</a></p><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><ul><li>自己写的</li><li>递归解法</li><li>思路见代码注释</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 404</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/sum-of-left-leaves/</span></span><br><span class="line"><span class="comment">// Tags: Tree Recursion</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 判断一个结点是否为叶子结点：该结点非空且左右孩子为空</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isLeaf</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left==<span class="literal">nullptr</span> &amp;&amp; root-&gt;right==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 得到一颗树的所有左叶子结点的值的总和</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumOfLeftLeaves</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 如果左孩子是叶子，则该树的结果为左孩子的值+右子树的结果</span></span><br><span class="line">        <span class="keyword">if</span>(isLeaf(root-&gt;left))</span><br><span class="line">            <span class="keyword">return</span> root-&gt;left-&gt;val + sumOfLeftLeaves(root-&gt;right);</span><br><span class="line">        <span class="comment">// 如果左孩子不是叶子，则该树对应的值为左子树的结果+右子树的结果</span></span><br><span class="line">        <span class="keyword">return</span> sumOfLeftLeaves(root-&gt;left) + sumOfLeftLeaves(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/sum-of-left-leaves/&quot;
-      
-    
-    </summary>
-    
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-      <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode111二叉树的最小深度</title>
-    <link href="https://chouxianyu.github.io/2020/07/26/LeetCode111%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6/"/>
-    <id>https://chouxianyu.github.io/2020/07/26/LeetCode111二叉树的最小深度/</id>
-    <published>2020-07-26T10:06:24.000Z</published>
-    <updated>2020-07-26T10:07:36.825Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/</a></p><h1 id="题解一"><a href="#题解一" class="headerlink" title="题解一"></a>题解一</h1><ul><li>递归解法</li><li>我写的</li><li>说明详见注释</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 111</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/</span></span><br><span class="line"><span class="comment">// Tags: Tree Recursion DFS</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> min=INT_MAX;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 深度优先遍历，在过程中记录最小路径</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, <span class="keyword">int</span> level)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        level += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left==<span class="literal">nullptr</span> &amp;&amp; root-&gt;right==<span class="literal">nullptr</span> &amp;&amp; level &lt; <span class="keyword">this</span>-&gt;min)</span><br><span class="line">            <span class="keyword">this</span>-&gt;min = level;</span><br><span class="line">        dfs(root-&gt;left, level);</span><br><span class="line">        dfs(root-&gt;right, level);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minDepth</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 空树则最小路径为0</span></span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        dfs(root, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;min;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h1 id="题解二"><a href="#题解二" class="headerlink" title="题解二"></a>题解二</h1><ul><li>递归解法</li><li>参考了官方的题解</li><li>说明详见代码注释，感觉有些地方比较不符合人的思维逻辑</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 111</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/</span></span><br><span class="line"><span class="comment">// Tags: Tree Recursion DFS</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minDepth</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 空树则最小路径为0</span></span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> left = minDepth(root-&gt;left);</span><br><span class="line">        <span class="keyword">int</span> right = minDepth(root-&gt;right);</span><br><span class="line">        <span class="comment">// 如果子树中有空树， 则该树的最小深度等于子树深度之和+1</span></span><br><span class="line">        <span class="keyword">if</span>(left==<span class="number">0</span> || right==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> left+right+<span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 如果子树都不为空，则该树的最小深度等于子树深度较小值+1</span></span><br><span class="line">        <span class="keyword">return</span> min(left, right)+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/minimum-depth-of-bin
-      
-    
-    </summary>
-    
-    
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
