@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2020-08-06T15:42:51.140Z</updated>
+  <updated>2020-08-07T15:23:51.793Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,85 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PAT甲级1145Hashing - Average Search Time</title>
+    <link href="https://chouxianyu.github.io/2020/08/07/PAT%E7%94%B2%E7%BA%A71145Hashing-Average-Search-Time/"/>
+    <id>https://chouxianyu.github.io/2020/08/07/PAT甲级1145Hashing-Average-Search-Time/</id>
+    <published>2020-08-07T15:23:04.000Z</published>
+    <updated>2020-08-07T15:23:51.793Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805343236767744" target="_blank" rel="noopener">https://pintia.cn/problem-sets/994805342720868352/problems/994805343236767744</a></p><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="基础知识：哈希"><a href="#基础知识：哈希" class="headerlink" title="基础知识：哈希"></a>基础知识：哈希</h2><p>为做这道题，我简单复习了一下<a href="https://www.cnblogs.com/chouxianyu/p/13455884.html" target="_blank" rel="noopener">哈希（点击查看）</a>。</p><h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><p>往一个哈希表里插入n个正整数，然后从哈希表里查找m个正整数，请输出平均查找次数（即比较次数）</p><p>哈希函数定义为$H(key)= key \% TSize$，其中$TSize$是哈希表的最大容量，它最好是素数，如果输入的不是素数就必须找到大于输入的最小素数。</p><p>用二次探测（仅具有正增量）解决冲突。</p><h2 id="英语"><a href="#英语" class="headerlink" title="英语"></a>英语</h2><ul><li><p>distinct</p><p>  截然不同的, 完全分开的</p></li><li><p>sequence</p><p>  有关联的一组事物, 一连串</p></li><li><p>quadratic</p><p>  二次的，二次方程式</p></li><li><p>probe</p><p>  n. 探针；调查<br>  vi. 调查；探测<br>  vt. 探查；用探针探测</p></li><li><p>collision</p><p>  碰撞, 冲突, 抵触</p></li><li><p>Quadratic probing (with positive increments only) is used to solve the collisions.</p><p>  二次探测（仅具有正增量）用于解决冲突。</p></li><li><p>synonym</p><p>  同义词</p></li><li><p>accurate up to 1 decimal place</p><p>  精确到小数点后1位</p></li></ul><h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><ul><li>待查找的元素可能不存在</li><li>题目说了输入的关键字都是<strong>正</strong>整数，所以可以把0作为表中某个位置没有元素的标志</li><li>注意这里的二次探测再散列只有正增量</li><li>查找时间指查找时进行比较的次数，如果没有再探测（即一次就找到了），那比较次数就是1</li></ul><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: PAT Advanced 1145</span></span><br><span class="line"><span class="comment">// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805343236767744</span></span><br><span class="line"><span class="comment">// Tags: Hash</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isPrime</span><span class="params">(<span class="keyword">int</span> num)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (num &lt; <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i * i &lt;= num; i++)</span><br><span class="line">        <span class="keyword">if</span> (num % i == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 获取输入的第一行</span></span><br><span class="line">    <span class="keyword">int</span> mSize, n, m; <span class="comment">// 哈希表最大容量、输入的整数的数量、待查找的整数的数量，都不超过1e4</span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; mSize &gt;&gt; n &gt;&gt; m;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 建立哈希表</span></span><br><span class="line">    <span class="keyword">while</span> (!isPrime(mSize)) mSize++;  <span class="comment">// 使哈希表表长为大于等于输入的最小素数</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; hashTable(mSize); <span class="comment">// 哈希表</span></span><br><span class="line">    <span class="keyword">int</span> key, pos; <span class="comment">// 关键字、哈希地址</span></span><br><span class="line">    <span class="keyword">bool</span> posFound; <span class="comment">// 某个key的位置是否找到了</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; key; <span class="comment">// 获取关键字</span></span><br><span class="line">        posFound = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mSize; j++)&#123; <span class="comment">// 二次探测再散列（只有正增量）</span></span><br><span class="line">            pos = (key + j * j) % mSize;</span><br><span class="line">            <span class="keyword">if</span> (hashTable[pos] == <span class="number">0</span>)&#123;  <span class="comment">// 这要求key不为0</span></span><br><span class="line">                hashTable[pos] = key;</span><br><span class="line">                posFound = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!posFound) <span class="built_in">printf</span>(<span class="string">"%d cannot be inserted.\n"</span>, key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查找元素并统计平均查找次数</span></span><br><span class="line">    <span class="keyword">double</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; key;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= mSize; j++)&#123; <span class="comment">// 题目似乎有问题，应该是j&lt;mSize的，而不是&lt;=</span></span><br><span class="line">            pos = (key + j * j) % mSize;</span><br><span class="line">            count += <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (hashTable[pos] == key || hashTable[pos] == <span class="number">0</span>)  <span class="comment">// 注意待查找的元素可能不存在</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.1f"</span>, count / m);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://pintia.cn/problem-sets/994805342720868352/pro
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="PAT" scheme="https://chouxianyu.github.io/tags/PAT/"/>
+    
+      <category term="哈希" scheme="https://chouxianyu.github.io/tags/%E5%93%88%E5%B8%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构-哈希</title>
+    <link href="https://chouxianyu.github.io/2020/08/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%93%88%E5%B8%8C/"/>
+    <id>https://chouxianyu.github.io/2020/08/07/数据结构-哈希/</id>
+    <published>2020-08-07T15:22:37.000Z</published>
+    <updated>2020-08-07T15:25:05.134Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="哈希函数、哈希表、哈希地址"><a href="#哈希函数、哈希表、哈希地址" class="headerlink" title="哈希函数、哈希表、哈希地址"></a>哈希函数、哈希表、哈希地址</h1><p>根据设定的<strong>哈希函数</strong>$H(key)$和处理冲突的方法将一组关键字映像到一个有限的连续的地址集（区间）上，并以关键字在地址集上的“像”作为记录在表中的存储位置，这种表便称为<strong>哈希表</strong>，这一映像过程称为哈希造表或散列，所得存储位置成<strong>哈希地址</strong>或散列地址。</p><h1 id="冲突、同义词"><a href="#冲突、同义词" class="headerlink" title="冲突、同义词"></a>冲突、同义词</h1><p>不同的关键字经哈希函数映像后求得到的哈希地址可能相同，即$key1\neq key2\ and \ H(key1)=H(key2)$，这就是<strong>冲突（collision）</strong>；具有相同哈希地址的关键字对该哈希函数来说就是<strong>同义词（synonym）</strong>。</p><p>哈希函数选得合适可以减少冲突现象。</p><p>一般情况下，哈希函数是一个压缩映像（关键字集合到地址集合的映像，而关键字集合的大小远大于地址集合），因此冲突只能尽可能地少而不能完全避免。</p><h1 id="哈希函数的构造方法"><a href="#哈希函数的构造方法" class="headerlink" title="哈希函数的构造方法"></a>哈希函数的构造方法</h1><p>常用的构造哈希函数的方法有：</p><ol><li>直接定址法</li><li>数字分析法</li><li>平方取中法</li><li>折叠法</li><li>除留余数法</li><li>随机数法</li></ol><h1 id="处理冲突的方法"><a href="#处理冲突的方法" class="headerlink" title="处理冲突的方法"></a>处理冲突的方法</h1><p>处理冲突过程中会有一个地址序列$H_i,i=1,2,\dots,k$，即如果发生冲突，就去找下一个地址。</p><p>通常用的处理冲突的方法有下列几种：</p><ol><li>开放定址法</li><li>再哈希法</li><li>链地址法</li><li>建立一个公共溢出区</li></ol><h3 id="开放定址法"><a href="#开放定址法" class="headerlink" title="开放定址法"></a>开放定址法</h3><script type="math/tex; mode=display">H_i=(H(key)+d_i)\ MOD\ m \ ，\ i=1,2,\dots, k(k\leq m-1)</script><p>其中$H(key)$为哈希函数；$m$是哈希表表长；$d_i$为增量序列，可以有下面3种取法：</p><ol><li>$d_i=1,2,3\dots,m-1$，称为线性探测再散列</li><li>$d_i=1^2,-1^2,2^2,-2^2,3^2,\dots,\pm k^2,(k\leq m/2)$，称为二次探测再散列</li><li>$d_i=伪随机数序列$，称为伪随机探测再散列</li></ol><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;哈希函数、哈希表、哈希地址&quot;&gt;&lt;a href=&quot;#哈希函数、哈希表、哈希地址&quot; class=&quot;headerlink&quot; title=&quot;哈希函数、哈希表、哈希地址&quot;&gt;&lt;/a&gt;哈希函数、哈希表、哈希地址&lt;/h1&gt;&lt;p&gt;根据设定的&lt;strong&gt;哈希函数&lt;/strong&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="哈希" scheme="https://chouxianyu.github.io/tags/%E5%93%88%E5%B8%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级1133Splitting A Linked List</title>
+    <link href="https://chouxianyu.github.io/2020/08/07/PAT%E7%94%B2%E7%BA%A71133Splitting-A-Linked-List/"/>
+    <id>https://chouxianyu.github.io/2020/08/07/PAT甲级1133Splitting-A-Linked-List/</id>
+    <published>2020-08-07T04:50:59.000Z</published>
+    <updated>2020-08-07T04:52:33.899Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805346776760320" target="_blank" rel="noopener">https://pintia.cn/problem-sets/994805342720868352/problems/994805346776760320</a></p><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><p>给1个有n（不超过1e5）个结点的单向链表和数字k（不超过1e3），链表的值属于[-1e5,1e5]要求将链表改为（或输出）：负数结点出现在正数结点之前，值属于[0,k]的结点出现在值大于k的结点之前，其余不变##</p><h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><ul><li>PAT中的这种链表适合用数组形式的链表</li><li>PAT里的链表和LeetCode里的链表（LeetCode里的链表是基于指针的）不太一样，因此操作也要适当调整</li><li>不一定要修改链表结构，能按要求输出就可以</li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>用数组表示链表，然后遍历将链表里的结点分成3类（小于0的、0到k的、大于k的）并存入3个数组，然后按顺序遍历3个数组并输出</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: PAT Advanced 1133</span></span><br><span class="line"><span class="comment">// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805346776760320</span></span><br><span class="line"><span class="comment">// Tags: Linked List</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    <span class="keyword">int</span> next;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">ListNode <span class="built_in">list</span>[<span class="keyword">int</span>(<span class="number">1e5</span>) + <span class="number">10</span>];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; parts[<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 获取输入</span></span><br><span class="line">    <span class="keyword">int</span> head, n, k; <span class="comment">// 头结点地址、结点数量、k</span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; head &gt;&gt; n &gt;&gt; k;</span><br><span class="line">    <span class="keyword">int</span> address;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; address;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; <span class="built_in">list</span>[address].val &gt;&gt; <span class="built_in">list</span>[address].next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 遍历链表将其中的结点分为3个部分</span></span><br><span class="line">    <span class="keyword">int</span> p = head;</span><br><span class="line">    <span class="keyword">while</span>(p != <span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> partIndex = <span class="number">1</span>;  <span class="comment">// 默认为第2部分，即结点的值属于[0,k]</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">list</span>[p].val &lt; <span class="number">0</span>)</span><br><span class="line">            partIndex = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">list</span>[p].val &gt; k)</span><br><span class="line">            partIndex = <span class="number">2</span>;</span><br><span class="line">        parts[partIndex].push_back(p);</span><br><span class="line">        p = <span class="built_in">list</span>[p].next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将划分好的3部分结点输出</span></span><br><span class="line">    <span class="keyword">bool</span> isFirstLine = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; parts[i].size(); j++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (isFirstLine)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%05d %d"</span>, parts[i][j], <span class="built_in">list</span>[parts[i][j]].val);</span><br><span class="line">                isFirstLine = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">" %05d\n%05d %d"</span>, parts[i][j], parts[i][j], <span class="built_in">list</span>[parts[i][j]].val);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">" -1"</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://pintia.cn/problem-sets/994805342720868352/pro
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="单向链表" scheme="https://chouxianyu.github.io/tags/%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/"/>
+    
+      <category term="PAT" scheme="https://chouxianyu.github.io/tags/PAT/"/>
+    
+  </entry>
   
   <entry>
     <title>PAT甲级1144The Missing Number</title>
@@ -197,9 +276,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -230,9 +309,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -263,9 +342,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="单向链表" scheme="https://chouxianyu.github.io/tags/%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/"/>
     
@@ -290,9 +369,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="单向链表" scheme="https://chouxianyu.github.io/tags/%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/"/>
     
@@ -317,9 +396,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
     
@@ -348,9 +427,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
     
@@ -379,9 +458,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
     
@@ -408,9 +487,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
     
@@ -439,9 +518,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -470,9 +549,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
@@ -501,102 +580,9 @@
     </summary>
     
     
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
-      <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-      <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
-    
-      <category term="DFS" scheme="https://chouxianyu.github.io/tags/DFS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode337打家劫舍III</title>
-    <link href="https://chouxianyu.github.io/2020/07/30/LeetCode337%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/"/>
-    <id>https://chouxianyu.github.io/2020/07/30/LeetCode337打家劫舍III/</id>
-    <published>2020-07-30T03:19:52.000Z</published>
-    <updated>2020-08-01T02:38:41.168Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode-cn.com/problems/house-robber-iii/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/house-robber-iii/</a></p><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><ul><li>递归写法</li><li>这个思路似乎是错的(不过我提交后是在某一个测试用例是超时了)，先把这份代码放这儿吧，后边补正确的解法<ul><li>题目要求两个结点不能相连，这不等于隔层求和</li></ul></li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 337</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/house-robber-iii/</span></span><br><span class="line"><span class="comment">// Tags: Tree DFS Recursion</span></span><br><span class="line"><span class="comment">// Difficulty: Medium</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">rob</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 空结点，结果为0</span></span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 抢当前结点及其隔层</span></span><br><span class="line">        <span class="keyword">int</span> result1 = root-&gt;val;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left!=<span class="literal">nullptr</span>)</span><br><span class="line">            result1 += rob(root-&gt;left-&gt;left) + rob(root-&gt;left-&gt;right);</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;right!=<span class="literal">nullptr</span>)</span><br><span class="line">            result1 += rob(root-&gt;right-&gt;left) + rob(root-&gt;right-&gt;right);</span><br><span class="line">        <span class="comment">// 抢根结点下一层的两个结点及其隔层</span></span><br><span class="line">        <span class="keyword">int</span> result2 = rob(root-&gt;left) + rob(root-&gt;right);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> max(result1, result2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/house-robber-iii/&quot; t
-      
-    
-    </summary>
-    
-    
       <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
-      <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-      <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
-    
-      <category term="DFS" scheme="https://chouxianyu.github.io/tags/DFS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode124二叉树中的最大路径和</title>
-    <link href="https://chouxianyu.github.io/2020/07/27/LeetCode124%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/"/>
-    <id>https://chouxianyu.github.io/2020/07/27/LeetCode124二叉树中的最大路径和/</id>
-    <published>2020-07-27T08:55:15.000Z</published>
-    <updated>2020-08-01T02:38:41.167Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/</a></p><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><ul><li>递归解法</li><li>路径：一条从树中任意结点出发，达到任意结点的序列。该路径至少包含一个结点，且不一定经过根结点。</li><li>这道题和<a href="https://www.cnblogs.com/chouxianyu/p/13385101.html" target="_blank" rel="noopener">LeetCode687最长同值路径</a>和<a href="https://www.cnblogs.com/chouxianyu/p/13376411.html" target="_blank" rel="noopener">LeetCode543二叉树的直径</a>很相似，都很难，每个题都做了很久<ul><li>三道题的共性是dfs函数并非直接实现了目标功能，而是将目标功能拆解，实现目标功能的一部分，然后再利用某种关系（根结点、左子树、右子树之间的关系，需要结合题意）拼接出目标功能（求目标值）</li></ul></li><li>思路见代码注释</li><li>需要高度注意dfs函数的功能</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 124</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/</span></span><br><span class="line"><span class="comment">// Tags: Tree Recursion DFS</span></span><br><span class="line"><span class="comment">// Difficulty: Hard</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> maxSum = INT_MIN; <span class="comment">// 全局最大路径和</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 功能：求一颗树的最大路径和，要求从根结点开始，在左子树或右子树结束，也可不经过左子树和右子树，即至多经过一个子树</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(TreeNode *root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> left = dfs(root-&gt;left);</span><br><span class="line">        <span class="keyword">int</span> right = dfs(root-&gt;right);</span><br><span class="line">        <span class="comment">// 过程中更新全局最大路径和：根结点必须经过，左右子树可经过可不经过</span></span><br><span class="line">        maxSum = max(maxSum, root-&gt;val + max(left, <span class="number">0</span>) + max(right, <span class="number">0</span>));</span><br><span class="line">        <span class="comment">// 从根结点开始，在左子树或右子树结束，也可不经过左子树和右子树，即至多经过一个子树</span></span><br><span class="line">        <span class="keyword">return</span> max(root-&gt;val, root-&gt;val + max(max(left, right), <span class="number">0</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 求一颗树的最大路径和，不要求经过根结点，起始和终止结点任意</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxPathSum</span><span class="params">(TreeNode *root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        dfs(root);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;maxSum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/binary-tree-maximum-
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
-    
-      <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-      <category term="递归" scheme="https://chouxianyu.github.io/tags/%E9%80%92%E5%BD%92/"/>
-    
-      <category term="DFS" scheme="https://chouxianyu.github.io/tags/DFS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode687最长同值路径</title>
-    <link href="https://chouxianyu.github.io/2020/07/27/LeetCode687%E6%9C%80%E9%95%BF%E5%90%8C%E5%80%BC%E8%B7%AF%E5%BE%84/"/>
-    <id>https://chouxianyu.github.io/2020/07/27/LeetCode687最长同值路径/</id>
-    <published>2020-07-27T05:56:59.000Z</published>
-    <updated>2020-08-01T02:38:41.173Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode-cn.com/problems/longest-univalue-path/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-univalue-path/</a></p><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><ul><li>这道题写了好久，然后参考了题解</li><li>递归解法</li><li>这道题和<a href="https://www.cnblogs.com/chouxianyu/p/13376411.html" target="_blank" rel="noopener">LeetCode543二叉树的直径(点击查看)</a>非常相似，可以看一下</li><li>类似的题目还有<a href="https://www.cnblogs.com/chouxianyu/p/13386394.html" target="_blank" rel="noopener">LeetCode124(点击查看)</a>，非常相似，难度是Hard</li><li><strong>将一条路径分为左右两半，两个结点之间路径长度等于它们到根结点的距离之和</strong></li><li>思路见代码注释，<strong>关键的代码是26-29行</strong></li><li>需要高度注意dfs函数的功能</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 687</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/longest-univalue-path/</span></span><br><span class="line"><span class="comment">// Tags: Tree Recursion DFS</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> maxLen = <span class="number">0</span>;  <span class="comment">// 全局最长同值路径</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 功能：返回该树与根结点同值的路径（必须以根结点为起点，至多经过一个子树）的最大长度</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 空树则长度为0</span></span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 该树根结点在左右方向上的最长同值路径的长度（从根结点开始，路径上的结点的值都与根结点一致）</span></span><br><span class="line">        <span class="keyword">int</span> left = dfs(root-&gt;left);</span><br><span class="line">        <span class="keyword">int</span> right = dfs(root-&gt;right);</span><br><span class="line">        left = (root-&gt;left != <span class="literal">nullptr</span> &amp;&amp; root-&gt;val == root-&gt;left-&gt;val) ? left + <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        right = (root-&gt;right != <span class="literal">nullptr</span> &amp;&amp; root-&gt;val == root-&gt;right-&gt;val) ? right + <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 更新全局最长同值路径</span></span><br><span class="line">        maxLen = max(maxLen, left + right); <span class="comment">// 将一条路径分为左右两半，两个结点之间路径长度等于它们到根结点的距离之和</span></span><br><span class="line">        <span class="comment">// 经过左子树或者右子树，或者不经过子树（left和right都为0时）</span></span><br><span class="line">        <span class="keyword">return</span> max(left, right);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 求该树中的最长同值路径，可以经过也可以不经过根结点</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestUnivaluePath</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        dfs(root);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;maxLen;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><hr><p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p><p>欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/longest-univalue-pat
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="https://chouxianyu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="LeetCode" scheme="https://chouxianyu.github.io/tags/LeetCode/"/>
     
       <category term="二叉树" scheme="https://chouxianyu.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
