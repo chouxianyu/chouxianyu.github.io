@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="算法,递归,二叉树,PAT,map,LCA," />
+  <meta name="keywords" content="算法,二叉树,递归,PAT,map,LCA," />
 
 
 
@@ -82,14 +82,14 @@
 
 
 <meta name="description" content="题目链接https://pintia.cn/problem-sets/994805342720868352/problems/1038430130011897856 题解题目要求 最近公共祖先（LCA，The lowest common ancestor）   在一颗树中，结点U和V的LCA是U和V为其后代的深度最大的结点。   给定一颗二叉树中的任意两个结点，请找到它们的LCA。  输入  M：">
-<meta name="keywords" content="算法,递归,二叉树,PAT,map,LCA">
+<meta name="keywords" content="算法,二叉树,递归,PAT,map,LCA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PAT甲级1151LCA in a Binary Tree">
 <meta property="og:url" content="https://chouxianyu.github.io/2020/09/07/PAT甲级1151LCA-in-a-Binary-Tree/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
 <meta property="og:description" content="题目链接https://pintia.cn/problem-sets/994805342720868352/problems/1038430130011897856 题解题目要求 最近公共祖先（LCA，The lowest common ancestor）   在一颗树中，结点U和V的LCA是U和V为其后代的深度最大的结点。   给定一颗二叉树中的任意两个结点，请找到它们的LCA。  输入  M：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-07T08:29:27.643Z">
+<meta property="og:updated_time" content="2020-09-08T11:16:47.596Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PAT甲级1151LCA in a Binary Tree">
 <meta name="twitter:description" content="题目链接https://pintia.cn/problem-sets/994805342720868352/problems/1038430130011897856 题解题目要求 最近公共祖先（LCA，The lowest common ancestor）   在一颗树中，结点U和V的LCA是U和V为其后代的深度最大的结点。   给定一颗二叉树中的任意两个结点，请找到它们的LCA。  输入  M：">
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,295 字
+                  1,336 字
                 </span>
               
 
@@ -454,6 +454,7 @@
  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> leftPosBoundOfInOrder, <span class="keyword">int</span> rightPosBoundOfInOrder, <span class="keyword">int</span> rootPosOfPreOrder)</span></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    当前这颗树在整棵树中序遍历结果inOrder的范围索引为[leftPosBoundOfInOrder,rightPosBoundOfInOrder]</span></span><br><span class="line"><span class="comment">    rootPosOfPreOrder指当前这颗树根结点在整棵树先序遍历结果preOrder中的索引</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 越界判断</span></span><br><span class="line">    <span class="keyword">if</span> (leftPosBoundOfInOrder &gt; rightPosBoundOfInOrder) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 左子树</span></span><br><span class="line">    lca(leftPosBoundOfInOrder, rootPosOfInOrder - <span class="number">1</span>, rootPosOfPreOrder + <span class="number">1</span>);</span><br><span class="line">    <span class="comment">// 右子树</span></span><br><span class="line">    lca(rootPosOfInOrder + <span class="number">1</span>, rightPosBoundOfInOrder, rootPosOfPreOrder + (rootPosOfInOrder - leftPosBoundOfInOrder) + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">func(<span class="number">1</span>, n, <span class="number">1</span>); <span class="comment">// 调用（假设整颗树有n个结点，在数组中的索引为[1,n]）</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<p><a href="https://www.cnblogs.com/chouxianyu/p/13634613.html" target="_blank" rel="noopener">PAT甲级1138Postorder Traversal</a>这道题也涉及如何根据先序遍历结果和中序遍历结果确定一棵树并遍历它，可以看一看。</p>
 <h3 id="最近公共祖先LCA"><a href="#最近公共祖先LCA" class="headerlink" title="最近公共祖先LCA"></a>最近公共祖先LCA</h3><p>已知某颗树的根结点，</p>
 <ol>
 <li>若u和u在根结点的左边，则u和v的最近公共祖先在当前子树根结点的左子树寻找；</li>
@@ -488,9 +489,9 @@
           
             <a href="/tags/算法/" rel="tag"># 算法</a>
           
-            <a href="/tags/递归/" rel="tag"># 递归</a>
-          
             <a href="/tags/二叉树/" rel="tag"># 二叉树</a>
+          
+            <a href="/tags/递归/" rel="tag"># 递归</a>
           
             <a href="/tags/PAT/" rel="tag"># PAT</a>
           
@@ -611,7 +612,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">212</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -624,7 +625,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">103</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -716,7 +717,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">185.9k</span>
+    <span title="Site words total count">177.0k</span>
   
 </div>
 
