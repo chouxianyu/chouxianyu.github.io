@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[PAT甲级1146Topological Order]]></title>
+    <url>%2F2020%2F09%2F15%2FPAT%E7%94%B2%E7%BA%A71146Topological-Order%2F</url>
+    <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805343043829760 题解题目要求给定一个有向图，请判断一个序列是否是该有向图的拓扑序列。 输入 N：正整数，不超过1000，图中顶点的数量，顶点索引为[1,N] M：正整数，不超过10000，有向边的数量 M条有向边：开始顶点索引、结束顶点索引 K：不超过100，待检验的序列的个数 K个序列：索引为[0,K] 输出 对于每个排列，如果不是拓扑排序则输出其索引 解题思路 保存每个结点的前驱结点 使用一维数组保存每个结点是否已访问 遍历序列判断每个结点的前驱结点是否已访问，如果未访问，则该序列不是拓扑序列 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061// Problem: PAT Advanced 1146// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805343043829760// Tags: 拓扑序列 图#include &lt;iostream&gt;#include &lt;vector&gt;using namespace std;vector&lt;vector&lt;int&gt;&gt; before;int main()&#123; int n, m, k; scanf("%d %d", &amp;n, &amp;m); before.resize(n+1); int v1, v2; for (int i = 0; i &lt; m; i++)&#123; scanf("%d %d", &amp;v1, &amp;v2); before[v2].push_back(v1); &#125; scanf("%d", &amp;k); vector&lt;int&gt; result; for (int i = 0; i &lt; k; i++)&#123; // 判断k个序列 // 保存一个序列 vector&lt;int&gt; sequence(n); for (int j = 0; j &lt; n; j++)&#123; scanf("%d", &amp;sequence[j]); &#125; // 判断该序列是否是拓扑序列 vector&lt;bool&gt; visited(n + 1, false); bool isTopological = true; for (int j = 0; j &lt; n; j++)&#123; v2 = sequence[j]; for (auto iter = before[v2].begin(); iter != before[v2].end(); iter++)&#123; if (!visited[*iter])&#123; isTopological = false; result.push_back(i); break; &#125; &#125; if (isTopological) visited[v2] = true; else break; &#125; &#125; // 输出结果 auto iter = result.begin(); printf("%d", *iter); iter++; while (iter != result.end())&#123; printf(" %d", *iter); iter++; &#125; printf("\n"); return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>算法</tag>
+        <tag>PAT</tag>
+        <tag>图</tag>
+        <tag>拓扑序列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[PAT甲级1135Is It A Red-Black Tree]]></title>
+    <url>%2F2020%2F09%2F15%2FPAT%E7%94%B2%E7%BA%A71135Is-It-A-Red-Black-Tree%2F</url>
+    <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805346063728640 题解题目要求 红黑树 在二叉搜索树的基础上，红黑树还具有以下特征 每个结点是红色或者黑色 根结点是黑色的 叶子结点（NULL）都是黑色 每个红色结点的两个子结点都是黑色 从每个叶子到根的所有路径上不能有两个连续的红色结点 每个结点到其每个叶子结点的所有路径都包含相同数目的黑色节点。 给定一颗二叉搜索树，请判断它是否是一个合法的红黑树。 输入 K：正整数，不超过30，测试用例的数量 N：正整数，不超过30，二叉树中结点的数量 二叉树的先序遍历结果：结点的值都是正整数，用负数代表红色结点 输出 判断每颗二叉搜索树是否是红黑树，是则输出Yes，否则输出No。 解题思路 根据先序遍历结果和二叉搜索树的性质（左子树小于根结点小于右子树），递归构建二叉树 判断性质3：根结点是否是黑色 判断性质4，见代码中的函数judge1 判断性质5，见代码中的函数judge2 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970// Problem: PAT Advanced 1135// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805346063728640// Tags: Tree BST RBTree#include &lt;iostream&gt;#include &lt;cmath&gt;using namespace std;struct Node&#123; int val; Node* left = nullptr; Node* right = nullptr;&#125;;Node* build(Node* root, int v)&#123; if (root == nullptr)&#123; root = new Node(); root-&gt;val = v; &#125; else if (abs(v) &lt;= abs(root-&gt;val)) root-&gt;left = build(root-&gt;left, v); else root-&gt;right = build(root-&gt;right, v); return root;&#125;bool judge1(Node* root)&#123; if (root == nullptr) return true; if (root-&gt;val &lt; 0)&#123; if (root-&gt;left != nullptr &amp;&amp; root-&gt;left-&gt;val &lt; 0) return false; if (root-&gt;right != nullptr &amp;&amp; root-&gt;right-&gt;val &lt; 0) return false; &#125; return judge1(root-&gt;left) &amp;&amp; judge1(root-&gt;right);&#125;int getDepth(Node* root)&#123; if (root == nullptr) return 0; int ret = max(getDepth(root-&gt;left), getDepth(root-&gt;right)); return root-&gt;val &gt; 0 ? ret + 1 : ret;&#125;bool judge2(Node *root)&#123; if (root == nullptr) return true; if (getDepth(root-&gt;left) != getDepth(root-&gt;right)) return false; return judge2(root-&gt;left) &amp;&amp; judge2(root-&gt;right);&#125;int main()&#123; int k, n, val; scanf("%d", &amp;k); while (k--)&#123; scanf("%d", &amp;n); Node* root = nullptr; for (int i = 0; i &lt; n; i++)&#123; scanf("%d", &amp;val); root = build(root, val); &#125; if (root-&gt;val &lt; 0 || !judge1(root) || !judge2(root)) printf("No\n"); else printf("Yes\n"); &#125; return 0;&#125; 参考链接https://blog.csdn.net/liuchuo/article/details/78037334 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>算法</tag>
+        <tag>二叉树</tag>
+        <tag>递归</tag>
+        <tag>DFS</tag>
+        <tag>BST</tag>
+        <tag>PAT</tag>
+        <tag>红黑树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[PAT甲级1138Postorder Traversal]]></title>
     <url>%2F2020%2F09%2F08%2FPAT%E7%94%B2%E7%BA%A71138Postorder-Traversal%2F</url>
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805345078067200 题解题目要求假设二叉树中所有结点的值都是互异的正整数，给定二叉树的先序和后序遍历，请输出该树后序遍历的第一个数字。 输入 N：正整数，不超过50000，二叉树中结点的数量 先序遍历结果 中序遍历结果 解题思路 根据先序遍历和中序遍历结果可以确定一颗树，这道题的关键就是如何确定出这颗树并遍历它。 可以参考PAT甲级1151LCA in a Binary Tree，这道题里也是根据先序遍历和中序遍历结果确定出了一棵树。 设置全局flag判断是否是该树后序遍历的第一个数字，如果是则输出，不是则不输出 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849// Problem: PAT Advanced 1138// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805345078067200// Tags: Tree DFS#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;map&gt;using namespace std;vector&lt;int&gt; preOrder; // 先序遍历结果vector&lt;int&gt; inOrder; // 中序遍历结果map&lt;int, int&gt; inPos; // 结点到中序遍历结果inOrder索引的映射bool firstIsPrinted = false; // 为true代表后序遍历时的第一个结点已经输出void postOrderTraverse(int inLeft, int inRight, int preRoot)&#123; if (firstIsPrinted) // 只输出后序遍历的第一个结点即可 return ; if (inRight &lt; inLeft) // 该树不存在 return ; int inRoot = inPos[preOrder[preRoot]]; // 当前树的根结点在中序遍历结果inOrder中的索引 // 后序遍历 postOrderTraverse(inLeft, inRoot - 1, preRoot + 1); // 遍历左子树并判断左子树是否存在 postOrderTraverse(inRoot + 1, inRight, preRoot + 1 + (inRoot - inLeft)); // 遍历右子树并判断右子树是否存在 if (!firstIsPrinted)&#123; // 只输出后序遍历的第一个结点即可 printf("%d", inOrder[inRoot]); firstIsPrinted = true; &#125;&#125;int main()&#123; int n; scanf("%d", &amp;n); preOrder.resize(n + 1); inOrder.resize(n + 1); for (int i = 1; i &lt;= n; i++) // 读取先序遍历结果 scanf("%d", &amp;preOrder[i]); for (int i = 1; i &lt;= n; i++)&#123; // 读取中序遍历结果 scanf("%d", &amp;inOrder[i]); inPos[inOrder[i]] = i; &#125; postOrderTraverse(1, n, 1); return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
@@ -47,9 +72,9 @@
         <tag>算法</tag>
         <tag>PAT</tag>
         <tag>图</tag>
+        <tag>set</tag>
         <tag>团</tag>
         <tag>极大团</tag>
-        <tag>set</tag>
       </tags>
   </entry>
   <entry>
@@ -121,8 +146,8 @@
       <tags>
         <tag>算法</tag>
         <tag>PAT</tag>
-        <tag>map</tag>
         <tag>图</tag>
+        <tag>map</tag>
         <tag>哈希</tag>
       </tags>
   </entry>
@@ -133,9 +158,9 @@
       <tags>
         <tag>算法</tag>
         <tag>PAT</tag>
-        <tag>map</tag>
         <tag>图</tag>
         <tag>set</tag>
+        <tag>map</tag>
         <tag>点着色</tag>
       </tags>
   </entry>
@@ -1963,8 +1988,8 @@
     <url>%2F2018%2F11%2F03%2Fjava.util.NoSuchElementException%2F</url>
     <content type="text"><![CDATA[问题引入Java商店作业不同函数里需要获取用户输入，用Scanner的时候,出现了异常java.util.NoSuchElementException 作业中代码模式如下，func1和func2中都使用Scanner并关闭它。然后在main中依次调用func1和func2，func2产生异常。说func1和func2其实不合适，应该加个括号……..懒得加了 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748//Demo.javaimport java.util.Scanner;class Test&#123; void func1() &#123; Scanner sc=new Scanner(System.in); //输出用户输入，替代作业里的使用Scanner System.out.print("Func1请输入内容："); System.out.println("Func1输出"+sc.next()); //关闭Scanner sc.close(); &#125; void func2() &#123; Scanner sc=new Scanner(System.in); //输出用户输入，替代作业里的使用Scanner System.out.print("Func2请输入内容："); System.out.println("Func2输出"+sc.nextInt()); //关闭Scanner sc.close(); &#125;&#125;public class Demo&#123; public static void main(String[] args) &#123; Test t=new Test(); t.func1(); t.func2(); &#125;&#125;/*Console输出如下：Func1请输入内容：小姐，请问你喜欢吃青椒吗？Func1输出：小姐，请问你喜欢吃青椒吗？Func2请输入内容：Exception in thread "main" java.util.NoSuchElementException at java.base/java.util.Scanner.throwFor(Unknown Source) at java.base/java.util.Scanner.next(Unknown Source) at java.base/java.util.Scanner.nextInt(Unknown Source) at java.base/java.util.Scanner.nextInt(Unknown Source) at Test.func2(Demo.java:21) at Demo.main(Demo.java:31)*/ 异常产生原因func1中sc.close();语句关闭了Scanner，func2中使用Scanner产生异常 因为System.in是System类的静态成员，所以不同Scanner对象内的in是同一个in` func1和func2中都用System.in创建了Scanner func1打开Scanner后将其关闭，这里间接地将System.in也关闭了 func1结束后运行func2，这时再调用nextInt，在System.in已经关闭了的情况下，不能读取到任何数据，就会产生 java.util.NoSuchElementException 解决方法系统资源一旦释放就不能再开启了，所以只有确定不在使用系统的时候，才能将流关闭 所以应该在整个程序结束时释放Scanner等资源，而不是某个函数中每次使用Scanner等资源后都释放一次 问题引入中的代码只是个模式，上边的两句话用在作业实际代码里就好了 代码分析Scanner()创建Scanner对象代码为Scanner sc=new Scanner(System.in);构造函数源码如下 123public Scanner(InputStream source) &#123; this(new InputStreamReader(source), WHITESPACE_PATTERN);&#125; 可看出是调用了另外一个构造函数，继续查看源码 123456789101112private Scanner(Readable source, Pattern pattern) &#123; assert source != null : "source should not be null"; assert pattern != null : "pattern should not be null"; this.source = source; //看这句 delimPattern = pattern; buf = CharBuffer.allocate(BUFFER_SIZE); buf.limit(0); matcher = delimPattern.matcher(buf); matcher.useTransparentBounds(true); matcher.useAnchoringBounds(false); useLocale(Locale.getDefault(Locale.Category.FORMAT)); &#125; 至少知道了Scanner内部还是用到了流，算是对流进行了封装吧，使用起来更方便一些 close()调用语句为sc.close();，查看close()源码，如下 1234567891011121314public void close() &#123; if (closed) //1.通过closed标志校验Scanner是否已关闭； return; if (source instanceof Closeable) &#123; //2.执行source的close()方法， try &#123; //将source关闭（这里为System.in）； ((Closeable)source).close(); &#125; catch (IOException ioe) &#123; lastException = ioe; &#125; &#125; sourceClosed = true; //3.将sourceClosed标志设置为true，表示source已关闭； source = null; //4.将source置为null，不再引用，处于可回收状态； closed = true; //5.将closed标志设置为true，表示Scanner已关闭；&#125; 可以知道关闭Scanner的时候，((Closeable)source).close();把System.in关闭了 关闭后下次想再使用就当然有错了~（除非构造函数里还再把in给打开，但这样也不太合理） 其实如果还可以再仔细看看Scanner的构造方法，和Scanner的next()，能力有限，点到为止 作者：@臭咸鱼 本文为作者原创，转载请注明出处：https://chouxianyu.github.io/2018/11/03/java.util.NoSuchElementException/#more 欢迎转发和评论]]></content>
       <tags>
-        <tag>Bug</tag>
         <tag>Java</tag>
+        <tag>Bug</tag>
       </tags>
   </entry>
   <entry>
@@ -1972,8 +1997,8 @@
     <url>%2F2018%2F09%2F22%2FJava%E5%AD%97%E8%8A%82%E6%B5%81read%E5%87%BD%E6%95%B0%2F</url>
     <content type="text"><![CDATA[问题引入做Java作业从标准输入流获取用户输入，用到了System.in.read(),然后出现了bug。 1234567891011121314151617181920212223//随机生成一个小写字母，用户猜5次，读取用户输入，并判断是否猜对import java.io.IOException;public class LetterGuessing &#123; public static void main(String[] args) throws IOException &#123; char ch,answer; //随机生成字母 answer=(char)(Math.random()*26+'a'); System.out.print("请输入一个小写字母："); for(int i=1;i&lt;=5;i++) &#123; //获取用户输入，可能抛出异常 ch=(char)System.in.read(); //比较大小 if(ch == answer)&#123; System.out.println("恭喜，正确！用了"+i+"次猜对"); break; &#125; else if(ch &gt; answer) System.out.println("您猜大了，还有"+ (5-i) +"次机会"); else System.out.println("您猜小了，还有"+ (5-i) +"次机会"); &#125; &#125;&#125; 输入字符&#39;a&#39;，按下Enter,却没有等我下次输入，循环就运行了三次。 问题来源System.in.read()按字节读，一次读入一个字节。后边有详细讲解。 经调试，可知三次循环中ch分别为a,\r,\n。 为什么a+Enter,会变成a\r\n呢 Windows下存在两种文件读写方式，一个是二进制方式，另一种是文本方式。 文本方式中写时”换行”会变成”回车-换行”，即\r\n；读时”回车-换行”会变成”换行”。 二进制方式中读写是严格按照一个字节一个字节的方式进行的。 在这里虽然没有用到文件，但道理应该是一样的 用read()函数是按照一个字节一个字节读取的，即二进制方式。 可能可以推导出，我们向输入流中输入数据默认是按照文本方式。 解决方法方法一在代码第10行后，加两行System.in.read(); 目的是读取掉输入流中的/r和/n。 这种方法的局限性就是输入字母前后不能加空格，因为它不会使空格从输入流中删除。 方法二不用read()读取，用以下代码代替 123import java.util.Scanner;Scanner input=new Scanner(System.in);ch=input.next().charAt(0); 这种方法就比较好，读取字符串（忽略空格和换行，空格和换行不会留在输入流里），然后取字符串的第一个字符。 知识点System.in官方文档：https://docs.oracle.com/javase/10/docs/api/java/lang/System.html#in System是个类，in是System的一个成员，官方介绍如下： 1public static final InputStream in The “standard” input stream. This stream is already open and ready to supply input data. Typically this stream corresponds to keyboard input or another input source specified by the host environment or user. in是一个InputStream类型的对象,所以只需要了解InputStream即可。 InputStream官方文档： https://docs.oracle.com/javase/10/docs/api/java/io/InputStream.html 123public abstract class InputStream //抽象类extends Object //继承Object类implements Closeable //实现Closeable接口 官方介绍如下： This abstract class is the superclass of all classes representing an input stream of bytes. 翻译为：这个抽象类是所有字节流类的父类。 字节流的含义：读取方式为一个字节一个字节地读取,而字符流是二个字节二个字节的读。 Applications that need to define a subclass of InputStream must always provide a method that returns the next byte of input. 翻译为：需要定义一个InputStream子类的应用必须提供一个返回输入下一字节的方法（函数）。 read()官方文档：https://docs.oracle.com/javase/10/docs/api/java/io/InputStream.html#read() 12public abstract int read() throws IOException Reads the next byte of data from the input stream. The value byte is returned as an int in the range 0 to255. 这个是重点，它返回下一字节的ASCII码 If no byte is available because the end of the stream has been reached, the value -1 is returned. This method blocks until input data is available, the end of the stream is detected, or an exception is thrown. A subclass must provide an implementation of this method. Returns: the next byte of data, or -1 if the end of the stream is reached. Throws: IOException - if an I/O error occurs. 作者：@臭咸鱼 本文为作者原创，转载请注明出处：https://chouxianyu.github.io/2018/09/22/Java字节流read函数/#more 欢迎转发和评论]]></content>
       <tags>
-        <tag>Bug</tag>
         <tag>Java</tag>
+        <tag>Bug</tag>
       </tags>
   </entry>
   <entry>
