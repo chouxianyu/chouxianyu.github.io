@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="算法,BFS,PAT,贪心,图,最短路,单源最短路,dijkstra," />
+  <meta name="keywords" content="算法,BFS,PAT,贪心,图,dijkstra,最短路,单源最短路," />
 
 
 
@@ -82,14 +82,14 @@
 
 
 <meta name="description" content="题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805523835109376 题解题目要求 有几个城市，每个城市中有多个救援队，城市间由公路相连，公路的长度不一  输入  N：正整数，不超过500，城市的数量，城市索引为[0,N-1]  M：公路的数量  c1：你现在所在的城市  c2：你需要去的城市  各城市中">
-<meta name="keywords" content="算法,BFS,PAT,贪心,图,最短路,单源最短路,dijkstra">
+<meta name="keywords" content="算法,BFS,PAT,贪心,图,dijkstra,最短路,单源最短路">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PAT甲级1003Emergency">
 <meta property="og:url" content="https://chouxianyu.github.io/2020/09/17/PAT甲级1003Emergency/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
 <meta property="og:description" content="题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805523835109376 题解题目要求 有几个城市，每个城市中有多个救援队，城市间由公路相连，公路的长度不一  输入  N：正整数，不超过500，城市的数量，城市索引为[0,N-1]  M：公路的数量  c1：你现在所在的城市  c2：你需要去的城市  各城市中">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-18T01:54:53.022Z">
+<meta property="og:updated_time" content="2020-09-20T10:27:05.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PAT甲级1003Emergency">
 <meta name="twitter:description" content="题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805523835109376 题解题目要求 有几个城市，每个城市中有多个救援队，城市间由公路相连，公路的长度不一  输入  N：正整数，不超过500，城市的数量，城市索引为[0,N-1]  M：公路的数量  c1：你现在所在的城市  c2：你需要去的城市  各城市中">
@@ -458,7 +458,7 @@
 </li>
 <li><p>伪代码</p>
 <p>  n个结点</p>
-  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> visited[n];  <span class="comment">// 标记：是否找到源点s到某点的最短路径</span></span><br><span class="line"><span class="keyword">int</span> shortestPathDis[n]; <span class="comment">// 记录源点s到某点的最短路径的长度</span></span><br><span class="line"><span class="keyword">int</span> w[n][n]; <span class="comment">// 结点间的距离</span></span><br><span class="line"></span><br><span class="line">visited数组置<span class="literal">false</span>;</span><br><span class="line">dis数组置无穷大，dis[s]置<span class="number">0</span>;</span><br><span class="line">循环n次&#123;</span><br><span class="line">    寻找未被标记的、距离结点s最近的结点u;</span><br><span class="line">    如果找到u则将其标记(visited[u] = <span class="literal">true</span>),否则结束循环;</span><br><span class="line">    如果存在边&lt;u,v&gt;,则更新dis[v] = min(dis[v], dis[u] + w[u][v]); <span class="comment">// 贪心</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> visited[n];  <span class="comment">// 标记：是否找到源点s到某点的最短路径</span></span><br><span class="line"><span class="keyword">int</span> dis[n]; <span class="comment">// 记录源点s到某点的最短路径的长度</span></span><br><span class="line"><span class="keyword">int</span> w[n][n]; <span class="comment">// 结点间的距离</span></span><br><span class="line"></span><br><span class="line">visited数组置<span class="literal">false</span>;</span><br><span class="line">dis数组置无穷大，dis[s]置<span class="number">0</span>;</span><br><span class="line">循环n次&#123;</span><br><span class="line">    寻找未被标记的、距离结点s最近的结点u;</span><br><span class="line">    如果找到u则将其标记(visited[u] = <span class="literal">true</span>),否则结束循环;</span><br><span class="line">    如果存在边&lt;u,v&gt;,则更新dis[v] = min(dis[v], dis[u] + w[u][v]); <span class="comment">// 贪心</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -521,11 +521,11 @@
           
             <a href="/tags/图/" rel="tag"># 图</a>
           
+            <a href="/tags/dijkstra/" rel="tag"># dijkstra</a>
+          
             <a href="/tags/最短路/" rel="tag"># 最短路</a>
           
             <a href="/tags/单源最短路/" rel="tag"># 单源最短路</a>
-          
-            <a href="/tags/dijkstra/" rel="tag"># dijkstra</a>
           
         </div>
       
@@ -547,6 +547,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/09/18/PAT甲级1018Public-Bike-Management/" rel="prev" title="PAT甲级1018Public Bike Management">
+                PAT甲级1018Public Bike Management <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -636,7 +640,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">215</span>
+                  <span class="site-state-item-count">219</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -741,7 +745,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">179.3k</span>
+    <span title="Site words total count">182.7k</span>
   
 </div>
 
