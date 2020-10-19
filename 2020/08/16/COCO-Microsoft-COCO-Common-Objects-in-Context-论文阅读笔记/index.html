@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="COCO,论文笔记," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="臭咸鱼的缺氧瓶" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="以下为我总结出的论文各部分的主要内容，某些地方可能夹带着一些自己的理解和思考。 [toc] 摘要 该论文/该数据集的目的   推动目标识别领域的技术突破  数据集概要  320k张图片，250万个实例，91种实例类型 标注类型：实例分割 该数据集的主要创新：实例是放在natural context中的，并且语境有很多种而非人为定义的背景中，看Fig1就懂这一点创新了   本文工作  制作该数据集">
+<meta name="keywords" content="COCO,论文笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="COCO(Microsoft COCO: Common Objects in Context)论文阅读笔记">
+<meta property="og:url" content="https://chouxianyu.github.io/2020/08/16/COCO-Microsoft-COCO-Common-Objects-in-Context-论文阅读笔记/index.html">
+<meta property="og:site_name" content="臭咸鱼的缺氧瓶">
+<meta property="og:description" content="以下为我总结出的论文各部分的主要内容，某些地方可能夹带着一些自己的理解和思考。 [toc] 摘要 该论文/该数据集的目的   推动目标识别领域的技术突破  数据集概要  320k张图片，250万个实例，91种实例类型 标注类型：实例分割 该数据集的主要创新：实例是放在natural context中的，并且语境有很多种而非人为定义的背景中，看Fig1就懂这一点创新了   本文工作  制作该数据集">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-10-19T11:10:42.373Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="COCO(Microsoft COCO: Common Objects in Context)论文阅读笔记">
+<meta name="twitter:description" content="以下为我总结出的论文各部分的主要内容，某些地方可能夹带着一些自己的理解和思考。 [toc] 摘要 该论文/该数据集的目的   推动目标识别领域的技术突破  数据集概要  320k张图片，250万个实例，91种实例类型 标注类型：实例分割 该数据集的主要创新：实例是放在natural context中的，并且语境有很多种而非人为定义的背景中，看Fig1就懂这一点创新了   本文工作  制作该数据集">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chouxianyu.github.io/2020/08/16/COCO-Microsoft-COCO-Common-Objects-in-Context-论文阅读笔记/"/>
+
+
+
+
+
+  <title>COCO(Microsoft COCO: Common Objects in Context)论文阅读笔记 | 臭咸鱼的缺氧瓶</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5706c34297d4762ba8c6d799a54234b9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">臭咸鱼的缺氧瓶</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快给我氧气！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2020/08/16/COCO-Microsoft-COCO-Common-Objects-in-Context-论文阅读笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">COCO(Microsoft COCO: Common Objects in Context)论文阅读笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-16T17:50:27+08:00">
+                2020-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/08/16/COCO-Microsoft-COCO-Common-Objects-in-Context-论文阅读笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/08/16/COCO-Microsoft-COCO-Common-Objects-in-Context-论文阅读笔记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/08/16/COCO-Microsoft-COCO-Common-Objects-in-Context-论文阅读笔记/" class="leancloud_visitors" data-flag-title="COCO(Microsoft COCO: Common Objects in Context)论文阅读笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3,466 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  13 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>以下为我总结出的论文各部分的主要内容，某些地方可能夹带着一些自己的理解和思考。</p>
+<p>[toc]</p>
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><ul>
+<li><p>该论文/该数据集的目的</p>
+<p>  推动目标识别领域的技术突破</p>
+</li>
+<li><p>数据集概要</p>
+<ul>
+<li>320k张图片，250万个实例，91种实例类型</li>
+<li>标注类型：实例分割</li>
+<li>该数据集的主要创新：实例是放在natural context中的，并且语境有很多种而非人为定义的背景中，看Fig1就懂这一点创新了</li>
+</ul>
+</li>
+<li><p>本文工作</p>
+<ol>
+<li>制作该数据集</li>
+<li>统计分析该数据集，并与其它3个数据集做比较</li>
+<li>使用DPM，提供该数据集的目标检测和实例分割的baseline，并分析其performance</li>
+</ol>
+</li>
+</ul>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><ul>
+<li><p>场景理解包含的任务</p>
+<ol>
+<li>图像分类：识别目标的种类</li>
+<li>定位：定位2D或3D目标</li>
+<li>确定目标和场景的属性</li>
+<li>描述物体间的关系</li>
+<li>提供场景的语义描述</li>
+</ol>
+</li>
+<li><p>该数据集解决场景理解中3个核心研究问题</p>
+<ol>
+<li>检测非图标的目标。图标型目标，比如百度搜到的那种自行车，绝大多数都是背景很空，中间放了个自行车；自然型目标，比如人在骑自行车，停车场中的自行车，背景、语义的差异是极大的。可以看Fig.2</li>
+<li>对象之间的上下文推理，即上面第4个任务</li>
+<li>目标的精确2D定位，即上面第2个任务中的实例分割</li>
+</ol>
+</li>
+<li><p>假设存在的问题并在该数据集上证明</p>
+<p>  现在的视觉识别系统识别图标型目标的能力相当好，但识别自然场景中的目标的能力却不好</p>
+</li>
+<li><p>一个观点</p>
+<p>  理解目标的空间位置关系，将成为场景分析的核心部分</p>
+</li>
+<li><p>数据集里的图片怎么来的？</p>
+<ol>
+<li>搜索两个目标</li>
+<li>搜索场景</li>
+</ol>
+</li>
+<li><p>在标注时，分步进行，由于标注工作的不确定性在每个阶段中做了很多权衡</p>
+</li>
+<li><p>和其它数据集的区别，详见Fig.5</p>
+<ul>
+<li>和ImageNet对比，COCO有更少类别，但每个类别有更多实例，更有利于目标的定位</li>
+<li>和ImageNet、VOC、SUN相比，该数据集每个类别都有更多实例，更关键的是每张图中实例更多，有利于学习目标间的关系</li>
+<li>和ImageNet相比、VOC相比，该数据集每张图里的实例更多；SUN一张图里的实例则比该数据集高，但整体上数据集中的实例更少。</li>
+</ul>
+</li>
+</ul>
+<h1 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h1><p>该数据集依次解决3个问题：</p>
+<ol>
+<li>图像分类</li>
+<li>目标检测</li>
+<li>semantic scene labeling</li>
+</ol>
+<h2 id="图像分类"><a href="#图像分类" class="headerlink" title="图像分类"></a>图像分类</h2><ul>
+<li><p>图像分类做什么</p>
+<p>  给出二进制标签，指出图片中是否包含某目标，见Fig1(a)</p>
+</li>
+<li><p>进展</p>
+<ol>
+<li>MNIST、COIL等数量少，甚至只有一种类别</li>
+<li>CIFAR-10 and CIFAR-100，类别多了些，但还很少且是入门级别entry-level，和人类认知相差很多</li>
+<li>ImageNet突然实现数量和类别（both entry-level and fine-grained）的大增长</li>
+</ol>
+</li>
+</ul>
+<h2 id="目标检测"><a href="#目标检测" class="headerlink" title="目标检测"></a>目标检测</h2><ul>
+<li><p>目标检测做什么</p>
+<p>  识别并定位某物体，典型的定位方式是矩形框，见Fig.1(b)</p>
+</li>
+<li><p>发展</p>
+<ol>
+<li>人脸识别，先是各种临时数据集，后来出现了更复杂的</li>
+<li>行人识别，Caltech Pedestrian Dataset</li>
+<li>基础目标识别，2005到2012年多年努力，VOC数据集</li>
+</ol>
+</li>
+</ul>
+<h2 id="语义分割"><a href="#语义分割" class="headerlink" title="语义分割"></a>语义分割</h2><ul>
+<li><p>语义分割做什么</p>
+<p>  确定图片里每个像素属于什么类别，即使是“背景”，见Fig.1(c)</p>
+</li>
+<li><p>发展</p>
+<p>  很难标注，比如草、街道；有室内和室外的数据集；有些数据集还有深度信息（什么意思？没懂）</p>
+<ul>
+<li>SUN数据集，长尾现象（类别数量不平衡，比如wall有20213个，但boat只有349个）</li>
+<li>该数据集（COCO）保证每个类别有大量实例</li>
+</ul>
+</li>
+</ul>
+<h2 id="其它视觉数据集"><a href="#其它视觉数据集" class="headerlink" title="其它视觉数据集"></a>其它视觉数据集</h2><ul>
+<li>Middlebury datasets，立体视觉，多视图立体，光流</li>
+<li>Berkeley Segmentation Data Set(BSDS500)，分割，边缘检测</li>
+</ul>
+<h1 id="图片收集"><a href="#图片收集" class="headerlink" title="图片收集"></a>图片收集</h1><p>如何选择目标的类别以及候选图片</p>
+<h2 id="常见目标类别"><a href="#常见目标类别" class="headerlink" title="常见目标类别"></a>常见目标类别</h2><ul>
+<li><p>对类别的要求</p>
+<ol>
+<li>所有类别中有代表性的那些类别</li>
+<li>和现实应用相关</li>
+<li>高频出现以保证数据集数据多</li>
+</ol>
+</li>
+<li><p>其它类别</p>
+<p>  是否要包括stuff、thing，是否要包括细粒度（Fine-grained）、对象部分（object-part）</p>
+<ul>
+<li><p>thing：很容易区分和标注，比如person、chair。该数据集中做了标注</p>
+</li>
+<li><p>stuff：没有明显边界，比如sky、street、grass。</p>
+<p>  该数据集中没有标注，stuff包含了重要的上下文信息，对其标注是有益的，这一点可以改进</p>
+</li>
+</ul>
+</li>
+<li><p>类别细分度</p>
+<ul>
+<li>例：牧羊犬是狗，狗也是哺乳动物</li>
+<li>为使方案可行，并且保证每个类别有大量实例，该数据集的类别选择entry-level，入门级别，即人们普遍使用的类别，dog、chair、person</li>
+</ul>
+</li>
+<li><p>对象部分</p>
+<p>  预计将包含对象部分类别，比如face、hands、wheels，它们有益于现实应用</p>
+</li>
+<li><p>确定类别</p>
+<ol>
+<li>PASCAL VOC+a subset of the 1200 most frequently used words that denote visually identifiable objects</li>
+<li>让4到8岁的小孩说出他们在室内外看到的物体</li>
+<li>合著者投票5级制投票，考虑是否常用、现实应用价值、与其它类别的差异程度</li>
+<li>根据投票结果选择，同时保证每个类别实例数量均匀且充足。为保证向后兼容，VOC的所有类别都被包含了</li>
+<li>最终得到91个类别</li>
+</ol>
+</li>
+</ul>
+<h2 id="非图标图片收集"><a href="#非图标图片收集" class="headerlink" title="非图标图片收集"></a>非图标图片收集</h2><ul>
+<li><p>将图片分为3类</p>
+<ol>
+<li>iconic object images，通过谷歌和必应图片搜索可以很方便地找到</li>
+<li>iconic scene images</li>
+<li>non-iconic images，目标是主要收集这些图片</li>
+</ol>
+</li>
+<li><p>收集non-iconic images，两个策略</p>
+<ol>
+<li><p>像VOC一样，从Flickr中收集，其中的图片有可以搜索的原数据和关键词</p>
+</li>
+<li><p>成对搜索类别，比如dog + car，搜索结果一般都是non-iconic images，甚至图片里不只这两个类别</p>
+<p> 还有scene/object category pairs</p>
+<p> 如果找不到足够的图片，就单独搜索类别然后筛选出non-iconic images</p>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="图片标注"><a href="#图片标注" class="headerlink" title="图片标注"></a>图片标注</h1><p>如何标注收集到的图片</p>
+<ul>
+<li>标注pipeline，见Fig3<ol>
+<li>类别标注</li>
+<li>实例定位</li>
+<li>实例分割</li>
+</ol>
+</li>
+<li>对于众包任务，标注人员，来自Amazon’s Mechanical Turk (AMT)，用户接口见附录</li>
+<li>提高标注质量<ol>
+<li>类别标注和实例定位这两个阶段的标注人员增加到8个</li>
+<li>增加一个阶段验证实例分割的标注结果</li>
+</ol>
+</li>
+</ul>
+<h2 id="类别标注"><a href="#类别标注" class="headerlink" title="类别标注"></a>类别标注</h2><ul>
+<li><p>类别标注做什么</p>
+<p>  确定图片里有哪些类别，Fig3(a)，大致标出位置</p>
+</li>
+<li><p>类别标注怎么做</p>
+<ul>
+<li><p>分级/分步：把91个类别分为11个父类</p>
+<p>  只需标出图片里有哪些类别，比如有多个dog，标出一个即可。</p>
+<ol>
+<li>给定图像，向标注人员依次显示每组类别，并要求其指示是否存在该父类的实例。</li>
+<li>如果某标注人员负责从父类（比如动物）中确定存在实例，则对于存在的每个下属类别（狗，猫等），工作人员必须将类别的图标拖到该类别的一个实例上的图像上。</li>
+</ol>
+</li>
+<li><p>共8个标注人员负责这项工作，如果有任何标注人员指出该类别，则认为该类别存在（提高recall）；误报将在后续阶段处理。</p>
+</li>
+</ul>
+</li>
+<li><p>类别标注耗时多久</p>
+<p>  这个阶段耗时20000工时</p>
+</li>
+</ul>
+<h2 id="实例定位"><a href="#实例定位" class="headerlink" title="实例定位"></a>实例定位</h2><ul>
+<li><p>实例定位做什么</p>
+<p>  基于上一步类别标注的结果，标注图像中对象类别的所有实例，大致位置，如果有多个dog，都要标注出来。Fig3(b)</p>
+</li>
+<li><p>实例定位怎么做</p>
+<ul>
+<li>标注人员在上一个阶段中找到的特定类别的每个实例的顶部放置一个叉号</li>
+<li>标注人员可以用放大镜去找到小的实例</li>
+<li>每个工作人员被要求为每个图像标记最多10个给定类别的实例。</li>
+</ul>
+</li>
+<li><p>实例定位耗时多久</p>
+<p>  每个图像由8名工人标记，总计约10,000个工时</p>
+</li>
+</ul>
+<h2 id="实例分割"><a href="#实例分割" class="headerlink" title="实例分割"></a>实例分割</h2><ul>
+<li><p>实例分割做什么</p>
+<p>  基于上一步实例定位的结果，</p>
+</li>
+<li><p>实例分割怎么做</p>
+<ul>
+<li>修改了Bell等人开发的用户接口，</li>
+<li>如果在图像中已经对其他实例进行了分割，则将这些分割显示给工作人员。</li>
+<li>工作人员还可能指示图像中没有给定类别的对象实例（这意味着来自上一阶段的假肯定标签），或者所有对象实例都已被分割。</li>
+<li>为最小化成本，每个实例仅有一名标注人员分割</li>
+<li>初步标注出的质量不高，所以训练标注人员，标注人员和标注结果的质量提高了</li>
+<li>要求多个工作人员（3至5名）判断每个标注，并表明其是否与实例完全匹配。质量不高的标注将被丢弃，并将相应的实例添加回未标注的对象池中。</li>
+<li>一些批准的工人总是生成差劲的标注；从这些工人那里获得的所有工作都被丢弃</li>
+<li>如果实例很密集，比如人群、一车香蕉，就会标注为一个“crowds”（出于评估目的，标记为crowds的区域将被忽略，并且不会影响探测器的得分）</li>
+</ul>
+</li>
+<li><p>实例分割耗时多久</p>
+<ul>
+<li>22 worker hours per 1,000 segmentations.</li>
+</ul>
+</li>
+</ul>
+<h2 id="标注性能分析"><a href="#标注性能分析" class="headerlink" title="标注性能分析"></a>标注性能分析</h2><ul>
+<li>10个标注人员和7个专家标注对比（其实是合著者）</li>
+<li>Ground Truth根据专家的标注确定，10个标注人员的recall更高，见Fig4(a)</li>
+<li>测评中recall更关键，因为错误标注可以在之后去掉</li>
+<li>大多数标注人员具有很高的precision；这些标注人员通常会完成更多工作，见Fig4(b)</li>
+</ul>
+<h2 id="Caption-Annotation"><a href="#Caption-Annotation" class="headerlink" title="Caption Annotation"></a>Caption Annotation</h2><ul>
+<li>为每张图片提供5个说明注释，这一版本的数据集不久后发布</li>
+</ul>
+<h1 id="数据统计"><a href="#数据统计" class="headerlink" title="数据统计"></a>数据统计</h1><p>和ImageNet, PASCAL VOC 2012, and SUN进行对比</p>
+<ul>
+<li>各自特点<ul>
+<li>ImageNet：类别多且很多是细粒度的</li>
+<li>SUN：关注场景类型及其中的常见目标</li>
+<li>VOC：主要应用于自然图片的目标检测</li>
+<li>COCO：自然图片中的目标检测和分割</li>
+</ul>
+</li>
+<li>其它内容就是Fig5，以及前面引言INtroduction里对数据集本身的描述</li>
+<li>Fig5<ul>
+<li>每个类别的实例的数量，比较均匀</li>
+<li>每张图片里的类别的数量，ImageNet和VOC多数只有1或2个类别，而COCO多数有1-6个类别</li>
+<li>每张图片里的实例的数量，SUN最多，ImageNet和VOC多数是1-2个，COCO多数是1-5个</li>
+<li>类别数量VS实例数量，越靠右上角越复杂</li>
+<li>实例在图片中的占比（尺寸维度），几个数据集差不多，50%以上的目标都不超过图片尺寸的10%</li>
+</ul>
+</li>
+</ul>
+<h1 id="数据集划分"><a href="#数据集划分" class="headerlink" title="数据集划分"></a>数据集划分</h1><p>为更快发行数据集，COCO被分成大致等量的两部分</p>
+<ul>
+<li>第一部分，2014公开，82783训练，40504验证，40775测试</li>
+<li>第二部分，2015公开，165,482 train, 81,208 val, and 81,434 test images.</li>
+<li>训练和验证的标注会公开，但测试集的标注不会公开</li>
+</ul>
+<h1 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h1><h2 id="目标框检测"><a href="#目标框检测" class="headerlink" title="目标框检测"></a>目标框检测</h2><ul>
+<li>从COCO中选55k张图片，根据分割标注进行tight-fitting得到矩形框</li>
+<li>在COCO和VOC上测试数据集</li>
+<li>测试两个模型：DPMv5-P和DPMv5-C。P指在PascalVOC2012上训练的。C指在COCO（5000正样本，10000负样本）上训练的，使用默认设置训练COCO的模型。</li>
+<li>两个模型在两个数据集上进行测试，在COCO上的性能都比在VOC上的性能低（见Table1），指出COCO包含更多难的图片。</li>
+<li>关于训练集对性能的影响的<strong>结论</strong>：文中指出<strong>在训练过程中包含困难（非图标）图像可能并不总是有帮助，如果该模型不够丰富，无法捕获此类外观可变性，则此类示例可能会充当噪声并污染学习的模型。<br>  我们的数据集允许探索此类问题。</strong></li>
+<li>一个<strong>结论</strong>：<strong>根据实验，模型在MS COCO的总体性能要低得多。这些观察结果支持两个假设：1）MS COCO比PASCAL VOC困难得多，并且2）在有更多训练数据的情况下，在MS COCO上训练的模型可以更好地推广到更容易的数据集，例如PASCAL VOC。</strong></li>
+</ul>
+<h2 id="基于检测框生成分割"><a href="#基于检测框生成分割" class="headerlink" title="基于检测框生成分割"></a>基于检测框生成分割</h2><ul>
+<li>对每个类别，学习其像素级掩码，方式是将训练得到的实例（框）对齐，然后平均，见Fig7</li>
+</ul>
+<h2 id="通过分割评估检测"><a href="#通过分割评估检测" class="headerlink" title="通过分割评估检测"></a>通过分割评估检测</h2><ul>
+<li>现在有分割标注，通过tight-fitting得到矩形框1，以预测（检测）的分割tight-fitting得到的矩形框2和矩形框1的交并比应大于等于0.5为标准，见Fig8</li>
+<li><strong>结论</strong><ul>
+<li>即使预测和标签的真实边界框重叠得很好，预测的分割也可能无法恢复对象细节，见Fig9左</li>
+<li>Fig9中的结论没怎么看懂，大概是说即使标注及其矩形框IOU很大，也还是难以预测</li>
+<li>Fig9右，在COCO上测试，正确预测的平均交并比也都不高，基本不超0.5，这一点也不是很懂</li>
+</ul>
+</li>
+</ul>
+<h1 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h1><p>又强调了一些东西</p>
+<ul>
+<li>over 70,000 worker hours</li>
+<li>non-iconic images of objects in natural environments and varied viewpoints.</li>
+<li>rich contextual information</li>
+</ul>
+<p>未来展望/方向：</p>
+<ul>
+<li>现在没有标注stuff，未来可以标注</li>
+</ul>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><ul>
+<li>detailed descriptions of the AMT user interfaces </li>
+<li>the full list of OBJECT &amp; SCENE CATEGORIES</li>
+</ul>
+<hr>
+<p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p>
+<p>欢迎讨论和交流!</p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/COCO/" rel="tag"># COCO</a>
+          
+            <a href="/tags/论文笔记/" rel="tag"># 论文笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/11/PAT甲级1141PAT-Ranking-of-Institutions/" rel="next" title="PAT甲级1141PAT Ranking of Institutions">
+                <i class="fa fa-chevron-left"></i> PAT甲级1141PAT Ranking of Institutions
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/16/SOLO-SOLO-Segmenting-Objects-by-Locations-论文阅读笔记/" rel="prev" title="SOLO(SOLO: Segmenting Objects by Locations)论文阅读笔记">
+                SOLO(SOLO: Segmenting Objects by Locations)论文阅读笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg"
+                alt="臭咸鱼" />
+            
+              <p class="site-author-name" itemprop="name">臭咸鱼</p>
+              <p class="site-description motion-element" itemprop="description">祝你天天开心啊！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">235</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">121</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://maluguang.com" title="Road Wide's Blog" target="_blank">Road Wide's Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/chouxianyu/" title="Chou Xianyu's CNBlog" target="_blank">Chou Xianyu's CNBlog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">2.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关工作"><span class="nav-number">3.</span> <span class="nav-text">相关工作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#图像分类"><span class="nav-number">3.1.</span> <span class="nav-text">图像分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目标检测"><span class="nav-number">3.2.</span> <span class="nav-text">目标检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语义分割"><span class="nav-number">3.3.</span> <span class="nav-text">语义分割</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它视觉数据集"><span class="nav-number">3.4.</span> <span class="nav-text">其它视觉数据集</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图片收集"><span class="nav-number">4.</span> <span class="nav-text">图片收集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见目标类别"><span class="nav-number">4.1.</span> <span class="nav-text">常见目标类别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非图标图片收集"><span class="nav-number">4.2.</span> <span class="nav-text">非图标图片收集</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图片标注"><span class="nav-number">5.</span> <span class="nav-text">图片标注</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类别标注"><span class="nav-number">5.1.</span> <span class="nav-text">类别标注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例定位"><span class="nav-number">5.2.</span> <span class="nav-text">实例定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例分割"><span class="nav-number">5.3.</span> <span class="nav-text">实例分割</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标注性能分析"><span class="nav-number">5.4.</span> <span class="nav-text">标注性能分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Caption-Annotation"><span class="nav-number">5.5.</span> <span class="nav-text">Caption Annotation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据统计"><span class="nav-number">6.</span> <span class="nav-text">数据统计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据集划分"><span class="nav-number">7.</span> <span class="nav-text">数据集划分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法分析"><span class="nav-number">8.</span> <span class="nav-text">算法分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目标框检测"><span class="nav-number">8.1.</span> <span class="nav-text">目标框检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于检测框生成分割"><span class="nav-number">8.2.</span> <span class="nav-text">基于检测框生成分割</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过分割评估检测"><span class="nav-number">8.3.</span> <span class="nav-text">通过分割评估检测</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#讨论"><span class="nav-number">9.</span> <span class="nav-text">讨论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录"><span class="nav-number">10.</span> <span class="nav-text">附录</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">臭咸鱼</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">198.3k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz',
+        appKey: 'Si7hBxIAVOGbu6Pot7HHaVBB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz", "Si7hBxIAVOGbu6Pot7HHaVBB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
