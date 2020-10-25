@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[一文详解特征缩放、标准化、归一化的定义、区别、特点和作用]]></title>
+    <url>%2F2020%2F10%2F25%2F%E4%B8%80%E6%96%87%E8%AF%A6%E8%A7%A3%E7%89%B9%E5%BE%81%E7%BC%A9%E6%94%BE%E3%80%81%E6%A0%87%E5%87%86%E5%8C%96%E3%80%81%E5%BD%92%E4%B8%80%E5%8C%96%E7%9A%84%E5%AE%9A%E4%B9%89%E3%80%81%E5%8C%BA%E5%88%AB%E3%80%81%E7%89%B9%E7%82%B9%E5%92%8C%E4%BD%9C%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[前言我在学李宏毅的机器学习课程，助教给的回归作业代码中有数据标准化的操作。 我听过数据标准化，还有归一化、批量归一化等等，但不是很懂，不知道他们具体是什么、有什么区别。 百度上找了挺多文章，讲得都不是很系统，比如大多文章都没讲懂标准化和归一化的区别或者是不同文章讲的内容矛盾了。 用谷歌一搜，就找到了很多很有价值的相关文章，然后我也写了这篇文章做个记录。 相对来讲，中文社区要比英文社区差些，部分原因是名词滥用或中英翻译问题，比如标准化和归一化、常量指针和指针常量。emmm 概要本文主要讲解了以下内容 特征缩放是什么/特征缩放的定义 归一化是什么/归一化的定义 标准化是什么/标准化的定义 归一化和标准化的区别 为什么要进行特征缩放/特征缩放有什么作用 有哪些常见的特征缩放方法 什么时候适合进行特征缩放/特征缩放方法的应用 名词定义这几个词是有区别的，特别是标准化和归一化，不要滥用（在本文中也请区分这几个词）。 中文 英文 特征缩放 Feature Scaling 标准化 Standardization(Z-Score Normalization) 归一化 Normalization 可以认为Feature Scaling包括Standardization和Normalization，其中Standardization可以叫做Z-Score Normalization。 为什么需要进行特征缩放使用单一指标对某事物进行评价并不合理，因此需要多指标综合评价方法。多指标综合评价方法，就是把描述某事物不同方面的多个指标综合起来得到一个综合指标，并通过它评价、比较该事物。 由于性质不同，不同评价指标通常具有不同的量纲和数量级。当各指标相差很大时，如果直接使用原始指标值计算综合指标，就会突出数值较大的指标在分析中的作用、削弱数值较小的指标在分析中的作用。 为消除各评价指标间量纲和数量级的差异、保证结果的可靠性，就需要对各指标的原始数据进行特征缩放（也有数据标准化、数据归一化的说法，但不准确，所以不推荐这么叫）。 由于量纲和数量级不同，所以需要特征缩放。特征缩放可以显著提升部分机器学习算法的性能，但它对部分算法没有帮助。 基于梯度下降的算法（Gradient Descent Based Algorithms）在基于梯度下降进行优化的算法中，需要进行特征缩放，比如线性回归、逻辑回归、神经网络等。 因为计算梯度时会使用特征的值，如果各特征的的取值范围差异很大，不同特征对应梯度的值就会差异很大。 为保证平滑走到最优点、按相同速率更新各特征的权重，需要进行特征放缩。 通过特征放缩，可以使数值范围变小，进而加速梯度下降。 基于距离的算法（Distance-Based Algorithms）在基于距离进行优化的算法中，需要进行特征缩放，比如K近邻、K-Means、SVM、PCA等。 因为这些算法是基于数据点的特征值计算它们的距离，距离越小则两者越相似。 基于树的算法（Tree-Based Algorithms）基于树的算法对特征（features）的数值范围并不敏感，比如决策树。 决策树仅基于单个feature拆分节点，并不受其它feature的影响。 线性判别分析、朴素贝叶斯等算法这两个算法处理了特征数量级差异大的问题，因此不需要进行特征缩放。 四种特征缩放的方法标准化和归一化都可以实现特征缩放，但两者是有区别的。 假设我们有一份数据$x$，它有$N$行$M$列，即有$N$个对象，每个对象有$M$个特征，$x^i_j$表示对象$i$的特征$j$。 Standardization（Z-Score Normalization） Mean Normalization Min-Max Normalization Unit Vector Normalization/Scaling to unit length 标准化（Standardization/Z-Score Normalization） 定义 公式为$\hat x[:,j]=\frac{x[:,j]-mean(x[:,j])}{std(x[:,j])}$，其中$mean$代表平均值，$std$代表标准差， $mean(x[:,j])=\frac{1}{N}\cdot\sum_{i=1}^Nx[i,j]$， $std(x[:,j])=\sqrt{\frac{1}{N-1}\cdot\sum^N_{i=1}(x[i,j]-\mu_j)^2}$。 特点 使数据的平均值变为0、标准差变为1，不改变数据的分布类型，数值范围不一定，消除了数据的量纲差异。 假设 标准化假设数据是正态分布，但这个要求并不十分严格，如果数据是正态分布则该技术会更有效。 何时使用 当我们使用的算法假设数据是正态分布时，可以使用Standardization，比如线性回归、逻辑回归、线性判别分析。 因为Standardization使数据平均值为0，也可以在一些假设数据中心为0（zero centric data）的算法中使用，比如主成分分析（PCA）。 归一化（Normalization） 特点 把数据调整到[0,1]，并且消除了数据的量纲差异。 也可以把数据调到[-1,1]，在使用SVM和Adaboost时就需要这样。 何时使用 当我们不知道数据分布时或者我们知道数据不是正态分布时，这是一个很好的方法。 换种说法就是，当我们使用的算法没有假设数据的分布类型时，就可以使用Normalization，比如K近邻算法和人工神经网络。 Mean Normalization 定义 $\hat x[:,j]=\frac{x[:,j]-mean(x[:,j])}{max(x[:,j])-min(x[:,j])}$ 其中$mean$代表平均值，$max$代表最大值，$min$代表最小值。 特点 把数据调到[-1,1]，平均值为0 何时使用 一些假设数据中心为0（zero centric data）的算法，比如主成分分析（PCA）。 Min-Max Normalization 定义 $\hat x[:,j]=\frac{x[:,j]-min(x[:,j])}{max(x[:,j])-min(x[:,j])}$ 其中$max$代表最大值，$min$代表最小值。 特点 把数据调到[0,1] 何时使用 当处理具有严格数值范围要求的数据（比如图片）时，这非常有用。 Unit Vector Normalization/Scaling to unit length 定义 $\hat x[i,:]=\frac{x[i,:]}{||x[i,:]||}$ 把每个对象的特征向量变成单位长度。 特点 把数据调到[0,1] 何时使用 当处理具有严格数值范围要求的数据（比如图片）时，这非常有用。 参考链接下面几篇文章确实讲得很清晰、精准，作为机器学习新手的我都能看懂。 这篇文章的内容也都是从下面这些文章里提取总结出来的，所以如果我上面哪里讲得不清楚、不好的话，建议直接查看下面几篇文章或者直接谷歌搜索相关名词。 https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E6%A0%87%E5%87%86%E5%8C%96 https://www.analyticsvidhya.com/blog/2020/04/feature-scaling-machine-learning-normalization-standardization/ 这篇文章讲得很不错，建议参考。 https://medium.com/greyatom/why-how-and-when-to-scale-your-features-4b30ab09db5e 这篇文章讲得很不错，建议参考。 https://machinelearningmastery.com/normalize-standardize-machine-learning-data-weka/ 这篇文章讲了Weka的使用，但我们并不需要看Weka怎么用，看文章里其它理论部分即可。 https://towardsdatascience.com/understand-data-normalization-in-machine-learning-8ff3062101f0 这篇文章更偏向于实践一些，也很不错。 https://en.wikipedia.org/wiki/Feature_scaling 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>特征缩放</tag>
+        <tag>标准化</tag>
+        <tag>归一化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ModuleNotFoundError-No module named jupyter_nbextensions_configurator]]></title>
+    <url>%2F2020%2F10%2F24%2FModuleNotFoundError-No-module-named-jupyter-nbextensions-configurator%2F</url>
+    <content type="text"><![CDATA[启动Anaconda中的Jupyter Notebook的时候，出现如下错误 12345678910[W 08:37:25.964 NotebookApp] Error loading server extension jupyter_nbextensions_configurator Traceback (most recent call last): File &quot;D:\WorkingSoftware\Anaconda3\lib\site-packages\notebook\notebookapp.py&quot;, line 1615, in init_server_extensions mod = importlib.import_module(modulename) File &quot;D:\WorkingSoftware\Anaconda3\lib\importlib\__init__.py&quot;, line 127, in import_module return _bootstrap._gcd_import(name[level:], package, level) File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 1006, in _gcd_import File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 983, in _find_and_load File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 965, in _find_and_load_unlocked ModuleNotFoundError: No module named &apos;jupyter_nbextensions_configurator&apos; 经查询，在Anaconda Prompt某Python环境（我使用的是Anaconda默认的base环境）中运行如下命令 1python -m pip install jupyter_nbextensions_configurator 再次打开Jupyter Notebook时就可以发现问题已经解决。 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>Bug</tag>
+        <tag>python</tag>
+        <tag>Jupyter</tag>
+        <tag>Anaconda</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[VSCode运行Python代码:文件存在但出现FileNotFoundError]]></title>
+    <url>%2F2020%2F10%2F23%2FVSCode%E8%BF%90%E8%A1%8CPython%E4%BB%A3%E7%A0%81-%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8%E4%BD%86%E5%87%BA%E7%8E%B0FileNotFoundError%2F</url>
+    <content type="text"><![CDATA[今天使用VSCode运行Python代码，读取当前目录下的CSV文件，代码如下 12import pandas as pddata = pd.read_csv('./train.csv') 我已确认过我的Python代码文件和train.csv在同一个目录，正常情况下这份代码不应该报错的。 但我运行这份代码时，终端内容如下 1234E:\Study\LHYMachineLearning&gt;python -u "e:\Study\LHYMachineLearning\LHYMLCode\hw1_regression\hw1_regression.py"Traceback (most recent call last):………………&lt;此处内容省略&gt;FileNotFoundError: [Errno 2] File b'./train.csv' does not exist: b'./train.csv' 但是如果我修改VSCode终端的所在路径，这样运行就不会报错。 1E:\Study\LHYMachineLearning\LHYMLCode\hw1_regression&gt;python -u hw1_regression.py 所以问题就在于运行命令时VSCode终端的所在路径，这里不再过多解释，上面两条命令的对比十分明显了。 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>Bug</tag>
+        <tag>python</tag>
+        <tag>VSCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[(hexo)YAMLException can not read a block mapping entry; a multiline key may not be an implicit key]]></title>
+    <url>%2F2020%2F10%2F19%2Fhexo-YAMLException-can-not-read-a-block-mapping-entry-a-multiline-key-may-not-be-an-implicit-key%2F</url>
+    <content type="text"><![CDATA[运行hexo g后，报错如下： 1YAMLException can not read a block mapping entry; a multiline key may not be an implicit key 根据报错定位（一般会定位到文件的某行某列），检查一下是不是哪里少了空格，我的情况是文章开头的tags后边少了个空格。 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[PAT甲级1118Birds in Forest]]></title>
     <url>%2F2020%2F10%2F19%2FPAT%E7%94%B2%E7%BA%A71118Birds-in-Forest%2F</url>
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805354108403712 题解题目要求 输入 N：正整数，不超过1000，照片的数量 N张照片：每张照片中有K只鸟，鸟的索引从1开始，不超过10000。假设一张图片中出现的所有鸟属于同一棵树 Q：正整数，不超过10000，查询的数量 Q个查询 输出 有多少颗树、多少只鸟 判断Q对鸟是否属于同一颗树 解题思路 用并查集做就行，这道题和PAT甲级1114Family Property很相似，但简单很多。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667// Problem: PAT Advanced 1118// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805354108403712// Tags: 并查集 路径压缩#include &lt;iostream&gt;using namespace std;const int MAXN = 10001;int tree[MAXN];int birdNum[MAXN];int findTree(int x)&#123; return (x == -1 || x == tree[x]) ? x : tree[x] = findTree(tree[x]);&#125;void UNION(int a, int b)&#123; int ta = findTree(a), tb = findTree(b); if (ta != tb) tree[tb] = ta;&#125;int main()&#123; fill(tree, tree + MAXN, -1); int n, q, k, bird1, bird2; scanf("%d", &amp;n); for (int i = 0; i &lt; n; i++)&#123; scanf("%d", &amp;k); scanf("%d", &amp;bird1); if (tree[bird1] == -1) tree[bird1] = bird1; // 记录该鸟 for (int j = 1; j &lt; k; j++)&#123; scanf("%d", &amp;bird2); if (tree[bird2] == -1) tree[bird2] = bird2; // 记录该鸟 UNION(bird1, bird2); &#125; &#125; int tempTree; for (int i = 0; i &lt; MAXN; i++)&#123; tempTree = findTree(i); if (tempTree != -1)&#123; birdNum[tempTree] += 1; &#125; &#125; int treeCount = 0, birdCount = 0; for (int i = 0; i &lt; MAXN; i++)&#123; if (birdNum[i] &gt; 0)&#123; treeCount += 1; birdCount += birdNum[i]; &#125; &#125; printf("%d %d\n", treeCount, birdCount); scanf("%d", &amp;q); int tree1, tree2; while (q--)&#123; scanf("%d%d", &amp;bird1, &amp;bird2); tree1 = findTree(bird1); tree2 = findTree(bird2); if (tree1 != -1 &amp;&amp; tree2 != -1 &amp;&amp; tree1 == tree2) printf("Yes\n"); else printf("No\n"); &#125; return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
@@ -259,8 +299,8 @@
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805346063728640 题解题目要求 红黑树 在二叉搜索树的基础上，红黑树还具有以下特征 每个结点是红色或者黑色 根结点是黑色的 叶子结点（NULL）都是黑色 每个红色结点的两个子结点都是黑色 从每个叶子到根的所有路径上不能有两个连续的红色结点 每个结点到其每个叶子结点的所有路径都包含相同数目的黑色节点。 给定一颗二叉搜索树，请判断它是否是一个合法的红黑树。 输入 K：正整数，不超过30，测试用例的数量 N：正整数，不超过30，二叉树中结点的数量 二叉树的先序遍历结果：结点的值都是正整数，用负数代表红色结点 输出 判断每颗二叉搜索树是否是红黑树，是则输出Yes，否则输出No。 解题思路 根据先序遍历结果和二叉搜索树的性质（左子树小于根结点小于右子树），递归构建二叉树 判断性质3：根结点是否是黑色 判断性质4，见代码中的函数judge1 判断性质5，见代码中的函数judge2 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970// Problem: PAT Advanced 1135// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805346063728640// Tags: Tree BST RBTree#include &lt;iostream&gt;#include &lt;cmath&gt;using namespace std;struct Node&#123; int val; Node* left = nullptr; Node* right = nullptr;&#125;;Node* build(Node* root, int v)&#123; if (root == nullptr)&#123; root = new Node(); root-&gt;val = v; &#125; else if (abs(v) &lt;= abs(root-&gt;val)) root-&gt;left = build(root-&gt;left, v); else root-&gt;right = build(root-&gt;right, v); return root;&#125;bool judge1(Node* root)&#123; if (root == nullptr) return true; if (root-&gt;val &lt; 0)&#123; if (root-&gt;left != nullptr &amp;&amp; root-&gt;left-&gt;val &lt; 0) return false; if (root-&gt;right != nullptr &amp;&amp; root-&gt;right-&gt;val &lt; 0) return false; &#125; return judge1(root-&gt;left) &amp;&amp; judge1(root-&gt;right);&#125;int getDepth(Node* root)&#123; if (root == nullptr) return 0; int ret = max(getDepth(root-&gt;left), getDepth(root-&gt;right)); return root-&gt;val &gt; 0 ? ret + 1 : ret;&#125;bool judge2(Node *root)&#123; if (root == nullptr) return true; if (getDepth(root-&gt;left) != getDepth(root-&gt;right)) return false; return judge2(root-&gt;left) &amp;&amp; judge2(root-&gt;right);&#125;int main()&#123; int k, n, val; scanf("%d", &amp;k); while (k--)&#123; scanf("%d", &amp;n); Node* root = nullptr; for (int i = 0; i &lt; n; i++)&#123; scanf("%d", &amp;val); root = build(root, val); &#125; if (root-&gt;val &lt; 0 || !judge1(root) || !judge2(root)) printf("No\n"); else printf("Yes\n"); &#125; return 0;&#125; 参考链接https://blog.csdn.net/liuchuo/article/details/78037334 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
         <tag>算法</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
         <tag>BST</tag>
         <tag>PAT</tag>
@@ -273,8 +313,8 @@
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805345078067200 题解题目要求假设二叉树中所有结点的值都是互异的正整数，给定二叉树的先序和后序遍历，请输出该树后序遍历的第一个数字。 输入 N：正整数，不超过50000，二叉树中结点的数量 先序遍历结果 中序遍历结果 解题思路 根据先序遍历和中序遍历结果可以确定一颗树，这道题的关键就是如何确定出这颗树并遍历它。 可以参考PAT甲级1151LCA in a Binary Tree，这道题里也是根据先序遍历和中序遍历结果确定出了一棵树。 设置全局flag判断是否是该树后序遍历的第一个数字，如果是则输出，不是则不输出 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849// Problem: PAT Advanced 1138// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805345078067200// Tags: Tree DFS#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;map&gt;using namespace std;vector&lt;int&gt; preOrder; // 先序遍历结果vector&lt;int&gt; inOrder; // 中序遍历结果map&lt;int, int&gt; inPos; // 结点到中序遍历结果inOrder索引的映射bool firstIsPrinted = false; // 为true代表后序遍历时的第一个结点已经输出void postOrderTraverse(int inLeft, int inRight, int preRoot)&#123; if (firstIsPrinted) // 只输出后序遍历的第一个结点即可 return ; if (inRight &lt; inLeft) // 该树不存在 return ; int inRoot = inPos[preOrder[preRoot]]; // 当前树的根结点在中序遍历结果inOrder中的索引 // 后序遍历 postOrderTraverse(inLeft, inRoot - 1, preRoot + 1); // 遍历左子树并判断左子树是否存在 postOrderTraverse(inRoot + 1, inRight, preRoot + 1 + (inRoot - inLeft)); // 遍历右子树并判断右子树是否存在 if (!firstIsPrinted)&#123; // 只输出后序遍历的第一个结点即可 printf("%d", inOrder[inRoot]); firstIsPrinted = true; &#125;&#125;int main()&#123; int n; scanf("%d", &amp;n); preOrder.resize(n + 1); inOrder.resize(n + 1); for (int i = 1; i &lt;= n; i++) // 读取先序遍历结果 scanf("%d", &amp;preOrder[i]); for (int i = 1; i &lt;= n; i++)&#123; // 读取中序遍历结果 scanf("%d", &amp;inOrder[i]); inPos[inOrder[i]] = i; &#125; postOrderTraverse(1, n, 1); return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
         <tag>算法</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
         <tag>PAT</tag>
         <tag>map</tag>
@@ -299,8 +339,8 @@
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/1038430130011897856 题解题目要求 最近公共祖先（LCA，The lowest common ancestor） 在一颗树中，结点U和V的LCA是U和V为其后代的深度最大的结点。 给定一颗二叉树中的任意两个结点，请找到它们的LCA。 输入 M：正整数，不超过1000，需要测试的结点对的数量 N：正整数，不超过10000，二叉树中结点的数量，结点值都在int范围内 二叉树中序遍历结果：N个数字 二叉树先序遍历结果：N个数字 M个结点对： 输出 对于每个结点对，判断结点对中每个结点是否存在，如果都存在则找到他们的LCA。 思路根据先序遍历结果和中序遍历结果可以确定一颗树中序遍历结果加先序遍历结果可以唯一确定一棵树，在不构建树的情况下，在每一层的递归中，可以得到树的根结点。 使用两个数组分别保存树的先序遍历结果和后序遍历结果 根据先序遍历结果可以确定根节点 比如刚开始的第一个结点就是整棵树的根结点 根据中序遍历结果和整棵树的根结点可以确定整棵树的左右子树 中序遍历结果中，根结点左侧就是整棵树的左子树的中序遍历结果，根结点右侧就是整棵树的右子树的中序遍历结果 递归确定左右子树的结构 某颗树的结构可根据2个变量确定：其根结点在整颗树先序遍历结果中的索引、其中序遍历结果序列（可通过起始索引和结束索引2个变量确定） 123456789101112131415void func(int leftPosBoundOfInOrder, int rightPosBoundOfInOrder, int rootPosOfPreOrder)&#123; /* 当前这颗树在整棵树中序遍历结果inOrder的范围索引为[leftPosBoundOfInOrder,rightPosBoundOfInOrder] rootPosOfPreOrder指当前这颗树根结点在整棵树先序遍历结果preOrder中的索引 */ // 越界判断 if (leftPosBoundOfInOrder &gt; rightPosBoundOfInOrder) return; // 左子树 lca(leftPosBoundOfInOrder, rootPosOfInOrder - 1, rootPosOfPreOrder + 1); // 右子树 lca(rootPosOfInOrder + 1, rightPosBoundOfInOrder, rootPosOfPreOrder + (rootPosOfInOrder - leftPosBoundOfInOrder) + 1);&#125;func(1, n, 1); // 调用（假设整颗树有n个结点，在数组中的索引为[1,n]） PAT甲级1138Postorder Traversal这道题也涉及如何根据先序遍历结果和中序遍历结果确定一棵树并遍历它，可以看一看。 最近公共祖先LCA已知某颗树的根结点， 若u和u在根结点的左边，则u和v的最近公共祖先在当前子树根结点的左子树寻找； 如果u和v在当前子树根结点的右边，则u和v的最近公共祖先就在当前子树的右子树寻找； 如果u和v在当前子树根结点的两边，在当前子树的根结点就是u和v的最近公共祖先； 如果u或v就是根结点，那其就是这两个结点的最近公共祖先。 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768// Problem: PAT Advanced 1151// URL: https://pintia.cn/problem-sets/994805342720868352/problems/1038430130011897856// Tags: Tree LCA Map#include &lt;iostream&gt;#include &lt;map&gt;#include &lt;vector&gt;using namespace std;int u, v;map&lt;int, int&gt; pos;vector&lt;int&gt; inOrder, preOrder;void lca(int leftPosBoundOfInOrder, int rightPosBoundOfInOrder, int rootPosOfPreOrder)&#123; /* 当前这颗树在整棵树中序遍历结果inOrder的范围索引为[leftPosBoundOfInOrder,rightPosBoundOfInOrder] rootPosOfPreOrder指当前这颗树根结点在整棵树先序遍历结果preOrder中的索引 */ if (leftPosBoundOfInOrder &gt; rightPosBoundOfInOrder) return; // 越界判断 int rootPosOfInOrder = pos[preOrder[rootPosOfPreOrder]]; // 根结点在中序遍历结果中的索引 int uPosOfInorder = pos[u]; // 结点u在中序遍历结果中的索引 int vPosOfInorder = pos[v]; // 结点v在中序遍历结果中的索引 // u和v都在左子树就去左子树找 if (uPosOfInorder &lt; rootPosOfInOrder &amp;&amp; vPosOfInorder &lt; rootPosOfInOrder) lca(leftPosBoundOfInOrder, rootPosOfInOrder - 1, rootPosOfPreOrder + 1); // u和v都在右子树就去右子树找 else if (uPosOfInorder &gt; rootPosOfInOrder &amp;&amp; vPosOfInorder &gt; rootPosOfInOrder) lca(rootPosOfInOrder + 1, rightPosBoundOfInOrder, rootPosOfPreOrder + (rootPosOfInOrder - leftPosBoundOfInOrder) + 1); // u和v在分别在左右子树，则当前树的根节点就是LCA else if ((uPosOfInorder &lt; rootPosOfInOrder &amp;&amp; vPosOfInorder &gt; rootPosOfInOrder) || (uPosOfInorder &gt; rootPosOfInOrder &amp;&amp; vPosOfInorder &lt; rootPosOfInOrder)) printf("LCA of %d and %d is %d.\n", u, v, preOrder[rootPosOfPreOrder]); // 结点u就是根结点 else if (uPosOfInorder == rootPosOfInOrder) printf("%d is an ancestor of %d.\n", u, v); // 结点v就是根结点 else if (vPosOfInorder == rootPosOfInOrder) printf("%d is an ancestor of %d.\n", v, u);&#125;int main()&#123; int m, n; // 结点对个数，结点个数 scanf("%d %d", &amp;m, &amp;n); inOrder.resize(n + 1), preOrder.resize(n + 1); for (int i = 1; i &lt;= n; i++)&#123; // 记录中序遍历结果，并记录各结点的索引 scanf("%d", &amp;inOrder[i]); pos[inOrder[i]] = i; &#125; for (int i = 1; i &lt;= n; i++)&#123; // 记录先序遍历结果 scanf("%d", &amp;preOrder[i]); &#125; while (m--)&#123; scanf("%d %d", &amp;u, &amp;v); if (pos[u] == 0 &amp;&amp; pos[v] == 0) // 判断元素是否存在 printf("ERROR: %d and %d are not found.\n", u, v); else if(pos[u] == 0 || pos[v] == 0) printf("ERROR: %d is not found.\n", pos[u] == 0 ? u : v); else lca(1, n, 1); &#125; return 0;&#125; 参考链接https://blog.csdn.net/zhuiqiuzhuoyue583/article/details/80452127 https://blog.csdn.net/liuchuo/article/details/82560863 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
         <tag>算法</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>PAT</tag>
         <tag>map</tag>
         <tag>LCA</tag>
@@ -325,8 +365,8 @@
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/1071785408849047552 题解题目要求堆（大顶堆或小顶堆）中，任意一条从根结点到叶子结点的路径上的值一定是非递增序列或者非递减序列。 现在给定一个完全二叉树，请检查它的每一条路径，判断这棵树是不是堆。 输入 N：正整数，大于1，不超过1000，树中结点的数量 N个结点的值（互异）：都是int范围内，按照层次遍历的顺序给出 输出 对于每棵树 先输出所有从根结点到叶子结点的路径，每条路径占一行，数字间用一个空格间隔，首尾不能有多余空格 输出顺序：对于每个结点，其右子树的所有路径要先于其左子树的所有路径输出 输出这颗树是大顶堆还是小顶堆，或者它不是堆 思路 利用完全二叉树的性质，将结点记录到一维数组中 使用DFS，使用vecotr记录当前遍历到的所有结点（即路径），如果当前结点是叶子结点则输出这条路径，否则先遍历右子树再遍历左子树 在DFS过程中判断是否违背大小顶堆性质 最后输出该树是否是大小顶堆 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455// Problem: PAT Advanced 1155// URL: https://pintia.cn/problem-sets/994805342720868352/problems/1071785408849047552// Tags: Tree DFS Heap#include &lt;iostream&gt;#include &lt;vector&gt;using namespace std;int n;bool isMaxHeap = true, isMinHeap = true;int nodes[2010]; // 索引为[1,n]的元素有效vector&lt;int&gt; path; // 目前遍历到的所有结点void dfs(int i)&#123; if (i &gt; n) return; // 越界则无操作 if (i &gt; 1)&#123; // 检查是否是大小顶堆 if (nodes[i] &gt; nodes[i / 2]) isMaxHeap = false; else if(nodes[i] &lt; nodes[i / 2]) isMinHeap = false; &#125; path.push_back(nodes[i]); // 遍历当前结点 if (2 * i &gt; n &amp;&amp; 2 * i + 1 &gt; n)&#123; // 是叶子结点则输出当前遍历到的所有结点 auto it = path.begin(); printf("%d", *it); it++; while (it != path.end())&#123; printf(" %d", *it); it++; &#125; printf("\n"); &#125; else&#123; // 不是叶子结点 dfs(2 * i + 1); // 遍历右子树 dfs(2 * i); // 遍历左子树 &#125; path.pop_back(); // 回溯&#125;int main()&#123; scanf("%d", &amp;n); for (int i = 1; i &lt;= n; i++)&#123; // 记录结点 scanf("%d", nodes+i); &#125; dfs(1); // 深度优先遍历树并在过程中判断是否为大顶堆或小顶堆 if (isMaxHeap) printf("Max Heap"); else if (isMinHeap) printf("Min Heap"); else printf("Not Heap"); return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
         <tag>算法</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
         <tag>回溯</tag>
         <tag>PAT</tag>
@@ -567,8 +607,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
         <tag>BST</tag>
       </tags>
@@ -580,8 +620,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
         <tag>BST</tag>
       </tags>
@@ -684,8 +724,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -696,8 +736,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -708,8 +748,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -720,8 +760,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -732,8 +772,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
@@ -743,8 +783,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -755,8 +795,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -767,8 +807,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -779,8 +819,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -791,8 +831,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
         <tag>回溯</tag>
       </tags>
@@ -804,8 +844,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
@@ -815,8 +855,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
@@ -826,8 +866,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -838,8 +878,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -850,8 +890,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
@@ -861,10 +901,10 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
-        <tag>队列</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
+        <tag>队列</tag>
         <tag>BFS</tag>
       </tags>
   </entry>
@@ -873,8 +913,8 @@
     <url>%2F2020%2F07%2F13%2F%E4%BA%8C%E5%8F%89%E6%A0%91%E5%89%8D%E5%BA%8F%E3%80%81%E4%B8%AD%E5%BA%8F%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%EF%BC%88%E9%9D%9E%E9%80%92%E5%BD%92%E7%BB%9F%E4%B8%80%E8%A7%A3%E6%B3%95%EF%BC%89%2F</url>
     <content type="text"><![CDATA[前言昨天和今天复习了二叉树的前序遍历、中序遍历和后序遍历，找到了一种统一的非递归的方法（即使用一个思路非递归实现二叉树的前序、中序和后序遍历）。 思路思路本质上还是递归，只不过不通过递归函数显式递归，而是通过栈模拟递归。 具体思路：https://leetcode-cn.com/problems/binary-tree-postorder-traversal/solution/mo-fang-di-gui-zhi-bian-yi-xing-by-sonp/ 注意： 非空的树结点指针才能存入栈中 因为使用nullptr作为递归函数结束的标志，所以在栈中存储树结点指针时必须要检查是否非空。 遍历顺序和入栈顺序相反 前序遍历LeetCode题目：https://www.cnblogs.com/chouxianyu/p/13290758.html 123456789101112131415161718192021222324252627vector&lt;int&gt; preorderTraversal(TreeNode* root)&#123; vector&lt;int&gt; result; stack&lt;TreeNode*&gt; nodes; if(root!=nullptr) nodes.push(root); while(!nodes.empty())&#123; // 取出结点 root = nodes.top(); nodes.pop(); // 将结点对应的树拆解成前序，模拟递归解法中的函数调用 if(root!=nullptr)&#123; if(root-&gt;right!=nullptr) nodes.push(root-&gt;right); if(root-&gt;left!=nullptr) nodes.push(root-&gt;left); nodes.push(root); nodes.push(nullptr); // 设置nullptr标志 &#125; // nullptr代表栈顶对应的树（根、左子树、右子树）已按照指定顺序遍历，一层递归函数运行结束 else&#123; result.push_back(nodes.top()-&gt;val); nodes.pop(); &#125; &#125; return result;&#125; 中序遍历LeetCode题目：https://www.cnblogs.com/chouxianyu/p/13293153.html 12345678910111213141516171819202122232425vector&lt;int&gt; inorderTraversal(TreeNode* root) &#123; vector&lt;int&gt; result; stack&lt;TreeNode*&gt; nodes; if(root!=nullptr) nodes.push(root); while(!nodes.empty())&#123; root = nodes.top(); nodes.pop(); // 模拟调用递归函数 if(root!=nullptr)&#123; if(root-&gt;right!=nullptr) nodes.push(root-&gt;right); nodes.push(root); nodes.push(nullptr); if(root-&gt;left!=nullptr) nodes.push(root-&gt;left); &#125; // 一层递归函数结束 else&#123; result.push_back(nodes.top()-&gt;val); nodes.pop(); &#125; &#125; return result;&#125; 后序遍历LeetCode题目：https://www.cnblogs.com/chouxianyu/p/13293152.html 12345678910111213141516171819202122232425vector&lt;int&gt; postorderTraversal(TreeNode* root)&#123; vector&lt;int&gt; result; stack&lt;TreeNode*&gt; nodes; if(root!=nullptr) nodes.push(root); while(!nodes.empty())&#123; root = nodes.top(); nodes.pop(); // 模拟调用递归函数 if(root!=nullptr)&#123; nodes.push(root); nodes.push(nullptr); if(root-&gt;right!=nullptr) nodes.push(root-&gt;right); if(root-&gt;left!=nullptr) nodes.push(root-&gt;left); &#125; // 递归函数调用成功 else&#123; result.push_back(nodes.top()-&gt;val); nodes.pop(); &#125; &#125; return result;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>栈</tag>
       </tags>
   </entry>
@@ -885,8 +925,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>栈</tag>
       </tags>
   </entry>
@@ -897,8 +937,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>栈</tag>
       </tags>
   </entry>
@@ -909,8 +949,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>栈</tag>
       </tags>
   </entry>
@@ -1164,8 +1204,8 @@
     <url>%2F2019%2F10%2F22%2Fsklearn%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E5%AE%9E%E6%88%98%2F</url>
     <content type="text"><![CDATA[题目要求根据学生两门课的成绩和是否入学的数据，预测学生能否顺利入学：利用ex2data1.txt和ex2data2.txt中的数据，进行逻辑回归和预测。 数据放在最后边。 ex2data1.txt处理作散点图可知，决策大致符合线性关系，但还是有弯曲（非线性），用线性效果并不好，因此可用两种方案：方案一，无多项式特征；方案二，有多项式特征。 方案一：无多项式特征对ex2data1.txt中的数据进行逻辑回归，无多项式特征 代码实现如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253""" 对ex2data1.txt中的数据进行逻辑回归（无多项式特征）"""from sklearn.model_selection import train_test_splitfrom matplotlib.colors import ListedColormapfrom sklearn.linear_model import LogisticRegressionimport numpy as npimport matplotlib.pyplot as pltplt.rcParams['font.sans-serif'] = ['SimHei'] # 用来正常显示中文标签plt.rcParams['axes.unicode_minus'] = False # 用来正常显示负号# 数据格式：成绩1,成绩2,是否被录取（1代表被录取，0代表未被录取）# 函数（画决策边界）定义def plot_decision_boundary(model, axis): x0, x1 = np.meshgrid( np.linspace(axis[0], axis[1], int((axis[1] - axis[0]) * 100)).reshape(-1, 1), np.linspace(axis[2], axis[3], int((axis[3] - axis[2]) * 100)).reshape(-1, 1), ) X_new = np.c_[x0.ravel(), x1.ravel()] y_predict = model.predict(X_new) zz = y_predict.reshape(x0.shape) custom_cmap = ListedColormap(['#EF9A9A', '#FFF59D', '#90CAF9']) plt.contourf(x0, x1, zz, cmap=custom_cmap)# 读取数据data = np.loadtxt('ex2data1.txt', delimiter=',')data_X = data[:, 0:2]data_y = data[:, 2]# 数据分割X_train, X_test, y_train, y_test = train_test_split(data_X, data_y, random_state=666)# 训练模型log_reg = LogisticRegression()log_reg.fit(X_train, y_train)# 结果可视化plot_decision_boundary(log_reg, axis=[0, 100, 0, 100])plt.scatter(data_X[data_y == 0, 0], data_X[data_y == 0, 1], color='red')plt.scatter(data_X[data_y == 1, 0], data_X[data_y == 1, 1], color='blue')plt.xlabel('成绩1')plt.ylabel('成绩2')plt.title('两门课程成绩与是否录取的关系')plt.show()# 模型测试print(log_reg.score(X_train, y_train))print(log_reg.score(X_test, y_test)) 输出结果如下： 120.85333333333333340.76 方案二：引入多项式特征对ex2data1.txt中的数据进行逻辑回归，引入多项式特征。经调试，当degree为3时，耗费时间较长；当degree为2时，耗费时间可接受，效果与方案一相比好了很多 实现如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465""" 对ex2data1.txt中的数据进行逻辑回归（引入多项式特征）"""from sklearn.model_selection import train_test_splitfrom matplotlib.colors import ListedColormapfrom sklearn.linear_model import LogisticRegressionimport numpy as npimport matplotlib.pyplot as pltfrom sklearn.preprocessing import PolynomialFeaturesfrom sklearn.pipeline import Pipelinefrom sklearn.preprocessing import StandardScalerplt.rcParams['font.sans-serif'] = ['SimHei'] # 用来正常显示中文标签plt.rcParams['axes.unicode_minus'] = False # 用来正常显示负号# 数据格式：成绩1,成绩2,是否被录取（1代表被录取，0代表未被录取）# 函数定义def plot_decision_boundary(model, axis): x0, x1 = np.meshgrid( np.linspace(axis[0], axis[1], int((axis[1] - axis[0]) * 100)).reshape(-1, 1), np.linspace(axis[2], axis[3], int((axis[3] - axis[2]) * 100)).reshape(-1, 1), ) X_new = np.c_[x0.ravel(), x1.ravel()] y_predict = model.predict(X_new) zz = y_predict.reshape(x0.shape) custom_cmap = ListedColormap(['#EF9A9A', '#FFF59D', '#90CAF9']) plt.contourf(x0, x1, zz, cmap=custom_cmap)def PolynomialLogisticRegression(degree): return Pipeline([ ('poly', PolynomialFeatures(degree=degree)), ('std_scaler', StandardScaler()), ('log_reg', LogisticRegression()) ])# 读取数据data = np.loadtxt('ex2data1.txt', delimiter=',')data_X = data[:, 0:2]data_y = data[:, 2]# 数据分割X_train, X_test, y_train, y_test = train_test_split(data_X, data_y, random_state=666)# 训练模型poly_log_reg = PolynomialLogisticRegression(degree=2)poly_log_reg.fit(X_train, y_train)# 结果可视化plot_decision_boundary(poly_log_reg, axis=[0, 100, 0, 100])plt.scatter(data_X[data_y == 0, 0], data_X[data_y == 0, 1], color='red')plt.scatter(data_X[data_y == 1, 0], data_X[data_y == 1, 1], color='blue')plt.xlabel('成绩1')plt.ylabel('成绩2')plt.title('两门课程成绩与是否录取的关系')plt.show()# 模型测试print(poly_log_reg.score(X_train, y_train))print(poly_log_reg.score(X_test, y_test)) 输出如下： 120.920.92 ex2data2.txt处理作散点图可知，这组数据的决策边界绝对是非线性的，所以直接引入多项式特征对ex2data2.txt中的数据进行逻辑回归。 代码实现如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465""" 对ex2data2.txt中的数据进行逻辑回归（引入多项式特征）"""from sklearn.model_selection import train_test_splitfrom matplotlib.colors import ListedColormapfrom sklearn.linear_model import LogisticRegressionimport numpy as npimport matplotlib.pyplot as pltfrom sklearn.preprocessing import PolynomialFeaturesfrom sklearn.pipeline import Pipelinefrom sklearn.preprocessing import StandardScalerplt.rcParams['font.sans-serif'] = ['SimHei'] # 用来正常显示中文标签plt.rcParams['axes.unicode_minus'] = False # 用来正常显示负号# 数据格式：成绩1,成绩2,是否被录取（1代表被录取，0代表未被录取）# 函数定义def plot_decision_boundary(model, axis): x0, x1 = np.meshgrid( np.linspace(axis[0], axis[1], int((axis[1] - axis[0]) * 100)).reshape(-1, 1), np.linspace(axis[2], axis[3], int((axis[3] - axis[2]) * 100)).reshape(-1, 1), ) X_new = np.c_[x0.ravel(), x1.ravel()] y_predict = model.predict(X_new) zz = y_predict.reshape(x0.shape) custom_cmap = ListedColormap(['#EF9A9A', '#FFF59D', '#90CAF9']) plt.contourf(x0, x1, zz, cmap=custom_cmap)def PolynomialLogisticRegression(degree): return Pipeline([ ('poly', PolynomialFeatures(degree=degree)), ('std_scaler', StandardScaler()), ('log_reg', LogisticRegression()) ])# 读取数据data = np.loadtxt('ex2data2.txt', delimiter=',')data_X = data[:, 0:2]data_y = data[:, 2]# 数据分割X_train, X_test, y_train, y_test = train_test_split(data_X, data_y, random_state=666)# 训练模型poly_log_reg = PolynomialLogisticRegression(degree=2)poly_log_reg.fit(X_train, y_train)# 结果可视化plot_decision_boundary(poly_log_reg, axis=[-1, 1, -1, 1])plt.scatter(data_X[data_y == 0, 0], data_X[data_y == 0, 1], color='red')plt.scatter(data_X[data_y == 1, 0], data_X[data_y == 1, 1], color='blue')plt.xlabel('成绩1')plt.ylabel('成绩2')plt.title('两门课程成绩与是否录取的关系')plt.show()# 模型测试print(poly_log_reg.score(X_train, y_train))print(poly_log_reg.score(X_test, y_test)) 输出结果如下： 由图可知，分类结果较好。 120.79545454545454540.9 两份数据ex2data1.txt12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910034.62365962451697,78.0246928153624,030.28671076822607,43.89499752400101,035.84740876993872,72.90219802708364,060.18259938620976,86.30855209546826,179.0327360507101,75.3443764369103,145.08327747668339,56.3163717815305,061.10666453684766,96.51142588489624,175.02474556738889,46.55401354116538,176.09878670226257,87.42056971926803,184.43281996120035,43.53339331072109,195.86155507093572,38.22527805795094,075.01365838958247,30.60326323428011,082.30705337399482,76.48196330235604,169.36458875970939,97.71869196188608,139.53833914367223,76.03681085115882,053.9710521485623,89.20735013750205,169.07014406283025,52.74046973016765,167.94685547711617,46.67857410673128,070.66150955499435,92.92713789364831,176.97878372747498,47.57596364975532,167.37202754570876,42.83843832029179,089.67677575072079,65.79936592745237,150.534788289883,48.85581152764205,034.21206097786789,44.20952859866288,077.9240914545704,68.9723599933059,162.27101367004632,69.95445795447587,180.1901807509566,44.82162893218353,193.114388797442,38.80067033713209,061.83020602312595,50.25610789244621,038.78580379679423,64.99568095539578,061.379289447425,72.80788731317097,185.40451939411645,57.05198397627122,152.10797973193984,63.12762376881715,052.04540476831827,69.43286012045222,140.23689373545111,71.16774802184875,054.63510555424817,52.21388588061123,033.91550010906887,98.86943574220611,064.17698887494485,80.90806058670817,174.78925295941542,41.57341522824434,034.1836400264419,75.2377203360134,083.90239366249155,56.30804621605327,151.54772026906181,46.85629026349976,094.44336776917852,65.56892160559052,182.36875375713919,40.61825515970618,051.04775177128865,45.82270145776001,062.22267576120188,52.06099194836679,077.19303492601364,70.45820000180959,197.77159928000232,86.7278223300282,162.07306379667647,96.76882412413983,191.56497449807442,88.69629254546599,179.94481794066932,74.16311935043758,199.2725269292572,60.99903099844988,190.54671411399852,43.39060180650027,134.52451385320009,60.39634245837173,050.2864961189907,49.80453881323059,049.58667721632031,59.80895099453265,097.64563396007767,68.86157272420604,132.57720016809309,95.59854761387875,074.24869136721598,69.82457122657193,171.79646205863379,78.45356224515052,175.3956114656803,85.75993667331619,135.28611281526193,47.02051394723416,056.25381749711624,39.26147251058019,030.05882244669796,49.59297386723685,044.66826172480893,66.45008614558913,066.56089447242954,41.09209807936973,040.45755098375164,97.53518548909936,149.07256321908844,51.88321182073966,080.27957401466998,92.11606081344084,166.74671856944039,60.99139402740988,132.72283304060323,43.30717306430063,064.0393204150601,78.03168802018232,172.34649422579923,96.22759296761404,160.45788573918959,73.09499809758037,158.84095621726802,75.85844831279042,199.82785779692128,72.36925193383885,147.26426910848174,88.47586499559782,150.45815980285988,75.80985952982456,160.45555629271532,42.50840943572217,082.22666157785568,42.71987853716458,088.9138964166533,69.80378889835472,194.83450672430196,45.69430680250754,167.31925746917527,66.58935317747915,157.23870631569862,59.51428198012956,180.36675600171273,90.96014789746954,168.46852178591112,85.59430710452014,142.0754545384731,78.84478600148043,075.47770200533905,90.42453899753964,178.63542434898018,96.64742716885644,152.34800398794107,60.76950525602592,094.09433112516793,77.15910509073893,190.44855097096364,87.50879176484702,155.48216114069585,35.57070347228866,074.49269241843041,84.84513684930135,189.84580670720979,45.35828361091658,183.48916274498238,48.38028579728175,142.2617008099817,87.10385094025457,199.31500880510394,68.77540947206617,155.34001756003703,64.9319380069486,174.77589300092767,89.52981289513276,1 ex2data2.txt1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991001011021031041051061071081091101111121131141151161171180.051267,0.69956,1-0.092742,0.68494,1-0.21371,0.69225,1-0.375,0.50219,1-0.51325,0.46564,1-0.52477,0.2098,1-0.39804,0.034357,1-0.30588,-0.19225,10.016705,-0.40424,10.13191,-0.51389,10.38537,-0.56506,10.52938,-0.5212,10.63882,-0.24342,10.73675,-0.18494,10.54666,0.48757,10.322,0.5826,10.16647,0.53874,1-0.046659,0.81652,1-0.17339,0.69956,1-0.47869,0.63377,1-0.60541,0.59722,1-0.62846,0.33406,1-0.59389,0.005117,1-0.42108,-0.27266,1-0.11578,-0.39693,10.20104,-0.60161,10.46601,-0.53582,10.67339,-0.53582,1-0.13882,0.54605,1-0.29435,0.77997,1-0.26555,0.96272,1-0.16187,0.8019,1-0.17339,0.64839,1-0.28283,0.47295,1-0.36348,0.31213,1-0.30012,0.027047,1-0.23675,-0.21418,1-0.06394,-0.18494,10.062788,-0.16301,10.22984,-0.41155,10.2932,-0.2288,10.48329,-0.18494,10.64459,-0.14108,10.46025,0.012427,10.6273,0.15863,10.57546,0.26827,10.72523,0.44371,10.22408,0.52412,10.44297,0.67032,10.322,0.69225,10.13767,0.57529,1-0.0063364,0.39985,1-0.092742,0.55336,1-0.20795,0.35599,1-0.20795,0.17325,1-0.43836,0.21711,1-0.21947,-0.016813,1-0.13882,-0.27266,10.18376,0.93348,00.22408,0.77997,00.29896,0.61915,00.50634,0.75804,00.61578,0.7288,00.60426,0.59722,00.76555,0.50219,00.92684,0.3633,00.82316,0.27558,00.96141,0.085526,00.93836,0.012427,00.86348,-0.082602,00.89804,-0.20687,00.85196,-0.36769,00.82892,-0.5212,00.79435,-0.55775,00.59274,-0.7405,00.51786,-0.5943,00.46601,-0.41886,00.35081,-0.57968,00.28744,-0.76974,00.085829,-0.75512,00.14919,-0.57968,0-0.13306,-0.4481,0-0.40956,-0.41155,0-0.39228,-0.25804,0-0.74366,-0.25804,0-0.69758,0.041667,0-0.75518,0.2902,0-0.69758,0.68494,0-0.4038,0.70687,0-0.38076,0.91886,0-0.50749,0.90424,0-0.54781,0.70687,00.10311,0.77997,00.057028,0.91886,0-0.10426,0.99196,0-0.081221,1.1089,00.28744,1.087,00.39689,0.82383,00.63882,0.88962,00.82316,0.66301,00.67339,0.64108,01.0709,0.10015,0-0.046659,-0.57968,0-0.23675,-0.63816,0-0.15035,-0.36769,0-0.49021,-0.3019,0-0.46717,-0.13377,0-0.28859,-0.060673,0-0.61118,-0.067982,0-0.66302,-0.21418,0-0.59965,-0.41886,0-0.72638,-0.082602,0-0.83007,0.31213,0-0.72062,0.53874,0-0.59389,0.49488,0-0.48445,0.99927,0-0.0063364,0.99927,00.63265,-0.030612,0 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>机器学习</tag>
         <tag>python</tag>
+        <tag>机器学习</tag>
         <tag>sklearn</tag>
         <tag>逻辑回归</tag>
       </tags>
@@ -1175,8 +1215,8 @@
     <url>%2F2019%2F10%2F19%2Fsklearn%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B%2F</url>
     <content type="text"><![CDATA[题目要求建立房价预测模型：利用ex1data1.txt（单特征）和ex1data2.txt（多特征）中的数据，进行线性回归和预测。 作散点图可知，数据大致符合线性关系，故暂不研究其他形式的回归。 两份数据放在最后。 单特征线性回归ex1data1.txt中的数据是单特征，作一个简单的线性回归即可：$y=ax+b$。 根据是否分割数据，产生两种方案：方案一，所有样本都用来训练和预测；方案二，一部分样本用来训练，一部分用来检验模型。 方案一对ex1data1.txt中的数据进行线性回归，所有样本都用来训练和预测。 代码实现如下： 123456789101112131415161718192021222324252627282930313233343536373839""" 对ex1data1.txt中的数据进行线性回归，所有样本都用来训练和预测"""import numpy as npimport matplotlib.pyplot as pltfrom sklearn.linear_model import LinearRegressionfrom sklearn.metrics import mean_squared_error, r2_scoreplt.rcParams['font.sans-serif'] = ['SimHei'] # 用来正常显示中文标签plt.rcParams['axes.unicode_minus'] = False # 用来正常显示负号# 数据格式：城市人口,食品经销商利润# 读取数据data = np.loadtxt('ex1data1.txt', delimiter=',')data_X = data[:, 0]data_y = data[:, 1]# 训练模型model = LinearRegression()model.fit(data_X.reshape([-1, 1]), data_y)# 利用模型进行预测y_predict = model.predict(data_X.reshape([-1, 1]))# 结果可视化plt.scatter(data_X, data_y, color='red')plt.plot(data_X, y_predict, color='blue', linewidth=3)plt.xlabel('城市人口')plt.ylabel('食品经销商利润')plt.title('线性回归——城市人口与食品经销商利润的关系')plt.show()# 模型参数print(model.coef_)print(model.intercept_)# MSEprint(mean_squared_error(data_y, y_predict))# R^2print(r2_score(data_y, y_predict)) 结果如下： 由下可知函数形式以及$R^2$为0.70 1234[1.19303364]-3.895780878311858.9539427519503580.7020315537841397 方案二对ex1data1.txt中的数据进行线性回归，部分样本用来训练，部分样本用来预测。 实现如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243""" 对ex1data1.txt中的数据进行线性回归，部分样本用来训练，部分样本用来预测"""import numpy as npimport matplotlib.pyplot as pltfrom sklearn.linear_model import LinearRegressionfrom sklearn.model_selection import train_test_splitfrom sklearn.metrics import mean_squared_error, r2_scoreplt.rcParams['font.sans-serif'] = ['SimHei'] # 用来正常显示中文标签plt.rcParams['axes.unicode_minus'] = False # 用来正常显示负号# 数据格式：城市人口,食品经销商利润# 读取数据data = np.loadtxt('ex1data1.txt', delimiter=',')data_X = data[:, 0]data_y = data[:, 1]# 数据分割X_train, X_test, y_train, y_test = train_test_split(data_X, data_y)# 训练模型model = LinearRegression()model.fit(X_train.reshape([-1, 1]), y_train)# 利用模型进行预测y_predict = model.predict(X_test.reshape([-1, 1]))# 结果可视化plt.scatter(X_test, y_test, color='red') # 测试样本plt.plot(X_test, y_predict, color='blue', linewidth=3)plt.xlabel('城市人口')plt.ylabel('食品经销商利润')plt.title('线性回归——城市人口与食品经销商利润的关系')plt.show()# 模型参数print(model.coef_)print(model.intercept_)# MSEprint(mean_squared_error(y_test, y_predict))# R^2print(r2_score(y_test, y_predict)) 结果如下： 由下可知函数形式以及$R^2$为0.80 1234[1.21063939]-4.1954819659450555.9943626670476170.8095125123727652 多特征线性回归ex1data2.txt中的数据是二个特征，作一个最简单的多元（在此为二元）线性回归即可：$y=a_1x_1+a_2x_2+b$。 对ex1data2.txt中的数据进行线性回归，所有样本都用来训练和预测。 代码实现如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243""" 对ex1data2.txt中的数据进行线性回归，所有样本都用来训练和预测"""import numpy as npimport matplotlib.pyplot as pltfrom sklearn.linear_model import LinearRegressionfrom mpl_toolkits.mplot3d import Axes3D # 不要去掉这个importfrom sklearn.metrics import mean_squared_error, r2_scoreplt.rcParams['font.sans-serif'] = ['SimHei'] # 用来正常显示中文标签plt.rcParams['axes.unicode_minus'] = False # 用来正常显示负号# 数据格式：城市人口,房间数目,房价# 读取数据data = np.loadtxt('ex1data2.txt', delimiter=',')data_X = data[:, 0:2]data_y = data[:, 2]# 训练模型model = LinearRegression()model.fit(data_X, data_y)# 利用模型进行预测y_predict = model.predict(data_X)# 结果可视化fig = plt.figure()ax = fig.gca(projection='3d')ax.scatter(data_X[:, 0], data_X[:, 1], data_y, color='red')ax.plot(data_X[:, 0], data_X[:, 1], y_predict, color='blue')ax.set_xlabel('城市人口')ax.set_ylabel('房间数目')ax.set_zlabel('房价')plt.title('线性回归——城市人口、房间数目与房价的关系')plt.show()# 模型参数print(model.coef_)print(model.intercept_)# MSEprint(mean_squared_error(data_y, y_predict))# R^2print(r2_score(data_y, y_predict)) 结果如下： 由下可知函数形式以及$R^2$为0.73 1234[ 139.21067402 -8738.01911233]89597.909542797484086560101.2056580.7329450180289141 两份数据ex1data1.txt123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596976.1101,17.5925.5277,9.13028.5186,13.6627.0032,11.8545.8598,6.82338.3829,11.8867.4764,4.34838.5781,126.4862,6.59875.0546,3.81665.7107,3.252214.164,15.5055.734,3.15518.4084,7.22585.6407,0.716185.3794,3.51296.3654,5.30485.1301,0.560776.4296,3.65187.0708,5.38936.1891,3.138620.27,21.7675.4901,4.2636.3261,5.18755.5649,3.082518.945,22.63812.828,13.50110.957,7.046713.176,14.69222.203,24.1475.2524,-1.226.5894,5.99669.2482,12.1345.8918,1.84958.2111,6.54267.9334,4.56238.0959,4.11645.6063,3.392812.836,10.1176.3534,5.49745.4069,0.556576.8825,3.911511.708,5.38545.7737,2.44067.8247,6.73187.0931,1.04635.0702,5.13375.8014,1.84411.7,8.00435.5416,1.01797.5402,6.75045.3077,1.83967.4239,4.28857.6031,4.99816.3328,1.42336.3589,-1.42116.2742,2.47565.6397,4.60429.3102,3.96249.4536,5.41418.8254,5.16945.1793,-0.7427921.279,17.92914.908,12.05418.959,17.0547.2182,4.88528.2951,5.744210.236,7.77545.4994,1.017320.341,20.99210.136,6.67997.3345,4.02596.0062,1.27847.2259,3.34115.0269,-2.68076.5479,0.296787.5386,3.88455.0365,5.701410.274,6.75265.1077,2.05765.7292,0.479535.1884,0.204216.3557,0.678619.7687,7.54356.5159,5.34368.5172,4.24159.1802,6.79816.002,0.926955.5204,0.1525.0594,2.82145.7077,1.84517.6366,4.29595.8707,7.20295.3054,1.98698.2934,0.1445413.394,9.05515.4369,0.61705 ex1data2.txt12345678910111213141516171819202122232425262728293031323334353637383940414243444546472104,3,3999001600,3,3299002400,3,3690001416,2,2320003000,4,5399001985,4,2999001534,3,3149001427,3,1989991380,3,2120001494,3,2425001940,4,2399992000,3,3470001890,3,3299994478,5,6999001268,3,2599002300,4,4499001320,2,2999001236,3,1999002609,4,4999983031,4,5990001767,3,2529001888,2,2550001604,3,2429001962,4,2599003890,3,5739001100,3,2499001458,3,4645002526,3,4690002200,3,4750002637,3,2999001839,2,3499001000,1,1699002040,4,3149003137,3,5799001811,4,2859001437,3,2499001239,3,2299002132,4,3450004215,4,5490002162,4,2870001664,2,3685002238,3,3299002567,4,3140001200,3,299000852,2,1799001852,4,2999001203,3,239500 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>机器学习</tag>
         <tag>python</tag>
+        <tag>机器学习</tag>
         <tag>sklearn</tag>
         <tag>线性回归</tag>
       </tags>
@@ -2304,8 +2344,8 @@
     <url>%2F2018%2F08%2F22%2FJAI%E4%B8%A2%E5%8C%85%E6%8E%89%E5%B8%A7%E5%A4%84%E7%90%86%2F</url>
     <content type="text"><![CDATA[问题时间戳停止变化/图像停止更新 描述本小白刚刚接触JAI，有很多不懂的地方。这次遇到问题是请教了YZ大哥（不知道年龄，暂时这么称呼），很感谢YZ大哥的耐心指导。因为我不仅不知道怎么调，连在哪里调也不知道╭(╯^╰)╮。以下是此次问题解决步骤，是YZ大哥跟我说怎么做，然后我照做，过程中又遇到问题，下边也给出了碰到的问题以及相应的解决方法。（8.21更） 刚刚又看了下JAI SDK Getting Started Guide，发现YZ讲的方法就是文档里那部分我觉得可以先跳过的内容，出现问题应该也是因为我没有按照文档进行配置…..可能我写的这个会有错误、遗漏、表述模糊，具体操作还可参加文档说明（8.22更） 4.4=》设置接收缓冲区 4.5=》设置中断调整 4.6=》打开巨型帧 4.7=》计算和设置包延迟 出现问题原因图像传输时丢包（掉帧） 解决方法使用 JAI Control Tool 采集图像 防止丢包如何使用JAI Control Tool 采集图像 如何查看是否丢包？ 除了通过搜索，也可以找到GigE Image Acquisition-Total missing packets其实观察刚开始采集图像时图片是否有撕裂的情况（出现水平黑线） 如果丢包 设置相机据包为8000左右（我是8196）如何设置相机数据包 设置相机数据包后用JAI Control Tool采图时黑屏，查看黑屏是是否有帧率如何查看帧率 有帧率则调整网卡巨型帧等如何找到相机连接的网卡网络和共享中心-以太网（就是相机那条网线）-属性-由勾选EBUS设置为不勾选EBUS 同时可以看到连接时使用的网卡 找到网卡右击-属性-高级-巨型帧（由关闭设为9KB MTU）接收缓冲区设为最大（我的最大只有512，只能这样了） 提醒：文档中指出当巨型帧打开的时候，相机数据包大小就可以大于1500bytes，但相机数据包必须小于巨型帧大小。 提醒：文档中指出典型的接收缓冲区最大值为2048，标准默认值为256，请结合自己的实际情况 是不是我的网卡太菜了，众筹给我买个好的可以吗？？？ 如果仍丢包则根据文档设置延时直至成功如何设置延时？参照文档设置延时（主要是帧率）我的Max Fps是2.00 ，Band Width是90% 修改最大帧率，调整带宽，点击calculate，点击ok。（文档指出当数据包大小或者像素格式改变时，数据包延迟都需要重新计算） 最后查看是否丢包 如有丢包可以再次调整数据包大小和延迟。另外有一点是，图像的传输是和你整个电脑的运行都有关系的，而不只是网卡和相机设置。]]></content>
       <tags>
-        <tag>Bug</tag>
         <tag>JAI</tag>
+        <tag>Bug</tag>
       </tags>
   </entry>
   <entry>
