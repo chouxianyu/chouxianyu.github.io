@@ -4,8 +4,134 @@
 
     
   <url>
+    <loc>https://chouxianyu.github.io/2020/12/25/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-5%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92Python%E5%AE%9E%E6%88%98/</loc>
+    <lastmod>2020-12-25T01:07:05.128Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-2.5线性回归Python实战</title>
+        <pubTime>2020-12-25T01:03:09.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>机器学习</tag>
+         
+        <tag>线性回归</tag>
+         
+        <tag>adgrad</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/12/24/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-1%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B/</loc>
+    <lastmod>2020-12-24T11:54:21.972Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-2.1线性回归模型</title>
+        <pubTime>2020-12-24T11:09:06.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>线性回归，梯度下降</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/12/24/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-2%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9E%8B%E3%80%81%E5%87%8F%E5%B0%8F%E8%AF%AF%E5%B7%AE/</loc>
+    <lastmod>2020-12-24T11:40:32.890Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-2.2如何选择模型、减小误差</title>
+        <pubTime>2020-12-24T11:09:41.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>Bias</tag>
+         
+        <tag>Variance</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/12/24/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-4%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81/</loc>
+    <lastmod>2020-12-24T11:34:54.806Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-2.4交叉验证</title>
+        <pubTime>2020-12-24T11:10:34.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>交叉验证</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/12/24/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-3%E6%AC%A0%E6%8B%9F%E5%90%88%E4%B8%8E%E8%BF%87%E6%8B%9F%E5%90%88/</loc>
+    <lastmod>2020-12-24T11:16:33.772Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-2.3欠拟合与过拟合</title>
+        <pubTime>2020-12-24T11:10:08.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>Bias</tag>
+         
+        <tag>Variance</tag>
+         
+        <tag>欠拟合</tag>
+         
+        <tag>过拟合</tag>
+         
+        <tag>正则化</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/12/22/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-1-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%AE%BA/</loc>
+    <lastmod>2020-12-22T03:13:10.560Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-1.机器学习概论</title>
+        <pubTime>2020-12-22T02:06:27.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chouxianyu.github.io/2020/11/26/%E6%B5%99%E6%B1%9F%E7%90%86%E5%B7%A5%E5%A4%A7%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF%E4%B8%93%E4%B8%9A%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0%E3%80%81%E8%AF%95%E9%A2%98%E3%80%81%E8%AF%BE%E4%BB%B6%E7%AD%89%E5%A4%8D%E4%B9%A0%E8%B5%84%E6%96%99%E5%A4%A7%E7%A4%BC%E5%8C%85/</loc>
-    <lastmod>2020-11-30T12:02:23.209Z</lastmod>
+    <lastmod>2020-12-12T02:24:38.609Z</lastmod>
     <data>
         <display>
         <title>浙江理工大学计算机科学与技术专业课程笔记、试题、课件等复习资料大礼包</title>
@@ -425,9 +551,9 @@
          
         <tag>图</tag>
          
-        <tag>连通图</tag>
-         
         <tag>连通分量</tag>
+         
+        <tag>连通图</tag>
          
         <tag>树</tag>
          
@@ -456,9 +582,9 @@
          
         <tag>图</tag>
          
-        <tag>连通图</tag>
-         
         <tag>连通分量</tag>
+         
+        <tag>连通图</tag>
          
          
            
@@ -1564,81 +1690,6 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2020/07/31/LeetCode445%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0II/</loc>
-    <lastmod>2020-08-01T02:38:41.168Z</lastmod>
-    <data>
-        <display>
-        <title>LeetCode445两数相加II</title>
-        <pubTime>2020-07-31T03:18:45.000Z</pubTime>
-        
-        <tag>LeetCode</tag>
-         
-        <tag>算法</tag>
-         
-        <tag>递归</tag>
-         
-        <tag>栈</tag>
-         
-        <tag>单向链表</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2020/07/30/LeetCode337%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/</loc>
-    <lastmod>2020-08-01T02:38:41.168Z</lastmod>
-    <data>
-        <display>
-        <title>LeetCode337打家劫舍III</title>
-        <pubTime>2020-07-30T03:19:52.000Z</pubTime>
-        
-        <tag>LeetCode</tag>
-         
-        <tag>算法</tag>
-         
-        <tag>二叉树</tag>
-         
-        <tag>递归</tag>
-         
-        <tag>DFS</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2020/07/26/LeetCode437%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8CIII/</loc>
-    <lastmod>2020-08-01T02:38:41.168Z</lastmod>
-    <data>
-        <display>
-        <title>LeetCode437路径总和III</title>
-        <pubTime>2020-07-26T05:40:41.000Z</pubTime>
-        
-        <tag>LeetCode</tag>
-         
-        <tag>算法</tag>
-         
-        <tag>二叉树</tag>
-         
-        <tag>递归</tag>
-         
-        <tag>DFS</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://chouxianyu.github.io/2020/07/30/LeetCode637%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%B9%B3%E5%9D%87%E5%80%BC/</loc>
     <lastmod>2020-08-01T02:38:41.168Z</lastmod>
     <data>
@@ -1714,6 +1765,56 @@
 
     
   <url>
+    <loc>https://chouxianyu.github.io/2020/07/26/LeetCode437%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8CIII/</loc>
+    <lastmod>2020-08-01T02:38:41.168Z</lastmod>
+    <data>
+        <display>
+        <title>LeetCode437路径总和III</title>
+        <pubTime>2020-07-26T05:40:41.000Z</pubTime>
+        
+        <tag>LeetCode</tag>
+         
+        <tag>算法</tag>
+         
+        <tag>二叉树</tag>
+         
+        <tag>递归</tag>
+         
+        <tag>DFS</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/07/31/LeetCode445%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0II/</loc>
+    <lastmod>2020-08-01T02:38:41.168Z</lastmod>
+    <data>
+        <display>
+        <title>LeetCode445两数相加II</title>
+        <pubTime>2020-07-31T03:18:45.000Z</pubTime>
+        
+        <tag>LeetCode</tag>
+         
+        <tag>算法</tag>
+         
+        <tag>递归</tag>
+         
+        <tag>栈</tag>
+         
+        <tag>单向链表</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chouxianyu.github.io/2020/07/30/LeetCode19%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9/</loc>
     <lastmod>2020-08-01T02:38:41.168Z</lastmod>
     <data>
@@ -1739,33 +1840,12 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2020/07/31/LeetCode328%E5%A5%87%E5%81%B6%E9%93%BE%E8%A1%A8/</loc>
-    <lastmod>2020-08-01T02:38:41.167Z</lastmod>
+    <loc>https://chouxianyu.github.io/2020/07/30/LeetCode337%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/</loc>
+    <lastmod>2020-08-01T02:38:41.168Z</lastmod>
     <data>
         <display>
-        <title>LeetCode328奇偶链表</title>
-        <pubTime>2020-07-31T15:21:02.000Z</pubTime>
-        
-        <tag>LeetCode</tag>
-         
-        <tag>算法</tag>
-         
-        <tag>单向链表</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2020/07/27/LeetCode404%E5%B7%A6%E5%8F%B6%E5%AD%90%E4%B9%8B%E5%92%8C/</loc>
-    <lastmod>2020-08-01T02:38:41.167Z</lastmod>
-    <data>
-        <display>
-        <title>LeetCode404左叶子之和</title>
-        <pubTime>2020-07-27T02:13:34.000Z</pubTime>
+        <title>LeetCode337打家劫舍III</title>
+        <pubTime>2020-07-30T03:19:52.000Z</pubTime>
         
         <tag>LeetCode</tag>
          
@@ -1774,6 +1854,8 @@
         <tag>二叉树</tag>
          
         <tag>递归</tag>
+         
+        <tag>DFS</tag>
          
          
            
@@ -1808,22 +1890,66 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2020/07/31/LeetCode234%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/</loc>
+    <loc>https://chouxianyu.github.io/2020/07/12/LeetCode144%E4%BA%8C%E5%8F%89%E6%A0%91%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86/</loc>
     <lastmod>2020-08-01T02:38:41.167Z</lastmod>
     <data>
         <display>
-        <title>LeetCode234回文链表</title>
-        <pubTime>2020-07-31T05:45:41.000Z</pubTime>
+        <title>LeetCode144二叉树前序遍历</title>
+        <pubTime>2020-07-12T15:40:38.000Z</pubTime>
         
         <tag>LeetCode</tag>
          
         <tag>算法</tag>
          
+        <tag>二叉树</tag>
+         
         <tag>递归</tag>
          
-        <tag>单向链表</tag>
+        <tag>栈</tag>
          
-        <tag>双指针</tag>
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/07/27/LeetCode404%E5%B7%A6%E5%8F%B6%E5%AD%90%E4%B9%8B%E5%92%8C/</loc>
+    <lastmod>2020-08-01T02:38:41.167Z</lastmod>
+    <data>
+        <display>
+        <title>LeetCode404左叶子之和</title>
+        <pubTime>2020-07-27T02:13:34.000Z</pubTime>
+        
+        <tag>LeetCode</tag>
+         
+        <tag>算法</tag>
+         
+        <tag>二叉树</tag>
+         
+        <tag>递归</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/07/31/LeetCode328%E5%A5%87%E5%81%B6%E9%93%BE%E8%A1%A8/</loc>
+    <lastmod>2020-08-01T02:38:41.167Z</lastmod>
+    <data>
+        <display>
+        <title>LeetCode328奇偶链表</title>
+        <pubTime>2020-07-31T15:21:02.000Z</pubTime>
+        
+        <tag>LeetCode</tag>
+         
+        <tag>算法</tag>
+         
+        <tag>单向链表</tag>
          
          
            
@@ -1856,31 +1982,6 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2020/07/12/LeetCode144%E4%BA%8C%E5%8F%89%E6%A0%91%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86/</loc>
-    <lastmod>2020-08-01T02:38:41.167Z</lastmod>
-    <data>
-        <display>
-        <title>LeetCode144二叉树前序遍历</title>
-        <pubTime>2020-07-12T15:40:38.000Z</pubTime>
-        
-        <tag>LeetCode</tag>
-         
-        <tag>算法</tag>
-         
-        <tag>二叉树</tag>
-         
-        <tag>递归</tag>
-         
-        <tag>栈</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://chouxianyu.github.io/2020/07/30/LeetCode24%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/</loc>
     <lastmod>2020-08-01T02:38:41.167Z</lastmod>
     <data>
@@ -1904,12 +2005,37 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2020/07/25/LeetCode110%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
+    <loc>https://chouxianyu.github.io/2020/07/31/LeetCode234%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/</loc>
+    <lastmod>2020-08-01T02:38:41.167Z</lastmod>
+    <data>
+        <display>
+        <title>LeetCode234回文链表</title>
+        <pubTime>2020-07-31T05:45:41.000Z</pubTime>
+        
+        <tag>LeetCode</tag>
+         
+        <tag>算法</tag>
+         
+        <tag>递归</tag>
+         
+        <tag>单向链表</tag>
+         
+        <tag>双指针</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/07/24/LeetCode102%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/</loc>
     <lastmod>2020-08-01T02:38:41.161Z</lastmod>
     <data>
         <display>
-        <title>LeetCode110平衡二叉树</title>
-        <pubTime>2020-07-25T03:14:05.000Z</pubTime>
+        <title>LeetCode102二叉树层次遍历</title>
+        <pubTime>2020-07-24T14:39:14.000Z</pubTime>
         
         <tag>LeetCode</tag>
          
@@ -1921,6 +2047,10 @@
          
         <tag>DFS</tag>
          
+        <tag>队列</tag>
+         
+        <tag>BFS</tag>
+         
          
            
         </display>
@@ -1929,12 +2059,12 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2020/07/26/LeetCode101%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
+    <loc>https://chouxianyu.github.io/2020/07/25/LeetCode110%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
     <lastmod>2020-08-01T02:38:41.161Z</lastmod>
     <data>
         <display>
-        <title>LeetCode101对称二叉树</title>
-        <pubTime>2020-07-26T06:36:56.000Z</pubTime>
+        <title>LeetCode110平衡二叉树</title>
+        <pubTime>2020-07-25T03:14:05.000Z</pubTime>
         
         <tag>LeetCode</tag>
          
@@ -1981,12 +2111,12 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2020/07/24/LeetCode102%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/</loc>
+    <loc>https://chouxianyu.github.io/2020/07/26/LeetCode101%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
     <lastmod>2020-08-01T02:38:41.161Z</lastmod>
     <data>
         <display>
-        <title>LeetCode102二叉树层次遍历</title>
-        <pubTime>2020-07-24T14:39:14.000Z</pubTime>
+        <title>LeetCode101对称二叉树</title>
+        <pubTime>2020-07-26T06:36:56.000Z</pubTime>
         
         <tag>LeetCode</tag>
          
@@ -1997,10 +2127,6 @@
         <tag>递归</tag>
          
         <tag>DFS</tag>
-         
-        <tag>队列</tag>
-         
-        <tag>BFS</tag>
          
          
            
@@ -2017,6 +2143,8 @@
         <title>JUnit白盒测试之基本路径测试：称重3次找到假球</title>
         <pubTime>2020-04-07T05:08:52.000Z</pubTime>
         
+        <tag>Java</tag>
+         
         <tag>软件测试</tag>
          
         <tag>白盒测试</tag>
@@ -2024,8 +2152,6 @@
         <tag>基本路径测试</tag>
          
         <tag>JUnit</tag>
-         
-        <tag>Java</tag>
          
          
            
