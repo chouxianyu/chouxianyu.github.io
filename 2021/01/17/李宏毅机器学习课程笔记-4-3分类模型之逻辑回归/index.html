@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,线性回归,逻辑回归,分类,Softmax,特征变换,神经网络," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="臭咸鱼的缺氧瓶" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="逻辑回归假设训练集如下，有2个类别$C_1$和$C_2$，表格中的每列为一个样本。 例如，第一列表示样本$x^1$的类别为$C_1$，所以它的标签$\hat y^1$是1。     $x^1$ $x^2$ $x^2$ $\dots$ $x^N$     $C_1$ $C_1$ $C_2$ $\dots$ $C_1$   $\hat y^1=1$ $\hat y^2=1$ $\hat y^3=0$">
+<meta name="keywords" content="机器学习,线性回归,逻辑回归,分类,Softmax,特征变换,神经网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="李宏毅机器学习课程笔记-4.3分类模型之逻辑回归">
+<meta property="og:url" content="https://chouxianyu.github.io/2021/01/17/李宏毅机器学习课程笔记-4-3分类模型之逻辑回归/index.html">
+<meta property="og:site_name" content="臭咸鱼的缺氧瓶">
+<meta property="og:description" content="逻辑回归假设训练集如下，有2个类别$C_1$和$C_2$，表格中的每列为一个样本。 例如，第一列表示样本$x^1$的类别为$C_1$，所以它的标签$\hat y^1$是1。     $x^1$ $x^2$ $x^2$ $\dots$ $x^N$     $C_1$ $C_1$ $C_2$ $\dots$ $C_1$   $\hat y^1=1$ $\hat y^2=1$ $\hat y^3=0$">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101070942LogisticRegressionVSLinearRegression.png">
+<meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071052LogisticRegressionWithSquareError.png">
+<meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071124CrossEntropyVSSquareError.png">
+<meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071155Multi-class%20Classification.png">
+<meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071220Softmax.png">
+<meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071300LimitationOfLogisticRegression1.png">
+<meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071327LimitationOfLogisticRegression2.png">
+<meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071357LimitationOfLogisticRegression3.png">
+<meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071425CascadingLogisticRegressionModels.png">
+<meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071449CascadingLogisticRegressionModels2.png">
+<meta property="og:updated_time" content="2021-01-17T06:52:51.280Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="李宏毅机器学习课程笔记-4.3分类模型之逻辑回归">
+<meta name="twitter:description" content="逻辑回归假设训练集如下，有2个类别$C_1$和$C_2$，表格中的每列为一个样本。 例如，第一列表示样本$x^1$的类别为$C_1$，所以它的标签$\hat y^1$是1。     $x^1$ $x^2$ $x^2$ $\dots$ $x^N$     $C_1$ $C_1$ $C_2$ $\dots$ $C_1$   $\hat y^1=1$ $\hat y^2=1$ $\hat y^3=0$">
+<meta name="twitter:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101070942LogisticRegressionVSLinearRegression.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chouxianyu.github.io/2021/01/17/李宏毅机器学习课程笔记-4-3分类模型之逻辑回归/"/>
+
+
+
+
+
+  <title>李宏毅机器学习课程笔记-4.3分类模型之逻辑回归 | 臭咸鱼的缺氧瓶</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5706c34297d4762ba8c6d799a54234b9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">臭咸鱼的缺氧瓶</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快给我氧气！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2021/01/17/李宏毅机器学习课程笔记-4-3分类模型之逻辑回归/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">李宏毅机器学习课程笔记-4.3分类模型之逻辑回归</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-01-17T14:31:35+08:00">
+                2021-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/01/17/李宏毅机器学习课程笔记-4-3分类模型之逻辑回归/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/01/17/李宏毅机器学习课程笔记-4-3分类模型之逻辑回归/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2021/01/17/李宏毅机器学习课程笔记-4-3分类模型之逻辑回归/" class="leancloud_visitors" data-flag-title="李宏毅机器学习课程笔记-4.3分类模型之逻辑回归">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,186 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  9 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h1><p>假设训练集如下，有2个类别$C_1$和$C_2$，表格中的每列为一个样本。</p>
+<p>例如，第一列表示样本$x^1$的类别为$C_1$，所以它的标签$\hat y^1$是1。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">$x^1$</th>
+<th style="text-align:center">$x^2$</th>
+<th style="text-align:center">$x^2$</th>
+<th style="text-align:center">$\dots$</th>
+<th style="text-align:center">$x^N$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$C_1$</td>
+<td style="text-align:center">$C_1$</td>
+<td style="text-align:center">$C_2$</td>
+<td style="text-align:center">$\dots$</td>
+<td style="text-align:center">$C_1$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\hat y^1=1$</td>
+<td style="text-align:center">$\hat y^2=1$</td>
+<td style="text-align:center">$\hat y^3=0$</td>
+<td style="text-align:center">$\dots$</td>
+<td style="text-align:center">$\hat y^N=1$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="模型定义"><a href="#模型定义" class="headerlink" title="模型定义"></a>模型定义</h2><p>在分类（Classification）一节中，我们要找到一个模型$P_{w,b}(C_1|x)$，如果$P_{w,b}(C_1|x)\geq0.5$，则$x$属于类别$C_1$，否则属于类别$C_2$。</p>
+<p>可知$P_{w,b}(C_1|x)=\sigma(z)$，其中$\sigma(z)=\frac{1}{1+e^{-z}}$（Sigmoid Function），$z=w\cdot x+b=\sum_{i=1}^Nw_ix_i+b$。</p>
+<p>最终我们找到了模型$f_{w,b}(x)=\sigma(\sum_{i=1}^Nw_ix_i+b)$，<strong>这其实就是逻辑回归（Logistic Regression）</strong>。</p>
+<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p><strong>从模型$f_{w,b}(x)=P_{w,b}(C_1|x)$中取样得到训练集的概率为</strong>：$L(w,b)=f_{w,b}(x^1)f_{w,b}(x^2)(1-f_{w,b}(x^3))\dots f_{w,b}(x^N)$（似然函数）。</p>
+<p>我们要求$w^<em>,b^</em>=arg\ max_{w,b}L(w,b)$，等同于$w^<em>,b^</em>=arg\ min_{w,b}-lnL(w,b)$（对数似然方程，Log-likelihood Equation）。</p>
+<p>而$-lnL(w,b)=-lnf_{w,b}(x^1)-lnf_{w,b}(x^2)-ln(1-f_{w,b}(x^3))\dots$，其中$lnf_{w,b}(x^n)=\hat y^nlnf_{w,b}(x^n)+(1-\hat y^n)ln(1-f(x^n))$，所以$-lnL(w,b)=\sum_{n=1}^N-[\hat y^nlnf_{w,b}(x^n)+(1-\hat y^n)ln(1-f_{w,b}(x^n))]$，式中$n$用来选择某个样本。</p>
+<p>假设有两个伯努利分布$p$和$q$，在$p$中有$p(x=1)=\hat y^n,p(x=0)=1-\hat y^n$，在$q$中有$q(x=1)=f(x^n),q(x=0)=1-f(x^n)$，则$p$和$q$的<strong>交叉熵</strong>（Cross Entropy，代表两个分布有多接近，两个分布一模一样时交叉熵为0）为$H(p,q)=-\sum_xp(x)ln(q(x))$。</p>
+<p>所以损失函数$L(f)=\sum_{n=1}^NC(f(x^n),\hat y^n)$，其中$C(f(x^n),\hat y^n)=-[\hat y^nlnf_{w,b}(x^n)+(1-\hat y^n)ln(1-f_{w,b}(x^n))]$，即损失函数为所有样本的$f(x^n)$与$\hat y^n$的交叉熵之和，式中$n$用来选择某个样本。</p>
+<h2 id="梯度"><a href="#梯度" class="headerlink" title="梯度"></a>梯度</h2><p>$\frac{-lnL(w,b)}{\partial w_i}=\sum_{n=1}^{N}-(\hat y^n-f_{w,b}(x^n))x_i^n$（推导过程省略，具体见<a href="https://www.bilibili.com/video/BV1JE411g7XF?p=11" target="_blank" rel="noopener">李宏毅机器学习视频</a>14分56秒），其中$i$用来选择数据的某个维度，$n$用来选择某个样本，$N$为数据集中样本个数。</p>
+<p>该式表明，预测值与label相差越大时，参数更新的步幅越大，这符合常理。</p>
+<h1 id="逻辑回归VS线性回归"><a href="#逻辑回归VS线性回归" class="headerlink" title="逻辑回归VS线性回归"></a>逻辑回归VS线性回归</h1><p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101070942LogisticRegressionVSLinearRegression.png" alt="LogisticRegressionVSLinearRegression" style="zoom: 33%;"></p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>逻辑回归模型比线性回归模型多了一个sigmoid函数；</p>
+<p>逻辑回归输出是[0,1]，而线性回归的输出是任意值。</p>
+<h2 id="损失函数-1"><a href="#损失函数-1" class="headerlink" title="损失函数"></a>损失函数</h2><p>逻辑回归模型使用的训练集中label的值必须是0或1，而线性回归模型训练集中label的值是真实值。</p>
+<p>图中线性回归损失函数中的$\frac{1}{2}$是为了方便求导</p>
+<p>这里有一个问题，为什么逻辑回归模型中不使用Square Error呢？这个问题的答案见下文</p>
+<h2 id="梯度-1"><a href="#梯度-1" class="headerlink" title="梯度"></a>梯度</h2><p>逻辑回归模型和线性回归模型的梯度公式一样</p>
+<h1 id="为什么逻辑回归模型中不使用Square-Error"><a href="#为什么逻辑回归模型中不使用Square-Error" class="headerlink" title="为什么逻辑回归模型中不使用Square Error"></a>为什么逻辑回归模型中不使用Square Error</h1><p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071052LogisticRegressionWithSquareError.png" alt="LogisticRegressionWithSquareError" style="zoom:33%;"></p>
+<p>由上图可知，当label的值为1时，不管预测值是0还是1，梯度都为0，当label值为0时也是这样。</p>
+<p>如下图所示，如果在逻辑回归中使用Square Error，当梯度接近0时，我们无法判断目前与最优解的距离，也就无法调节学习率；并且在大多数时候梯度都是接近0的，收敛速度会很慢。</p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071124CrossEntropyVSSquareError.png" alt="CrossEntropyVSSquareError" style="zoom:33%;"></p>
+<h1 id="判别模型VS生成模型"><a href="#判别模型VS生成模型" class="headerlink" title="判别模型VS生成模型"></a>判别模型VS生成模型</h1><h2 id="形式对比"><a href="#形式对比" class="headerlink" title="形式对比"></a>形式对比</h2><p>逻辑回归是一个判别模型（Discriminative Model），用正态分布描述后验概率（Posterior Probability）则是生成模型（Generative Model）。</p>
+<p><strong>如果生成模型中共用协方差矩阵，那两个模型/函数集其实是一样的，都是$P(C_1|x)=\sigma(w\cdot x+b)$。</strong></p>
+<p><strong>因为做了不同的假设，即使是使用同一个数据集、同一个模型，找到的函数是不一样的。</strong></p>
+<h2 id="优劣对比"><a href="#优劣对比" class="headerlink" title="优劣对比"></a>优劣对比</h2><ul>
+<li>如果现在数据很少，当假设了概率分布之后，就可以需要更少的数据用于训练，受数据影响较小；而判别模型就只根据数据来学习，易受数据影响，需要更多数据。</li>
+<li>当假设了概率分布之后，生成模型受数据影响较小，对噪声的鲁棒性更强。</li>
+<li>对于生成模型来讲，先验的和基于类别的概率（Priors and class-dependent probabilities），即$P(C_1)$和$P(C_2)$，可以从不同的来源估计得到。以语音识别为例，如果使用生成模型，可能并不需要声音的数据，网上的文本也可以用来估计某段文本出现的概率。</li>
+</ul>
+<h1 id="多分类（Multi-class-Classification）"><a href="#多分类（Multi-class-Classification）" class="headerlink" title="多分类（Multi-class Classification）"></a>多分类（Multi-class Classification）</h1><p>以3个类别$C_1$、$C_2$和$C_3$为例，分别对应参数$w^1,b_1$、$w^2,b_2$和$w^3,b_3$，即$z_1=w^1\cdot x+b_1$、$z_2=w^2\cdot x+b_2$和$z_3=w^3\cdot x+b_3$。</p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071155Multi-class%20Classification.png" alt="Multi-class Classification" style="zoom:33%;"></p>
+<h2 id="Softmax"><a href="#Softmax" class="headerlink" title="Softmax"></a>Softmax</h2><p>使用Softmax（$y_i=\frac{e^{z_i}}{\sum_{j=1}^3e^{z_j}}$），使得$0&lt;y_i&lt;1$以及$\sum_{i=1}^3y_i=1$，其中$y_i=P(C_i|x)$，即一个样本$x$属于类别$C_i$的概率不超过1，属于所有类别的概率之和为1。==Softmax公式中的z是一个参数吗？怎么确定或求得？==</p>
+<p>Softmax公式中为什么要用$e$？这是有原因/可解释的，可以看下PRML，也可以搜下最大熵。</p>
+<p>最大熵（Maximum Entropy）其实也是一种分类器，和逻辑回归一样，只是从<strong>信息论</strong>的角度来看待。</p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071220Softmax.png" alt="Softmax" style="zoom:33%;"></p>
+<h2 id="损失函数-2"><a href="#损失函数-2" class="headerlink" title="损失函数"></a>损失函数</h2><p>计算预测值$y$和$\hat y$的交叉熵，$y$和$\hat y$都是一个向量，即$-\sum_{i=1}^3\hat y^ilny^i$。</p>
+<p>这时需要使用one-hot编码：如果$x\in C_1$，则$y=\begin{bmatrix}1\\0\\0\end{bmatrix}$；如果$x\in C_2$，则$y=\begin{bmatrix}0\\1\\0\end{bmatrix}$；如果$x\in C_3$，则$y=\begin{bmatrix}0\\0\\1\end{bmatrix}$。</p>
+<h2 id="梯度-2"><a href="#梯度-2" class="headerlink" title="梯度"></a>梯度</h2><p>和逻辑回归的思路一样。</p>
+<h1 id="逻辑回归的局限"><a href="#逻辑回归的局限" class="headerlink" title="逻辑回归的局限"></a>逻辑回归的局限</h1><p>如下图所示，假如有2个类别，数据集中有4个样本，每个样本有2维特征，将这4个样本画在图上。</p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071300LimitationOfLogisticRegression1.png" alt="LimitationOfLogisticRegression1" style="zoom:33%;"></p>
+<p>如下图所示，假如用逻辑回归做分类，即$y=\sigma(z)=\sigma(w_1x_1+w_2x_2+b)$，我们找不到一个可以把“蓝色”样本和“红色”样本间隔开的函数。</p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071327LimitationOfLogisticRegression2.png" alt="LimitationOfLogisticRegression2" style="zoom:33%;"></p>
+<p>假如一定要用逻辑回归，那我们可以怎么办呢？我们可以尝试特征变换（Feature Transformation）。</p>
+<h1 id="特征变换（Feature-Transformation）"><a href="#特征变换（Feature-Transformation）" class="headerlink" title="特征变换（Feature Transformation）"></a>特征变换（Feature Transformation）</h1><p>在上面的例子中，我们并不能找到一个能将蓝色样本和红色样本间隔开的函数。</p>
+<p>如下图所示，我们可以把原始的数据/特征转换到另外一个空间，在这个新的特征空间中，找到一个函数将“蓝色”样本和“红色”样本间隔开。</p>
+<p>比如把原始的两维特征变换为与$\begin{bmatrix}0\\0\end{bmatrix}$和$\begin{bmatrix}1\\1\end{bmatrix}$的距离，在这个新的特征空间中，“蓝色”样本和“红色”样本是可分的。</p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071357LimitationOfLogisticRegression3.png" alt="LimitationOfLogisticRegression3" style="zoom:33%;"></p>
+<p>但有一个问题是，我们并不一定知道怎么进行特征变换。或者说我们想让机器自己学会特征变换，这可以通过级联逻辑回归模型实现，即把多个逻辑回归模型连接起来，如下图所示。</p>
+<p>下图中有3个逻辑回归模型，根据颜色称它们为小蓝、小绿和小红。小蓝和小绿的作用是分别将原始的2维特征变换为新的特征$x_1’$和$x_2’$，小红的作用是在新的特征空间$\begin{bmatrix}x_1’\\x_2’\end{bmatrix}$上将样本分类。</p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071425CascadingLogisticRegressionModels.png" alt="CascadingLogisticRegressionModels" style="zoom:33%;"></p>
+<p>如下图所示，举一个例子。小蓝的功能是（下图左上角），离$(1,0)$越远、离$(0,1)$越近，则$x_1’$越大；小蓝的功能是（下图左下角），离$(1,0)$越远、离$(0,1)$越近，则$x_2’$越小。小蓝和小绿将特征映射到新的特征空间$\begin{bmatrix}x_1’\\x_2’\end{bmatrix}$中，结果见下图右下角，然后小红就能找到一个函数将“蓝色”样本和“红色”样本间隔开。</p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201101071449CascadingLogisticRegressionModels2.png" alt="CascadingLogisticRegressionModels2" style="zoom:33%;"></p>
+<h1 id="神经网络（Neural-Network）"><a href="#神经网络（Neural-Network）" class="headerlink" title="神经网络（Neural Network）"></a>神经网络（Neural Network）</h1><p>假如把上例中的一个逻辑回归叫做神经元（Neuron），那我们就形成了一个神经网络。</p>
+<hr>
+<p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p>
+<p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p>
+<p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p>
+<p>微信公众号：<a href="">@臭咸鱼的快乐生活</a></p>
+<p>转载请注明出处，欢迎讨论和交流!</p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/线性回归/" rel="tag"># 线性回归</a>
+          
+            <a href="/tags/逻辑回归/" rel="tag"># 逻辑回归</a>
+          
+            <a href="/tags/分类/" rel="tag"># 分类</a>
+          
+            <a href="/tags/Softmax/" rel="tag"># Softmax</a>
+          
+            <a href="/tags/特征变换/" rel="tag"># 特征变换</a>
+          
+            <a href="/tags/神经网络/" rel="tag"># 神经网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/01/17/李宏毅机器学习课程笔记-4-2分类模型之概率生成模型/" rel="next" title="李宏毅机器学习课程笔记-4.2分类模型之概率生成模型">
+                <i class="fa fa-chevron-left"></i> 李宏毅机器学习课程笔记-4.2分类模型之概率生成模型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg"
+                alt="臭咸鱼" />
+            
+              <p class="site-author-name" itemprop="name">臭咸鱼</p>
+              <p class="site-description motion-element" itemprop="description">祝你天天开心啊！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">250</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">147</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://maluguang.com" title="Road Wide's Blog" target="_blank">Road Wide's Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/chouxianyu/" title="Chou Xianyu's CNBlog" target="_blank">Chou Xianyu's CNBlog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑回归"><span class="nav-number">1.</span> <span class="nav-text">逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型定义"><span class="nav-number">1.1.</span> <span class="nav-text">模型定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#损失函数"><span class="nav-number">1.2.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度"><span class="nav-number">1.3.</span> <span class="nav-text">梯度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑回归VS线性回归"><span class="nav-number">2.</span> <span class="nav-text">逻辑回归VS线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">2.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#损失函数-1"><span class="nav-number">2.2.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度-1"><span class="nav-number">2.3.</span> <span class="nav-text">梯度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么逻辑回归模型中不使用Square-Error"><span class="nav-number">3.</span> <span class="nav-text">为什么逻辑回归模型中不使用Square Error</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#判别模型VS生成模型"><span class="nav-number">4.</span> <span class="nav-text">判别模型VS生成模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#形式对比"><span class="nav-number">4.1.</span> <span class="nav-text">形式对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优劣对比"><span class="nav-number">4.2.</span> <span class="nav-text">优劣对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多分类（Multi-class-Classification）"><span class="nav-number">5.</span> <span class="nav-text">多分类（Multi-class Classification）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax"><span class="nav-number">5.1.</span> <span class="nav-text">Softmax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#损失函数-2"><span class="nav-number">5.2.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度-2"><span class="nav-number">5.3.</span> <span class="nav-text">梯度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑回归的局限"><span class="nav-number">6.</span> <span class="nav-text">逻辑回归的局限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特征变换（Feature-Transformation）"><span class="nav-number">7.</span> <span class="nav-text">特征变换（Feature Transformation）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络（Neural-Network）"><span class="nav-number">8.</span> <span class="nav-text">神经网络（Neural Network）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">臭咸鱼</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">212.8k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz',
+        appKey: 'Si7hBxIAVOGbu6Pot7HHaVBB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz", "Si7hBxIAVOGbu6Pot7HHaVBB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
