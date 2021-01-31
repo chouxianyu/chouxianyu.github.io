@@ -96,7 +96,7 @@
 <meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201108074342BackwardPass1.jpg">
 <meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201108075906BackwardPass3.jpg">
 <meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201108075902BackwardPass2.jpg">
-<meta property="og:updated_time" content="2021-01-27T03:52:15.446Z">
+<meta property="og:updated_time" content="2021-01-30T04:14:26.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="李宏毅机器学习课程笔记-5.3神经网络中的反向传播算法">
 <meta name="twitter:description" content="[TOC] 链式法则（Chain Rule） $z=h(y),y=g(x)\to\frac{dz}{dx}=\frac{dz}{dy}\frac{dy}{dx}$ $z=k(x,y),x=g(s),y=h(s)\to\frac{dz}{ds}=\frac{dz}{dx}\frac{dx}{ds}+\frac{dz}{dy}\frac{dy}{ds}$  反向传播算法（Backpropagation">
@@ -433,26 +433,26 @@
 </ul>
 <h1 id="反向传播算法（Backpropagation）"><a href="#反向传播算法（Backpropagation）" class="headerlink" title="反向传播算法（Backpropagation）"></a>反向传播算法（Backpropagation）</h1><h2 id="变量定义"><a href="#变量定义" class="headerlink" title="变量定义"></a>变量定义</h2><p>如下图所示，设神经网络的输入为$x^n$，该输入对应的label是$\hat y^n$，神经网络的参数是$\theta$，神经网络的输出是$y^n$。</p>
 <p>整个神经网络的Loss为$L(\theta)=\sum_{n=1}^{N}C^n(\theta)$。假设$\theta$中有一个参数$w$，那$\frac{\partial L(\theta)}{\partial w}=\sum^N_{n=1}\frac{\partial C^n(\theta)}{\partial w}$。</p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201104063357Backpropagation1.png" alt="Backpropagation1" style="zoom: 50%;"></p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201104063357Backpropagation1.png" alt="Backpropagation1"></p>
 <h2 id="一个神经元的情况"><a href="#一个神经元的情况" class="headerlink" title="一个神经元的情况"></a>一个神经元的情况</h2><p>如下图所示，$z=x_1w_1+x_2w_x+b$，根据链式法则可知$\frac{\partial C}{\partial w}=\frac{\partial z}{\partial w}\frac{\partial C}{\partial z}$，其中为所有参数$w$计算$\frac{\partial z}{\partial w}$是Forward Pass、为所有激活函数的输入$z$计算$\frac{\partial C}{\partial z}$是Backward Pass。</p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201104064536Backpropagation2.png" alt="Backpropagation2.png" style="zoom: 50%;"></p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201104064536Backpropagation2.png" alt="Backpropagation2.png"></p>
 <h2 id="Forward-Pass"><a href="#Forward-Pass" class="headerlink" title="Forward Pass"></a>Forward Pass</h2><p>Forward Pass是为所有参数$w$计算$\frac{\partial z}{\partial w}$，它的方向是从前往后算的，所以叫Forward Pass。</p>
 <p>以一个神经元为例，因为$z=x_1w_1+x_2w_x+b$，所以$\frac{\partial z}{\partial w_1}=x_1,\frac{\partial z}{\partial w_2}=x_2$，如下图所示。</p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201108071142ForwardPass1.jpg" alt="Forward Pass1" style="zoom:50%;"></p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201108071142ForwardPass1.jpg" alt="Forward Pass1"></p>
 <p>规律是：该权重乘以的那个输入的值。所以当有多个神经元时，如下图所示。</p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201108071151ForwardPass2.jpg" alt="Forward Pass2" style="zoom:50%;"></p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201108071151ForwardPass2.jpg" alt="Forward Pass2"></p>
 <h2 id="Backward-Pass"><a href="#Backward-Pass" class="headerlink" title="Backward Pass"></a>Backward Pass</h2><p>Backward Pass是为所有激活函数的输入$z$计算$\frac{\partial C}{\partial z}$，它的方向是从后往前算的，要先算出输出层的$\frac{\partial C}{\partial z}$，再往前计算其它神经元的$\frac{\partial C}{\partial z}$，所以叫Backward Pass。</p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201108074342BackwardPass1.jpg" alt="BackwardPass1" style="zoom:50%;"></p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201108074342BackwardPass1.jpg" alt="BackwardPass1"></p>
 <p>如上图所示，令$a=\sigma(z)$，根据链式法则，可知$\frac{\partial C}{\partial z}=\frac{\partial a}{\partial z}\frac{\partial C}{\partial a}$，其中$\frac{\partial a}{\partial z}=\sigma’(z)$是一个常数，因为在Forward Pass时$z$的值就已经确定了，而$\frac{\partial C}{\partial a}=\frac{\partial z’}{\partial a}\frac{\partial C}{\partial z’}+\frac{\partial z’’}{\partial a}\frac{\partial C}{\partial z’’}=w_3\frac{\partial C}{\partial z’}+w_4\frac{\partial C}{\partial z’’}$，所以$\frac{\partial C}{\partial z}=\sigma’(z)[w_3\frac{\partial C}{\partial z’}+w_4\frac{\partial C}{\partial z’’}]$。</p>
 <p>对于式子$\frac{\partial C}{\partial z}=\sigma’(z)[w_3\frac{\partial C}{\partial z’}+w_4\frac{\partial C}{\partial z’’}]$，我们可以发现两点：</p>
 <ol>
 <li><p>$\frac{\partial C}{\partial z}$的计算式是递归的，因为在计算$\frac{\partial C}{\partial z}$的时候需要计算$\frac{\partial C}{\partial z’}$和$\frac{\partial C}{\partial z’’}$。</p>
 <p> 如下图所示，输出层的$\frac{\partial C}{\partial z’}$和$\frac{\partial C}{\partial z’’}$是容易计算的。</p>
-<p> <img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201108075906BackwardPass3.jpg" alt="BackwardPass3" style="zoom:50%;"></p>
+<p> <img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201108075906BackwardPass3.jpg" alt="BackwardPass3"></p>
 </li>
 <li><p>$\frac{\partial C}{\partial z}$的计算式$\frac{\partial C}{\partial z}=\sigma’(z)[w_3\frac{\partial C}{\partial z’}+w_4\frac{\partial C}{\partial z’’}]$是一个神经元的形式</p>
 <p> 如下图所示，只不过没有嵌套sigmoid函数而是乘以一个常数$\sigma’(z)$，每个$\frac{\partial C}{\partial z}$都是一个神经元的形式，所以可以通过神经网络计算$\frac{\partial C}{\partial z}$。</p>
-<p> <img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201108075902BackwardPass2.jpg" alt="BackwardPass2" style="zoom:50%;"></p>
+<p> <img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201108075902BackwardPass2.jpg" alt="BackwardPass2"></p>
 </li>
 </ol>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
@@ -505,8 +505,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/01/27/李宏毅机器学习课程笔记-5-2为什么是深度神经网络/" rel="next" title="李宏毅机器学习课程笔记-5.2为什么是深度神经网络">
-                <i class="fa fa-chevron-left"></i> 李宏毅机器学习课程笔记-5.2为什么是深度神经网络
+              <a href="/2021/01/27/李宏毅机器学习课程笔记-5-2神经网络为什么要是深度的/" rel="next" title="李宏毅机器学习课程笔记-5.2神经网络为什么要是深度的">
+                <i class="fa fa-chevron-left"></i> 李宏毅机器学习课程笔记-5.2神经网络为什么要是深度的
               </a>
             
           </div>
@@ -607,7 +607,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">255</span>
+                  <span class="site-state-item-count">257</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -712,7 +712,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">218.2k</span>
+    <span title="Site words total count">220.4k</span>
   
 </div>
 

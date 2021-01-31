@@ -84,16 +84,16 @@
 <meta name="description" content="[TOC] 为什么是“深度”神经网络？问题与答案 矮胖的神经网络和高瘦的神经网络，假设它们参数量相同，哪一个更好呢？   2011年有一个实验，证明在参数量相当的情况下，高瘦的神经网络（即深度神经网络）的准确度更高，因为深度可以实现模块化。  只用一个神经元足够多的隐藏层，这个模型就包括了任意函数，那为什么不这么做呢？   这样确实可以包括任意函数，但实现的效率不高。   相关网址http://n">
 <meta name="keywords" content="机器学习,深度学习,神经网络">
 <meta property="og:type" content="article">
-<meta property="og:title" content="李宏毅机器学习课程笔记-5.2为什么是深度神经网络">
-<meta property="og:url" content="https://chouxianyu.github.io/2021/01/27/李宏毅机器学习课程笔记-5-2为什么是深度神经网络/index.html">
+<meta property="og:title" content="李宏毅机器学习课程笔记-5.2神经网络为什么要是深度的">
+<meta property="og:url" content="https://chouxianyu.github.io/2021/01/27/李宏毅机器学习课程笔记-5-2神经网络为什么要是深度的/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
 <meta property="og:description" content="[TOC] 为什么是“深度”神经网络？问题与答案 矮胖的神经网络和高瘦的神经网络，假设它们参数量相同，哪一个更好呢？   2011年有一个实验，证明在参数量相当的情况下，高瘦的神经网络（即深度神经网络）的准确度更高，因为深度可以实现模块化。  只用一个神经元足够多的隐藏层，这个模型就包括了任意函数，那为什么不这么做呢？   这样确实可以包括任意函数，但实现的效率不高。   相关网址http://n">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201110021709WhyDeepModularization1.png">
 <meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201110021748WhyDeepModularization2.png">
-<meta property="og:updated_time" content="2021-01-27T03:52:26.543Z">
+<meta property="og:updated_time" content="2021-01-29T05:48:02.576Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="李宏毅机器学习课程笔记-5.2为什么是深度神经网络">
+<meta name="twitter:title" content="李宏毅机器学习课程笔记-5.2神经网络为什么要是深度的">
 <meta name="twitter:description" content="[TOC] 为什么是“深度”神经网络？问题与答案 矮胖的神经网络和高瘦的神经网络，假设它们参数量相同，哪一个更好呢？   2011年有一个实验，证明在参数量相当的情况下，高瘦的神经网络（即深度神经网络）的准确度更高，因为深度可以实现模块化。  只用一个神经元足够多的隐藏层，这个模型就包括了任意函数，那为什么不这么做呢？   这样确实可以包括任意函数，但实现的效率不高。   相关网址http://n">
 <meta name="twitter:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201110021709WhyDeepModularization1.png">
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="https://chouxianyu.github.io/2021/01/27/李宏毅机器学习课程笔记-5-2为什么是深度神经网络/"/>
+  <link rel="canonical" href="https://chouxianyu.github.io/2021/01/27/李宏毅机器学习课程笔记-5-2神经网络为什么要是深度的/"/>
 
 
 
 
 
-  <title>李宏毅机器学习课程笔记-5.2为什么是深度神经网络 | 臭咸鱼的缺氧瓶</title>
+  <title>李宏毅机器学习课程笔记-5.2神经网络为什么要是深度的 | 臭咸鱼的缺氧瓶</title>
   
 
 
@@ -302,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2021/01/27/李宏毅机器学习课程笔记-5-2为什么是深度神经网络/">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2021/01/27/李宏毅机器学习课程笔记-5-2神经网络为什么要是深度的/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="臭咸鱼">
@@ -319,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">李宏毅机器学习课程笔记-5.2为什么是深度神经网络</h1>
+          <h1 class="post-title" itemprop="name headline">李宏毅机器学习课程笔记-5.2神经网络为什么要是深度的</h1>
         
 
         <div class="post-meta">
@@ -350,8 +350,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2021/01/27/李宏毅机器学习课程笔记-5-2为什么是深度神经网络/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2021/01/27/李宏毅机器学习课程笔记-5-2为什么是深度神经网络/" itemprop="commentCount"></span>
+                <a href="/2021/01/27/李宏毅机器学习课程笔记-5-2神经网络为什么要是深度的/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/01/27/李宏毅机器学习课程笔记-5-2神经网络为什么要是深度的/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -359,7 +359,7 @@
 
           
           
-             <span id="/2021/01/27/李宏毅机器学习课程笔记-5-2为什么是深度神经网络/" class="leancloud_visitors" data-flag-title="李宏毅机器学习课程笔记-5.2为什么是深度神经网络">
+             <span id="/2021/01/27/李宏毅机器学习课程笔记-5-2神经网络为什么要是深度的/" class="leancloud_visitors" data-flag-title="李宏毅机器学习课程笔记-5.2神经网络为什么要是深度的">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -603,7 +603,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">255</span>
+                  <span class="site-state-item-count">257</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -708,7 +708,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">218.2k</span>
+    <span title="Site words total count">220.4k</span>
   
 </div>
 
