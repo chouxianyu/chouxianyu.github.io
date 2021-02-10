@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="哈希函数、哈希表、哈希地址根据设定的哈希函数$H(key)$和处理冲突的方法将一组关键字映像到一个有限的连续的地址集（区间）上，并以关键字在地址集上的“像”作为记录在表中的存储位置，这种表便称为哈希表，这一映像过程称为哈希造表或散列，所得存储位置成哈希地址或散列地址。 冲突、同义词不同的关键字经哈希函数映像后求得到的哈希地址可能相同，即$key1\neq key2\ and \ H(key1)=H">
+<meta name="description" content="背景散列（hash）是常见的算法思想之一，在很多程序中都会有意无意地使用到。 若给出$N$个正整数，再给出$M$个正整数，问这M个数中的每个数分别是否在$N$个数出现过，其中$N,M\leq10^5$，且所有正整数均不超过$10^5$。 对这个问题，最直接的思路是：对每个欲查询的正整数$x$，遍历$N$个数，看是否有一个数与x相等。这种做法的时间复杂度是$O(NM)$，当$N$和$M$都很大（$1">
 <meta name="keywords" content="算法,哈希">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构-哈希">
 <meta property="og:url" content="https://chouxianyu.github.io/2020/08/07/数据结构-哈希/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="哈希函数、哈希表、哈希地址根据设定的哈希函数$H(key)$和处理冲突的方法将一组关键字映像到一个有限的连续的地址集（区间）上，并以关键字在地址集上的“像”作为记录在表中的存储位置，这种表便称为哈希表，这一映像过程称为哈希造表或散列，所得存储位置成哈希地址或散列地址。 冲突、同义词不同的关键字经哈希函数映像后求得到的哈希地址可能相同，即$key1\neq key2\ and \ H(key1)=H">
+<meta property="og:description" content="背景散列（hash）是常见的算法思想之一，在很多程序中都会有意无意地使用到。 若给出$N$个正整数，再给出$M$个正整数，问这M个数中的每个数分别是否在$N$个数出现过，其中$N,M\leq10^5$，且所有正整数均不超过$10^5$。 对这个问题，最直接的思路是：对每个欲查询的正整数$x$，遍历$N$个数，看是否有一个数与x相等。这种做法的时间复杂度是$O(NM)$，当$N$和$M$都很大（$1">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-07T15:25:05.134Z">
+<meta property="og:updated_time" content="2021-02-06T08:14:00.546Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构-哈希">
-<meta name="twitter:description" content="哈希函数、哈希表、哈希地址根据设定的哈希函数$H(key)$和处理冲突的方法将一组关键字映像到一个有限的连续的地址集（区间）上，并以关键字在地址集上的“像”作为记录在表中的存储位置，这种表便称为哈希表，这一映像过程称为哈希造表或散列，所得存储位置成哈希地址或散列地址。 冲突、同义词不同的关键字经哈希函数映像后求得到的哈希地址可能相同，即$key1\neq key2\ and \ H(key1)=H">
+<meta name="twitter:description" content="背景散列（hash）是常见的算法思想之一，在很多程序中都会有意无意地使用到。 若给出$N$个正整数，再给出$M$个正整数，问这M个数中的每个数分别是否在$N$个数出现过，其中$N,M\leq10^5$，且所有正整数均不超过$10^5$。 对这个问题，最直接的思路是：对每个欲查询的正整数$x$，遍历$N$个数，看是否有一个数与x相等。这种做法的时间复杂度是$O(NM)$，当$N$和$M$都很大（$1">
 
 
 
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  532 字
+                  1,452 字
                 </span>
               
 
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2 分
+                  5 分
                 </span>
               
             </div>
@@ -418,7 +418,17 @@
       
 
       
-        <h1 id="哈希函数、哈希表、哈希地址"><a href="#哈希函数、哈希表、哈希地址" class="headerlink" title="哈希函数、哈希表、哈希地址"></a>哈希函数、哈希表、哈希地址</h1><p>根据设定的<strong>哈希函数</strong>$H(key)$和处理冲突的方法将一组关键字映像到一个有限的连续的地址集（区间）上，并以关键字在地址集上的“像”作为记录在表中的存储位置，这种表便称为<strong>哈希表</strong>，这一映像过程称为哈希造表或散列，所得存储位置成<strong>哈希地址</strong>或散列地址。</p>
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>散列（hash）是常见的算法思想之一，在很多程序中都会有意无意地使用到。</p>
+<p>若给出$N$个正整数，再给出$M$个正整数，问这M个数中的每个数分别是否在$N$个数出现过，其中$N,M\leq10^5$，且所有正整数均不超过$10^5$。</p>
+<p>对这个问题，最直接的思路是：对每个欲查询的正整数$x$，遍历$N$个数，看是否有一个数与x相等。这种做法的时间复杂度是$O(NM)$，当$N$和$M$都很大（$10^5$级别）时，显然是无法承受的。</p>
+<p>不妨用空间换时间，即设定一个<code>bool</code>型数组<code>hashTable[100010]</code>，其中<code>hashTable[x]==true</code>表示正整数$x$在$n$个正整数中出现过。这样就可以在一开始读入$N$个正整数时就对<code>hashTable</code>进行赋值，于是对于$M$个欲查询的数，就能直接通过<code>hashTable</code>判断出每个数是否出现过。显然这种做法的时间复杂度为$O(M+N)$。</p>
+<p>同样的，如果题目要求统计次数而非是否出现，就把数组改成<code>int</code>型，这两个问题的解法都有一个特点，那就是直接把输入的数作为数组的下标来对这个数的性质进行统计（<strong>这种做法非常实用，请务必掌握</strong>）。这是一个很好的用空间换时间的策略，因为它将查询的复杂度降到了$O(1)$级别。</p>
+<p>但这个策略暂时还有一个问题——上面的题目中出现的每个数都不会超过$10^5$，因此直接作为数组下标是可行的，但是如果输入可能是$10^9$大小的整数，或者甚至是一个字符串，就不能将它们直接作为数组下标了。这时可以使用<strong>散列</strong>。</p>
+<h1 id="散列-哈希简介"><a href="#散列-哈希简介" class="headerlink" title="散列/哈希简介"></a>散列/哈希简介</h1><p>一般来说，可以精简地将散列定义为“<strong>将元素通过一个函数转换为整数，使得该正数可以尽量唯一地代表这个元素</strong>”，其中把这个转换函数称为<strong>散列函数H</strong>，也就是说，如果元素在转换前为<code>key</code>，那么转换后就是一个整数<code>H(key)</code>。</p>
+<p>对于<code>key</code>是整数的情况来说，<strong>常用的散列函数</strong>有直接定址法、平方取中法、除留余数法。</p>
+<p><code>H(key1)==H(key2)</code>，这种情况叫作<strong>冲突</strong>。<strong>常用的解决冲突的方法</strong>有线性探查法、平方探查法和链地址法，其中前两种都计算了新的hash值，又称为开放定址法。</p>
+<p>在写代码时，这种散列的功能可以用STL中的<code>map</code>代替。</p>
+<h1 id="哈希函数、哈希表、哈希地址"><a href="#哈希函数、哈希表、哈希地址" class="headerlink" title="哈希函数、哈希表、哈希地址"></a>哈希函数、哈希表、哈希地址</h1><p>根据设定的<strong>哈希函数</strong>$H(key)$和处理冲突的方法将一组关键字映像到一个有限的连续的地址集（区间）上，并以关键字在地址集上的“像”作为记录在表中的存储位置，这种表便称为<strong>哈希表</strong>，这一映像过程称为哈希造表或散列，所得存储位置成<strong>哈希地址</strong>或散列地址。</p>
 <h1 id="冲突、同义词"><a href="#冲突、同义词" class="headerlink" title="冲突、同义词"></a>冲突、同义词</h1><p>不同的关键字经哈希函数映像后求得到的哈希地址可能相同，即$key1\neq key2\ and \ H(key1)=H(key2)$，这就是<strong>冲突（collision）</strong>；具有相同哈希地址的关键字对该哈希函数来说就是<strong>同义词（synonym）</strong>。</p>
 <p>哈希函数选得合适可以减少冲突现象。</p>
 <p>一般情况下，哈希函数是一个压缩映像（关键字集合到地址集合的映像，而关键字集合的大小远大于地址集合），因此冲突只能尽可能地少而不能完全避免。</p>
@@ -446,6 +456,11 @@ H_i=(H(key)+d_i)\ MOD\ m \ ，\ i=1,2,\dots, k(k\leq m-1)</script><p>其中$H(ke
 <li>$d_i=1^2,-1^2,2^2,-2^2,3^2,\dots,\pm k^2,(k\leq m/2)$，称为二次探测再散列</li>
 <li>$d_i=伪随机数序列$，称为伪随机探测再散列</li>
 </ol>
+<h1 id="字符串hash"><a href="#字符串hash" class="headerlink" title="字符串hash"></a>字符串hash</h1><p>一个点$P$的坐标$(x,y)$可以用下面的散列函数进行处理：</p>
+<p>$H(P)=x\times Range+y$，这样对数据范围内的任意两个整点$P_1$和$P_2$，$H(P_1)$都不会等于$H(P_2)$。</p>
+<p><strong>字符串hash</strong>是指将一个字符串$S$转换为一个整数,使得该整数可以尽可能地唯一地代表字符串$S$。本节只讨论将字符串转换为唯一的整数。</p>
+<p>假设字符串$S$由大写字母$A \sim Z$构成。在这个假设下，可以把26个大写字母视为$0\sim25$，进而转换为二十六进制，再转换为十进制，可得一唯一整数。只是$S$的长度并不可太长。</p>
+<p>在上面的假设下，假如还可以由$a\sim z$组成，可以再把$a\sim z$对应为$26\sim51$，进而转换为五十二进制，再转换为十进制。</p>
 <hr>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p>
@@ -585,7 +600,7 @@ H_i=(H(key)+d_i)\ MOD\ m \ ，\ i=1,2,\dots, k(k\leq m-1)</script><p>其中$H(ke
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">259</span>
+                  <span class="site-state-item-count">262</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -598,7 +613,7 @@ H_i=(H(key)+d_i)\ MOD\ m \ ，\ i=1,2,\dots, k(k\leq m-1)</script><p>其中$H(ke
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">152</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -656,7 +671,7 @@ H_i=(H(key)+d_i)\ MOD\ m \ ，\ i=1,2,\dots, k(k\leq m-1)</script><p>其中$H(ke
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#哈希函数、哈希表、哈希地址"><span class="nav-number">1.</span> <span class="nav-text">哈希函数、哈希表、哈希地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#冲突、同义词"><span class="nav-number">2.</span> <span class="nav-text">冲突、同义词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#哈希函数的构造方法"><span class="nav-number">3.</span> <span class="nav-text">哈希函数的构造方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理冲突的方法"><span class="nav-number">4.</span> <span class="nav-text">处理冲突的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开放定址法"><span class="nav-number">4.0.1.</span> <span class="nav-text">开放定址法</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#散列-哈希简介"><span class="nav-number">2.</span> <span class="nav-text">散列/哈希简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#哈希函数、哈希表、哈希地址"><span class="nav-number">3.</span> <span class="nav-text">哈希函数、哈希表、哈希地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#冲突、同义词"><span class="nav-number">4.</span> <span class="nav-text">冲突、同义词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#哈希函数的构造方法"><span class="nav-number">5.</span> <span class="nav-text">哈希函数的构造方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理冲突的方法"><span class="nav-number">6.</span> <span class="nav-text">处理冲突的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开放定址法"><span class="nav-number">6.0.1.</span> <span class="nav-text">开放定址法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串hash"><span class="nav-number">7.</span> <span class="nav-text">字符串hash</span></a></li></ol></div>
             
 
           </div>
@@ -690,7 +705,7 @@ H_i=(H(key)+d_i)\ MOD\ m \ ，\ i=1,2,\dots, k(k\leq m-1)</script><p>其中$H(ke
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">222.3k</span>
+    <span title="Site words total count">218.5k</span>
   
 </div>
 

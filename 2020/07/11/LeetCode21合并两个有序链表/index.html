@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="题目链接https://leetcode-cn.com/problems/merge-two-sorted-lists/description/ 题目分析 两个链表已排序 新链表应该是两个链表拼接起来的，而非new出来的 链表中头结点的val应该是有意义的  题解一：迭代思路 先new一个无意义的头结点，方便建立新链表 同时遍历两个链表并拼接至新链表，每取一个结点就更新其所在链表的指针和新链表指针">
+<meta name="description" content="[toc] 题目介绍 题目链接   https://leetcode-cn.com/problems/merge-two-sorted-lists/description/  题目考点   链表，递归，迭代  题目难度   LeetCode Easy  题目大意   给出2个升序链表，请合并成1个新的升序链表。  输入   2个升序链表的头结点  输出   新的升序链表的头结点   题解一解题思路">
 <meta name="keywords" content="LeetCode,算法,递归,单向链表,迭代">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode21合并两个有序链表">
 <meta property="og:url" content="https://chouxianyu.github.io/2020/07/11/LeetCode21合并两个有序链表/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="题目链接https://leetcode-cn.com/problems/merge-two-sorted-lists/description/ 题目分析 两个链表已排序 新链表应该是两个链表拼接起来的，而非new出来的 链表中头结点的val应该是有意义的  题解一：迭代思路 先new一个无意义的头结点，方便建立新链表 同时遍历两个链表并拼接至新链表，每取一个结点就更新其所在链表的指针和新链表指针">
+<meta property="og:description" content="[toc] 题目介绍 题目链接   https://leetcode-cn.com/problems/merge-two-sorted-lists/description/  题目考点   链表，递归，迭代  题目难度   LeetCode Easy  题目大意   给出2个升序链表，请合并成1个新的升序链表。  输入   2个升序链表的头结点  输出   新的升序链表的头结点   题解一解题思路">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-01T02:55:09.817Z">
+<meta property="og:updated_time" content="2021-02-09T11:33:50.370Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode21合并两个有序链表">
-<meta name="twitter:description" content="题目链接https://leetcode-cn.com/problems/merge-two-sorted-lists/description/ 题目分析 两个链表已排序 新链表应该是两个链表拼接起来的，而非new出来的 链表中头结点的val应该是有意义的  题解一：迭代思路 先new一个无意义的头结点，方便建立新链表 同时遍历两个链表并拼接至新链表，每取一个结点就更新其所在链表的指针和新链表指针">
+<meta name="twitter:description" content="[toc] 题目介绍 题目链接   https://leetcode-cn.com/problems/merge-two-sorted-lists/description/  题目考点   链表，递归，迭代  题目难度   LeetCode Easy  题目大意   给出2个升序链表，请合并成1个新的升序链表。  输入   2个升序链表的头结点  输出   新的升序链表的头结点   题解一解题思路">
 
 
 
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  973 字
+                  566 字
                 </span>
               
 
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  4 分
+                  2 分
                 </span>
               
             </div>
@@ -418,48 +418,45 @@
       
 
       
-        <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode-cn.com/problems/merge-two-sorted-lists/description/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/merge-two-sorted-lists/description/</a></p>
-<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><ul>
-<li>两个链表已排序</li>
-<li>新链表应该是两个链表拼接起来的，而非new出来的</li>
-<li>链表中头结点的val应该是有意义的</li>
-</ul>
-<h1 id="题解一：迭代"><a href="#题解一：迭代" class="headerlink" title="题解一：迭代"></a>题解一：迭代</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
-<li>先new一个无意义的头结点，方便建立新链表</li>
-<li>同时遍历两个链表并拼接至新链表，每取一个结点就更新其所在链表的指针和新链表指针，直至两个链表中的某一个遍历结束</li>
-<li>将未遍历完的链表拼接至新链表</li>
-<li>delete无意义的头结点，释放内存，返回其next</li>
-</ol>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 21</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/merge-two-sorted-lists/description/</span></span><br><span class="line"><span class="comment">// Tags: Linked List Recursion Iteration</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode* next;</span><br><span class="line">    ListNode(): val(<span class="number">0</span>), next(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x): val(x), next(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x, ListNode* next): val(x), next(next)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeTwoLists</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定义头结点，方便建立新链表</span></span><br><span class="line">        ListNode *head = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</span><br><span class="line">        <span class="comment">// 遍历链表用的指针</span></span><br><span class="line">        ListNode *l3 = head;</span><br><span class="line">        <span class="comment">// 同时遍历两个链表并拼接值较小的结点到新链表中，同步更新链表指针，直至某个链表遍历结束</span></span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="literal">nullptr</span> &amp;&amp; l2 != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span> (l1-&gt;val &lt; l2-&gt;val)&#123;</span><br><span class="line">                l3-&gt;next = l1;</span><br><span class="line">                l1 = l1-&gt;next;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                l3-&gt;next = l2;</span><br><span class="line">                l2 = l2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            l3 = l3-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 将未遍历完的链表拼接至新链表</span></span><br><span class="line">        <span class="keyword">if</span>(l1!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            l3-&gt;next = l1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (l2 != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            l3-&gt;next = l2;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 释放无意义头结点并返回其next</span></span><br><span class="line">        l3 = head-&gt;next;</span><br><span class="line">        <span class="keyword">delete</span> head;</span><br><span class="line">        <span class="keyword">return</span> l3;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="题解二：递归"><a href="#题解二：递归" class="headerlink" title="题解二：递归"></a>题解二：递归</h1><h2 id="再思递归"><a href="#再思递归" class="headerlink" title="再思递归"></a>再思递归</h2><p>昨天也做了一个<a href="https://www.cnblogs.com/chouxianyu/p/13284071.html" target="_blank" rel="noopener">递归</a>题，今天这道题也可以用递归，我又有了一些关于递归的想法：</p>
-<ul>
-<li>递归表达式<ul>
-<li>其实就是函数，要求明确几点：输入、输出、功能、拼接公式，有时候还需要知道函数运行对各个变量的影响（比如昨天那道题从代码二修改至代码三）</li>
-</ul>
+        <p>[toc]</p>
+<h1 id="题目介绍"><a href="#题目介绍" class="headerlink" title="题目介绍"></a>题目介绍</h1><ul>
+<li><p>题目链接</p>
+<p>  <a href="https://leetcode-cn.com/problems/merge-two-sorted-lists/description/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/merge-two-sorted-lists/description/</a></p>
 </li>
-<li>递归出口（也包括边界）<ul>
-<li>一定要最小化</li>
-<li>要求能够处理递归表达式的已知情况，即输入取特定值（因题目而不同）时的情况</li>
-</ul>
+<li><p>题目考点</p>
+<p>  链表，递归，迭代</p>
+</li>
+<li><p>题目难度</p>
+<p>  LeetCode Easy</p>
+</li>
+<li><p>题目大意</p>
+<p>  给出2个升序链表，请合并成1个新的升序链表。</p>
+</li>
+<li><p>输入</p>
+<p>  2个升序链表的头结点</p>
+</li>
+<li><p>输出</p>
+<p>  新的升序链表的头结点</p>
 </li>
 </ul>
-<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><ul>
-<li><p>递归表达式</p>
-<ul>
-<li>输入：两个链表的头指针</li>
-<li>输出：两个链表拼接后的头指针</li>
-<li>功能：将两个链表拼接</li>
-</ul>
+<h1 id="题解一"><a href="#题解一" class="headerlink" title="题解一"></a>题解一</h1><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><ul>
+<li><p>递归法</p>
+<p>  取出当前2个链表中头结点较小的那个链表的头结点，然后通过递归将2个链表合并（<code>a-&gt;next</code>和<code>b</code>）。</p>
 </li>
-<li><p>递归出口</p>
-<p>  链表指针为null时。如果出口是next为null，这个出口并不是最小化的</p>
+<li><p>复杂度分析</p>
+<p>  假设3个链表分别有n和m个结点，则时间复杂度为$O(n+m)$、空间复杂度为$O(n+m)$。</p>
 </li>
 </ul>
-<p>递归函数实现的功能和思路为：</p>
-<p>递归函数拿到了两个链表A和B，取出两个链表中值较小的那个头结点N，然后通过递归拼接剩下的两个链表返回M，然后手动拼接N和M。</p>
-<p>思路模拟：</p>
-<p>假设是链表A的头结点N的值比较小，那我取出其头结点N后形成一个新的链表A1（不包括头结点），然后通过递归拼接A1和B返回M，然后手工拼接N和M（即<code>N-&gt;next=M;</code>）。</p>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 21</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/merge-two-sorted-lists/description/</span></span><br><span class="line"><span class="comment">// Tags: Linked List Recursion Iteration</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode* next;</span><br><span class="line">    ListNode(): val(<span class="number">0</span>), next(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x): val(x), next(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x, ListNode* next): val(x), next(next)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeTwoLists</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 边界和递归出口</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="literal">nullptr</span>==l1)&#123;<span class="keyword">return</span> l2;&#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="literal">nullptr</span>==l2)&#123;<span class="keyword">return</span> l1;&#125;</span><br><span class="line">        <span class="comment">// 递归表达式</span></span><br><span class="line">        <span class="keyword">if</span>(l1-&gt;val&lt;l2-&gt;val)&#123;</span><br><span class="line">            l1-&gt;next = mergeTwoLists(l1-&gt;next, l2);</span><br><span class="line">            <span class="keyword">return</span> l1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            l2-&gt;next = mergeTwoLists(l2-&gt;next, l1);</span><br><span class="line">            <span class="keyword">return</span> l2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeTwoLists</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 边界和递归出口</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="literal">nullptr</span>==l1)&#123;<span class="keyword">return</span> l2;&#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="literal">nullptr</span>==l2)&#123;<span class="keyword">return</span> l1;&#125;</span><br><span class="line">        <span class="comment">// 递归表达式</span></span><br><span class="line">        <span class="keyword">if</span>(l1-&gt;val&lt;l2-&gt;val)&#123;</span><br><span class="line">            l1-&gt;next = mergeTwoLists(l1-&gt;next, l2);</span><br><span class="line">            <span class="keyword">return</span> l1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            l2-&gt;next = mergeTwoLists(l2-&gt;next, l1);</span><br><span class="line">            <span class="keyword">return</span> l2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="题解二"><a href="#题解二" class="headerlink" title="题解二"></a>题解二</h1><h2 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h2><ul>
+<li><p>迭代法</p>
+<p>  用pre保存前1个结点，用2个指针分别遍历这2个链表每次取出值最小的结点，然后拼接成新的链表。当其中1个链表遍历结束，将另外1个链表直接拼接在新的链表的尾部。</p>
+</li>
+<li><p>复杂度分析</p>
+<p>  假设2个链表的长度分别是n和m，则最大时间复杂度为$O(n+m)$、空间复杂度为$O(1)$。</p>
+</li>
+</ul>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeTwoLists</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定义头结点，方便建立新链表</span></span><br><span class="line">        ListNode *head = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</span><br><span class="line">        <span class="comment">// 遍历链表用的指针</span></span><br><span class="line">        ListNode *l3 = head;</span><br><span class="line">        <span class="comment">// 同时遍历两个链表并拼接值较小的结点到新链表中，同步更新链表指针，直至某个链表遍历结束</span></span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="literal">nullptr</span> &amp;&amp; l2 != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span> (l1-&gt;val &lt; l2-&gt;val)&#123;</span><br><span class="line">                l3-&gt;next = l1;</span><br><span class="line">                l1 = l1-&gt;next;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                l3-&gt;next = l2;</span><br><span class="line">                l2 = l2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            l3 = l3-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 将未遍历完的链表拼接至新链表</span></span><br><span class="line">        <span class="keyword">if</span>(l1!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            l3-&gt;next = l1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (l2 != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            l3-&gt;next = l2;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 释放无意义头结点并返回其next</span></span><br><span class="line">        l3 = head-&gt;next;</span><br><span class="line">        <span class="keyword">delete</span> head;</span><br><span class="line">        <span class="keyword">return</span> l3;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p>
@@ -605,7 +602,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">259</span>
+                  <span class="site-state-item-count">262</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -618,7 +615,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">152</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -676,7 +673,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目链接"><span class="nav-number">1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目分析"><span class="nav-number">2.</span> <span class="nav-text">题目分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解一：迭代"><span class="nav-number">3.</span> <span class="nav-text">题解一：迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">3.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解二：递归"><span class="nav-number">4.</span> <span class="nav-text">题解二：递归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#再思递归"><span class="nav-number">4.1.</span> <span class="nav-text">再思递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路-1"><span class="nav-number">4.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">4.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目介绍"><span class="nav-number">1.</span> <span class="nav-text">题目介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解一"><span class="nav-number">2.</span> <span class="nav-text">题解一</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路"><span class="nav-number">2.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">2.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解二"><span class="nav-number">3.</span> <span class="nav-text">题解二</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路-1"><span class="nav-number">3.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">3.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -710,7 +707,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">222.3k</span>
+    <span title="Site words total count">218.5k</span>
   
 </div>
 

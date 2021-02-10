@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="LeetCode,算法,递归,单向链表,迭代," />
+  <meta name="keywords" content="LeetCode,算法,递归,单向链表,双指针,迭代," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="题目链接https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/ 题目分析 链表已排序  题解一：迭代思路遍历链表，如果发现重复元素就删除。 注意发现重复时遍历链表用的指针不要后移，不重复时才后移。 代码1234567891011121314151617181920212223242526272829">
-<meta name="keywords" content="LeetCode,算法,递归,单向链表,迭代">
+<meta name="description" content="[toc] 题目介绍 题目链接   https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/  题目考点   链表，递归，迭代  题目难度   LeetCode  题目大意   给出1个排好序的链表，删除其中的重复元素  输入   原链表  输出   删除重复元素后的链表   题解一解题思路 递归法">
+<meta name="keywords" content="LeetCode,算法,递归,单向链表,双指针,迭代">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode83删除排序链表中的重复元素">
 <meta property="og:url" content="https://chouxianyu.github.io/2020/07/12/LeetCode83删除排序链表中的重复元素/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="题目链接https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/ 题目分析 链表已排序  题解一：迭代思路遍历链表，如果发现重复元素就删除。 注意发现重复时遍历链表用的指针不要后移，不重复时才后移。 代码1234567891011121314151617181920212223242526272829">
+<meta property="og:description" content="[toc] 题目介绍 题目链接   https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/  题目考点   链表，递归，迭代  题目难度   LeetCode  题目大意   给出1个排好序的链表，删除其中的重复元素  输入   原链表  输出   删除重复元素后的链表   题解一解题思路 递归法">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-01T02:54:22.329Z">
+<meta property="og:updated_time" content="2021-02-10T04:37:21.717Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode83删除排序链表中的重复元素">
-<meta name="twitter:description" content="题目链接https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/ 题目分析 链表已排序  题解一：迭代思路遍历链表，如果发现重复元素就删除。 注意发现重复时遍历链表用的指针不要后移，不重复时才后移。 代码1234567891011121314151617181920212223242526272829">
+<meta name="twitter:description" content="[toc] 题目介绍 题目链接   https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/  题目考点   链表，递归，迭代  题目难度   LeetCode  题目大意   给出1个排好序的链表，删除其中的重复元素  输入   原链表  输出   删除重复元素后的链表   题解一解题思路 递归法">
 
 
 
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  516 字
+                  838 字
                 </span>
               
 
@@ -418,25 +418,67 @@
       
 
       
-        <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/" target="_blank" rel="noopener">https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/</a></p>
-<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><ul>
-<li>链表已排序</li>
+        <p>[toc]</p>
+<h1 id="题目介绍"><a href="#题目介绍" class="headerlink" title="题目介绍"></a>题目介绍</h1><ul>
+<li><p>题目链接</p>
+<p>  <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/" target="_blank" rel="noopener">https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/</a></p>
+</li>
+<li><p>题目考点</p>
+<p>  链表，递归，迭代</p>
+</li>
+<li><p>题目难度</p>
+<p>  LeetCode</p>
+</li>
+<li><p>题目大意</p>
+<p>  给出1个排好序的链表，删除其中的重复元素</p>
+</li>
+<li><p>输入</p>
+<p>  原链表</p>
+</li>
+<li><p>输出</p>
+<p>  删除重复元素后的链表</p>
+</li>
 </ul>
-<h1 id="题解一：迭代"><a href="#题解一：迭代" class="headerlink" title="题解一：迭代"></a>题解一：迭代</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>遍历链表，如果发现重复元素就删除。</p>
-<p>注意发现重复时遍历链表用的指针不要后移，不重复时才后移。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 83</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/description/</span></span><br><span class="line"><span class="comment">// Tags: Linked List Recursion Iteration</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode* next;</span><br><span class="line">    ListNode(): val(<span class="number">0</span>), next(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x): val(x), next(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x, ListNode* next) : val(x), next(next) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">deleteDuplicates</span><span class="params">(ListNode* head)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="literal">nullptr</span> == head)&#123;<span class="keyword">return</span> head;&#125;</span><br><span class="line">        ListNode *next = <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* ret = head; <span class="comment">// 用于返回</span></span><br><span class="line">        <span class="keyword">while</span>(head-&gt;next !=  <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            next = head-&gt;next;</span><br><span class="line">            <span class="comment">// 元素重复</span></span><br><span class="line">            <span class="keyword">if</span> (head-&gt;val == next-&gt;val)&#123;</span><br><span class="line">                head-&gt;next = next-&gt;next;</span><br><span class="line">                <span class="keyword">delete</span> next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 元素未重复</span></span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                head = next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="题解二：递归"><a href="#题解二：递归" class="headerlink" title="题解二：递归"></a>题解二：递归</h1><h2 id="关于递归"><a href="#关于递归" class="headerlink" title="关于递归"></a>关于递归</h2><p>又摸到一个递归函数套路（有可能仅针对这道题）：</p>
-<ol>
-<li>递归出口（包括边界）</li>
-<li>递归调用</li>
-<li>手工拼接？（这一步可能直接融合到第二步）</li>
-</ol>
-<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><ul>
-<li>递归函数的功能是将一个链表去重</li>
-<li>思路是取出head然后剩下的链表通过递归去重，然后手动去重</li>
+<h1 id="题解一"><a href="#题解一" class="headerlink" title="题解一"></a>题解一</h1><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><ul>
+<li><p>递归法</p>
+<p>  首先通过遍历删除与头结点同值的结点，后面1部分的链表通过递归删除其中的重复结点，然后将当前头结点与后面1部分链表（已删除重复结点）连接起来，最终返回当前头结点。</p>
+</li>
+<li><p>复杂度分析</p>
+<p>  假设链表有n个结点，则时间复杂度和空间复杂度都为$O(n)$。</p>
+</li>
 </ul>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 83</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/description/</span></span><br><span class="line"><span class="comment">// Tags: Linked List Recursion Iteration</span></span><br><span class="line"><span class="comment">// Difficulty: Easy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode* next;</span><br><span class="line">    ListNode(): val(<span class="number">0</span>), next(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x): val(x), next(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">    ListNode(<span class="keyword">int</span> x, ListNode* next) : val(x), next(next) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">deleteDuplicates</span><span class="params">(ListNode* head)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="literal">nullptr</span> == head || <span class="literal">nullptr</span> == head-&gt;next)&#123;</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 取出head然后剩下的链表通过递归去重</span></span><br><span class="line">        head-&gt;next = deleteDuplicates(head-&gt;next);</span><br><span class="line">        <span class="comment">// 手动去重</span></span><br><span class="line">        <span class="keyword">if</span>(head-&gt;val == head-&gt;next-&gt;val)&#123;</span><br><span class="line">            ListNode* ret = head-&gt;next;</span><br><span class="line">            <span class="keyword">delete</span> head;</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">deleteDuplicates</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        ListNode* cur=head;</span><br><span class="line">        <span class="keyword">while</span>(cur!=<span class="literal">nullptr</span> &amp;&amp; cur-&gt;val == head-&gt;val)</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        head-&gt;next = deleteDuplicates(cur);</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="题解二"><a href="#题解二" class="headerlink" title="题解二"></a>题解二</h1><h2 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h2><ul>
+<li><p>递归法</p>
+<p>  首先取出头结点，然后通过递归删除剩余链表中的重复结点并将其与头结点连接，然后判断当前头结点和第2个结点是否重复（如果重复则删除）。</p>
+</li>
+<li><p>复杂度分析</p>
+<p>  假设链表有n个结点，则时间复杂度和空间复杂度都为$O(n)$。</p>
+</li>
+</ul>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">deleteDuplicates</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        head-&gt;next = deleteDuplicates(head-&gt;next);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (head-&gt;next!=<span class="literal">nullptr</span> &amp;&amp; head-&gt;val==head-&gt;next-&gt;val)</span><br><span class="line">            <span class="keyword">return</span> head-&gt;next;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="题解三"><a href="#题解三" class="headerlink" title="题解三"></a>题解三</h1><h2 id="解题思路-2"><a href="#解题思路-2" class="headerlink" title="解题思路"></a>解题思路</h2><ul>
+<li><p>迭代法</p>
+<p>  整体思路为用哨兵<code>sentry</code>保存当前最后1个不重复结点，当发现新的不重复结点时将哨兵与该结点连接（这样就是一次性删除多个重复结点）。</p>
+<p>  具体方法为：遍历链表，当发现<code>cur</code>和<code>sentry</code>异值时则一次性删除多个重复结点并更新最后1个不重复结点为当前结点（<code>sentry-&gt;next=cur;sentry=cur;</code>），直到整个链表遍历结束。最后将最后1个不重复结点的下1个结点置空。</p>
+</li>
+<li><p>复杂度分析</p>
+<p>  假设链表长度为n，则时间复杂度为$O(n)$、空间复杂度为$O(1)$。</p>
+</li>
+</ul>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">deleteDuplicates</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* sentry=head, *cur=head;</span><br><span class="line">        <span class="keyword">while</span>(cur!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(sentry-&gt;val != cur-&gt;val)&#123;</span><br><span class="line">                sentry-&gt;next = cur;</span><br><span class="line">                sentry = cur;</span><br><span class="line">            &#125;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        sentry-&gt;next=<span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="题解四"><a href="#题解四" class="headerlink" title="题解四"></a>题解四</h1><h2 id="解题思路-3"><a href="#解题思路-3" class="headerlink" title="解题思路"></a>解题思路</h2><ul>
+<li><p>迭代法</p>
+<p>  遍历链表，如果当前结点与下1个结点通知则删除下1个结点，否则更新下1个结点。</p>
+<p>  该思路与题解三的思路有相同也有不同，相同之处是都保存当前最后1个不重复结点，区别是题解三是一次性删除多个重复结点，而该方法是遇到1个重复结点则直接删除（1次删除1个结点）。</p>
+</li>
+<li><p>复杂度分析</p>
+<ul>
+<li>假设链表长度为n，则时间复杂度为$O(n)$、空间复杂度为$O(1)$。</li>
+</ul>
+</li>
+</ul>
+<h2 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">deleteDuplicates</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head==<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        ListNode* cur=head, *next;</span><br><span class="line">        <span class="keyword">while</span>((next=cur-&gt;next)!=<span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;val==next-&gt;val)</span><br><span class="line">                cur-&gt;next = next-&gt;next;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                cur = next;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p>
 <p>欢迎讨论和交流!</p>
@@ -465,6 +507,8 @@
             <a href="/tags/递归/" rel="tag"># 递归</a>
           
             <a href="/tags/单向链表/" rel="tag"># 单向链表</a>
+          
+            <a href="/tags/双指针/" rel="tag"># 双指针</a>
           
             <a href="/tags/迭代/" rel="tag"># 迭代</a>
           
@@ -581,7 +625,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">259</span>
+                  <span class="site-state-item-count">262</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -594,7 +638,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">152</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -652,7 +696,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目链接"><span class="nav-number">1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目分析"><span class="nav-number">2.</span> <span class="nav-text">题目分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解一：迭代"><span class="nav-number">3.</span> <span class="nav-text">题解一：迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">3.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解二：递归"><span class="nav-number">4.</span> <span class="nav-text">题解二：递归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于递归"><span class="nav-number">4.1.</span> <span class="nav-text">关于递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路-1"><span class="nav-number">4.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">4.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目介绍"><span class="nav-number">1.</span> <span class="nav-text">题目介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解一"><span class="nav-number">2.</span> <span class="nav-text">题解一</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路"><span class="nav-number">2.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">2.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解二"><span class="nav-number">3.</span> <span class="nav-text">题解二</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路-1"><span class="nav-number">3.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">3.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解三"><span class="nav-number">4.</span> <span class="nav-text">题解三</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路-2"><span class="nav-number">4.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-2"><span class="nav-number">4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解四"><span class="nav-number">5.</span> <span class="nav-text">题解四</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路-3"><span class="nav-number">5.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-3"><span class="nav-number">5.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -686,7 +730,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">222.3k</span>
+    <span title="Site words total count">218.5k</span>
   
 </div>
 
