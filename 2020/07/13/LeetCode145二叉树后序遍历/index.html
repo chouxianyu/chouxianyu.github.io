@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="LeetCode,算法,二叉树,递归,栈," />
+  <meta name="keywords" content="LeetCode,算法,二叉树,递归,栈,迭代," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="题目链接https://leetcode-cn.com/problems/binary-tree-postorder-traversal/description/ 题解一：递归123456789101112131415161718192021222324252627282930313233343536373839404142// Problem: LeetCode 145// URL: https">
-<meta name="keywords" content="LeetCode,算法,二叉树,递归,栈">
+<meta name="description" content="[toc] 题目介绍 题目链接   https://leetcode-cn.com/problems/binary-tree-postorder-traversal/description/  题目考点   二叉树，后序遍历，递归，迭代，栈  题目难度   LeetCode Medium  题目大意   后序遍历1颗二叉树  输入   1颗二叉树  输出   后序遍历的结果   题解一解题思路 递">
+<meta name="keywords" content="LeetCode,算法,二叉树,递归,栈,迭代">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode145二叉树后序遍历">
 <meta property="og:url" content="https://chouxianyu.github.io/2020/07/13/LeetCode145二叉树后序遍历/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="题目链接https://leetcode-cn.com/problems/binary-tree-postorder-traversal/description/ 题解一：递归123456789101112131415161718192021222324252627282930313233343536373839404142// Problem: LeetCode 145// URL: https">
+<meta property="og:description" content="[toc] 题目介绍 题目链接   https://leetcode-cn.com/problems/binary-tree-postorder-traversal/description/  题目考点   二叉树，后序遍历，递归，迭代，栈  题目难度   LeetCode Medium  题目大意   后序遍历1颗二叉树  输入   1颗二叉树  输出   后序遍历的结果   题解一解题思路 递">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-13T07:04:01.130Z">
+<meta property="og:updated_time" content="2021-02-13T05:13:06.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode145二叉树后序遍历">
-<meta name="twitter:description" content="题目链接https://leetcode-cn.com/problems/binary-tree-postorder-traversal/description/ 题解一：递归123456789101112131415161718192021222324252627282930313233343536373839404142// Problem: LeetCode 145// URL: https">
+<meta name="twitter:description" content="[toc] 题目介绍 题目链接   https://leetcode-cn.com/problems/binary-tree-postorder-traversal/description/  题目考点   二叉树，后序遍历，递归，迭代，栈  题目难度   LeetCode Medium  题目大意   后序遍历1颗二叉树  输入   1颗二叉树  输出   后序遍历的结果   题解一解题思路 递">
 
 
 
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  387 字
+                  937 字
                 </span>
               
 
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2 分
+                  4 分
                 </span>
               
             </div>
@@ -418,10 +418,69 @@
       
 
       
-        <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode-cn.com/problems/binary-tree-postorder-traversal/description/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/binary-tree-postorder-traversal/description/</a></p>
-<h1 id="题解一：递归"><a href="#题解一：递归" class="headerlink" title="题解一：递归"></a>题解一：递归</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 145</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/binary-tree-postorder-traversal/description/</span></span><br><span class="line"><span class="comment">// Tags: Stack Tree Recursion </span></span><br><span class="line"><span class="comment">// Difficulty: Hard</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> x): val(x), left(<span class="literal">nullptr</span>), right(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traversal</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(root-&gt;left!=<span class="literal">nullptr</span>)</span><br><span class="line">                traversal(root-&gt;left);</span><br><span class="line">            <span class="keyword">if</span>(root-&gt;right!=<span class="literal">nullptr</span>)</span><br><span class="line">                traversal(root-&gt;right);</span><br><span class="line">            result.push_back(root-&gt;val);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; postorderTraversal(TreeNode* root)&#123;</span><br><span class="line">        traversal(root);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"helloworld"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="题解二：非递归（通过栈模拟递归）"><a href="#题解二：非递归（通过栈模拟递归）" class="headerlink" title="题解二：非递归（通过栈模拟递归）"></a>题解二：非递归（通过栈模拟递归）</h1><p>思路：<a href="https://www.cnblogs.com/chouxianyu/p/13293284.html" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/p/13293284.html</a></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: LeetCode 145</span></span><br><span class="line"><span class="comment">// URL: https://leetcode-cn.com/problems/binary-tree-postorder-traversal/description/</span></span><br><span class="line"><span class="comment">// Tags: Stack Tree Recursion </span></span><br><span class="line"><span class="comment">// Difficulty: Hard</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> x): val(x), left(<span class="literal">nullptr</span>), right(<span class="literal">nullptr</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; postorderTraversal(TreeNode* root)&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">        <span class="built_in">stack</span>&lt;TreeNode*&gt; nodes;</span><br><span class="line">        <span class="keyword">if</span>(root!=<span class="literal">nullptr</span>)</span><br><span class="line">            nodes.push(root);</span><br><span class="line">        <span class="keyword">while</span>(!nodes.empty())&#123;</span><br><span class="line">            root = nodes.top();</span><br><span class="line">            nodes.pop();</span><br><span class="line">            <span class="comment">// 模拟调用递归函数</span></span><br><span class="line">            <span class="keyword">if</span>(root!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">                nodes.push(root);</span><br><span class="line">                nodes.push(<span class="literal">nullptr</span>);</span><br><span class="line">                <span class="keyword">if</span>(root-&gt;right!=<span class="literal">nullptr</span>)</span><br><span class="line">                    nodes.push(root-&gt;right);</span><br><span class="line">                <span class="keyword">if</span>(root-&gt;left!=<span class="literal">nullptr</span>)</span><br><span class="line">                    nodes.push(root-&gt;left);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 递归函数调用成功</span></span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                result.push_back(nodes.top()-&gt;val);</span><br><span class="line">                nodes.pop();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"helloworld"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// system("pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>[toc]</p>
+<h1 id="题目介绍"><a href="#题目介绍" class="headerlink" title="题目介绍"></a>题目介绍</h1><ul>
+<li><p>题目链接</p>
+<p>  <a href="https://leetcode-cn.com/problems/binary-tree-postorder-traversal/description/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/binary-tree-postorder-traversal/description/</a></p>
+</li>
+<li><p>题目考点</p>
+<p>  二叉树，后序遍历，递归，迭代，栈</p>
+</li>
+<li><p>题目难度</p>
+<p>  LeetCode Medium</p>
+</li>
+<li><p>题目大意</p>
+<p>  后序遍历1颗二叉树</p>
+</li>
+<li><p>输入</p>
+<p>  1颗二叉树</p>
+</li>
+<li><p>输出</p>
+<p>  后序遍历的结果</p>
+</li>
+</ul>
+<h1 id="题解一"><a href="#题解一" class="headerlink" title="题解一"></a>题解一</h1><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><ul>
+<li><p>递归法</p>
+<p>  后序遍历的顺序是“左右中”。先后通过递归遍历左子树和右子树，然后遍历当前根结点。</p>
+</li>
+<li><p>复杂度分析</p>
+<p>  假设该二叉树有n个结点，则时间复杂度为$O(n)$、最大空间复杂度为$O(n)$、平均空间复杂度为$O(log\ n)$。</p>
+</li>
+</ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traversal</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            traversal(root-&gt;left);</span><br><span class="line">            traversal(root-&gt;right);</span><br><span class="line">            result.push_back(root-&gt;val);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; postorderTraversal(TreeNode* root)&#123;</span><br><span class="line">        traversal(root);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="题解二"><a href="#题解二" class="headerlink" title="题解二"></a>题解二</h1><h2 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h2><ul>
+<li><p>栈法/迭代法</p>
+<p>  该思路是通过显式栈模拟递归函数。虽然该思路的复杂度稍高一些，但其仅需要微小改动就可以通用于二叉树的先/中/后序遍历。该思路实现3种顺序遍历的介绍：<a href="https://www.cnblogs.com/chouxianyu/p/13293284.html" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/p/13293284.html</a></p>
+<p>  该思路的核心是将<code>nullptr</code>作为可以遍历下1个结点的标志（因此也就不能将空结点压入栈中），即遇到<code>nullptr</code>时就可以遍历下一个结点，如果不是<code>nullptr</code>则根据遍历顺序入栈，当前根结点入栈时也要将<code>nullptr</code>压入栈中（后续遇到这个<code>nullptr</code>时就可以遍历到该根结点）。</p>
+</li>
+<li><p>复杂度分析</p>
+<p>  假设二叉树有n个结点，则时间复杂度为$O(n)$、最大空间复杂度为$O(n)$、平均空间复杂度为$O(log\ n)$。</p>
+</li>
+</ul>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; postorderTraversal(TreeNode* root) &#123;</span><br><span class="line">        <span class="built_in">stack</span>&lt;TreeNode*&gt; nodes;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">        <span class="keyword">if</span> (root!=<span class="literal">nullptr</span>)</span><br><span class="line">            nodes.push(root);</span><br><span class="line">        <span class="keyword">while</span>(!nodes.empty())&#123;</span><br><span class="line">            root=nodes.top();</span><br><span class="line">            nodes.pop();</span><br><span class="line">            <span class="keyword">if</span>(root==<span class="literal">nullptr</span>)&#123;</span><br><span class="line">                result.push_back(nodes.top()-&gt;val);</span><br><span class="line">                nodes.pop();</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                nodes.push(root);</span><br><span class="line">                nodes.push(<span class="literal">nullptr</span>);</span><br><span class="line">                <span class="keyword">if</span>(root-&gt;right!=<span class="literal">nullptr</span>)</span><br><span class="line">                    nodes.push(root-&gt;right);</span><br><span class="line">                <span class="keyword">if</span>(root-&gt;left!=<span class="literal">nullptr</span>)</span><br><span class="line">                    nodes.push(root-&gt;left);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="题解三"><a href="#题解三" class="headerlink" title="题解三"></a>题解三</h1><h2 id="解题思路-2"><a href="#解题思路-2" class="headerlink" title="解题思路"></a>解题思路</h2><ul>
+<li><p>栈法/迭代法</p>
+<p>  后序遍历的顺序为：左子树、右子树、根结点。</p>
+<p>  用<code>prev</code>保存上1个遍历过的结点。对于1个根结点，分3步操作：</p>
+<ol>
+<li><p>将<code>root</code>压入栈中并不断更新为其左子树，直至<code>root</code>为空</p>
+<p> 可以想象下，后序遍历时就是这样并不遍历当前结点，而是一直往左下角延伸到底</p>
+</li>
+<li><p>更新<code>root</code>为栈顶结点</p>
+<p> 第1步结束后，此时栈顶结点无左子树或其左子树已遍历完</p>
+</li>
+<li><p>如果无右子树或右子树已遍历，则遍历<code>root</code>并更新<code>prev</code>为<code>root</code>、更新<code>root</code>为<code>nullptr</code>；否则<code>root</code>入栈并更新<code>root</code>为右子树。</p>
+<p>如果<code>root</code>非空或者栈非空则循环以上步骤。</p>
+</li>
+</ol>
+</li>
+<li><p>复杂度分析</p>
+<p>  假设二叉树有n个结点，则时间复杂度为$O(n)$、最大空间复杂度为$O(n)$、平均空间复杂度为$O(log\ n)$。</p>
+</li>
+</ul>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; postorderTraversal(TreeNode* root) &#123;</span><br><span class="line">        <span class="built_in">stack</span>&lt;TreeNode*&gt; nodes;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">        TreeNode* prev=<span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">while</span>(root!=<span class="literal">nullptr</span> || !nodes.empty())&#123;</span><br><span class="line">            <span class="keyword">while</span>(root!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">                nodes.push(root);</span><br><span class="line">                root=root-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line">            root=nodes.top();</span><br><span class="line">            nodes.pop();</span><br><span class="line">            <span class="keyword">if</span>(root-&gt;right==<span class="literal">nullptr</span> || root-&gt;right==prev)&#123;</span><br><span class="line">                result.push_back(root-&gt;val);</span><br><span class="line">                prev=root;</span><br><span class="line">                root=<span class="literal">nullptr</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                nodes.push(root);</span><br><span class="line">                root=root-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="题解四"><a href="#题解四" class="headerlink" title="题解四"></a>题解四</h1><p><strong>Morris 遍历算法</strong>是另一种遍历二叉树的方法。</p>
+<p>假设二叉树有n个结点，该算法的时间复杂度为$O(n)$、空间复杂度为$O(1)$。</p>
 <hr>
 <p>作者：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@臭咸鱼</a></p>
 <p>转载请注明出处：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">https://www.cnblogs.com/chouxianyu/</a></p>
@@ -453,6 +512,8 @@
             <a href="/tags/递归/" rel="tag"># 递归</a>
           
             <a href="/tags/栈/" rel="tag"># 栈</a>
+          
+            <a href="/tags/迭代/" rel="tag"># 迭代</a>
           
         </div>
       
@@ -567,7 +628,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">262</span>
+                  <span class="site-state-item-count">265</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -580,7 +641,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">152</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -638,7 +699,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目链接"><span class="nav-number">1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解一：递归"><span class="nav-number">2.</span> <span class="nav-text">题解一：递归</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解二：非递归（通过栈模拟递归）"><span class="nav-number">3.</span> <span class="nav-text">题解二：非递归（通过栈模拟递归）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目介绍"><span class="nav-number">1.</span> <span class="nav-text">题目介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解一"><span class="nav-number">2.</span> <span class="nav-text">题解一</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路"><span class="nav-number">2.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">2.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解二"><span class="nav-number">3.</span> <span class="nav-text">题解二</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路-1"><span class="nav-number">3.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">3.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解三"><span class="nav-number">4.</span> <span class="nav-text">题解三</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路-2"><span class="nav-number">4.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-2"><span class="nav-number">4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解四"><span class="nav-number">5.</span> <span class="nav-text">题解四</span></a></li></ol></div>
             
 
           </div>
@@ -672,7 +733,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">218.5k</span>
+    <span title="Site words total count">224.7k</span>
   
 </div>
 

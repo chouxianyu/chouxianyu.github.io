@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2021-02-10T05:00:13.727Z</updated>
+  <updated>2021-02-26T13:44:40.364Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,104 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ResNet论文阅读笔记</title>
+    <link href="https://chouxianyu.github.io/2021/02/26/ResNet%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
+    <id>https://chouxianyu.github.io/2021/02/26/ResNet论文阅读笔记/</id>
+    <published>2021-02-26T13:33:20.000Z</published>
+    <updated>2021-02-26T13:44:40.364Z</updated>
+    
+    <content type="html"><![CDATA[<p>[toc]</p><h1 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h1><ul><li><p>论文名称</p><p>  Deep Residual Learning for Image Recognition</p></li><li><p>作者</p><p>  Kaiming He</p><p>  Microsoft Research</p></li><li><p>发表时间</p><p>  2015年</p></li><li><p>来源</p><p>  CVPR2016</p></li></ul><h1 id="主要收获"><a href="#主要收获" class="headerlink" title="主要收获"></a>主要收获</h1><ul><li>知识<ul><li>较深的神经网络难以训练</li><li><strong>网络的深度</strong>对于许多视觉识别任务至关重要<ul><li>152层的ResNet，<strong>8× deeper than VGG</strong>，但却有<strong>更低的计算复杂度</strong>，在ImageNet测试集上错误率为3.57%，获ILSVRC 2015中图像分类任务的第1名。</li><li>ResNet在COCO目标检测数据集上获得了<strong>28％</strong>的相对改进，在其它几个数据集和任务上也取得第1名。</li></ul></li><li><strong>假设</strong>多个非线性层可以渐近地逼近复杂函数（该假设还有待讨论，详见引文），则等效于假设它们可以渐近地近似残差函数。</li><li>理论基础：假设目标函数为H(x)，可将其表示为H(x)=F(x)+x。若最优解是identity mapping，则此时F(x)为0，<strong>使参数为0比学习H(x)更加容易</strong>。</li><li>F(x)+x可以通过<strong>shortcut connections</strong>实现，不需额外参数，仅需微小计算量（element-wise addition）。</li><li>基础网络（Plain Network）采用VGGNet的设计思路，主要使用3×3卷积并遵守2个设计原则：①若输出特征图的尺寸不变，则通道数也应不变；②若输出特征的尺寸减半，则通道数应增1倍以保留时间复杂度。</li><li>ResNet50网络的具体结构以及Bottleneck的具体结构，这份见下篇文章。</li></ul></li><li>未知点<ul><li>residual：并不只是ResNet中的residual，在其它领域和算法中也有residual的概念，有待了解。</li><li>inception：《Going deeper with convolutions》</li><li>highway networks：《Highway networks》、《Training very deep networks》</li><li>VGGNet的设计思想</li><li>bacth normalization</li><li>mini-batch</li></ul></li></ul><h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><ul><li>较深的神经网络难以训练，本文提出一个residual learning framework训练较深的神经网络。</li><li>We explicitly reformulate the layers as learning residual functions with reference to the layer inputs, instead of learning unreferenced functions.</li><li>通过大量empirical实验证明，本文中提出的残差网络<strong>更易优化</strong>，并可以从大量增加的网络深度中获取<strong>准确性</strong>。用<strong>152层（8× deeper than VGG）</strong>，但却有<strong>更低的计算复杂度</strong>，在ImageNet测试集上错误率为3.57%(top5)，获ILSVRC 2015中图像分类任务的第1名。</li><li>网络的深度对于许多视觉识别任务至关重要。ResNet在COCO目标检测数据集上获得了<strong>28％</strong>的相对改进，在其它几个数据集和任务上也取得第1名。</li></ul><h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><ul><li><p>背景/问题</p><ul><li><p><strong>深度网络以1种end-to-end的多层的方式，自然地集成了low/mid/high-level features和classifiers[引]，并且features的“levels”可以通过堆叠层数（深度）来enrich。</strong></p></li><li><p>最近有研究[引]证明网络的深度十分重要，ImageNet上的领先结果[引]都使用了”very deep” model[引]（16到30层），较深的网络在其它视觉识别任务中也有好的效果。</p></li><li><p>既然深度如此重要，那有个问题是：<strong>Is learning better networks as easy as stacking more layers</strong>。要回答这个问题，1个障碍是<strong>梯度消失/爆炸</strong>（会影响模型收敛），该问题已通过<strong>normalized initialization</strong>[引]和<strong>intermediate normalization layers</strong>[引]得到很大的解决，可以使数十层的网络通过SGD收敛。</p></li><li><p>深度模型收敛之后，又遇到了<strong>the degradation problem：随着网络深度增加，准确率变得饱和然后迅速下降</strong>，并且实验结果说明这种下降并不是过拟合导致的。相关研究[引]指出<strong>给1个层数合适的网络添加更多的层会导致训练误差增高</strong>，本文图1和图4也彻底证明了这一点。</p><p>  考虑1个shallower architecture并基于此添加一些层形成1个deeper counterpart，如果添加的这些层是identity mapping，那这个deeper counterpart则等同于这个shallower architecture。这说明<strong>1个deeper model的训练误差应不高于其shallower counterpart</strong>。但实验证明，目前的模型并没有达到这个效果。</p></li></ul></li><li><p>本文所提方法的原理及优点</p><ul><li><p>本文提出1个deep residual learning framework来解决degradation问题。each few stacked layers并不直接拟合1个desired underlying mapping：$H(x)$，而是拟合1个residual mapping：$F(x)=H(x)-x$，即原先想要的underlying mapping为$H(x)=F(x)+x$。</p></li><li><p>我们假定该residual mapping比原先的mapping更易优化。<strong>在极端情况下如果identity mapping是最优的，使residual为0比拟合1个identity mapping更加容易。</strong></p><p>  $F(x)+x$可以<strong>通过shortcut connections实现</strong>，在本方法中其仅需进行identity mapping和相加，如原文图2所示。<strong>这种identity shortcut connections不需要额外参数和计算量</strong>。整个网络仍可以通过SGD进行end-to-end训练，并易于通过Caffe等开源库实现。</p></li></ul></li><li><p>实验与结果</p><ul><li>本文在ImageNet上进行了全面实验以说明degradation问题和评估本文的方法。<ol><li>Our extremely deep residual nets are <strong>easy to optimize</strong>, but the counterpart “plain” nets (that simply stack layers) exhibit <strong>higher training error when the depth increases</strong>.</li><li>Our deep residual nets can <strong>easily enjoy accuracy gains from greatly increased depth</strong>, producing results <strong>substantially better than previous networks</strong>.</li></ol></li><li>在CIFAR-10上进行实验也出现了类似现象，说明degradation问题和<strong>本文方法并不只适用于特定数据集</strong>。我们训练了超过100层的网络，还尝试了超过1000层的网络。</li><li>在ImageNet上，我们的<strong>152层</strong>网络是最深的，但其<strong>比VGG计算复杂度更低</strong>，在ImageNet测试集上错误率为3.57%(top5)，获ILSVRC 2015中图像分类任务的第1名。在其它识别任务中也有出色表现，有多项第1名（略）。这说明the residual learning principle is generic，我们猜想<strong>本方法也适用于其它视觉和非视觉问题</strong>。</li></ul></li></ul><h1 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2. Related Work"></a>2. Related Work</h1><ul><li><p><strong>Residual Representations</strong></p><ul><li><p>image recognition</p><p>  VLAD[引]、Fisher Vector[引]、encoding residual vectors[引]</p></li><li><p>low-level vision and computer graphics</p><p>  Multigrid method[引]、hierarchical basis preconditioning[引]、</p></li></ul></li><li><p><strong>Shortcut Connections</strong></p><ul><li><p>some practices and theories of shortcut connections</p><p>  具体看引文</p></li><li><p>comparison with the shortcut connections with gating functions（shortcut connections with gating functions）</p></li></ul></li></ul><h1 id="3-Deep-Residual-Learning"><a href="#3-Deep-Residual-Learning" class="headerlink" title="3. Deep Residual Learning"></a>3. Deep Residual Learning</h1><h2 id="3-1-Residual-Learning"><a href="#3-1-Residual-Learning" class="headerlink" title="3.1. Residual Learning"></a>3.1. Residual Learning</h2><p>假设某几个连续的层（并非必须是整个网络）要拟合的目标是函数H(x)，x是其中第1层的输入。<strong>假设</strong>多个非线性层可以渐近地逼近复杂函数（该假设还有待讨论，详见引文），则等效于假设它们可以渐近地近似残差函数，即F(x)=H(x)-x（假设输入和输出的维数相同）。<strong>虽然H(x)和F(x)+x形式相同， 但学习成本是不同的。</strong>这种重构的思路来源于原文图1所示的the degradation problem，其指出深度模型在通过多个层拟合identity mappings时遇到了问题。通过重构，训练师使参数趋于0会更容易。</p><p>在真实情况中，<strong>虽然identity mappings并不一定是最优解，但该思路还是可能对the degradation problem进行了precondition</strong>。相对于1个zero mapping，如果最优解更接近于identity mappings，那么参考identity mappings做扰动应该比从头学习1个新的函数要更容易。本文通过<strong>实验（图7）</strong>表明，学习到的残差函数通常具有较小的响应（small responses），这表明identity mappings提供了合理的precondition。</p><h2 id="3-2-Identity-Mapping-by-Shortcuts"><a href="#3-2-Identity-Mapping-by-Shortcuts" class="headerlink" title="3.2. Identity Mapping by Shortcuts"></a>3.2. Identity Mapping by Shortcuts</h2><p>每几个层都进行residual learning，形成1个具有多层的block（见原文图2）。图2所示的block有2层，其公式（式1）为$y=F(x,\{W_i\})+x=\sigma(W_2\sigma(W_1x+b_1)+b)$，其中$\sigma$是ReLU。</p><p>F(x)+x通过shortcut connection实现，即保存输入x然后和输出F(x)相加得到F(x)+x，并且使用的这种shortcut connection并不增加参数和计算量（仅增加了微不足道的element-wise addition）。</p><p>在式1中，F(x)和x的通道数必须是一样的，否则就需要在shortcut connections中对x进行1个线性投影（<strong>linear projection</strong>）以匹配维度，即式2$y=F(x,\{W_i\})+W_sx$，其中$W_s$仅被用来匹配F(x)的维度。</p><p>每个block中可以有更多层，比如3（如图5所示的BottleNeck），但如果每个block中只有1层的话，公式就变成了1个线性层$y = W_1x+x$。</p><p>这种block也适用于卷积层，其中F(x)+x是每个维度对应位置元素相加。</p><h2 id="3-3-Network-Architectures"><a href="#3-3-Network-Architectures" class="headerlink" title="3.3. Network Architectures"></a>3.3. Network Architectures</h2><ul><li><p><strong>Plain Network</strong></p><p>  根据VGG网络的理论，主要使用3×3卷积并遵守2个设计原则：①若输出特征图的尺寸不变，则通道数也应不变；②若输出特征的尺寸减半，则通道数应增1倍以保留时间复杂度。</p><p>  本文直接通过步长为2的卷积层进行下采样，网络尾部是1个global average pooling layer和1个1000-way fully-connected layer with softmax，共有34层权重（图3中间的网络）。</p><p>  该模型中的通道比VGG网络更少，有更低的复杂度，FLOPS是VGG19的18%。</p></li><li><p><strong>Residual Network</strong></p><p>  基于上述Plain Network，添加shortcut connections（图3右边的网络），形成ResNet34。</p><p>  对于identity shortcut，当输出和输入的通道数相同时（<strong>实线</strong>），就直接每个通道对应位置元素相加；</p><p>  当输出的通道数大于输入时（<strong>虚线</strong>），有2个方法：①The shortcut still performs identity mapping, with extra zero entries padded for increasing dimensions. ②通过式2表示的projection shortcut匹配通道（以1×1卷积实现）。对于这2个方法，当输出和输入的尺寸不同时，这是通过步长为2实现（尺寸减半，通道数对应增加1倍）的。</p></li></ul><h2 id="3-4-Implementation"><a href="#3-4-Implementation" class="headerlink" title="3.4. Implementation"></a>3.4. Implementation</h2><p>在ImageNet上</p><p>按照引文41，将图片根据短边随机缩放到[256,480]。随机224×224 crop，随机水平翻转，减去像素均值。</p><p>按照引文21，每个卷积后和每个激活函数前使用bacth normalization。</p><p>按照引文13，初始化模型参数。</p><p>从头训练，SGD，mini-batch大小为256，学习率从0.1开始当loss稳定时除以10，训练了60W个iteration。</p><p>weight decay 0.0001，momentum 0.9。</p><p>不使用dropout。</p><h1 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h1><h2 id="4-1-ImageNet-Classification"><a href="#4-1-ImageNet-Classification" class="headerlink" title="4.1. ImageNet Classification"></a>4.1. ImageNet Classification</h2><ul><li><p><strong>Plain Networks</strong></p><p>  略</p></li><li><p><strong>Residual Networks</strong></p><p>  略</p></li><li><p><strong>Deeper Bottleneck Architectures</strong></p><p>  考虑到可接受的训练时长，使用Bottleneck（图5所示），每个block中包含3个层：1×1卷积、3×3卷积、1×1卷积，其中2个1×1卷积f分别用来减少和恢复维度，使得3×3卷积接收和输出更少的通道数。</p><p>  不需额外参数的identity shortcuts对于Bottleneck非常重要，如果把Bottleneck中的identity shortcut换成projection，模型的时间复杂度和参数量就会增加1倍，因为shortcut连接到了2个高维特征上。所以identity shortcuts使得基于Bottleneck的模型更加有效。</p></li><li><p><strong>50-layer ResNet</strong></p><p>  ResNet50，将ResNet34中包含2层的block换成Bottleneck，就得到了ResNet50。当输出的通道数大于输入时，使用第2种方法（式2）。</p></li><li><p>略……</p></li></ul><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;[toc]&lt;/p&gt;
+&lt;h1 id=&quot;基本信息&quot;&gt;&lt;a href=&quot;#基本信息&quot; class=&quot;headerlink&quot; title=&quot;基本信息&quot;&gt;&lt;/a&gt;基本信息&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;论文名称&lt;/p&gt;
+&lt;p&gt;  Deep Residual Learning for
+      
+    
+    </summary>
+    
+    
+      <category term="论文笔记" scheme="https://chouxianyu.github.io/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="ResNet" scheme="https://chouxianyu.github.io/tags/ResNet/"/>
+    
+      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>李宏毅机器学习课程笔记-6.4学习率调整方法</title>
+    <link href="https://chouxianyu.github.io/2021/02/15/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-6-4%E5%AD%A6%E4%B9%A0%E7%8E%87%E8%B0%83%E6%95%B4%E6%96%B9%E6%B3%95/"/>
+    <id>https://chouxianyu.github.io/2021/02/15/李宏毅机器学习课程笔记-6-4学习率调整方法/</id>
+    <published>2021-02-15T04:18:25.000Z</published>
+    <updated>2021-02-15T04:19:24.329Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="RMSProp"><a href="#RMSProp" class="headerlink" title="RMSProp"></a>RMSProp</h2><p>2013年Hinton在Coursera提出。</p><ul><li><p>背景</p><p>  RMSProp是Adagrad的升级版。</p><p>  在训练神经网络时，损失函数不一定是凸函数（局部最小值即为全局最小值），可能是各种各样的函数，有时需要较大的学习率，有时需要较小的学习率，而Adagrad并不能实现这种效果，因此产生了RMSProp。</p></li><li><p>定义</p><script type="math/tex; mode=display">  w^{t+1}=w^t-\frac{\eta}{\sigma^t}g^t\\  \sigma^0=g^0,\sigma^t=\sqrt{\alpha(\sigma^{t-1})^2+(1-\alpha)(g^t)^2}</script><p>  其中$w$是某个参数；$\eta$是学习率；$g$是梯度；$\alpha$代表旧的梯度的重要性，值越小则旧的梯度越不重要。</p></li><li><p>神经网络中很难找到最优的参数吗？</p><p>  面临的问题有plateau、saddle point和local minima。</p><p>  |     英文     |    中文    |                  梯度                   |<br>  | :—————: | :————: | :——————————————————-: |<br>  |   plateau    |   停滞期   | $\frac{\partial L}{\partial w}\approx0$ |<br>  | saddle point |    鞍点    |    $\frac{\partial L}{\partial w}=0$    |<br>  | local minima | 局部最小值 |    $\frac{\partial L}{\partial w}=0$    |</p><p>  2007年有人（名字读音好像是young la ken）指出神经网络的error surface是很平滑的，没有很多局部最优。</p><p>  假设有1000个参数，一个参数处于局部最优的概率是$p$，则整个神经网络处于局部最优的概率是$p^{1000}$，这个值是很小的。</p></li></ul><h2 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h2><p>1986年提出</p><ul><li><p>如何处理停滞期、鞍点、局部最小值等问题？</p><p>  考虑现实世界中物体具有惯性、动量（Momentum）的特点，尽可能避免“小球”陷入error surface上的这几种位置。</p></li><li><p>定义</p><p>  如下图所示，不仅考虑当前的梯度，还考虑上一次的移动方向：$v^t=\lambda v^{t-1}-\eta g^t,v^0=0$，</p><p>  其中上标$t$是迭代次数；$v$指移动方向（movement），类似于物理中的速度；$g$是梯度（gradient）；$\lambda$用来控制惯性的重要性，值越大代表惯性越重要；$\eta$是学习率。</p><p>  <img src="https://img2020.cnblogs.com/blog/1478490/202012/1478490-20201216171725468-884779641.jpg" alt="Momentum"></p></li></ul><h2 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h2><p>RMSProp+Momentum+Bias Correction，2015年提出</p><h2 id="Adam-VS-SGDM"><a href="#Adam-VS-SGDM" class="headerlink" title="Adam VS SGDM"></a>Adam VS SGDM</h2><p>目前常用的就是Adam和SGDM。</p><p>Adam训练速度快，large generalization gap（在训练集和验证集上的性能差异大），但不稳定；SGDM更稳定，little generalization gap，更加converge（收敛）。</p><div class="table-container"><table><thead><tr><th style="text-align:center">领域</th><th style="text-align:center">技术/模型</th><th style="text-align:center">优化器</th></tr></thead><tbody><tr><td style="text-align:center">Q&amp;A、文意理解、文章生成</td><td style="text-align:center">BERT</td><td style="text-align:center">Adam</td></tr><tr><td style="text-align:center">BERT的Backbone、翻译</td><td style="text-align:center">Transformer</td><td style="text-align:center">Adam</td></tr><tr><td style="text-align:center">语音生成</td><td style="text-align:center">Tacotron</td><td style="text-align:center">Adam</td></tr><tr><td style="text-align:center">目标检测</td><td style="text-align:center">YOLO</td><td style="text-align:center">SGDM</td></tr><tr><td style="text-align:center">目标检测</td><td style="text-align:center">Mask R-CNN</td><td style="text-align:center">SGDM</td></tr><tr><td style="text-align:center">图片分类</td><td style="text-align:center">ResNet</td><td style="text-align:center">SGDM</td></tr><tr><td style="text-align:center">图片生成</td><td style="text-align:center">Big-GAN</td><td style="text-align:center">Adam</td></tr><tr><td style="text-align:center">元学习</td><td style="text-align:center">MAML</td><td style="text-align:center">Adam</td></tr></tbody></table></div><p>SGDM适用于计算机视觉，Adam适用于NLP、Speech Synthesis、GAN、Reinforcement Learning。</p><h2 id="SWATS"><a href="#SWATS" class="headerlink" title="SWATS"></a>SWATS</h2><p>2017年提出，尝试把Adam和SGDM结合，其实就是前一段时间用Adam，后一段时间用SGDM，但在切换时需要解决一些问题。</p><h2 id="尝试改进Adam"><a href="#尝试改进Adam" class="headerlink" title="尝试改进Adam"></a>尝试改进Adam</h2><ul><li><p>AMSGrad</p><ul><li><p>Adam的问题</p><blockquote><p>Non-informative gradients contribute more than informative gradients.</p></blockquote><p>  在Adam中，之前所有的梯度都会对第$t$步的movement产生影响。然而较早阶段(比如第1、2步)的梯度信息是相对无效的，较晚阶段（比如$t-1$、$t-2$步）的梯度信息是相对有效的。在Adam中，可能发生较早阶段梯度相对于较晚阶段梯度比重更大的问题。</p></li><li><p>提出AMSGrad</p><p>  2018年提出</p></li></ul></li><li><p>AdaBound</p><p>  2019年提出，目的也是改进Adam。</p></li><li><p>Adam需要warm up吗？需要</p><p>  warm up：开始时学习率小，后面学习率大。</p><p>  因为实验结果说明在刚开始的几次（大概是10次）迭代中，参数值的分布比较散乱（distort），因此梯度值就比较散乱，导致梯度下降不稳定。</p></li><li><p>RAdam</p><p>  2020年提出</p></li><li><p>Lookahead</p><p>  2019年提出，像一个wrapper一样套在优化器外面，适用于Adam、SGDM等任何优化器。</p><p>  迭代几次后会回头检查一下。</p></li><li><p>Nadam</p><p>  2016年提出，把NAG的概念应用到Adam上。</p></li><li><p>AdamW</p><p>  2017年提出，这个优化器还是有重要应用的（训练出了某个BERT模型）。</p></li></ul><h2 id="尝试改进SGDM"><a href="#尝试改进SGDM" class="headerlink" title="尝试改进SGDM"></a>尝试改进SGDM</h2><ul><li><p>LR range test</p><p>  2017年提出</p></li><li><p>Cyclical LR</p><p>  2017年提出</p></li><li><p>SGDR</p><p>  2017年提出，模拟Cosine但并不是Cosine</p></li><li><p>One-cycle LR</p><p>  2017年提出，warm-up+annealing+fine-tuning</p></li><li><p>SGDW</p><p>  2017年提出，</p></li></ul><h2 id="改进Momentum"><a href="#改进Momentum" class="headerlink" title="改进Momentum"></a>改进Momentum</h2><ul><li><p>背景</p><p>如果梯度指出要停下来，但动量说要继续走，这样可能导致坏的结果。</p></li><li><p>NAG（Nesterov accelerated gradient）</p><p>  1983年提出，会预测下一步。</p></li></ul><h2 id="Early-Stopping"><a href="#Early-Stopping" class="headerlink" title="Early Stopping"></a>Early Stopping</h2><p>如果学习率调整得较好，随着迭代次数增加，神经网络在训练集上的loss会越来越小，但因为验证集（Validation set）和训练集不完全一样，所以神经网络在验证集上的loss可能不降反升，所以我们应该在神经网络在验证集上loss最小时停止训练。</p><p><a href="https://keras.io/getting_started/faq/#how-can-i-interrupt-training-when-the-validation-loss-isnt-decreasing-anymore" target="_blank" rel="noopener">Keras文档</a>中就有关于Early stopping的说明。</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;RMSProp&quot;&gt;&lt;a href=&quot;#RMSProp&quot; class=&quot;headerlink&quot; title=&quot;RMSProp&quot;&gt;&lt;/a&gt;RMSProp&lt;/h2&gt;&lt;p&gt;2013年Hinton在Coursera提出。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;背景&lt;/p&gt;
+&lt;p&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="学习率" scheme="https://chouxianyu.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%8E%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>李宏毅机器学习课程笔记-6.3常用激活函数</title>
+    <link href="https://chouxianyu.github.io/2021/02/15/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-6-3%E5%B8%B8%E7%94%A8%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/"/>
+    <id>https://chouxianyu.github.io/2021/02/15/李宏毅机器学习课程笔记-6-3常用激活函数/</id>
+    <published>2021-02-15T03:59:27.000Z</published>
+    <updated>2021-02-15T04:01:05.856Z</updated>
+    
+    <content type="html"><![CDATA[<p>[toc]</p><h2 id="梯度消失（Vanishing-Gradient-Problem）"><a href="#梯度消失（Vanishing-Gradient-Problem）" class="headerlink" title="梯度消失（Vanishing Gradient Problem）"></a>梯度消失（Vanishing Gradient Problem）</h2><ul><li><p>定义</p><p>  1980年代常用的激活函数是sigmoid函数。以MNIST手写数字识别为例，在使用sigmoid函数时会发现随着神经网络层数增加，识别准确率逐渐下降，这个现象的原因并不是过拟合（原因见上文），而是梯度消失。</p><p>  <img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201117115824VanishingGradientProblem.jpg" alt="VanishingGradientProblem"></p><p>  如上图所示，当神经网络层数很多时，靠近输入层的参数的梯度会很小，靠近输出层的参数的梯度会很大。当每个参数的学习率相同时，靠近输入层的参数会更新得很慢，靠近输出层的几层参数会更新得很快。所以，当靠近输入层的参数几乎还是随机数时，靠近输出层的参数已经收敛了。</p></li><li><p>原因</p><p>  按照反向传播的式子，这确实是会发生的。</p><p>  直观感觉上，sigmoid函数输入的范围是无穷大，但输出的范围是[0,1]，也就是说sigmoid函数减弱了输入变化导致输出变化的幅度。那为什么靠近输出层的参数的梯度更大呢？sigmoid函数是一层层叠起来的，不断地减弱靠近输入层的参数的变化导致输出变化的幅度，所以更靠后的参数的梯度越大。</p></li><li><p>解决方法</p><p>  Hinton提出无监督逐层训练方法以解决这个问题，其基本思想是每次训练一层隐节点。</p><p>  后来Hinton等人提出修改激活函数，比如换成ReLU。</p></li></ul><h2 id="ReLU-Rectified-Linear-Unit"><a href="#ReLU-Rectified-Linear-Unit" class="headerlink" title="ReLU(Rectified Linear Unit)"></a>ReLU(Rectified Linear Unit)</h2><ul><li><p>定义</p><p>  当输入小于等于0时，输出为0；当输入大于0时，输出等于输入。</p></li><li><p>优点</p><p>  相比于sigmoid函数，它有以下优点</p><ol><li>运算更快</li><li>更符合生物学</li><li>等同于无穷多个bias不同的sigmoid函数叠加起来</li><li>可以解决梯度消失问题</li></ol></li><li><p>如何解决梯度消失问题</p><p>  当ReLU输出为0时该激活函数对神经网络不起作用，所以在神经网络中生效的激活函数都是输出等于输入，所以就不会出现sigmoid函数导致的减弱输入变化导致输出变化的幅度的情况。</p></li><li><p>ReLU会使整个神经网络变成线性的吗？</p><p>  可知有效的激活函数都是线性的，但整个神经网络还是非线性的。当输入改变很小、不改变每个激活函数的Operation Region（操作区域，大概意思就是输入范围）时，整个神经网络是线性的；当输入改变很大、改变了Operation Region时，整个神经网络就是非线性的。==目前我是凭直觉理解这一点，还未细究==</p></li><li><p>ReLU可以做微分吗？</p><p>  不用处理输入为0的情况，当输入小于0时，微分就是0，当输入大于0时微分就是1。</p></li></ul><h2 id="Leaky-ReLU"><a href="#Leaky-ReLU" class="headerlink" title="Leaky ReLU"></a>Leaky ReLU</h2><p>当输入小于等于0时，输出为输入的0.01倍；当输入大于0时，输出等于输入。</p><h2 id="Parametric-ReLU"><a href="#Parametric-ReLU" class="headerlink" title="Parametric ReLU"></a>Parametric ReLU</h2><p>当输入小于等于0时，输出为输入的$\alpha$倍；当输入大于0时，输出等于输入。</p><p>其中$\alpha$是通过梯度下降学习到的参数</p><h2 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h2><ul><li><p>定义</p><p>  通过学习得到一个激活函数，人为将每层输出的多个值分组，然后输出每组值中的最大值。（跟maxpooling一模一样）</p></li><li><p>ReLU是Maxout的一个特例</p><p>  <img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201216075138Maxout1.png" alt="Maxout1"></p></li><li><p>Maxout比ReLU包含了更多的函数</p><p>  <img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201216075144Maxout2.jpg" alt="Maxout2"></p></li><li><p>Maxout可以得到任意的分段线性凸函数（piecewise linear convex），有几个分段取决于每组里有几个值</p><p>  <img src="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201216075148Maxout3.jpg" alt="Maxout3"></p></li><li><p>如何训练Maxout</p><p>  Maxout只是选择输出哪一个线性函数的值而已，因此Maxout激活函数还是线性的。</p><p>  因为在多个值中只选择最大值进行输出，所以会形成一个比较瘦长/窄深的神经网络。</p><p>  在多个值中只选择最大值进行输出，这并不会导致一些参数无法被训练：因为输入不同导致一组值中的最大值不同，所以各个参数都可能被训练到。</p><p>  当输入不同时，形成的也是不同结构的神经网络。</p></li></ul><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;[toc]&lt;/p&gt;
+&lt;h2 id=&quot;梯度消失（Vanishing-Gradient-Problem）&quot;&gt;&lt;a href=&quot;#梯度消失（Vanishing-Gradient-Problem）&quot; class=&quot;headerlink&quot; title=&quot;梯度消失（Vanishing 
+      
+    
+    </summary>
+    
+    
+      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="梯度消失" scheme="https://chouxianyu.github.io/tags/%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1/"/>
+    
+      <category term="激活函数" scheme="https://chouxianyu.github.io/tags/%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>李宏毅机器学习课程笔记-6.2神经网络精度低不一定是因为过拟合</title>
@@ -41,9 +139,9 @@
     
       <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="过拟合" scheme="https://chouxianyu.github.io/tags/%E8%BF%87%E6%8B%9F%E5%90%88/"/>
-    
       <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="过拟合" scheme="https://chouxianyu.github.io/tags/%E8%BF%87%E6%8B%9F%E5%90%88/"/>
     
   </entry>
   
@@ -68,15 +166,15 @@
     </summary>
     
     
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="正则化" scheme="https://chouxianyu.github.io/tags/%E6%AD%A3%E5%88%99%E5%8C%96/"/>
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
       <category term="学习率" scheme="https://chouxianyu.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%8E%87/"/>
     
-      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+      <category term="正则化" scheme="https://chouxianyu.github.io/tags/%E6%AD%A3%E5%88%99%E5%8C%96/"/>
     
       <category term="激活函数" scheme="https://chouxianyu.github.io/tags/%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/"/>
     
@@ -346,9 +444,9 @@
     </summary>
     
     
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
@@ -376,9 +474,9 @@
     </summary>
     
     
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
@@ -405,9 +503,9 @@
     </summary>
     
     
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
@@ -435,17 +533,17 @@
     
       <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="线性回归" scheme="https://chouxianyu.github.io/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/"/>
+      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
       <category term="逻辑回归" scheme="https://chouxianyu.github.io/tags/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/"/>
+    
+      <category term="线性回归" scheme="https://chouxianyu.github.io/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/"/>
     
       <category term="分类" scheme="https://chouxianyu.github.io/tags/%E5%88%86%E7%B1%BB/"/>
     
       <category term="Softmax" scheme="https://chouxianyu.github.io/tags/Softmax/"/>
     
       <category term="特征变换" scheme="https://chouxianyu.github.io/tags/%E7%89%B9%E5%BE%81%E5%8F%98%E6%8D%A2/"/>
-    
-      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
@@ -536,98 +634,6 @@
       <category term="Adagrad" scheme="https://chouxianyu.github.io/tags/Adagrad/"/>
     
       <category term="SGD" scheme="https://chouxianyu.github.io/tags/SGD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-2.5线性回归Python实战</title>
-    <link href="https://chouxianyu.github.io/2020/12/25/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-5%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92Python%E5%AE%9E%E6%88%98/"/>
-    <id>https://chouxianyu.github.io/2020/12/25/李宏毅机器学习课程笔记-2-5线性回归Python实战/</id>
-    <published>2020-12-25T01:03:09.000Z</published>
-    <updated>2021-02-03T07:26:18.925Z</updated>
-    
-    <content type="html"><![CDATA[<p>本文为作者学习李宏毅机器学习课程时参照样例完成homework1的记录。</p><ul><li><p>任务描述（Task Description）</p><p>  现在有某地空气质量的观测数据，请使用线性回归拟合数据，预测PM2.5。</p></li><li><p>数据集描述（Dataset Description）</p><ul><li><p>train.csv</p><p>  该文件中是2014年每月前20天每小时的观察数据，每小时的数据是18个维度的（其中之一是PM2.5）。</p></li><li><p>test.csv</p><p>  该文件中包含240组数据，每组数据是连续9个小时的所有观测数据（同样是18个维度）。</p><p>  请预测每组数据对应的第10个小时的PM2.5数值。</p></li></ul></li><li><p>结果格式</p><p>  要求上交结果的格式为CSV文件。</p><p>  第一行必须是<code>id,value</code>。</p><p>  从第二行开始每行分别为id值及预测的PM2.5数值，两者用逗号间隔</p></li><li><p>总结</p><ul><li>数据处理<ul><li>将数据处理、转换成什么形式，要根据数据集格式、任务来确定。</li><li>要熟练掌握pandas、numpy等数据处理工具，特别是要知道它们能实现什么功能。</li></ul></li></ul></li><li><p>参考链接</p><p>  <a href="https://colab.research.google.com/drive/131sSqmrmWXfjFZ3jWSELl8cm0Ox5ah3C" target="_blank" rel="noopener">https://colab.research.google.com/drive/131sSqmrmWXfjFZ3jWSELl8cm0Ox5ah3C</a></p></li><li><p>Python代码</p>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line"><span class="comment">## 读取数据</span></span><br><span class="line">data = pd.read_csv(<span class="string">'./train.csv'</span>, encoding = <span class="string">'big5'</span>) <span class="comment"># 读取训练集</span></span><br><span class="line"><span class="comment"># print(data.describe())</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 数据预处理</span></span><br><span class="line">data = data.iloc[:, <span class="number">3</span>:] <span class="comment"># 不需要使用前三列的表头，所以删除</span></span><br><span class="line">data[data == <span class="string">'NR'</span>] = <span class="number">0</span> <span class="comment"># 将非数值NR改为0</span></span><br><span class="line">raw_data = data.to_numpy() <span class="comment"># pandas转numpy数组，形状是4320(=18*20*12)*24</span></span><br><span class="line"><span class="comment"># print(raw_data.shape)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 修改数据格式</span></span><br><span class="line"><span class="comment"># 数据格式为12(month)*18(features)*480(=24*20hours)，即12个月、每个月有480小时的数据（18维）</span></span><br><span class="line">month_data = &#123;&#125; <span class="comment"># 字典</span></span><br><span class="line"><span class="keyword">for</span> month <span class="keyword">in</span> range(<span class="number">12</span>):</span><br><span class="line">    sample = np.empty([<span class="number">18</span>, <span class="number">480</span>])</span><br><span class="line">    <span class="keyword">for</span> day <span class="keyword">in</span> range(<span class="number">20</span>):</span><br><span class="line">        sample[ : , <span class="number">24</span> * day : <span class="number">24</span> * (day + <span class="number">1</span>)] = raw_data[(month * <span class="number">20</span> + day) * <span class="number">18</span> : (month * <span class="number">20</span> + day + <span class="number">1</span>) * <span class="number">18</span>, : ]</span><br><span class="line">    month_data[month] = sample</span><br><span class="line"></span><br><span class="line"><span class="comment">## 修改数据格式</span></span><br><span class="line"><span class="comment"># 数据格式为每个月有连续的480个小时，每10个小时形成1个object，每个月就有471个object，12个月就有471*12个oeject，每个object包括x(18*9的featrues)和y(1个PM2.5数值)。</span></span><br><span class="line">x = np.empty([<span class="number">471</span>*<span class="number">12</span>, <span class="number">18</span>*<span class="number">9</span>], dtype=float) <span class="comment"># 471*12行，一行是一个object的x</span></span><br><span class="line">y = np.empty([<span class="number">471</span>*<span class="number">12</span>, <span class="number">1</span>], dtype=float) <span class="comment"># 471*12行，一行是一个object的y</span></span><br><span class="line"><span class="keyword">for</span> month <span class="keyword">in</span> range(<span class="number">12</span>):</span><br><span class="line">    <span class="keyword">for</span> day <span class="keyword">in</span> range(<span class="number">20</span>):</span><br><span class="line">        <span class="keyword">for</span> hour <span class="keyword">in</span> range(<span class="number">24</span>):</span><br><span class="line">            <span class="keyword">if</span> day == <span class="number">19</span> <span class="keyword">and</span> hour &gt; <span class="number">14</span>: <span class="comment"># 最后一个10小时从第20天14小时开始，防止越界</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            x[month * <span class="number">471</span> + day * <span class="number">24</span> + hour, :] = month_data[month][:,day * <span class="number">24</span> + hour : day * <span class="number">24</span> + hour + <span class="number">9</span>].reshape(<span class="number">1</span>, <span class="number">-1</span>) <span class="comment"># reshape时的(1, -1)指：1行、列数自动计算</span></span><br><span class="line">            y[month * <span class="number">471</span> + day * <span class="number">24</span> + hour, <span class="number">0</span>] = month_data[month][<span class="number">9</span>, day * <span class="number">24</span> + hour + <span class="number">9</span>] <span class="comment"># 取对应的第10个小时的PM2.5的值</span></span><br><span class="line"><span class="comment"># print(x, y)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 标准化</span></span><br><span class="line"><span class="comment">#关于标准化，可以看这篇文章https://www.cnblogs.com/chouxianyu/p/13872444.html</span></span><br><span class="line">mean_x = np.mean(x, axis=<span class="number">0</span>) <span class="comment"># 平均值，axis=0指沿着列计算平均值，即计算每列的平均值</span></span><br><span class="line">std_x = np.std(x, axis=<span class="number">0</span>) <span class="comment"># 标准差，axis=0指沿着列计算平均值，即计算每列的标准差</span></span><br><span class="line"><span class="comment"># print(mean_x.shape, std_x.shape)</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(x)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(x[<span class="number">0</span>])):</span><br><span class="line">        <span class="keyword">if</span> std_x[j] != <span class="number">0</span>:</span><br><span class="line">            x[i][j] = (x[i][j] - mean_x[j]) / std_x[j]</span><br><span class="line"></span><br><span class="line"><span class="comment">## 训练</span></span><br><span class="line">dim = <span class="number">18</span> * <span class="number">9</span> + <span class="number">1</span> <span class="comment"># 这个+1是为了保存偏置</span></span><br><span class="line">w = np.zeros([dim, <span class="number">1</span>])</span><br><span class="line">x = np.concatenate((np.ones([<span class="number">471</span> * <span class="number">12</span>, <span class="number">1</span>]), x), axis=<span class="number">1</span>).astype(float) <span class="comment"># axis=1表示将两个数组按行拼接，向x中添加1是为了让其与weight中的偏置相乘</span></span><br><span class="line">learning_rate = <span class="number">100</span> <span class="comment"># 学习率</span></span><br><span class="line">iter_time = <span class="number">1000</span> <span class="comment"># 迭代次数</span></span><br><span class="line">adagrad = np.zeros([dim, <span class="number">1</span>])</span><br><span class="line">eps = <span class="number">1e-10</span>  <span class="comment"># eps是避免Adagrad分母为0而加的</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(iter_time):</span><br><span class="line">    loss = np.sqrt(np.sum(np.power(np.dot(x, w) - y, <span class="number">2</span>)) / <span class="number">471</span> / <span class="number">12</span>) <span class="comment"># RMSE</span></span><br><span class="line">    <span class="keyword">if</span> (t % <span class="number">100</span> == <span class="number">0</span>):</span><br><span class="line">        print(t, loss)</span><br><span class="line">    gradient = <span class="number">2</span> * np.dot(x.transpose(), np.dot(x, w) - y) <span class="comment"># dim*1</span></span><br><span class="line">    adagrad += gradient ** <span class="number">2</span></span><br><span class="line">    w -= learning_rate * gradient / np.sqrt(adagrad + eps)</span><br><span class="line">np.save(<span class="string">'weight.npy'</span>, w)</span><br><span class="line">print(<span class="string">'Training Done'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 测试</span></span><br><span class="line"><span class="comment"># 读取数据</span></span><br><span class="line">test_data = pd.read_csv(<span class="string">'./test.csv'</span>,header=<span class="keyword">None</span>, encoding=<span class="string">'big5'</span>)</span><br><span class="line">test_data = test_data.iloc[ : , <span class="number">2</span>:] <span class="comment"># 去除表头（前两列）</span></span><br><span class="line">test_data[test_data == <span class="string">'NR'</span>] = <span class="number">0</span></span><br><span class="line">test_data = test_data.to_numpy()</span><br><span class="line">test_x = np.empty([<span class="number">240</span>, <span class="number">18</span> * <span class="number">9</span>]) <span class="comment"># 240个object，一行是一个object的x</span></span><br><span class="line"><span class="comment"># 修改数据格式</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">240</span>):</span><br><span class="line">    test_x[i, :] = test_data[i * <span class="number">18</span> : (i + <span class="number">1</span>) * <span class="number">18</span>, : ].reshape(<span class="number">1</span>, <span class="number">-1</span>) <span class="comment"># 格式和训练集一样</span></span><br><span class="line"><span class="comment"># 标准化</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(test_x)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(test_x[<span class="number">0</span>])):</span><br><span class="line">        <span class="keyword">if</span> std_x[j] != <span class="number">0</span>:</span><br><span class="line">            test_x[i, j] = (test_x[i, j] - mean_x[j]) / std_x[j]</span><br><span class="line">test_x = np.concatenate((np.ones([<span class="number">240</span>, <span class="number">1</span>]), test_x), axis=<span class="number">1</span>).astype(float) <span class="comment"># axis=1表示将两个数组按行拼接，向x中添加1是为了让其与weight中的偏置相乘</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 预测</span></span><br><span class="line">w = np.load(<span class="string">'weight.npy'</span>)</span><br><span class="line">ans_y = np.dot(test_x, w)</span><br><span class="line"><span class="comment"># print('ans_y.shape', ans_y.shape)</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'answer.csv'</span>, mode=<span class="string">'w'</span>, newline=<span class="string">''</span>) <span class="keyword">as</span> answer_file:</span><br><span class="line">    csv_writer = csv.writer(answer_file)</span><br><span class="line">    csv_writer.writerow([<span class="string">'id'</span>, <span class="string">'value'</span>])</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">240</span>):</span><br><span class="line">        row = [<span class="string">'id_'</span> + str(i), ans_y[i][<span class="number">0</span>]]</span><br><span class="line">        csv_writer.writerow(row)</span><br><span class="line">        <span class="comment"># print(row)</span></span><br></pre></td></tr></table></figure></li></ul><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;本文为作者学习李宏毅机器学习课程时参照样例完成homework1的记录。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;任务描述（Task Description）&lt;/p&gt;
-&lt;p&gt;  现在有某地空气质量的观测数据，请使用线性回归拟合数据，预测PM2.5。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="python" scheme="https://chouxianyu.github.io/tags/python/"/>
-    
-      <category term="线性回归" scheme="https://chouxianyu.github.io/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/"/>
-    
-      <category term="adgrad" scheme="https://chouxianyu.github.io/tags/adgrad/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-2.4交叉验证</title>
-    <link href="https://chouxianyu.github.io/2020/12/24/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-4%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81/"/>
-    <id>https://chouxianyu.github.io/2020/12/24/李宏毅机器学习课程笔记-2-4交叉验证/</id>
-    <published>2020-12-24T11:10:34.000Z</published>
-    <updated>2021-02-03T07:26:18.925Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="交叉验证（Cross-Validation）"><a href="#交叉验证（Cross-Validation）" class="headerlink" title="交叉验证（Cross Validation）"></a>交叉验证（Cross Validation）</h1><p>在机器学习中，通常不能将全部数据用于模型训练，否则将没有数据集可以用来评估模型。</p><h2 id="The-Validation-Set-Approach"><a href="#The-Validation-Set-Approach" class="headerlink" title="The Validation Set Approach"></a>The Validation Set Approach</h2><ul><li><p>定义</p><p>  将数据集划分成训练集（Training Set）和测试集（Test Set）两部分。</p></li><li><p>缺点</p><p>  这种方法的缺点是依赖于训练集和测试集的划分方法，并且只用了部分数据进行模型的训练。</p></li></ul><h2 id="LOOCV（Leave-One-Out-Cross-Validation）"><a href="#LOOCV（Leave-One-Out-Cross-Validation）" class="headerlink" title="LOOCV（Leave One Out Cross Validation）"></a>LOOCV（Leave One Out Cross Validation）</h2><ul><li><p>定义</p><p>  假设数据集中有N个数据，取其中1个数据作为测试集，将剩下的N-1个数据作为训练集，这样重复N次就得到N个模型以及N个误差值，最终使用这N个误差值的平均值评估该模型。</p></li><li><p>优点</p><p>  该方法不受训练集和测试集划分方法的影响，因为每个数据都单独做过测试集；同时该方法用了N-1个数据训练模型，也几乎用到了所有的数据，保证了模型的Bias更小。</p></li><li><p>缺点</p><p>  该方法的缺点是计算量过大，是The Validation Set Approach耗时的N-1倍。</p></li></ul><h2 id="K折交叉验证（K-fold-Cross-Validation）"><a href="#K折交叉验证（K-fold-Cross-Validation）" class="headerlink" title="K折交叉验证（K-fold Cross Validation）"></a>K折交叉验证（K-fold Cross Validation）</h2><ul><li><p>定义</p><p>  该方法是LOOCV的折中，即将数据集分成K份。</p></li><li><p>如何选取K的值</p><p>  K的选取是一个Bias和Variance的trade-off。一般选择K=5或10。</p><p>  K越大，每次训练时训练集的数据量就越大，则Bias越小；但每次训练时的训练集之间的相关性越大（考虑最极端的情况K=N，也就是LOOCV，每次训练使用的数据几乎是一样的），这种大相关性会导致最终的误差具有更大的Variance。</p></li></ul><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;交叉验证（Cross-Validation）&quot;&gt;&lt;a href=&quot;#交叉验证（Cross-Validation）&quot; class=&quot;headerlink&quot; title=&quot;交叉验证（Cross Validation）&quot;&gt;&lt;/a&gt;交叉验证（Cross Validatio
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="交叉验证" scheme="https://chouxianyu.github.io/tags/%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-2.3欠拟合与过拟合</title>
-    <link href="https://chouxianyu.github.io/2020/12/24/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-3%E6%AC%A0%E6%8B%9F%E5%90%88%E4%B8%8E%E8%BF%87%E6%8B%9F%E5%90%88/"/>
-    <id>https://chouxianyu.github.io/2020/12/24/李宏毅机器学习课程笔记-2-3欠拟合与过拟合/</id>
-    <published>2020-12-24T11:10:08.000Z</published>
-    <updated>2021-02-03T07:26:18.925Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="欠拟合（Underfitting）"><a href="#欠拟合（Underfitting）" class="headerlink" title="欠拟合（Underfitting）"></a>欠拟合（Underfitting）</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>Bias较大、Variance较小。</p><p>如果模型在训练集上的误差很大，则此时Bias是大的，情况为欠拟合。</p><h2 id="Bias大时如何处理"><a href="#Bias大时如何处理" class="headerlink" title="Bias大时如何处理"></a>Bias大时如何处理</h2><p>使用更复杂的模型，比如添加考虑更多维度的输入、把线性模型换成非线性模型。</p><h1 id="过拟合（Overfitting）"><a href="#过拟合（Overfitting）" class="headerlink" title="过拟合（Overfitting）"></a>过拟合（Overfitting）</h1><h2 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h2><p>Bias较小、Variance较大。</p><p>如果模型在训练集上的误差很小，但是在测试集上的误差很大，则此时Variance是大的，情况为过拟合。</p><h2 id="Variance大时如何处理"><a href="#Variance大时如何处理" class="headerlink" title="Variance大时如何处理"></a>Variance大时如何处理</h2><ul><li><p>使用更复杂的数据集</p><p>  比如添加数据（很有效，但不一定做得到）、数据增强等方法。</p></li><li><p>使用更简单的模型（不是根本方法）</p><p>  可能是模型过于复杂导致了过拟合，因此可以简化模型缓解过拟合。</p></li><li><p>正则化（Regularization）</p><p>  正则化可能会使Bias增大，所以需要调整正则化的参数。</p><p>  如$L_{new}=L_{old}+\lambda \sum(w_i)^2$，其中$\lambda$是一个常数。</p><p>  加上正则项$\lambda \sum(w_i)^2$的目的是让函数参数的值尽可能地接近0，使函数变得更平滑。</p></li></ul><h1 id="平滑（Smooth）"><a href="#平滑（Smooth）" class="headerlink" title="平滑（Smooth）"></a>平滑（Smooth）</h1><h2 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h2><p>平滑是指输入变化影响输出变化的程度（输出对输入的敏感程度）。</p><p>假设输入变化，如果函数越不平滑，则输出变化程度越大。</p><p>函数参数越接近0，这个函数就越平滑（smooth）。 </p><h2 id="我们为什么喜欢一个平滑的函数？"><a href="#我们为什么喜欢一个平滑的函数？" class="headerlink" title="我们为什么喜欢一个平滑的函数？"></a>我们为什么喜欢一个平滑的函数？</h2><p>适度平滑的函数可以缓解函数输入中包含的噪声对函数输出的影响。</p><p>如果输入中包含一些噪声/干扰（noise），那平滑函数的输出受输入中包含的噪声干扰的程度更小。</p><h2 id="我们为什么不喜欢过于平滑的函数？"><a href="#我们为什么不喜欢过于平滑的函数？" class="headerlink" title="我们为什么不喜欢过于平滑的函数？"></a>我们为什么不喜欢过于平滑的函数？</h2><p>函数过于平滑，就无法有效地提取数据的特征，这不是我们想要的函数。</p><p>假设有一个极限平滑的函数，即该函数的输出不受输入的影响，那当然不是个好的函数。</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;欠拟合（Underfitting）&quot;&gt;&lt;a href=&quot;#欠拟合（Underfitting）&quot; class=&quot;headerlink&quot; title=&quot;欠拟合（Underfitting）&quot;&gt;&lt;/a&gt;欠拟合（Underfitting）&lt;/h1&gt;&lt;h2 id=&quot;定义&quot;&gt;&lt;
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="Bias" scheme="https://chouxianyu.github.io/tags/Bias/"/>
-    
-      <category term="Variance" scheme="https://chouxianyu.github.io/tags/Variance/"/>
-    
-      <category term="欠拟合" scheme="https://chouxianyu.github.io/tags/%E6%AC%A0%E6%8B%9F%E5%90%88/"/>
-    
-      <category term="过拟合" scheme="https://chouxianyu.github.io/tags/%E8%BF%87%E6%8B%9F%E5%90%88/"/>
-    
-      <category term="正则化" scheme="https://chouxianyu.github.io/tags/%E6%AD%A3%E5%88%99%E5%8C%96/"/>
     
   </entry>
   
