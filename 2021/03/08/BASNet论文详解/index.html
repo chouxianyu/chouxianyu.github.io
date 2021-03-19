@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,深度学习,神经网络,显著性目标检测,论文笔记,BASNet," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="臭咸鱼的缺氧瓶" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="[toc] 基本信息 论文名称   BASNet: Boundary-Aware Salient Object Detection  作者   Xuebin Qin等  发表时间   2019年  来源   CVPR2019   主要收获 知识  本文混合损失函数中的3种loss  本文核心是混合损失函数以及refine module，其中refine module借用了ResNet中的思路：$S">
+<meta name="keywords" content="机器学习,深度学习,神经网络,显著性目标检测,论文笔记,BASNet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BASNet论文详解">
+<meta property="og:url" content="https://chouxianyu.github.io/2021/03/08/BASNet论文详解/index.html">
+<meta property="og:site_name" content="臭咸鱼的缺氧瓶">
+<meta property="og:description" content="[toc] 基本信息 论文名称   BASNet: Boundary-Aware Salient Object Detection  作者   Xuebin Qin等  发表时间   2019年  来源   CVPR2019   主要收获 知识  本文混合损失函数中的3种loss  本文核心是混合损失函数以及refine module，其中refine module借用了ResNet中的思路：$S">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-03-08T03:35:13.463Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BASNet论文详解">
+<meta name="twitter:description" content="[toc] 基本信息 论文名称   BASNet: Boundary-Aware Salient Object Detection  作者   Xuebin Qin等  发表时间   2019年  来源   CVPR2019   主要收获 知识  本文混合损失函数中的3种loss  本文核心是混合损失函数以及refine module，其中refine module借用了ResNet中的思路：$S">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chouxianyu.github.io/2021/03/08/BASNet论文详解/"/>
+
+
+
+
+
+  <title>BASNet论文详解 | 臭咸鱼的缺氧瓶</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5706c34297d4762ba8c6d799a54234b9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">臭咸鱼的缺氧瓶</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快给我氧气！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2021/03/08/BASNet论文详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BASNet论文详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-08T11:04:00+08:00">
+                2021-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/03/08/BASNet论文详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/03/08/BASNet论文详解/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2021/03/08/BASNet论文详解/" class="leancloud_visitors" data-flag-title="BASNet论文详解">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3,335 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  14 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[toc]</p>
+<h1 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h1><ul>
+<li><p>论文名称</p>
+<p>  BASNet: Boundary-Aware Salient Object Detection</p>
+</li>
+<li><p>作者</p>
+<p>  Xuebin Qin等</p>
+</li>
+<li><p>发表时间</p>
+<p>  2019年</p>
+</li>
+<li><p>来源</p>
+<p>  CVPR2019</p>
+</li>
+</ul>
+<h1 id="主要收获"><a href="#主要收获" class="headerlink" title="主要收获"></a>主要收获</h1><ul>
+<li><p>知识</p>
+<ul>
+<li><p>本文混合损失函数中的3种loss</p>
+</li>
+<li><p>本文核心是混合损失函数以及refine module，其中refine module借用了ResNet中的思路：$S_{refined}=S_{coarse}+S_{residual}$。</p>
+</li>
+<li><p>如图3所示，coarse saliency map存在2方面的问题：①the blurry and noisy boundaries(边界不准确、不清晰), ②the unevenly predicted regional probabilities(同类区域中像素概率不均匀)</p>
+</li>
+<li><p>RRM_LC和RRM_MS等模块比较shallow，所以很难捕捉到可用于refinement的high level information。</p>
+</li>
+<li><p>评估指标</p>
+<ul>
+<li><p>PR Curve</p>
+<p>  PR Curve是1种评估预测所得显著性图的标准方式。1张显著性图的precision和recall通过比较二值化的显著性图及其ground truth计算。<strong>1个二值化threshold对应的1对precision和recall是数据集中所有显著性图的平均precision和recall</strong>。threshold从0到1变化，可以得到<strong>1个precision-recall pair序列</strong>，画出来就是PR Curve。</p>
+</li>
+<li><p>F-measure</p>
+<p>  F-measure可以全面地衡量precision和recall，其<strong>基于1对precision和recall进行计算</strong>。在进行算法比较时，一般采用最大的F-measure进行比较。</p>
+</li>
+<li><p>MAE</p>
+<p>  MAE指显著性图与其ground truth的average absolute per-pixel difference。<strong>模型对于1个数据集的MAE为所有显著性图的MAE的平均值</strong>。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>一些未知的东西</p>
+<ul>
+<li>U-Net</li>
+<li>SegNet</li>
+<li>dilation convolution</li>
+<li>感受野的计算方法</li>
+</ul>
+</li>
+</ul>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><ul>
+<li>背景：多数前人工作只关注region accuracy而非boundary quality。</li>
+<li>本文提出：a predict-refine architecture: BASNet and a new hybrid loss for Boundary-Aware Salient object detection<ul>
+<li>BASNet<ul>
+<li>a densely supervised Encoder-Decoder network, in charge of saliency prediction</li>
+<li>a residual refinement module(RRM), in charge of saliency map refinement</li>
+</ul>
+</li>
+<li>The hybrid loss<ul>
+<li>3级层次结构：pixel-level, patch-level, map-level</li>
+<li>方式：混合3种loss，Binary Cross Entropy (BCE), Structural SIMilarity (SSIM) and Intersection-over-Union (IoU) losses</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>效果</strong>：effectively segment the salient object regions and accurately predict <strong>the fine structures with clear boundaries</strong><ul>
+<li>精度：在6个数据集上，ofregional and boundary evaluation measures超过SOTA。</li>
+<li>速度：over 25 fps on a single GPU</li>
+</ul>
+</li>
+<li>Code：<a href="https://github.com/NathanUA/BASNet" target="_blank" rel="noopener">https://github.com/NathanUA/BASNet</a></li>
+</ul>
+<h1 id="1-Inroducion"><a href="#1-Inroducion" class="headerlink" title="1. Inroducion"></a>1. Inroducion</h1><ul>
+<li><p>背景</p>
+<p>  近期FCN被用于显著性目标检测，性能优于传统算法，但their predicted saliency maps are still <strong>defective in fine structures and/or boundaries</strong>，如图1(c)和(d)所示。</p>
+</li>
+<li><p><strong>two main challenges</strong> in accurate salient object detection</p>
+<ol>
+<li>network：networks that <strong>aggregate multi-level deep features</strong> are needed</li>
+<li>loss：models trained with CE loss usually have <strong>low confidence</strong> in differentiating boundary pixels, leading to <strong>blurry</strong> boundaries. Other losses such as Intersection over Union (IoU) loss, F-measure loss and Dice-score loss are not specifically designed for capturing <strong>fine structures</strong>。</li>
+</ol>
+</li>
+<li><p>BASNet: the prediction module and RRM</p>
+<p>  To capture both <strong>global (coarse)</strong> and <strong>local (fine)</strong> contexts，a new <strong>predict-refine</strong> network is proposed。</p>
+<ul>
+<li><p>the prediction module</p>
+<p>  a <strong>U-Net-like</strong> densely supervised Encoder-Decoder network，transfers the input image to a probability map</p>
+</li>
+<li><p>RRM</p>
+<p>  a novel residual refinement module，refines the predicted map by learning the residuals between the coarse saliency map and ground truth</p>
+</li>
+</ul>
+</li>
+<li><p>the hybrid loss</p>
+<p>  To obtain <strong>high confidence</strong> saliency map and <strong>clear</strong> boundary, we propose a hybrid loss that combines Binary Cross Entropy (<strong>BCE</strong>), Structural SIMilarity (<strong>SSIM</strong>) and <strong>IoU</strong> losses, which are expected to learn from ground truth information in <strong>pixel-, patch- and map- level</strong>, respectively.</p>
+<p>  <strong>Rather than using explicit boundary losses</strong> (NLDF+ , C2S ), we implicitly inject the goal of accurate boundary prediction in the hybrid loss, contemplating that it may help reduce spurious error from cross propagating the information learned on the boundary and the other regions on the image。</p>
+<p>  毕竟任务不是边缘检测，所以不能只检测边缘。</p>
+</li>
+</ul>
+<h1 id="2-Related-Works"><a href="#2-Related-Works" class="headerlink" title="2. Related Works"></a>2. Related Works</h1><ul>
+<li><p>Traditional Methods</p>
+<p>  早期方法根据1个<strong>预定义</strong>的基于<strong>手工特征</strong>计算的saliency measure<strong>搜索像素</strong>以检测显著目标。Borji等人提供了1个全面的综述。</p>
+</li>
+<li><p>Patch-wise Deep Methods</p>
+<p>  受深度卷积神经网络推动图片分类发展的启发，早期的deep方法基于从单/多尺度提取的<strong>local image patches</strong>将image pixels和super pixels分类为显著/非显著。这些方法通常生成<strong>coarse outputs</strong>因为在全连接层中<strong>spatial information会丢失</strong>。</p>
+</li>
+<li><p>FCN-based Methods</p>
+<p>  相比于Traditional Methods和Patch-wise Deep Methods，基于FCN的方法取得了重要进展，因为FCN is able to <strong>capture richer spatial and multiscale information</strong>。</p>
+<p>  UCF、Amulet、NLDF+、DSS+、HED、RAS、LFR、BMPM。</p>
+</li>
+<li><p>Deep Recurrent and attention Methods</p>
+<p>  PAGRN、RADF+、RFCNPiCANetR</p>
+</li>
+<li><p>Coarse to Fine Deep Methods</p>
+<p>  为捕捉finer structures和more accurate boundaries，学者提出了大量refinement策略。</p>
+<p>  SRM、R3Net+、DGRL</p>
+</li>
+</ul>
+<h1 id="3-BASNet"><a href="#3-BASNet" class="headerlink" title="3. BASNet"></a>3. BASNet</h1><h2 id="3-1-Overview-of-Network-Architecture"><a href="#3-1-Overview-of-Network-Architecture" class="headerlink" title="3.1. Overview of Network Architecture"></a>3.1. Overview of Network Architecture</h2><p>BASNet包括2个Module：Predict Module和Refine Module，如图2所示。</p>
+<ul>
+<li><p>Predict Module</p>
+<p>  a U-Net-like densely supervised Encoder-Decoder network，作用是predict saliency map from input images</p>
+</li>
+<li><p>Refine Module</p>
+<p>  Residual Refinement Module，<strong>refines the resulting saliency map</strong> of the prediction module by learning the residuals between the saliency map and the ground truth。</p>
+</li>
+</ul>
+<h2 id="3-2-Predict-Module"><a href="#3-2-Predict-Module" class="headerlink" title="3.2. Predict Module"></a>3.2. Predict Module</h2><ul>
+<li><p>整体</p>
+<ul>
+<li>受U-Net和SegNet启发，predict module是1个<strong>Encoder-Decoder</strong>网络，这种结构可以同时捕捉<strong>high level global contexts and low level details</strong>。</li>
+<li>受HED启发，为减少过拟合，通过ground truth对decoder每个stage的最后1层进行监督，如图2所示。</li>
+</ul>
+</li>
+<li><p>encoder</p>
+<p>  encoder部分包含<strong>1个输入卷积层</strong>和<strong>6个由basic res-blocks组成的stage</strong>，其中输入卷积层和前4个stage是修改过的<strong>ResNet34</strong>。</p>
+<p>  改动为本文中的输入卷积层有64个步长为1的3×3卷积核而非步长为2的7×7卷积核，并且在输入卷积层之后没有pooling，这使得在前几层获得更大尺寸的特征图但也减小了整体的感受野。</p>
+<p>  为获得和ResNet34相同的感受野，本文<strong>在ResNet34又加了2个stage</strong>，每个stage均由size为2的不重叠maxpooling层及3个512filter的basic res-block组成。</p>
+</li>
+<li><p>bridge</p>
+<p>  为进一步捕捉global infomation，本文<strong>在encoder和decoder之间添加了1个bridge</strong>。</p>
+<p>  该bridge包括3个512核的dilation为2的3×3卷积层，其中每个卷积层后都有1个BN层和ReLU。</p>
+</li>
+<li><p>decoder</p>
+<p>  decoder几乎和encoder完全对称。decoder的每个stage包含3个卷积层，每个卷积层后有1个BN层和ReLU。</p>
+<p>  <strong>每个stage的输入是</strong>其前1个stage的输出和其对应的encoder中的stage的输出的<strong>concatenate</strong>结果。</p>
+<p>  为得到side-output saliency maps，bridge和decoder中每个stage的输出被进行处理，处理过程为：<strong>1个3×3卷积、上采样、sigmoid</strong>。因此输入1张图片，本文的predict module在训练过程中输出<strong>7个saliency maps</strong>，其中<strong>最后1个saliency map</strong>的accuracy最高，所以其作为predict module的最终输出传入refine module。</p>
+</li>
+</ul>
+<h2 id="3-3-Refine-Module"><a href="#3-3-Refine-Module" class="headerlink" title="3.3. Refine Module"></a>3.3. Refine Module</h2><ul>
+<li>Refinement Module通常被定义为1个<strong>residual block</strong>，其通过学习saliency map和ground truth之间的residual$S_{residual}$来refine预测得到的coarse saliency map$S_{coarse}$，公式为$S_{refined}=S_{coarse}+S_{residual}$。</li>
+<li>如图3所示，<strong>coarse包含2方面的含义</strong>：①the blurry and noisy boundaries, ②the unevenly predicted regional probabilities，模型预测所得的coarse saliency map中这2方面的问题都会有。</li>
+<li><strong>RRM_LC</strong>(residual refinement module based on local context)起初被提出是用于boundary refinement，因为其感受野较小，Islam和Deng等人iteratively或recurrently在不同尺度上使用它refine saliency maps。Wang等人使用了PPM(pyramid pooling module)，其中3个尺度的pyramid pooling features被concatenate。为避免池化操作导致细节损失，<strong>RRM_MS</strong>使用kernel size和dilation不同的卷积层捕捉multi-scale contexts。然而这些模块是shallow的，所以<strong>很难捕捉到可用于refinement的high level information</strong>。</li>
+<li>本文的<strong>RRM和predict module结构相似</strong>但简单很多，其包含1个输入层、1个encoder、1个bridge、1个decoder和1个输出层。encoder和decoder都包含<strong>4个stage</strong>，<strong>每个stage</strong>只包含1个64核的3×3卷积层，<strong>每个卷积层</strong>后面都有1个BN层和1个ReLU。bridge和1个stage结构相同，也包含1个64核的3×3卷积层(后面跟着1个BN层和1个ReLU)。encoder中下采样时使用maxpooling，decoder中上采样时使用bilinear interpolation。RRM的输出即本文整个模型最终的输出。</li>
+</ul>
+<h2 id="3-4-Hybrid-Loss"><a href="#3-4-Hybrid-Loss" class="headerlink" title="3.4. Hybrid Loss"></a>3.4. Hybrid Loss</h2><ul>
+<li><p>训练中的Loss是各个side output的loss的加权和，每个side output的loss公式都是1个hybrid loss(3种loss之和)。本文模型对8个side output进行深度监督，其中7个side output来自Predict Module、1个side output来自Refine Module。</p>
+<ul>
+<li>BCE Loss：在二分类和分割任务中，二值交叉熵损失函数（Binary Cross Entropy Loss，BCE Loss）是最常用的损失函数。公式略</li>
+<li>SSIM Loss：结构相似损失（Structural Similarity Loss，SSIM Loss）在提出时被用于图像质量评价。它可以捕捉一张图片中的结构信息，因此本文将其集成于混合损失函数中，以获取显著目标标注中的结构信息。公式略</li>
+<li>IoU Loss：交并比损失（Intersection over Union Loss，IoU Loss）在提出时被用来衡量2个集合的相似性，后来被作为目标检测和分割的标准评估指标。最近，它也被用在了显著性目标检测的训练中。公式略</li>
+</ul>
+</li>
+<li><p>本文阐述了3种loss的作用，图5中的热力图展示了每个像素的loss随训练过程的变化，3列分别代表训练过程中的不同阶段，3行分别是不同的loss。</p>
+<ul>
+<li><p>BCE Loss是<strong>pixel-level</strong>的measure，它并不考虑周围像素的label并且foreground像素和background像素的权重相同，<strong>有助于所有像素的收敛</strong>。</p>
+</li>
+<li><p>SSIM Loss是<strong>patch-level</strong>的measure，它考虑每个像素的local neighborhood，<strong>对边界具有更高的权重</strong>(即使预测前景的概率相同，但边界附近的loss比前景中心的loss更高)。</p>
+<p>  在训练过程的初始阶段，边界周围像素的loss是最大的(见图5第2行)，<strong>这帮助集中于边界附近像素的收敛</strong>。随着训练过程，foreground的SSIM Loss减小而<strong>background的loss成为主导项</strong>。但只有当background的预测非常接近ground truth(0)时 background的loss才会起作用，<strong>这时loss会从1急速下降到0</strong>，因为通常只有在训练晚期BCE loss平滑(flat)时background的预测才会到0。SSIM Loss保证有足够的梯度使得网络继续学习。因为预测被push到0，background的预测看起来会更clean。</p>
+</li>
+<li><p>IoU Loss是<strong>map-level</strong>的measure，但是本文为了阐述所以根据式6画出了每个像素的IoU Loss。</p>
+<p>  随着foreground的预测越来越接近1，foreground的loss最终变成0。</p>
+<p>把3个loss混合起来，<strong>利用BCE使每个像素都有smooth gradient，利用IoU给予foreground更多注意力，通过SSIM基于图像结构使得边界的loss更大</strong>。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="4-Experimental-Results"><a href="#4-Experimental-Results" class="headerlink" title="4. Experimental Results"></a>4. Experimental Results</h1><h2 id="4-1-Datasets"><a href="#4-1-Datasets" class="headerlink" title="4.1. Datasets"></a>4.1. Datasets</h2><p>在6个常用数据集上对模型进行了评估。具体是哪些数据集、这些数据集有哪些特点请见原文。</p>
+<h2 id="4-2-Implementation-and-Experimental-Setup"><a href="#4-2-Implementation-and-Experimental-Setup" class="headerlink" title="4.2. Implementation and Experimental Setup"></a>4.2. Implementation and Experimental Setup</h2><ul>
+<li><p>训练</p>
+<ul>
+<li>使用DUTS-TR训练模型，训练前进行离线数据增强(将图片水平翻转)。</li>
+<li>将图片resize到256×256并随机裁剪成224×224。</li>
+<li>encoder的部分参数使用ResNet34的预训练模型进行初始化，其它卷积层通过Xavier初始化。</li>
+<li>使用Adam进行训练，超参数为默认值（初始学习率1e-3，betas=(0.9, 0.999)，eps=1e-8，weight decay=0）</li>
+<li>一直训练到loss收敛，不使用validation set。最终经历了400k iterations，batch size为8，耗时125小时c</li>
+</ul>
+</li>
+<li><p>测试/推理</p>
+<p>  将原图resize到256×256，再将最终得到的显著图resize back到原图大小</p>
+</li>
+<li><p>软/硬件环境</p>
+<p>  训练和测试的软硬件环境一致。</p>
+<p>  PyTorch0.4.0，An eight-core PC with an AMD Ryzen 1800x 3.5 GHz CPU (with 32GB RAM) and a GTX 1080ti GPU (with 11GB memory)</p>
+<p>  256×256图片的推理耗时为0.04秒。</p>
+</li>
+</ul>
+<h2 id="4-3-Evaluation-Metrics"><a href="#4-3-Evaluation-Metrics" class="headerlink" title="4.3. Evaluation Metrics"></a>4.3. Evaluation Metrics</h2><p>PR Curve、F-measure、MAE、relaxed F-measure of boundary ($relaxF^b_{\beta}$)。对这几个评估指标的具体介绍请见原文。</p>
+<ul>
+<li><p>PR Curve</p>
+<p>  PR Curve是1种评估预测所得显著性图的标准方式。1张显著性图的precision和recall通过比较二值化的显著性图及其ground truth计算。<strong>1个二值化threshold对应的1对precision和recall是数据集中所有显著性图的平均precision和recall</strong>。threshold从0到1变化，可以得到<strong>1个precision-recall pair序列</strong>，画出来就是PR Curve。</p>
+</li>
+<li><p>F-measure</p>
+<p>  F-measure可以全面地衡量precision和recall，其<strong>基于1对precision和recall进行计算</strong>。在进行算法比较时，一般采用最大的F-measure进行比较。</p>
+</li>
+<li><p>MAE</p>
+<p>  MAE指显著性图与其ground truth的average absolute per-pixel difference。<strong>模型对于1个数据集的MAE为所有显著性图的MAE的平均值</strong>。</p>
+</li>
+<li><p>relaxed F-measure of boundary</p>
+<p>  此处省略，请见原文。</p>
+</li>
+</ul>
+<h2 id="4-4-Ablation-Study"><a href="#4-4-Ablation-Study" class="headerlink" title="4.4. Ablation Study"></a>4.4. Ablation Study</h2><p>这个section验证了本文模型中的每个关键component。消融实验包括architecture ablation和loss ablation2个部分。消融实验是在ECSSD数据集上进行的。</p>
+<ul>
+<li><p>architecture ablation</p>
+<p>  为证明BASNet的有效性，本文提供了BASNet与其它相关结构的量化对比结果。</p>
+<p>  Loss都使用BCE，首先以U-Net作为baseline，然后是Encoder-Decoder Network、Deep Supervision、RRM_LC、RRM_MS、RRM_Ours，结果如表1所示，可见本文提出的<strong>BASNet在这5个实验中性能最优</strong>。</p>
+</li>
+<li><p>loss ablation</p>
+<p>  为阐述本文提出的fusion loss的有效性，本文基于BASNet使用不同loss进行了1系列实验。表1中的结果证明<strong>本文提出的hybrid loss极大地提升了性能</strong>，特别是边界的质量。</p>
+<p>  为进一步阐述损失函数对于BASNet预测质量的影响，使用不同Loss对BASNet进行训练的结果如图7所示，很明显可以看出<strong>本文提出的混合损失函数达到了最优的质量</strong>。</p>
+</li>
+</ul>
+<h2 id="4-5-Comparison-with-State-of-the-arts"><a href="#4-5-Comparison-with-State-of-the-arts" class="headerlink" title="4.5. Comparison with State-of-the-arts"></a>4.5. Comparison with State-of-the-arts</h2><p>和15个SOTA算法进行比较。公平起见，使用原文作者提供的显著性图或者使用原文作者公开的模型。</p>
+<ul>
+<li><p>Quantitative evaluation</p>
+<p>  <strong>图6</strong>展示了在5个数据集上的PR曲线和F-measure曲线，表2展示了在6个数据集上的maximum region-based F-measure、MAE、the relaxed boundary Fmeasure。数据提了很多个percent（略）</p>
+</li>
+<li><p>Qualitative evaluation</p>
+<p>  <strong>图8</strong>展示对比了8种算法对<strong>不同类型图片</strong>的识别效果图，图片类型有images with low contrast、fine structures、large object touching image boundaries、complex object boundaries。</p>
+</li>
+</ul>
+<h1 id="5-Conclusion"><a href="#5-Conclusion" class="headerlink" title="5. Conclusion"></a>5. Conclusion</h1><p>略</p>
+<hr>
+<p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p>
+<p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p>
+<p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p>
+<p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>转载请注明出处，欢迎讨论和交流!</p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/神经网络/" rel="tag"># 神经网络</a>
+          
+            <a href="/tags/显著性目标检测/" rel="tag"># 显著性目标检测</a>
+          
+            <a href="/tags/论文笔记/" rel="tag"># 论文笔记</a>
+          
+            <a href="/tags/BASNet/" rel="tag"># BASNet</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/05/PSPNet论文阅读笔记/" rel="next" title="PSPNet论文阅读笔记">
+                <i class="fa fa-chevron-left"></i> PSPNet论文阅读笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/19/PoolNet论文详解/" rel="prev" title="PoolNet论文详解">
+                PoolNet论文详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg"
+                alt="臭咸鱼" />
+            
+              <p class="site-author-name" itemprop="name">臭咸鱼</p>
+              <p class="site-description motion-element" itemprop="description">祝你天天开心啊！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">270</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">159</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://maluguang.com" title="Road Wide's Blog" target="_blank">Road Wide's Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/chouxianyu/" title="Chou Xianyu's CNBlog" target="_blank">Chou Xianyu's CNBlog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本信息"><span class="nav-number">1.</span> <span class="nav-text">基本信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主要收获"><span class="nav-number">2.</span> <span class="nav-text">主要收获</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">3.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Inroducion"><span class="nav-number">4.</span> <span class="nav-text">1. Inroducion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Related-Works"><span class="nav-number">5.</span> <span class="nav-text">2. Related Works</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-BASNet"><span class="nav-number">6.</span> <span class="nav-text">3. BASNet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-Overview-of-Network-Architecture"><span class="nav-number">6.1.</span> <span class="nav-text">3.1. Overview of Network Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Predict-Module"><span class="nav-number">6.2.</span> <span class="nav-text">3.2. Predict Module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-Refine-Module"><span class="nav-number">6.3.</span> <span class="nav-text">3.3. Refine Module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-Hybrid-Loss"><span class="nav-number">6.4.</span> <span class="nav-text">3.4. Hybrid Loss</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Experimental-Results"><span class="nav-number">7.</span> <span class="nav-text">4. Experimental Results</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Datasets"><span class="nav-number">7.1.</span> <span class="nav-text">4.1. Datasets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Implementation-and-Experimental-Setup"><span class="nav-number">7.2.</span> <span class="nav-text">4.2. Implementation and Experimental Setup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-Evaluation-Metrics"><span class="nav-number">7.3.</span> <span class="nav-text">4.3. Evaluation Metrics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-Ablation-Study"><span class="nav-number">7.4.</span> <span class="nav-text">4.4. Ablation Study</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-Comparison-with-State-of-the-arts"><span class="nav-number">7.5.</span> <span class="nav-text">4.5. Comparison with State-of-the-arts</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-Conclusion"><span class="nav-number">8.</span> <span class="nav-text">5. Conclusion</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">臭咸鱼</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">240.6k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz',
+        appKey: 'Si7hBxIAVOGbu6Pot7HHaVBB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz", "Si7hBxIAVOGbu6Pot7HHaVBB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>

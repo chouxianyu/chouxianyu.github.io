@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="论文笔记,深度学习,机器学习,ResNet,神经网络," />
+  <meta name="keywords" content="机器学习,深度学习,神经网络,论文笔记,ResNet," />
 
 
 
@@ -82,14 +82,14 @@
 
 
 <meta name="description" content="[toc] 基本信息 论文名称   Deep Residual Learning for Image Recognition  作者   Kaiming He   Microsoft Research  发表时间   2015年  来源   CVPR2016   主要收获 知识 较深的神经网络难以训练 网络的深度对于许多视觉识别任务至关重要 152层的ResNet，8× deeper than V">
-<meta name="keywords" content="论文笔记,深度学习,机器学习,ResNet,神经网络">
+<meta name="keywords" content="机器学习,深度学习,神经网络,论文笔记,ResNet">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ResNet论文阅读笔记">
 <meta property="og:url" content="https://chouxianyu.github.io/2021/02/26/ResNet论文阅读笔记/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
 <meta property="og:description" content="[toc] 基本信息 论文名称   Deep Residual Learning for Image Recognition  作者   Kaiming He   Microsoft Research  发表时间   2015年  来源   CVPR2016   主要收获 知识 较深的神经网络难以训练 网络的深度对于许多视觉识别任务至关重要 152层的ResNet，8× deeper than V">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-02-26T13:44:40.364Z">
+<meta property="og:updated_time" content="2021-03-17T12:34:45.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ResNet论文阅读笔记">
 <meta name="twitter:description" content="[toc] 基本信息 论文名称   Deep Residual Learning for Image Recognition  作者   Kaiming He   Microsoft Research  发表时间   2015年  来源   CVPR2016   主要收获 知识 较深的神经网络难以训练 网络的深度对于许多视觉识别任务至关重要 152层的ResNet，8× deeper than V">
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2,696 字
+                  2,687 字
                 </span>
               
 
@@ -446,7 +446,7 @@
 <li>理论基础：假设目标函数为H(x)，可将其表示为H(x)=F(x)+x。若最优解是identity mapping，则此时F(x)为0，<strong>使参数为0比学习H(x)更加容易</strong>。</li>
 <li>F(x)+x可以通过<strong>shortcut connections</strong>实现，不需额外参数，仅需微小计算量（element-wise addition）。</li>
 <li>基础网络（Plain Network）采用VGGNet的设计思路，主要使用3×3卷积并遵守2个设计原则：①若输出特征图的尺寸不变，则通道数也应不变；②若输出特征的尺寸减半，则通道数应增1倍以保留时间复杂度。</li>
-<li>ResNet50网络的具体结构以及Bottleneck的具体结构，这份见下篇文章。</li>
+<li><a href="https://zhuanlan.zhihu.com/p/353235794" target="_blank" rel="noopener">ResNet50网络结构图解以及Bottleneck结构图解</a></li>
 </ul>
 </li>
 <li>未知点<ul>
@@ -525,7 +525,7 @@
 <p>在真实情况中，<strong>虽然identity mappings并不一定是最优解，但该思路还是可能对the degradation problem进行了precondition</strong>。相对于1个zero mapping，如果最优解更接近于identity mappings，那么参考identity mappings做扰动应该比从头学习1个新的函数要更容易。本文通过<strong>实验（图7）</strong>表明，学习到的残差函数通常具有较小的响应（small responses），这表明identity mappings提供了合理的precondition。</p>
 <h2 id="3-2-Identity-Mapping-by-Shortcuts"><a href="#3-2-Identity-Mapping-by-Shortcuts" class="headerlink" title="3.2. Identity Mapping by Shortcuts"></a>3.2. Identity Mapping by Shortcuts</h2><p>每几个层都进行residual learning，形成1个具有多层的block（见原文图2）。图2所示的block有2层，其公式（式1）为$y=F(x,\{W_i\})+x=\sigma(W_2\sigma(W_1x+b_1)+b)$，其中$\sigma$是ReLU。</p>
 <p>F(x)+x通过shortcut connection实现，即保存输入x然后和输出F(x)相加得到F(x)+x，并且使用的这种shortcut connection并不增加参数和计算量（仅增加了微不足道的element-wise addition）。</p>
-<p>在式1中，F(x)和x的通道数必须是一样的，否则就需要在shortcut connections中对x进行1个线性投影（<strong>linear projection</strong>）以匹配维度，即式2$y=F(x,\{W_i\})+W_sx$，其中$W_s$仅被用来匹配F(x)的维度。</p>
+<p>在式1中，F(x)和x的通道数必须是一样的，否则就需要在shortcut connections中对x进行1个线性投影（<strong>linear projection</strong>）以匹配维度，即式2：$y=F(x,\{W_i\})+W_sx$，其中$W_s$仅被用来匹配F(x)的维度。</p>
 <p>每个block中可以有更多层，比如3（如图5所示的BottleNeck），但如果每个block中只有1层的话，公式就变成了1个线性层$y = W_1x+x$。</p>
 <p>这种block也适用于卷积层，其中F(x)+x是每个维度对应位置元素相加。</p>
 <h2 id="3-3-Network-Architectures"><a href="#3-3-Network-Architectures" class="headerlink" title="3.3. Network Architectures"></a>3.3. Network Architectures</h2><ul>
@@ -555,7 +555,7 @@
 <p>  略</p>
 </li>
 <li><p><strong>Deeper Bottleneck Architectures</strong></p>
-<p>  考虑到可接受的训练时长，使用Bottleneck（图5所示），每个block中包含3个层：1×1卷积、3×3卷积、1×1卷积，其中2个1×1卷积f分别用来减少和恢复维度，使得3×3卷积接收和输出更少的通道数。</p>
+<p>  考虑到可接受的训练时长，使用Bottleneck（图5所示），每个block中包含3个层：1×1卷积、3×3卷积、1×1卷积，其中2个1×1卷积分别用来减少和恢复维度，使得3×3卷积接收和输出更少的通道数。</p>
 <p>  不需额外参数的identity shortcuts对于Bottleneck非常重要，如果把Bottleneck中的identity shortcut换成projection，模型的时间复杂度和参数量就会增加1倍，因为shortcut连接到了2个高维特征上。所以identity shortcuts使得基于Bottleneck的模型更加有效。</p>
 </li>
 <li><p><strong>50-layer ResNet</strong></p>
@@ -590,15 +590,15 @@
       
         <div class="post-tags">
           
-            <a href="/tags/论文笔记/" rel="tag"># 论文笔记</a>
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
           
             <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
-            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+            <a href="/tags/神经网络/" rel="tag"># 神经网络</a>
+          
+            <a href="/tags/论文笔记/" rel="tag"># 论文笔记</a>
           
             <a href="/tags/ResNet/" rel="tag"># ResNet</a>
-          
-            <a href="/tags/神经网络/" rel="tag"># 神经网络</a>
           
         </div>
       
@@ -620,6 +620,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/02/26/ResNet50网络结构图及结构详解/" rel="prev" title="ResNet50网络结构图及结构详解">
+                ResNet50网络结构图及结构详解 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -709,7 +713,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">265</span>
+                  <span class="site-state-item-count">270</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -722,7 +726,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">159</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -814,7 +818,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">224.7k</span>
+    <span title="Site words total count">240.6k</span>
   
 </div>
 
