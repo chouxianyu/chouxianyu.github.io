@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[李宏毅机器学习课程笔记-8.1图神经网络入门]]></title>
+    <url>%2F2021%2F04%2F02%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-8-1%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%85%A5%E9%97%A8%2F</url>
+    <content type="text"><![CDATA[GNN的用处分类（Classification）比如，有很多不同的化学分子，将其表示成图作为输入，用GNN判断其是否会导致突变，这就是一个有监督分类问题。 生成（Generation）比如，我们需要开发针对新冠病毒的新药，我们可以训练出一个可以生成我们想要的分子（输出形式为图）的GNN，然后用这个GNN生成可以对抗病毒的某种化学分子。 GraphVAE 为什么要用GNN上面列举的分类、生成的例子中输入或输出都是图，所以要用GNN。图不仅包含了各个结点的信息，更重要的是它包含了各个结点之间的关系。 使用GNN时可能遇到的问题 如何通过结点间的信息帮助模型 图中可能包含大量结点，数据集非常大 大量结点都是没有label的 GNN的两种思路很直观地可以想到，一个结点和它的相邻结点肯定有某些特定的关系，比如说相似（近朱者赤近墨者黑）、相反、合作等等。在多数情况下，数据集unlabeled node都是远多于labeled node的，我们想要得到一个较好的模型，那我们要如何利用仅有的少量labeled node以及它和邻居间的关系呢？结合CNN，我们要如何将卷积这个操作推广到GNN模型中，用卷积将结点嵌入到某个特征空间中呢？有两种方法 Spatial-based Convolution Generalize the concept of convolution(corelation) to graph. Spectral-based Convolution Back to the definition of convolution in signal processing. GNN导图 任务和数据集常见任务 Classification Regression Graph Classification Graph Representation Learning Link Prediction 常用数据集 CORA: citation network, 2.7k nodes and 5.4k links TU-MUTAG: 188 molecules with 18 nodes on average 其它https://www.dgl.ai/ Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+        <tag>神经网络</tag>
+        <tag>图神经网络</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[李宏毅机器学习课程笔记-7.3CNN应用案例]]></title>
     <url>%2F2021%2F04%2F01%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-7-3CNN%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B%2F</url>
     <content type="text"><![CDATA[Deep DreamDeep Dream是这样的：如果给机器一张图片$x$，Deep Dream会把机器看到的内容加到图片$x$中得到$x’$。那如何实现呢？ 如上图所示，将图片$x$输入到CNN中，然后取出CNN中某一层$L$（可以是卷积、池化阶段的隐藏层，也可以是FNN中的隐藏层）的输出$O$，然后将$L$中的正值调大、负值调小得到一个新的输出$O’$，然后通过梯度下降找到一张新的图片$x’$使层$L$的输出为$O’$，这个$x’$就是我们要的结果。直观理解的话，也就是让CNN夸大它所看到的内容。 然后就得到了如下结果……（看到的时候我惊了，真是十分哇塞） Deep StyleDeep Style是这样的：如果给机器一张图片$x$和$y$，Deep Style可以把图片$y$的风格加到图片$x$上，也就是风格迁移。 那如何实现呢？论文：A Neural Algorithm of Artistic Style。 把图片$x$传入CNN并得到输出，然后其输出作为图片$x$的内容$c_x$（content）； 把图片$y$传入CNN并得到输出，但不是考虑输出的值是什么，而是考虑输出层中各个filter输出之间的相关性（corelation）作为图片$y$的风格$s_y$（style）； 最后基于同一个CNN找到图片$z$，图片$z$传入CNN后得到的内容$c_z$像$c_x$、风格$s_z$像$s_y$。 如下图所示 围棋CNN不单单可以用在图像上，还可以用在其它方面，比如下围棋。 在下围棋这件事上，其实FNN就可以（输入和输出都是19×19=361的vector），但CNN的效果更好。当然还可以用强化学习。 为什么CNN可以用来下围棋呢？因为围棋具有图像的3个性质，不过AlphaGo并没有用Max Pooling因为它不需要。 语音如下图所示，用语谱图（Spectrogram）表示语音。 语谱图的x轴是时间，y轴是频率，z轴是幅度。幅度用颜色表示（比如亮色表示高、暗色表示低）。 在语谱图中，CNN的卷积核往往只在y轴方向上移动，这样可以消除男生女生声音频率的差异；卷积核往往不在x轴上移动，因为时间域一般是在后面用LSTM等等进行处理，如下图所示。 文本CNN也可以用在文字处理上，比如文本情感分析。具体不再讲，可以看李宏毅老师的视频。 图片生成Deep Dream的方法还是不能画出图片，不过也有其它较为成功的方法，如下图所示。 Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
@@ -182,8 +193,8 @@
         <tag>机器学习</tag>
         <tag>深度学习</tag>
         <tag>神经网络</tag>
-        <tag>学习率</tag>
         <tag>正则化</tag>
+        <tag>学习率</tag>
         <tag>激活函数</tag>
         <tag>Dropout</tag>
       </tags>
@@ -225,8 +236,8 @@
       <tags>
         <tag>算法</tag>
         <tag>PAT</tag>
-        <tag>map</tag>
         <tag>排序</tag>
+        <tag>map</tag>
       </tags>
   </entry>
   <entry>
@@ -859,8 +870,8 @@
         <tag>算法</tag>
         <tag>PAT</tag>
         <tag>图</tag>
-        <tag>set</tag>
         <tag>map</tag>
+        <tag>set</tag>
         <tag>点着色</tag>
       </tags>
   </entry>
@@ -1089,8 +1100,8 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
-        <tag>栈</tag>
         <tag>单向链表</tag>
+        <tag>栈</tag>
       </tags>
   </entry>
   <entry>
@@ -1338,8 +1349,8 @@
       <tags>
         <tag>二叉树</tag>
         <tag>递归</tag>
-        <tag>栈</tag>
         <tag>迭代</tag>
+        <tag>栈</tag>
       </tags>
   </entry>
   <entry>
@@ -1351,8 +1362,8 @@
         <tag>算法</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
-        <tag>栈</tag>
         <tag>迭代</tag>
+        <tag>栈</tag>
       </tags>
   </entry>
   <entry>
@@ -1364,8 +1375,8 @@
         <tag>算法</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
-        <tag>栈</tag>
         <tag>迭代</tag>
+        <tag>栈</tag>
       </tags>
   </entry>
   <entry>
@@ -1377,8 +1388,8 @@
         <tag>算法</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
-        <tag>栈</tag>
         <tag>迭代</tag>
+        <tag>栈</tag>
       </tags>
   </entry>
   <entry>
@@ -1389,9 +1400,9 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
-        <tag>迭代</tag>
         <tag>单向链表</tag>
         <tag>双指针</tag>
+        <tag>迭代</tag>
       </tags>
   </entry>
   <entry>
@@ -1402,8 +1413,8 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
-        <tag>迭代</tag>
         <tag>单向链表</tag>
+        <tag>迭代</tag>
       </tags>
   </entry>
   <entry>
@@ -1414,10 +1425,10 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
-        <tag>栈</tag>
-        <tag>迭代</tag>
         <tag>单向链表</tag>
         <tag>双指针</tag>
+        <tag>迭代</tag>
+        <tag>栈</tag>
       </tags>
   </entry>
   <entry>
@@ -2768,8 +2779,8 @@
     <url>%2F2018%2F08%2F22%2FJAI%E4%B8%A2%E5%8C%85%E6%8E%89%E5%B8%A7%E5%A4%84%E7%90%86%2F</url>
     <content type="text"><![CDATA[问题时间戳停止变化/图像停止更新 描述本小白刚刚接触JAI，有很多不懂的地方。这次遇到问题是请教了YZ大哥（不知道年龄，暂时这么称呼），很感谢YZ大哥的耐心指导。因为我不仅不知道怎么调，连在哪里调也不知道╭(╯^╰)╮。以下是此次问题解决步骤，是YZ大哥跟我说怎么做，然后我照做，过程中又遇到问题，下边也给出了碰到的问题以及相应的解决方法。（8.21更） 刚刚又看了下JAI SDK Getting Started Guide，发现YZ讲的方法就是文档里那部分我觉得可以先跳过的内容，出现问题应该也是因为我没有按照文档进行配置…..可能我写的这个会有错误、遗漏、表述模糊，具体操作还可参加文档说明（8.22更） 4.4=》设置接收缓冲区 4.5=》设置中断调整 4.6=》打开巨型帧 4.7=》计算和设置包延迟 出现问题原因图像传输时丢包（掉帧） 解决方法使用 JAI Control Tool 采集图像 防止丢包如何使用JAI Control Tool 采集图像 如何查看是否丢包？ 除了通过搜索，也可以找到GigE Image Acquisition-Total missing packets其实观察刚开始采集图像时图片是否有撕裂的情况（出现水平黑线） 如果丢包 设置相机据包为8000左右（我是8196）如何设置相机数据包 设置相机数据包后用JAI Control Tool采图时黑屏，查看黑屏是是否有帧率如何查看帧率 有帧率则调整网卡巨型帧等如何找到相机连接的网卡网络和共享中心-以太网（就是相机那条网线）-属性-由勾选EBUS设置为不勾选EBUS 同时可以看到连接时使用的网卡 找到网卡右击-属性-高级-巨型帧（由关闭设为9KB MTU）接收缓冲区设为最大（我的最大只有512，只能这样了） 提醒：文档中指出当巨型帧打开的时候，相机数据包大小就可以大于1500bytes，但相机数据包必须小于巨型帧大小。 提醒：文档中指出典型的接收缓冲区最大值为2048，标准默认值为256，请结合自己的实际情况 是不是我的网卡太菜了，众筹给我买个好的可以吗？？？ 如果仍丢包则根据文档设置延时直至成功如何设置延时？参照文档设置延时（主要是帧率）我的Max Fps是2.00 ，Band Width是90% 修改最大帧率，调整带宽，点击calculate，点击ok。（文档指出当数据包大小或者像素格式改变时，数据包延迟都需要重新计算） 最后查看是否丢包 如有丢包可以再次调整数据包大小和延迟。另外有一点是，图像的传输是和你整个电脑的运行都有关系的，而不只是网卡和相机设置。]]></content>
       <tags>
-        <tag>JAI</tag>
         <tag>Bug</tag>
+        <tag>JAI</tag>
       </tags>
   </entry>
   <entry>
