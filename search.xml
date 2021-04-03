@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[PyTorch入门：使用PyTorch搭建神经网络LeNet5]]></title>
+    <url>%2F2021%2F04%2F03%2FPyTorch%E5%85%A5%E9%97%A8%EF%BC%9A%E4%BD%BF%E7%94%A8PyTorch%E6%90%AD%E5%BB%BA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CLeNet5%2F</url>
+    <content type="text"><![CDATA[前言在本文中，我们基于PyTorch构建一个简单的神经网络LeNet5。 在阅读本文之前，建议您了解一些卷积神经网络的前置知识，比如卷积、Max Pooling和全连接层等等，可以看我写的相关文章：李宏毅机器学习课程笔记-7.1CNN入门详解。 通过阅读本文，您可以学习到如何使用PyTorch构建神经网络LeNet5。 模型说明在本例中，我们使用如下图所示的神经网络模型：LeNet5。 该模型有1个输入层、2个卷积层、2次Max Pooling、2个全连接层和1个输出层。 输入层INPUT 1个channel，图片size是32×32。 卷积层C1 6个channel，特征图的size是28×28，即每个卷积核的size为(5,5)，stride为1。 下采样操作S2 6个channel，特征图的size是14×14，即Max Pooling窗口size为(2,2)。 卷积层C3 16个channel，特征图的size是10×10，即每个卷积核的size为(5,5)，stride为1。 下采样操作S4 16个channel，特征图的size是5×5，即Max Pooling窗口size为(2,2)。 全连接层F5 120个神经元。 全连接层F6 84个神经元。 输出层OUTPUT 10个神经元。 另外，除了输入层和输出层，剩下的卷积层、最大池化操作和全连接层后面都要加上Relu激活函数，下采样操作S4之后需要进行Flatten以和全连接层F5衔接起来。 代码实现1234567891011121314151617181920212223242526272829import torchimport torch.nn as nnimport torch.nn.functional as Fclass LeNet5(nn.Module): def __init__(self): super(LeNet5, self).__init__() # 卷积层 self.conv1 = nn.Conv2d(in_channels=1, out_channels=6, kernel_size=5) self.conv3 = nn.Conv2d(6, 16, 5) # 全连接层 self.fc5 = nn.Linear(in_features=16*5*5, out_features=120) self.fc6 = nn.Linear(120, 84) self.OUTPUT = nn.Linear(84, 10) def forward(self, x): x = F.relu(self.conv1(x)) x = F.max_pool2d(x, (2, 2)) # Max pooling over a (2, 2) window x = F.relu(self.conv3(x)) x = F.max_pool2d(x, 2) # If the size is a square you can only specify a single number x = x.view(-1, 16*5*5) # Flatten x = F.relu(self.fc5(x)) x = F.relu(self.fc6(x)) x = self.OUTPUT(x) return xnet = LeNet5()output = net(torch.rand(1, 1, 32, 32))# print(output) 参考链接https://pytorch.org/tutorials/beginner/blitz/neural_networks_tutorial.html 其实本文内容主要是PyTorch的官方教程。 PyTorch官方教程中代码实现与图片所示的LeNet5不符（PyTorch官方教程代码中是3×3的卷积核，而图片中LeNet5是5×5的卷积核），本文中我是按照图片所示模型结构实现的。 其实PyTorch开发者和其他开发者也注意到了这一问题，详见： https://github.com/pytorch/tutorials/pull/515 https://github.com/pytorch/tutorials/commit/630802450c13c78f02f744af1c47d1033b6fe206 https://github.com/pytorch/tutorials/pull/1257 Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>神经网络</tag>
+        <tag>PyTorch</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[李宏毅机器学习课程笔记-8.1图神经网络入门]]></title>
     <url>%2F2021%2F04%2F02%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-8-1%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%85%A5%E9%97%A8%2F</url>
     <content type="text"><![CDATA[GNN的用处分类（Classification）比如，有很多不同的化学分子，将其表示成图作为输入，用GNN判断其是否会导致突变，这就是一个有监督分类问题。 生成（Generation）比如，我们需要开发针对新冠病毒的新药，我们可以训练出一个可以生成我们想要的分子（输出形式为图）的GNN，然后用这个GNN生成可以对抗病毒的某种化学分子。 GraphVAE 为什么要用GNN上面列举的分类、生成的例子中输入或输出都是图，所以要用GNN。图不仅包含了各个结点的信息，更重要的是它包含了各个结点之间的关系。 使用GNN时可能遇到的问题 如何通过结点间的信息帮助模型 图中可能包含大量结点，数据集非常大 大量结点都是没有label的 GNN的两种思路很直观地可以想到，一个结点和它的相邻结点肯定有某些特定的关系，比如说相似（近朱者赤近墨者黑）、相反、合作等等。在多数情况下，数据集unlabeled node都是远多于labeled node的，我们想要得到一个较好的模型，那我们要如何利用仅有的少量labeled node以及它和邻居间的关系呢？结合CNN，我们要如何将卷积这个操作推广到GNN模型中，用卷积将结点嵌入到某个特征空间中呢？有两种方法 Spatial-based Convolution Generalize the concept of convolution(corelation) to graph. Spectral-based Convolution Back to the definition of convolution in signal processing. GNN导图 任务和数据集常见任务 Classification Regression Graph Classification Graph Representation Learning Link Prediction 常用数据集 CORA: citation network, 2.7k nodes and 5.4k links TU-MUTAG: 188 molecules with 18 nodes on average 其它https://www.dgl.ai/ Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
@@ -386,10 +396,10 @@
     <content type="text"><![CDATA[欠拟合（Underfitting）定义Bias较大、Variance较小。 如果模型在训练集上的误差很大，则此时Bias是大的，情况为欠拟合。 Bias大时如何处理使用更复杂的模型，比如添加考虑更多维度的输入、把线性模型换成非线性模型。 过拟合（Overfitting）定义Bias较小、Variance较大。 如果模型在训练集上的误差很小，但是在测试集上的误差很大，则此时Variance是大的，情况为过拟合。 Variance大时如何处理 使用更复杂的数据集 比如添加数据（很有效，但不一定做得到）、数据增强等方法。 使用更简单的模型（不是根本方法） 可能是模型过于复杂导致了过拟合，因此可以简化模型缓解过拟合。 正则化（Regularization） 正则化可能会使Bias增大，所以需要调整正则化的参数。 如$L_{new}=L_{old}+\lambda \sum(w_i)^2$，其中$\lambda$是一个常数。 加上正则项$\lambda \sum(w_i)^2$的目的是让函数参数的值尽可能地接近0，使函数变得更平滑。 平滑（Smooth）定义平滑是指输入变化影响输出变化的程度（输出对输入的敏感程度）。 假设输入变化，如果函数越不平滑，则输出变化程度越大。 函数参数越接近0，这个函数就越平滑（smooth）。 我们为什么喜欢一个平滑的函数？适度平滑的函数可以缓解函数输入中包含的噪声对函数输出的影响。 如果输入中包含一些噪声/干扰（noise），那平滑函数的输出受输入中包含的噪声干扰的程度更小。 我们为什么不喜欢过于平滑的函数？函数过于平滑，就无法有效地提取数据的特征，这不是我们想要的函数。 假设有一个极限平滑的函数，即该函数的输出不受输入的影响，那当然不是个好的函数。 Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
       <tags>
         <tag>机器学习</tag>
-        <tag>Bias</tag>
-        <tag>Variance</tag>
         <tag>欠拟合</tag>
         <tag>过拟合</tag>
+        <tag>Bias</tag>
+        <tag>Variance</tag>
         <tag>正则化</tag>
       </tags>
   </entry>
@@ -1100,8 +1110,8 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
-        <tag>单向链表</tag>
         <tag>栈</tag>
+        <tag>单向链表</tag>
       </tags>
   </entry>
   <entry>
@@ -1349,8 +1359,8 @@
       <tags>
         <tag>二叉树</tag>
         <tag>递归</tag>
-        <tag>迭代</tag>
         <tag>栈</tag>
+        <tag>迭代</tag>
       </tags>
   </entry>
   <entry>
@@ -1362,8 +1372,8 @@
         <tag>算法</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
-        <tag>迭代</tag>
         <tag>栈</tag>
+        <tag>迭代</tag>
       </tags>
   </entry>
   <entry>
@@ -1375,8 +1385,8 @@
         <tag>算法</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
-        <tag>迭代</tag>
         <tag>栈</tag>
+        <tag>迭代</tag>
       </tags>
   </entry>
   <entry>
@@ -1388,8 +1398,8 @@
         <tag>算法</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
-        <tag>迭代</tag>
         <tag>栈</tag>
+        <tag>迭代</tag>
       </tags>
   </entry>
   <entry>
@@ -1400,9 +1410,9 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
+        <tag>迭代</tag>
         <tag>单向链表</tag>
         <tag>双指针</tag>
-        <tag>迭代</tag>
       </tags>
   </entry>
   <entry>
@@ -1413,8 +1423,8 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
-        <tag>单向链表</tag>
         <tag>迭代</tag>
+        <tag>单向链表</tag>
       </tags>
   </entry>
   <entry>
@@ -1425,10 +1435,10 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
+        <tag>栈</tag>
+        <tag>迭代</tag>
         <tag>单向链表</tag>
         <tag>双指针</tag>
-        <tag>迭代</tag>
-        <tag>栈</tag>
       </tags>
   </entry>
   <entry>
@@ -2724,8 +2734,8 @@
     <url>%2F2018%2F11%2F03%2Fjava.util.NoSuchElementException%2F</url>
     <content type="text"><![CDATA[问题引入Java商店作业不同函数里需要获取用户输入，用Scanner的时候,出现了异常java.util.NoSuchElementException 作业中代码模式如下，func1和func2中都使用Scanner并关闭它。然后在main中依次调用func1和func2，func2产生异常。说func1和func2其实不合适，应该加个括号……..懒得加了 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748//Demo.javaimport java.util.Scanner;class Test&#123; void func1() &#123; Scanner sc=new Scanner(System.in); //输出用户输入，替代作业里的使用Scanner System.out.print("Func1请输入内容："); System.out.println("Func1输出"+sc.next()); //关闭Scanner sc.close(); &#125; void func2() &#123; Scanner sc=new Scanner(System.in); //输出用户输入，替代作业里的使用Scanner System.out.print("Func2请输入内容："); System.out.println("Func2输出"+sc.nextInt()); //关闭Scanner sc.close(); &#125;&#125;public class Demo&#123; public static void main(String[] args) &#123; Test t=new Test(); t.func1(); t.func2(); &#125;&#125;/*Console输出如下：Func1请输入内容：小姐，请问你喜欢吃青椒吗？Func1输出：小姐，请问你喜欢吃青椒吗？Func2请输入内容：Exception in thread "main" java.util.NoSuchElementException at java.base/java.util.Scanner.throwFor(Unknown Source) at java.base/java.util.Scanner.next(Unknown Source) at java.base/java.util.Scanner.nextInt(Unknown Source) at java.base/java.util.Scanner.nextInt(Unknown Source) at Test.func2(Demo.java:21) at Demo.main(Demo.java:31)*/ 异常产生原因func1中sc.close();语句关闭了Scanner，func2中使用Scanner产生异常 因为System.in是System类的静态成员，所以不同Scanner对象内的in是同一个in` func1和func2中都用System.in创建了Scanner func1打开Scanner后将其关闭，这里间接地将System.in也关闭了 func1结束后运行func2，这时再调用nextInt，在System.in已经关闭了的情况下，不能读取到任何数据，就会产生 java.util.NoSuchElementException 解决方法系统资源一旦释放就不能再开启了，所以只有确定不在使用系统的时候，才能将流关闭 所以应该在整个程序结束时释放Scanner等资源，而不是某个函数中每次使用Scanner等资源后都释放一次 问题引入中的代码只是个模式，上边的两句话用在作业实际代码里就好了 代码分析Scanner()创建Scanner对象代码为Scanner sc=new Scanner(System.in);构造函数源码如下 123public Scanner(InputStream source) &#123; this(new InputStreamReader(source), WHITESPACE_PATTERN);&#125; 可看出是调用了另外一个构造函数，继续查看源码 123456789101112private Scanner(Readable source, Pattern pattern) &#123; assert source != null : "source should not be null"; assert pattern != null : "pattern should not be null"; this.source = source; //看这句 delimPattern = pattern; buf = CharBuffer.allocate(BUFFER_SIZE); buf.limit(0); matcher = delimPattern.matcher(buf); matcher.useTransparentBounds(true); matcher.useAnchoringBounds(false); useLocale(Locale.getDefault(Locale.Category.FORMAT)); &#125; 至少知道了Scanner内部还是用到了流，算是对流进行了封装吧，使用起来更方便一些 close()调用语句为sc.close();，查看close()源码，如下 1234567891011121314public void close() &#123; if (closed) //1.通过closed标志校验Scanner是否已关闭； return; if (source instanceof Closeable) &#123; //2.执行source的close()方法， try &#123; //将source关闭（这里为System.in）； ((Closeable)source).close(); &#125; catch (IOException ioe) &#123; lastException = ioe; &#125; &#125; sourceClosed = true; //3.将sourceClosed标志设置为true，表示source已关闭； source = null; //4.将source置为null，不再引用，处于可回收状态； closed = true; //5.将closed标志设置为true，表示Scanner已关闭；&#125; 可以知道关闭Scanner的时候，((Closeable)source).close();把System.in关闭了 关闭后下次想再使用就当然有错了~（除非构造函数里还再把in给打开，但这样也不太合理） 其实如果还可以再仔细看看Scanner的构造方法，和Scanner的next()，能力有限，点到为止 作者：@臭咸鱼 本文为作者原创，转载请注明出处：https://chouxianyu.github.io/2018/11/03/java.util.NoSuchElementException/#more 欢迎转发和评论]]></content>
       <tags>
-        <tag>Java</tag>
         <tag>Bug</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -2733,8 +2743,8 @@
     <url>%2F2018%2F09%2F22%2FJava%E5%AD%97%E8%8A%82%E6%B5%81read%E5%87%BD%E6%95%B0%2F</url>
     <content type="text"><![CDATA[问题引入做Java作业从标准输入流获取用户输入，用到了System.in.read(),然后出现了bug。 1234567891011121314151617181920212223//随机生成一个小写字母，用户猜5次，读取用户输入，并判断是否猜对import java.io.IOException;public class LetterGuessing &#123; public static void main(String[] args) throws IOException &#123; char ch,answer; //随机生成字母 answer=(char)(Math.random()*26+'a'); System.out.print("请输入一个小写字母："); for(int i=1;i&lt;=5;i++) &#123; //获取用户输入，可能抛出异常 ch=(char)System.in.read(); //比较大小 if(ch == answer)&#123; System.out.println("恭喜，正确！用了"+i+"次猜对"); break; &#125; else if(ch &gt; answer) System.out.println("您猜大了，还有"+ (5-i) +"次机会"); else System.out.println("您猜小了，还有"+ (5-i) +"次机会"); &#125; &#125;&#125; 输入字符&#39;a&#39;，按下Enter,却没有等我下次输入，循环就运行了三次。 问题来源System.in.read()按字节读，一次读入一个字节。后边有详细讲解。 经调试，可知三次循环中ch分别为a,\r,\n。 为什么a+Enter,会变成a\r\n呢 Windows下存在两种文件读写方式，一个是二进制方式，另一种是文本方式。 文本方式中写时”换行”会变成”回车-换行”，即\r\n；读时”回车-换行”会变成”换行”。 二进制方式中读写是严格按照一个字节一个字节的方式进行的。 在这里虽然没有用到文件，但道理应该是一样的 用read()函数是按照一个字节一个字节读取的，即二进制方式。 可能可以推导出，我们向输入流中输入数据默认是按照文本方式。 解决方法方法一在代码第10行后，加两行System.in.read(); 目的是读取掉输入流中的/r和/n。 这种方法的局限性就是输入字母前后不能加空格，因为它不会使空格从输入流中删除。 方法二不用read()读取，用以下代码代替 123import java.util.Scanner;Scanner input=new Scanner(System.in);ch=input.next().charAt(0); 这种方法就比较好，读取字符串（忽略空格和换行，空格和换行不会留在输入流里），然后取字符串的第一个字符。 知识点System.in官方文档：https://docs.oracle.com/javase/10/docs/api/java/lang/System.html#in System是个类，in是System的一个成员，官方介绍如下： 1public static final InputStream in The “standard” input stream. This stream is already open and ready to supply input data. Typically this stream corresponds to keyboard input or another input source specified by the host environment or user. in是一个InputStream类型的对象,所以只需要了解InputStream即可。 InputStream官方文档： https://docs.oracle.com/javase/10/docs/api/java/io/InputStream.html 123public abstract class InputStream //抽象类extends Object //继承Object类implements Closeable //实现Closeable接口 官方介绍如下： This abstract class is the superclass of all classes representing an input stream of bytes. 翻译为：这个抽象类是所有字节流类的父类。 字节流的含义：读取方式为一个字节一个字节地读取,而字符流是二个字节二个字节的读。 Applications that need to define a subclass of InputStream must always provide a method that returns the next byte of input. 翻译为：需要定义一个InputStream子类的应用必须提供一个返回输入下一字节的方法（函数）。 read()官方文档：https://docs.oracle.com/javase/10/docs/api/java/io/InputStream.html#read() 12public abstract int read() throws IOException Reads the next byte of data from the input stream. The value byte is returned as an int in the range 0 to255. 这个是重点，它返回下一字节的ASCII码 If no byte is available because the end of the stream has been reached, the value -1 is returned. This method blocks until input data is available, the end of the stream is detected, or an exception is thrown. A subclass must provide an implementation of this method. Returns: the next byte of data, or -1 if the end of the stream is reached. Throws: IOException - if an I/O error occurs. 作者：@臭咸鱼 本文为作者原创，转载请注明出处：https://chouxianyu.github.io/2018/09/22/Java字节流read函数/#more 欢迎转发和评论]]></content>
       <tags>
-        <tag>Java</tag>
         <tag>Bug</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
