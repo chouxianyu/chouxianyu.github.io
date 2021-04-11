@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[李宏毅机器学习课程笔记-9.2如何训练RNN]]></title>
+    <url>%2F2021%2F04%2F11%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-9-2%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83RNN%2F</url>
+    <content type="text"><![CDATA[RNN的损失函数仍然以Slot Filling为例，如下图所示。 对于1个word$x^i$，RNN输出1个one-hot编码的vector $y^i$，求$y^i$和对应label的交叉熵损失（Cross Entropy Loss），将多个word的loss求和即为RNN的损失函数。需要注意的是不能打乱word的语序，$x^{i+1}$要紧接着$x^i$输入。 确定RNN的损失函数后，RNN的训练其实也是用的梯度下降。训练前馈神经网络时我们使用有效的反向传播算法，为了方便地训练RNN，我们使用BPTT。基于BP，BPTT(Backpropagation Through Time)考虑了时间维度的信息。 RNN的Error SurfaceRNN的Error Surface如下图所示，其中$z$轴代表loss，$x$轴和$y$轴代表两个参数$w_1$和$w_2$。可以看出，RNN的Error Surface在某些地方非常平坦，在某些地方又非常的陡峭。这样的Error Surface导致在训练RNN时loss剧烈变化。 问题出现的原因既然RNN的Error Surface中有这么平滑的地方，那会不会是sigmoid激活函数造成的梯度消失呢？原因并不是sigmoid，如果是的话，那换成ReLU就可以，但把sigmoid换成ReLU之后，效果反而更差了。那到底为什么会有非常陡峭和非常平滑的地方呢？ 如上图所示，假设某RNN只含1个神经元，并且该神经元是Linear的，input和output的weight都是1，没有bias，memory传递的weight是$w$，输入序列为[1, 0, 0, 0, …, 0]，所以$y^{1000}=w^{999}$。 现在我们考虑loss关于参数$w$的梯度，当$w:\ 1\ =&gt;\ 1.01$时，可知$y^{1000}:\ 1\ =&gt;\ 20000$，此时梯度很大；当$w:\ 0.99\ =&gt;\ 0.01$时，可知$y^{1000}$几乎没有变化，此时梯度很小。 从该例中可知，RNN的Error Surface中的“悬崖”出现的原因是，关于memory的参数$w$的作用随着时间增加不断增强，导致RNN出现梯度消失或梯度爆炸的问题。 处理方法如何解决RNN梯度消失或梯度爆炸的问题？可以通过Clipping进行处理，Clipping的效果是使梯度不超过某个阈值，即当梯度即将超过某个阈值（比如15）时，就将梯度赋值为该阈值。 LSTM有什么更好的方法可以解决RNN的Error Surface中的问题呢？LSTM就是使用最广泛的技巧，它可以“删除”Error Surface中比较平坦的部分，也就解决了梯度消失的问题，但它无法解决梯度爆炸的问题。正因如此，训练LSTM时需要将学习率调得特别小。 LSTM为什么可以解决RNN中梯度消失的问题呢，因为RNN和LSTM对memory的处理是不同的（LSTM有forget gate）。在RNN中，每个时间点memory中的旧值都会被新值覆盖，导致参数$w$对memory的影响每次都被清除，进而引发梯度消失。在LSTM中，每个时间点memory里的旧值会乘以$f(g(f))$再与新值相加，只有在forget gate被关闭时参数$w$对memory的影响才会被清除，在forget gate被打开时参数$w$对memory的影响就会通过累加得到保留，因此不会出现梯度消失的问题。 LSTM在1997年被提出，第1版的LSTM被提出就是为了解决梯度消失的问题，但这1版本是没有forget gate的，forget gate是后来才加上去的。也有1种说法是，在训练LSTM时需要给forget gate特别大的bias，以确保forget gate在多数情况下是开启的。 GRU（Gated Recurrent Unit, Cho, EMNLP’14）GRU比LSTM更简单，GRU只有2个gate，因此需要更少的参数量、鲁棒性更好、更不容易过拟合。GRU的基本思路是“旧的不去，新的不来”，GRU把input和forget gate联动起来，当forget gate把memory中的值清空时，input gate才会打开然后放入新的值。 Clockwise RNN（Jan Koutnik, JMLR’14）SCRN（Structrally Constrained Recurrent Network, Tomas Mikolov, ICLR’15）Vanilla RNN Initialized with Identity Matrix + ReLU（Quoc V.Le, arXiv’15） Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+        <tag>神经网络</tag>
+        <tag>循环神经网络</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[李宏毅机器学习课程笔记-9.1循环神经网络RNN入门]]></title>
     <url>%2F2021%2F04%2F10%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-9-1%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CRNN%E5%85%A5%E9%97%A8%2F</url>
     <content type="text"><![CDATA[Slot Filling比如在订票系统中，输入“Arrive Taipei on November 2nd”这样一个序列，我们设置几个slot(槽位)，希望算法能够将关键词“Taipei”放入Destination这个slot，将”November”和”2nd”放入到达时间Time of Arrival这个slot，而“Arrive”和“on”不属于任何slot。那这个算法如何实现呢？ Slot Filling with FNN可以用Feedforward Neural Network实现Slot Filling吗？可以，下面介绍这种FNN的输入和输出，但其存在问题。 输入是一个word（比如“Taipei”）并用vector来表示它；输出是1个probablity distribution，表示输入的word属于各个slot的概率。 如何用vector表示1个word呢？方法有很多。比如1-of-N Encoding(又名one-hot Encoding)，如下图所示。设定1个lexicon(词汇表)，那vector的size就和lexicon的size相同，vector中的每个维度对应lexicon中的word，vector中word对应的维度的值为1、其它维度的值为0。 如下图所示，只有1-of-N Encoding还不够，一些word不在lexicon中，对此我们需要在lexicon中添加1个”other“。除了1-of-N Encoding，还可以通过word hashing。可以用1个26×26×26的vector表示1个word，该vector中每个元素代表1个3字母序列。比如”apple”包括”app”、”ppl”、”ple”。 使用FNN实现Slot Filling时会存在一个问题：假如有2个句子“Arrive Taipei on November 2nd”和“Leave Taipei on November 2nd”，在处理这2个句子时FNN会先处理“arrive”和“leave”这2个词汇然后再处理“Taipei”。这时FNN没有办法区分出“Taipei”是出发地还是目的地，而我们希望算法在处理序列时是有“记忆力”的（即在处理“Taipei”时，它还记得“Leave”或“Arrive”），于是RNN诞生了。 Recurrent Neural Network如下图所示，将每1个隐藏层的输出保存在memory中，网络不仅考虑了input，还要考虑memory中的数据（merory中的数据是需要有初值的，比如0）。 因为RNN会考虑memory中存储的临时值，而不同输入产生的临时值不一定相同，所以改变输入序列中元素的顺序会导致最终输出结果的改变（Changing the sequence order will change the output）。 Slot Filling with RNN如下图所示，以“Arrive Taipei on November 2nd” 这个word sequence为例，将“Arrive”的vector$x^1$输入到RNN，隐藏层生成$a^1$，根据$a^1$生成$y^1$，表示“arrive”属于每个slot的概率，其中$a^1$会被存储到memory中；将“Taipei”的vector$x^2$输入到RNN，此时隐藏层同时考虑$x^2$和memory中的$a^1$生成$a^2$，根据$a^2$生成$y^2$，表示“Taipei”属于某个slot的概率，此时再把$a^2$存到memory中；以此类推根据$x_3$和$a_2$生成$a_3$进而得到$y^3$…… RNN的变体Elman Network &amp; Jordan NetworkRNN也有不同的变形。Elman Network是把隐藏层的输出存到memory中，而Jordan Network是把输出层的输出保存到memory中。由于隐藏层没有明确的训练目标，而整个NN具有明确的目标，因此Jordan Network的表现会更好一些。 Bidirectional RNN如下图所示，RNN可以是双向的。训练2个方向的RNN，1个从前往后读取序列，1个从后往前读取序列，然后使用2个RNN的隐藏层得到最后的输出层。这样的好处是，输出层的感受野更大，因为RNN在得到$y^{t+1}$的时候，它不只看了从句首$x^1$开始到$x^{t+1}$的数据，还看了从句尾$x^{n}$一直到$x^{t+1}$的输入，这就相当于RNN是在看过整个句子之后才计算每个word属于哪个slot的概率。 Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
@@ -248,8 +259,8 @@
         <tag>机器学习</tag>
         <tag>深度学习</tag>
         <tag>神经网络</tag>
-        <tag>学习率</tag>
         <tag>正则化</tag>
+        <tag>学习率</tag>
         <tag>激活函数</tag>
         <tag>Dropout</tag>
       </tags>
@@ -291,8 +302,8 @@
       <tags>
         <tag>算法</tag>
         <tag>PAT</tag>
-        <tag>排序</tag>
         <tag>map</tag>
+        <tag>排序</tag>
       </tags>
   </entry>
   <entry>
@@ -687,10 +698,10 @@
         <tag>DFS</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -702,10 +713,10 @@
         <tag>DFS</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -716,10 +727,10 @@
         <tag>算法</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -730,10 +741,10 @@
         <tag>算法</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -745,10 +756,10 @@
         <tag>DFS</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -760,10 +771,10 @@
         <tag>BFS</tag>
         <tag>PAT</tag>
         <tag>贪心</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -783,8 +794,8 @@
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805346063728640 题解题目要求 红黑树 在二叉搜索树的基础上，红黑树还具有以下特征 每个结点是红色或者黑色 根结点是黑色的 叶子结点（NULL）都是黑色 每个红色结点的两个子结点都是黑色 从每个叶子到根的所有路径上不能有两个连续的红色结点 每个结点到其每个叶子结点的所有路径都包含相同数目的黑色节点。 给定一颗二叉搜索树，请判断它是否是一个合法的红黑树。 输入 K：正整数，不超过30，测试用例的数量 N：正整数，不超过30，二叉树中结点的数量 二叉树的先序遍历结果：结点的值都是正整数，用负数代表红色结点 输出 判断每颗二叉搜索树是否是红黑树，是则输出Yes，否则输出No。 解题思路 根据先序遍历结果和二叉搜索树的性质（左子树小于根结点小于右子树），递归构建二叉树 判断性质3：根结点是否是黑色 判断性质4，见代码中的函数judge1 判断性质5，见代码中的函数judge2 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970// Problem: PAT Advanced 1135// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805346063728640// Tags: Tree BST RBTree#include &lt;iostream&gt;#include &lt;cmath&gt;using namespace std;struct Node&#123; int val; Node* left = nullptr; Node* right = nullptr;&#125;;Node* build(Node* root, int v)&#123; if (root == nullptr)&#123; root = new Node(); root-&gt;val = v; &#125; else if (abs(v) &lt;= abs(root-&gt;val)) root-&gt;left = build(root-&gt;left, v); else root-&gt;right = build(root-&gt;right, v); return root;&#125;bool judge1(Node* root)&#123; if (root == nullptr) return true; if (root-&gt;val &lt; 0)&#123; if (root-&gt;left != nullptr &amp;&amp; root-&gt;left-&gt;val &lt; 0) return false; if (root-&gt;right != nullptr &amp;&amp; root-&gt;right-&gt;val &lt; 0) return false; &#125; return judge1(root-&gt;left) &amp;&amp; judge1(root-&gt;right);&#125;int getDepth(Node* root)&#123; if (root == nullptr) return 0; int ret = max(getDepth(root-&gt;left), getDepth(root-&gt;right)); return root-&gt;val &gt; 0 ? ret + 1 : ret;&#125;bool judge2(Node *root)&#123; if (root == nullptr) return true; if (getDepth(root-&gt;left) != getDepth(root-&gt;right)) return false; return judge2(root-&gt;left) &amp;&amp; judge2(root-&gt;right);&#125;int main()&#123; int k, n, val; scanf("%d", &amp;k); while (k--)&#123; scanf("%d", &amp;n); Node* root = nullptr; for (int i = 0; i &lt; n; i++)&#123; scanf("%d", &amp;val); root = build(root, val); &#125; if (root-&gt;val &lt; 0 || !judge1(root) || !judge2(root)) printf("No\n"); else printf("Yes\n"); &#125; return 0;&#125; 参考链接https://blog.csdn.net/liuchuo/article/details/78037334 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
         <tag>算法</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
         <tag>BST</tag>
         <tag>PAT</tag>
@@ -797,8 +808,8 @@
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805345078067200 题解题目要求假设二叉树中所有结点的值都是互异的正整数，给定二叉树的先序和后序遍历，请输出该树后序遍历的第一个数字。 输入 N：正整数，不超过50000，二叉树中结点的数量 先序遍历结果 中序遍历结果 解题思路 根据先序遍历和中序遍历结果可以确定一颗树，这道题的关键就是如何确定出这颗树并遍历它。 可以参考PAT甲级1151LCA in a Binary Tree，这道题里也是根据先序遍历和中序遍历结果确定出了一棵树。 设置全局flag判断是否是该树后序遍历的第一个数字，如果是则输出，不是则不输出 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849// Problem: PAT Advanced 1138// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805345078067200// Tags: Tree DFS#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;map&gt;using namespace std;vector&lt;int&gt; preOrder; // 先序遍历结果vector&lt;int&gt; inOrder; // 中序遍历结果map&lt;int, int&gt; inPos; // 结点到中序遍历结果inOrder索引的映射bool firstIsPrinted = false; // 为true代表后序遍历时的第一个结点已经输出void postOrderTraverse(int inLeft, int inRight, int preRoot)&#123; if (firstIsPrinted) // 只输出后序遍历的第一个结点即可 return ; if (inRight &lt; inLeft) // 该树不存在 return ; int inRoot = inPos[preOrder[preRoot]]; // 当前树的根结点在中序遍历结果inOrder中的索引 // 后序遍历 postOrderTraverse(inLeft, inRoot - 1, preRoot + 1); // 遍历左子树并判断左子树是否存在 postOrderTraverse(inRoot + 1, inRight, preRoot + 1 + (inRoot - inLeft)); // 遍历右子树并判断右子树是否存在 if (!firstIsPrinted)&#123; // 只输出后序遍历的第一个结点即可 printf("%d", inOrder[inRoot]); firstIsPrinted = true; &#125;&#125;int main()&#123; int n; scanf("%d", &amp;n); preOrder.resize(n + 1); inOrder.resize(n + 1); for (int i = 1; i &lt;= n; i++) // 读取先序遍历结果 scanf("%d", &amp;preOrder[i]); for (int i = 1; i &lt;= n; i++)&#123; // 读取中序遍历结果 scanf("%d", &amp;inOrder[i]); inPos[inOrder[i]] = i; &#125; postOrderTraverse(1, n, 1); return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
         <tag>算法</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
         <tag>PAT</tag>
         <tag>map</tag>
@@ -823,8 +834,8 @@
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/1038430130011897856 题解题目要求 最近公共祖先（LCA，The lowest common ancestor） 在一颗树中，结点U和V的LCA是U和V为其后代的深度最大的结点。 给定一颗二叉树中的任意两个结点，请找到它们的LCA。 输入 M：正整数，不超过1000，需要测试的结点对的数量 N：正整数，不超过10000，二叉树中结点的数量，结点值都在int范围内 二叉树中序遍历结果：N个数字 二叉树先序遍历结果：N个数字 M个结点对： 输出 对于每个结点对，判断结点对中每个结点是否存在，如果都存在则找到他们的LCA。 思路根据先序遍历结果和中序遍历结果可以确定一颗树中序遍历结果加先序遍历结果可以唯一确定一棵树，在不构建树的情况下，在每一层的递归中，可以得到树的根结点。 使用两个数组分别保存树的先序遍历结果和后序遍历结果 根据先序遍历结果可以确定根节点 比如刚开始的第一个结点就是整棵树的根结点 根据中序遍历结果和整棵树的根结点可以确定整棵树的左右子树 中序遍历结果中，根结点左侧就是整棵树的左子树的中序遍历结果，根结点右侧就是整棵树的右子树的中序遍历结果 递归确定左右子树的结构 某颗树的结构可根据2个变量确定：其根结点在整颗树先序遍历结果中的索引、其中序遍历结果序列（可通过起始索引和结束索引2个变量确定） 123456789101112131415void func(int leftPosBoundOfInOrder, int rightPosBoundOfInOrder, int rootPosOfPreOrder)&#123; /* 当前这颗树在整棵树中序遍历结果inOrder的范围索引为[leftPosBoundOfInOrder,rightPosBoundOfInOrder] rootPosOfPreOrder指当前这颗树根结点在整棵树先序遍历结果preOrder中的索引 */ // 越界判断 if (leftPosBoundOfInOrder &gt; rightPosBoundOfInOrder) return; // 左子树 lca(leftPosBoundOfInOrder, rootPosOfInOrder - 1, rootPosOfPreOrder + 1); // 右子树 lca(rootPosOfInOrder + 1, rightPosBoundOfInOrder, rootPosOfPreOrder + (rootPosOfInOrder - leftPosBoundOfInOrder) + 1);&#125;func(1, n, 1); // 调用（假设整颗树有n个结点，在数组中的索引为[1,n]） PAT甲级1138Postorder Traversal这道题也涉及如何根据先序遍历结果和中序遍历结果确定一棵树并遍历它，可以看一看。 最近公共祖先LCA已知某颗树的根结点， 若u和u在根结点的左边，则u和v的最近公共祖先在当前子树根结点的左子树寻找； 如果u和v在当前子树根结点的右边，则u和v的最近公共祖先就在当前子树的右子树寻找； 如果u和v在当前子树根结点的两边，在当前子树的根结点就是u和v的最近公共祖先； 如果u或v就是根结点，那其就是这两个结点的最近公共祖先。 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768// Problem: PAT Advanced 1151// URL: https://pintia.cn/problem-sets/994805342720868352/problems/1038430130011897856// Tags: Tree LCA Map#include &lt;iostream&gt;#include &lt;map&gt;#include &lt;vector&gt;using namespace std;int u, v;map&lt;int, int&gt; pos;vector&lt;int&gt; inOrder, preOrder;void lca(int leftPosBoundOfInOrder, int rightPosBoundOfInOrder, int rootPosOfPreOrder)&#123; /* 当前这颗树在整棵树中序遍历结果inOrder的范围索引为[leftPosBoundOfInOrder,rightPosBoundOfInOrder] rootPosOfPreOrder指当前这颗树根结点在整棵树先序遍历结果preOrder中的索引 */ if (leftPosBoundOfInOrder &gt; rightPosBoundOfInOrder) return; // 越界判断 int rootPosOfInOrder = pos[preOrder[rootPosOfPreOrder]]; // 根结点在中序遍历结果中的索引 int uPosOfInorder = pos[u]; // 结点u在中序遍历结果中的索引 int vPosOfInorder = pos[v]; // 结点v在中序遍历结果中的索引 // u和v都在左子树就去左子树找 if (uPosOfInorder &lt; rootPosOfInOrder &amp;&amp; vPosOfInorder &lt; rootPosOfInOrder) lca(leftPosBoundOfInOrder, rootPosOfInOrder - 1, rootPosOfPreOrder + 1); // u和v都在右子树就去右子树找 else if (uPosOfInorder &gt; rootPosOfInOrder &amp;&amp; vPosOfInorder &gt; rootPosOfInOrder) lca(rootPosOfInOrder + 1, rightPosBoundOfInOrder, rootPosOfPreOrder + (rootPosOfInOrder - leftPosBoundOfInOrder) + 1); // u和v在分别在左右子树，则当前树的根节点就是LCA else if ((uPosOfInorder &lt; rootPosOfInOrder &amp;&amp; vPosOfInorder &gt; rootPosOfInOrder) || (uPosOfInorder &gt; rootPosOfInOrder &amp;&amp; vPosOfInorder &lt; rootPosOfInOrder)) printf("LCA of %d and %d is %d.\n", u, v, preOrder[rootPosOfPreOrder]); // 结点u就是根结点 else if (uPosOfInorder == rootPosOfInOrder) printf("%d is an ancestor of %d.\n", u, v); // 结点v就是根结点 else if (vPosOfInorder == rootPosOfInOrder) printf("%d is an ancestor of %d.\n", v, u);&#125;int main()&#123; int m, n; // 结点对个数，结点个数 scanf("%d %d", &amp;m, &amp;n); inOrder.resize(n + 1), preOrder.resize(n + 1); for (int i = 1; i &lt;= n; i++)&#123; // 记录中序遍历结果，并记录各结点的索引 scanf("%d", &amp;inOrder[i]); pos[inOrder[i]] = i; &#125; for (int i = 1; i &lt;= n; i++)&#123; // 记录先序遍历结果 scanf("%d", &amp;preOrder[i]); &#125; while (m--)&#123; scanf("%d %d", &amp;u, &amp;v); if (pos[u] == 0 &amp;&amp; pos[v] == 0) // 判断元素是否存在 printf("ERROR: %d and %d are not found.\n", u, v); else if(pos[u] == 0 || pos[v] == 0) printf("ERROR: %d is not found.\n", pos[u] == 0 ? u : v); else lca(1, n, 1); &#125; return 0;&#125; 参考链接https://blog.csdn.net/zhuiqiuzhuoyue583/article/details/80452127 https://blog.csdn.net/liuchuo/article/details/82560863 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
         <tag>算法</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>PAT</tag>
         <tag>map</tag>
         <tag>LCA</tag>
@@ -849,8 +860,8 @@
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/1071785408849047552 题解题目要求堆（大顶堆或小顶堆）中，任意一条从根结点到叶子结点的路径上的值一定是非递增序列或者非递减序列。 现在给定一个完全二叉树，请检查它的每一条路径，判断这棵树是不是堆。 输入 N：正整数，大于1，不超过1000，树中结点的数量 N个结点的值（互异）：都是int范围内，按照层次遍历的顺序给出 输出 对于每棵树 先输出所有从根结点到叶子结点的路径，每条路径占一行，数字间用一个空格间隔，首尾不能有多余空格 输出顺序：对于每个结点，其右子树的所有路径要先于其左子树的所有路径输出 输出这颗树是大顶堆还是小顶堆，或者它不是堆 思路 利用完全二叉树的性质，将结点记录到一维数组中 使用DFS，使用vecotr记录当前遍历到的所有结点（即路径），如果当前结点是叶子结点则输出这条路径，否则先遍历右子树再遍历左子树 在DFS过程中判断是否违背大小顶堆性质 最后输出该树是否是大小顶堆 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455// Problem: PAT Advanced 1155// URL: https://pintia.cn/problem-sets/994805342720868352/problems/1071785408849047552// Tags: Tree DFS Heap#include &lt;iostream&gt;#include &lt;vector&gt;using namespace std;int n;bool isMaxHeap = true, isMinHeap = true;int nodes[2010]; // 索引为[1,n]的元素有效vector&lt;int&gt; path; // 目前遍历到的所有结点void dfs(int i)&#123; if (i &gt; n) return; // 越界则无操作 if (i &gt; 1)&#123; // 检查是否是大小顶堆 if (nodes[i] &gt; nodes[i / 2]) isMaxHeap = false; else if(nodes[i] &lt; nodes[i / 2]) isMinHeap = false; &#125; path.push_back(nodes[i]); // 遍历当前结点 if (2 * i &gt; n &amp;&amp; 2 * i + 1 &gt; n)&#123; // 是叶子结点则输出当前遍历到的所有结点 auto it = path.begin(); printf("%d", *it); it++; while (it != path.end())&#123; printf(" %d", *it); it++; &#125; printf("\n"); &#125; else&#123; // 不是叶子结点 dfs(2 * i + 1); // 遍历右子树 dfs(2 * i); // 遍历左子树 &#125; path.pop_back(); // 回溯&#125;int main()&#123; scanf("%d", &amp;n); for (int i = 1; i &lt;= n; i++)&#123; // 记录结点 scanf("%d", nodes+i); &#125; dfs(1); // 深度优先遍历树并在过程中判断是否为大顶堆或小顶堆 if (isMaxHeap) printf("Max Heap"); else if (isMinHeap) printf("Min Heap"); else printf("Not Heap"); return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
         <tag>算法</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
         <tag>回溯</tag>
         <tag>PAT</tag>
@@ -912,8 +923,8 @@
       <tags>
         <tag>算法</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
         <tag>map</tag>
+        <tag>图</tag>
         <tag>哈希</tag>
       </tags>
   </entry>
@@ -924,8 +935,8 @@
       <tags>
         <tag>算法</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
         <tag>map</tag>
+        <tag>图</tag>
         <tag>set</tag>
         <tag>点着色</tag>
       </tags>
@@ -1096,8 +1107,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
         <tag>BST</tag>
       </tags>
@@ -1109,8 +1120,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
         <tag>BST</tag>
       </tags>
@@ -1213,8 +1224,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1225,8 +1236,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1237,8 +1248,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1249,8 +1260,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1261,8 +1272,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -1272,8 +1283,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1284,8 +1295,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1296,8 +1307,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1308,8 +1319,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1320,8 +1331,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
         <tag>回溯</tag>
       </tags>
@@ -1333,8 +1344,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -1344,8 +1355,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -1355,8 +1366,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1367,8 +1378,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1379,8 +1390,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -1390,10 +1401,10 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
-        <tag>DFS</tag>
+        <tag>二叉树</tag>
         <tag>队列</tag>
+        <tag>DFS</tag>
         <tag>BFS</tag>
       </tags>
   </entry>
@@ -1402,8 +1413,8 @@
     <url>%2F2020%2F07%2F13%2F%E4%BA%8C%E5%8F%89%E6%A0%91%E5%89%8D%E5%BA%8F%E3%80%81%E4%B8%AD%E5%BA%8F%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%EF%BC%88%E9%9D%9E%E9%80%92%E5%BD%92%E7%BB%9F%E4%B8%80%E8%A7%A3%E6%B3%95%EF%BC%89%2F</url>
     <content type="text"><![CDATA[前言最近复习了二叉树的前序遍历、中序遍历和后序遍历，找到了一种统一的非递归的迭代方法。 思路思路本质上还是递归，只不过不通过递归函数显式递归，而是通过栈模拟递归。 该思路仅需要微小改动就可以通用于二叉树的先/中/后序遍历，也很容易理解。 注意： 该思路的核心是将nullptr作为可以遍历栈中下1个结点的标志（因此也就不能将空结点压入栈中），即栈中弹出nullptr时就可以遍历下1个栈顶结点，如果不是nullptr则根据遍历顺序入栈，当前根结点入栈时也要将nullptr压入栈中（后续遇到这个nullptr时就可以遍历到该根结点）。 遍历顺序和入栈顺序相反 前序遍历LeetCode题解：https://www.cnblogs.com/chouxianyu/p/13290758.html 12345678910111213141516171819202122vector&lt;int&gt; preorderTraversal(TreeNode* root) &#123; vector&lt;int&gt; result; stack&lt;TreeNode*&gt; nodes; if (root!=nullptr) nodes.push(root); while(!nodes.empty())&#123; root = nodes.top(); nodes.pop(); if (root==nullptr)&#123; result.push_back(nodes.top()-&gt;val); nodes.pop(); &#125;else&#123; if (root-&gt;right!=nullptr) nodes.push(root-&gt;right); if (root-&gt;left!=nullptr) nodes.push(root-&gt;left); nodes.push(root); nodes.push(nullptr); &#125; &#125; return result;&#125; 中序遍历LeetCode题解：https://www.cnblogs.com/chouxianyu/p/13293153.html 12345678910111213141516171819202122vector&lt;int&gt; inorderTraversal(TreeNode* root) &#123; vector&lt;int&gt; result; stack&lt;TreeNode*&gt; nodes; if(root!=nullptr) nodes.push(root); while(!nodes.empty())&#123; root=nodes.top(); nodes.pop(); if(root==nullptr)&#123; result.push_back(nodes.top()-&gt;val); nodes.pop(); &#125;else&#123; if (root-&gt;right!=nullptr) nodes.push(root-&gt;right); nodes.push(root); nodes.push(nullptr); if (root-&gt;left!=nullptr) nodes.push(root-&gt;left); &#125; &#125; return result;&#125; 后序遍历LeetCode题解：https://www.cnblogs.com/chouxianyu/p/13293152.html 12345678910111213141516171819202122vector&lt;int&gt; postorderTraversal(TreeNode* root) &#123; stack&lt;TreeNode*&gt; nodes; vector&lt;int&gt; result; if (root!=nullptr) nodes.push(root); while(!nodes.empty())&#123; root=nodes.top(); nodes.pop(); if(root==nullptr)&#123; result.push_back(nodes.top()-&gt;val); nodes.pop(); &#125;else&#123; nodes.push(root); nodes.push(nullptr); if(root-&gt;right!=nullptr) nodes.push(root-&gt;right); if(root-&gt;left!=nullptr) nodes.push(root-&gt;left); &#125; &#125; return result;&#125; 参考链接https://leetcode-cn.com/problems/binary-tree-postorder-traversal/solution/mo-fang-di-gui-zhi-bian-yi-xing-by-sonp/ 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>栈</tag>
         <tag>迭代</tag>
       </tags>
@@ -1415,8 +1426,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>栈</tag>
         <tag>迭代</tag>
       </tags>
@@ -1428,8 +1439,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>栈</tag>
         <tag>迭代</tag>
       </tags>
@@ -1441,8 +1452,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>栈</tag>
         <tag>迭代</tag>
       </tags>
