@@ -4,8 +4,173 @@
 
     
   <url>
+    <loc>https://chouxianyu.github.io/2021/04/14/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-9-5%E8%AF%A6%E8%A7%A3%E5%9F%BA%E4%BA%8ELSTM%E7%9A%84RNN/</loc>
+    <lastmod>2021-04-14T02:40:15.998Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-9.5详解基于LSTM的RNN</title>
+        <pubTime>2021-04-14T02:38:35.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>深度学习</tag>
+         
+        <tag>神经网络</tag>
+         
+        <tag>循环神经网络</tag>
+         
+        <tag>LSTM</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/12/25/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-5%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92Python%E5%AE%9E%E6%88%98/</loc>
+    <lastmod>2021-04-13T08:57:41.539Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-2.5线性回归Python实战</title>
+        <pubTime>2020-12-25T01:03:09.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>python</tag>
+         
+        <tag>线性回归</tag>
+         
+        <tag>adgrad</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2021/03/28/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-4-4%E6%A6%82%E7%8E%87%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8BPython%E5%AE%9E%E6%88%98/</loc>
+    <lastmod>2021-04-13T08:57:27.173Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-4.4概率生成模型Python实战</title>
+        <pubTime>2021-03-28T02:12:34.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>分类</tag>
+         
+        <tag>概率生成模型</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2021/03/28/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-4-5%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92Python%E5%AE%9E%E6%88%98/</loc>
+    <lastmod>2021-04-13T08:57:16.104Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-4.5逻辑回归Python实战</title>
+        <pubTime>2021-03-28T02:40:20.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>逻辑回归</tag>
+         
+        <tag>线性回归</tag>
+         
+        <tag>分类</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2021/04/05/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-7-4%E5%9F%BA%E4%BA%8ECNN%E5%92%8CPyTorch%E7%9A%84%E9%A3%9F%E7%89%A9%E5%9B%BE%E7%89%87%E5%88%86%E7%B1%BB/</loc>
+    <lastmod>2021-04-13T08:52:03.190Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-7.4基于CNN和PyTorch的食物图片分类</title>
+        <pubTime>2021-04-05T11:42:47.000Z</pubTime>
+        
+        <tag>深度学习</tag>
+         
+        <tag>神经网络</tag>
+         
+        <tag>PyTorch</tag>
+         
+        <tag>图片分类</tag>
+         
+        <tag>卷积神经网络</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2021/04/13/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-9-4LSTM%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2021-04-13T00:47:38.903Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-9.4LSTM入门</title>
+        <pubTime>2021-04-13T00:35:26.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>深度学习</tag>
+         
+        <tag>神经网络</tag>
+         
+        <tag>循环神经网络</tag>
+         
+        <tag>LSTM</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2021/04/12/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-9-3RNN%E7%9A%84%E5%BA%94%E7%94%A8/</loc>
+    <lastmod>2021-04-12T01:02:36.510Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-9.3RNN的应用</title>
+        <pubTime>2021-04-12T00:54:54.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>深度学习</tag>
+         
+        <tag>神经网络</tag>
+         
+        <tag>循环神经网络</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chouxianyu.github.io/2021/04/11/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-9-2%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83RNN/</loc>
-    <lastmod>2021-04-11T02:42:37.212Z</lastmod>
+    <lastmod>2021-04-11T02:43:24.928Z</lastmod>
     <data>
         <display>
         <title>李宏毅机器学习课程笔记-9.2如何训练RNN</title>
@@ -64,31 +229,6 @@
         <tag>神经网络</tag>
          
         <tag>图神经网络</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2021/04/05/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-7-4%E5%9F%BA%E4%BA%8ECNN%E5%92%8CPyTorch%E7%9A%84%E9%A3%9F%E7%89%A9%E5%9B%BE%E7%89%87%E5%88%86%E7%B1%BB/</loc>
-    <lastmod>2021-04-05T11:45:38.379Z</lastmod>
-    <data>
-        <display>
-        <title>李宏毅机器学习课程笔记-7.4基于CNN和PyTorch的食物图片分类</title>
-        <pubTime>2021-04-05T11:42:47.000Z</pubTime>
-        
-        <tag>深度学习</tag>
-         
-        <tag>神经网络</tag>
-         
-        <tag>PyTorch</tag>
-         
-        <tag>图片分类</tag>
-         
-        <tag>卷积神经网络</tag>
          
          
            
@@ -234,50 +374,6 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2021/03/28/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-4-5%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92Python%E5%AE%9E%E6%88%98/</loc>
-    <lastmod>2021-03-28T03:34:31.552Z</lastmod>
-    <data>
-        <display>
-        <title>李宏毅机器学习课程笔记-4.5逻辑回归Python实战</title>
-        <pubTime>2021-03-28T02:40:20.000Z</pubTime>
-        
-        <tag>机器学习</tag>
-         
-        <tag>线性回归</tag>
-         
-        <tag>逻辑回归</tag>
-         
-        <tag>分类</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2021/03/28/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-4-4%E6%A6%82%E7%8E%87%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8BPython%E5%AE%9E%E6%88%98/</loc>
-    <lastmod>2021-03-28T02:56:16.379Z</lastmod>
-    <data>
-        <display>
-        <title>李宏毅机器学习课程笔记-4.4概率生成模型Python实战</title>
-        <pubTime>2021-03-28T02:12:34.000Z</pubTime>
-        
-        <tag>机器学习</tag>
-         
-        <tag>分类</tag>
-         
-        <tag>概率生成模型</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://chouxianyu.github.io/2021/01/17/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-4-3%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B%E4%B9%8B%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/</loc>
     <lastmod>2021-03-28T02:50:12.763Z</lastmod>
     <data>
@@ -289,38 +385,15 @@
          
         <tag>神经网络</tag>
          
-        <tag>线性回归</tag>
-         
         <tag>逻辑回归</tag>
+         
+        <tag>线性回归</tag>
          
         <tag>分类</tag>
          
         <tag>Softmax</tag>
          
         <tag>特征变换</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2020/12/25/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-5%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92Python%E5%AE%9E%E6%88%98/</loc>
-    <lastmod>2021-03-28T02:33:12.763Z</lastmod>
-    <data>
-        <display>
-        <title>李宏毅机器学习课程笔记-2.5线性回归Python实战</title>
-        <pubTime>2020-12-25T01:03:09.000Z</pubTime>
-        
-        <tag>机器学习</tag>
-         
-        <tag>python</tag>
-         
-        <tag>线性回归</tag>
-         
-        <tag>adgrad</tag>
          
          
            
@@ -593,9 +666,9 @@
          
         <tag>二叉树</tag>
          
-        <tag>栈</tag>
-         
         <tag>迭代</tag>
+         
+        <tag>栈</tag>
          
          
            
@@ -668,9 +741,9 @@
          
         <tag>二叉树</tag>
          
-        <tag>栈</tag>
-         
         <tag>迭代</tag>
+         
+        <tag>栈</tag>
          
          
            
@@ -695,9 +768,9 @@
          
         <tag>二叉树</tag>
          
-        <tag>栈</tag>
-         
         <tag>迭代</tag>
+         
+        <tag>栈</tag>
          
          
            
@@ -722,9 +795,9 @@
          
         <tag>二叉树</tag>
          
-        <tag>栈</tag>
-         
         <tag>迭代</tag>
+         
+        <tag>栈</tag>
          
          
            
@@ -741,11 +814,11 @@
         <title>计算某天的下一天：黑盒测试之等价类划分+JUnit参数化测试</title>
         <pubTime>2020-04-27T19:10:53.000Z</pubTime>
         
+        <tag>Java</tag>
+         
         <tag>软件测试</tag>
          
         <tag>JUnit</tag>
-         
-        <tag>Java</tag>
          
         <tag>黑盒测试</tag>
          
@@ -812,11 +885,11 @@
          
         <tag>递归</tag>
          
-        <tag>迭代</tag>
-         
         <tag>单向链表</tag>
          
         <tag>双指针</tag>
+         
+        <tag>迭代</tag>
          
          
            
@@ -839,9 +912,9 @@
          
         <tag>递归</tag>
          
-        <tag>迭代</tag>
-         
         <tag>单向链表</tag>
+         
+        <tag>迭代</tag>
          
          
            
@@ -893,13 +966,13 @@
          
         <tag>递归</tag>
          
-        <tag>栈</tag>
-         
-        <tag>迭代</tag>
-         
         <tag>单向链表</tag>
          
         <tag>双指针</tag>
+         
+        <tag>迭代</tag>
+         
+        <tag>栈</tag>
          
          
            
@@ -989,31 +1062,6 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2021/01/17/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-4-2%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B%E4%B9%8B%E6%A6%82%E7%8E%87%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B/</loc>
-    <lastmod>2021-02-03T07:26:19.810Z</lastmod>
-    <data>
-        <display>
-        <title>李宏毅机器学习课程笔记-4.2分类模型之概率生成模型</title>
-        <pubTime>2021-01-17T06:28:04.000Z</pubTime>
-        
-        <tag>机器学习</tag>
-         
-        <tag>分类</tag>
-         
-        <tag>概率生成模型</tag>
-         
-        <tag>贝叶斯</tag>
-         
-        <tag>Sigmoid</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://chouxianyu.github.io/2021/01/27/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-5-3%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2021-02-03T07:26:19.810Z</lastmod>
     <data>
@@ -1037,232 +1085,22 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2021/01/30/PAT%E7%94%B2%E7%BA%A71056Mice-and-Rice/</loc>
-    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
+    <loc>https://chouxianyu.github.io/2021/01/17/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-4-2%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B%E4%B9%8B%E6%A6%82%E7%8E%87%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B/</loc>
+    <lastmod>2021-02-03T07:26:19.810Z</lastmod>
     <data>
         <display>
-        <title>PAT甲级1056Mice and Rice</title>
-        <pubTime>2021-01-30T13:25:37.000Z</pubTime>
-        
-        <tag>算法</tag>
-         
-        <tag>队列</tag>
-         
-        <tag>PAT</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2020/12/27/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-3-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%B2%BE%E8%AE%B2/</loc>
-    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
-    <data>
-        <display>
-        <title>李宏毅机器学习课程笔记-3.梯度下降精讲</title>
-        <pubTime>2020-12-27T10:03:48.000Z</pubTime>
+        <title>李宏毅机器学习课程笔记-4.2分类模型之概率生成模型</title>
+        <pubTime>2021-01-17T06:28:04.000Z</pubTime>
         
         <tag>机器学习</tag>
          
-        <tag>梯度下降</tag>
+        <tag>分类</tag>
          
-        <tag>学习率</tag>
+        <tag>概率生成模型</tag>
          
-        <tag>Adagrad</tag>
+        <tag>贝叶斯</tag>
          
-        <tag>SGD</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2020/12/24/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-3%E6%AC%A0%E6%8B%9F%E5%90%88%E4%B8%8E%E8%BF%87%E6%8B%9F%E5%90%88/</loc>
-    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
-    <data>
-        <display>
-        <title>李宏毅机器学习课程笔记-2.3欠拟合与过拟合</title>
-        <pubTime>2020-12-24T11:10:08.000Z</pubTime>
-        
-        <tag>机器学习</tag>
-         
-        <tag>Bias</tag>
-         
-        <tag>Variance</tag>
-         
-        <tag>欠拟合</tag>
-         
-        <tag>过拟合</tag>
-         
-        <tag>正则化</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2020/12/24/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-4%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81/</loc>
-    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
-    <data>
-        <display>
-        <title>李宏毅机器学习课程笔记-2.4交叉验证</title>
-        <pubTime>2020-12-24T11:10:34.000Z</pubTime>
-        
-        <tag>机器学习</tag>
-         
-        <tag>交叉验证</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2020/12/24/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-1%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B/</loc>
-    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
-    <data>
-        <display>
-        <title>李宏毅机器学习课程笔记-2.1线性回归模型</title>
-        <pubTime>2020-12-24T11:09:06.000Z</pubTime>
-        
-        <tag>机器学习</tag>
-         
-        <tag>线性回归，梯度下降</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2020/12/24/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-2%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9E%8B%E3%80%81%E5%87%8F%E5%B0%8F%E8%AF%AF%E5%B7%AE/</loc>
-    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
-    <data>
-        <display>
-        <title>李宏毅机器学习课程笔记-2.2如何选择模型、减小误差</title>
-        <pubTime>2020-12-24T11:09:41.000Z</pubTime>
-        
-        <tag>机器学习</tag>
-         
-        <tag>Bias</tag>
-         
-        <tag>Variance</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2021/02/02/PAT%E7%94%B2%E7%BA%A71016Phone-Bills/</loc>
-    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
-    <data>
-        <display>
-        <title>PAT甲级1016Phone Bills</title>
-        <pubTime>2021-02-02T05:00:04.000Z</pubTime>
-        
-        <tag>算法</tag>
-         
-        <tag>PAT</tag>
-         
-        <tag>map</tag>
-         
-        <tag>排序</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2021/01/28/PAT%E7%94%B2%E7%BA%A71014Waiting-in-Line/</loc>
-    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
-    <data>
-        <display>
-        <title>PAT甲级1014Waiting in Line</title>
-        <pubTime>2021-01-28T13:38:59.000Z</pubTime>
-        
-        <tag>算法</tag>
-         
-        <tag>队列</tag>
-         
-        <tag>PAT</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2021/01/27/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-5-1%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%BC%95%E8%A8%80/</loc>
-    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
-    <data>
-        <display>
-        <title>李宏毅机器学习课程笔记-5.1深度学习之引言</title>
-        <pubTime>2021-01-27T03:35:22.000Z</pubTime>
-        
-        <tag>机器学习</tag>
-         
-        <tag>深度学习</tag>
-         
-        <tag>神经网络</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2021/01/27/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-5-2%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%98%AF%E6%B7%B1%E5%BA%A6%E7%9A%84/</loc>
-    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
-    <data>
-        <display>
-        <title>李宏毅机器学习课程笔记-5.2神经网络为什么要是深度的</title>
-        <pubTime>2021-01-27T03:36:51.000Z</pubTime>
-        
-        <tag>机器学习</tag>
-         
-        <tag>深度学习</tag>
-         
-        <tag>神经网络</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2020/12/22/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-1-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%AE%BA/</loc>
-    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
-    <data>
-        <display>
-        <title>李宏毅机器学习课程笔记-1.机器学习概论</title>
-        <pubTime>2020-12-22T02:06:27.000Z</pubTime>
-        
-        <tag>机器学习</tag>
+        <tag>Sigmoid</tag>
          
          
            
@@ -1307,6 +1145,241 @@
         <tag>PAT</tag>
          
         <tag>排序</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2021/01/30/PAT%E7%94%B2%E7%BA%A71056Mice-and-Rice/</loc>
+    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
+    <data>
+        <display>
+        <title>PAT甲级1056Mice and Rice</title>
+        <pubTime>2021-01-30T13:25:37.000Z</pubTime>
+        
+        <tag>算法</tag>
+         
+        <tag>队列</tag>
+         
+        <tag>PAT</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2021/02/02/PAT%E7%94%B2%E7%BA%A71016Phone-Bills/</loc>
+    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
+    <data>
+        <display>
+        <title>PAT甲级1016Phone Bills</title>
+        <pubTime>2021-02-02T05:00:04.000Z</pubTime>
+        
+        <tag>算法</tag>
+         
+        <tag>PAT</tag>
+         
+        <tag>排序</tag>
+         
+        <tag>map</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/12/24/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-4%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81/</loc>
+    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-2.4交叉验证</title>
+        <pubTime>2020-12-24T11:10:34.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>交叉验证</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/12/24/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-2%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9E%8B%E3%80%81%E5%87%8F%E5%B0%8F%E8%AF%AF%E5%B7%AE/</loc>
+    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-2.2如何选择模型、减小误差</title>
+        <pubTime>2020-12-24T11:09:41.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>Bias</tag>
+         
+        <tag>Variance</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/12/24/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-3%E6%AC%A0%E6%8B%9F%E5%90%88%E4%B8%8E%E8%BF%87%E6%8B%9F%E5%90%88/</loc>
+    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-2.3欠拟合与过拟合</title>
+        <pubTime>2020-12-24T11:10:08.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>欠拟合</tag>
+         
+        <tag>过拟合</tag>
+         
+        <tag>Bias</tag>
+         
+        <tag>Variance</tag>
+         
+        <tag>正则化</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/12/24/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-2-1%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B/</loc>
+    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-2.1线性回归模型</title>
+        <pubTime>2020-12-24T11:09:06.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>线性回归，梯度下降</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/12/22/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-1-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%AE%BA/</loc>
+    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-1.机器学习概论</title>
+        <pubTime>2020-12-22T02:06:27.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/12/27/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-3-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%B2%BE%E8%AE%B2/</loc>
+    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-3.梯度下降精讲</title>
+        <pubTime>2020-12-27T10:03:48.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>梯度下降</tag>
+         
+        <tag>学习率</tag>
+         
+        <tag>Adagrad</tag>
+         
+        <tag>SGD</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2021/01/27/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-5-2%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%98%AF%E6%B7%B1%E5%BA%A6%E7%9A%84/</loc>
+    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-5.2神经网络为什么要是深度的</title>
+        <pubTime>2021-01-27T03:36:51.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>深度学习</tag>
+         
+        <tag>神经网络</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2021/01/28/PAT%E7%94%B2%E7%BA%A71014Waiting-in-Line/</loc>
+    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
+    <data>
+        <display>
+        <title>PAT甲级1014Waiting in Line</title>
+        <pubTime>2021-01-28T13:38:59.000Z</pubTime>
+        
+        <tag>算法</tag>
+         
+        <tag>队列</tag>
+         
+        <tag>PAT</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2021/01/27/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-5-1%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%BC%95%E8%A8%80/</loc>
+    <lastmod>2021-02-03T07:26:18.925Z</lastmod>
+    <data>
+        <display>
+        <title>李宏毅机器学习课程笔记-5.1深度学习之引言</title>
+        <pubTime>2021-01-27T03:35:22.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>深度学习</tag>
+         
+        <tag>神经网络</tag>
          
          
            
@@ -1795,13 +1868,13 @@
          
         <tag>PAT</tag>
          
+        <tag>图</tag>
+         
         <tag>dijkstra</tag>
          
         <tag>最短路</tag>
          
         <tag>单源最短路</tag>
-         
-        <tag>图</tag>
          
          
            
@@ -1826,13 +1899,13 @@
          
         <tag>PAT</tag>
          
+        <tag>图</tag>
+         
         <tag>dijkstra</tag>
          
         <tag>最短路</tag>
          
         <tag>单源最短路</tag>
-         
-        <tag>图</tag>
          
          
            
@@ -1855,13 +1928,13 @@
          
         <tag>PAT</tag>
          
+        <tag>图</tag>
+         
         <tag>dijkstra</tag>
          
         <tag>最短路</tag>
          
         <tag>单源最短路</tag>
-         
-        <tag>图</tag>
          
          
            
@@ -1886,13 +1959,13 @@
          
         <tag>贪心</tag>
          
+        <tag>图</tag>
+         
         <tag>dijkstra</tag>
          
         <tag>最短路</tag>
          
         <tag>单源最短路</tag>
-         
-        <tag>图</tag>
          
          
            
@@ -1917,13 +1990,13 @@
          
         <tag>PAT</tag>
          
+        <tag>图</tag>
+         
         <tag>dijkstra</tag>
          
         <tag>最短路</tag>
          
         <tag>单源最短路</tag>
-         
-        <tag>图</tag>
          
          
            
@@ -1946,13 +2019,13 @@
          
         <tag>PAT</tag>
          
+        <tag>图</tag>
+         
         <tag>dijkstra</tag>
          
         <tag>最短路</tag>
          
         <tag>单源最短路</tag>
-         
-        <tag>图</tag>
          
          
            
@@ -2216,9 +2289,9 @@
          
         <tag>PAT</tag>
          
-        <tag>map</tag>
-         
         <tag>图</tag>
+         
+        <tag>map</tag>
          
         <tag>set</tag>
          
@@ -2289,9 +2362,9 @@
          
         <tag>PAT</tag>
          
-        <tag>map</tag>
-         
         <tag>图</tag>
+         
+        <tag>map</tag>
          
         <tag>哈希</tag>
          
@@ -2690,31 +2763,6 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2020/07/30/LeetCode671%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%AC%AC%E4%BA%8C%E5%B0%8F%E7%9A%84%E8%8A%82%E7%82%B9/</loc>
-    <lastmod>2020-08-01T02:38:41.168Z</lastmod>
-    <data>
-        <display>
-        <title>LeetCode671二叉树中第二小的结点</title>
-        <pubTime>2020-07-30T05:49:56.000Z</pubTime>
-        
-        <tag>算法</tag>
-         
-        <tag>LeetCode</tag>
-         
-        <tag>递归</tag>
-         
-        <tag>二叉树</tag>
-         
-        <tag>DFS</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://chouxianyu.github.io/2020/07/25/LeetCode543%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84/</loc>
     <lastmod>2020-08-01T02:38:41.168Z</lastmod>
     <data>
@@ -2765,12 +2813,12 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2020/07/30/LeetCode19%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9/</loc>
+    <loc>https://chouxianyu.github.io/2020/07/30/LeetCode671%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%AC%AC%E4%BA%8C%E5%B0%8F%E7%9A%84%E8%8A%82%E7%82%B9/</loc>
     <lastmod>2020-08-01T02:38:41.168Z</lastmod>
     <data>
         <display>
-        <title>LeetCode19删除链表的倒数第N个结点</title>
-        <pubTime>2020-07-30T12:42:27.000Z</pubTime>
+        <title>LeetCode671二叉树中第二小的结点</title>
+        <pubTime>2020-07-30T05:49:56.000Z</pubTime>
         
         <tag>算法</tag>
          
@@ -2778,34 +2826,9 @@
          
         <tag>递归</tag>
          
-        <tag>单向链表</tag>
+        <tag>二叉树</tag>
          
-        <tag>双指针</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2020/07/31/LeetCode445%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0II/</loc>
-    <lastmod>2020-08-01T02:38:41.168Z</lastmod>
-    <data>
-        <display>
-        <title>LeetCode445两数相加II</title>
-        <pubTime>2020-07-31T03:18:45.000Z</pubTime>
-        
-        <tag>算法</tag>
-         
-        <tag>LeetCode</tag>
-         
-        <tag>递归</tag>
-         
-        <tag>栈</tag>
-         
-        <tag>单向链表</tag>
+        <tag>DFS</tag>
          
          
            
@@ -2840,12 +2863,37 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2020/07/26/LeetCode437%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8CIII/</loc>
+    <loc>https://chouxianyu.github.io/2020/07/31/LeetCode445%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0II/</loc>
     <lastmod>2020-08-01T02:38:41.168Z</lastmod>
     <data>
         <display>
-        <title>LeetCode437路径总和III</title>
-        <pubTime>2020-07-26T05:40:41.000Z</pubTime>
+        <title>LeetCode445两数相加II</title>
+        <pubTime>2020-07-31T03:18:45.000Z</pubTime>
+        
+        <tag>算法</tag>
+         
+        <tag>LeetCode</tag>
+         
+        <tag>递归</tag>
+         
+        <tag>单向链表</tag>
+         
+        <tag>栈</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/07/30/LeetCode337%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/</loc>
+    <lastmod>2020-08-01T02:38:41.168Z</lastmod>
+    <data>
+        <display>
+        <title>LeetCode337打家劫舍III</title>
+        <pubTime>2020-07-30T03:19:52.000Z</pubTime>
         
         <tag>算法</tag>
          
@@ -2890,12 +2938,87 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2020/07/30/LeetCode337%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/</loc>
+    <loc>https://chouxianyu.github.io/2020/07/30/LeetCode19%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9/</loc>
     <lastmod>2020-08-01T02:38:41.168Z</lastmod>
     <data>
         <display>
-        <title>LeetCode337打家劫舍III</title>
-        <pubTime>2020-07-30T03:19:52.000Z</pubTime>
+        <title>LeetCode19删除链表的倒数第N个结点</title>
+        <pubTime>2020-07-30T12:42:27.000Z</pubTime>
+        
+        <tag>算法</tag>
+         
+        <tag>LeetCode</tag>
+         
+        <tag>递归</tag>
+         
+        <tag>单向链表</tag>
+         
+        <tag>双指针</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/07/26/LeetCode437%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8CIII/</loc>
+    <lastmod>2020-08-01T02:38:41.168Z</lastmod>
+    <data>
+        <display>
+        <title>LeetCode437路径总和III</title>
+        <pubTime>2020-07-26T05:40:41.000Z</pubTime>
+        
+        <tag>算法</tag>
+         
+        <tag>LeetCode</tag>
+         
+        <tag>递归</tag>
+         
+        <tag>二叉树</tag>
+         
+        <tag>DFS</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/07/31/LeetCode234%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/</loc>
+    <lastmod>2020-08-01T02:38:41.167Z</lastmod>
+    <data>
+        <display>
+        <title>LeetCode234回文链表</title>
+        <pubTime>2020-07-31T05:45:41.000Z</pubTime>
+        
+        <tag>算法</tag>
+         
+        <tag>LeetCode</tag>
+         
+        <tag>递归</tag>
+         
+        <tag>单向链表</tag>
+         
+        <tag>双指针</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/07/27/LeetCode124%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/</loc>
+    <lastmod>2020-08-01T02:38:41.167Z</lastmod>
+    <data>
+        <display>
+        <title>LeetCode124二叉树中的最大路径和</title>
+        <pubTime>2020-07-27T08:55:15.000Z</pubTime>
         
         <tag>算法</tag>
          
@@ -2936,54 +3059,6 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2020/07/25/LeetCode226%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
-    <lastmod>2020-08-01T02:38:41.167Z</lastmod>
-    <data>
-        <display>
-        <title>LeetCode226翻转二叉树</title>
-        <pubTime>2020-07-25T09:32:55.000Z</pubTime>
-        
-        <tag>算法</tag>
-         
-        <tag>LeetCode</tag>
-         
-        <tag>递归</tag>
-         
-        <tag>二叉树</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2020/07/27/LeetCode124%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/</loc>
-    <lastmod>2020-08-01T02:38:41.167Z</lastmod>
-    <data>
-        <display>
-        <title>LeetCode124二叉树中的最大路径和</title>
-        <pubTime>2020-07-27T08:55:15.000Z</pubTime>
-        
-        <tag>算法</tag>
-         
-        <tag>LeetCode</tag>
-         
-        <tag>递归</tag>
-         
-        <tag>二叉树</tag>
-         
-        <tag>DFS</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://chouxianyu.github.io/2020/07/27/LeetCode404%E5%B7%A6%E5%8F%B6%E5%AD%90%E4%B9%8B%E5%92%8C/</loc>
     <lastmod>2020-08-01T02:38:41.167Z</lastmod>
     <data>
@@ -3007,12 +3082,12 @@
 
     
   <url>
-    <loc>https://chouxianyu.github.io/2020/07/31/LeetCode234%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/</loc>
+    <loc>https://chouxianyu.github.io/2020/07/25/LeetCode226%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
     <lastmod>2020-08-01T02:38:41.167Z</lastmod>
     <data>
         <display>
-        <title>LeetCode234回文链表</title>
-        <pubTime>2020-07-31T05:45:41.000Z</pubTime>
+        <title>LeetCode226翻转二叉树</title>
+        <pubTime>2020-07-25T09:32:55.000Z</pubTime>
         
         <tag>算法</tag>
          
@@ -3020,9 +3095,7 @@
          
         <tag>递归</tag>
          
-        <tag>单向链表</tag>
-         
-        <tag>双指针</tag>
+        <tag>二叉树</tag>
          
          
            
@@ -3046,60 +3119,6 @@
         <tag>递归</tag>
          
         <tag>单向链表</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2020/07/25/LeetCode110%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
-    <lastmod>2020-08-01T02:38:41.161Z</lastmod>
-    <data>
-        <display>
-        <title>LeetCode110平衡二叉树</title>
-        <pubTime>2020-07-25T03:14:05.000Z</pubTime>
-        
-        <tag>算法</tag>
-         
-        <tag>LeetCode</tag>
-         
-        <tag>递归</tag>
-         
-        <tag>二叉树</tag>
-         
-        <tag>DFS</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://chouxianyu.github.io/2020/07/24/LeetCode102%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/</loc>
-    <lastmod>2020-08-01T02:38:41.161Z</lastmod>
-    <data>
-        <display>
-        <title>LeetCode102二叉树层次遍历</title>
-        <pubTime>2020-07-24T14:39:14.000Z</pubTime>
-        
-        <tag>算法</tag>
-         
-        <tag>LeetCode</tag>
-         
-        <tag>递归</tag>
-         
-        <tag>二叉树</tag>
-         
-        <tag>队列</tag>
-         
-        <tag>DFS</tag>
-         
-        <tag>BFS</tag>
          
          
            
@@ -3161,6 +3180,60 @@
 
     
   <url>
+    <loc>https://chouxianyu.github.io/2020/07/24/LeetCode102%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/</loc>
+    <lastmod>2020-08-01T02:38:41.161Z</lastmod>
+    <data>
+        <display>
+        <title>LeetCode102二叉树层次遍历</title>
+        <pubTime>2020-07-24T14:39:14.000Z</pubTime>
+        
+        <tag>算法</tag>
+         
+        <tag>LeetCode</tag>
+         
+        <tag>递归</tag>
+         
+        <tag>二叉树</tag>
+         
+        <tag>队列</tag>
+         
+        <tag>DFS</tag>
+         
+        <tag>BFS</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chouxianyu.github.io/2020/07/25/LeetCode110%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
+    <lastmod>2020-08-01T02:38:41.161Z</lastmod>
+    <data>
+        <display>
+        <title>LeetCode110平衡二叉树</title>
+        <pubTime>2020-07-25T03:14:05.000Z</pubTime>
+        
+        <tag>算法</tag>
+         
+        <tag>LeetCode</tag>
+         
+        <tag>递归</tag>
+         
+        <tag>二叉树</tag>
+         
+        <tag>DFS</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://chouxianyu.github.io/2020/04/07/JUnit%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95%E4%B9%8B%E5%9F%BA%E6%9C%AC%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95%EF%BC%9A%E7%A7%B0%E9%87%8D3%E6%AC%A1%E6%89%BE%E5%88%B0%E5%81%87%E7%90%83/</loc>
     <lastmod>2020-08-01T02:36:35.068Z</lastmod>
     <data>
@@ -3168,6 +3241,8 @@
         <title>JUnit白盒测试之基本路径测试：称重3次找到假球</title>
         <pubTime>2020-04-07T05:08:52.000Z</pubTime>
         
+        <tag>Java</tag>
+         
         <tag>软件测试</tag>
          
         <tag>白盒测试</tag>
@@ -3175,8 +3250,6 @@
         <tag>基本路径测试</tag>
          
         <tag>JUnit</tag>
-         
-        <tag>Java</tag>
          
          
            
@@ -5563,9 +5636,9 @@
         
         <tag>Matlab</tag>
          
-        <tag>可视化</tag>
-         
         <tag>数学建模</tag>
+         
+        <tag>可视化</tag>
          
          
            
