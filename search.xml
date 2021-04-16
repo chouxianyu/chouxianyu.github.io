@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[李宏毅机器学习课程笔记-10.1半监督学习简介]]></title>
+    <url>%2F2021%2F04%2F16%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-10-1%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E7%AE%80%E4%BB%8B%2F</url>
+    <content type="text"><![CDATA[有监督学习(Supervised Learning)训练集数据为$\{ (x^r,\ \hat y^r) \}_{r=1}^R$，其中每组数据包括算法的输入与输出(标签)。 半监督学习(Semi-supervised Learning)训练集数据为$\{ (x^r,\ \hat y^r) \}_{r=1}^R+\{ x^u\}_{u=R+1}^{U+R}$，即其中部分数据有标签而大量数据没有标签($U&gt;&gt;R$)。 半监督学习可以分为以下2种情况 Transductive Learning unlabeled data is the testing data，只使用testing data中的feature，并没有使用testing data中的label，所以并没有cheating。 适用于已知testing data的情况，比如kaggle比赛。 Inductive Learning unlabeled data is not the testing data，完全不使用testing data。 适用于testing data未知的情况，这是大多数情况。 为什么需要半监督学习其实缺的并不是数据，缺少的是有标签的数据。利用这些大量的没有标签的数据进行学习，这是非常有价值的。 为什么半监督学习有用The distribution of the unlabeled data tell us something：无标注数据的分布可以告诉我们一些东西 半监督学习往往伴随着假设，而该假设的合理与否决定了结果的好坏程度。如上图所示，在猫狗图片分类中一只狗被认为是一只猫，这很可能是由于这2张图片的背景都是绿色，因此假设的合理性至关重要。 Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>半监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[李宏毅机器学习课程笔记-9.6基于RNN和PyTorch的文本情感分类]]></title>
     <url>%2F2021%2F04%2F15%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-9-6%E5%9F%BA%E4%BA%8ERNN%E5%92%8CPyTorch%E7%9A%84%E6%96%87%E6%9C%AC%E6%83%85%E6%84%9F%E5%88%86%E7%B1%BB%2F</url>
     <content type="text"><![CDATA[本文为作者学习李宏毅机器学习课程时参照样例完成homework4的记录。 全部课程PPT、数据和代码下载链接： 链接：https://pan.baidu.com/s/1n_N7aoaNxxwqO03EmV5Bjg 提取码：tpmc 代码仓库：https://github.com/chouxianyu/LHY_ML2020_Codes 任务描述 通过RNN实现文本情感分类(Text Sentiment Classification)。 数据集描述 输入是1个句子，输出是0(负面)或1(正面)。 训练集：标注数据20万，无标注数据120万 测试集：20万(无标注) 数据格式 training_label.txt：label +++$+++ sentence，其中+++$+++只是分隔符 training_nolabel.txt：每一行就是一个句子，没有label testing_data.txt： 数据预处理 一个句子(sentence)中有多个word，我们需要通过Word Embedding(我的其它文章里有介绍)用一个vector表示一个word， 然后使用RNN得到一个表示该sentence的vector。 半监督学习 这里使用一种半监督学习方法：Self-Training(我的其它文章里有介绍)。使用有标签数据训练好模型，然后对无标签数据进行预测，并根据预测结果对无标签数据进行标注(“伪标签”)并继续训练模型 第三方库 使用Python第三方库gensim实现word2vec模型，以进行Word Embedding。 代码 https://github.com/chouxianyu/LHY_ML2020_Codes/tree/master/hw4_RNN Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
@@ -285,8 +294,8 @@
         <tag>机器学习</tag>
         <tag>深度学习</tag>
         <tag>神经网络</tag>
-        <tag>激活函数</tag>
         <tag>梯度消失</tag>
+        <tag>激活函数</tag>
       </tags>
   </entry>
   <entry>
@@ -746,10 +755,10 @@
         <tag>DFS</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -761,10 +770,10 @@
         <tag>DFS</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -775,10 +784,10 @@
         <tag>算法</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -789,10 +798,10 @@
         <tag>算法</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -804,10 +813,10 @@
         <tag>DFS</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -819,10 +828,10 @@
         <tag>BFS</tag>
         <tag>PAT</tag>
         <tag>贪心</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -971,8 +980,8 @@
       <tags>
         <tag>算法</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
         <tag>map</tag>
+        <tag>图</tag>
         <tag>哈希</tag>
       </tags>
   </entry>
@@ -983,8 +992,8 @@
       <tags>
         <tag>算法</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
         <tag>map</tag>
+        <tag>图</tag>
         <tag>set</tag>
         <tag>点着色</tag>
       </tags>
@@ -1214,8 +1223,8 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
-        <tag>栈</tag>
         <tag>单向链表</tag>
+        <tag>栈</tag>
       </tags>
   </entry>
   <entry>
@@ -1514,9 +1523,9 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
-        <tag>迭代</tag>
         <tag>单向链表</tag>
         <tag>双指针</tag>
+        <tag>迭代</tag>
       </tags>
   </entry>
   <entry>
@@ -1527,8 +1536,8 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
-        <tag>迭代</tag>
         <tag>单向链表</tag>
+        <tag>迭代</tag>
       </tags>
   </entry>
   <entry>
@@ -1539,10 +1548,10 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
-        <tag>栈</tag>
-        <tag>迭代</tag>
         <tag>单向链表</tag>
         <tag>双指针</tag>
+        <tag>栈</tag>
+        <tag>迭代</tag>
       </tags>
   </entry>
   <entry>
@@ -1561,9 +1570,9 @@
     <url>%2F2020%2F04%2F28%2F%E8%AE%A1%E7%AE%97%E6%9F%90%E5%A4%A9%E7%9A%84%E4%B8%8B%E4%B8%80%E5%A4%A9%EF%BC%9A%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95%E4%B9%8B%E7%AD%89%E4%BB%B7%E7%B1%BB%E5%88%92%E5%88%86-JUnit%E5%8F%82%E6%95%B0%E5%8C%96%E6%B5%8B%E8%AF%95%2F</url>
     <content type="text"><![CDATA[题目要求测试以下程序：该程序有三个输入变量month、day、year（month、day和year均为整数值，并且满足：1≤month≤12、1≤day≤31和1900≤year≤2050)，分别作为输入日期的月份、日、年份，通过程序可以输出该输入日期在日历上隔一天的日期。例如，输入为2004年11月30日，则该程序的输出为2004年12月1日。 划分等价类，按照等价类划分法设计测试用例； 编写getNextDate函数； 掌握Junit4的用法，使用Junit4测试getNextDate函数。 等价类表假设输入格式为year,month,day，且三个输入变量year、month和day均被输入。 year要区分闰年和平年，其中闰年还可以分为世纪闰年和普通闰年，且year要属于[1900,2050]。 month要根据该月有几天来进行区分，并且需要考虑是否向year进位，且month要属于[1,12]。 day要根据月份来判断天数是否合法，并且需要考虑是否向month进位，且day要属于[1,31]。 等价类划分如下。 测试用例有效等价类测试用例共有5个有效等价类测试用例。 测试数据 期望结果 覆盖范围 2004/12/25 2004/12/26 2,10,14 2001/2/28 2001/3/1 3,7,15 2000/2/29 2000/3/1 1,7,16 2001/4/30 2001/5/1 3,8,17 2001/5/31 2001/6/1 3,9,18 无效等价类测试用例共有12个有效等价类测试用例。 测试数据 期望结果 覆盖范围 1899/6/1 year非法 4 2051/6/1 year非法 5 a/6/1 year非法 6 1999/0/1 month非法 11 1999/13/1 month非法 12 1999/a/1 month非法 13 1999/1/0 day非法 19 1999/1/32 day非法 20 1999/1/a day非法 21 2001/2/29 day非法 22 2000/2/30 day非法 23 2001/4/31 day非法 24 源代码项目结构如下图所示 DateUtil.java123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192193194195196197198199200201202203204205206package com.company;public class DateUtil &#123; // 有31天的月份 private static int[] monthOfThirtyOne = new int[]&#123;1,3,5,7,8,10,12&#125;; // 有30天的月份 private static int[] monthOfThirty = new int[]&#123;4,6,9,11&#125;; // 年月日 private int year; private int month; private int day; // 最终实现的功能，输入是一个“年/月/日”格式的字符串； // 如果函数运行成功，输出则是相同格式的下一天，否则是错误信息 public String getNextDate(String dateStr)&#123; String updateResult = this.updateDate(dateStr); // 如果输入合法 if (updateResult.equals("success"))&#123; String checkResult = this.checkDate(); // 如果输入合法 if (checkResult.equals("valid"))&#123; // 计算明天的日期 return this.calcNextDate(); &#125; return checkResult; &#125; return updateResult; &#125; // 根据输入字符串转换并更新年月日 private String updateDate(String dateStr)&#123; // 获取年月日 String[] numbers = dateStr.split("/"); try&#123; this.year = Integer.parseInt(numbers[0]); &#125;catch (NumberFormatException e)&#123; return "year非法"; &#125; try&#123; this.month = Integer.parseInt(numbers[1]); &#125;catch (NumberFormatException e)&#123; return "month非法"; &#125; try&#123; this.day = Integer.parseInt(numbers[2]); &#125;catch (NumberFormatException e)&#123; return "day非法"; &#125; return "success"; &#125; // 检查日期是否合法 private String checkDate()&#123; String valid = "valid"; String yearInvalid = "year非法"; String monthInvalid = "month非法"; String dayInvalid = "day非法"; // year合法 if (year&gt;=1900&amp;&amp;year&lt;=2050)&#123; // month合法 if (month&gt;=1&amp;&amp;month&lt;=12)&#123; // day小于1 if (day&lt;=0)&#123; return dayInvalid; &#125; // 至此能保证day大于0 // 是2月 if (month==2)&#123; // 闰年 if (yearIsLeap(year))&#123; // 1-29 if (day&lt;=29)&#123; return valid; &#125;else&#123; return dayInvalid; &#125; &#125; // 平年2月 else&#123; // 1-28 if (day&lt;=28)&#123; return valid; &#125;else&#123; return dayInvalid; &#125; &#125; &#125; // 至此能保证不是2月 // 是否为31天的月 for(int i=0;i&lt;7;++i)&#123; if (month==monthOfThirtyOne[i])&#123; // 1-31 if (day&lt;=31)&#123; return valid; &#125;else&#123; return dayInvalid; &#125; &#125; &#125; // 至此能保证不是2月和31天的月 // 是否为30天的月 for(int i=0;i&lt;4;++i)&#123; if (month==monthOfThirty[i])&#123; // 1-30 if (day&lt;=30)&#123; return valid; &#125;else&#123; return dayInvalid; &#125; &#125; &#125; &#125; // month非法 else&#123; return monthInvalid; &#125; &#125; // year非法 return yearInvalid; &#125; // 计算下一天 private String calcNextDate()&#123; int yearNext; int monthNext; int dayNext=day+1; int dayCarry=0; int monthCarry=0; // 处理day // 是2月 if (month==2)&#123; // 闰年 if (yearIsLeap(year))&#123; // 1-29 if (day==29)&#123; dayNext = 1; dayCarry = 1; &#125; &#125; // 平年2月 else&#123; // 1-28 if (day==28)&#123; dayNext = 1; dayCarry = 1; &#125; &#125; &#125; // 不是2月 else&#123; boolean isThirtyOne= false; // 是否为31天的月 for(int i=0;i&lt;7;++i)&#123; if (month==monthOfThirtyOne[i])&#123; isThirtyOne = true; // 1-31 if (day==31)&#123; dayNext = 1; dayCarry = 1; &#125; break; &#125; &#125; // 至此能保证是30天的月 if (!isThirtyOne)&#123; // 1-30 if (day==30)&#123; dayNext = 1; dayCarry = 1; &#125; &#125; &#125; // 处理月 if (month+dayCarry&gt;12)&#123; monthNext = 1; monthCarry = 1; &#125;else&#123; monthNext = month+dayCarry; &#125; // 处理年 yearNext = year+monthCarry; return yearNext +"/"+ monthNext +"/"+ dayNext; &#125; // 判断某一年是否为闰年 private boolean yearIsLeap(int year)&#123; // 普通闰年和世纪闰年 if ((year%4==0&amp;&amp;year%100!=0)||(year%400==0))&#123; return true; &#125; // 平年 return false; &#125;&#125; DateUtilTest.java1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556package com.test;import com.company.DateUtil;import static org.junit.Assert.*;import org.junit.Test;//1、参数化测试：引入相关的包和类import java.util.Collection;import java.util.Arrays;import org.junit.runner.RunWith;import org.junit.runners.Parameterized;import org.junit.runners.Parameterized.Parameters;@RunWith(Parameterized.class) //2、参数化测试：更改测试运行器为RunWith(Parameterized.class)public class DateUtilTest &#123; //3、参数化测试：声明变量用来存放预期值与结果值 private DateUtil util = new DateUtil(); private String date; private String except; //4、参数化测试：声明一个返回值为 Collection 的公共静态方法，并使用@Parameters 进行修饰 @Parameters public static Collection data()&#123; return Arrays.asList(new Object[][]&#123; &#123;"2004/12/25", "2004/12/26"&#125;, &#123;"2001/2/28", "2001/3/1"&#125;, &#123;"2000/2/29", "2000/3/1"&#125;, &#123;"2001/4/30", "2001/5/1"&#125;, &#123;"2001/5/31", "2001/6/1"&#125;, &#123;"1899/6/1", "year非法"&#125;, &#123;"2051/6/1", "year非法"&#125;, &#123;"a/6/1", "year非法"&#125;, &#123;"1999/0/1", "month非法"&#125;, &#123;"1999/13/1", "month非法"&#125;, &#123;"1999/a/1", "month非法"&#125;, &#123;"1999/1/0", "day非法"&#125;, &#123;"1999/1/32", "day非法"&#125;, &#123;"1999/1/a", "day非法"&#125;, &#123;"2001/2/29", "day非法"&#125;, &#123;"2000/2/30", "day非法"&#125;, &#123;"2001/4/31", "day非法"&#125;, &#125;); &#125; //5、参数化测试：为测试类声明一个带有参数的公共构造方法，并在其中为声明变量赋值 public DateUtilTest(String date, String except)&#123; this.date = date; this.except = except; &#125; @Test public void testGetNextDate()&#123; assertEquals(except, util.getNextDate(date)); &#125;&#125; 测试结果如下图所示，17个测试用例均测试成功，程序实际输出与期望值相同。 实验总结本次实验的主要目的是巩固黑盒测试方法中的等价类划分法的知识，练习JUnit的参数化测试。在本次实验中，我认为我的getNextDate函数的实现并不是很优雅，比较过程化。写这个函数花了我很多时间，主要问题在于我没有抓住一些关键的、抽象的逻辑和子函数，比如天向月份进位和月份向年份完全可以参照加法器的循环、可以写一个函数根据年份和月份判断出天数的最大值等等。 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>Java</tag>
         <tag>软件测试</tag>
         <tag>JUnit</tag>
+        <tag>Java</tag>
         <tag>黑盒测试</tag>
       </tags>
   </entry>
@@ -1598,11 +1607,11 @@
     <url>%2F2020%2F04%2F07%2FJUnit%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95%E4%B9%8B%E5%9F%BA%E6%9C%AC%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95%EF%BC%9A%E7%A7%B0%E9%87%8D3%E6%AC%A1%E6%89%BE%E5%88%B0%E5%81%87%E7%90%83%2F</url>
     <content type="text"><![CDATA[前言记录一次软件测试课程的课后作业，作业内容是白盒测试中的基本路径测试，步骤如下 分析程序的控制流 计算环形复杂度 找出基本路径 设计测试用例 执行测试用例（要求使用JUnit） 作业要求使用白盒测试用例设计方法为下面的程序设计测试用例（基本路径测试）并用JUnit测试： 程序要求 10个铅球中有一个假球（比其他铅球的重量要轻），用天平三次称出假球。 程序设计思路 第一次使用天平分别称5个球，判断轻的一边有假球；拿出轻的5个球，取出其中4个第二次称，两边分别放2个球：如果两边同重，则剩下的球为假球；若两边不同重，拿出轻的两个球称第三次，轻的为假球。 递交材料 测试用例设计电子稿、源程序、JUnit测试截图。 程序代码及控制流图程序代码文件SearchBall.java内容如下。 注意不要让代码的行号变动，程序流图中结点的编号是根据这份代码里每条执行语句里的行号对应的。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950package module;public class SearchBall &#123; private static int x[]=new int[10]; public SearchBall()&#123;&#125; public void setBWeight(int w[])&#123; for(int i=0;i&lt;w.length;i++)&#123; x[i]=w[i]; &#125; &#125; public String BeginSearch()&#123; if(x[0]+x[1]+x[2]+x[3]+x[4]&lt;x[5]+x[6]+x[7]+x[8]+x[9])&#123; if(x[1]+x[2]==x[3]+x[4])&#123; return "1号是假球"; &#125; if(x[1]+x[2]&lt;x[3]+x[4])&#123; if (x[1]&lt;x[2]) &#123; return "2号是假球"; &#125;else &#123; return "3号是假球"; &#125; &#125;else &#123; if (x[3]&lt;x[4])&#123; return "4号是假球"; &#125; else&#123; return "5号是假球"; &#125; &#125; &#125;else &#123; if(x[6]+x[7]==x[8]+x[9])&#123; return "6号是假球"; &#125; if(x[6]+x[7]&lt;x[8]+x[9]) &#123; if (x[6]&lt;x[7]) &#123; return "7号是假球"; &#125;else &#123; return "8号是假球"; &#125; &#125;else &#123; if (x[8]&lt;x[9]) &#123; return "9号是假球"; &#125;else &#123; return "10号是假球"; &#125; &#125; &#125; &#125;&#125; 程序控制流图下图中结点中的数字是对应可执行语句在上面代码中的行号；边上的Y代表判定结果为真，N代表判定结果为假。 计算环形复杂度控制流图$G$的环形复杂度计算公式：$V(G)=E-N+2$，其中$E$为控制流图中边的数量，$N$是控制流图中的结点数量。 函数BeginSearch()的控制流图的环形复杂度为 V(G)=18-19+2=1基本路径从程序流图中可知，共有10条基本路径，具体如下 路径编号 经过结点 1 12-13-14 2 12-13-16-17-18 3 12-13-16-17-20 4 12-13-16-23-24 5 12-13-16-23-27 6 12-31-32 7 12-31-34-35-36 8 12-31-34-35-38 9 12-31-34-41-42 10 12-31-34-41-44 测试用例设计与执行测试用例设计 路径编号 用例输入 期待输出 1 {5, 10, 10, 10, 10, 10, 10, 10, 10, 10} “1号是假球” 2 {10, 5, 10, 10, 10, 10, 10, 10, 10, 10} “2号是假球” 3 {10, 10, 5, 10, 10, 10, 10, 10, 10, 10} “3号是假球” 4 {10, 10, 10, 5, 10, 10, 10, 10, 10, 10} “4号是假球” 5 {10, 10, 10, 10, 5, 10, 10, 10, 10, 10} “5号是假球” 6 {10, 10, 10, 10, 10, 5, 10, 10, 10, 10} “6号是假球” 7 {10, 10, 10, 10, 10, 10, 5, 10, 10, 10} “7号是假球” 8 {10, 10, 10, 10, 10, 10, 10, 5, 10, 10} “8号是假球” 9 {10, 10, 10, 10, 10, 10, 10, 10, 5, 10} “9号是假球” 10 {10, 10, 10, 10, 10, 10, 10, 10, 10, 5} “10号是假球” Junit执行测试用例基于JUnit生成的测试代码，我补充了测试函数BeginSearch()的代码，文件SearchBallTest.java内容如下。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657package test.module; import org.junit.Test; import org.junit.Before; import org.junit.After; import module.SearchBall;import static org.junit.Assert.assertEquals;/** * SearchBall Tester. * * @author &lt;Authors name&gt; * @since &lt;pre&gt;4月 7, 2020&lt;/pre&gt; * @version 1.0 */ public class SearchBallTest &#123; @Beforepublic void before() throws Exception &#123; &#125; @Afterpublic void after() throws Exception &#123; &#125; /** * * Method: setBWeight(int w[]) * */ @Testpublic void testSetBWeight() throws Exception &#123; //TODO: Test goes here... &#125; /** * * Method: BeginSearch() * */ @Testpublic void testBeginSearch() throws Exception &#123; SearchBall obj = new SearchBall(); int[] input; int ballIndex; // 遍历测试各个基本路径 for(int i=0;i&lt;10;++i)&#123; // 生成用例输入 input = new int[]&#123;10, 10, 10, 10, 10, 10, 10, 10, 10, 10&#125;; input[i]=5; obj.setBWeight(input); // 测试用例输出 ballIndex = i+1; assertEquals(ballIndex+"号是假球", obj.BeginSearch()); &#125;&#125; &#125; 执行函数testBeginSearch()，得到如下图所示的结果（从下图也可以看到项目的结构） 其它 我自己实现的找到假球的程序 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>Java</tag>
         <tag>软件测试</tag>
         <tag>白盒测试</tag>
         <tag>基本路径测试</tag>
         <tag>JUnit</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -2491,8 +2500,8 @@
     <content type="text"><![CDATA[构造函数与析构函数 派生类只能在构造函数初始化列表中为基类或对象成员进行初始化。 当基类没有默认构造函数的情况下，派生类必须定义构造函数，并通过它为基类构造函数提供初始化值。（编译器合成的构造函数也算默认构造函数） 子类构造函数只负责直接基类的初始化。 当存在虚基类时，所有虚基类都由最后的派生类负责初始化。如果没有，则报错。 子类继承基类的构造函数C++11允许子类继承基类的构造函数，带来的方便是： 当基类构造函数有较多参数，而派生类没有数据成员需要初始化，但它必须提供构造函数，且唯一目的是为基类构造函数提供初始化值。在这种情况下，它只需要继承直接基类的构造函数就可以了。 12345class Derived:public Base&#123; ... using Base::Base; //继承基类构造函数 ...&#125;; 这个using不受访问权限的控制，放在public、private和protected区域中没有区别。 但这个using与另外两种用法（见继承第一讲）有不同之处：这个会使编译器在子类中生成代码，而用using声明基类成员时，并不生成代码。 构造函数和析构函数的调用次序基类构造函数$\rightarrow$对象成员构造函数$\rightarrow$子类构造函数（体） 多继承时，基类构造函数调用次序为继承方式中声明次序。 有多个对象成员时，按它们在子类中的声明次序调用其构造函数。 析构函数与构造函数次序相反。 这个次序要和之后出现虚拟继承后构造函数的次序进行结合，例题可看课本P173。 基类与继承类的使用根据继承的定义，我们可知任何一个派生类对象的内部都包含一个基类子对象，所以可以通过截取的方法从派生类对象中复制其基类子对象并将之赋值给基类对象。 子类对象对基类对象的赋值和初始化有两种情况：赋值和初始化。如下： 赋值123Derived d1;Base b1;b1=d1; 在把子类对象赋值给基类对象时调用基类的赋值运算符函数。 初始化12Derived d1;Base b1(d1); 1234void func(Base b);//main中Derived d1;func(d1); 以上两种情况，在用子类对象初始化基类对象时，会调用基类的拷贝构造函数。 子类指针和基类指针在这里，在逻辑上引用与指针等价。 基类指针可以指向子类对象12Derived d1;Base* pb=&amp;d1; 子类指针不能指向基类对象12Base b1;Derived* pd=&amp;b1; //错误的 若想实现类似子类指针指向基类对象的功能，需要用强制类型转换，但也只能在逻辑上正确时才能使用，否则后续使用中绝对会出错的。如下： 123Derived d1;Base* pb=&amp;d1;Derived* pd=static_cast&lt;Derived*&gt;(pb); //这里是个模板函数 多继承定义多继承即一个类继承了多个类。 123class D:public A, B,protected C&#123; ... &#125;; 成员二义性多继承情况下，当多个（1个以上）基类拥有同名成员时，会产生成员二义性。 可以通过类域限定符解决该问题，明确指出成员所属的基类。 虚拟继承虚拟继承引入的原因解决多继承引出的二义性问题。 如Student、Employee继承Person，StuEmployee继承了Student、Employee，这样StuEmployee的对象中就有两份不同的Person的数据成员。 123class Student: public Person&#123;...&#125;class Employee: public Person&#123;...&#125;class StuEmployee: public Student,public Employee,&#123;...&#125; 语法123class Student:virtual public Person&#123;...&#125;class Employee:virtual public Person&#123;...&#125;class StuEmployee: public Student,public Employee,&#123;...&#125; 构造函数调用次序 先调用虚基类的构造函数，再调用非虚基类的构造函数。 同一继承层次中有多个虚基类时，就按照它们声明次序进行构造。 若某个虚基类的构造函数已被调用，就不再调用。 若虚基类有非虚基类派生而来，则先调用该虚基类的构造函数，再调用该非虚基类的构造函数。 成员函数优先级继承层次中越靠下优先级越高。 作者：@臭咸鱼 转载请注明出处：https://chouxianyu.github.io 欢迎讨论和交流!]]></content>
       <tags>
         <tag>C/C++</tag>
-        <tag>继承</tag>
         <tag>面向对象</tag>
+        <tag>继承</tag>
       </tags>
   </entry>
   <entry>
@@ -2528,8 +2537,8 @@
     <content type="text"><![CDATA[继承的概念继承源于生物界，指后代能够传承前代的特征和行为。 基类和子类继承使我们可以通过一个已有的类创建一个新类，新类自然获得已有类的全部功能。在某个继承关系中，已有的类在这个继承关系中作为基类、超类或父类，新类称为派生类或子类。 具体来讲，子类复制了基类的全体数据成员和成员函数。此外，子类还可以进行扩充、修改和重定义。 同一个类可以作为多个类的基类，一个子类也可以作为另一个类的基类。 基类和子类是继承关系中的概念，并不是本质的概念，而是关系上的概念。 继承与派生A作为基类，B作为子类时，我们称： B继承A A派生B 单继承和多继承只能从一个基类派生的继承称为单继承，即一个类一次最多继承一个基类。 可以从多个基类派生的继承称为多继承。 C++支持单继承和多继承。 Java只支持单继承，需要“多继承”时使用接口实现。（接口是什么，学了Java就知道了） 类成员访问权限C++类成员访问权限默认为private。 public语法正确的条件下，访问不受控制，在哪里都可以访问。 private只能在类内、友元函数访问。 protected只能在类内、子类内、友元函数访问。 继承方式注意：继承方式决定的是子类如何继承基类成员的访问权限。 不同继承方式会不同程度地改变基类成员在派生类中的访问权限。（个人觉得这句话不好，易让人误解） C++中继承方式默认为private。 public基类成员的访问权限在派生类中保持不变。 基类的private成员、public成员、protected成员在子类中保持他们在基类中相同的访问权限。 private基类成员的访问权限在派生类中全部变为private。 protected基类的public成员的访问权限在派生类中变为protected。 private成员和protected成员的访问权限不变。 派生类对基类的扩展派生类可以： 增加新的数据成员和成员函数 重载从基类继承到的成员函数 覆盖（重定义）从基类集成到的成员函数 改变基类成员在派生类中的访问属性（通过继承方式实现） 派生类不能继承基类的以下内容： 析构函数 基类的友元函数 静态成员 静态数据成员 静态成员函数 注意： 静态成员为整个继承体系公有。 C++11之前，派生类不能继承基类的构造函数，C++11之后可以，通过using实现。 成员函数的重定义、重载及隐藏派生类对继承到的基类成员函数的重定义或重载都会影响它们在派生类中的可见性。 派生类对基类函数进行重定义或重载时，由于继承和类作用域的原因，导致了隐藏，解决隐藏有三种方法。 影响可见性： 如果派生类重定义或者重载了基类中某个函数名为func的函数，则基类中的所有名字为func的函数都会被隐藏。（其中隐藏指的是在派生类中不能直接看到这个函数。） 解决： 通过基类名称访问被派生类重定义或重载隐藏的函数， 如基类::函数名(...)。 重载基类的所有同名函数，这些重载函数的代码与基类完全相同。 使用using。 前两种方法都很繁琐。 而C++11提供了using使基类中被隐藏的函数在派生类中可见，具体使用在后边的using部分讲解。 重定义是什么覆盖也称为重定义、重写。 重定义是指派生类定义与基类具有相同参数列表的同名成员函数。 （关于重定义的定义，我个人认为书上P147的说法是错的。） 隐藏及解决代码如下： 123456789101112131415161718192021222324252627282930313233343536373839#include &lt;iostream&gt;using namespace std;class Base &#123;public: void print() &#123; cout &lt;&lt; "Base::print()" &lt;&lt; endl; &#125; void print(int i) &#123; cout &lt;&lt; "Base::print()......" &lt;&lt; i &lt;&lt; endl; &#125;&#125;;class Derived :public Base &#123;public: int print() //重定义Base类的void print() &#123; cout &lt;&lt; "Derived::print()" &lt;&lt; endl; return 0; &#125;&#125;;int main()&#123; Base b1; Derived d1; b1.print(); //Base类调用函数正常 b1.print(1);//Base类调用函数正常 d1.print(); //Base类中的print()被隐藏，调用Derived类的print() d1.print(1);//该行报错，编译不通过。原因是Derived类的int print()重定义了Base类的void print()，导致Base中所有同名函数被隐藏，即print(int)和print()被隐藏。 d1.Base::print(); //调用Base类的print() d1.Base::print(1); //调用Base类的print(int) return 0;&#125; 将第34行注释后，输出结果如下： 12345Base::print()Base::print()......1Derived::print()Base::print()Base::print()......1 重载是什么重载与重定义不同，重载要求成员函数名称相同，但具有不同的参数列表。 （关于重载的定义，我个人认为书上P147的说法是错的） 隐藏及解决123456789101112131415161718192021222324252627282930313233343536373839#include &lt;iostream&gt;using namespace std;class Base &#123;public: void print() &#123; cout &lt;&lt; "Base::print()" &lt;&lt; endl; &#125; void print(int i) &#123; cout &lt;&lt; "Base::print()......" &lt;&lt; i &lt;&lt; endl; &#125;&#125;;class Derived :public Base &#123;public: void print(char i) //重载Base类的两个print函数，即print()、print(int i) &#123; cout &lt;&lt; "Derived::print()......" &lt;&lt; i &lt;&lt; endl; &#125; //int print(int i);//这个是重定义Base的void print(int i)，而非重载&#125;;int main()&#123; Base b1; Derived d1; b1.print(); //Base类调用函数正常 b1.print(1);//Base类调用函数正常 d1.print(); //该行报错，因为Derived的print(char i)重载了Base类的两个print函数，它们在Derived类中被隐藏了 d1.print('A');//调用Derived类的print(char i) d1.Base::print(); //调用Base类的print() d1.Base::print(1); //调用Base类的print(int) return 0;&#125; 将第33行注释后，输出结果如下： 12345Base::print()Base::print()......1Derived::print()......ABase::print()Base::print()......1 usingusing有三个用途： 使隐藏的函数重现 改变基类成员在派生类中的访问权限 使子类继承基类构造函数（在继承第二讲中讲解如何使用） 使隐藏函数重现方法：在派生类中用using 基类::函数名;声明基类的函数名，不需提供函数参数。 一条using可以把指定函数名的所有版本添加到派生类作用域中，它们的访问权限与using语句所在区域的访问权限相同。 12345678910111213141516171819202122232425262728293031323334#include &lt;iostream&gt;using namespace std;class Base &#123;public: void print() &#123; cout &lt;&lt; "Base::print()" &lt;&lt; endl; &#125; void print(int i) &#123; cout &lt;&lt; "Base::print()......" &lt;&lt; i &lt;&lt; endl; &#125;&#125;;class Derived :public Base &#123;public: void print(char i) //重载Base类的两个print函数，即print()、print(int i) &#123; cout &lt;&lt; "Derived::print()......" &lt;&lt; i &lt;&lt; endl; &#125; using Base::print;&#125;;int main()&#123; Derived d1; d1.print(); //不加using的话该行报错 d1.print('A');//调用Derived类的print(char i) return 0;&#125; 改变基类成员在派生类中的访问权限在派生类的public、protected或private权限区域内，使用using再次声明基类的非private成员，就可以重新设置它们在派生类中的权限为using语句所在区域的权限。 继承和类作用域在存在继承关系时，派生类的作用域嵌套在基类作用域的内层。 因此，在解析类成员名称时，如果在本类的作用域内没有找到，编译器会接着在外层的基类作用域内继续寻找该成员名称的定义。 在这个寻找的过程中，一旦在某个作用域找到了，就停止查找，即使外层作用域内还有同名成员，也不找了。 形式如下： 12345678Base &#123; int print(int)&#123;&#125; ... Derived &#123; void print() ... &#125;&#125; 代码验证： 12345678910111213141516171819202122232425262728293031#include &lt;iostream&gt;using namespace std;class Base &#123;public: void print(int i) &#123; cout &lt;&lt; "Base::print()......" &lt;&lt; i &lt;&lt; endl; &#125;&#125;;class Derived1 :public Base &#123;public: void print() &#123; cout &lt;&lt; "Derived::print()......" &lt;&lt; endl; &#125; &#125;;class Derived2 :public Derived1 &#123;&#125;;int main()&#123; Derived2 d; d.print(1); //该行代码报错，因为在Derived1中找到同名函数void print()，不会再向外层找，又因为参数列表不匹配，所以报错 return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://chouxianyu.github.io 欢迎讨论和交流!]]></content>
       <tags>
         <tag>C/C++</tag>
-        <tag>继承</tag>
         <tag>面向对象</tag>
+        <tag>继承</tag>
       </tags>
   </entry>
   <entry>
