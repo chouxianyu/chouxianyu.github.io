@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[李宏毅机器学习课程笔记-10.2生成模型中的半监督学习]]></title>
+    <url>%2F2021%2F04%2F17%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-10-2%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%2F</url>
+    <content type="text"><![CDATA[生成模型中的半监督学习：Semi-supervised Learning for Generative Model 有监督生成模型有监督生成模型：Supervised Generative Model 如下图所示，在有监督生成模型中，得到$P(C_1),P(C_2),\mu^1,\mu^2,\Sigma$后，就可以计算出$x$属于类别$C_i$的概率$P(C_i|x)$。 半监督生成模型半监督生成模型：Semi-supervised Generative Model 基于有监督生成模型，当有了无标签数据之后(下图中绿色圆点)，我们会明显发现有监督生成模型中的$P(C_1),P(C_2),\mu^1,\mu^2,\Sigma$并不够正确，比如2个类别的分布应该接近于下图中虚线圆圈、先验概率$P(C_1)$应该小于$P(C_2)$，所以应该使用无标签数据重新估计$P(C_1),P(C_2),\mu^1,\mu^2,\Sigma$。 直观理解具体来讲，按照以下步骤进行计算： 初始化参数：$\theta=\{P(C_1),P(C_2),\mu^1,\mu^2,\Sigma\}$ 可以随机初始化，也可以用有标签数据估算 通过$\theta$计算每个样本$x^u$属于类别$C_i$的概率$P_\theta(C_i|x^u)$ 更新参数$\theta$（其实重点就是如何同时利用有标签数据和无标签数据实现半监督） $P(C_1)=\frac{N_1+\sum_{x^u}P(C_1|x^u)}{N}$，其中$N$是所有样本的数量、$N_1$是属于类别$C_1$的样本的数量。 $\mu^1=\frac{1}{N_1}\sum_{x^r\in C_1}x^r+\frac{1}{\sum_{x^u}P(C_1|x^u)}\sum_{x^u}P(C_1|x^u)x^u$，其中$x^r,x^u$分别指有标签的样本和无标签的样本 同理可知其它参数的计算和更新方法 返回第2步 理论上，上述步骤是可以收敛的，但参数$\theta$的初始化值会影响结果。其实上面的第2步是EM算法中的E，第3步是EM算法中的M。 理论推导$\theta=\{P(C_1),P(C_2),\mu^1,\mu^2,\Sigma\}$ Maximum likelihood with labelled data 使得$logL(\theta)=\sum_{x^r}logP_\theta(x^r, \hat y^r)$最大(有一个Closed-form solution)，其中每个有标注样本$x^r$的$P_\theta(x^r,\hat y^r)=P_\theta(x^r|\hat y^r)P(\hat y^r)$。 Maximum likelihood with labelled &amp; unlabeled data 使得$logL(\theta)=\sum_{x^r}logP_\theta(x^r, \hat y^r)+\sum_{x^u}logP_\theta(x^u)$最大(该式并不是凹函数，所以需要迭代求解)，其中每个无标注样本$x^u$的$P_\theta(x^u)=P_\theta(x^u|C_1)P(C_1)+P_\theta(x^u|C_2)P(C_2)$ Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>半监督学习</tag>
+        <tag>概率生成模型</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[李宏毅机器学习课程笔记-10.1半监督学习简介]]></title>
     <url>%2F2021%2F04%2F16%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-10-1%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E7%AE%80%E4%BB%8B%2F</url>
     <content type="text"><![CDATA[有监督学习(Supervised Learning)训练集数据为$\{ (x^r,\ \hat y^r) \}_{r=1}^R$，其中每组数据包括算法的输入与输出(标签)。 半监督学习(Semi-supervised Learning)训练集数据为$\{ (x^r,\ \hat y^r) \}_{r=1}^R+\{ x^u\}_{u=R+1}^{U+R}$，即其中部分数据有标签而大量数据没有标签($U&gt;&gt;R$)。 半监督学习可以分为以下2种情况 Transductive Learning unlabeled data is the testing data，只使用testing data中的feature，并没有使用testing data中的label，所以并没有cheating。 适用于已知testing data的情况，比如kaggle比赛。 Inductive Learning unlabeled data is not the testing data，完全不使用testing data。 适用于testing data未知的情况，这是大多数情况。 为什么需要半监督学习其实缺的并不是数据，缺少的是有标签的数据。利用这些大量的没有标签的数据进行学习，这是非常有价值的。 为什么半监督学习有用The distribution of the unlabeled data tell us something：无标注数据的分布可以告诉我们一些东西 半监督学习往往伴随着假设，而该假设的合理与否决定了结果的好坏程度。如上图所示，在猫狗图片分类中一只狗被认为是一只猫，这很可能是由于这2张图片的背景都是绿色，因此假设的合理性至关重要。 Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
@@ -184,8 +194,8 @@
     <content type="text"><![CDATA[本文为作者学习李宏毅机器学习课程时参照样例完成homework2的记录。 关注我的公众号：臭咸鱼，回复LHY可获取课程PPT、数据和代码下载链接。 代码仓库：https://github.com/chouxianyu/LHY_ML2020_Codes 任务描述（Task Description） 二分类（Binary Classification） 根据个人资料，判断每个人的年收入是否超过50000美元。 数据集描述（Dataset Description） train.csv test_no_label.csv x_train.csv Y_train.csv X_test.csv 参考链接 https://colab.research.google.com/drive/1JaMKJU7hvnDoUfZjvUKzm9u-JLeX6B2C 代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141import numpy as np## 文件路径X_train_fpath = '../data/X_train.csv'Y_train_fpath = '../data/Y_train.csv'X_test_fpath = '../data/X_test.csv'output_fpath = 'output.csv'## 函数定义# 归一化def _normalize(X, train=True, specified_column=None, X_mean=None, X_std=None): # This function normalizes specific columns of X. # The mean and standard variance of training data will be reused when processing testing data. # # Arguments: # X: data to be processed # train: 'True' when processing training data, 'False' for testing data # specific_column: indexes of the columns that will be normalized. If 'None', all columns # will be normalized. # X_mean: mean value of training data, used when train = 'False' # X_std: standard deviation of training data, used when train = 'False' # Outputs: # X: normalized data # X_mean: computed mean value of training data # X_std: computed standard deviation of training data if specified_column is None: specified_column = np.arange(X.shape[1]) if train: X_mean = np.mean(X[:, specified_column], axis=0).reshape(1, -1) X_std = np.std(X[:, specified_column], axis=0).reshape(1, -1) X[:, specified_column] = (X[:, specified_column] - X_mean) / (X_std + 1e-8) return X, X_mean, X_std# 训练集划分def _train_valid_split(X, Y, valid_ratio=0.25): # This function splits data into training set and validation set. train_size = int(len(X) * (1 - valid_ratio)) return X[:train_size], Y[:train_size], X[train_size:], Y[train_size:]# sigmoid函数def _sigmoid(z): # Sigmoid function can be used to calculate probability. # To avoid overflow, minimum/maximum output value is set. return np.clip(1.0 / (1.0 + np.exp(-z)), 1e-8, 1 - ( 1e-8))# forwarddef _f(X, w, b): # This is the logistic regression function, parameterized by w and b # # Arguements: # X: input data, shape = [batch_size, data_dimension] # w: weight vector, shape = [data_dimension, ] # b: bias, scalar # Output: # predicted probability of each row of X being positively labeled, shape = [batch_size, ] return _sigmoid(np.matmul(X, w) + b)# 预测def _predict(X, w, b): # This function returns a truth value prediction for each row of X # by rounding the result of logistic regression function. return np.round(_f(X, w, b)).astype(np.int)# 计算精度def _accuracy(Y_pred, Y_label): # This function calculates prediction accuracy return 1 - np.mean(np.abs(Y_pred - Y_label))## 读取数据with open(X_train_fpath) as f: next(f) # 不需要第一行的表头 X_train = np.array([line.strip('\n').split(',')[1:] for line in f], dtype=float) # 不要第一列的ID # print(X_train)with open(Y_train_fpath) as f: next(f) # 不需要第一行的表头 Y_train = np.array([line.strip('\n').split(',')[1] for line in f], dtype=float)# 不要第一列的ID，只取第二列 # print(Y_train)with open(X_test_fpath) as f: next(f) # 不需要第一行的表头 X_test = np.array([line.strip('\n').split(',')[1:] for line in f], dtype=float) # print(X_test)## 数据集处理# 训练集和测试集normalizationX_train, X_mean, X_std = _normalize(X_train, train=True)X_test, _, _ = _normalize(X_test, train=False, specified_column=None, X_mean=X_mean, X_std=X_std)data_dim = X_train.shape[1]## 计算每个类别的样本的平均值和协方差# 区分类别X_train_0 = np.array([x for x, y in zip(X_train, Y_train) if y==0])X_train_1 = np.array([x for x, y in zip(X_train, Y_train) if y==1])# 计算每个类别的样本的平均值mean_0 = np.mean(X_train_0, axis=0) # 计算每个维度特征的平均值mean_1 = np.mean(X_train_1, axis=0)# 计算每个类别的样本的协方差矩阵（可以研究下协方差矩阵是如何计算的以及为什么）cov_0 = np.zeros((data_dim, data_dim))cov_1 = np.zeros((data_dim, data_dim))for x in X_train_0: cov_0 += np.dot(np.transpose([x - mean_0]), [x - mean_0]) / X_train_0.shape[0] # transpose没有参数的话，就是转置，计算协方差矩阵时需要转置for x in X_train_1: cov_1 += np.dot(np.transpose([x - mean_1]), [x - mean_1]) / X_train_1.shape[0]# 计算共享协方差矩阵（Shared covariance is taken as a weighted average of individual in-class covariance）cov = (cov_0 * X_train_0.shape[0] + cov_1 * X_train_1.shape[0]) / (X_train_0.shape[0] + X_train_1.shape[0])## 计算权重和偏置# 计算协方差矩阵的逆矩阵# Since covariance matrix may be nearly singular, np.linalg.inv() may give a large numerical error.# Via SVD decomposition, one can get matrix inverse efficiently and accurately.u, s, v = np.linalg.svd(cov, full_matrices=False)inv = np.matmul(v.T * 1 / s, u.T)# 计算weight和biasw = np.dot(inv, mean_0 - mean_1)b = (-0.5) * np.dot(mean_0, np.dot(inv, mean_0)) + 0.5 * np.dot(mean_1, np.dot(inv, mean_1)) + np.log(float(X_train_0.shape[0])) / X_train_1.shape[0]## 计算在训练集上的准确率Y_train_pred = 1 - _predict(X_train, w, b)print('Training accuracy: &#123;&#125;'.format(_accuracy(Y_train_pred, Y_train)))## 预测测试集结果predictions = 1 - _predict(X_test, w, b)with open(output_fpath, 'w') as f: f.write('id,label\n') for i, label in enumerate(predictions): f.write('&#123;&#125;,&#123;&#125;\n'.format(i, label))## 寻找最重要的10个维度的特征index = np.argsort(np.abs(w))[::-1] # 将w按绝对值从大到小排序with open(X_test_fpath) as f: features = np.array(f.readline().strip('\n').split(',')) for i in index[:10]: print(features[i], w[i]) Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
       <tags>
         <tag>机器学习</tag>
-        <tag>分类</tag>
         <tag>概率生成模型</tag>
+        <tag>分类</tag>
       </tags>
   </entry>
   <entry>
@@ -455,8 +465,8 @@
     <content type="text"><![CDATA[贝叶斯公式$P(A\cap B)=P(A)P(B|A)=P(B)P(A|B)$ $P(A|B)=\frac{P(B|A)P(A)}{P(B)}$ 全概率公式$P(B)=\sum_{i=1}^nP(A_i)P(B|A_i)$ 概率生成模型（Probalitity Generative Model）理论与定义假设有两个类别$C_1$和$C_2$，要判断对象$x$属于哪个类别，即计算$x$属于类别$C_1$的概率，这样把分类问题变成了概率计算问题。 根据贝叶斯公式（Bayes’ theorem）和全概率公式（Total Probability Theorem）可以知道，$x$属于类别$C_1$的概率为$P(C_1|x)=\frac{P(x|C_1)P(C_1)}{P(x)}=\frac{P(x|C_1)P(C_1)}{P(x|C_1)P(C_1)+P(x|C_2)P(C_2)}$，如果$P(C_1|x)&gt;0.5$则类别为$C_1$，否则类别为$C_2$。 概率生成模型的意思就是可以通过这个模型生成一个$x$。 具体来讲就是，根据$P(x)=P(x|C_1)P(C_1)+P(x|C_2)P(C_2)$计算出$P(x)$，就可以知道$x$的分布进而生成$x$。如果想要计算出$P(x)$，就要根据训练集估计出$P(C_1)$、$P(x|C_1)$、$P(C_2)$、$P(x|C_2)$这四个值。 更直观一点地讲，每个类别就是一个多元正态分布，其中多元是因为每个样本有多个维度的特征。 可以根据数据集中属于两个类别的对象的数量计算$P(C_1)$和$P(C_2)$这两个先验概率（Prior Probability）。 如果有2个样本属于类别$C_1$，4个样本属于类别$C_2$，那$P(C_1)=\frac{1}{3}$、$P(C_2)=\frac{2}{3}$。 要计算后验概率（Posterior Probability）$P(x|C_1)$和$P(x|C_2)$，可以假设训练集中的各类别样本的特征分别是从某个多元正态分布（多元对应特征的多维）中取样得到的，或者说是假设训练集中各类别样本的特征分别符合某多元正态分布。 该正态分布的输入是一个样本的特征$x$，输出为样本$x$是从这个正态分布取样得到（或者说该样本属于某类别）的概率密度，然后通过积分就可以求得$P(x|C_1)$和$P(x|C_2)$。 正态分布公式为$f_{\mu,\Sigma}(x)=\frac{1}{(2\pi)^{\frac{D}{2}}}\frac{1}{|\Sigma|^{\frac{1}{2}}}e^{-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)}$。 正态分布有2个参数，即均值$\mu$（代表正态分布的中心位置）和协方差矩阵（Covariance Matrix）$\Sigma$（代表正态分布的离散程度），计算出均值$\mu$和协方差$\Sigma$即可得到该正态分布。 公式中的$D$为多维特征的维度。 实际上从任何一个正态分布中取样都有可能得到训练集中的特征，只是概率不同而已。通过极大似然估计（Maximum Likelihood Estimate，MLE），我们可以找到取样得到训练集特征的概率最大的那个正态分布，假设其均值和协方差矩阵为$\mu^$和$\Sigma^$。 根据某正态分布的均值$\mu$和协方差$\Sigma$，可以计算出从该正态分布取样得到训练集的概率。$L(\mu,\Sigma)=f_{\mu,\Sigma}(x^1)f_{\mu,\Sigma}(x^2)\dots f_{\mu,\Sigma}(x^N)$，这就是似然函数（Likelihood Function），其中$N$是训练集中某个类别样本的数量。 $\mu^,\Sigma^=arg\ max_{\mu,\Sigma}L(\mu,\Sigma)$。 当然可以求导。 直觉：$\mu^=\frac{1}{N}\sum_{i=1}^Nx^i$，$\Sigma^=\frac{1}{N}\sum_{i=1}^N(x^i-\mu^)(x^i-\mu^)T$。 协方差矩阵共享每个类别的特征符合一个多元正态分布，每个多元正态分布也有不同的均值和协方差矩阵。让每个类别对应的多元正态分布共享一个协方差矩阵（各个协方差矩阵的加权平均和），公式为$\Sigma=\frac{N_1}{N_1+N_2}\Sigma^1+\frac{N_2}{N_1+N_2}\Sigma^2$，可以减少模型参数，缓解过拟合。 极大似然估计 定义 极大似然估计指已知某个随机样本满足某种概率分布，但是其中具体的参数不清楚，然后通过若干次试验，观察其结果，利用结果推出参数的大概值。一般说来，在一次试验中如果事件A发生了，则认为此时的参数值会使得$P(A|\theta)$最大，极大似然估计法就是要这样估计出的参数值，使所选取的样本在被选的总体中出现的可能性为最大。 求极大似然函数估计值的一般步骤： 写出似然函数 对似然函数取对数，并整理 求导数 解似然方程 当共享协方差矩阵时 此时似然函数是$L(\mu^1,\mu^2,\Sigma)=f_{\mu^1,\Sigma}(x^1)f_{\mu^2,\Sigma}(x^2)\dots f_{\mu^1,\Sigma}(x^{N_1})\times f_{\mu^2,\Sigma}(x^{N_1+1})f_{\mu^2,\Sigma}(x^{N_1+2})\dots f_{\mu^2,\Sigma}(x^{N_1+N_2})$，其中$N_1$为训练集中类别$C_1$的样本数、$N_2$为训练集中类别$C_2$的样本数。 当只有两个类别、两个特征时，如果共享协方差矩阵，那最终得到的两个类别的分界线是直线（横纵轴是两个特征），这一点可以在下文解释。 除了正态分布，还可以用其它的概率模型。 比如对于二值特征，可以使用伯努利分布（Bernouli Distribution）。 朴素贝叶斯分类 如果假设样本各个维度的数据是互相独立的，那这就是朴素贝叶斯分类器（Naive Bayes Classfier）。 Sigmoid函数由上面我们知道$P(C_1|x)=\frac{P(x|C_1)P(C_1)}{P(x|C_1)P(C_1)+P(x|C_2)P(C_2)}=\frac{1}{1+\frac{P(x|C_2)P(C_2)}{P(x|C_1)P(C_1)}}$， 令$z=ln\frac{P(x|C_1P(C_1)}{P(x|C_2P(C_2))}$，则$P(C_1|x)=\frac{P(x|C_1)P(C_1)}{P(x|C_1)P(C_1)+P(x|C_2)P(C_2)}=\frac{1}{1+\frac{P(x|C_2)P(C_2)}{P(x|C_1)P(C_1)}}=\frac{1}{1+e^{-z}}=\sigma(z)$，这就是Sigmoid函数。 如果共享协方差矩阵，经过运算可以得到$z=w^T\cdot x+b$的形式，其中常量$w^T=(\mu^1-\mu^2)^T\Sigma^{-1}$，常量$b=-\frac{1}{2}(\mu^1)^T(\Sigma^1)^{-1}\mu^1+\frac{1}{2}(\mu^2)^T(\Sigma^2)^{-1}\mu^2+ln\frac{N_1}{N_2}$，即形如$P(C_1|x)=\sigma(w\cdot x+b)$。 我们最终得到了一个这么简单的一个式子，有一个问题是，我们假设了分布、用了一堆概率，为什么不能直接定义线性模型呢？该问题的答案在下一篇文章李宏毅机器学习课程笔记-4.3分类模型之逻辑回归中的判别模型VS生成模型部分。 Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
       <tags>
         <tag>机器学习</tag>
-        <tag>分类</tag>
         <tag>概率生成模型</tag>
+        <tag>分类</tag>
         <tag>贝叶斯</tag>
         <tag>Sigmoid</tag>
       </tags>
@@ -755,10 +765,10 @@
         <tag>DFS</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
       </tags>
   </entry>
   <entry>
@@ -770,10 +780,10 @@
         <tag>DFS</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
       </tags>
   </entry>
   <entry>
@@ -784,10 +794,10 @@
         <tag>算法</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
       </tags>
   </entry>
   <entry>
@@ -798,10 +808,10 @@
         <tag>算法</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
       </tags>
   </entry>
   <entry>
@@ -813,10 +823,10 @@
         <tag>DFS</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
       </tags>
   </entry>
   <entry>
@@ -828,10 +838,10 @@
         <tag>BFS</tag>
         <tag>PAT</tag>
         <tag>贪心</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
       </tags>
   </entry>
   <entry>
@@ -980,8 +990,8 @@
       <tags>
         <tag>算法</tag>
         <tag>PAT</tag>
-        <tag>map</tag>
         <tag>图</tag>
+        <tag>map</tag>
         <tag>哈希</tag>
       </tags>
   </entry>
@@ -992,8 +1002,8 @@
       <tags>
         <tag>算法</tag>
         <tag>PAT</tag>
-        <tag>map</tag>
         <tag>图</tag>
+        <tag>map</tag>
         <tag>set</tag>
         <tag>点着色</tag>
       </tags>
@@ -1570,9 +1580,9 @@
     <url>%2F2020%2F04%2F28%2F%E8%AE%A1%E7%AE%97%E6%9F%90%E5%A4%A9%E7%9A%84%E4%B8%8B%E4%B8%80%E5%A4%A9%EF%BC%9A%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95%E4%B9%8B%E7%AD%89%E4%BB%B7%E7%B1%BB%E5%88%92%E5%88%86-JUnit%E5%8F%82%E6%95%B0%E5%8C%96%E6%B5%8B%E8%AF%95%2F</url>
     <content type="text"><![CDATA[题目要求测试以下程序：该程序有三个输入变量month、day、year（month、day和year均为整数值，并且满足：1≤month≤12、1≤day≤31和1900≤year≤2050)，分别作为输入日期的月份、日、年份，通过程序可以输出该输入日期在日历上隔一天的日期。例如，输入为2004年11月30日，则该程序的输出为2004年12月1日。 划分等价类，按照等价类划分法设计测试用例； 编写getNextDate函数； 掌握Junit4的用法，使用Junit4测试getNextDate函数。 等价类表假设输入格式为year,month,day，且三个输入变量year、month和day均被输入。 year要区分闰年和平年，其中闰年还可以分为世纪闰年和普通闰年，且year要属于[1900,2050]。 month要根据该月有几天来进行区分，并且需要考虑是否向year进位，且month要属于[1,12]。 day要根据月份来判断天数是否合法，并且需要考虑是否向month进位，且day要属于[1,31]。 等价类划分如下。 测试用例有效等价类测试用例共有5个有效等价类测试用例。 测试数据 期望结果 覆盖范围 2004/12/25 2004/12/26 2,10,14 2001/2/28 2001/3/1 3,7,15 2000/2/29 2000/3/1 1,7,16 2001/4/30 2001/5/1 3,8,17 2001/5/31 2001/6/1 3,9,18 无效等价类测试用例共有12个有效等价类测试用例。 测试数据 期望结果 覆盖范围 1899/6/1 year非法 4 2051/6/1 year非法 5 a/6/1 year非法 6 1999/0/1 month非法 11 1999/13/1 month非法 12 1999/a/1 month非法 13 1999/1/0 day非法 19 1999/1/32 day非法 20 1999/1/a day非法 21 2001/2/29 day非法 22 2000/2/30 day非法 23 2001/4/31 day非法 24 源代码项目结构如下图所示 DateUtil.java123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192193194195196197198199200201202203204205206package com.company;public class DateUtil &#123; // 有31天的月份 private static int[] monthOfThirtyOne = new int[]&#123;1,3,5,7,8,10,12&#125;; // 有30天的月份 private static int[] monthOfThirty = new int[]&#123;4,6,9,11&#125;; // 年月日 private int year; private int month; private int day; // 最终实现的功能，输入是一个“年/月/日”格式的字符串； // 如果函数运行成功，输出则是相同格式的下一天，否则是错误信息 public String getNextDate(String dateStr)&#123; String updateResult = this.updateDate(dateStr); // 如果输入合法 if (updateResult.equals("success"))&#123; String checkResult = this.checkDate(); // 如果输入合法 if (checkResult.equals("valid"))&#123; // 计算明天的日期 return this.calcNextDate(); &#125; return checkResult; &#125; return updateResult; &#125; // 根据输入字符串转换并更新年月日 private String updateDate(String dateStr)&#123; // 获取年月日 String[] numbers = dateStr.split("/"); try&#123; this.year = Integer.parseInt(numbers[0]); &#125;catch (NumberFormatException e)&#123; return "year非法"; &#125; try&#123; this.month = Integer.parseInt(numbers[1]); &#125;catch (NumberFormatException e)&#123; return "month非法"; &#125; try&#123; this.day = Integer.parseInt(numbers[2]); &#125;catch (NumberFormatException e)&#123; return "day非法"; &#125; return "success"; &#125; // 检查日期是否合法 private String checkDate()&#123; String valid = "valid"; String yearInvalid = "year非法"; String monthInvalid = "month非法"; String dayInvalid = "day非法"; // year合法 if (year&gt;=1900&amp;&amp;year&lt;=2050)&#123; // month合法 if (month&gt;=1&amp;&amp;month&lt;=12)&#123; // day小于1 if (day&lt;=0)&#123; return dayInvalid; &#125; // 至此能保证day大于0 // 是2月 if (month==2)&#123; // 闰年 if (yearIsLeap(year))&#123; // 1-29 if (day&lt;=29)&#123; return valid; &#125;else&#123; return dayInvalid; &#125; &#125; // 平年2月 else&#123; // 1-28 if (day&lt;=28)&#123; return valid; &#125;else&#123; return dayInvalid; &#125; &#125; &#125; // 至此能保证不是2月 // 是否为31天的月 for(int i=0;i&lt;7;++i)&#123; if (month==monthOfThirtyOne[i])&#123; // 1-31 if (day&lt;=31)&#123; return valid; &#125;else&#123; return dayInvalid; &#125; &#125; &#125; // 至此能保证不是2月和31天的月 // 是否为30天的月 for(int i=0;i&lt;4;++i)&#123; if (month==monthOfThirty[i])&#123; // 1-30 if (day&lt;=30)&#123; return valid; &#125;else&#123; return dayInvalid; &#125; &#125; &#125; &#125; // month非法 else&#123; return monthInvalid; &#125; &#125; // year非法 return yearInvalid; &#125; // 计算下一天 private String calcNextDate()&#123; int yearNext; int monthNext; int dayNext=day+1; int dayCarry=0; int monthCarry=0; // 处理day // 是2月 if (month==2)&#123; // 闰年 if (yearIsLeap(year))&#123; // 1-29 if (day==29)&#123; dayNext = 1; dayCarry = 1; &#125; &#125; // 平年2月 else&#123; // 1-28 if (day==28)&#123; dayNext = 1; dayCarry = 1; &#125; &#125; &#125; // 不是2月 else&#123; boolean isThirtyOne= false; // 是否为31天的月 for(int i=0;i&lt;7;++i)&#123; if (month==monthOfThirtyOne[i])&#123; isThirtyOne = true; // 1-31 if (day==31)&#123; dayNext = 1; dayCarry = 1; &#125; break; &#125; &#125; // 至此能保证是30天的月 if (!isThirtyOne)&#123; // 1-30 if (day==30)&#123; dayNext = 1; dayCarry = 1; &#125; &#125; &#125; // 处理月 if (month+dayCarry&gt;12)&#123; monthNext = 1; monthCarry = 1; &#125;else&#123; monthNext = month+dayCarry; &#125; // 处理年 yearNext = year+monthCarry; return yearNext +"/"+ monthNext +"/"+ dayNext; &#125; // 判断某一年是否为闰年 private boolean yearIsLeap(int year)&#123; // 普通闰年和世纪闰年 if ((year%4==0&amp;&amp;year%100!=0)||(year%400==0))&#123; return true; &#125; // 平年 return false; &#125;&#125; DateUtilTest.java1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556package com.test;import com.company.DateUtil;import static org.junit.Assert.*;import org.junit.Test;//1、参数化测试：引入相关的包和类import java.util.Collection;import java.util.Arrays;import org.junit.runner.RunWith;import org.junit.runners.Parameterized;import org.junit.runners.Parameterized.Parameters;@RunWith(Parameterized.class) //2、参数化测试：更改测试运行器为RunWith(Parameterized.class)public class DateUtilTest &#123; //3、参数化测试：声明变量用来存放预期值与结果值 private DateUtil util = new DateUtil(); private String date; private String except; //4、参数化测试：声明一个返回值为 Collection 的公共静态方法，并使用@Parameters 进行修饰 @Parameters public static Collection data()&#123; return Arrays.asList(new Object[][]&#123; &#123;"2004/12/25", "2004/12/26"&#125;, &#123;"2001/2/28", "2001/3/1"&#125;, &#123;"2000/2/29", "2000/3/1"&#125;, &#123;"2001/4/30", "2001/5/1"&#125;, &#123;"2001/5/31", "2001/6/1"&#125;, &#123;"1899/6/1", "year非法"&#125;, &#123;"2051/6/1", "year非法"&#125;, &#123;"a/6/1", "year非法"&#125;, &#123;"1999/0/1", "month非法"&#125;, &#123;"1999/13/1", "month非法"&#125;, &#123;"1999/a/1", "month非法"&#125;, &#123;"1999/1/0", "day非法"&#125;, &#123;"1999/1/32", "day非法"&#125;, &#123;"1999/1/a", "day非法"&#125;, &#123;"2001/2/29", "day非法"&#125;, &#123;"2000/2/30", "day非法"&#125;, &#123;"2001/4/31", "day非法"&#125;, &#125;); &#125; //5、参数化测试：为测试类声明一个带有参数的公共构造方法，并在其中为声明变量赋值 public DateUtilTest(String date, String except)&#123; this.date = date; this.except = except; &#125; @Test public void testGetNextDate()&#123; assertEquals(except, util.getNextDate(date)); &#125;&#125; 测试结果如下图所示，17个测试用例均测试成功，程序实际输出与期望值相同。 实验总结本次实验的主要目的是巩固黑盒测试方法中的等价类划分法的知识，练习JUnit的参数化测试。在本次实验中，我认为我的getNextDate函数的实现并不是很优雅，比较过程化。写这个函数花了我很多时间，主要问题在于我没有抓住一些关键的、抽象的逻辑和子函数，比如天向月份进位和月份向年份完全可以参照加法器的循环、可以写一个函数根据年份和月份判断出天数的最大值等等。 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
+        <tag>Java</tag>
         <tag>软件测试</tag>
         <tag>JUnit</tag>
-        <tag>Java</tag>
         <tag>黑盒测试</tag>
       </tags>
   </entry>
@@ -1607,11 +1617,11 @@
     <url>%2F2020%2F04%2F07%2FJUnit%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95%E4%B9%8B%E5%9F%BA%E6%9C%AC%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95%EF%BC%9A%E7%A7%B0%E9%87%8D3%E6%AC%A1%E6%89%BE%E5%88%B0%E5%81%87%E7%90%83%2F</url>
     <content type="text"><![CDATA[前言记录一次软件测试课程的课后作业，作业内容是白盒测试中的基本路径测试，步骤如下 分析程序的控制流 计算环形复杂度 找出基本路径 设计测试用例 执行测试用例（要求使用JUnit） 作业要求使用白盒测试用例设计方法为下面的程序设计测试用例（基本路径测试）并用JUnit测试： 程序要求 10个铅球中有一个假球（比其他铅球的重量要轻），用天平三次称出假球。 程序设计思路 第一次使用天平分别称5个球，判断轻的一边有假球；拿出轻的5个球，取出其中4个第二次称，两边分别放2个球：如果两边同重，则剩下的球为假球；若两边不同重，拿出轻的两个球称第三次，轻的为假球。 递交材料 测试用例设计电子稿、源程序、JUnit测试截图。 程序代码及控制流图程序代码文件SearchBall.java内容如下。 注意不要让代码的行号变动，程序流图中结点的编号是根据这份代码里每条执行语句里的行号对应的。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950package module;public class SearchBall &#123; private static int x[]=new int[10]; public SearchBall()&#123;&#125; public void setBWeight(int w[])&#123; for(int i=0;i&lt;w.length;i++)&#123; x[i]=w[i]; &#125; &#125; public String BeginSearch()&#123; if(x[0]+x[1]+x[2]+x[3]+x[4]&lt;x[5]+x[6]+x[7]+x[8]+x[9])&#123; if(x[1]+x[2]==x[3]+x[4])&#123; return "1号是假球"; &#125; if(x[1]+x[2]&lt;x[3]+x[4])&#123; if (x[1]&lt;x[2]) &#123; return "2号是假球"; &#125;else &#123; return "3号是假球"; &#125; &#125;else &#123; if (x[3]&lt;x[4])&#123; return "4号是假球"; &#125; else&#123; return "5号是假球"; &#125; &#125; &#125;else &#123; if(x[6]+x[7]==x[8]+x[9])&#123; return "6号是假球"; &#125; if(x[6]+x[7]&lt;x[8]+x[9]) &#123; if (x[6]&lt;x[7]) &#123; return "7号是假球"; &#125;else &#123; return "8号是假球"; &#125; &#125;else &#123; if (x[8]&lt;x[9]) &#123; return "9号是假球"; &#125;else &#123; return "10号是假球"; &#125; &#125; &#125; &#125;&#125; 程序控制流图下图中结点中的数字是对应可执行语句在上面代码中的行号；边上的Y代表判定结果为真，N代表判定结果为假。 计算环形复杂度控制流图$G$的环形复杂度计算公式：$V(G)=E-N+2$，其中$E$为控制流图中边的数量，$N$是控制流图中的结点数量。 函数BeginSearch()的控制流图的环形复杂度为 V(G)=18-19+2=1基本路径从程序流图中可知，共有10条基本路径，具体如下 路径编号 经过结点 1 12-13-14 2 12-13-16-17-18 3 12-13-16-17-20 4 12-13-16-23-24 5 12-13-16-23-27 6 12-31-32 7 12-31-34-35-36 8 12-31-34-35-38 9 12-31-34-41-42 10 12-31-34-41-44 测试用例设计与执行测试用例设计 路径编号 用例输入 期待输出 1 {5, 10, 10, 10, 10, 10, 10, 10, 10, 10} “1号是假球” 2 {10, 5, 10, 10, 10, 10, 10, 10, 10, 10} “2号是假球” 3 {10, 10, 5, 10, 10, 10, 10, 10, 10, 10} “3号是假球” 4 {10, 10, 10, 5, 10, 10, 10, 10, 10, 10} “4号是假球” 5 {10, 10, 10, 10, 5, 10, 10, 10, 10, 10} “5号是假球” 6 {10, 10, 10, 10, 10, 5, 10, 10, 10, 10} “6号是假球” 7 {10, 10, 10, 10, 10, 10, 5, 10, 10, 10} “7号是假球” 8 {10, 10, 10, 10, 10, 10, 10, 5, 10, 10} “8号是假球” 9 {10, 10, 10, 10, 10, 10, 10, 10, 5, 10} “9号是假球” 10 {10, 10, 10, 10, 10, 10, 10, 10, 10, 5} “10号是假球” Junit执行测试用例基于JUnit生成的测试代码，我补充了测试函数BeginSearch()的代码，文件SearchBallTest.java内容如下。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657package test.module; import org.junit.Test; import org.junit.Before; import org.junit.After; import module.SearchBall;import static org.junit.Assert.assertEquals;/** * SearchBall Tester. * * @author &lt;Authors name&gt; * @since &lt;pre&gt;4月 7, 2020&lt;/pre&gt; * @version 1.0 */ public class SearchBallTest &#123; @Beforepublic void before() throws Exception &#123; &#125; @Afterpublic void after() throws Exception &#123; &#125; /** * * Method: setBWeight(int w[]) * */ @Testpublic void testSetBWeight() throws Exception &#123; //TODO: Test goes here... &#125; /** * * Method: BeginSearch() * */ @Testpublic void testBeginSearch() throws Exception &#123; SearchBall obj = new SearchBall(); int[] input; int ballIndex; // 遍历测试各个基本路径 for(int i=0;i&lt;10;++i)&#123; // 生成用例输入 input = new int[]&#123;10, 10, 10, 10, 10, 10, 10, 10, 10, 10&#125;; input[i]=5; obj.setBWeight(input); // 测试用例输出 ballIndex = i+1; assertEquals(ballIndex+"号是假球", obj.BeginSearch()); &#125;&#125; &#125; 执行函数testBeginSearch()，得到如下图所示的结果（从下图也可以看到项目的结构） 其它 我自己实现的找到假球的程序 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
+        <tag>Java</tag>
         <tag>软件测试</tag>
         <tag>白盒测试</tag>
         <tag>基本路径测试</tag>
         <tag>JUnit</tag>
-        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
