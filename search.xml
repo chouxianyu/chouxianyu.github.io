@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[李宏毅机器学习课程笔记-10.3基于Low-density Separation假设的半监督学习]]></title>
+    <url>%2F2021%2F04%2F18%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-10-3%E5%9F%BA%E4%BA%8ELow-density-Separation%E5%81%87%E8%AE%BE%E7%9A%84%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%2F</url>
+    <content type="text"><![CDATA[按照“非黑即白”的思路，假设类别之间的boundary周围的data是很少的，即假设不同类别数据之间应该有1个很明显的boundary。 Self-training最简单的基于Low-density Separation假设的半监督学习是Self-training。 使用有标签的数据训练1个模型$f^*$，模型类型和训练方式没有限制，神经网络、深或浅、其它机器学习方法等等都可以 使用模型$f^$生成未标注数据的伪标签(Pseudo-label)，即$y^u=f^(x^u)$ 取出一部分未标注数据将它们添加到有标签数据中，然后回到步骤1 如何选择未标注数据仍然是一个open question，可以自行设计策略，比如给每个样本一个置信度。 Self-training和生成模型中的半监督学习(见上1篇文章)还挺像的，它们的区别在于： Self-training使用hard label，即假定某个无标签样本一定属于某个类别(“非黑即白”) 生成模型使用soft label，即假定某个无标签样本有一定概率属于某类别(也可以理解为一个样本可以按照后验概率划分成多个部分，不同部分属于不同类别) Self-training使用了hard label，它并不适用于regression。 生成模型使用了soft label，它生成的伪标签在分类任务中是没有用的。因为把某个无标签样本(通过soft label生成伪标签)丢进模型重新训练模型，模型参数根本不会发生变化。 实际上，low-density separation就是通过hard label来提升分类效果的方法。 Entropy-based Regularization该方法是Self-training的进阶版。 Self-training中使用的hard label还是有些武断和激进，Entropy-based Regularization对此进行了改进。 在使用神经网络进行分类时，$y^u=f^_{\theta^}(x^u)$，其中$y_u$是1个one-hot编码。现在我们并不限制其必须是某个类别，而是将其看做1个分布，我们希望这个分布越集中越好(“非黑即白”)，因为分布越集中时它的含义就是样本$x^u$属于某类别的概率很大属于其它类别的概率很小。 我们可以使用Entropy评估分布$y^u$的集中程度$E(y^u)=-\sum_{m=1}^5y_m^uln(y_m^u)$，假设是5分类，其值越小则表示分布$y^u$越集中。 无监督分类的目标为有标签数据分类正确、无标签数据分类结果集中，所以损失函数则为$L=\sum_{x^r}C(y^r,\hat y^r)+\lambda\sum_{x^u}E(y^u)$，其中第1项为有标签数据的交叉熵损失、第2项为无标签数据的entropy、$\lambda$表示无标签数据的损失权重，因为式中第2项的作用类似于regularization，所以该方法被称为Entropy-based Regularization。 Semi-supervised SVMSVM为两个类别的数据找到一个boundary，该boundary与两个类别的margin最大、分类错误最小。 Semi-supervised SVM穷举所有无标签数据的类别并进行计算，最终选择与两个类别的margin最大、分类错误最小的boundary。 在数据量大的时候，Semi-supervised SVM难以穷举出所有情况，但还有一种求近似解的方法，其大致思路是初始化一些label，然后每次尝试改动1个样本的label并判断是否更优，如果更优则改变该样本的label，具体见Transductive Inference for Text Classification using Support Vector Machines。 Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>半监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[李宏毅机器学习课程笔记-10.2生成模型中的半监督学习]]></title>
     <url>%2F2021%2F04%2F17%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-10-2%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%2F</url>
     <content type="text"><![CDATA[生成模型中的半监督学习：Semi-supervised Learning for Generative Model 有监督生成模型有监督生成模型：Supervised Generative Model 如下图所示，在有监督生成模型中，得到$P(C_1),P(C_2),\mu^1,\mu^2,\Sigma$后，就可以计算出$x$属于类别$C_i$的概率$P(C_i|x)$。 半监督生成模型半监督生成模型：Semi-supervised Generative Model 基于有监督生成模型，当有了无标签数据之后(下图中绿色圆点)，我们会明显发现有监督生成模型中的$P(C_1),P(C_2),\mu^1,\mu^2,\Sigma$并不够正确，比如2个类别的分布应该接近于下图中虚线圆圈、先验概率$P(C_1)$应该小于$P(C_2)$，所以应该使用无标签数据重新估计$P(C_1),P(C_2),\mu^1,\mu^2,\Sigma$。 直观理解具体来讲，按照以下步骤进行计算： 初始化参数：$\theta=\{P(C_1),P(C_2),\mu^1,\mu^2,\Sigma\}$ 可以随机初始化，也可以用有标签数据估算 通过$\theta$计算每个样本$x^u$属于类别$C_i$的概率$P_\theta(C_i|x^u)$ 更新参数$\theta$（其实重点就是如何同时利用有标签数据和无标签数据实现半监督） $P(C_1)=\frac{N_1+\sum_{x^u}P(C_1|x^u)}{N}$，其中$N$是所有样本的数量、$N_1$是属于类别$C_1$的样本的数量。 $\mu^1=\frac{1}{N_1}\sum_{x^r\in C_1}x^r+\frac{1}{\sum_{x^u}P(C_1|x^u)}\sum_{x^u}P(C_1|x^u)x^u$，其中$x^r,x^u$分别指有标签的样本和无标签的样本 同理可知其它参数的计算和更新方法 返回第2步 理论上，上述步骤是可以收敛的，但参数$\theta$的初始化值会影响结果。其实上面的第2步是EM算法中的E，第3步是EM算法中的M。 理论推导$\theta=\{P(C_1),P(C_2),\mu^1,\mu^2,\Sigma\}$ Maximum likelihood with labelled data 使得$logL(\theta)=\sum_{x^r}logP_\theta(x^r, \hat y^r)$最大(有一个Closed-form solution)，其中每个有标注样本$x^r$的$P_\theta(x^r,\hat y^r)=P_\theta(x^r|\hat y^r)P(\hat y^r)$。 Maximum likelihood with labelled &amp; unlabeled data 使得$logL(\theta)=\sum_{x^r}logP_\theta(x^r, \hat y^r)+\sum_{x^u}logP_\theta(x^u)$最大(该式并不是凹函数，所以需要迭代求解)，其中每个无标注样本$x^u$的$P_\theta(x^u)=P_\theta(x^u|C_1)P(C_1)+P_\theta(x^u|C_2)P(C_2)$ Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
@@ -304,8 +313,8 @@
         <tag>机器学习</tag>
         <tag>深度学习</tag>
         <tag>神经网络</tag>
-        <tag>梯度消失</tag>
         <tag>激活函数</tag>
+        <tag>梯度消失</tag>
       </tags>
   </entry>
   <entry>
@@ -1233,8 +1242,8 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
-        <tag>单向链表</tag>
         <tag>栈</tag>
+        <tag>单向链表</tag>
       </tags>
   </entry>
   <entry>
@@ -1533,9 +1542,9 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
+        <tag>迭代</tag>
         <tag>单向链表</tag>
         <tag>双指针</tag>
-        <tag>迭代</tag>
       </tags>
   </entry>
   <entry>
@@ -1546,8 +1555,8 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
-        <tag>单向链表</tag>
         <tag>迭代</tag>
+        <tag>单向链表</tag>
       </tags>
   </entry>
   <entry>
@@ -1558,10 +1567,10 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
-        <tag>单向链表</tag>
-        <tag>双指针</tag>
         <tag>栈</tag>
         <tag>迭代</tag>
+        <tag>单向链表</tag>
+        <tag>双指针</tag>
       </tags>
   </entry>
   <entry>
@@ -1580,9 +1589,9 @@
     <url>%2F2020%2F04%2F28%2F%E8%AE%A1%E7%AE%97%E6%9F%90%E5%A4%A9%E7%9A%84%E4%B8%8B%E4%B8%80%E5%A4%A9%EF%BC%9A%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95%E4%B9%8B%E7%AD%89%E4%BB%B7%E7%B1%BB%E5%88%92%E5%88%86-JUnit%E5%8F%82%E6%95%B0%E5%8C%96%E6%B5%8B%E8%AF%95%2F</url>
     <content type="text"><![CDATA[题目要求测试以下程序：该程序有三个输入变量month、day、year（month、day和year均为整数值，并且满足：1≤month≤12、1≤day≤31和1900≤year≤2050)，分别作为输入日期的月份、日、年份，通过程序可以输出该输入日期在日历上隔一天的日期。例如，输入为2004年11月30日，则该程序的输出为2004年12月1日。 划分等价类，按照等价类划分法设计测试用例； 编写getNextDate函数； 掌握Junit4的用法，使用Junit4测试getNextDate函数。 等价类表假设输入格式为year,month,day，且三个输入变量year、month和day均被输入。 year要区分闰年和平年，其中闰年还可以分为世纪闰年和普通闰年，且year要属于[1900,2050]。 month要根据该月有几天来进行区分，并且需要考虑是否向year进位，且month要属于[1,12]。 day要根据月份来判断天数是否合法，并且需要考虑是否向month进位，且day要属于[1,31]。 等价类划分如下。 测试用例有效等价类测试用例共有5个有效等价类测试用例。 测试数据 期望结果 覆盖范围 2004/12/25 2004/12/26 2,10,14 2001/2/28 2001/3/1 3,7,15 2000/2/29 2000/3/1 1,7,16 2001/4/30 2001/5/1 3,8,17 2001/5/31 2001/6/1 3,9,18 无效等价类测试用例共有12个有效等价类测试用例。 测试数据 期望结果 覆盖范围 1899/6/1 year非法 4 2051/6/1 year非法 5 a/6/1 year非法 6 1999/0/1 month非法 11 1999/13/1 month非法 12 1999/a/1 month非法 13 1999/1/0 day非法 19 1999/1/32 day非法 20 1999/1/a day非法 21 2001/2/29 day非法 22 2000/2/30 day非法 23 2001/4/31 day非法 24 源代码项目结构如下图所示 DateUtil.java123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192193194195196197198199200201202203204205206package com.company;public class DateUtil &#123; // 有31天的月份 private static int[] monthOfThirtyOne = new int[]&#123;1,3,5,7,8,10,12&#125;; // 有30天的月份 private static int[] monthOfThirty = new int[]&#123;4,6,9,11&#125;; // 年月日 private int year; private int month; private int day; // 最终实现的功能，输入是一个“年/月/日”格式的字符串； // 如果函数运行成功，输出则是相同格式的下一天，否则是错误信息 public String getNextDate(String dateStr)&#123; String updateResult = this.updateDate(dateStr); // 如果输入合法 if (updateResult.equals("success"))&#123; String checkResult = this.checkDate(); // 如果输入合法 if (checkResult.equals("valid"))&#123; // 计算明天的日期 return this.calcNextDate(); &#125; return checkResult; &#125; return updateResult; &#125; // 根据输入字符串转换并更新年月日 private String updateDate(String dateStr)&#123; // 获取年月日 String[] numbers = dateStr.split("/"); try&#123; this.year = Integer.parseInt(numbers[0]); &#125;catch (NumberFormatException e)&#123; return "year非法"; &#125; try&#123; this.month = Integer.parseInt(numbers[1]); &#125;catch (NumberFormatException e)&#123; return "month非法"; &#125; try&#123; this.day = Integer.parseInt(numbers[2]); &#125;catch (NumberFormatException e)&#123; return "day非法"; &#125; return "success"; &#125; // 检查日期是否合法 private String checkDate()&#123; String valid = "valid"; String yearInvalid = "year非法"; String monthInvalid = "month非法"; String dayInvalid = "day非法"; // year合法 if (year&gt;=1900&amp;&amp;year&lt;=2050)&#123; // month合法 if (month&gt;=1&amp;&amp;month&lt;=12)&#123; // day小于1 if (day&lt;=0)&#123; return dayInvalid; &#125; // 至此能保证day大于0 // 是2月 if (month==2)&#123; // 闰年 if (yearIsLeap(year))&#123; // 1-29 if (day&lt;=29)&#123; return valid; &#125;else&#123; return dayInvalid; &#125; &#125; // 平年2月 else&#123; // 1-28 if (day&lt;=28)&#123; return valid; &#125;else&#123; return dayInvalid; &#125; &#125; &#125; // 至此能保证不是2月 // 是否为31天的月 for(int i=0;i&lt;7;++i)&#123; if (month==monthOfThirtyOne[i])&#123; // 1-31 if (day&lt;=31)&#123; return valid; &#125;else&#123; return dayInvalid; &#125; &#125; &#125; // 至此能保证不是2月和31天的月 // 是否为30天的月 for(int i=0;i&lt;4;++i)&#123; if (month==monthOfThirty[i])&#123; // 1-30 if (day&lt;=30)&#123; return valid; &#125;else&#123; return dayInvalid; &#125; &#125; &#125; &#125; // month非法 else&#123; return monthInvalid; &#125; &#125; // year非法 return yearInvalid; &#125; // 计算下一天 private String calcNextDate()&#123; int yearNext; int monthNext; int dayNext=day+1; int dayCarry=0; int monthCarry=0; // 处理day // 是2月 if (month==2)&#123; // 闰年 if (yearIsLeap(year))&#123; // 1-29 if (day==29)&#123; dayNext = 1; dayCarry = 1; &#125; &#125; // 平年2月 else&#123; // 1-28 if (day==28)&#123; dayNext = 1; dayCarry = 1; &#125; &#125; &#125; // 不是2月 else&#123; boolean isThirtyOne= false; // 是否为31天的月 for(int i=0;i&lt;7;++i)&#123; if (month==monthOfThirtyOne[i])&#123; isThirtyOne = true; // 1-31 if (day==31)&#123; dayNext = 1; dayCarry = 1; &#125; break; &#125; &#125; // 至此能保证是30天的月 if (!isThirtyOne)&#123; // 1-30 if (day==30)&#123; dayNext = 1; dayCarry = 1; &#125; &#125; &#125; // 处理月 if (month+dayCarry&gt;12)&#123; monthNext = 1; monthCarry = 1; &#125;else&#123; monthNext = month+dayCarry; &#125; // 处理年 yearNext = year+monthCarry; return yearNext +"/"+ monthNext +"/"+ dayNext; &#125; // 判断某一年是否为闰年 private boolean yearIsLeap(int year)&#123; // 普通闰年和世纪闰年 if ((year%4==0&amp;&amp;year%100!=0)||(year%400==0))&#123; return true; &#125; // 平年 return false; &#125;&#125; DateUtilTest.java1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556package com.test;import com.company.DateUtil;import static org.junit.Assert.*;import org.junit.Test;//1、参数化测试：引入相关的包和类import java.util.Collection;import java.util.Arrays;import org.junit.runner.RunWith;import org.junit.runners.Parameterized;import org.junit.runners.Parameterized.Parameters;@RunWith(Parameterized.class) //2、参数化测试：更改测试运行器为RunWith(Parameterized.class)public class DateUtilTest &#123; //3、参数化测试：声明变量用来存放预期值与结果值 private DateUtil util = new DateUtil(); private String date; private String except; //4、参数化测试：声明一个返回值为 Collection 的公共静态方法，并使用@Parameters 进行修饰 @Parameters public static Collection data()&#123; return Arrays.asList(new Object[][]&#123; &#123;"2004/12/25", "2004/12/26"&#125;, &#123;"2001/2/28", "2001/3/1"&#125;, &#123;"2000/2/29", "2000/3/1"&#125;, &#123;"2001/4/30", "2001/5/1"&#125;, &#123;"2001/5/31", "2001/6/1"&#125;, &#123;"1899/6/1", "year非法"&#125;, &#123;"2051/6/1", "year非法"&#125;, &#123;"a/6/1", "year非法"&#125;, &#123;"1999/0/1", "month非法"&#125;, &#123;"1999/13/1", "month非法"&#125;, &#123;"1999/a/1", "month非法"&#125;, &#123;"1999/1/0", "day非法"&#125;, &#123;"1999/1/32", "day非法"&#125;, &#123;"1999/1/a", "day非法"&#125;, &#123;"2001/2/29", "day非法"&#125;, &#123;"2000/2/30", "day非法"&#125;, &#123;"2001/4/31", "day非法"&#125;, &#125;); &#125; //5、参数化测试：为测试类声明一个带有参数的公共构造方法，并在其中为声明变量赋值 public DateUtilTest(String date, String except)&#123; this.date = date; this.except = except; &#125; @Test public void testGetNextDate()&#123; assertEquals(except, util.getNextDate(date)); &#125;&#125; 测试结果如下图所示，17个测试用例均测试成功，程序实际输出与期望值相同。 实验总结本次实验的主要目的是巩固黑盒测试方法中的等价类划分法的知识，练习JUnit的参数化测试。在本次实验中，我认为我的getNextDate函数的实现并不是很优雅，比较过程化。写这个函数花了我很多时间，主要问题在于我没有抓住一些关键的、抽象的逻辑和子函数，比如天向月份进位和月份向年份完全可以参照加法器的循环、可以写一个函数根据年份和月份判断出天数的最大值等等。 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>Java</tag>
         <tag>软件测试</tag>
         <tag>JUnit</tag>
+        <tag>Java</tag>
         <tag>黑盒测试</tag>
       </tags>
   </entry>
@@ -1617,11 +1626,11 @@
     <url>%2F2020%2F04%2F07%2FJUnit%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95%E4%B9%8B%E5%9F%BA%E6%9C%AC%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95%EF%BC%9A%E7%A7%B0%E9%87%8D3%E6%AC%A1%E6%89%BE%E5%88%B0%E5%81%87%E7%90%83%2F</url>
     <content type="text"><![CDATA[前言记录一次软件测试课程的课后作业，作业内容是白盒测试中的基本路径测试，步骤如下 分析程序的控制流 计算环形复杂度 找出基本路径 设计测试用例 执行测试用例（要求使用JUnit） 作业要求使用白盒测试用例设计方法为下面的程序设计测试用例（基本路径测试）并用JUnit测试： 程序要求 10个铅球中有一个假球（比其他铅球的重量要轻），用天平三次称出假球。 程序设计思路 第一次使用天平分别称5个球，判断轻的一边有假球；拿出轻的5个球，取出其中4个第二次称，两边分别放2个球：如果两边同重，则剩下的球为假球；若两边不同重，拿出轻的两个球称第三次，轻的为假球。 递交材料 测试用例设计电子稿、源程序、JUnit测试截图。 程序代码及控制流图程序代码文件SearchBall.java内容如下。 注意不要让代码的行号变动，程序流图中结点的编号是根据这份代码里每条执行语句里的行号对应的。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950package module;public class SearchBall &#123; private static int x[]=new int[10]; public SearchBall()&#123;&#125; public void setBWeight(int w[])&#123; for(int i=0;i&lt;w.length;i++)&#123; x[i]=w[i]; &#125; &#125; public String BeginSearch()&#123; if(x[0]+x[1]+x[2]+x[3]+x[4]&lt;x[5]+x[6]+x[7]+x[8]+x[9])&#123; if(x[1]+x[2]==x[3]+x[4])&#123; return "1号是假球"; &#125; if(x[1]+x[2]&lt;x[3]+x[4])&#123; if (x[1]&lt;x[2]) &#123; return "2号是假球"; &#125;else &#123; return "3号是假球"; &#125; &#125;else &#123; if (x[3]&lt;x[4])&#123; return "4号是假球"; &#125; else&#123; return "5号是假球"; &#125; &#125; &#125;else &#123; if(x[6]+x[7]==x[8]+x[9])&#123; return "6号是假球"; &#125; if(x[6]+x[7]&lt;x[8]+x[9]) &#123; if (x[6]&lt;x[7]) &#123; return "7号是假球"; &#125;else &#123; return "8号是假球"; &#125; &#125;else &#123; if (x[8]&lt;x[9]) &#123; return "9号是假球"; &#125;else &#123; return "10号是假球"; &#125; &#125; &#125; &#125;&#125; 程序控制流图下图中结点中的数字是对应可执行语句在上面代码中的行号；边上的Y代表判定结果为真，N代表判定结果为假。 计算环形复杂度控制流图$G$的环形复杂度计算公式：$V(G)=E-N+2$，其中$E$为控制流图中边的数量，$N$是控制流图中的结点数量。 函数BeginSearch()的控制流图的环形复杂度为 V(G)=18-19+2=1基本路径从程序流图中可知，共有10条基本路径，具体如下 路径编号 经过结点 1 12-13-14 2 12-13-16-17-18 3 12-13-16-17-20 4 12-13-16-23-24 5 12-13-16-23-27 6 12-31-32 7 12-31-34-35-36 8 12-31-34-35-38 9 12-31-34-41-42 10 12-31-34-41-44 测试用例设计与执行测试用例设计 路径编号 用例输入 期待输出 1 {5, 10, 10, 10, 10, 10, 10, 10, 10, 10} “1号是假球” 2 {10, 5, 10, 10, 10, 10, 10, 10, 10, 10} “2号是假球” 3 {10, 10, 5, 10, 10, 10, 10, 10, 10, 10} “3号是假球” 4 {10, 10, 10, 5, 10, 10, 10, 10, 10, 10} “4号是假球” 5 {10, 10, 10, 10, 5, 10, 10, 10, 10, 10} “5号是假球” 6 {10, 10, 10, 10, 10, 5, 10, 10, 10, 10} “6号是假球” 7 {10, 10, 10, 10, 10, 10, 5, 10, 10, 10} “7号是假球” 8 {10, 10, 10, 10, 10, 10, 10, 5, 10, 10} “8号是假球” 9 {10, 10, 10, 10, 10, 10, 10, 10, 5, 10} “9号是假球” 10 {10, 10, 10, 10, 10, 10, 10, 10, 10, 5} “10号是假球” Junit执行测试用例基于JUnit生成的测试代码，我补充了测试函数BeginSearch()的代码，文件SearchBallTest.java内容如下。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657package test.module; import org.junit.Test; import org.junit.Before; import org.junit.After; import module.SearchBall;import static org.junit.Assert.assertEquals;/** * SearchBall Tester. * * @author &lt;Authors name&gt; * @since &lt;pre&gt;4月 7, 2020&lt;/pre&gt; * @version 1.0 */ public class SearchBallTest &#123; @Beforepublic void before() throws Exception &#123; &#125; @Afterpublic void after() throws Exception &#123; &#125; /** * * Method: setBWeight(int w[]) * */ @Testpublic void testSetBWeight() throws Exception &#123; //TODO: Test goes here... &#125; /** * * Method: BeginSearch() * */ @Testpublic void testBeginSearch() throws Exception &#123; SearchBall obj = new SearchBall(); int[] input; int ballIndex; // 遍历测试各个基本路径 for(int i=0;i&lt;10;++i)&#123; // 生成用例输入 input = new int[]&#123;10, 10, 10, 10, 10, 10, 10, 10, 10, 10&#125;; input[i]=5; obj.setBWeight(input); // 测试用例输出 ballIndex = i+1; assertEquals(ballIndex+"号是假球", obj.BeginSearch()); &#125;&#125; &#125; 执行函数testBeginSearch()，得到如下图所示的结果（从下图也可以看到项目的结构） 其它 我自己实现的找到假球的程序 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>Java</tag>
         <tag>软件测试</tag>
         <tag>白盒测试</tag>
         <tag>基本路径测试</tag>
         <tag>JUnit</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
