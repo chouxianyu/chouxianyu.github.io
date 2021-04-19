@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[李宏毅机器学习课程笔记-10.4基于Smoothness假设的半监督学习]]></title>
+    <url>%2F2021%2F04%2F19%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-10-4%E5%9F%BA%E4%BA%8ESmoothness%E5%81%87%E8%AE%BE%E7%9A%84%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%2F</url>
+    <content type="text"><![CDATA[Smoothness假设Smoothness假设的定义基于Smoothness假设的半监督学习的基本思路是“近朱者赤近墨者黑”，即相似的$x$具有相同的$\hat y$，其具体定义为： $x$的分布不平均，在某些地方(high density region)很集中，在某些地方很分散 如果$x^1$和$x^2$在一个high density region中距离非常近，则$x^1$和$x^2$通过1个high density path相连、$\hat y^1=\hat y^2$。 举一个例子，如下图所示，$x^1,x^2,x^3$是3个样本，如果单纯地看它们之间的相似度，显然$x^2$和$x^3$更接近一些。但对于smoothness assumption来说，$x^1$和$x^2$是位于同一个high density region中，它们之间有high density path；而$x^2$与$x^3$之间则是“断开”的，没有high density path，因此$x^1$与$x^2$更“像”。 手写数字识别举例再举一个手写数字识别和人脸识别的例子，如下图所示，最左侧的2、最右侧的2和最右侧的3，从pixel角度来看明显是最右侧的2和3更加相似(尽管两者并非是同一个数字)，但如果考虑最左侧的2朝着最右侧的2的演化过程，可以发现产生了一种“间接相似性”(high density path)。根据Smoothness假设，由于这6个2之间存在间接的相似而这6个2和最右侧的3之间不存在high density path，因此这6个2是彼此相似的；而最右侧的3和这6个2是不相似的。 文章分类举例假设对天文学(astronomy)和旅行(travel)的文章进行分类，它们有各自的专属词汇，此时如果unlabeled data与label data的词汇是相同或重合(overlap)的，那么就很容易分类；但真实情况中unlabeled data和labeled data之间可能没有任何重复的word，因为世界上的词汇太多了，sparse的分布中overlap难以发生。 但如果unlabeled data足够多，就会以一种相似传递的形式，建立起文档之间相似的桥梁。 cluster and then label如何实现基于Smoothness假设的半监督学习呢？在具体实现上，最简单的方式是cluster and then label。 cluster and then label就是先把所有样本(包括有标签样本和无标签样本)分成几个cluster，然后根据每个cluster中各类别有标签样本的数量确定该cluster中所有样本的label，然后进一步用这些cluster学习得到分类器。 这种方法不一定会得到好的结果，因为该方法有个前提是我们能够把同类别的样本分到同一个cluster，而这并不容易。对图像分类来说，如果仅仅依据pixel-wise相似度来划分cluster，得到的结果一般都会很差。所以为了满足这个前提，我们需要设计较好的方法来描述一张图片(比如使用Deep Autoencoder提取图片特征feature)，以保证cluster时能够将同类别的样本分到同一个cluster。 Graph-based Approachhigh density path如何实现基于Smoothness假设的半监督学习呢？我们可以将每个样本视为图中的1个点，通过图来表示connected by a high density path。Graph-based方法的基本思路是图中的有标注样本会影响与它们邻近的无标注样本并在图中产生“间接相似性”，即使某些无标注样本没有直接与有标注样本相连也仍然可以被判定为相似。如果想要让这种方法生效，收集到的数据一定要足够多，否则可能导致无法形成path、失去了information的传递效果。 如何建立一张图有时候点之间的边是比较好建立的(比如网页超链接、论文引用)，有时候需要我们自行建立点之间的边。图的好坏对最终结果的影响是非常关键的，但如何建图是一件heuristic的事情，需要我们凭经验和直觉来做，建图步骤如下： 定义两个样本$x^i,x^j$之间的相似度计算方法$s(x^i,x^j)$ 如果是基于pixel-wise的相似度，那结果可能比较差，建议使用更好的方法(比如使用Autoencoder提取图片特征，并基于提取到的特征计算相似度)。 推荐使用的相似度计算方法为高斯径向基函数(Gaussian Radial Basis Function)：$s(x^i,x^j)=exp(-\gamma||x^i-x^j||^2)$，其中$x^i,x^j$均为vector。经验上来说exp(exponential)通常是可以帮助提升性能的，因为它使得仅当$x^i,x^j$非常接近时similarity才会大、只要距离稍微远一点similarity就会迅速变小，也就是使用exponential可以做到只有非常近的两个点才能相连、稍微远一点就无法相连的效果。 建立点和点之间的边 k-Nearest Neighbor(K近邻算法) 在特征空间中，如果一个样本附近的k个最近样本的大多数属于某一类别，则该样本也属于这个类别 e-Neighborhood 设置点和点之间边的权重 一条边的权重应该和该边两个顶点的相似度成比例 如何定量地评估一个图符合Smoothness假设的程度那如何定量地评估一个图符合Smoothness假设的程度呢？ 如上图所示，我们定义1个图的Smoothness为$S=\frac{1}{2}\sum_{i,j}w_{i,j}(y^i-y^j)^2$并希望它越小越好，其中$i,j$为所有样本点的索引、$x^i$表示样本的特征、$y^j$表示样本的标注(有可能是伪标签)、$w_{i,j}$是2个样本之间边的权重、$\frac{1}{2}$只是为了方便计算。 上式Smoothness定义还可以表示为$S=y^TLy$，其中$y$是1个(R+U)-dim的vector：$y=[\dots,y^i,\dots,y^j,\dots]^T$、$L$是1个(R+U)×(R+U)的矩阵(名字叫做Graph Laplacian)。 Graph Laplacian的定义为$L=D-W$，其中$W_{i,j}$为2个样本点之间边的权重，把$W$每行元素之和放在该行对应的对角线上其它元素值为0即可得到$D$，如上图所示。在图神经网络(Spectral-based Convolution)中，有关于Graph Laplacian的介绍。 如何训练Smoothness定义$S=y^TLy$中$y$是模型的输出(预测得到的类别)，它是取决于模型参数的，因此训练时仅需在有标注数据的损失函数上加上Smoothness即可：$L=\sum_{x^r}C(y^r,\hat y^r)+\lambda S$，其中$\lambda S$可以被视为正则项。 由上可知，训练目标为： 有标注数据的交叉熵越小越好，即模型的输出与标注越接近越好 所有数据的Smoothness越小越好，即不管是有标注数据还是无标注数据，模型输出都要符合Smoothness Assumption的假设 注：训练时可以不仅仅要求整个模型的输出层要smooth，还可以对模型中任意一个隐藏层加上smooth的限制。 Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>半监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[李宏毅机器学习课程笔记-10.3基于Low-density Separation假设的半监督学习]]></title>
     <url>%2F2021%2F04%2F18%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-10-3%E5%9F%BA%E4%BA%8ELow-density-Separation%E5%81%87%E8%AE%BE%E7%9A%84%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%2F</url>
     <content type="text"><![CDATA[按照“非黑即白”的思路，假设类别之间的boundary周围的data是很少的，即假设不同类别数据之间应该有1个很明显的boundary。 Self-training最简单的基于Low-density Separation假设的半监督学习是Self-training。 使用有标签的数据训练1个模型$f^*$，模型类型和训练方式没有限制，神经网络、深或浅、其它机器学习方法等等都可以 使用模型$f^$生成未标注数据的伪标签(Pseudo-label)，即$y^u=f^(x^u)$ 取出一部分未标注数据将它们添加到有标签数据中，然后回到步骤1 如何选择未标注数据仍然是一个open question，可以自行设计策略，比如给每个样本一个置信度。 Self-training和生成模型中的半监督学习(见上1篇文章)还挺像的，它们的区别在于： Self-training使用hard label，即假定某个无标签样本一定属于某个类别(“非黑即白”) 生成模型使用soft label，即假定某个无标签样本有一定概率属于某类别(也可以理解为一个样本可以按照后验概率划分成多个部分，不同部分属于不同类别) Self-training使用了hard label，它并不适用于regression。 生成模型使用了soft label，它生成的伪标签在分类任务中是没有用的。因为把某个无标签样本(通过soft label生成伪标签)丢进模型重新训练模型，模型参数根本不会发生变化。 实际上，low-density separation就是通过hard label来提升分类效果的方法。 Entropy-based Regularization该方法是Self-training的进阶版。 Self-training中使用的hard label还是有些武断和激进，Entropy-based Regularization对此进行了改进。 在使用神经网络进行分类时，$y^u=f^_{\theta^}(x^u)$，其中$y_u$是1个one-hot编码。现在我们并不限制其必须是某个类别，而是将其看做1个分布，我们希望这个分布越集中越好(“非黑即白”)，因为分布越集中时它的含义就是样本$x^u$属于某类别的概率很大属于其它类别的概率很小。 我们可以使用Entropy评估分布$y^u$的集中程度$E(y^u)=-\sum_{m=1}^5y_m^uln(y_m^u)$，假设是5分类，其值越小则表示分布$y^u$越集中。 无监督分类的目标为有标签数据分类正确、无标签数据分类结果集中，所以损失函数则为$L=\sum_{x^r}C(y^r,\hat y^r)+\lambda\sum_{x^u}E(y^u)$，其中第1项为有标签数据的交叉熵损失、第2项为无标签数据的entropy、$\lambda$表示无标签数据的损失权重，因为式中第2项的作用类似于regularization，所以该方法被称为Entropy-based Regularization。 Semi-supervised SVMSVM为两个类别的数据找到一个boundary，该boundary与两个类别的margin最大、分类错误最小。 Semi-supervised SVM穷举所有无标签数据的类别并进行计算，最终选择与两个类别的margin最大、分类错误最小的boundary。 在数据量大的时候，Semi-supervised SVM难以穷举出所有情况，但还有一种求近似解的方法，其大致思路是初始化一些label，然后每次尝试改动1个样本的label并判断是否更优，如果更优则改变该样本的label，具体见Transductive Inference for Text Classification using Support Vector Machines。 Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
@@ -192,8 +201,8 @@
     <content type="text"><![CDATA[本文为作者学习李宏毅机器学习课程时参照样例完成homework2的记录。 关注我的公众号：臭咸鱼，回复LHY可获取课程PPT、数据和代码下载链接。 代码仓库：https://github.com/chouxianyu/LHY_ML2020_Codes 任务描述（Task Description） 二分类（Binary Classification） 根据个人资料，判断每个人的年收入是否超过50000美元。 数据集描述（Dataset Description） train.csv test_no_label.csv x_train.csv Y_train.csv X_test.csv 参考链接 https://colab.research.google.com/drive/1JaMKJU7hvnDoUfZjvUKzm9u-JLeX6B2C 代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192193194195196197198199200201202203204205import numpy as npimport matplotlib.pyplot as pltnp.random.seed(0) # 使每次随机生成的数字相同## 函数定义# 归一化def _normalize(X, train=True, specified_column=None, X_mean=None, X_std=None): # This function normalizes specific columns of X. # The mean and standard variance of training data will be reused when processing testing data. # # Arguments: # X: data to be processed # train: 'True' when processing training data, 'False' for testing data # specific_column: indexes of the columns that will be normalized. If 'None', all columns # will be normalized. # X_mean: mean value of training data, used when train = 'False' # X_std: standard deviation of training data, used when train = 'False' # Outputs: # X: normalized data # X_mean: computed mean value of training data # X_std: computed standard deviation of training data if specified_column is None: specified_column = np.arange(X.shape[1]) if train: X_mean = np.mean(X[:, specified_column], axis=0).reshape(1, -1) X_std = np.std(X[:, specified_column], axis=0).reshape(1, -1) X[:, specified_column] = (X[:, specified_column] - X_mean) / (X_std + 1e-8) return X, X_mean, X_std# 训练集划分def _train_valid_split(X, Y, valid_ratio=0.25): # This function splits data into training set and validation set. train_size = int(len(X) * (1 - valid_ratio)) return X[:train_size], Y[:train_size], X[train_size:], Y[train_size:]# 数据打乱def _shuffle(X, Y): # This function shuffles two equal-length list/array, X and Y, together. randomize = np.arange(len(X)) np.random.shuffle(randomize) return (X[randomize], Y[randomize])# sigmoid函数def _sigmoid(z): # Sigmoid function can be used to calculate probability. # To avoid overflow, minimum/maximum output value is set. return np.clip(1.0 / (1.0 + np.exp(-z)), 1e-8, 1 - ( 1e-8))# forwarddef _f(X, w, b): # This is the logistic regression function, parameterized by w and b # # Arguements: # X: input data, shape = [batch_size, data_dimension] # w: weight vector, shape = [data_dimension, ] # b: bias, scalar # Output: # predicted probability of each row of X being positively labeled, shape = [batch_size, ] return _sigmoid(np.matmul(X, w) + b)# 预测def _predict(X, w, b): # This function returns a truth value prediction for each row of X # by rounding the result of logistic regression function. return np.round(_f(X, w, b)).astype(np.int)# 计算精度def _accuracy(Y_pred, Y_label): # This function calculates prediction accuracy return 1 - np.mean(np.abs(Y_pred - Y_label))# 交叉熵损失函数def _cross_entropy_loss(y_pred, Y_label): # This function computes the cross entropy. # # Arguements: # y_pred: probabilistic predictions, float vector # Y_label: ground truth labels, bool vector # Output: # cross entropy, scalar return -np.dot(Y_label, np.log(y_pred)) - np.dot((1 - Y_label), np.log(1 - y_pred))# 梯度计算def _gradient(X, Y_label, w, b): # This function computes the gradient of cross entropy loss with respect to weight w and bias b. Y_pred = _f(X, w, b) pred_error = Y_label - Y_pred w_grad = -np.sum(pred_error * X.T, axis=1) b_grad = -np.sum(pred_error) return w_grad, b_grad## 文件路径X_train_fpath = '../data/X_train.csv'Y_train_fpath = '../data/Y_train.csv'X_test_fpath = '../data/X_test.csv'output_fpath = 'output.csv'## 读取数据with open(X_train_fpath) as f: next(f) # 不需要第一行的表头 X_train = np.array([line.strip('\n').split(',')[1:] for line in f], dtype=float) # 不要第一列的ID # print(X_train)with open(Y_train_fpath) as f: next(f) # 不需要第一行的表头 Y_train = np.array([line.strip('\n').split(',')[1] for line in f], dtype=float)# 不要第一列的ID，只取第二列 # print(Y_train)with open(X_test_fpath) as f: next(f) # 不需要第一行的表头 X_test = np.array([line.strip('\n').split(',')[1:] for line in f], dtype=float) # print(X_test)## 数据集处理# 训练集和测试集normalizationX_train, X_mean, X_std = _normalize(X_train, train=True)X_test, _, _ = _normalize(X_test, train=False, specified_column=None, X_mean=X_mean, X_std=X_std)# 训练集验证集划分X_train, Y_train, X_valid, Y_valid = _train_valid_split(X_train,Y_train, valid_ratio=0.1)train_size = X_train.shape[0]valid_size = X_valid.shape[0]test_size = X_test.shape[0]data_dim = X_train.shape[1]print('Size of training set: &#123;&#125;'.format(train_size))print('Size of validation set: &#123;&#125;'.format(valid_size))print('Size of testing set: &#123;&#125;'.format(test_size))print('Dimension of data: &#123;&#125;'.format(data_dim))## 训练（使用小批次梯度下降法，Mini-batch training）# 参数初始化w = np.zeros((data_dim, ))b = np.zeros((1, ))# 训练参数max_iter = 10batch_size = 8learning_rate = 0.2# 保存每个epoch的loss以作图train_loss = []valid_loss = []train_acc = []valid_acc = []step = 1# 迭代for epoch in range(max_iter): # 打乱训练集 X_train, Y_train = _shuffle(X_train, Y_train) # Mini-batch training for idx in range(int(np.floor(X_train.shape[0] / batch_size))): # 取batch X = X_train[idx * batch_size : idx * batch_size + batch_size] Y = Y_train[idx * batch_size : idx * batch_size + batch_size] # 计算梯度 w_grad, b_grad = _gradient(X, Y, w, b) # 梯度下降（learning rate decay with time） w = w - learning_rate / np.sqrt(step) * w_grad b = b - learning_rate / np.sqrt(step) * b_grad step = step + 1 # 计算训练集和验证集的loss和精度 y_train_pred = _f(X_train, w, b) Y_train_pred = np.round(y_train_pred) train_acc.append(_accuracy(Y_train_pred, Y_train)) train_loss.append(_cross_entropy_loss(y_train_pred, Y_train) / train_size) y_valid_pred = _f(X_valid, w, b) Y_valid_pred = np.round(y_valid_pred) valid_acc.append(_accuracy(Y_valid_pred, Y_valid)) valid_loss.append(_cross_entropy_loss(y_valid_pred, Y_valid) / valid_size)print('Training loss: &#123;&#125;'.format(train_loss[-1]))print('Validation loss: &#123;&#125;'.format(valid_loss[-1]))print('Training accuracy: &#123;&#125;'.format(train_acc[-1]))print('Validation accuracy: &#123;&#125;'.format(valid_acc[-1]))## 训练过程可视化# loss可视化plt.plot(train_loss)plt.plot(valid_loss)plt.title('Loss')plt.legend(['train', 'valid'])plt.savefig('Loss.png')plt.show()# accuracy可视化plt.plot(train_acc)plt.plot(valid_acc)plt.title('Accuracy')plt.legend(['train', 'valid'])plt.savefig('Accuracy.png')plt.show()## 预测测试集predictions = _predict(X_test, w, b)with open(output_fpath, 'w') as f: f.write('id,label\n') for i, label in enumerate(predictions): f.write('&#123;&#125;,&#123;&#125;\n'.format(i, label))## 寻找最重要的10个维度的特征index = np.argsort(np.abs(w))[::-1] # 将w按绝对值从大到小排序with open(X_test_fpath) as f: features = np.array(f.readline().strip('\n').split(',')) for i in index[:10]: print(features[i], w[i]) Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
       <tags>
         <tag>机器学习</tag>
-        <tag>线性回归</tag>
         <tag>逻辑回归</tag>
+        <tag>线性回归</tag>
         <tag>分类</tag>
       </tags>
   </entry>
@@ -313,8 +322,8 @@
         <tag>机器学习</tag>
         <tag>深度学习</tag>
         <tag>神经网络</tag>
-        <tag>激活函数</tag>
         <tag>梯度消失</tag>
+        <tag>激活函数</tag>
       </tags>
   </entry>
   <entry>
@@ -461,8 +470,8 @@
       <tags>
         <tag>机器学习</tag>
         <tag>神经网络</tag>
-        <tag>线性回归</tag>
         <tag>逻辑回归</tag>
+        <tag>线性回归</tag>
         <tag>分类</tag>
         <tag>Softmax</tag>
         <tag>特征变换</tag>
@@ -774,10 +783,10 @@
         <tag>DFS</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -789,10 +798,10 @@
         <tag>DFS</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -803,10 +812,10 @@
         <tag>算法</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -817,10 +826,10 @@
         <tag>算法</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -832,10 +841,10 @@
         <tag>DFS</tag>
         <tag>BFS</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -847,10 +856,10 @@
         <tag>BFS</tag>
         <tag>PAT</tag>
         <tag>贪心</tag>
-        <tag>图</tag>
+        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
-        <tag>dijkstra</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -1012,8 +1021,8 @@
         <tag>算法</tag>
         <tag>PAT</tag>
         <tag>图</tag>
-        <tag>map</tag>
         <tag>set</tag>
+        <tag>map</tag>
         <tag>点着色</tag>
       </tags>
   </entry>
@@ -1242,8 +1251,8 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
-        <tag>栈</tag>
         <tag>单向链表</tag>
+        <tag>栈</tag>
       </tags>
   </entry>
   <entry>
@@ -1542,9 +1551,9 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
-        <tag>迭代</tag>
         <tag>单向链表</tag>
         <tag>双指针</tag>
+        <tag>迭代</tag>
       </tags>
   </entry>
   <entry>
@@ -1555,8 +1564,8 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
-        <tag>迭代</tag>
         <tag>单向链表</tag>
+        <tag>迭代</tag>
       </tags>
   </entry>
   <entry>
@@ -1567,10 +1576,10 @@
         <tag>LeetCode</tag>
         <tag>算法</tag>
         <tag>递归</tag>
-        <tag>栈</tag>
-        <tag>迭代</tag>
         <tag>单向链表</tag>
         <tag>双指针</tag>
+        <tag>栈</tag>
+        <tag>迭代</tag>
       </tags>
   </entry>
   <entry>

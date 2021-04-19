@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2021-04-18T07:18:14.773Z</updated>
+  <updated>2021-04-19T00:29:53.557Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>李宏毅机器学习课程笔记-10.4基于Smoothness假设的半监督学习</title>
+    <link href="https://chouxianyu.github.io/2021/04/19/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-10-4%E5%9F%BA%E4%BA%8ESmoothness%E5%81%87%E8%AE%BE%E7%9A%84%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://chouxianyu.github.io/2021/04/19/李宏毅机器学习课程笔记-10-4基于Smoothness假设的半监督学习/</id>
+    <published>2021-04-19T00:27:39.000Z</published>
+    <updated>2021-04-19T00:29:53.557Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Smoothness假设"><a href="#Smoothness假设" class="headerlink" title="Smoothness假设"></a>Smoothness假设</h2><h3 id="Smoothness假设的定义"><a href="#Smoothness假设的定义" class="headerlink" title="Smoothness假设的定义"></a>Smoothness假设的定义</h3><p>基于Smoothness假设的半监督学习的基本思路是“近朱者赤近墨者黑”，即<strong>相似的$x$具有相同的$\hat y$</strong>，其具体<strong>定义</strong>为：</p><ol><li>$x$的<strong>分布不平均</strong>，在某些地方(high density region)很集中，在某些地方很分散</li><li>如果$x^1$和$x^2$在一个<strong>high density region</strong>中距离非常近，则$x^1$和$x^2$通过1个<strong>high density path</strong>相连、$\hat y^1=\hat y^2$。</li></ol><p>举一个例子，如下图所示，$x^1,x^2,x^3$是3个样本，如果单纯地看它们之间的相似度，显然$x^2$和$x^3$更接近一些。但对于smoothness assumption来说，$x^1$和$x^2$是位于同一个high density region中，它们之间有high density path；而$x^2$与$x^3$之间则是“断开”的，没有high density path，因此$x^1$与$x^2$更“像”。</p><p><img src="https://pic1.zhimg.com/80/v2-a45cf1b179557c638d294edf952053a2_720w.png" alt="img"></p><h3 id="手写数字识别举例"><a href="#手写数字识别举例" class="headerlink" title="手写数字识别举例"></a>手写数字识别举例</h3><p>再举一个手写数字识别和人脸识别的例子，如下图所示，最左侧的2、最右侧的2和最右侧的3，从<strong>pixel角度</strong>来看明显是最右侧的2和3更加相似(尽管两者并非是同一个数字)，但如果考虑最左侧的2朝着最右侧的2的演化过程，可以发现产生了一种“<strong>间接相似性</strong>”(high density path)。根据Smoothness假设，由于这6个2之间存在间接的相似而这6个2和最右侧的3之间不存在high density path，因此这6个2是彼此相似的；而最右侧的3和这6个2是不相似的。</p><p><img src="https://pic4.zhimg.com/80/v2-c8fd736cc00ef0209e973b93b62b2541_720w.png" alt="img"></p><h3 id="文章分类举例"><a href="#文章分类举例" class="headerlink" title="文章分类举例"></a>文章分类举例</h3><p>假设对天文学(astronomy)和旅行(travel)的文章进行分类，它们有各自的专属词汇，此时如果unlabeled data与label data的词汇是相同或重合(overlap)的，那么就很容易分类；但真实情况中unlabeled data和labeled data之间可能没有任何重复的word，因为世界上的词汇太多了，sparse的分布中overlap难以发生。</p><p>但如果unlabeled data足够多，就会以一种<strong>相似传递</strong>的形式，建立起文档之间相似的桥梁。</p><h2 id="cluster-and-then-label"><a href="#cluster-and-then-label" class="headerlink" title="cluster and then label"></a>cluster and then label</h2><p>如何实现基于Smoothness假设的半监督学习呢？在具体实现上，最简单的方式是cluster and then label。</p><p>cluster and then label就是先<strong>把所有样本(包括有标签样本和无标签样本)分成几个cluster，然后根据每个cluster中各类别有标签样本的数量确定该cluster中所有样本的label，然后进一步用这些cluster学习得到分类器</strong>。</p><p>这种方法不一定会得到好的结果，因为该方法有个<strong>前提是我们能够把同类别的样本分到同一个cluster</strong>，而这并不容易。对图像分类来说，如果仅仅依据pixel-wise相似度来划分cluster，得到的结果一般都会很差。所以为了满足这个前提，我们需要设计较好的方法来描述一张图片(比如使用Deep Autoencoder提取图片特征feature)，以保证cluster时能够将同类别的样本分到同一个cluster。</p><h2 id="Graph-based-Approach"><a href="#Graph-based-Approach" class="headerlink" title="Graph-based Approach"></a>Graph-based Approach</h2><h3 id="high-density-path"><a href="#high-density-path" class="headerlink" title="high density path"></a>high density path</h3><p>如何实现基于Smoothness假设的半监督学习呢？我们可以将每个样本视为图中的1个点，<strong>通过图来表示connected by a high density path</strong>。Graph-based方法的基本思路是图中的有标注样本会影响与它们邻近的无标注样本并在图中产生“<strong>间接相似性</strong>”，即使某些无标注样本没有直接与有标注样本相连也仍然可以被判定为相似。如果想要让这种方法生效，<strong>收集到的数据一定要足够多</strong>，否则可能导致无法形成path、失去了information的传递效果。</p><h3 id="如何建立一张图"><a href="#如何建立一张图" class="headerlink" title="如何建立一张图"></a>如何建立一张图</h3><p>有时候点之间的边是比较好建立的(比如网页超链接、论文引用)，有时候需要我们自行建立点之间的边。图的好坏对最终结果的影响是非常关键的，但如何建图是一件heuristic的事情，需要我们凭经验和直觉来做，<strong>建图步骤</strong>如下：</p><ol><li><p>定义两个样本$x^i,x^j$之间的相似度计算方法$s(x^i,x^j)$</p><p> 如果是基于pixel-wise的相似度，那结果可能比较差，建议使用更好的方法(比如使用Autoencoder提取图片特征，并基于提取到的特征计算相似度)。</p><p> 推荐使用的相似度计算方法为高斯径向基函数(Gaussian Radial Basis Function)：$s(x^i,x^j)=exp(-\gamma||x^i-x^j||^2)$，其中$x^i,x^j$均为vector。经验上来说exp(exponential)通常是可以帮助提升性能的，因为它使得仅当$x^i,x^j$非常接近时similarity才会大、只要距离稍微远一点similarity就会迅速变小，也就是使用exponential可以做到<strong>只有非常近的两个点才能相连、稍微远一点就无法相连</strong>的效果。</p></li><li><p>建立点和点之间的边</p><ul><li><p>k-Nearest Neighbor(K近邻算法)</p><p>  在特征空间中，如果一个样本附近的k个最近样本的大多数属于某一类别，则该样本也属于这个类别</p></li><li><p>e-Neighborhood</p></li></ul></li><li><p>设置点和点之间边的权重</p><p> 一条边的权重应该和该边两个顶点的相似度成比例</p></li></ol><h3 id="如何定量地评估一个图符合Smoothness假设的程度"><a href="#如何定量地评估一个图符合Smoothness假设的程度" class="headerlink" title="如何定量地评估一个图符合Smoothness假设的程度"></a>如何定量地评估一个图符合Smoothness假设的程度</h3><p>那如何定量地评估一个图符合Smoothness假设的程度呢？</p><p><img src="https://pic1.zhimg.com/80/v2-db490c6a659a6fb1765c956d9f584cac_720w.png" alt="img"></p><p>如上图所示，我们定义1个图的<strong>Smoothness</strong>为$S=\frac{1}{2}\sum_{i,j}w_{i,j}(y^i-y^j)^2$并希望它<strong>越小越好</strong>，其中$i,j$为所有样本点的索引、$x^i$表示样本的特征、$y^j$表示样本的标注(有可能是伪标签)、$w_{i,j}$是2个样本之间边的权重、$\frac{1}{2}$只是为了方便计算。</p><p>上式Smoothness定义还可以表示为$S=y^TLy$，其中$y$是1个(R+U)-dim的vector：$y=[\dots,y^i,\dots,y^j,\dots]^T$、$L$是1个(R+U)×(R+U)的矩阵(名字叫做Graph Laplacian)。</p><p>Graph Laplacian的定义为$L=D-W$，其中$W_{i,j}$为2个样本点之间边的权重，把$W$每行元素之和放在该行对应的对角线上其它元素值为0即可得到$D$，如上图所示。在图神经网络(Spectral-based Convolution)中，有关于Graph Laplacian的介绍。</p><h3 id="如何训练"><a href="#如何训练" class="headerlink" title="如何训练"></a>如何训练</h3><p>Smoothness定义$S=y^TLy$中$y$是模型的输出(预测得到的类别)，它是取决于模型参数的，因此训练时仅需在有标注数据的损失函数上加上Smoothness即可：$L=\sum_{x^r}C(y^r,\hat y^r)+\lambda S$，其中$\lambda S$可以被视为正则项。</p><p>由上可知，<strong>训练目标</strong>为：</p><ol><li>有标注数据的交叉熵越小越好，即模型的输出与标注越接近越好</li><li>所有数据的Smoothness越小越好，即不管是有标注数据还是无标注数据，模型输出都要符合Smoothness Assumption的假设</li></ol><p>注：训练时可以不仅仅要求整个模型的输出层要smooth，还可以对模型中任意一个隐藏层加上smooth的限制。</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Smoothness假设&quot;&gt;&lt;a href=&quot;#Smoothness假设&quot; class=&quot;headerlink&quot; title=&quot;Smoothness假设&quot;&gt;&lt;/a&gt;Smoothness假设&lt;/h2&gt;&lt;h3 id=&quot;Smoothness假设的定义&quot;&gt;&lt;a href=
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="半监督学习" scheme="https://chouxianyu.github.io/tags/%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>李宏毅机器学习课程笔记-10.3基于Low-density Separation假设的半监督学习</title>
@@ -543,9 +568,9 @@
     
       <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="线性回归" scheme="https://chouxianyu.github.io/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/"/>
-    
       <category term="逻辑回归" scheme="https://chouxianyu.github.io/tags/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/"/>
+    
+      <category term="线性回归" scheme="https://chouxianyu.github.io/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/"/>
     
       <category term="分类" scheme="https://chouxianyu.github.io/tags/%E5%88%86%E7%B1%BB/"/>
     
@@ -577,41 +602,6 @@
       <category term="概率生成模型" scheme="https://chouxianyu.github.io/tags/%E6%A6%82%E7%8E%87%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B/"/>
     
       <category term="分类" scheme="https://chouxianyu.github.io/tags/%E5%88%86%E7%B1%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《基于深度学习的显著性目标检测综述》阅读笔记</title>
-    <link href="https://chouxianyu.github.io/2021/03/20/%E3%80%8A%E5%9F%BA%E4%BA%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%98%BE%E8%91%97%E6%80%A7%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC%E8%BF%B0%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
-    <id>https://chouxianyu.github.io/2021/03/20/《基于深度学习的显著性目标检测综述》阅读笔记/</id>
-    <published>2021-03-20T09:57:10.000Z</published>
-    <updated>2021-03-20T09:58:22.201Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h1><ul><li><p>论文名称</p><p>  基于深度学习的显著性目标检测综述</p></li><li><p>作者</p><p>  史彩娟等</p></li><li><p>发表时间</p><p>  2020年</p></li><li><p>来源</p><p>  知网</p></li></ul><h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>本文基本研究对象为：基于深度学习的SOD算法。</p><p>下文中将显著性目标检测简写为SOD（Salient Object Detection），将基于深度学习的显著性目标检测算法简写为DSOD（Deep Learning Based SOD）。</p><h1 id="主要收获"><a href="#主要收获" class="headerlink" title="主要收获"></a>主要收获</h1><ul><li><p>知识</p><ul><li><p>低层特征中包含更多的边界信息</p><ul><li>通过编码低层特征距离来检测边界信息可能导致部分边界细节丢失。</li><li>通过引入相关操作来增强低层特征具有的边界信息，可以获得更清晰的边界，但容易造成显著性目标检测主体不准确的问题。</li></ul></li><li><p>高层特征中包含更多的语义信息。</p><ul><li>只对高层特征所包含的语义进行增强，有时会造成显著性目标边界模糊或者多个显著性目标重合。</li></ul></li><li><p>只进行边界增强容易造成显著性目标不准确，而只进行语义增强则会引起显著性目标的边界不准确，所以可以同时增强两者。</p><p>  因为通过语义增强可以减小无效目标的干扰，更好地定位显著性目标的位置；通过边界增强可以获得清晰的显著性目标边界。</p><ul><li>金字塔结构可以处理高低层的特征</li></ul></li><li><p>全局信息（颜色，纹理，背景/前景等）包含显著性目标的位置信息，而局部信息可以增强显著性目标边界。</p></li></ul></li><li><p>一些未知的东西</p><ul><li>BASNet是怎么实现的？其中的混合Loss是什么</li><li>Boundary-Enhanced Loss是什么？</li><li>注意力机制（Attention）是什么？</li><li>金字塔结构是什么？</li><li>层次递归卷积神经网络(Hierarchical Recurrent Convolutional Neural Network，HRCNN)是什么？</li><li>字幕网络(Image Captioning Network，ICN)是什么？</li><li>SqueezeNet是什么？3种设计原则？</li><li>MobileNet是什么？深度可分离卷积？</li><li>可变形卷积是什么？</li><li>评估指标<ul><li>F-度量($F-measure,F_\beta$)</li><li>加权F-度量($Weighted\  F-measure,F_\beta^\omega$)</li><li>P-R曲线</li><li>平均绝对误差(Mean Absolute Error, MAE)</li></ul></li></ul></li><li><p>思考</p><ul><li>研究至少有2个思路：横向（分类）和纵向（深入）。</li></ul></li></ul><h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><ol><li><p>根据原理不同，分3类介绍并定性分析比较DSOD。</p><p> 3个类别为：边界/语义增强、全局/局部结合、辅助网络</p></li><li><p>简单介绍DSOD的常用数据集和评估准则</p></li><li><p>现有DSOD方法在多个数据集上进行多方面的性能比较</p><p> 包括定量比较、P-R曲线和视觉比较</p></li><li><p><strong>现有DSOD算法在复杂背景、小目标、实时性检测等方面的不足</strong></p></li><li><p><strong>DSOD的未来发展方向，如复杂背景、实时、小目标、弱监督</strong></p></li></ol><h1 id="1-引言"><a href="#1-引言" class="headerlink" title="1 引言"></a>1 引言</h1><ul><li>传统SOD方法主要利用<strong>人类直观感觉或启发式先验</strong>，如利用色度比较，背景比较和边界点先验等，通过人工提取特征来检测目标，但人工提取特征非常耗时。</li><li>DSOD可自动学习到<strong>多尺度</strong>特征，精度速度大幅提升，但也存在<strong>不足</strong>：复杂背景下的性能有待提升、实时性需提高、模型复杂度需降低。</li></ul><h1 id="2-基于深度学习的显著性目标检测方法"><a href="#2-基于深度学习的显著性目标检测方法" class="headerlink" title="2 基于深度学习的显著性目标检测方法"></a>2 基于深度学习的显著性目标检测方法</h1><ul><li>传统方法中人工提取特征耗时或者迁移性较差</li><li>DSOD可分为3个类别：边界/语义增强、全局/局部结合、辅助网络</li><li>==图1==给出了今年DSOD的发展历程和主要算法</li></ul><h2 id="2-1-基于边界-语义增强的SOD"><a href="#2-1-基于边界-语义增强的SOD" class="headerlink" title="2.1 基于边界/语义增强的SOD"></a>2.1 基于边界/语义增强的SOD</h2><h3 id="2-1-1-基于边界增强的SOD方法"><a href="#2-1-1-基于边界增强的SOD方法" class="headerlink" title="2.1.1 基于边界增强的SOD方法"></a>2.1.1 基于边界增强的SOD方法</h3><ul><li><p>边界增强是指<strong>通过增强深度特征中的低层特征来获得更多的边界信息，从而更好的定位显著目标边界</strong>。</p><ul><li><p>ELD算法和KSR算法<strong>通过编码低层特征距离来检测边界信息</strong>，定位显著性目标轮廓，但是轮廓边界有时会模糊，导致部分边界细节丢失。</p></li><li><p>DCL算法和DSS算法<strong>通过引入相关操作来增强低层特征具有的边界信息</strong>。</p><p>  相较于直接编码低层特征距离的算法，这类方法获得的显著性目标<strong>边界更加清晰</strong>。但是，这些操作的引入容易引起显著性目标检测<strong>主体不准确</strong>，比如只有1个目标却检测出了2个。</p><p>原文中==图2==展示并对比了上述4个算法的检测效果。</p></li></ul></li><li><p>还可以<strong>直接对显著性目标的边界进行检测</strong>，比如GearNet、AFNet（<strong>采用BEL，Boundary-Enhanced Loss</strong>）、BASNet。</p><p>  这类方法能够提取清晰的显著性目标边界，边界细节相对较好，显著性目标的检测准确度较高(无关的显著性目标较少)，效果见原文==图3==。</p></li></ul><h3 id="2-1-2-基于语义增强的SOD方法"><a href="#2-1-2-基于语义增强的SOD方法" class="headerlink" title="2.1.2 基于语义增强的SOD方法"></a>2.1.2 基于语义增强的SOD方法</h3><ul><li><p>语义增强是指从<strong>高层特征</strong>中获得丰富的<strong>语义</strong>信息，从而更好的定位显著性目标，使显著性目标更加突出。</p><p>  比如R_FCN算法、CPD算法和PoolNet算法等，算法效果见原文==图4==。</p><p>  这类方法可以<strong>准确定位</strong>显著性目标，但是由于<strong>仅针对</strong>高层特征所包含的语义进行增强，有时会造成显著性目标<strong>边界模糊</strong>或者多个显著性目标重合。</p></li><li><p>还可以通过引入<strong>注意力机制</strong>进一步增强语义信息，如PiCANet和RAS算法。主体准确性和边界准确性都不错，算法效果见原文==图5==。</p></li></ul><h3 id="2-1-3-基于边界-语义增强的SOD方法"><a href="#2-1-3-基于边界-语义增强的SOD方法" class="headerlink" title="2.1.3 基于边界/语义增强的SOD方法"></a>2.1.3 基于边界/语义增强的SOD方法</h3><ul><li><p>只进行边界增强容易造成显著性目标模糊，而只进行语义增强则会引起显著性目标的边界模糊，所以可以<strong>同时对两者进行增强</strong>。</p><p>  因为通过语义增强可以减小无效目标的干扰，更好地定位显著性目标的位置；通过边界增强可以获得清晰的显著性目标边界</p><p>  这类算法有Amulet、BDMPM等，算法效果见原文==图6==。</p></li><li><p>还可以采用<strong>金字塔结构</strong>同时对高低层特征进行处理，以同时增强显著性目标边界和语义。</p><p>  这类算法有SRM算法、PAGE算法、FPA算法，算法效果见原文==图7==。</p></li></ul><h2 id="2-2-基于全局-局部结合的SOD"><a href="#2-2-基于全局-局部结合的SOD" class="headerlink" title="2.2 基于全局/局部结合的SOD"></a>2.2 基于全局/局部结合的SOD</h2><ul><li><p><strong>全局信息</strong>（颜色，纹理，背景/前景等）包含显著性目标的位置信息，而<strong>局部信息</strong>可以增强显著性目标边界。</p></li><li><p>一些检测方法采用<strong>递归</strong>操作、<strong>多分辨率</strong>操作和<strong>注意力机制</strong>等将全局/局部相结合以 获得更好的显著性目标检测性能</p></li><li><p>这类算法有DHSNet、GRL、NLDF、PAGR算法等，算法效果见原文==图8==。</p></li></ul><h2 id="2-3-基于辅助网络的SOD"><a href="#2-3-基于辅助网络的SOD" class="headerlink" title="2.3 基于辅助网络的SOD"></a>2.3 基于辅助网络的SOD</h2><ul><li>基于辅助网络的显著性目标检测是指采用其它领域已有模型作为辅助网络来提升显著性目标检测性能</li><li>这类算法有MDF、C2S-Net、CapSal、MLMSNet算法等，算法效果见原文==图9==。</li></ul><h2 id="2-4-不同类型SOD方法分析比较"><a href="#2-4-不同类型SOD方法分析比较" class="headerlink" title="2.4 不同类型SOD方法分析比较"></a>2.4 不同类型SOD方法分析比较</h2><ul><li>现有DSOD方法边界模糊的原因和解决办法<ol><li>深度模型包含许多下采样操作，上采样后的特征难以恢复原有的空间信息，融合后引起边界模糊。因此，为了减小<strong>下采样操作引起的多尺度融合损失</strong>，引入一些特定操作，如 PoolNet 算法中采用<strong>功能聚合模块</strong>等。</li><li>针对不同因素对边界检测的影响，通过<strong>编码低层特征距离</strong>来检测边界信息，定位显著性目标轮廓，如ELD算法和KSR算法；或者是<strong>设计新的损失函数</strong>， 通过反向传播调整模型参数，如AFNet算法和BASNet算法。</li><li>基础<strong>模型简易导致检测的边界模糊</strong>，可以通过<strong>多尺度操作</strong>增强原有的特征效果，如DSS算法、SRM算法和PAGE算法等，或添加<strong>注意力机制</strong>来提取更有效的低层特征，如PFA算法等。</li></ol></li><li>基于深度学习的显著性目标检测方法中常常引入注意力机制，大致可分为3类<ol><li><strong>时空域注意力</strong>，比较适合同时具有时序及空域特征的场景，通过递归神经网络 （Recurrent Neural Network，RNN）设计注意力机制，如PAGR算法。</li><li><strong>软注意力</strong>，是一种确定性的注意力，可以直接通过网络生成，它也是可微的， 可以通过神经网络算出梯度并且前向传播和后向 反馈来学习得到注意力的权重，如PFA算法和RAS算法；</li><li><strong>硬注意力</strong>，从输入信息中选择重要的特征，如PiCANet算法每个像素生成注意力图，这种方式更高效和直接。</li></ol></li></ul><h1 id="3-常用数据集及评估标准"><a href="#3-常用数据集及评估标准" class="headerlink" title="3 常用数据集及评估标准"></a>3 常用数据集及评估标准</h1><h2 id="3-1-常用数据集"><a href="#3-1-常用数据集" class="headerlink" title="3.1 常用数据集"></a>3.1 常用数据集</h2><ul><li><p>SOD数据集</p><p>  MSRA、SOD、MSRA10K、HKU-IS、DUTS、SED、ECSSD、DUTO-OMRON、PASCAL-S</p></li><li><p>常用DSOD数据集</p><ul><li>MSRA10K：边界框级别的显著性真值标定</li><li>HKU-IS：4447个图像，多个断开连接的显著性目标，多目标的边界重合和色彩对比度较低</li><li>DUTS：10553个训练图像和5019个测试图像，训练和测试集都包含非常重要的场景</li><li>SOD：300张图像，像素级注释，大部分图像包含多个显著性目标，并且目标与背景的颜色对比度较低。</li><li>ECSSD：1000张图像，图像具有复杂的结构和背景</li><li>DUTO-OMRON：5168个高质量图像，图像具有多个显著性目标，背景相对复杂</li><li>PASCAL-S：8 个类别，850张图像，用于评估具有复杂背景、多个目标场景的模型性能</li></ul></li></ul><h2 id="3-2-常用评估准则"><a href="#3-2-常用评估准则" class="headerlink" title="3.2 常用评估准则"></a>3.2 常用评估准则</h2><p>DSOD常用评估准则</p><ul><li><p>F-度量($F-measure,F_\beta$)</p><p>  对精度和召回率进行总体评估，最终值越大表明性能越好，其中$\beta$是一个参数，一般取$\beta^2=0.3$。公式暂略。</p></li><li><p>加权F-度量($Weighted\  F-measure,F_\beta^\omega$)</p><p>  加权F-度量是F-度量的推广，通过交替计算精度和召回率得到。</p><p>  加权F-度量为了解决邻域信息的不同， 为不同位置的不同误差分配了不同的权重。公式暂略。</p></li><li><p>P-R曲线</p><p>  以Precision和Recall作为纵-横轴坐标的二维曲线，即查准率-查全率曲线，选取不同阈值时对应的精度和召回率绘制。P-R曲线围起来 的面积是AP(Average Precision)值，AP值越高，模型性能越好。公式暂略。</p></li><li><p>平均绝对误差(Mean Absolute Error, MAE)</p><p>  MAE值越小表示模型越好。公式暂略。</p></li></ul><h1 id="4-基于深度学习的显著性目标检测方法性能比较"><a href="#4-基于深度学习的显著性目标检测方法性能比较" class="headerlink" title="4 基于深度学习的显著性目标检测方法性能比较"></a>4 基于深度学习的显著性目标检测方法性能比较</h1><ul><li>在数据集ECSSD、DUT-OMRON、HKU-IS和DUTS-TE上进行实验，采用F-度量和平均绝对误差MAE作为评估准则</li></ul><h1 id="5-基于深度学习的显著性目标检测算法的不足与未来展望"><a href="#5-基于深度学习的显著性目标检测算法的不足与未来展望" class="headerlink" title="5 基于深度学习的显著性目标检测算法的不足与未来展望"></a>5 基于深度学习的显著性目标检测算法的不足与未来展望</h1><ul><li><p>不足与未来展望</p><ul><li><p>复杂背景</p><ul><li>设计适应复杂背景（对背景敏感或者前景背景对比度低等）的显著性目标检测模型</li><li>建立包含复杂背景的图像数据集</li></ul></li><li><p>实时性</p><ul><li>设计轻量化网络，比如遵守SqueezeNet特有的三种设计原则</li><li>采用深度可分离卷积，比如MobileNet</li><li>对网络直接进行压缩与编码</li></ul></li><li><p>小目标</p><ul><li>使用分辨率更高的卷积特征图以及残差模块来增强对小目标的检测能力</li></ul></li><li><p>矩形框定位</p><ul><li>可变形卷积</li></ul></li><li><p>完全监督学习</p><p>  无监督或弱监督</p></li></ul></li></ul><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;基本信息&quot;&gt;&lt;a href=&quot;#基本信息&quot; class=&quot;headerlink&quot; title=&quot;基本信息&quot;&gt;&lt;/a&gt;基本信息&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;论文名称&lt;/p&gt;
-&lt;p&gt;  基于深度学习的显著性目标检测综述&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;作者&lt;/p
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="显著性目标检测" scheme="https://chouxianyu.github.io/tags/%E6%98%BE%E8%91%97%E6%80%A7%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="论文笔记" scheme="https://chouxianyu.github.io/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
