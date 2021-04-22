@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[李宏毅机器学习课程笔记-11.2Explainable AI(Local Explanation)]]></title>
+    <url>%2F2021%2F04%2F22%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-11-2Explainable-AI-Local-Explanation%2F</url>
+    <content type="text"><![CDATA[假定在图片分类任务中有一张图片，Local Explanation则要求机器说明为什么它认为这张图片是某个类别(比如“cat”)。 Explainable AI(Local Explanation)的目标是，知道每个component对于最终结果的重要性。我们可以通过remove或者modify其中一个component，看decision会有什么变化。 基于梯度判断Component重要性假设输入是$x$，它有很多component $\{x_1,x_2,\dots,x_N\}$组成。如果输入是image，则component一般是pixel、segment或patch等；如果输入是text，则component一般是word。对于图片，我们可以在图片上“放置”一个灰块以覆盖图像的一小部分，观察其对结果的影响，见《Visualizing and Understanding Convolutional Networks》。注：component的选取、remove或者modify也是需要研究的。 还有另一种方法是，输入为$\{x_1,…,x_n\}$，对某个pixel $x_n$加上$\Delta x$，用$\frac{\Delta y}{\Delta x}$来表示扰动$\Delta x$对结果$y$的影响，即通过$\frac{\partial y_k}{\partial x_n}$的绝对值表示某个pixel对$y_k$的影响，见《Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps》。 还有很多其它基于梯度来判断Component重要性的方法： Grad-CAM SmoothGrad Layer-wise Relevance Propagation(LRP) Redistribute the output, Backward propagation until reaching input Guided Backpropagation 梯度饱和基于梯度来判断component重要性的方法也存在着局限性：梯度饱和(Gradient Saturation)和Noisy Gradient。 考虑$\frac{\partial大象}{\partial鼻子长度}$，可知在一定范围内，鼻子越长，则判定为大象的概率就越大，但随着鼻子长度增加到一定数值后，鼻子长度对于判定大象的影响几乎为0，这时就出现了梯度饱和，如下图所示。 那如何解决梯度饱和的问题呢？解决方法就是Global Explanation，可以参考Integrated gradient和DeepLIFT。 相对于梯度饱和，另外一个问题就是Noisy Gradient，即Gradient变化非常大，解决方法是SmoothGrad（在计算梯度时添加噪声以扰动生成多个样本，并计算平均梯度） Attack Interpretation向输入中加入一些细微的噪声，这样并不影响视觉效果和模型的输出，但这样可以攻击explanation，如下图所示，详见《Interpretation of Neural Networks is Fragile》。 Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>ExplainableAI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[李宏毅机器学习课程笔记-11.1Explainable AI引言]]></title>
     <url>%2F2021%2F04%2F21%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-11-1Explainable-AI%E5%BC%95%E8%A8%80%2F</url>
     <content type="text"><![CDATA[Explainable AI是什么我们希望，机器不仅要知道“是什么”还要知道“为什么”，或者说机器不仅要给出答案还要给出explanation。 Explanation可以分为两类： Local Explanation 假定在图片分类任务中有一张图片，要求机器说明为什么它认为这张图片是某个类别(比如“cat”)。 Global Explanation 假定在图片分类任务中，要求机器说明它认为一个类别(比如“cat”)是什么样子，而非针对一张图片进行解释。 Explainable AI有什么用在使用机器挑选简历时，我们需要知道机器为什么选择某份简历(性别?还是实力)。 在使用机器判定罪犯是否可以假释时，我们需要知道机器为什么判定是或否(实证?还是肤色)。 在使用机器判定是否给某人贷款时，我们需要知道机器为什么判定是或否。 通过Explainable AI，我们可以知道模型学到了什么从而进行模型诊断，对模型进行改进和调整。我们不仅只关注模型在数据集上的精确度，还需要进行模型诊断，因为有可能精确度很高但实际上机器什么都没学到。 Explainable AI是否有必要李宏毅老师认为Explainable AI的目标并非完全理解模型是如何work的，而是为了让人感到comfortable。 因为深度学习是一个黑盒所以有些人认为深度学习不可信，这有些因噎废食。人脑等很多事物对现在的人类来讲都也还是黑盒，完全理解模型的work机理不是必要的，因为某些东西是黑盒就不使用它也不行。 Explainable AI其实就是为了使老板、客户、自己等感到comfortable，甚至对不同人也应该有不同的解释。 Interpretable VS Powerful决策树既是interpretable又是powerful的，但当分支特别多的时候决策树的表现也会很差，这时可以使用Random Forest或者XGBoost，但它们虽然powerful但不interpretable。 Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
@@ -793,9 +802,9 @@
         <tag>BFS</tag>
         <tag>PAT</tag>
         <tag>图</tag>
-        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
+        <tag>dijkstra</tag>
       </tags>
   </entry>
   <entry>
@@ -808,9 +817,9 @@
         <tag>BFS</tag>
         <tag>PAT</tag>
         <tag>图</tag>
-        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
+        <tag>dijkstra</tag>
       </tags>
   </entry>
   <entry>
@@ -822,9 +831,9 @@
         <tag>BFS</tag>
         <tag>PAT</tag>
         <tag>图</tag>
-        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
+        <tag>dijkstra</tag>
       </tags>
   </entry>
   <entry>
@@ -836,9 +845,9 @@
         <tag>BFS</tag>
         <tag>PAT</tag>
         <tag>图</tag>
-        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
+        <tag>dijkstra</tag>
       </tags>
   </entry>
   <entry>
@@ -851,9 +860,9 @@
         <tag>BFS</tag>
         <tag>PAT</tag>
         <tag>图</tag>
-        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
+        <tag>dijkstra</tag>
       </tags>
   </entry>
   <entry>
@@ -866,9 +875,9 @@
         <tag>PAT</tag>
         <tag>贪心</tag>
         <tag>图</tag>
-        <tag>dijkstra</tag>
         <tag>最短路</tag>
         <tag>单源最短路</tag>
+        <tag>dijkstra</tag>
       </tags>
   </entry>
   <entry>
@@ -888,8 +897,8 @@
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805346063728640 题解题目要求 红黑树 在二叉搜索树的基础上，红黑树还具有以下特征 每个结点是红色或者黑色 根结点是黑色的 叶子结点（NULL）都是黑色 每个红色结点的两个子结点都是黑色 从每个叶子到根的所有路径上不能有两个连续的红色结点 每个结点到其每个叶子结点的所有路径都包含相同数目的黑色节点。 给定一颗二叉搜索树，请判断它是否是一个合法的红黑树。 输入 K：正整数，不超过30，测试用例的数量 N：正整数，不超过30，二叉树中结点的数量 二叉树的先序遍历结果：结点的值都是正整数，用负数代表红色结点 输出 判断每颗二叉搜索树是否是红黑树，是则输出Yes，否则输出No。 解题思路 根据先序遍历结果和二叉搜索树的性质（左子树小于根结点小于右子树），递归构建二叉树 判断性质3：根结点是否是黑色 判断性质4，见代码中的函数judge1 判断性质5，见代码中的函数judge2 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970// Problem: PAT Advanced 1135// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805346063728640// Tags: Tree BST RBTree#include &lt;iostream&gt;#include &lt;cmath&gt;using namespace std;struct Node&#123; int val; Node* left = nullptr; Node* right = nullptr;&#125;;Node* build(Node* root, int v)&#123; if (root == nullptr)&#123; root = new Node(); root-&gt;val = v; &#125; else if (abs(v) &lt;= abs(root-&gt;val)) root-&gt;left = build(root-&gt;left, v); else root-&gt;right = build(root-&gt;right, v); return root;&#125;bool judge1(Node* root)&#123; if (root == nullptr) return true; if (root-&gt;val &lt; 0)&#123; if (root-&gt;left != nullptr &amp;&amp; root-&gt;left-&gt;val &lt; 0) return false; if (root-&gt;right != nullptr &amp;&amp; root-&gt;right-&gt;val &lt; 0) return false; &#125; return judge1(root-&gt;left) &amp;&amp; judge1(root-&gt;right);&#125;int getDepth(Node* root)&#123; if (root == nullptr) return 0; int ret = max(getDepth(root-&gt;left), getDepth(root-&gt;right)); return root-&gt;val &gt; 0 ? ret + 1 : ret;&#125;bool judge2(Node *root)&#123; if (root == nullptr) return true; if (getDepth(root-&gt;left) != getDepth(root-&gt;right)) return false; return judge2(root-&gt;left) &amp;&amp; judge2(root-&gt;right);&#125;int main()&#123; int k, n, val; scanf("%d", &amp;k); while (k--)&#123; scanf("%d", &amp;n); Node* root = nullptr; for (int i = 0; i &lt; n; i++)&#123; scanf("%d", &amp;val); root = build(root, val); &#125; if (root-&gt;val &lt; 0 || !judge1(root) || !judge2(root)) printf("No\n"); else printf("Yes\n"); &#125; return 0;&#125; 参考链接https://blog.csdn.net/liuchuo/article/details/78037334 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
         <tag>算法</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
         <tag>BST</tag>
         <tag>PAT</tag>
@@ -902,8 +911,8 @@
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805345078067200 题解题目要求假设二叉树中所有结点的值都是互异的正整数，给定二叉树的先序和后序遍历，请输出该树后序遍历的第一个数字。 输入 N：正整数，不超过50000，二叉树中结点的数量 先序遍历结果 中序遍历结果 解题思路 根据先序遍历和中序遍历结果可以确定一颗树，这道题的关键就是如何确定出这颗树并遍历它。 可以参考PAT甲级1151LCA in a Binary Tree，这道题里也是根据先序遍历和中序遍历结果确定出了一棵树。 设置全局flag判断是否是该树后序遍历的第一个数字，如果是则输出，不是则不输出 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849// Problem: PAT Advanced 1138// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805345078067200// Tags: Tree DFS#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;map&gt;using namespace std;vector&lt;int&gt; preOrder; // 先序遍历结果vector&lt;int&gt; inOrder; // 中序遍历结果map&lt;int, int&gt; inPos; // 结点到中序遍历结果inOrder索引的映射bool firstIsPrinted = false; // 为true代表后序遍历时的第一个结点已经输出void postOrderTraverse(int inLeft, int inRight, int preRoot)&#123; if (firstIsPrinted) // 只输出后序遍历的第一个结点即可 return ; if (inRight &lt; inLeft) // 该树不存在 return ; int inRoot = inPos[preOrder[preRoot]]; // 当前树的根结点在中序遍历结果inOrder中的索引 // 后序遍历 postOrderTraverse(inLeft, inRoot - 1, preRoot + 1); // 遍历左子树并判断左子树是否存在 postOrderTraverse(inRoot + 1, inRight, preRoot + 1 + (inRoot - inLeft)); // 遍历右子树并判断右子树是否存在 if (!firstIsPrinted)&#123; // 只输出后序遍历的第一个结点即可 printf("%d", inOrder[inRoot]); firstIsPrinted = true; &#125;&#125;int main()&#123; int n; scanf("%d", &amp;n); preOrder.resize(n + 1); inOrder.resize(n + 1); for (int i = 1; i &lt;= n; i++) // 读取先序遍历结果 scanf("%d", &amp;preOrder[i]); for (int i = 1; i &lt;= n; i++)&#123; // 读取中序遍历结果 scanf("%d", &amp;inOrder[i]); inPos[inOrder[i]] = i; &#125; postOrderTraverse(1, n, 1); return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
         <tag>算法</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
         <tag>PAT</tag>
         <tag>map</tag>
@@ -928,8 +937,8 @@
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/1038430130011897856 题解题目要求 最近公共祖先（LCA，The lowest common ancestor） 在一颗树中，结点U和V的LCA是U和V为其后代的深度最大的结点。 给定一颗二叉树中的任意两个结点，请找到它们的LCA。 输入 M：正整数，不超过1000，需要测试的结点对的数量 N：正整数，不超过10000，二叉树中结点的数量，结点值都在int范围内 二叉树中序遍历结果：N个数字 二叉树先序遍历结果：N个数字 M个结点对： 输出 对于每个结点对，判断结点对中每个结点是否存在，如果都存在则找到他们的LCA。 思路根据先序遍历结果和中序遍历结果可以确定一颗树中序遍历结果加先序遍历结果可以唯一确定一棵树，在不构建树的情况下，在每一层的递归中，可以得到树的根结点。 使用两个数组分别保存树的先序遍历结果和后序遍历结果 根据先序遍历结果可以确定根节点 比如刚开始的第一个结点就是整棵树的根结点 根据中序遍历结果和整棵树的根结点可以确定整棵树的左右子树 中序遍历结果中，根结点左侧就是整棵树的左子树的中序遍历结果，根结点右侧就是整棵树的右子树的中序遍历结果 递归确定左右子树的结构 某颗树的结构可根据2个变量确定：其根结点在整颗树先序遍历结果中的索引、其中序遍历结果序列（可通过起始索引和结束索引2个变量确定） 123456789101112131415void func(int leftPosBoundOfInOrder, int rightPosBoundOfInOrder, int rootPosOfPreOrder)&#123; /* 当前这颗树在整棵树中序遍历结果inOrder的范围索引为[leftPosBoundOfInOrder,rightPosBoundOfInOrder] rootPosOfPreOrder指当前这颗树根结点在整棵树先序遍历结果preOrder中的索引 */ // 越界判断 if (leftPosBoundOfInOrder &gt; rightPosBoundOfInOrder) return; // 左子树 lca(leftPosBoundOfInOrder, rootPosOfInOrder - 1, rootPosOfPreOrder + 1); // 右子树 lca(rootPosOfInOrder + 1, rightPosBoundOfInOrder, rootPosOfPreOrder + (rootPosOfInOrder - leftPosBoundOfInOrder) + 1);&#125;func(1, n, 1); // 调用（假设整颗树有n个结点，在数组中的索引为[1,n]） PAT甲级1138Postorder Traversal这道题也涉及如何根据先序遍历结果和中序遍历结果确定一棵树并遍历它，可以看一看。 最近公共祖先LCA已知某颗树的根结点， 若u和u在根结点的左边，则u和v的最近公共祖先在当前子树根结点的左子树寻找； 如果u和v在当前子树根结点的右边，则u和v的最近公共祖先就在当前子树的右子树寻找； 如果u和v在当前子树根结点的两边，在当前子树的根结点就是u和v的最近公共祖先； 如果u或v就是根结点，那其就是这两个结点的最近公共祖先。 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768// Problem: PAT Advanced 1151// URL: https://pintia.cn/problem-sets/994805342720868352/problems/1038430130011897856// Tags: Tree LCA Map#include &lt;iostream&gt;#include &lt;map&gt;#include &lt;vector&gt;using namespace std;int u, v;map&lt;int, int&gt; pos;vector&lt;int&gt; inOrder, preOrder;void lca(int leftPosBoundOfInOrder, int rightPosBoundOfInOrder, int rootPosOfPreOrder)&#123; /* 当前这颗树在整棵树中序遍历结果inOrder的范围索引为[leftPosBoundOfInOrder,rightPosBoundOfInOrder] rootPosOfPreOrder指当前这颗树根结点在整棵树先序遍历结果preOrder中的索引 */ if (leftPosBoundOfInOrder &gt; rightPosBoundOfInOrder) return; // 越界判断 int rootPosOfInOrder = pos[preOrder[rootPosOfPreOrder]]; // 根结点在中序遍历结果中的索引 int uPosOfInorder = pos[u]; // 结点u在中序遍历结果中的索引 int vPosOfInorder = pos[v]; // 结点v在中序遍历结果中的索引 // u和v都在左子树就去左子树找 if (uPosOfInorder &lt; rootPosOfInOrder &amp;&amp; vPosOfInorder &lt; rootPosOfInOrder) lca(leftPosBoundOfInOrder, rootPosOfInOrder - 1, rootPosOfPreOrder + 1); // u和v都在右子树就去右子树找 else if (uPosOfInorder &gt; rootPosOfInOrder &amp;&amp; vPosOfInorder &gt; rootPosOfInOrder) lca(rootPosOfInOrder + 1, rightPosBoundOfInOrder, rootPosOfPreOrder + (rootPosOfInOrder - leftPosBoundOfInOrder) + 1); // u和v在分别在左右子树，则当前树的根节点就是LCA else if ((uPosOfInorder &lt; rootPosOfInOrder &amp;&amp; vPosOfInorder &gt; rootPosOfInOrder) || (uPosOfInorder &gt; rootPosOfInOrder &amp;&amp; vPosOfInorder &lt; rootPosOfInOrder)) printf("LCA of %d and %d is %d.\n", u, v, preOrder[rootPosOfPreOrder]); // 结点u就是根结点 else if (uPosOfInorder == rootPosOfInOrder) printf("%d is an ancestor of %d.\n", u, v); // 结点v就是根结点 else if (vPosOfInorder == rootPosOfInOrder) printf("%d is an ancestor of %d.\n", v, u);&#125;int main()&#123; int m, n; // 结点对个数，结点个数 scanf("%d %d", &amp;m, &amp;n); inOrder.resize(n + 1), preOrder.resize(n + 1); for (int i = 1; i &lt;= n; i++)&#123; // 记录中序遍历结果，并记录各结点的索引 scanf("%d", &amp;inOrder[i]); pos[inOrder[i]] = i; &#125; for (int i = 1; i &lt;= n; i++)&#123; // 记录先序遍历结果 scanf("%d", &amp;preOrder[i]); &#125; while (m--)&#123; scanf("%d %d", &amp;u, &amp;v); if (pos[u] == 0 &amp;&amp; pos[v] == 0) // 判断元素是否存在 printf("ERROR: %d and %d are not found.\n", u, v); else if(pos[u] == 0 || pos[v] == 0) printf("ERROR: %d is not found.\n", pos[u] == 0 ? u : v); else lca(1, n, 1); &#125; return 0;&#125; 参考链接https://blog.csdn.net/zhuiqiuzhuoyue583/article/details/80452127 https://blog.csdn.net/liuchuo/article/details/82560863 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
         <tag>算法</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>PAT</tag>
         <tag>map</tag>
         <tag>LCA</tag>
@@ -954,8 +963,8 @@
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/1071785408849047552 题解题目要求堆（大顶堆或小顶堆）中，任意一条从根结点到叶子结点的路径上的值一定是非递增序列或者非递减序列。 现在给定一个完全二叉树，请检查它的每一条路径，判断这棵树是不是堆。 输入 N：正整数，大于1，不超过1000，树中结点的数量 N个结点的值（互异）：都是int范围内，按照层次遍历的顺序给出 输出 对于每棵树 先输出所有从根结点到叶子结点的路径，每条路径占一行，数字间用一个空格间隔，首尾不能有多余空格 输出顺序：对于每个结点，其右子树的所有路径要先于其左子树的所有路径输出 输出这颗树是大顶堆还是小顶堆，或者它不是堆 思路 利用完全二叉树的性质，将结点记录到一维数组中 使用DFS，使用vecotr记录当前遍历到的所有结点（即路径），如果当前结点是叶子结点则输出这条路径，否则先遍历右子树再遍历左子树 在DFS过程中判断是否违背大小顶堆性质 最后输出该树是否是大小顶堆 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455// Problem: PAT Advanced 1155// URL: https://pintia.cn/problem-sets/994805342720868352/problems/1071785408849047552// Tags: Tree DFS Heap#include &lt;iostream&gt;#include &lt;vector&gt;using namespace std;int n;bool isMaxHeap = true, isMinHeap = true;int nodes[2010]; // 索引为[1,n]的元素有效vector&lt;int&gt; path; // 目前遍历到的所有结点void dfs(int i)&#123; if (i &gt; n) return; // 越界则无操作 if (i &gt; 1)&#123; // 检查是否是大小顶堆 if (nodes[i] &gt; nodes[i / 2]) isMaxHeap = false; else if(nodes[i] &lt; nodes[i / 2]) isMinHeap = false; &#125; path.push_back(nodes[i]); // 遍历当前结点 if (2 * i &gt; n &amp;&amp; 2 * i + 1 &gt; n)&#123; // 是叶子结点则输出当前遍历到的所有结点 auto it = path.begin(); printf("%d", *it); it++; while (it != path.end())&#123; printf(" %d", *it); it++; &#125; printf("\n"); &#125; else&#123; // 不是叶子结点 dfs(2 * i + 1); // 遍历右子树 dfs(2 * i); // 遍历左子树 &#125; path.pop_back(); // 回溯&#125;int main()&#123; scanf("%d", &amp;n); for (int i = 1; i &lt;= n; i++)&#123; // 记录结点 scanf("%d", nodes+i); &#125; dfs(1); // 深度优先遍历树并在过程中判断是否为大顶堆或小顶堆 if (isMaxHeap) printf("Max Heap"); else if (isMinHeap) printf("Min Heap"); else printf("Not Heap"); return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
         <tag>算法</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
         <tag>回溯</tag>
         <tag>PAT</tag>
@@ -1030,8 +1039,8 @@
         <tag>算法</tag>
         <tag>PAT</tag>
         <tag>图</tag>
-        <tag>map</tag>
         <tag>set</tag>
+        <tag>map</tag>
         <tag>点着色</tag>
       </tags>
   </entry>
@@ -1201,8 +1210,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
         <tag>BST</tag>
       </tags>
@@ -1214,8 +1223,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
         <tag>BST</tag>
       </tags>
@@ -1318,8 +1327,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1330,8 +1339,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1342,8 +1351,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1354,8 +1363,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1366,8 +1375,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -1377,8 +1386,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1389,8 +1398,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1401,8 +1410,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1413,8 +1422,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1425,8 +1434,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
         <tag>回溯</tag>
       </tags>
@@ -1438,8 +1447,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -1449,8 +1458,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -1460,8 +1469,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1472,8 +1481,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1484,8 +1493,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -1495,10 +1504,10 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
-        <tag>DFS</tag>
+        <tag>二叉树</tag>
         <tag>队列</tag>
+        <tag>DFS</tag>
         <tag>BFS</tag>
       </tags>
   </entry>
@@ -1507,8 +1516,8 @@
     <url>%2F2020%2F07%2F13%2F%E4%BA%8C%E5%8F%89%E6%A0%91%E5%89%8D%E5%BA%8F%E3%80%81%E4%B8%AD%E5%BA%8F%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%EF%BC%88%E9%9D%9E%E9%80%92%E5%BD%92%E7%BB%9F%E4%B8%80%E8%A7%A3%E6%B3%95%EF%BC%89%2F</url>
     <content type="text"><![CDATA[前言最近复习了二叉树的前序遍历、中序遍历和后序遍历，找到了一种统一的非递归的迭代方法。 思路思路本质上还是递归，只不过不通过递归函数显式递归，而是通过栈模拟递归。 该思路仅需要微小改动就可以通用于二叉树的先/中/后序遍历，也很容易理解。 注意： 该思路的核心是将nullptr作为可以遍历栈中下1个结点的标志（因此也就不能将空结点压入栈中），即栈中弹出nullptr时就可以遍历下1个栈顶结点，如果不是nullptr则根据遍历顺序入栈，当前根结点入栈时也要将nullptr压入栈中（后续遇到这个nullptr时就可以遍历到该根结点）。 遍历顺序和入栈顺序相反 前序遍历LeetCode题解：https://www.cnblogs.com/chouxianyu/p/13290758.html 12345678910111213141516171819202122vector&lt;int&gt; preorderTraversal(TreeNode* root) &#123; vector&lt;int&gt; result; stack&lt;TreeNode*&gt; nodes; if (root!=nullptr) nodes.push(root); while(!nodes.empty())&#123; root = nodes.top(); nodes.pop(); if (root==nullptr)&#123; result.push_back(nodes.top()-&gt;val); nodes.pop(); &#125;else&#123; if (root-&gt;right!=nullptr) nodes.push(root-&gt;right); if (root-&gt;left!=nullptr) nodes.push(root-&gt;left); nodes.push(root); nodes.push(nullptr); &#125; &#125; return result;&#125; 中序遍历LeetCode题解：https://www.cnblogs.com/chouxianyu/p/13293153.html 12345678910111213141516171819202122vector&lt;int&gt; inorderTraversal(TreeNode* root) &#123; vector&lt;int&gt; result; stack&lt;TreeNode*&gt; nodes; if(root!=nullptr) nodes.push(root); while(!nodes.empty())&#123; root=nodes.top(); nodes.pop(); if(root==nullptr)&#123; result.push_back(nodes.top()-&gt;val); nodes.pop(); &#125;else&#123; if (root-&gt;right!=nullptr) nodes.push(root-&gt;right); nodes.push(root); nodes.push(nullptr); if (root-&gt;left!=nullptr) nodes.push(root-&gt;left); &#125; &#125; return result;&#125; 后序遍历LeetCode题解：https://www.cnblogs.com/chouxianyu/p/13293152.html 12345678910111213141516171819202122vector&lt;int&gt; postorderTraversal(TreeNode* root) &#123; stack&lt;TreeNode*&gt; nodes; vector&lt;int&gt; result; if (root!=nullptr) nodes.push(root); while(!nodes.empty())&#123; root=nodes.top(); nodes.pop(); if(root==nullptr)&#123; result.push_back(nodes.top()-&gt;val); nodes.pop(); &#125;else&#123; nodes.push(root); nodes.push(nullptr); if(root-&gt;right!=nullptr) nodes.push(root-&gt;right); if(root-&gt;left!=nullptr) nodes.push(root-&gt;left); &#125; &#125; return result;&#125; 参考链接https://leetcode-cn.com/problems/binary-tree-postorder-traversal/solution/mo-fang-di-gui-zhi-bian-yi-xing-by-sonp/ 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>栈</tag>
         <tag>迭代</tag>
       </tags>
@@ -1520,8 +1529,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>栈</tag>
         <tag>迭代</tag>
       </tags>
@@ -1533,8 +1542,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>栈</tag>
         <tag>迭代</tag>
       </tags>
@@ -1546,8 +1555,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>二叉树</tag>
         <tag>递归</tag>
+        <tag>二叉树</tag>
         <tag>栈</tag>
         <tag>迭代</tag>
       </tags>
@@ -2688,8 +2697,8 @@
     <content type="text"><![CDATA[二维作图plot 简单控制语句 sin(x) &amp; cos(x)12345678910x = -2 * pi : 0.1 : 2*pi; % 切片y1 = sin(x);y2 = cos(x);plot(x, y1,'-b'); % - 实线 b 蓝色hold on % 保持当前画的图形不被覆盖掉plot(x, y2, '-r'); % - 实线 r 红色xlabel('x'); % x轴上加标签ylabel('y'); % y轴上加标签text(0, 0, '(0,0)'); % 在(0,0)加文本legend('sin x', 'cos x'); % 图例 two hearts12345678910t = 0 : pi/180 : 4*pi; % 切片x = 16*sin(t).^3; % x,y用参数为t的方程表示y = 13*cos(t) - 5*cos(2*t)... % 本行未结束 -2*cos(3*t) - cos(4*t);plot(x-3, y, '-r', x+3, y, '-b');xlabel('x'); % x轴上加标签ylabel('y'); % y轴上加标签axis([-20, 20, -20, 15]); % 坐标范围：x [-20,20] y [-20,15]title('Two Hearts'); % 标题legend('U', 'I'); % 图例 对数坐标loglog，双对数坐标。 semilogx，只有x是对数。 12345678x = 10*2.^[0:6];y = [100 150 225 340 ... 510 765 1150];loglog(x, y, '.-r'); % 点实线 红色xlim([0.5e1, 0.8e3]); % x坐标范围ylim([0.8e2, 1.4e3]); % y坐标范围xlabel('x'); ylabel('y'); 极坐标polar 123theta = 0 : pi/180 : 4*pi; % 角度r = 1- sin(theta); % 长度polar(theta, r, '-r'); % 实线 红色 三维作图plot312345678910t = 0 : pi/50 : 10*pi; % 2pi是一圈 10pi转5圈 x = sin(t);y = cos(t);z = t;plot3(x, y, z); % 3维title('Helix');xlabel('sin t');ylabel('cos t');zlabel('t');grid on % 打开网格 三维曲面meshgrid，生成绘制3D图形所需的网格数据。 [x, y]=meshgrid(1:3, 1:3) mesh，surf 12345678[x, y] = meshgrid(-pi:0.1:pi); % 生成数据z = sin(x) .* cos(y);mesh(x, y, z); % 作图surf(x, y, z); % 使有颜色xlabel('x'); ylabel('y');zlabel('z');title('sin x sin y'); 作者：@臭咸鱼 本文为作者原创，转载请注明出处：https://chouxianyu.github.io 欢迎讨论和交流!]]></content>
       <tags>
         <tag>Matlab</tag>
-        <tag>数学建模</tag>
         <tag>可视化</tag>
+        <tag>数学建模</tag>
       </tags>
   </entry>
   <entry>
@@ -2884,8 +2893,8 @@
     <url>%2F2018%2F11%2F03%2Fjava.util.NoSuchElementException%2F</url>
     <content type="text"><![CDATA[问题引入Java商店作业不同函数里需要获取用户输入，用Scanner的时候,出现了异常java.util.NoSuchElementException 作业中代码模式如下，func1和func2中都使用Scanner并关闭它。然后在main中依次调用func1和func2，func2产生异常。说func1和func2其实不合适，应该加个括号……..懒得加了 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748//Demo.javaimport java.util.Scanner;class Test&#123; void func1() &#123; Scanner sc=new Scanner(System.in); //输出用户输入，替代作业里的使用Scanner System.out.print("Func1请输入内容："); System.out.println("Func1输出"+sc.next()); //关闭Scanner sc.close(); &#125; void func2() &#123; Scanner sc=new Scanner(System.in); //输出用户输入，替代作业里的使用Scanner System.out.print("Func2请输入内容："); System.out.println("Func2输出"+sc.nextInt()); //关闭Scanner sc.close(); &#125;&#125;public class Demo&#123; public static void main(String[] args) &#123; Test t=new Test(); t.func1(); t.func2(); &#125;&#125;/*Console输出如下：Func1请输入内容：小姐，请问你喜欢吃青椒吗？Func1输出：小姐，请问你喜欢吃青椒吗？Func2请输入内容：Exception in thread "main" java.util.NoSuchElementException at java.base/java.util.Scanner.throwFor(Unknown Source) at java.base/java.util.Scanner.next(Unknown Source) at java.base/java.util.Scanner.nextInt(Unknown Source) at java.base/java.util.Scanner.nextInt(Unknown Source) at Test.func2(Demo.java:21) at Demo.main(Demo.java:31)*/ 异常产生原因func1中sc.close();语句关闭了Scanner，func2中使用Scanner产生异常 因为System.in是System类的静态成员，所以不同Scanner对象内的in是同一个in` func1和func2中都用System.in创建了Scanner func1打开Scanner后将其关闭，这里间接地将System.in也关闭了 func1结束后运行func2，这时再调用nextInt，在System.in已经关闭了的情况下，不能读取到任何数据，就会产生 java.util.NoSuchElementException 解决方法系统资源一旦释放就不能再开启了，所以只有确定不在使用系统的时候，才能将流关闭 所以应该在整个程序结束时释放Scanner等资源，而不是某个函数中每次使用Scanner等资源后都释放一次 问题引入中的代码只是个模式，上边的两句话用在作业实际代码里就好了 代码分析Scanner()创建Scanner对象代码为Scanner sc=new Scanner(System.in);构造函数源码如下 123public Scanner(InputStream source) &#123; this(new InputStreamReader(source), WHITESPACE_PATTERN);&#125; 可看出是调用了另外一个构造函数，继续查看源码 123456789101112private Scanner(Readable source, Pattern pattern) &#123; assert source != null : "source should not be null"; assert pattern != null : "pattern should not be null"; this.source = source; //看这句 delimPattern = pattern; buf = CharBuffer.allocate(BUFFER_SIZE); buf.limit(0); matcher = delimPattern.matcher(buf); matcher.useTransparentBounds(true); matcher.useAnchoringBounds(false); useLocale(Locale.getDefault(Locale.Category.FORMAT)); &#125; 至少知道了Scanner内部还是用到了流，算是对流进行了封装吧，使用起来更方便一些 close()调用语句为sc.close();，查看close()源码，如下 1234567891011121314public void close() &#123; if (closed) //1.通过closed标志校验Scanner是否已关闭； return; if (source instanceof Closeable) &#123; //2.执行source的close()方法， try &#123; //将source关闭（这里为System.in）； ((Closeable)source).close(); &#125; catch (IOException ioe) &#123; lastException = ioe; &#125; &#125; sourceClosed = true; //3.将sourceClosed标志设置为true，表示source已关闭； source = null; //4.将source置为null，不再引用，处于可回收状态； closed = true; //5.将closed标志设置为true，表示Scanner已关闭；&#125; 可以知道关闭Scanner的时候，((Closeable)source).close();把System.in关闭了 关闭后下次想再使用就当然有错了~（除非构造函数里还再把in给打开，但这样也不太合理） 其实如果还可以再仔细看看Scanner的构造方法，和Scanner的next()，能力有限，点到为止 作者：@臭咸鱼 本文为作者原创，转载请注明出处：https://chouxianyu.github.io/2018/11/03/java.util.NoSuchElementException/#more 欢迎转发和评论]]></content>
       <tags>
-        <tag>Bug</tag>
         <tag>Java</tag>
+        <tag>Bug</tag>
       </tags>
   </entry>
   <entry>
@@ -2893,8 +2902,8 @@
     <url>%2F2018%2F09%2F22%2FJava%E5%AD%97%E8%8A%82%E6%B5%81read%E5%87%BD%E6%95%B0%2F</url>
     <content type="text"><![CDATA[问题引入做Java作业从标准输入流获取用户输入，用到了System.in.read(),然后出现了bug。 1234567891011121314151617181920212223//随机生成一个小写字母，用户猜5次，读取用户输入，并判断是否猜对import java.io.IOException;public class LetterGuessing &#123; public static void main(String[] args) throws IOException &#123; char ch,answer; //随机生成字母 answer=(char)(Math.random()*26+'a'); System.out.print("请输入一个小写字母："); for(int i=1;i&lt;=5;i++) &#123; //获取用户输入，可能抛出异常 ch=(char)System.in.read(); //比较大小 if(ch == answer)&#123; System.out.println("恭喜，正确！用了"+i+"次猜对"); break; &#125; else if(ch &gt; answer) System.out.println("您猜大了，还有"+ (5-i) +"次机会"); else System.out.println("您猜小了，还有"+ (5-i) +"次机会"); &#125; &#125;&#125; 输入字符&#39;a&#39;，按下Enter,却没有等我下次输入，循环就运行了三次。 问题来源System.in.read()按字节读，一次读入一个字节。后边有详细讲解。 经调试，可知三次循环中ch分别为a,\r,\n。 为什么a+Enter,会变成a\r\n呢 Windows下存在两种文件读写方式，一个是二进制方式，另一种是文本方式。 文本方式中写时”换行”会变成”回车-换行”，即\r\n；读时”回车-换行”会变成”换行”。 二进制方式中读写是严格按照一个字节一个字节的方式进行的。 在这里虽然没有用到文件，但道理应该是一样的 用read()函数是按照一个字节一个字节读取的，即二进制方式。 可能可以推导出，我们向输入流中输入数据默认是按照文本方式。 解决方法方法一在代码第10行后，加两行System.in.read(); 目的是读取掉输入流中的/r和/n。 这种方法的局限性就是输入字母前后不能加空格，因为它不会使空格从输入流中删除。 方法二不用read()读取，用以下代码代替 123import java.util.Scanner;Scanner input=new Scanner(System.in);ch=input.next().charAt(0); 这种方法就比较好，读取字符串（忽略空格和换行，空格和换行不会留在输入流里），然后取字符串的第一个字符。 知识点System.in官方文档：https://docs.oracle.com/javase/10/docs/api/java/lang/System.html#in System是个类，in是System的一个成员，官方介绍如下： 1public static final InputStream in The “standard” input stream. This stream is already open and ready to supply input data. Typically this stream corresponds to keyboard input or another input source specified by the host environment or user. in是一个InputStream类型的对象,所以只需要了解InputStream即可。 InputStream官方文档： https://docs.oracle.com/javase/10/docs/api/java/io/InputStream.html 123public abstract class InputStream //抽象类extends Object //继承Object类implements Closeable //实现Closeable接口 官方介绍如下： This abstract class is the superclass of all classes representing an input stream of bytes. 翻译为：这个抽象类是所有字节流类的父类。 字节流的含义：读取方式为一个字节一个字节地读取,而字符流是二个字节二个字节的读。 Applications that need to define a subclass of InputStream must always provide a method that returns the next byte of input. 翻译为：需要定义一个InputStream子类的应用必须提供一个返回输入下一字节的方法（函数）。 read()官方文档：https://docs.oracle.com/javase/10/docs/api/java/io/InputStream.html#read() 12public abstract int read() throws IOException Reads the next byte of data from the input stream. The value byte is returned as an int in the range 0 to255. 这个是重点，它返回下一字节的ASCII码 If no byte is available because the end of the stream has been reached, the value -1 is returned. This method blocks until input data is available, the end of the stream is detected, or an exception is thrown. A subclass must provide an implementation of this method. Returns: the next byte of data, or -1 if the end of the stream is reached. Throws: IOException - if an I/O error occurs. 作者：@臭咸鱼 本文为作者原创，转载请注明出处：https://chouxianyu.github.io/2018/09/22/Java字节流read函数/#more 欢迎转发和评论]]></content>
       <tags>
-        <tag>Bug</tag>
         <tag>Java</tag>
+        <tag>Bug</tag>
       </tags>
   </entry>
   <entry>
