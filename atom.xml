@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2021-04-22T00:41:07.591Z</updated>
+  <updated>2021-04-23T03:34:13.996Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>李宏毅机器学习课程笔记-11.3Explainable AI(Global Explanation)</title>
+    <link href="https://chouxianyu.github.io/2021/04/23/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-11-3Explainable-AI-Global-Explanation/"/>
+    <id>https://chouxianyu.github.io/2021/04/23/李宏毅机器学习课程笔记-11-3Explainable-AI-Global-Explanation/</id>
+    <published>2021-04-23T03:33:37.000Z</published>
+    <updated>2021-04-23T03:34:13.996Z</updated>
+    
+    <content type="html"><![CDATA[<p>假定在图片分类任务中，<strong>Global Explanation要求机器说明它认为一个类别(比如“cat”)是什么样子，而非针对一张图片进行解释。</strong></p><h2 id="Activation-maximization"><a href="#Activation-maximization" class="headerlink" title="Activation maximization"></a>Activation maximization</h2><p>在<a href="https://zhuanlan.zhihu.com/p/361283328" target="_blank" rel="noopener">李宏毅机器学习课程笔记-7.2CNN学到了什么</a>一文中，我们已讲过Activation maximization，不再复述，这里讲一些相关的新知识。</p><ol><li>在Activation maximization的MNIST手写数字识别案例中，我们观察到机器学习到的数字在人类看来完全就是噪音，由此可以想到：将机器认为是数字(或其它事物)的内容作为噪声添加到其它数据中，也许这样就可以实现Attack。</li><li>在使用Activation maximization观察模型学习到的内容时，我们可能需要使用大量<strong>Regularization(保证“可解释性”)</strong>以及暴调超参数，详见《Understanding Neural Networks Through Deep Visualization》。</li></ol><h2 id="“Regularization”-From-Generator"><a href="#“Regularization”-From-Generator" class="headerlink" title="“Regularization” From Generator"></a>“Regularization” From Generator</h2><p><strong>除了使用人工设置的Regularization来告诉机器什么是一张正常的输出(比如image)，还可以使用Generator进行Regularization</strong>。</p><p>Image Generator的输入是一个低维向量$z$，其输出为一张图片$x$，即$x=G(z)$。通常这个低维向量$z$是从某个已知的distribution(比如高斯分布、正态分布)中sample出来的，我们可以收集很多图片并使用GAN或者VAE训练这个Generator。</p><p>那如何使用Image Generator生成对图片的限制呢？以图片分类为例，将Generator输出的图片$x$输入到Image Classifier中得到输出分类结果$y_i$，目标是找到一个$z^<em>$使得图片$x$属于对应类别$i$的可能性$y_i$最大，即$z^</em>=arg \ max y_i$。得到$z^<em>$之后将其输入至Image Generator就可以得到一个图片$x$。如果通过$x^</em>=arg \ max y_i$直接得到图片呢，则不能保证结果的“可解释性”，因而需要对结果进行“可解释性”的约束，上述过程中Generator的作用就是对图片进行约束以确保生成的图片$x$是“可解释”的。</p><p>注：在进行$z^*=arg \ max y_i$时，Image Generator和Classifier的参数是不参与本次训练的。</p><p>那使用Generator能得到什么样的结果呢？结果挺好的，详见《Plug &amp; Play Generative Networks: Conditional Iterative Generation of Images in Latent Space》。</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;假定在图片分类任务中，&lt;strong&gt;Global Explanation要求机器说明它认为一个类别(比如“cat”)是什么样子，而非针对一张图片进行解释。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Activation-maximization&quot;&gt;&lt;a href=&quot;#Ac
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="ExplainableAI" scheme="https://chouxianyu.github.io/tags/ExplainableAI/"/>
+    
+  </entry>
   
   <entry>
     <title>李宏毅机器学习课程笔记-11.2Explainable AI(Local Explanation)</title>
@@ -551,36 +577,6 @@
       
       
         &lt;h2 id=&quot;卷积核学到了什么&quot;&gt;&lt;a href=&quot;#卷积核学到了什么&quot; class=&quot;headerlink&quot; title=&quot;卷积核学到了什么&quot;&gt;&lt;/a&gt;卷积核学到了什么&lt;/h2&gt;&lt;p&gt;如果想知道下图中第1个卷积层中的每个卷积核的功能，因为它参数比较少而且其输入是原图片，所以我
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="卷积神经网络" scheme="https://chouxianyu.github.io/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-7.1CNN入门详解</title>
-    <link href="https://chouxianyu.github.io/2021/03/29/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-7-1CNN%E5%85%A5%E9%97%A8%E8%AF%A6%E8%A7%A3/"/>
-    <id>https://chouxianyu.github.io/2021/03/29/李宏毅机器学习课程笔记-7-1CNN入门详解/</id>
-    <published>2021-03-29T09:09:58.000Z</published>
-    <updated>2021-03-29T10:54:37.445Z</updated>
-    
-    <content type="html"><![CDATA[<p>卷积神经网络（CNN）常常被用来做图像处理，当然也可以用一般的神经网络，那它们各自有什么优缺点呢？</p><h2 id="FNN用于图片处理的缺点"><a href="#FNN用于图片处理的缺点" class="headerlink" title="FNN用于图片处理的缺点"></a>FNN用于图片处理的缺点</h2><p>使用一般的全连接前馈神经网络（FNN）处理图片时的缺点：</p><ul><li><p>需要很多的参数</p><p>  假设有一张尺寸100×100的图片（尺寸已经算很小了），那输入层就有100×100×3=30K个像素，假设第一个隐藏层有1K个神经元（一个神经元包含30K个参数），这就已经需要30M个参数了……</p></li><li><p>该架构中每个神经元就是一个分类器，这是没必要的</p><p>  第一个隐藏层作为最基础的pattern分类器（比如判断有无绿色、边缘等），第二个隐藏层基于第一个隐藏层继续做pattern分类（比如木头、肉类），以此类推……</p></li></ul><p>按照人类的直观理解，我们不是像全连接神经网络一样去处理图片的。具体来看，有哪些方面呢？</p><h2 id="图片的一些性质"><a href="#图片的一些性质" class="headerlink" title="图片的一些性质"></a>图片的一些性质</h2><p>结合全连接前馈神经网络的缺点和人类对图片的直观理解，可以得到下述图片的3个性质。</p><h3 id="性质1：Some-patterns-are-much-smaller-than-the-whole-image"><a href="#性质1：Some-patterns-are-much-smaller-than-the-whole-image" class="headerlink" title="性质1：Some patterns are much smaller than the whole image."></a>性质1：Some patterns are much smaller than the whole image.</h3><p>在识别某个模式（pattern）时，一个神经元并不需要图片的所有像素点。对于一张人类全身照的图片，我们只需要看到头部而非整张图片就可以判断它是一个人脸。所以我们应该是可以用少量参数去识别这些pattern的。</p><p><img src="https://pic4.zhimg.com/80/v2-753ba3ca45cd6cc08d8a8d837d2ec425_720w.jpeg" alt="img" style="zoom:80%;"></p><h3 id="性质2：The-same-patterns-appear-in-different-regions"><a href="#性质2：The-same-patterns-appear-in-different-regions" class="headerlink" title="性质2：The same patterns appear in different regions."></a>性质2：The same patterns appear in different regions.</h3><p>比如说人脸可以在图片的中间区域，也可以在图片的某个角落区域。所以识别不同区域中的相同pattern的多个分类器（或detector）应该用同一组参数或者共享参数。</p><p><img src="https://pic1.zhimg.com/80/v2-cb9dfd6b582245692a8fe50979f5f77d_720w.png" alt="img" style="zoom:80%;"></p><h3 id="性质3：Subsampling-the-pixels-will-not-change-the-object"><a href="#性质3：Subsampling-the-pixels-will-not-change-the-object" class="headerlink" title="性质3：Subsampling the pixels will not change the object"></a>性质3：Subsampling the pixels will not change the object</h3><p>将图片缩小/下采样，并不会影响我们理解图片。所以我们可以通过将图片变小，进而用更少的参数处理图片。</p><p><img src="https://pic2.zhimg.com/80/v2-ee9888d41dfe87f1d8715949676ca025_720w.png" alt="img" style="zoom:80%;"></p><h2 id="CNN架构说明"><a href="#CNN架构说明" class="headerlink" title="CNN架构说明"></a>CNN架构说明</h2><p>2014年在ECCV上提出，针对上述的图片的3个性质，确定了CNN的架构如下。</p><p><img src="https://pic2.zhimg.com/80/v2-ea984acebb9fe399847d16b36d6fc559_720w.png" alt="img" style="zoom:80%;"></p><p>如上图所示，图片经过卷积层然后进行最大池化（max pooling），这个步骤可以进行多次；然后将数据展开（Flatten），然后将数据传进全连接前馈网络得到最后的图片分类结果。</p><h2 id="CNN架构作用探析"><a href="#CNN架构作用探析" class="headerlink" title="CNN架构作用探析"></a>CNN架构作用探析</h2><p><img src="https://pic1.zhimg.com/80/v2-544d4e0360461bfebe9624b4b20fedb5_720w.png" alt="img" style="zoom:80%;"></p><p>如上图所示，卷积是针对了图片的性质1和性质2，最大池化是针对了图片的性质3。</p><h2 id="卷积-Convolution-★"><a href="#卷积-Convolution-★" class="headerlink" title="卷积(Convolution) ★"></a>卷积(Convolution) ★</h2><p>假设有一张6×6的二值图，即一个6×6的矩阵。</p><h3 id="卷积核（Filter）"><a href="#卷积核（Filter）" class="headerlink" title="卷积核（Filter）"></a>卷积核（Filter）</h3><p>神经元就是一个计算/函数，卷积核其实就是神经元。</p><p>如下图所示，1个卷积层可以有多个卷积核，矩阵里元素的值就是需要通过学习得到的参数。</p><p>因为这里的输入是一个矩阵，所以卷积核也是1个矩阵（卷积核的通道数等于输入的通道数）。</p><p>假设卷积核大小是3×3，这对应了图片的性质1，即用小的卷积核识别一个小的pattern。</p><p><img src="https://pic1.zhimg.com/80/v2-dd755bcb25fdadf2bc819d96e03879f8_720w.png" alt="img" style="zoom:80%;"></p><h3 id="怎么做卷积"><a href="#怎么做卷积" class="headerlink" title="怎么做卷积"></a>怎么做卷积</h3><p>如下图所示</p><p><img src="https://pic3.zhimg.com/80/v2-be01890275fa85d7b665e5cc70131f30_720w.png" alt="img" style="zoom:80%;"></p><ul><li><p>卷积区域</p><p>  根据该卷积核的大小（以3×3为例），选择图片中相同大小的区域进行卷积。</p></li><li><p>卷积的计算方法</p><p>  从图片中扫描得到的3×3矩阵和卷积核的3×3矩阵，这2个矩阵相同位置的元素相乘可以得到9个值并求和（也就是内积）得到1个值，这就是1次卷积操作。</p></li><li><p>卷积顺序和方向</p><p>  卷积核按照从左到右、从上到下的顺序，从图片左上角开始移动，移动步长（stride）可以设置（以1为例）。在扫描到的每个区域中，都进行1次卷积。1个卷积核移动结束后，则得到1个新的矩阵（大小为4×4），即<strong>1个卷积核的输出是1个矩阵</strong>。</p><p>  卷积层有多个卷积核，每个卷积核都按照该方式进行卷积得到多个矩阵，这些矩阵合起来就形成了1个卷积层的<strong>特征图（Feature Map）</strong>，这个特征图也就是卷积层的输出。</p><p>  <strong>卷积层特征图的通道数等于该卷积层中卷积核的数量，即某卷积层有多少个卷积核，那该卷积层的特征图就有多少个通道</strong>。</p></li></ul><h3 id="卷积的作用"><a href="#卷积的作用" class="headerlink" title="卷积的作用"></a>卷积的作用</h3><p>在上图中，卷积核1的“对角线”的值都是1，就可以识别出图片中哪个区域具有“对角线”。在上图得到的4×4矩阵中，我们可以看到左上角和左下角3个元素的值为3，即有“对角线”。这对应了图片的性质2，我们用1个filter/1组参数识别了不同位置的相同pattern。</p><h3 id="卷积核是矩阵还是张量"><a href="#卷积核是矩阵还是张量" class="headerlink" title="卷积核是矩阵还是张量"></a>卷积核是矩阵还是张量</h3><p>卷积核可以是矩阵，也可以是张量，要根据其输入决定。</p><p><strong>卷积核的通道数等于其所在卷积层输入的通道数（即其所在卷积层前一层的特征图的通道数）</strong>，即单个卷积核会考虑输入的所有通道。</p><p>假如输入是一张RGB图片（大小为3×N×N，即有3个通道、每个通道中矩阵大小为N×N），那卷积核就是1个张量（大小为3×M×M，即有3个通道、每个通道中矩阵大小为M×M），卷积计算方法和上面一样是求内积（两个3×M×M的张量求内积）。</p><h3 id="卷积中如何做梯度下降"><a href="#卷积中如何做梯度下降" class="headerlink" title="卷积中如何做梯度下降"></a>卷积中如何做梯度下降</h3><p>因为一个卷积核要对图片的不同区域进行多次卷积，每次卷积都会有一个梯度，最终把这些梯度取平均值就好了。</p><p>大概这么个意思，实操中这种底层的东西不需要我们实现。</p><h2 id="Convolution-VS-Fully-Connected"><a href="#Convolution-VS-Fully-Connected" class="headerlink" title="Convolution VS Fully Connected"></a>Convolution VS Fully Connected</h2><p>其实，卷积核就是一个神经元，它相当于全连接层中的神经元并没有全连接（没有使用图片的所有像素，当然这样的层也就不能称为全连接层了），这样有两个好处</p><h3 id="模型的参数更少"><a href="#模型的参数更少" class="headerlink" title="模型的参数更少"></a>模型的参数更少</h3><p>如下图所示，因为没有使用所有像素、不是全连接，因此需要的参数更少。</p><p><img src="https://pic2.zhimg.com/80/v2-d386d44d45dc643867b81dc8a4a6a719_720w.png" alt="img" style="zoom: 80%;"></p><h3 id="参数共享"><a href="#参数共享" class="headerlink" title="参数共享"></a>参数共享</h3><p>如下图所示，因为用同1个卷积核在图片的不同区域做卷积，即用1组参数对不同区域的像素进行计算，得到了多个值、达成了多个神经元的效果，实现了参数共享。比如下图中神经元“3”处理图片第1个像素和神经元“-1”处理图片第2个像素就使用了同一个参数“1”（卷积核的第1个参数）。</p><p>因为实现了参数共享，卷积就比全连接进一步减少了参数量。</p><p><img src="https://pic2.zhimg.com/80/v2-ce7e944ef9280d1bb8505b4fc5f831cf_720w.png" alt="img" style="zoom: 80%;"></p><h2 id="最大池化（Max-Pooling）"><a href="#最大池化（Max-Pooling）" class="headerlink" title="最大池化（Max Pooling）"></a>最大池化（Max Pooling）</h2><p>最大池化是一种下采样（Subsample）,下采样不一定要取最大值，也可以取平均值。</p><h3 id="怎么做最大池化"><a href="#怎么做最大池化" class="headerlink" title="怎么做最大池化"></a>怎么做最大池化</h3><p><img src="https://pic1.zhimg.com/80/v2-b42884461b41f67fa084cc8e2a9d8ac3_720w.png" alt="img" style="zoom: 80%;"></p><p>如上图所示，假如某Max Pooling层的上1层是1个有2个卷积核的卷积层，该卷积层的输出是一个张量（大小为2×4×4，即2个通道、每个通道中矩阵的大小为4×4）。</p><p>对于输入中的每个通道，Max Pooling将4×4的矩阵划分成4个2×2的子矩阵（子矩阵大小可以人为设定），只取出每个子矩阵中的最大值就得到一个2×2的矩阵。又因为该Max Pooling层的输入有2个通道，所以其输出就是一个大小为2×2×2的张量。</p><h3 id="取最大值的话，该怎么微分？"><a href="#取最大值的话，该怎么微分？" class="headerlink" title="取最大值的话，该怎么微分？"></a>取最大值的话，该怎么微分？</h3><p>见笔记“Tips for Training DNN”Maxout部分，Max Pooling和Maxout其实是一样的。</p><h2 id="Flatten-amp-FNN"><a href="#Flatten-amp-FNN" class="headerlink" title="Flatten &amp; FNN"></a>Flatten &amp; FNN</h2><p>经过一系列的卷积和最大池化，将得到的特征图展开排列，作为FNN的输入，最后输出结果。</p><p><img src="https://pic4.zhimg.com/80/v2-591c85b68d94cb41194b8a70303a063c_720w.png" alt="img" style="zoom: 80%;"></p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;卷积神经网络（CNN）常常被用来做图像处理，当然也可以用一般的神经网络，那它们各自有什么优缺点呢？&lt;/p&gt;
-&lt;h2 id=&quot;FNN用于图片处理的缺点&quot;&gt;&lt;a href=&quot;#FNN用于图片处理的缺点&quot; class=&quot;headerlink&quot; title=&quot;FNN用于图片处理的缺
       
     
     </summary>

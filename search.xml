@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[李宏毅机器学习课程笔记-11.3Explainable AI(Global Explanation)]]></title>
+    <url>%2F2021%2F04%2F23%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-11-3Explainable-AI-Global-Explanation%2F</url>
+    <content type="text"><![CDATA[假定在图片分类任务中，Global Explanation要求机器说明它认为一个类别(比如“cat”)是什么样子，而非针对一张图片进行解释。 Activation maximization在李宏毅机器学习课程笔记-7.2CNN学到了什么一文中，我们已讲过Activation maximization，不再复述，这里讲一些相关的新知识。 在Activation maximization的MNIST手写数字识别案例中，我们观察到机器学习到的数字在人类看来完全就是噪音，由此可以想到：将机器认为是数字(或其它事物)的内容作为噪声添加到其它数据中，也许这样就可以实现Attack。 在使用Activation maximization观察模型学习到的内容时，我们可能需要使用大量Regularization(保证“可解释性”)以及暴调超参数，详见《Understanding Neural Networks Through Deep Visualization》。 “Regularization” From Generator除了使用人工设置的Regularization来告诉机器什么是一张正常的输出(比如image)，还可以使用Generator进行Regularization。 Image Generator的输入是一个低维向量$z$，其输出为一张图片$x$，即$x=G(z)$。通常这个低维向量$z$是从某个已知的distribution(比如高斯分布、正态分布)中sample出来的，我们可以收集很多图片并使用GAN或者VAE训练这个Generator。 那如何使用Image Generator生成对图片的限制呢？以图片分类为例，将Generator输出的图片$x$输入到Image Classifier中得到输出分类结果$y_i$，目标是找到一个$z^$使得图片$x$属于对应类别$i$的可能性$y_i$最大，即$z^=arg \ max y_i$。得到$z^$之后将其输入至Image Generator就可以得到一个图片$x$。如果通过$x^=arg \ max y_i$直接得到图片呢，则不能保证结果的“可解释性”，因而需要对结果进行“可解释性”的约束，上述过程中Generator的作用就是对图片进行约束以确保生成的图片$x$是“可解释”的。 注：在进行$z^*=arg \ max y_i$时，Image Generator和Classifier的参数是不参与本次训练的。 那使用Generator能得到什么样的结果呢？结果挺好的，详见《Plug &amp; Play Generative Networks: Conditional Iterative Generation of Images in Latent Space》。 Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>ExplainableAI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[李宏毅机器学习课程笔记-11.2Explainable AI(Local Explanation)]]></title>
     <url>%2F2021%2F04%2F22%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-11-2Explainable-AI-Local-Explanation%2F</url>
     <content type="text"><![CDATA[假定在图片分类任务中有一张图片，Local Explanation则要求机器说明为什么它认为这张图片是某个类别(比如“cat”)。 Explainable AI(Local Explanation)的目标是，知道每个component对于最终结果的重要性。我们可以通过remove或者modify其中一个component，看decision会有什么变化。 基于梯度判断Component重要性假设输入是$x$，它有很多component $\{x_1,x_2,\dots,x_N\}$组成。如果输入是image，则component一般是pixel、segment或patch等；如果输入是text，则component一般是word。对于图片，我们可以在图片上“放置”一个灰块以覆盖图像的一小部分，观察其对结果的影响，见《Visualizing and Understanding Convolutional Networks》。注：component的选取、remove或者modify也是需要研究的。 还有另一种方法是，输入为$\{x_1,…,x_n\}$，对某个pixel $x_n$加上$\Delta x$，用$\frac{\Delta y}{\Delta x}$来表示扰动$\Delta x$对结果$y$的影响，即通过$\frac{\partial y_k}{\partial x_n}$的绝对值表示某个pixel对$y_k$的影响，见《Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps》。 还有很多其它基于梯度来判断Component重要性的方法： Grad-CAM SmoothGrad Layer-wise Relevance Propagation(LRP) Redistribute the output, Backward propagation until reaching input Guided Backpropagation 梯度饱和基于梯度来判断component重要性的方法也存在着局限性：梯度饱和(Gradient Saturation)和Noisy Gradient。 考虑$\frac{\partial大象}{\partial鼻子长度}$，可知在一定范围内，鼻子越长，则判定为大象的概率就越大，但随着鼻子长度增加到一定数值后，鼻子长度对于判定大象的影响几乎为0，这时就出现了梯度饱和，如下图所示。 那如何解决梯度饱和的问题呢？解决方法就是Global Explanation，可以参考Integrated gradient和DeepLIFT。 相对于梯度饱和，另外一个问题就是Noisy Gradient，即Gradient变化非常大，解决方法是SmoothGrad（在计算梯度时添加噪声以扰动生成多个样本，并计算平均梯度） Attack Interpretation向输入中加入一些细微的噪声，这样并不影响视觉效果和模型的输出，但这样可以攻击explanation，如下图所示，详见《Interpretation of Neural Networks is Fragile》。 Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
@@ -340,8 +349,8 @@
         <tag>机器学习</tag>
         <tag>深度学习</tag>
         <tag>神经网络</tag>
-        <tag>梯度消失</tag>
         <tag>激活函数</tag>
+        <tag>梯度消失</tag>
       </tags>
   </entry>
   <entry>
@@ -362,8 +371,8 @@
         <tag>机器学习</tag>
         <tag>深度学习</tag>
         <tag>神经网络</tag>
-        <tag>正则化</tag>
         <tag>学习率</tag>
+        <tag>正则化</tag>
         <tag>激活函数</tag>
         <tag>Dropout</tag>
       </tags>
@@ -557,9 +566,9 @@
         <tag>机器学习</tag>
         <tag>Bias</tag>
         <tag>Variance</tag>
-        <tag>欠拟合</tag>
-        <tag>过拟合</tag>
         <tag>正则化</tag>
+        <tag>过拟合</tag>
+        <tag>欠拟合</tag>
       </tags>
   </entry>
   <entry>
@@ -897,8 +906,8 @@
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805346063728640 题解题目要求 红黑树 在二叉搜索树的基础上，红黑树还具有以下特征 每个结点是红色或者黑色 根结点是黑色的 叶子结点（NULL）都是黑色 每个红色结点的两个子结点都是黑色 从每个叶子到根的所有路径上不能有两个连续的红色结点 每个结点到其每个叶子结点的所有路径都包含相同数目的黑色节点。 给定一颗二叉搜索树，请判断它是否是一个合法的红黑树。 输入 K：正整数，不超过30，测试用例的数量 N：正整数，不超过30，二叉树中结点的数量 二叉树的先序遍历结果：结点的值都是正整数，用负数代表红色结点 输出 判断每颗二叉搜索树是否是红黑树，是则输出Yes，否则输出No。 解题思路 根据先序遍历结果和二叉搜索树的性质（左子树小于根结点小于右子树），递归构建二叉树 判断性质3：根结点是否是黑色 判断性质4，见代码中的函数judge1 判断性质5，见代码中的函数judge2 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970// Problem: PAT Advanced 1135// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805346063728640// Tags: Tree BST RBTree#include &lt;iostream&gt;#include &lt;cmath&gt;using namespace std;struct Node&#123; int val; Node* left = nullptr; Node* right = nullptr;&#125;;Node* build(Node* root, int v)&#123; if (root == nullptr)&#123; root = new Node(); root-&gt;val = v; &#125; else if (abs(v) &lt;= abs(root-&gt;val)) root-&gt;left = build(root-&gt;left, v); else root-&gt;right = build(root-&gt;right, v); return root;&#125;bool judge1(Node* root)&#123; if (root == nullptr) return true; if (root-&gt;val &lt; 0)&#123; if (root-&gt;left != nullptr &amp;&amp; root-&gt;left-&gt;val &lt; 0) return false; if (root-&gt;right != nullptr &amp;&amp; root-&gt;right-&gt;val &lt; 0) return false; &#125; return judge1(root-&gt;left) &amp;&amp; judge1(root-&gt;right);&#125;int getDepth(Node* root)&#123; if (root == nullptr) return 0; int ret = max(getDepth(root-&gt;left), getDepth(root-&gt;right)); return root-&gt;val &gt; 0 ? ret + 1 : ret;&#125;bool judge2(Node *root)&#123; if (root == nullptr) return true; if (getDepth(root-&gt;left) != getDepth(root-&gt;right)) return false; return judge2(root-&gt;left) &amp;&amp; judge2(root-&gt;right);&#125;int main()&#123; int k, n, val; scanf("%d", &amp;k); while (k--)&#123; scanf("%d", &amp;n); Node* root = nullptr; for (int i = 0; i &lt; n; i++)&#123; scanf("%d", &amp;val); root = build(root, val); &#125; if (root-&gt;val &lt; 0 || !judge1(root) || !judge2(root)) printf("No\n"); else printf("Yes\n"); &#125; return 0;&#125; 参考链接https://blog.csdn.net/liuchuo/article/details/78037334 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
         <tag>算法</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
         <tag>BST</tag>
         <tag>PAT</tag>
@@ -911,8 +920,8 @@
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/994805345078067200 题解题目要求假设二叉树中所有结点的值都是互异的正整数，给定二叉树的先序和后序遍历，请输出该树后序遍历的第一个数字。 输入 N：正整数，不超过50000，二叉树中结点的数量 先序遍历结果 中序遍历结果 解题思路 根据先序遍历和中序遍历结果可以确定一颗树，这道题的关键就是如何确定出这颗树并遍历它。 可以参考PAT甲级1151LCA in a Binary Tree，这道题里也是根据先序遍历和中序遍历结果确定出了一棵树。 设置全局flag判断是否是该树后序遍历的第一个数字，如果是则输出，不是则不输出 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849// Problem: PAT Advanced 1138// URL: https://pintia.cn/problem-sets/994805342720868352/problems/994805345078067200// Tags: Tree DFS#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;map&gt;using namespace std;vector&lt;int&gt; preOrder; // 先序遍历结果vector&lt;int&gt; inOrder; // 中序遍历结果map&lt;int, int&gt; inPos; // 结点到中序遍历结果inOrder索引的映射bool firstIsPrinted = false; // 为true代表后序遍历时的第一个结点已经输出void postOrderTraverse(int inLeft, int inRight, int preRoot)&#123; if (firstIsPrinted) // 只输出后序遍历的第一个结点即可 return ; if (inRight &lt; inLeft) // 该树不存在 return ; int inRoot = inPos[preOrder[preRoot]]; // 当前树的根结点在中序遍历结果inOrder中的索引 // 后序遍历 postOrderTraverse(inLeft, inRoot - 1, preRoot + 1); // 遍历左子树并判断左子树是否存在 postOrderTraverse(inRoot + 1, inRight, preRoot + 1 + (inRoot - inLeft)); // 遍历右子树并判断右子树是否存在 if (!firstIsPrinted)&#123; // 只输出后序遍历的第一个结点即可 printf("%d", inOrder[inRoot]); firstIsPrinted = true; &#125;&#125;int main()&#123; int n; scanf("%d", &amp;n); preOrder.resize(n + 1); inOrder.resize(n + 1); for (int i = 1; i &lt;= n; i++) // 读取先序遍历结果 scanf("%d", &amp;preOrder[i]); for (int i = 1; i &lt;= n; i++)&#123; // 读取中序遍历结果 scanf("%d", &amp;inOrder[i]); inPos[inOrder[i]] = i; &#125; postOrderTraverse(1, n, 1); return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
         <tag>算法</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
         <tag>PAT</tag>
         <tag>map</tag>
@@ -937,8 +946,8 @@
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/1038430130011897856 题解题目要求 最近公共祖先（LCA，The lowest common ancestor） 在一颗树中，结点U和V的LCA是U和V为其后代的深度最大的结点。 给定一颗二叉树中的任意两个结点，请找到它们的LCA。 输入 M：正整数，不超过1000，需要测试的结点对的数量 N：正整数，不超过10000，二叉树中结点的数量，结点值都在int范围内 二叉树中序遍历结果：N个数字 二叉树先序遍历结果：N个数字 M个结点对： 输出 对于每个结点对，判断结点对中每个结点是否存在，如果都存在则找到他们的LCA。 思路根据先序遍历结果和中序遍历结果可以确定一颗树中序遍历结果加先序遍历结果可以唯一确定一棵树，在不构建树的情况下，在每一层的递归中，可以得到树的根结点。 使用两个数组分别保存树的先序遍历结果和后序遍历结果 根据先序遍历结果可以确定根节点 比如刚开始的第一个结点就是整棵树的根结点 根据中序遍历结果和整棵树的根结点可以确定整棵树的左右子树 中序遍历结果中，根结点左侧就是整棵树的左子树的中序遍历结果，根结点右侧就是整棵树的右子树的中序遍历结果 递归确定左右子树的结构 某颗树的结构可根据2个变量确定：其根结点在整颗树先序遍历结果中的索引、其中序遍历结果序列（可通过起始索引和结束索引2个变量确定） 123456789101112131415void func(int leftPosBoundOfInOrder, int rightPosBoundOfInOrder, int rootPosOfPreOrder)&#123; /* 当前这颗树在整棵树中序遍历结果inOrder的范围索引为[leftPosBoundOfInOrder,rightPosBoundOfInOrder] rootPosOfPreOrder指当前这颗树根结点在整棵树先序遍历结果preOrder中的索引 */ // 越界判断 if (leftPosBoundOfInOrder &gt; rightPosBoundOfInOrder) return; // 左子树 lca(leftPosBoundOfInOrder, rootPosOfInOrder - 1, rootPosOfPreOrder + 1); // 右子树 lca(rootPosOfInOrder + 1, rightPosBoundOfInOrder, rootPosOfPreOrder + (rootPosOfInOrder - leftPosBoundOfInOrder) + 1);&#125;func(1, n, 1); // 调用（假设整颗树有n个结点，在数组中的索引为[1,n]） PAT甲级1138Postorder Traversal这道题也涉及如何根据先序遍历结果和中序遍历结果确定一棵树并遍历它，可以看一看。 最近公共祖先LCA已知某颗树的根结点， 若u和u在根结点的左边，则u和v的最近公共祖先在当前子树根结点的左子树寻找； 如果u和v在当前子树根结点的右边，则u和v的最近公共祖先就在当前子树的右子树寻找； 如果u和v在当前子树根结点的两边，在当前子树的根结点就是u和v的最近公共祖先； 如果u或v就是根结点，那其就是这两个结点的最近公共祖先。 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768// Problem: PAT Advanced 1151// URL: https://pintia.cn/problem-sets/994805342720868352/problems/1038430130011897856// Tags: Tree LCA Map#include &lt;iostream&gt;#include &lt;map&gt;#include &lt;vector&gt;using namespace std;int u, v;map&lt;int, int&gt; pos;vector&lt;int&gt; inOrder, preOrder;void lca(int leftPosBoundOfInOrder, int rightPosBoundOfInOrder, int rootPosOfPreOrder)&#123; /* 当前这颗树在整棵树中序遍历结果inOrder的范围索引为[leftPosBoundOfInOrder,rightPosBoundOfInOrder] rootPosOfPreOrder指当前这颗树根结点在整棵树先序遍历结果preOrder中的索引 */ if (leftPosBoundOfInOrder &gt; rightPosBoundOfInOrder) return; // 越界判断 int rootPosOfInOrder = pos[preOrder[rootPosOfPreOrder]]; // 根结点在中序遍历结果中的索引 int uPosOfInorder = pos[u]; // 结点u在中序遍历结果中的索引 int vPosOfInorder = pos[v]; // 结点v在中序遍历结果中的索引 // u和v都在左子树就去左子树找 if (uPosOfInorder &lt; rootPosOfInOrder &amp;&amp; vPosOfInorder &lt; rootPosOfInOrder) lca(leftPosBoundOfInOrder, rootPosOfInOrder - 1, rootPosOfPreOrder + 1); // u和v都在右子树就去右子树找 else if (uPosOfInorder &gt; rootPosOfInOrder &amp;&amp; vPosOfInorder &gt; rootPosOfInOrder) lca(rootPosOfInOrder + 1, rightPosBoundOfInOrder, rootPosOfPreOrder + (rootPosOfInOrder - leftPosBoundOfInOrder) + 1); // u和v在分别在左右子树，则当前树的根节点就是LCA else if ((uPosOfInorder &lt; rootPosOfInOrder &amp;&amp; vPosOfInorder &gt; rootPosOfInOrder) || (uPosOfInorder &gt; rootPosOfInOrder &amp;&amp; vPosOfInorder &lt; rootPosOfInOrder)) printf("LCA of %d and %d is %d.\n", u, v, preOrder[rootPosOfPreOrder]); // 结点u就是根结点 else if (uPosOfInorder == rootPosOfInOrder) printf("%d is an ancestor of %d.\n", u, v); // 结点v就是根结点 else if (vPosOfInorder == rootPosOfInOrder) printf("%d is an ancestor of %d.\n", v, u);&#125;int main()&#123; int m, n; // 结点对个数，结点个数 scanf("%d %d", &amp;m, &amp;n); inOrder.resize(n + 1), preOrder.resize(n + 1); for (int i = 1; i &lt;= n; i++)&#123; // 记录中序遍历结果，并记录各结点的索引 scanf("%d", &amp;inOrder[i]); pos[inOrder[i]] = i; &#125; for (int i = 1; i &lt;= n; i++)&#123; // 记录先序遍历结果 scanf("%d", &amp;preOrder[i]); &#125; while (m--)&#123; scanf("%d %d", &amp;u, &amp;v); if (pos[u] == 0 &amp;&amp; pos[v] == 0) // 判断元素是否存在 printf("ERROR: %d and %d are not found.\n", u, v); else if(pos[u] == 0 || pos[v] == 0) printf("ERROR: %d is not found.\n", pos[u] == 0 ? u : v); else lca(1, n, 1); &#125; return 0;&#125; 参考链接https://blog.csdn.net/zhuiqiuzhuoyue583/article/details/80452127 https://blog.csdn.net/liuchuo/article/details/82560863 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
         <tag>算法</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>PAT</tag>
         <tag>map</tag>
         <tag>LCA</tag>
@@ -963,8 +972,8 @@
     <content type="text"><![CDATA[题目链接https://pintia.cn/problem-sets/994805342720868352/problems/1071785408849047552 题解题目要求堆（大顶堆或小顶堆）中，任意一条从根结点到叶子结点的路径上的值一定是非递增序列或者非递减序列。 现在给定一个完全二叉树，请检查它的每一条路径，判断这棵树是不是堆。 输入 N：正整数，大于1，不超过1000，树中结点的数量 N个结点的值（互异）：都是int范围内，按照层次遍历的顺序给出 输出 对于每棵树 先输出所有从根结点到叶子结点的路径，每条路径占一行，数字间用一个空格间隔，首尾不能有多余空格 输出顺序：对于每个结点，其右子树的所有路径要先于其左子树的所有路径输出 输出这颗树是大顶堆还是小顶堆，或者它不是堆 思路 利用完全二叉树的性质，将结点记录到一维数组中 使用DFS，使用vecotr记录当前遍历到的所有结点（即路径），如果当前结点是叶子结点则输出这条路径，否则先遍历右子树再遍历左子树 在DFS过程中判断是否违背大小顶堆性质 最后输出该树是否是大小顶堆 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455// Problem: PAT Advanced 1155// URL: https://pintia.cn/problem-sets/994805342720868352/problems/1071785408849047552// Tags: Tree DFS Heap#include &lt;iostream&gt;#include &lt;vector&gt;using namespace std;int n;bool isMaxHeap = true, isMinHeap = true;int nodes[2010]; // 索引为[1,n]的元素有效vector&lt;int&gt; path; // 目前遍历到的所有结点void dfs(int i)&#123; if (i &gt; n) return; // 越界则无操作 if (i &gt; 1)&#123; // 检查是否是大小顶堆 if (nodes[i] &gt; nodes[i / 2]) isMaxHeap = false; else if(nodes[i] &lt; nodes[i / 2]) isMinHeap = false; &#125; path.push_back(nodes[i]); // 遍历当前结点 if (2 * i &gt; n &amp;&amp; 2 * i + 1 &gt; n)&#123; // 是叶子结点则输出当前遍历到的所有结点 auto it = path.begin(); printf("%d", *it); it++; while (it != path.end())&#123; printf(" %d", *it); it++; &#125; printf("\n"); &#125; else&#123; // 不是叶子结点 dfs(2 * i + 1); // 遍历右子树 dfs(2 * i); // 遍历左子树 &#125; path.pop_back(); // 回溯&#125;int main()&#123; scanf("%d", &amp;n); for (int i = 1; i &lt;= n; i++)&#123; // 记录结点 scanf("%d", nodes+i); &#125; dfs(1); // 深度优先遍历树并在过程中判断是否为大顶堆或小顶堆 if (isMaxHeap) printf("Max Heap"); else if (isMinHeap) printf("Min Heap"); else printf("Not Heap"); return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
         <tag>算法</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
         <tag>回溯</tag>
         <tag>PAT</tag>
@@ -1210,8 +1219,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
         <tag>BST</tag>
       </tags>
@@ -1223,8 +1232,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
         <tag>BST</tag>
       </tags>
@@ -1327,8 +1336,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1339,8 +1348,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1351,8 +1360,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1363,8 +1372,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1375,8 +1384,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
@@ -1386,8 +1395,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1398,8 +1407,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1410,8 +1419,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1422,8 +1431,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1434,8 +1443,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
         <tag>回溯</tag>
       </tags>
@@ -1447,8 +1456,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
@@ -1458,8 +1467,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
@@ -1469,8 +1478,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1481,8 +1490,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -1493,8 +1502,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
@@ -1504,10 +1513,10 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
-        <tag>队列</tag>
+        <tag>递归</tag>
         <tag>DFS</tag>
+        <tag>队列</tag>
         <tag>BFS</tag>
       </tags>
   </entry>
@@ -1516,8 +1525,8 @@
     <url>%2F2020%2F07%2F13%2F%E4%BA%8C%E5%8F%89%E6%A0%91%E5%89%8D%E5%BA%8F%E3%80%81%E4%B8%AD%E5%BA%8F%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%EF%BC%88%E9%9D%9E%E9%80%92%E5%BD%92%E7%BB%9F%E4%B8%80%E8%A7%A3%E6%B3%95%EF%BC%89%2F</url>
     <content type="text"><![CDATA[前言最近复习了二叉树的前序遍历、中序遍历和后序遍历，找到了一种统一的非递归的迭代方法。 思路思路本质上还是递归，只不过不通过递归函数显式递归，而是通过栈模拟递归。 该思路仅需要微小改动就可以通用于二叉树的先/中/后序遍历，也很容易理解。 注意： 该思路的核心是将nullptr作为可以遍历栈中下1个结点的标志（因此也就不能将空结点压入栈中），即栈中弹出nullptr时就可以遍历下1个栈顶结点，如果不是nullptr则根据遍历顺序入栈，当前根结点入栈时也要将nullptr压入栈中（后续遇到这个nullptr时就可以遍历到该根结点）。 遍历顺序和入栈顺序相反 前序遍历LeetCode题解：https://www.cnblogs.com/chouxianyu/p/13290758.html 12345678910111213141516171819202122vector&lt;int&gt; preorderTraversal(TreeNode* root) &#123; vector&lt;int&gt; result; stack&lt;TreeNode*&gt; nodes; if (root!=nullptr) nodes.push(root); while(!nodes.empty())&#123; root = nodes.top(); nodes.pop(); if (root==nullptr)&#123; result.push_back(nodes.top()-&gt;val); nodes.pop(); &#125;else&#123; if (root-&gt;right!=nullptr) nodes.push(root-&gt;right); if (root-&gt;left!=nullptr) nodes.push(root-&gt;left); nodes.push(root); nodes.push(nullptr); &#125; &#125; return result;&#125; 中序遍历LeetCode题解：https://www.cnblogs.com/chouxianyu/p/13293153.html 12345678910111213141516171819202122vector&lt;int&gt; inorderTraversal(TreeNode* root) &#123; vector&lt;int&gt; result; stack&lt;TreeNode*&gt; nodes; if(root!=nullptr) nodes.push(root); while(!nodes.empty())&#123; root=nodes.top(); nodes.pop(); if(root==nullptr)&#123; result.push_back(nodes.top()-&gt;val); nodes.pop(); &#125;else&#123; if (root-&gt;right!=nullptr) nodes.push(root-&gt;right); nodes.push(root); nodes.push(nullptr); if (root-&gt;left!=nullptr) nodes.push(root-&gt;left); &#125; &#125; return result;&#125; 后序遍历LeetCode题解：https://www.cnblogs.com/chouxianyu/p/13293152.html 12345678910111213141516171819202122vector&lt;int&gt; postorderTraversal(TreeNode* root) &#123; stack&lt;TreeNode*&gt; nodes; vector&lt;int&gt; result; if (root!=nullptr) nodes.push(root); while(!nodes.empty())&#123; root=nodes.top(); nodes.pop(); if(root==nullptr)&#123; result.push_back(nodes.top()-&gt;val); nodes.pop(); &#125;else&#123; nodes.push(root); nodes.push(nullptr); if(root-&gt;right!=nullptr) nodes.push(root-&gt;right); if(root-&gt;left!=nullptr) nodes.push(root-&gt;left); &#125; &#125; return result;&#125; 参考链接https://leetcode-cn.com/problems/binary-tree-postorder-traversal/solution/mo-fang-di-gui-zhi-bian-yi-xing-by-sonp/ 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>栈</tag>
         <tag>迭代</tag>
       </tags>
@@ -1529,8 +1538,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>栈</tag>
         <tag>迭代</tag>
       </tags>
@@ -1542,8 +1551,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>栈</tag>
         <tag>迭代</tag>
       </tags>
@@ -1555,8 +1564,8 @@
       <tags>
         <tag>算法</tag>
         <tag>LeetCode</tag>
-        <tag>递归</tag>
         <tag>二叉树</tag>
+        <tag>递归</tag>
         <tag>栈</tag>
         <tag>迭代</tag>
       </tags>
@@ -1616,9 +1625,9 @@
     <url>%2F2020%2F04%2F28%2F%E8%AE%A1%E7%AE%97%E6%9F%90%E5%A4%A9%E7%9A%84%E4%B8%8B%E4%B8%80%E5%A4%A9%EF%BC%9A%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95%E4%B9%8B%E7%AD%89%E4%BB%B7%E7%B1%BB%E5%88%92%E5%88%86-JUnit%E5%8F%82%E6%95%B0%E5%8C%96%E6%B5%8B%E8%AF%95%2F</url>
     <content type="text"><![CDATA[题目要求测试以下程序：该程序有三个输入变量month、day、year（month、day和year均为整数值，并且满足：1≤month≤12、1≤day≤31和1900≤year≤2050)，分别作为输入日期的月份、日、年份，通过程序可以输出该输入日期在日历上隔一天的日期。例如，输入为2004年11月30日，则该程序的输出为2004年12月1日。 划分等价类，按照等价类划分法设计测试用例； 编写getNextDate函数； 掌握Junit4的用法，使用Junit4测试getNextDate函数。 等价类表假设输入格式为year,month,day，且三个输入变量year、month和day均被输入。 year要区分闰年和平年，其中闰年还可以分为世纪闰年和普通闰年，且year要属于[1900,2050]。 month要根据该月有几天来进行区分，并且需要考虑是否向year进位，且month要属于[1,12]。 day要根据月份来判断天数是否合法，并且需要考虑是否向month进位，且day要属于[1,31]。 等价类划分如下。 测试用例有效等价类测试用例共有5个有效等价类测试用例。 测试数据 期望结果 覆盖范围 2004/12/25 2004/12/26 2,10,14 2001/2/28 2001/3/1 3,7,15 2000/2/29 2000/3/1 1,7,16 2001/4/30 2001/5/1 3,8,17 2001/5/31 2001/6/1 3,9,18 无效等价类测试用例共有12个有效等价类测试用例。 测试数据 期望结果 覆盖范围 1899/6/1 year非法 4 2051/6/1 year非法 5 a/6/1 year非法 6 1999/0/1 month非法 11 1999/13/1 month非法 12 1999/a/1 month非法 13 1999/1/0 day非法 19 1999/1/32 day非法 20 1999/1/a day非法 21 2001/2/29 day非法 22 2000/2/30 day非法 23 2001/4/31 day非法 24 源代码项目结构如下图所示 DateUtil.java123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192193194195196197198199200201202203204205206package com.company;public class DateUtil &#123; // 有31天的月份 private static int[] monthOfThirtyOne = new int[]&#123;1,3,5,7,8,10,12&#125;; // 有30天的月份 private static int[] monthOfThirty = new int[]&#123;4,6,9,11&#125;; // 年月日 private int year; private int month; private int day; // 最终实现的功能，输入是一个“年/月/日”格式的字符串； // 如果函数运行成功，输出则是相同格式的下一天，否则是错误信息 public String getNextDate(String dateStr)&#123; String updateResult = this.updateDate(dateStr); // 如果输入合法 if (updateResult.equals("success"))&#123; String checkResult = this.checkDate(); // 如果输入合法 if (checkResult.equals("valid"))&#123; // 计算明天的日期 return this.calcNextDate(); &#125; return checkResult; &#125; return updateResult; &#125; // 根据输入字符串转换并更新年月日 private String updateDate(String dateStr)&#123; // 获取年月日 String[] numbers = dateStr.split("/"); try&#123; this.year = Integer.parseInt(numbers[0]); &#125;catch (NumberFormatException e)&#123; return "year非法"; &#125; try&#123; this.month = Integer.parseInt(numbers[1]); &#125;catch (NumberFormatException e)&#123; return "month非法"; &#125; try&#123; this.day = Integer.parseInt(numbers[2]); &#125;catch (NumberFormatException e)&#123; return "day非法"; &#125; return "success"; &#125; // 检查日期是否合法 private String checkDate()&#123; String valid = "valid"; String yearInvalid = "year非法"; String monthInvalid = "month非法"; String dayInvalid = "day非法"; // year合法 if (year&gt;=1900&amp;&amp;year&lt;=2050)&#123; // month合法 if (month&gt;=1&amp;&amp;month&lt;=12)&#123; // day小于1 if (day&lt;=0)&#123; return dayInvalid; &#125; // 至此能保证day大于0 // 是2月 if (month==2)&#123; // 闰年 if (yearIsLeap(year))&#123; // 1-29 if (day&lt;=29)&#123; return valid; &#125;else&#123; return dayInvalid; &#125; &#125; // 平年2月 else&#123; // 1-28 if (day&lt;=28)&#123; return valid; &#125;else&#123; return dayInvalid; &#125; &#125; &#125; // 至此能保证不是2月 // 是否为31天的月 for(int i=0;i&lt;7;++i)&#123; if (month==monthOfThirtyOne[i])&#123; // 1-31 if (day&lt;=31)&#123; return valid; &#125;else&#123; return dayInvalid; &#125; &#125; &#125; // 至此能保证不是2月和31天的月 // 是否为30天的月 for(int i=0;i&lt;4;++i)&#123; if (month==monthOfThirty[i])&#123; // 1-30 if (day&lt;=30)&#123; return valid; &#125;else&#123; return dayInvalid; &#125; &#125; &#125; &#125; // month非法 else&#123; return monthInvalid; &#125; &#125; // year非法 return yearInvalid; &#125; // 计算下一天 private String calcNextDate()&#123; int yearNext; int monthNext; int dayNext=day+1; int dayCarry=0; int monthCarry=0; // 处理day // 是2月 if (month==2)&#123; // 闰年 if (yearIsLeap(year))&#123; // 1-29 if (day==29)&#123; dayNext = 1; dayCarry = 1; &#125; &#125; // 平年2月 else&#123; // 1-28 if (day==28)&#123; dayNext = 1; dayCarry = 1; &#125; &#125; &#125; // 不是2月 else&#123; boolean isThirtyOne= false; // 是否为31天的月 for(int i=0;i&lt;7;++i)&#123; if (month==monthOfThirtyOne[i])&#123; isThirtyOne = true; // 1-31 if (day==31)&#123; dayNext = 1; dayCarry = 1; &#125; break; &#125; &#125; // 至此能保证是30天的月 if (!isThirtyOne)&#123; // 1-30 if (day==30)&#123; dayNext = 1; dayCarry = 1; &#125; &#125; &#125; // 处理月 if (month+dayCarry&gt;12)&#123; monthNext = 1; monthCarry = 1; &#125;else&#123; monthNext = month+dayCarry; &#125; // 处理年 yearNext = year+monthCarry; return yearNext +"/"+ monthNext +"/"+ dayNext; &#125; // 判断某一年是否为闰年 private boolean yearIsLeap(int year)&#123; // 普通闰年和世纪闰年 if ((year%4==0&amp;&amp;year%100!=0)||(year%400==0))&#123; return true; &#125; // 平年 return false; &#125;&#125; DateUtilTest.java1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556package com.test;import com.company.DateUtil;import static org.junit.Assert.*;import org.junit.Test;//1、参数化测试：引入相关的包和类import java.util.Collection;import java.util.Arrays;import org.junit.runner.RunWith;import org.junit.runners.Parameterized;import org.junit.runners.Parameterized.Parameters;@RunWith(Parameterized.class) //2、参数化测试：更改测试运行器为RunWith(Parameterized.class)public class DateUtilTest &#123; //3、参数化测试：声明变量用来存放预期值与结果值 private DateUtil util = new DateUtil(); private String date; private String except; //4、参数化测试：声明一个返回值为 Collection 的公共静态方法，并使用@Parameters 进行修饰 @Parameters public static Collection data()&#123; return Arrays.asList(new Object[][]&#123; &#123;"2004/12/25", "2004/12/26"&#125;, &#123;"2001/2/28", "2001/3/1"&#125;, &#123;"2000/2/29", "2000/3/1"&#125;, &#123;"2001/4/30", "2001/5/1"&#125;, &#123;"2001/5/31", "2001/6/1"&#125;, &#123;"1899/6/1", "year非法"&#125;, &#123;"2051/6/1", "year非法"&#125;, &#123;"a/6/1", "year非法"&#125;, &#123;"1999/0/1", "month非法"&#125;, &#123;"1999/13/1", "month非法"&#125;, &#123;"1999/a/1", "month非法"&#125;, &#123;"1999/1/0", "day非法"&#125;, &#123;"1999/1/32", "day非法"&#125;, &#123;"1999/1/a", "day非法"&#125;, &#123;"2001/2/29", "day非法"&#125;, &#123;"2000/2/30", "day非法"&#125;, &#123;"2001/4/31", "day非法"&#125;, &#125;); &#125; //5、参数化测试：为测试类声明一个带有参数的公共构造方法，并在其中为声明变量赋值 public DateUtilTest(String date, String except)&#123; this.date = date; this.except = except; &#125; @Test public void testGetNextDate()&#123; assertEquals(except, util.getNextDate(date)); &#125;&#125; 测试结果如下图所示，17个测试用例均测试成功，程序实际输出与期望值相同。 实验总结本次实验的主要目的是巩固黑盒测试方法中的等价类划分法的知识，练习JUnit的参数化测试。在本次实验中，我认为我的getNextDate函数的实现并不是很优雅，比较过程化。写这个函数花了我很多时间，主要问题在于我没有抓住一些关键的、抽象的逻辑和子函数，比如天向月份进位和月份向年份完全可以参照加法器的循环、可以写一个函数根据年份和月份判断出天数的最大值等等。 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
+        <tag>Java</tag>
         <tag>软件测试</tag>
         <tag>JUnit</tag>
-        <tag>Java</tag>
         <tag>黑盒测试</tag>
       </tags>
   </entry>
@@ -1653,11 +1662,11 @@
     <url>%2F2020%2F04%2F07%2FJUnit%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95%E4%B9%8B%E5%9F%BA%E6%9C%AC%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95%EF%BC%9A%E7%A7%B0%E9%87%8D3%E6%AC%A1%E6%89%BE%E5%88%B0%E5%81%87%E7%90%83%2F</url>
     <content type="text"><![CDATA[前言记录一次软件测试课程的课后作业，作业内容是白盒测试中的基本路径测试，步骤如下 分析程序的控制流 计算环形复杂度 找出基本路径 设计测试用例 执行测试用例（要求使用JUnit） 作业要求使用白盒测试用例设计方法为下面的程序设计测试用例（基本路径测试）并用JUnit测试： 程序要求 10个铅球中有一个假球（比其他铅球的重量要轻），用天平三次称出假球。 程序设计思路 第一次使用天平分别称5个球，判断轻的一边有假球；拿出轻的5个球，取出其中4个第二次称，两边分别放2个球：如果两边同重，则剩下的球为假球；若两边不同重，拿出轻的两个球称第三次，轻的为假球。 递交材料 测试用例设计电子稿、源程序、JUnit测试截图。 程序代码及控制流图程序代码文件SearchBall.java内容如下。 注意不要让代码的行号变动，程序流图中结点的编号是根据这份代码里每条执行语句里的行号对应的。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950package module;public class SearchBall &#123; private static int x[]=new int[10]; public SearchBall()&#123;&#125; public void setBWeight(int w[])&#123; for(int i=0;i&lt;w.length;i++)&#123; x[i]=w[i]; &#125; &#125; public String BeginSearch()&#123; if(x[0]+x[1]+x[2]+x[3]+x[4]&lt;x[5]+x[6]+x[7]+x[8]+x[9])&#123; if(x[1]+x[2]==x[3]+x[4])&#123; return "1号是假球"; &#125; if(x[1]+x[2]&lt;x[3]+x[4])&#123; if (x[1]&lt;x[2]) &#123; return "2号是假球"; &#125;else &#123; return "3号是假球"; &#125; &#125;else &#123; if (x[3]&lt;x[4])&#123; return "4号是假球"; &#125; else&#123; return "5号是假球"; &#125; &#125; &#125;else &#123; if(x[6]+x[7]==x[8]+x[9])&#123; return "6号是假球"; &#125; if(x[6]+x[7]&lt;x[8]+x[9]) &#123; if (x[6]&lt;x[7]) &#123; return "7号是假球"; &#125;else &#123; return "8号是假球"; &#125; &#125;else &#123; if (x[8]&lt;x[9]) &#123; return "9号是假球"; &#125;else &#123; return "10号是假球"; &#125; &#125; &#125; &#125;&#125; 程序控制流图下图中结点中的数字是对应可执行语句在上面代码中的行号；边上的Y代表判定结果为真，N代表判定结果为假。 计算环形复杂度控制流图$G$的环形复杂度计算公式：$V(G)=E-N+2$，其中$E$为控制流图中边的数量，$N$是控制流图中的结点数量。 函数BeginSearch()的控制流图的环形复杂度为 V(G)=18-19+2=1基本路径从程序流图中可知，共有10条基本路径，具体如下 路径编号 经过结点 1 12-13-14 2 12-13-16-17-18 3 12-13-16-17-20 4 12-13-16-23-24 5 12-13-16-23-27 6 12-31-32 7 12-31-34-35-36 8 12-31-34-35-38 9 12-31-34-41-42 10 12-31-34-41-44 测试用例设计与执行测试用例设计 路径编号 用例输入 期待输出 1 {5, 10, 10, 10, 10, 10, 10, 10, 10, 10} “1号是假球” 2 {10, 5, 10, 10, 10, 10, 10, 10, 10, 10} “2号是假球” 3 {10, 10, 5, 10, 10, 10, 10, 10, 10, 10} “3号是假球” 4 {10, 10, 10, 5, 10, 10, 10, 10, 10, 10} “4号是假球” 5 {10, 10, 10, 10, 5, 10, 10, 10, 10, 10} “5号是假球” 6 {10, 10, 10, 10, 10, 5, 10, 10, 10, 10} “6号是假球” 7 {10, 10, 10, 10, 10, 10, 5, 10, 10, 10} “7号是假球” 8 {10, 10, 10, 10, 10, 10, 10, 5, 10, 10} “8号是假球” 9 {10, 10, 10, 10, 10, 10, 10, 10, 5, 10} “9号是假球” 10 {10, 10, 10, 10, 10, 10, 10, 10, 10, 5} “10号是假球” Junit执行测试用例基于JUnit生成的测试代码，我补充了测试函数BeginSearch()的代码，文件SearchBallTest.java内容如下。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657package test.module; import org.junit.Test; import org.junit.Before; import org.junit.After; import module.SearchBall;import static org.junit.Assert.assertEquals;/** * SearchBall Tester. * * @author &lt;Authors name&gt; * @since &lt;pre&gt;4月 7, 2020&lt;/pre&gt; * @version 1.0 */ public class SearchBallTest &#123; @Beforepublic void before() throws Exception &#123; &#125; @Afterpublic void after() throws Exception &#123; &#125; /** * * Method: setBWeight(int w[]) * */ @Testpublic void testSetBWeight() throws Exception &#123; //TODO: Test goes here... &#125; /** * * Method: BeginSearch() * */ @Testpublic void testBeginSearch() throws Exception &#123; SearchBall obj = new SearchBall(); int[] input; int ballIndex; // 遍历测试各个基本路径 for(int i=0;i&lt;10;++i)&#123; // 生成用例输入 input = new int[]&#123;10, 10, 10, 10, 10, 10, 10, 10, 10, 10&#125;; input[i]=5; obj.setBWeight(input); // 测试用例输出 ballIndex = i+1; assertEquals(ballIndex+"号是假球", obj.BeginSearch()); &#125;&#125; &#125; 执行函数testBeginSearch()，得到如下图所示的结果（从下图也可以看到项目的结构） 其它 我自己实现的找到假球的程序 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
+        <tag>Java</tag>
         <tag>软件测试</tag>
         <tag>白盒测试</tag>
         <tag>基本路径测试</tag>
         <tag>JUnit</tag>
-        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
