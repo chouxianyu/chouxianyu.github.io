@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2021-04-23T03:34:13.996Z</updated>
+  <updated>2021-04-24T02:37:44.740Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>李宏毅机器学习课程笔记-11.4模型无关的局部解释(LIME)</title>
+    <link href="https://chouxianyu.github.io/2021/04/24/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-11-4%E6%A8%A1%E5%9E%8B%E6%97%A0%E5%85%B3%E7%9A%84%E5%B1%80%E9%83%A8%E8%A7%A3%E9%87%8A-LIME/"/>
+    <id>https://chouxianyu.github.io/2021/04/24/李宏毅机器学习课程笔记-11-4模型无关的局部解释-LIME/</id>
+    <published>2021-04-24T02:36:52.000Z</published>
+    <updated>2021-04-24T02:37:44.740Z</updated>
+    
+    <content type="html"><![CDATA[<p>模型无关的局部解释（Local Interpretable Model-Agnostic Explanations，LIME）指<strong>使用一个Interpretable Model拟合一个Uninterpretable Model的局部</strong>，比如使用Linear Model或者Decision Tree模拟Neural Network。</p><p>具体来讲，对于局部范围内的相同输入，我们希望两个模型的输出尽可能接近。这里要重点强调局部范围的概念，因为实际上Linear Model并不能模拟整个Neural Network但却可以模拟其中的一个Local Region，这也是LIME可行的原因。</p><h2 id="案例：使用Linear-Model拟合Neural-Network"><a href="#案例：使用Linear-Model拟合Neural-Network" class="headerlink" title="案例：使用Linear Model拟合Neural Network"></a>案例：使用Linear Model拟合Neural Network</h2><ol><li><p>定位：确定需要解释的data point(下图5个蓝点中最中间的蓝点)</p></li><li><p>取样：在上一步确定的data point周围sample获得更多的data point(下图5个蓝点)</p><p> sample的<strong>范围</strong>需要根据情况调整，一般范围小则拟合得更准确</p><p> sample的<strong>方法</strong>不同，结果也会不同</p></li><li><p>拟合：使用Linear Model模拟上一步确定的data point及其对应的Neural Network输出</p></li><li><p>解释：对Linear Model进行解释，进而解释Neural Network的局部</p></li></ol><p><img src="https://pic1.zhimg.com/80/v2-a29bafdc2312575cab096090938493b2_720w.png" alt="img"></p><h2 id="案例：LIME-For-Image-Classification"><a href="#案例：LIME-For-Image-Classification" class="headerlink" title="案例：LIME For Image Classification"></a>案例：LIME For Image Classification</h2><p>如何将LIME应用到Image Classification呢？假设有一张图片被分类为frog，下面只讲一些关键点。</p><ul><li><p>如何进行sample？</p><p>  首先可以将图片分成多个segment：$\{s_1,s_2,\dots,s_n\}$，随机去除其中的一些segment就可以得到该图片“周围”的一些图片</p></li><li><p>将LIME应用于图片时，一般要进行Feature Extraction，那如何做呢？</p><p>  使用$x_i$表示图片中的每个segment是否被删除，其中$i=1,…,n$，若$x_i$为1则表示该segment被删除，否则表示该segment未被删除</p></li><li><p>如何解释Linear Model？</p><p>  设Linear Model为$y=w_1x_1+..+w_nx_n$，$w_i$的值有以下3种情况</p><ul><li>$w_i\approx 0$表示$s_i$对分类为frog没有影响；</li><li>$w_i&gt; 0$表示$s_i$对分类为frog具有正面影响，即这个segment使得模型倾向于将图片分类为frog</li><li>$w_i&lt;0$表示$s_i$对分类为frog具有负面影响，即这个segment使得模型倾向于认为该图片不是frog类别</li></ul></li></ul><h2 id="Tree-Regularization"><a href="#Tree-Regularization" class="headerlink" title="Tree Regularization"></a>Tree Regularization</h2><p><strong>理论上可以用无深度限制的Decision Tree拟合完整的Neural Network，但Decision Tree的深度不可能没有限制</strong>，因此在使用Decision Tree拟合Neural Network时需要对Decision Tree的复杂度进行约束。</p><p>设Neural Network的参数为$\theta$、Decision Tree的参数为$T_\theta$，使用Decision Tree的平均深度表示其参数$T_\theta$的复杂度$O(T_\theta)$。在使用Decision Tree拟合Neural Network时，不仅要使两者输出相近还要使$O(T_\theta)$最小化，因此优化目标为$\theta^*=arg\ {\rm min}\ L(\theta) + \lambda O(T_\theta)$。</p><p>因此我们<strong>在训练神经网络时就可以使用Tree Regularization使得训练出的神经网络更具有可解释性</strong>，$O(T_\theta)$不能微分，解决方法详见《Beyond Sparsity: Tree Regularization of Deep Models for Interpretability》。</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;模型无关的局部解释（Local Interpretable Model-Agnostic Explanations，LIME）指&lt;strong&gt;使用一个Interpretable Model拟合一个Uninterpretable Model的局部&lt;/strong&gt;，比如使用
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="ExplainableAI" scheme="https://chouxianyu.github.io/tags/ExplainableAI/"/>
+    
+      <category term="LIME" scheme="https://chouxianyu.github.io/tags/LIME/"/>
+    
+  </entry>
   
   <entry>
     <title>李宏毅机器学习课程笔记-11.3Explainable AI(Global Explanation)</title>
@@ -548,35 +575,6 @@
       
       
         &lt;h2 id=&quot;Deep-Dream&quot;&gt;&lt;a href=&quot;#Deep-Dream&quot; class=&quot;headerlink&quot; title=&quot;Deep Dream&quot;&gt;&lt;/a&gt;Deep Dream&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://deepdreamgenerator.co
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="卷积神经网络" scheme="https://chouxianyu.github.io/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-7.2CNN学到了什么</title>
-    <link href="https://chouxianyu.github.io/2021/03/31/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-7-2CNN%E5%AD%A6%E5%88%B0%E4%BA%86%E4%BB%80%E4%B9%88/"/>
-    <id>https://chouxianyu.github.io/2021/03/31/李宏毅机器学习课程笔记-7-2CNN学到了什么/</id>
-    <published>2021-03-31T05:36:40.000Z</published>
-    <updated>2021-03-31T05:37:13.456Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="卷积核学到了什么"><a href="#卷积核学到了什么" class="headerlink" title="卷积核学到了什么"></a>卷积核学到了什么</h2><p>如果想知道下图中第1个卷积层中的每个卷积核的功能，因为它参数比较少而且其输入是原图片，所以我们直接结合原图片观察卷积核的参数就可以知道该卷积核的功能。</p><p><img src="https://pic2.zhimg.com/80/v2-cb97966c67656a905b06956b7925f645_720w.png" alt="img" style="zoom: 80%;"></p><p>如上图所示，CNN中第2个卷积层的输入不是直观的图片而且其卷积核的感受野比第1个卷积层中卷积核的感受野更大，因此我们无法通过观察卷积核参数了解卷积核学习到了什么。</p><p>上图中CNN第2个卷积层中有50个卷积核，每个卷积核的输出都是一个大小为11×11的矩阵。</p><p>现在定义函数$a^k=\sum_{i=1}^{11}\sum_{j=1}^{11}a^k_{ij}$来衡量某卷积核被“激活”的程度，即将卷积核所输出矩阵的元素之和作为其被“激活”程度，被“激活”程度指CNN输入与该卷积核有多匹配。</p><p>接下来，通过梯度下降求得$x^<em>=arg\ max_x\ a^k$，即找到最能“激活”卷积核的输入图片$x^</em>$，然后将其可视化希求反映该卷积核学习到的内容。</p><p>上图左下角可视化了最能“激活”第2个卷积层中某12个卷积核的12张图片，可以看出各卷积核适用于检测<strong>小的纹理</strong>（这个案例是数字识别）。</p><h2 id="全连接层学到了什么"><a href="#全连接层学到了什么" class="headerlink" title="全连接层学到了什么"></a>全连接层学到了什么</h2><p>如下图所示，我们同样可以用梯度下降找到最能“激活”全连接层中某个神经元的输入，将该输入其可视化，以此观察全连接层学习到了什么。和卷积核不同，卷积核学习到的是<strong>较小的pattern</strong>，全连接层中的神经元学习到的是<strong>尺寸较大的pattern</strong>。</p><p><img src="https://img2020.cnblogs.com/blog/1478490/202012/1478490-20201221130655109-1379139074.png" style="zoom: 50%;"></p><h2 id="输出层学到了什么"><a href="#输出层学到了什么" class="headerlink" title="输出层学到了什么"></a>输出层学到了什么</h2><p>如下图所示，我们同样可以用梯度下降找到最能“激活”输出层中某个神经元的输入，将该输入其可视化，以此观察输出层学习到了什么。在想象中这些输入应该是对应的数字，然而并不是（有人说眯着眼马马虎虎可以从中看到数字）。</p><p>在其它的案例中也有这样的情况，即<strong>机器学习到的内容和人类所理解的内容是不同的</strong>。<a href="https://www.youtube.com/watch?v=M2IebCN9Ht4" target="_blank" rel="noopener">这个视频</a>里讲了相关例子。</p><p>但这个方法(通过“激活”卷积核反映学习到的内容)确实是有效的，那如何改进呢？我们可以对输入做一些限制（constraint）。</p><p><img src="https://img2020.cnblogs.com/blog/1478490/202012/1478490-20201221131204130-1053266641.png" style="zoom: 50%;"></p><p>在该例中数字图片中底色是黑色，前景色（数字）是白色。</p><p>如下图所示，简单考虑的话，我们可以添加图片中大部分像素是黑色的限制（值接近0，也就是L1正则化），然后将求得的输入可视化。</p><p><img src="https://img2020.cnblogs.com/blog/1478490/202012/1478490-20201221133929054-200979562.png" style="zoom:50%;"></p><p>当然，我们可以用更好的方法（比如说更好的限制）找到人类更容易理解的输入……这也是Deep Dream的精神。</p><h2 id="神经网络可视化"><a href="#神经网络可视化" class="headerlink" title="神经网络可视化"></a>神经网络可视化</h2><p><img src="https://pic4.zhimg.com/80/v2-59efdfca9bf326af0199db3ece69dd28_720w.png" alt="img"></p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;卷积核学到了什么&quot;&gt;&lt;a href=&quot;#卷积核学到了什么&quot; class=&quot;headerlink&quot; title=&quot;卷积核学到了什么&quot;&gt;&lt;/a&gt;卷积核学到了什么&lt;/h2&gt;&lt;p&gt;如果想知道下图中第1个卷积层中的每个卷积核的功能，因为它参数比较少而且其输入是原图片，所以我
       
     
     </summary>
