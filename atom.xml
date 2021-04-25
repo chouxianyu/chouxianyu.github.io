@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2021-04-24T02:37:44.740Z</updated>
+  <updated>2021-04-25T01:56:27.641Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>李宏毅机器学习课程笔记-11.5基于PyTorch的Explainabe AI实战</title>
+    <link href="https://chouxianyu.github.io/2021/04/25/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-11-5%E5%9F%BA%E4%BA%8EPyTorch%E7%9A%84Explainabe-AI%E5%AE%9E%E6%88%98/"/>
+    <id>https://chouxianyu.github.io/2021/04/25/李宏毅机器学习课程笔记-11-5基于PyTorch的Explainabe-AI实战/</id>
+    <published>2021-04-25T01:48:58.000Z</published>
+    <updated>2021-04-25T01:56:27.641Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文为作者学习李宏毅机器学习课程时参照样例完成homework5的记录。</p><p>全部课程PPT、数据和代码下载链接：</p><p>链接：<a href="https://pan.baidu.com/s/1n_N7aoaNxxwqO03EmV5Bjg" target="_blank" rel="noopener">https://pan.baidu.com/s/1n_N7aoaNxxwqO03EmV5Bjg</a> 提取码：tpmc</p><p>代码仓库：<a href="https://github.com/chouxianyu/LHY_ML2020_Codes" target="_blank" rel="noopener">https://github.com/chouxianyu/LHY_ML2020_Codes</a></p><h1 id="任务描述"><a href="#任务描述" class="headerlink" title="任务描述"></a>任务描述</h1><p>在homework3中我们通过CNN实现了食物图片分类，详见我之前的文章《李宏毅机器学习课程笔记-7.4基于CNN和PyTorch的食物图片分类》，这次作业的任务就是探究这个CNN的可解释性，具体如下</p><ol><li><p><strong>Saliency Map</strong></p><p> 按照《Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps》，计算每个像素对最终分类结果的重要性。</p><p> 我們把一张图片输入到model，将model的输出与label进行对比计算得到loss，因此与loss相关的变量有image、model parameter和label这3者。</p><p> 通常情況下，我們训练模型时希望找到一组好的model parameter来拟合image和label，因此loss在backward时我们只在乎loss关于model parameter的梯度。但在数学上image本身也是continuous tensor，我们可以<strong>在model parameter和label都固定的情况下计算loss关于image的梯度，这个梯度代表稍微改变image的某个pixel value会对loss产生什么影响，我们习惯把这个影响的程度解读为该pixel对于结果的重要性（每个pixel都有自己的梯度）</strong>。</p><p> 因此将loss关于一张图片中每个pixel的梯度计算并画出来，就可以看出该图中哪些像素是model在计算结果时的重要依据。那如何用代码实现我们的这个想法呢？非常简单，在一般训练中我们都是在forward后计算模型输出与标签之间的loss，然后进行loss的backward，其实在PyTorch中这个backword计算的是loss对<strong>model parameter</strong>的梯度，因此我們只需要用一行代码<code>images.requires_grad_()</code>使得<strong>image</strong>也要被计算梯度。</p></li><li><p><strong>Filter Visualization</strong></p><p> 基于Gradient Ascent，实现Activation maximization，找到最能够激活某个filter的图片，以观察模型学到了什么。</p><p> 这里我们想要知道某一个filter到底学习到了什么，我们需要做两件事情：<strong>①Filter Visualization：挑几张图片看看某个filter的输出；②Filter Activation：看看什么图片可以最大程度地activate该filter</strong>。</p><p> 在代码实现方面，我们一般是直接把图片输入到model，然后直接forward，那要如何取出model中某层的输出呢？虽然我们可以直接修改model的forward函数使其返回某层的输出，但这样比较麻烦，还可能会因此改动其它部分的代码。因此PyTorch提供了方便的解决方法：<strong>hook</strong>。</p></li><li><p><strong>LIME</strong></p><p> 绿色代表一个component和结果正相关，红色则代表该component和结果负相关。</p><p> 《”Why Should I Trust You?”: Explaining the predictions of Any Classifier》</p><p> 注：根据助教的示例，我遇到了一个BUG<code>KeyError: &#39;Label not in explanation&#39;</code>，暂未解决……</p></li></ol><h1 id="数据集描述"><a href="#数据集描述" class="headerlink" title="数据集描述"></a>数据集描述</h1><p>使用homework3使用的数据集以及训练出的CNN模型。</p><h1 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h1><p><a href="https://github.com/utkuozbulak/pytorch-cnn-visualizations" target="_blank" rel="noopener">https://github.com/utkuozbulak/pytorch-cnn-visualizations</a></p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;本文为作者学习李宏毅机器学习课程时参照样例完成homework5的记录。&lt;/p&gt;
+&lt;p&gt;全部课程PPT、数据和代码下载链接：&lt;/p&gt;
+&lt;p&gt;链接：&lt;a href=&quot;https://pan.baidu.com/s/1n_N7aoaNxxwqO03EmV5Bjg&quot; target
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="PyTorch" scheme="https://chouxianyu.github.io/tags/PyTorch/"/>
+    
+      <category term="ExplainableAI" scheme="https://chouxianyu.github.io/tags/ExplainableAI/"/>
+    
+  </entry>
   
   <entry>
     <title>李宏毅机器学习课程笔记-11.4模型无关的局部解释(LIME)</title>
@@ -558,35 +587,6 @@
       <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
       <category term="图神经网络" scheme="https://chouxianyu.github.io/tags/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-7.3CNN应用案例</title>
-    <link href="https://chouxianyu.github.io/2021/04/01/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-7-3CNN%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/"/>
-    <id>https://chouxianyu.github.io/2021/04/01/李宏毅机器学习课程笔记-7-3CNN应用案例/</id>
-    <published>2021-04-01T04:15:26.000Z</published>
-    <updated>2021-04-01T04:18:04.287Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Deep-Dream"><a href="#Deep-Dream" class="headerlink" title="Deep Dream"></a>Deep Dream</h2><p><a href="https://deepdreamgenerator.com/" target="_blank" rel="noopener">Deep Dream</a>是这样的：如果给机器一张图片$x$，Deep Dream会把机器看到的内容加到图片$x$中得到$x’$。那如何实现呢？</p><p><img src="https://img2020.cnblogs.com/blog/1478490/202012/1478490-20201221135654357-945005692.png"></p><p>如上图所示，将图片$x$输入到CNN中，然后取出CNN中某一层$L$（可以是卷积、池化阶段的隐藏层，也可以是FNN中的隐藏层）的输出$O$，然后将$L$中的正值调大、负值调小得到一个新的输出$O’$，然后通过梯度下降找到一张新的图片$x’$使层$L$的输出为$O’$，这个$x’$就是我们要的结果。直观理解的话，也就是<strong>让CNN夸大它所看到的内容</strong>。</p><p>然后就得到了如下结果……（看到的时候我惊了，真是十分哇塞）</p><p><img src="https://img2020.cnblogs.com/blog/1478490/202012/1478490-20201221135818664-1882676933.png"></p><h2 id="Deep-Style"><a href="#Deep-Style" class="headerlink" title="Deep Style"></a>Deep Style</h2><p><a href="https://dreamscopeapp.com/" target="_blank" rel="noopener">Deep Style</a>是这样的：如果给机器一张图片$x$和$y$，Deep Style可以把图片$y$的风格加到图片$x$上，也就是<strong>风格迁移</strong>。</p><p>那如何实现呢？论文：<a href="https://arxiv.org/abs/1508.06576" target="_blank" rel="noopener">A Neural Algorithm of Artistic Style</a>。</p><ol><li>把图片$x$传入CNN并得到输出，然后其输出作为图片$x$的内容$c_x$（<strong>content</strong>）；</li><li>把图片$y$传入CNN并得到输出，但不是考虑输出的值是什么，而是考虑输出层中各个filter输出之间的相关性（corelation）作为图片$y$的风格$s_y$（<strong>style</strong>）；</li><li>最后基于同一个CNN找到图片$z$，图片$z$传入CNN后得到的内容$c_z$像$c_x$、风格$s_z$像$s_y$。</li></ol><p>如下图所示</p><p><img src="https://pic1.zhimg.com/80/v2-fb5dd2b4083a6b896f57bb7e7a231c50_720w.png" alt="img"></p><h2 id="围棋"><a href="#围棋" class="headerlink" title="围棋"></a>围棋</h2><p>CNN不单单可以用在图像上，还可以用在其它方面，比如下围棋。</p><p>在下围棋这件事上，其实FNN就可以（输入和输出都是19×19=361的vector），但CNN的效果更好。当然还可以用强化学习。</p><p>为什么CNN可以用来下围棋呢？因为围棋具有图像的3个性质，不过AlphaGo并没有用Max Pooling因为它不需要。</p><h2 id="语音"><a href="#语音" class="headerlink" title="语音"></a>语音</h2><p>如下图所示，用<strong>语谱图（Spectrogram）</strong>表示语音。</p><p>语谱图的x轴是时间，y轴是频率，z轴是幅度。幅度用颜色表示（比如亮色表示高、暗色表示低）。</p><p>在语谱图中，CNN的卷积核往往只在y轴方向上移动，这样可以消除男生女生声音频率的差异；卷积核往往不在x轴上移动，因为时间域一般是在后面用LSTM等等进行处理，如下图所示。</p><p><img src="https://pic1.zhimg.com/80/v2-65e8d3ffdc43a45f4f9ca39ea16a9805_720w.png" alt="img"></p><h2 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h2><p>CNN也可以用在文字处理上，比如文本情感分析。具体不再讲，可以看李宏毅老师的<a href="https://www.bilibili.com/video/BV1JE411g7XF?p=17" target="_blank" rel="noopener">视频</a>。</p><p><img src="https://pic4.zhimg.com/80/v2-fec6cc1a30d3f436c71587f91f8f82ee_720w.png" alt="img"></p><h2 id="图片生成"><a href="#图片生成" class="headerlink" title="图片生成"></a>图片生成</h2><p>Deep Dream的方法还是不能画出图片，不过也有其它较为成功的方法，如下图所示。</p><p><img src="https://pic2.zhimg.com/80/v2-dc95952a08fcb965d30784de27789aef_720w.png" alt="img"></p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;Deep-Dream&quot;&gt;&lt;a href=&quot;#Deep-Dream&quot; class=&quot;headerlink&quot; title=&quot;Deep Dream&quot;&gt;&lt;/a&gt;Deep Dream&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://deepdreamgenerator.co
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="卷积神经网络" scheme="https://chouxianyu.github.io/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
