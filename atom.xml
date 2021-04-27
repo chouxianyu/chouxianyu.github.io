@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2021-04-25T01:56:27.641Z</updated>
+  <updated>2021-04-27T03:13:03.268Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>李宏毅机器学习课程笔记-12.1对抗攻击入门</title>
+    <link href="https://chouxianyu.github.io/2021/04/27/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-12-1%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB%E5%85%A5%E9%97%A8/"/>
+    <id>https://chouxianyu.github.io/2021/04/27/李宏毅机器学习课程笔记-12-1对抗攻击入门/</id>
+    <published>2021-04-27T02:23:23.000Z</published>
+    <updated>2021-04-27T03:13:03.268Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>我们希望我们的模型不仅仅是在大多数情况下可用的，还希望它能够应对来自外界的“攻击”，特别是在垃圾邮件分类、恶意软件检测、网络入侵检测等任务中。</p><p>这个领域为对抗攻击与防御（Adversarial Attack and Defense），目前攻击是比较容易的而防御比较困难。</p><h2 id="What-is-Attack"><a href="#What-is-Attack" class="headerlink" title="What is Attack"></a>What is Attack</h2><p>attack就是往原输入$x^0$中添加一些特别的噪声$\Delta x$(并不是随机生成的)得到一个稍微有些不同的输入$x’=x^0+\Delta x$，而模型却得到一个与原输出截然不同的输出。如下图所示，在图像分类任务中，对一张“Tiger Cat”图片添加一些特别的噪声$\Delta x$后，人类还能看出它是“Tiger Cat”，但模型却认为它是其它的类别。</p><p><img src="https://pic1.zhimg.com/80/v2-5610b9b55bf8893362a8526352810834_720w.png" alt="img"></p><h2 id="Loss-Function-For-Attack"><a href="#Loss-Function-For-Attack" class="headerlink" title="Loss Function For Attack"></a>Loss Function For Attack</h2><p>攻击可以分为两种：Non-targeted Attack和Targeted Attack。</p><h3 id="How-To-Train"><a href="#How-To-Train" class="headerlink" title="How To Train"></a>How To Train</h3><p>我们是这样训练一个普通的神经网络的：将输入$x^0$输入到模型后，我们希望<strong>模型的输出$y^0$和标签$y^{true}$越接近越好</strong>，则损失函数为$L_{train}(\theta)=C(y^0,y^{true})$。<strong>此时输入$x^0$是固定的，我们需要不断调整模型参数$\theta$</strong>，使得$L_{train}(\theta)$最小。</p><h3 id="Non-targeted-Attack"><a href="#Non-targeted-Attack" class="headerlink" title="Non-targeted Attack"></a>Non-targeted Attack</h3><p>如果是Non-targeted Attack，将输入$x’=x+\Delta x$输入到模型后，我们希望<strong>模型的输出$y’$和标签$y^{true}$的差异越大越好</strong>，则损失函数为$L_{Non-targeted\ Attack}(x’)=-C(y’,y^{true})$，比$L_{train}(\theta)$多了一个负号。<strong>此时模型参数$\theta$是固定的，我们需要不断调整输入$x’$</strong>，使$L_{Non-targeted\ Attack}(x’)$最小。</p><h3 id="Targeted-Attack"><a href="#Targeted-Attack" class="headerlink" title="Targeted Attack"></a>Targeted Attack</h3><p>如果是Targeted Attack，将输入$x’=x+\Delta x$输入到模型后，我们希望<strong>模型的输出$y’$和标签$y^{true}$的差异越大越好并且模型的输出$y’$与某个$y^{false}$越接近越好</strong>，其中$y^{false}$需要人为选择，则损失函数为$L_{Targeted\ Attack}(x’)=-C(y’,y^{true})+C(y’,y^{false})$。<strong>此时模型参数$\theta$是固定的，我们需要不断调整输入$x’$</strong>，使$L_{Targeted\ Attack}(x’)$最小。</p><h2 id="Constraint-For-Attack"><a href="#Constraint-For-Attack" class="headerlink" title="Constraint For Attack"></a>Constraint For Attack</h2><p>在Attack中，除了要使$L_{Non-targeted\ Attack}(x’)$和$L_{Targeted\ Attack}(x’)$最小之外，我们还希望<strong>$x^0$和$x’$之间的差异较小</strong>，即$d(x^0,x’)\leq\epsilon$，其中$\epsilon$需要人为选择，这样才能实现真正的Attack。</p><p>主要有两种计算$d(x^0,x’)$的方法，但在不同的任务中应该有不同的计算方法，因为其代表着人类视角下$x^0$和$x’$之间的差异。</p><h3 id="L2-norm"><a href="#L2-norm" class="headerlink" title="L2-norm"></a>L2-norm</h3><p>L2-norm为$x^0$和$x’$中每个像素之差的平方和，即$d(x^0,x’)=||x^0-x’||_2=||\Delta x||_2=(\Delta x_1)^2+(\Delta x_2)^2+(\Delta x_3)^2+\dots$</p><h3 id="L-infinity"><a href="#L-infinity" class="headerlink" title="L-infinity"></a>L-infinity</h3><p>L-infinity为$x^0$和$x’$中每个像素之差的最大值，即$d(x^0,x’)=||x^0-x’||_{\infin}=||\Delta x||_{\infty}=max\{\Delta x_1,\Delta x_2,\Delta_3,\dots\}$</p><p>对于图像中的pixel来讲，也许L-infinity是更有效的计算方法。</p><h2 id="How-to-Attack"><a href="#How-to-Attack" class="headerlink" title="How to Attack"></a>How to Attack</h2><p>我们在Attack时要训练的参数是输入$x’$而非模型参数$\theta$，在$d(x^0,x’)\leq\epsilon$的情况下使得$L(x’)$最小，即$x^*=arg\mathop{min}_\limits {d(x^0,x’)\leq\epsilon}L(x’)$。</p><p>关于如何训练输入$x’$而非模型参数$\theta$，可以参考下Explainable AI的代码部分，其实就是设置输入$x’$的梯度是可追踪的并在定义优化器时传入输入$x’$而非模型参数$\theta$。</p><p><img src="https://pic1.zhimg.com/80/v2-cabb0848c34eca5fe5f4009181b49e7b_720w.png" alt="img"></p><p>如上图所示，在训练时有两个关键点。第一点是输入$x’$应该用$x^0$初始化；第二点是在每个iteration中需要判断保证$d(x^0,x’)\leq\epsilon$，具体来讲就是当发现$d(x^0,x’)&gt;\epsilon$时就需要将$x’$修正为所有满足$d(x^0,x)&gt;\epsilon$的$x$中与$x’$最接近的那个。那要怎么找到所有满足$d(x^0,x)&gt;\epsilon$的$x$中与$x’$最接近的那个呢？下图中圆形和正方形中的$x$均满足$d(x^0,x)&gt;\epsilon$，所以中心$x^0$与$x’$连线与圆形或正方形的交点就是要修正的结果。</p><p><img src="https://pic2.zhimg.com/80/v2-163a5c710e5ed504d06debfb7c509493_720w.png" alt="img"></p><h2 id="Attack-Approaches"><a href="#Attack-Approaches" class="headerlink" title="Attack Approaches"></a>Attack Approaches</h2><ul><li>FGSM (<a href="https://arxiv.org/abs/1412.6572" target="_blank" rel="noopener">https://arxiv.org/abs/1412.6572</a>)</li><li>Basic iterative method (<a href="https://arxiv.org/abs/1607.02533" target="_blank" rel="noopener">https://arxiv.org/abs/1607.02533</a>) </li><li>L-BFGS (<a href="https://arxiv.org/abs/1312.6199" target="_blank" rel="noopener">https://arxiv.org/abs/1312.6199</a>)</li><li>Deepfool (<a href="https://arxiv.org/abs/1511.04599" target="_blank" rel="noopener">https://arxiv.org/abs/1511.04599</a>)</li><li>JSMA (<a href="https://arxiv.org/abs/1511.07528" target="_blank" rel="noopener">https://arxiv.org/abs/1511.07528</a>)</li><li>C&amp;W (<a href="https://arxiv.org/abs/1608.04644" target="_blank" rel="noopener">https://arxiv.org/abs/1608.04644</a>)</li><li>Elastic net attack (<a href="https://arxiv.org/abs/1709.04114" target="_blank" rel="noopener">https://arxiv.org/abs/1709.04114</a>)</li><li>Spatially Transformed (<a href="https://arxiv.org/abs/1801.02612" target="_blank" rel="noopener">https://arxiv.org/abs/1801.02612</a>) </li><li>One Pixel Attack (<a href="https://arxiv.org/abs/1710.08864" target="_blank" rel="noopener">https://arxiv.org/abs/1710.08864</a>)</li><li>……</li></ul><p>虽然有很多方法都可以进行attack，但它们的主要区别在于使用了不同的constraint或者使用了不同的optimization method。</p><h2 id="FGSM"><a href="#FGSM" class="headerlink" title="FGSM"></a>FGSM</h2><p>FGSM即Fast Gradient Sign Method，本次homework(hw6_AdversarialAttack)就使用了FGSM。</p><p>FGSM中输入的更新规则为$x^*=x^0-\epsilon\Delta x$。它首先计算出损失$L$关于$x$的每个维度的梯度，如果梯度大于0则修改为+1、小于0则修改为-1，也就是说$x^0$的所有维要么$+\epsilon$是要么是$-\epsilon$。</p><p>假设FGSM使用L-infinity计算$d(x^0,x^<em>)$，如果梯度指向左下角那么$x^</em>$就在方框的右上角；如果gradient指向左上角那么$x^<em>$就在方框的右下角；因此在FGSM中我们只在意梯度方向而不在意其大小。我们可以认为FGSM使用一个非常大的学习率使$x$飞出正方形，但因为要保证$d(x^0,x’)\leq\epsilon$所以$x^</em>$就会被限制到方形区域内部。所以就像是“一拳超人”，只攻击一次就达到好的效果。</p><p><img src="https://pic1.zhimg.com/80/v2-8c2bf52f38a95de4070288719e1eed4c_720w.png" alt="img"></p><h2 id="Black-Box-Attack"><a href="#Black-Box-Attack" class="headerlink" title="Black Box Attack"></a>Black Box Attack</h2><p>Attack可以分为White Box和Black Box。White Box Attack指<strong>模型参数$\theta$是已知的</strong>，Black Box Attack指<strong>模型参数$\theta$是未知的</strong>。</p><p>在Black Box Attack中，我们不知道Black Network的参数$\theta$。现假设我们知道Black Network的训练集，那我们就可以使用这份训练集自行训练出一个Proxy Network，然后基于Proxy Network和训练集就可以得到$x’$，这个$x’$一般也可以成功攻击Black Network。如果Black Network是一个在线API，我们既不知道Black Network的参数也不知道它的训练集，那上传大量输入后就可以得到大量对应的输出，并以这些输入输出对为训练集得到Proxy Network和$x’$。</p><p>有相关实验证明，Black Box Attack是非常有可能攻击成功的，详见：Delving into Transferable Adversarial Examples and Black-box Attacks(<a href="https://arxiv.org/abs/1611.02770" target="_blank" rel="noopener">https://arxiv.org/abs/1611.02770</a>)</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Motivation&quot;&gt;&lt;a href=&quot;#Motivation&quot; class=&quot;headerlink&quot; title=&quot;Motivation&quot;&gt;&lt;/a&gt;Motivation&lt;/h2&gt;&lt;p&gt;我们希望我们的模型不仅仅是在大多数情况下可用的，还希望它能够应对来自外界的“
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="对抗攻击与防御" scheme="https://chouxianyu.github.io/tags/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E5%BE%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>李宏毅机器学习课程笔记-11.5基于PyTorch的Explainabe AI实战</title>
@@ -558,35 +583,6 @@
       <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
       <category term="PyTorch" scheme="https://chouxianyu.github.io/tags/PyTorch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-8.1图神经网络入门</title>
-    <link href="https://chouxianyu.github.io/2021/04/02/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-8-1%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%85%A5%E9%97%A8/"/>
-    <id>https://chouxianyu.github.io/2021/04/02/李宏毅机器学习课程笔记-8-1图神经网络入门/</id>
-    <published>2021-04-01T17:25:04.000Z</published>
-    <updated>2021-04-01T17:41:57.916Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="GNN的用处"><a href="#GNN的用处" class="headerlink" title="GNN的用处"></a>GNN的用处</h2><h3 id="分类（Classification）"><a href="#分类（Classification）" class="headerlink" title="分类（Classification）"></a>分类（Classification）</h3><p>比如，有很多不同的化学分子，将其表示成图作为输入，用GNN判断其是否会导致突变，这就是一个有监督分类问题。</p><h3 id="生成（Generation）"><a href="#生成（Generation）" class="headerlink" title="生成（Generation）"></a>生成（Generation）</h3><p>比如，我们需要开发针对新冠病毒的新药，我们可以训练出一个可以生成我们想要的分子（输出形式为图）的GNN，然后用这个GNN生成可以对抗病毒的某种化学分子。</p><p>GraphVAE</p><h2 id="为什么要用GNN"><a href="#为什么要用GNN" class="headerlink" title="为什么要用GNN"></a>为什么要用GNN</h2><p>上面列举的分类、生成的例子中输入或输出都是图，所以要用GNN。图不仅包含了各个结点的信息，更重要的是它包含了<strong>各个结点之间的关系</strong>。</p><h2 id="使用GNN时可能遇到的问题"><a href="#使用GNN时可能遇到的问题" class="headerlink" title="使用GNN时可能遇到的问题"></a>使用GNN时可能遇到的问题</h2><ul><li>如何通过结点间的信息帮助模型</li><li>图中可能包含大量结点，数据集非常大</li><li><strong>大量结点都是没有label的</strong></li></ul><h2 id="GNN的两种思路"><a href="#GNN的两种思路" class="headerlink" title="GNN的两种思路"></a>GNN的两种思路</h2><p>很直观地可以想到，一个结点和它的相邻结点肯定有某些特定的关系，比如说相似（近朱者赤近墨者黑）、相反、合作等等。在多数情况下，数据集unlabeled node都是远多于labeled node的，我们想要得到一个较好的模型，那我们要如何利用仅有的少量labeled node以及它和邻居间的关系呢？结合CNN，我们要如何将卷积这个操作推广到GNN模型中，用卷积将结点嵌入到某个特征空间中呢？有两种方法</p><ul><li><p><strong>Spatial-based Convolution</strong></p><p>  Generalize the concept of convolution(corelation) to graph.</p></li><li><p><strong>Spectral-based Convolution</strong></p><p>  Back to the definition of convolution in signal processing.</p></li></ul><h2 id="GNN导图"><a href="#GNN导图" class="headerlink" title="GNN导图"></a>GNN导图</h2><p><img src="https://pic4.zhimg.com/80/v2-7e0da7ed579a0d8a74bb7d873d3449ae_720w.png" alt="img"></p><h2 id="任务和数据集"><a href="#任务和数据集" class="headerlink" title="任务和数据集"></a>任务和数据集</h2><h3 id="常见任务"><a href="#常见任务" class="headerlink" title="常见任务"></a>常见任务</h3><ul><li>Classification</li><li>Regression</li><li>Graph Classification</li><li>Graph Representation Learning</li><li>Link Prediction</li></ul><h3 id="常用数据集"><a href="#常用数据集" class="headerlink" title="常用数据集"></a>常用数据集</h3><ul><li>CORA: citation network, 2.7k nodes and 5.4k links</li><li>TU-MUTAG: 188 molecules with 18 nodes on average</li></ul><h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p><a href="https://www.dgl.ai/" target="_blank" rel="noopener">https://www.dgl.ai/</a></p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;GNN的用处&quot;&gt;&lt;a href=&quot;#GNN的用处&quot; class=&quot;headerlink&quot; title=&quot;GNN的用处&quot;&gt;&lt;/a&gt;GNN的用处&lt;/h2&gt;&lt;h3 id=&quot;分类（Classification）&quot;&gt;&lt;a href=&quot;#分类（Classification）&quot;
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="图神经网络" scheme="https://chouxianyu.github.io/tags/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
