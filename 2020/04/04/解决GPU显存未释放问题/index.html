@@ -81,22 +81,22 @@
 
 
 
-<meta name="description" content="前言今早我想用多块GPU测试模型，于是就用了PyTorch里的torch.nn.parallel.DistributedDataParallel来支持用多块GPU的同时使用（下面简称其为Dist）。 程序运行时，由于程序中其他部分的代码（与Dist无关的代码）出现了错误，导致程序退出。这次使用Dist时没有考虑和处理这种程序崩溃的情况，因此在程序退出前没有用Dist关闭生成的所有进程，最终导致本次">
+<meta name="description" content="前言今早我想用多块GPU测试模型，于是就用了PyTorch里的torch.nn.parallel.DistributedDataParallel(下面简称其为Dist)来支持用多块GPU的同时使用。 在程序运行时由于程序中一些与Dist无关的代码出现了错误导致程序退出，而如果在程序退出前没有用Dist关闭生成的所有进程，就会导致程序崩溃后GPU显存未释放。笔者观察发现，由于没有用Dist关闭所有进">
 <meta name="keywords" content="Bug,PyTorch,linux,GPU">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决GPU显存未释放问题">
 <meta property="og:url" content="https://chouxianyu.github.io/2020/04/04/解决GPU显存未释放问题/index.html">
 <meta property="og:site_name" content="臭咸鱼的缺氧瓶">
-<meta property="og:description" content="前言今早我想用多块GPU测试模型，于是就用了PyTorch里的torch.nn.parallel.DistributedDataParallel来支持用多块GPU的同时使用（下面简称其为Dist）。 程序运行时，由于程序中其他部分的代码（与Dist无关的代码）出现了错误，导致程序退出。这次使用Dist时没有考虑和处理这种程序崩溃的情况，因此在程序退出前没有用Dist关闭生成的所有进程，最终导致本次">
+<meta property="og:description" content="前言今早我想用多块GPU测试模型，于是就用了PyTorch里的torch.nn.parallel.DistributedDataParallel(下面简称其为Dist)来支持用多块GPU的同时使用。 在程序运行时由于程序中一些与Dist无关的代码出现了错误导致程序退出，而如果在程序退出前没有用Dist关闭生成的所有进程，就会导致程序崩溃后GPU显存未释放。笔者观察发现，由于没有用Dist关闭所有进">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_200404000440image-20200404070619631.png">
 <meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_200404000522image-20200404070704618.png">
 <meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_200404000606image-20200404070805983.png">
 <meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_200404000642image-20200404070901921.png">
-<meta property="og:updated_time" content="2020-04-04T02:34:55.526Z">
+<meta property="og:updated_time" content="2021-04-27T08:30:54.243Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决GPU显存未释放问题">
-<meta name="twitter:description" content="前言今早我想用多块GPU测试模型，于是就用了PyTorch里的torch.nn.parallel.DistributedDataParallel来支持用多块GPU的同时使用（下面简称其为Dist）。 程序运行时，由于程序中其他部分的代码（与Dist无关的代码）出现了错误，导致程序退出。这次使用Dist时没有考虑和处理这种程序崩溃的情况，因此在程序退出前没有用Dist关闭生成的所有进程，最终导致本次">
+<meta name="twitter:description" content="前言今早我想用多块GPU测试模型，于是就用了PyTorch里的torch.nn.parallel.DistributedDataParallel(下面简称其为Dist)来支持用多块GPU的同时使用。 在程序运行时由于程序中一些与Dist无关的代码出现了错误导致程序退出，而如果在程序退出前没有用Dist关闭生成的所有进程，就会导致程序崩溃后GPU显存未释放。笔者观察发现，由于没有用Dist关闭所有进">
 <meta name="twitter:image" content="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_200404000440image-20200404070619631.png">
 
 
@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  721 字
+                  704 字
                 </span>
               
 
@@ -423,8 +423,8 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今早我想用多块GPU测试模型，于是就用了PyTorch里的<code>torch.nn.parallel.DistributedDataParallel</code>来支持用多块GPU的同时使用（下面简称其为<strong>Dist</strong>）。</p>
-<p>程序运行时，由于程序中其他部分的代码（与Dist无关的代码）出现了错误，导致程序退出。这次使用Dist时没有考虑和处理这种程序崩溃的情况，因此在程序退出前没有用Dist关闭生成的所有进程，最终导致本次进程运行后GPU显存未释放（经观察，发现是由于没有用Dist关闭所有进程，导致程序运行后还有一部分进程在运行）。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今早我想用多块GPU测试模型，于是就用了PyTorch里的<code>torch.nn.parallel.DistributedDataParallel</code>(下面简称其为<strong>Dist</strong>)来支持用多块GPU的同时使用。</p>
+<p>在程序运行时由于程序中一些与Dist无关的代码出现了错误导致程序退出，而如果在程序退出前没有用Dist关闭生成的所有进程，就会导致程序崩溃后GPU显存未释放。笔者观察发现，由于没有用Dist关闭所有进程，导致程序结束运行后还有一部分进程在运行，所以显存未释放。</p>
 <p>下面介绍这次我解决该问题的过程。</p>
 <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="MVE"><a href="#MVE" class="headerlink" title="MVE"></a>MVE</h2><p>Minimal Verifiable Examples，关于本问题的程序代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.distributed <span class="keyword">as</span> dist</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一些代码：定义model等</span></span><br><span class="line">some code</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化并行训练</span></span><br><span class="line">dist.init_process_group(xxxx)  <span class="comment"># 函数参数省略</span></span><br><span class="line">model = torch.nn.parallel.DistributedDataParallel(model, find_unused_parameters=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一些代码：训练、测试模型等</span></span><br><span class="line">some code  <span class="comment"># 我的程序在这个部分出错且程序直接退出，导致下面的关闭进程的代码没有运行</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭所有进程</span></span><br><span class="line">dist.destroy_process_group()</span><br></pre></td></tr></table></figure>
@@ -586,7 +586,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">297</span>
+                  <span class="site-state-item-count">298</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -691,7 +691,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">269.3k</span>
+    <span title="Site words total count">270.6k</span>
   
 </div>
 
