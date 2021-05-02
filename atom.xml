@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2021-05-01T00:29:31.272Z</updated>
+  <updated>2021-05-01T22:40:07.243Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>李宏毅机器学习课程笔记-13.1模型压缩之网络剪枝</title>
+    <link href="https://chouxianyu.github.io/2021/05/02/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-13-1%E7%BD%91%E7%BB%9C%E5%8E%8B%E7%BC%A9%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%89%AA%E6%9E%9D/"/>
+    <id>https://chouxianyu.github.io/2021/05/02/李宏毅机器学习课程笔记-13-1网络压缩之网络剪枝/</id>
+    <published>2021-05-01T22:24:53.000Z</published>
+    <updated>2021-05-01T22:40:07.243Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>网络剪枝（Network Pruning）就是删除一个较大网络中的一些weight或neuron得到一个更小的网络。</p><p>我们相信，<strong>通常情况下我们训练出的神经网络是over-parameterized</strong>，即其中存在很多weight或neuron是没有用的(比如有些neuron的输出总是0、有些weight非常接近0) ，因此我们可以把这些没有用的weight或neuron剪掉。</p><p>在90年代，Yann Le Cun就提出了“网络剪枝”，paper名称为Optimal Brain Damage。</p><p>有个问题是：为什么不直接使用较小Network而是对较大Network进行剪枝？常见的解释是：较小的Network训练出来的结果一般都不好，而较大的Network更容易optimize（李老师这个视频有讲解为什么：<a href="https://www.youtube.com/watch?v=_VuWvQUMQVk）。在训练神经网络时可能会遇到local" target="_blank" rel="noopener">https://www.youtube.com/watch?v=_VuWvQUMQVk）。在训练神经网络时可能会遇到local</a> minima和saddle point的问题，但如果Network够大这种问题就会不那么严重，现在有很多文献甚至可以证明只要Network够大就可以用梯度下降找到global optimal。</p><h2 id="How-to-Prune-a-Network"><a href="#How-to-Prune-a-Network" class="headerlink" title="How to Prune a Network"></a>How to Prune a Network</h2><ol><li><p>训练出一个较大的Network</p></li><li><p>评估该Network中每个weight和neuron的重要性</p><p> 这一步有很多种做法</p><ul><li><p>weight的重要性</p><p>  比如：如果其值接近0，则说明该weight不重要，因此可以计算weight的L1或L2判断weight的重要性。</p></li><li><p>neuron的重要性</p><p>  比如：给定dataset，如果某个neural的输出都是0那么该neural是不那么重要的</p></li></ul></li><li><p>根据重要性将weight和neuron排序并删除那些不那么重要的weight和neuron</p><p> 删除一些weight和neuron后，Network会变小但精度一般也会变低，因此还需要进行fine-tune</p><p> 一次最好不要删除太多neuron或weight，否则Network的精度会无法通过fine-tune恢复，最好是每次只删除一小部分然后进行fine-tune并重复该过程</p></li><li><p>fine-tune</p><p> 训练剪枝得到的较小的网络</p></li></ol><p>熟悉YOLO的读者，可以根据这个仓库（<a href="https://github.com/tanluren/yolov3-channel-and-layer-pruning）感受一下剪枝和知识蒸馏。" target="_blank" rel="noopener">https://github.com/tanluren/yolov3-channel-and-layer-pruning）感受一下剪枝和知识蒸馏。</a></p><h2 id="Lottery-Ticket-Hypothesis"><a href="#Lottery-Ticket-Hypothesis" class="headerlink" title="Lottery Ticket Hypothesis"></a>Lottery Ticket Hypothesis</h2><p>论文链接：<a href="https://arxiv.org/abs/1803.03635，这是ICLR2019的一篇论文" target="_blank" rel="noopener">https://arxiv.org/abs/1803.03635，这是ICLR2019的一篇论文</a></p><p>如下图所示，现有一个较大网络A，随机初始化其参数并记该参数为W，训练该较大网络A并进行剪枝得到较小网络B。有个现象是：如果我们随机初始化较小网络B的参数并进行训练，得到的结果就不行；但如果使用参数W中的对应参数初始化，得到的结果就可以。</p><p><img src="https://pic4.zhimg.com/80/v2-6bbbbfc39567d8a138f36ac44ef94849_720w.png" alt="img"></p><h2 id="Rethinking-the-Value-of-Network-Pruning"><a href="#Rethinking-the-Value-of-Network-Pruning" class="headerlink" title="Rethinking the Value of Network Pruning"></a>Rethinking the Value of Network Pruning</h2><p>论文链接：<a href="https://arxiv.org/abs/1810.05270，这是ICLR2019的一篇论文" target="_blank" rel="noopener">https://arxiv.org/abs/1810.05270，这是ICLR2019的一篇论文</a></p><p>这篇论文的结论和Lottery Ticket Hypothesis一文相反：现有剪枝后的网络，将其参数随机初始化是可以训练出好的结果的。</p><p>ICLR2019的review是开放的，网上可以搜到两篇文章作者的讨论，知乎上也有关于这两篇论文的讨论，后续也有人做了相关研究。</p><h2 id="Some-Issue-in-Weight-Pruning"><a href="#Some-Issue-in-Weight-Pruning" class="headerlink" title="Some Issue in Weight Pruning"></a>Some Issue in Weight Pruning</h2><p>如果是weight pruning，那剪枝后的Network会变得不规则（比如有些neuron有2个weight而有些neuron有4个weight）。这样的不规则的Network是不好用keras等代码框架实现的，并且GPU只能对矩阵运算进行加速而无法加速这样的Network。比较常见的实做方法是将需要剪掉的weight设成0，因此仍然可以用GPU加速，但这样其实并没有使网络变小。</p><p>实际上做weight pruning是很麻烦的，通常都进行neuron pruning，因为比较容易用代码实现、也容易达到加速的目的。</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Motivation&quot;&gt;&lt;a href=&quot;#Motivation&quot; class=&quot;headerlink&quot; title=&quot;Motivation&quot;&gt;&lt;/a&gt;Motivation&lt;/h2&gt;&lt;p&gt;网络剪枝（Network Pruning）就是删除一个较大网络中的一些wei
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="模型压缩" scheme="https://chouxianyu.github.io/tags/%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9/"/>
+    
+      <category term="网络剪枝" scheme="https://chouxianyu.github.io/tags/%E7%BD%91%E7%BB%9C%E5%89%AA%E6%9E%9D/"/>
+    
+  </entry>
   
   <entry>
     <title>李宏毅机器学习课程笔记-12.4对抗攻击代码实战</title>
@@ -542,36 +569,6 @@
       <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
       <category term="循环神经网络" scheme="https://chouxianyu.github.io/tags/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-8.2图神经网络(Spatial-based Convolution)</title>
-    <link href="https://chouxianyu.github.io/2021/04/05/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-8-2%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-Spatial-based-Convolution/"/>
-    <id>https://chouxianyu.github.io/2021/04/05/李宏毅机器学习课程笔记-8-2图神经网络-Spatial-based-Convolution/</id>
-    <published>2021-04-05T12:06:39.000Z</published>
-    <updated>2021-04-05T12:07:56.753Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="术语（Terminology）"><a href="#术语（Terminology）" class="headerlink" title="术语（Terminology）"></a>术语（Terminology）</h2><ul><li><p><strong>Aggregation</strong></p><p>  Aggregation是Convolution在GNN中的推广。Aggregation就是在某一个layer中用某node及其neighbor的feature得到下一个layer中该node的feature。</p></li><li><p><strong>Readout</strong></p><p>  Readout有点像是全连接在GNN中的推广。Readout就是汇总整个图的信息，最终得到一个特征来表示这整个图（Graph Representation）。</p></li></ul><h2 id="NN4G-Neural-Network-for-Graph"><a href="#NN4G-Neural-Network-for-Graph" class="headerlink" title="NN4G(Neural Network for Graph)"></a>NN4G(Neural Network for Graph)</h2><p>论文链接：<a href="https://ieeexplore.ieee.org/document/4773279" target="_blank" rel="noopener">https://ieeexplore.ieee.org/document/4773279</a></p><ul><li><p>输入层</p><p>  假如是一个化学分子，输入层的图中的结点就是一个原子。不同原子有不同的特征， 其特征可以是任何和原子相关的化学特征，所以需要<strong>embedding</strong>（将高维特征映射到低维特征），做完embedding也就得到了隐藏层$h^0$。</p></li><li><p>隐藏层$h^0$</p><p>  如何做embedding呢？让原特征乘以embedding matrix就得到隐藏层$h^0$。如下图所示，以1个结点为例，输入层中结点$v_3$的特征是$x_3$，该结点embedding时的计算式为$h^0_3=\bar w_0\cdot x_3$。<strong>embedding</strong>后就得到了隐藏层$h^0$，然后再对隐藏层$h^0$进行<strong>Aggregation</strong>就得到了隐藏层$h^1$。</p><p>  <img src="https://pic2.zhimg.com/80/v2-cff58a466296d02f900be31d89fca62a_720w.png" alt="img"></p></li><li><p>隐藏层$h^1$</p><p>  如何做Aggregation呢？如下图所示，以1个结点为例，在隐藏层$h^0$中，结点$h^0_3$和$h^0_0,h^0_2,h^0_4$3个结点相邻，则Aggregation时计算式为$h^1_3=\hat w_{1,0}(h^0_0+h^0_2+h^0_4)+\bar w_1\cdot x_3$。<strong>经过多次Aggregation，最后需要Readout</strong>。</p><p>  <img src="https://pic3.zhimg.com/80/v2-35dabe169d54b8815ad452c1c105cd75_720w.png" alt="img"></p></li><li><p>Readout</p><p>  如何做Readout呢？如下图所示，假设有3个隐藏层，那Readout的计算式为$y=MEAN(h^0)+MEAN(h^1)+MEAN(h^2)$。</p><p>  <img src="https://pic4.zhimg.com/80/v2-99a44d03b0f47295abfe6d62eaa77bde_720w.png" alt="img"></p></li></ul><h2 id="DCNN-Diffusion-Convolution-Neural-Network"><a href="#DCNN-Diffusion-Convolution-Neural-Network" class="headerlink" title="DCNN(Diffusion-Convolution Neural Network)"></a>DCNN(Diffusion-Convolution Neural Network)</h2><p>论文链接：<a href="https://arxiv.org/abs/1511.02136" target="_blank" rel="noopener">https://arxiv.org/abs/1511.02136</a></p><ul><li><p>输入层</p><p>  假如我们有1个和上例中（NN4G）一样的输入图。</p></li><li><p>隐藏层$h^0$</p><p>  如下图所示，从输入层到隐藏层$h^0$的计算式为$h^0_3=w^0_3MEAN(d(3,\cdot)=1)$，其中$d(3,\cdot)=1$表示所有与结点$x_3$距离为1的输入层结点的特征。</p><p>  <img src="https://pic4.zhimg.com/80/v2-97b6883501dbd6fca82612e42f9e02b4_720w.png" alt="img"></p></li><li><p>隐藏层$h^1$</p><p>  如下图所示，从隐藏层$h^0$到隐藏层$h^1$的计算式为$h^1_3=w^1_3MEAN(d(3,\cdot)=2)$，其中$d(3,\cdot)=2$表示所有与结点$x_3$距离为2的输入层结点的特征。</p><p>  <img src="https://pic2.zhimg.com/80/v2-8282b7f79e512aa9bc1a1b3a18a295aa_720w.png" alt="img"></p><p>  以此类推，<strong>叠加k个隐藏层后就可以获取各结点k范围内的信息</strong>。如下图所示，令1个隐藏层中多个结点的特征形成矩阵（1行是1个结点的特征），多个隐藏层的特征就形成多个通道$H^0,H^1,\dots,H^k$。</p><p>  <img src="https://pic2.zhimg.com/80/v2-ec751b3608ee583f1f6a4cd320ff2f0b_720w.png" alt="img"></p></li><li><p>Node features</p><p>  如何表达整个图的特征呢？如下图所示，将每个通道的特征flatten，然后再乘以参数$w$得到$y_1$即可。</p><p>  <img src="https://pic1.zhimg.com/80/v2-c226fe1e317a545f5c9c5b2c114a0a7b_720w.png" alt="img"></p><p>  也有其它做法，ICLR2018中<a href="https://arxiv.org/abs/1707.01926" target="_blank" rel="noopener">DGC(Diffusion Graph Convolution)</a>不是flatten，而是相加，如下图所示。</p><p>  <img src="https://pic4.zhimg.com/80/v2-7110f786304c6ed60fd4071e00e23047_720w.png" alt="img"></p></li></ul><h2 id="MoNET-Mixture-Model-Networks"><a href="#MoNET-Mixture-Model-Networks" class="headerlink" title="MoNET(Mixture Model Networks)"></a>MoNET(Mixture Model Networks)</h2><p>NN4G、DCNN都是将邻居结点的特征直接相加，并没有考虑各个邻居结点特征的重要性，而MoNET考虑了这个问题。</p><p>论文链接：<a href="https://arxiv.org/abs/1611.08402" target="_blank" rel="noopener">https://arxiv.org/abs/1611.08402</a></p><p>MoNET定义了结点距离的概念，基于结点距离表示各个邻居结点特征的重要性然后对各个邻居结点进行<strong>加权</strong>求和，而不是简单地取均值或求和。</p><p>如下图所示，假如我们有和上例一样的输入图，隐藏层$h^0$中结点$v_3$的特征为$h^0_3$，结点$v_3$和结点$v_0$的距离为$u_{3,0}$。</p><p>定义结点$x,y$的距离$u(x,y)=(\frac{1}{\sqrt{deg(x)}},\frac{1}{\sqrt{deg(y)}})^T$，其中$deg(x)$表示结点$x$的度（degree，度是连接到每个节点的边的数量）。</p><p><img src="https://pic1.zhimg.com/80/v2-454c766a5484d4fe7f79178e679fab55_720w.png" alt="img"></p><h2 id="GraphSAGE"><a href="#GraphSAGE" class="headerlink" title="GraphSAGE"></a>GraphSAGE</h2><p><strong>SA</strong>mple and aggre<strong>G</strong>at<strong>E</strong>(GraphSAGE)，在transductive和inductive setting上都能work。</p><p>论文链接：<a href="https://arxiv.org/abs/1706.02216" target="_blank" rel="noopener">https://arxiv.org/abs/1706.02216</a></p><p>GraphSAGE的Aggregation除了mean，还有max pooling和LSTM。LSTM用来处理序列数据，但图中结点的邻居并没有序列关系，但如果每次在邻居中随机取样出不同顺序，那也许可以忽略顺序学习到顺序无关的信息。</p><h2 id="GAT-Graph-Attention-Networks"><a href="#GAT-Graph-Attention-Networks" class="headerlink" title="GAT(Graph Attention Networks)"></a>GAT(Graph Attention Networks)</h2><p>论文链接：<a href="https://arxiv.org/abs/1710.10903" target="_blank" rel="noopener">https://arxiv.org/abs/1710.10903</a></p><p>GAT不只是做加权求和（weighted sum），而其中的weight是通过学习得到的，方法就是对邻居做attention。</p><p>假如我们有1个和上例中（NN4G）一样的输入图。在做aggregation时，我们通过函数$f$计算各个邻居结点$v_0,v_2,v_4$对结点$v_3$的重要性，然后做加权求和。</p><p><img src="https://pic4.zhimg.com/80/v2-d293babed38f57a74e8740be39dd69d8_720w.png" alt="img"></p><h2 id="GIN-Graph-Isomorphism-Network"><a href="#GIN-Graph-Isomorphism-Network" class="headerlink" title="GIN(Graph Isomorphism Network)"></a>GIN(Graph Isomorphism Network)</h2><p>这篇论文偏理论，证明出有些方法是work的，有些是不会work的。</p><p>比如提取特征时不要用mean或max（在一些情况下会fail），要用sum，如下图所示。</p><p><img src="https://pic4.zhimg.com/80/v2-ad2c1fd4a3043d56cd5420c03d3cfef7_720w.png" alt="img"></p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;术语（Terminology）&quot;&gt;&lt;a href=&quot;#术语（Terminology）&quot; class=&quot;headerlink&quot; title=&quot;术语（Terminology）&quot;&gt;&lt;/a&gt;术语（Terminology）&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;A
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="图神经网络" scheme="https://chouxianyu.github.io/tags/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
