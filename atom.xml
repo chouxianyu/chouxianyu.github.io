@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2021-05-01T22:40:07.243Z</updated>
+  <updated>2021-05-04T01:47:41.640Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -17,9 +17,37 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>李宏毅机器学习课程笔记-13.2模型压缩之知识蒸馏</title>
+    <link href="https://chouxianyu.github.io/2021/05/04/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-13-2%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E4%B9%8B%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/"/>
+    <id>https://chouxianyu.github.io/2021/05/04/李宏毅机器学习课程笔记-13-2模型压缩之知识蒸馏/</id>
+    <published>2021-05-04T01:37:48.000Z</published>
+    <updated>2021-05-04T01:47:41.640Z</updated>
+    
+    <content type="html"><![CDATA[<p>知识蒸馏就是Knowledge Distillation。</p><p>Knowledge Distillation：<a href="https://arxiv.org/abs/1503.02531" target="_blank" rel="noopener">https://arxiv.org/abs/1503.02531</a></p><p>Do Deep Nets Really Need to be Deep?：<a href="https://arxiv.org/abs/1312.6184" target="_blank" rel="noopener">https://arxiv.org/abs/1312.6184</a></p><p>熟悉YOLO的读者，可以根据这个仓库感受一下剪枝和知识蒸馏：<a href="https://github.com/tanluren/yolov3-channel-and-layer-pruning" target="_blank" rel="noopener">https://github.com/tanluren/yolov3-channel-and-layer-pruning</a></p><h2 id="Student-and-Teacher"><a href="#Student-and-Teacher" class="headerlink" title="Student and Teacher"></a>Student and Teacher</h2><p>什么是Knowledge Distillation？</p><p>我们可以让一个较小的<strong>Student Net</strong>向较大的<strong>Teacher Net</strong>学习，使得Student Net的输出尽可能接近Teacher Net的输出。</p><p>普通的训练方式为仅在数据集上训练Student Net，而Knowledge Distillation的思路是：即使Teacher Net的输出并不一定是正确的，但<strong>Teacher Net可以提供一些数据集无法提供的信息</strong>，比如手写数字图片分类模型Teacher Net的输出为“1：0.7，7：0.2，9：0.1”，这不仅说明这张图片像1，<strong>还可以说明1和7、9很相似</strong>。</p><p>或者可以这么理解：学生自己直接做题目太难了，让学生学习下老师是怎么想的可能会更好。</p><h2 id="Ensemble"><a href="#Ensemble" class="headerlink" title="Ensemble"></a>Ensemble</h2><p>Knowledge Distillation有什么用呢？</p><p>打Kaggle比赛时很多人的做法是ensemble（将多个model的结果进行平均）。Ensemble通常可以得到更好的精度，但现实中设备上不可能放这么多个model，这时就可以利用Knowledge Distillation让Student Net向Teacher Net学习，最终设备上只运行Student Net就可以。</p><h2 id="Temperature"><a href="#Temperature" class="headerlink" title="Temperature"></a>Temperature</h2><p>在分类任务中，网络的最后一般有个softmax函数：$y_i=\frac{e^{x_i}}{\sum_je^{x^j}}$，其中$y_i$是输入属于类别$i$的置信度。</p><p>在Knowledge Distillation中，我们需要对softmax函数进行调整：$y_i=\frac{e^{\frac{x_i}{T}}}{\sum_je^{\frac{x^j}{T}}}$，其中$T$为Temperature，一般是一个大于1的数，它的作用是使得Teacher Net输出的属于各个类别的置信度更加接近，如下图所示。</p><p><img src="https://pic1.zhimg.com/80/v2-c06e6c918f5c8ac800f28f35deca8473_720w.png" alt="img"></p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;知识蒸馏就是Knowledge Distillation。&lt;/p&gt;
+&lt;p&gt;Knowledge Distillation：&lt;a href=&quot;https://arxiv.org/abs/1503.02531&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;htt
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="模型压缩" scheme="https://chouxianyu.github.io/tags/%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9/"/>
+    
+      <category term="知识蒸馏" scheme="https://chouxianyu.github.io/tags/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>李宏毅机器学习课程笔记-13.1模型压缩之网络剪枝</title>
-    <link href="https://chouxianyu.github.io/2021/05/02/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-13-1%E7%BD%91%E7%BB%9C%E5%8E%8B%E7%BC%A9%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%89%AA%E6%9E%9D/"/>
-    <id>https://chouxianyu.github.io/2021/05/02/李宏毅机器学习课程笔记-13-1网络压缩之网络剪枝/</id>
+    <link href="https://chouxianyu.github.io/2021/05/02/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-13-1%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%89%AA%E6%9E%9D/"/>
+    <id>https://chouxianyu.github.io/2021/05/02/李宏毅机器学习课程笔记-13-1模型压缩之网络剪枝/</id>
     <published>2021-05-01T22:24:53.000Z</published>
     <updated>2021-05-01T22:40:07.243Z</updated>
     
@@ -528,35 +556,6 @@
       
         &lt;h2 id=&quot;RNN的损失函数&quot;&gt;&lt;a href=&quot;#RNN的损失函数&quot; class=&quot;headerlink&quot; title=&quot;RNN的损失函数&quot;&gt;&lt;/a&gt;RNN的损失函数&lt;/h2&gt;&lt;p&gt;仍然以Slot Filling为例，如下图所示。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http
-      
-    
-    </summary>
-    
-    
-      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="循环神经网络" scheme="https://chouxianyu.github.io/tags/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-9.1循环神经网络RNN入门</title>
-    <link href="https://chouxianyu.github.io/2021/04/10/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-9-1%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CRNN%E5%85%A5%E9%97%A8/"/>
-    <id>https://chouxianyu.github.io/2021/04/10/李宏毅机器学习课程笔记-9-1循环神经网络RNN入门/</id>
-    <published>2021-04-10T00:53:08.000Z</published>
-    <updated>2021-04-10T01:02:16.365Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Slot-Filling"><a href="#Slot-Filling" class="headerlink" title="Slot Filling"></a>Slot Filling</h2><p>比如在订票系统中，输入“Arrive Taipei on November 2nd”这样一个序列，我们设置几个slot(槽位)，希望算法能够将关键词“Taipei”放入Destination这个slot，将”November”和”2nd”放入到达时间Time of Arrival这个slot，而“Arrive”和“on”不属于任何slot。那这个算法如何实现呢？</p><h2 id="Slot-Filling-with-FNN"><a href="#Slot-Filling-with-FNN" class="headerlink" title="Slot Filling with FNN"></a>Slot Filling with FNN</h2><p>可以用Feedforward Neural Network实现Slot Filling吗？可以，下面介绍这种FNN的输入和输出，但其存在问题。</p><p>输入是一个word（比如“Taipei”）并用vector来表示它；输出是1个probablity distribution，表示输入的word属于各个slot的概率。</p><p>如何用vector表示1个word呢？方法有很多。比如<strong>1-of-N Encoding</strong>(又名one-hot Encoding)，如下图所示。设定1个lexicon(词汇表)，那vector的size就和lexicon的size相同，vector中的每个维度对应lexicon中的word，vector中word对应的维度的值为1、其它维度的值为0。</p><p><img src="https://pic1.zhimg.com/80/v2-44be0e091d503721158e1bbee1cdb048_720w.png" alt="img"></p><p>如下图所示，只有1-of-N Encoding还不够，一些word不在lexicon中，对此我们需要在lexicon中添加1个”<strong>other</strong>“。除了1-of-N Encoding，还可以通过<strong>word hashing</strong>。可以用1个26×26×26的vector表示1个word，该vector中每个元素代表1个3字母序列。比如”apple”包括”app”、”ppl”、”ple”。</p><p><img src="https://pic4.zhimg.com/80/v2-828e73ac8019838e7667eeb033859d40_720w.png" alt="img"></p><p>使用FNN实现Slot Filling时会存在一个问题：假如有2个句子“Arrive Taipei on November 2nd”和“Leave Taipei on November 2nd”，在处理这2个句子时FNN会先处理“arrive”和“leave”这2个词汇然后再处理“Taipei”。<strong>这时FNN没有办法区分出“Taipei”是出发地还是目的地，而我们希望算法在处理序列时是有“记忆力”的（即在处理“Taipei”时，它还记得“Leave”或“Arrive”）</strong>，于是RNN诞生了。</p><h2 id="Recurrent-Neural-Network"><a href="#Recurrent-Neural-Network" class="headerlink" title="Recurrent Neural Network"></a>Recurrent Neural Network</h2><p>如下图所示，<strong>将每1个隐藏层的输出保存在memory中，网络不仅考虑了input，还要考虑memory中的数据</strong>（merory中的数据是需要有初值的，比如0）。</p><p><img src="https://pic1.zhimg.com/80/v2-f151d27c684e3ae8e60cb9d55d4a78fe_720w.png" alt="img"></p><p>因为RNN会考虑memory中存储的临时值，而不同输入产生的临时值不一定相同，所以<strong>改变输入序列中元素的顺序会导致最终输出结果的改变</strong>（Changing the sequence order will change the output）。</p><h2 id="Slot-Filling-with-RNN"><a href="#Slot-Filling-with-RNN" class="headerlink" title="Slot Filling with RNN"></a>Slot Filling with RNN</h2><p>如下图所示，以“Arrive Taipei on November 2nd” 这个word sequence为例，将“Arrive”的vector$x^1$输入到RNN，隐藏层生成$a^1$，根据$a^1$生成$y^1$，表示“arrive”属于每个slot的概率，其中$a^1$会被存储到memory中；将“Taipei”的vector$x^2$输入到RNN，此时隐藏层同时考虑$x^2$和memory中的$a^1$生成$a^2$，根据$a^2$生成$y^2$，表示“Taipei”属于某个slot的概率，此时再把$a^2$存到memory中；以此类推根据$x_3$和$a_2$生成$a_3$进而得到$y^3$……</p><p><img src="https://pic2.zhimg.com/80/v2-e16243c99c04f52df6f52ae560fdfb03_720w.png" alt="img"></p><h2 id="RNN的变体"><a href="#RNN的变体" class="headerlink" title="RNN的变体"></a>RNN的变体</h2><h3 id="Elman-Network-amp-Jordan-Network"><a href="#Elman-Network-amp-Jordan-Network" class="headerlink" title="Elman Network &amp; Jordan Network"></a>Elman Network &amp; Jordan Network</h3><p>RNN也有不同的变形。<strong>Elman Network是把隐藏层的输出存到memory中，而Jordan Network是把输出层的输出保存到memory中</strong>。由于隐藏层没有明确的训练目标，而整个NN具有明确的目标，因此Jordan Network的表现会更好一些。</p><p><img src="https://pic4.zhimg.com/80/v2-7df1a297e9879628ea03333d79b06d22_720w.png" alt="img"></p><h3 id="Bidirectional-RNN"><a href="#Bidirectional-RNN" class="headerlink" title="Bidirectional RNN"></a>Bidirectional RNN</h3><p>如下图所示，<strong>RNN可以是双向的</strong>。训练2个方向的RNN，1个从前往后读取序列，1个从后往前读取序列，然后使用2个RNN的隐藏层得到最后的输出层。这样的好处是，<strong>输出层的感受野更大</strong>，因为RNN在得到$y^{t+1}$的时候，它不只看了从句首$x^1$开始到$x^{t+1}$的数据，还看了从句尾$x^{n}$一直到$x^{t+1}$的输入，这就相当于<strong>RNN是在看过整个句子之后才计算每个word属于哪个slot的概率</strong>。</p><p><img src="https://pic2.zhimg.com/80/v2-a591f7a3eda6fd1328ae36273451bff2_720w.png" alt="img"></p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;Slot-Filling&quot;&gt;&lt;a href=&quot;#Slot-Filling&quot; class=&quot;headerlink&quot; title=&quot;Slot Filling&quot;&gt;&lt;/a&gt;Slot Filling&lt;/h2&gt;&lt;p&gt;比如在订票系统中，输入“Arrive Taipei on N
       
     
     </summary>
