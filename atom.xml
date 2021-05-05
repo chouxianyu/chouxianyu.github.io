@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2021-05-04T01:47:41.640Z</updated>
+  <updated>2021-05-05T01:54:04.032Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>李宏毅机器学习课程笔记-13.3模型压缩之参数量化</title>
+    <link href="https://chouxianyu.github.io/2021/05/05/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-13-3%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E4%B9%8B%E5%8F%82%E6%95%B0%E9%87%8F%E5%8C%96/"/>
+    <id>https://chouxianyu.github.io/2021/05/05/李宏毅机器学习课程笔记-13-3模型压缩之参数量化/</id>
+    <published>2021-05-05T01:49:34.000Z</published>
+    <updated>2021-05-05T01:54:04.032Z</updated>
+    
+    <content type="html"><![CDATA[<p>参数量化就是Parameter Quantization。</p><ol><li><p>用更少的bit表示一个value</p><p> 比如说本来用32位表示一个weight，现在用16位表示一个weight，这样就缩小了一半。</p></li><li><p>Weight Clustering</p><p> 根据weight的值对weight进行聚类，每个类中的weight都用同一个value(比如该类中所有weight的平均值)表示。每个类有个id，2个bit就可以表示4个类的id(再进一步还可以使用哈夫曼编码)，在存储时只需要存储每个weight所属的类的id以及每个类对应的value即可。</p><p> 因为每个类中的weight都用了同一个value表示，所以模型会有一些精度损失。</p></li><li><p>Binary Weights</p><p> weight的值只有±1。</p><p> 有不少研究者提出直接训练一个Binary Network，最早的是Binary Connect（<a href="http://arxiv.org/abs/1511.00363），其它的还有Binary" target="_blank" rel="noopener">http://arxiv.org/abs/1511.00363），其它的还有Binary</a> Network（<a href="https://arxiv.org/abs/1602.02830）、XNOR-Net（https://arxiv.org/abs/1603.05279）。" target="_blank" rel="noopener">https://arxiv.org/abs/1602.02830）、XNOR-Net（https://arxiv.org/abs/1603.05279）。</a></p><p> Binary Connect在训练中有2个分别使用real value和binary value的model，暂称为R和B。首先初始化R的参数，然后找到和R最接近的B，再使用B的梯度更新R的参数，然后再找到和R最接近的B，循环该过程直到停止，最后就使用最终的B。</p><p> Binary Connect其实像是一种Regularization，它约束weight的值必须是±1。</p></li></ol><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;参数量化就是Parameter Quantization。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;用更少的bit表示一个value&lt;/p&gt;
+&lt;p&gt; 比如说本来用32位表示一个weight，现在用16位表示一个weight，这样就缩小了一半。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;We
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="模型压缩" scheme="https://chouxianyu.github.io/tags/%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9/"/>
+    
+      <category term="参数量化" scheme="https://chouxianyu.github.io/tags/%E5%8F%82%E6%95%B0%E9%87%8F%E5%8C%96/"/>
+    
+  </entry>
   
   <entry>
     <title>李宏毅机器学习课程笔记-13.2模型压缩之知识蒸馏</title>
@@ -526,36 +558,6 @@
         &lt;p&gt;在Slot Filling中，输入是1个word vector，输出是每个word的label，&lt;strong&gt;输入和输出是等长的&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;然而，RNN还可以实现多对1、多对多…&lt;/p&gt;
 &lt;h2 id=&quot;Many-to-One&quot;&gt;&lt;a href=&quot;
-      
-    
-    </summary>
-    
-    
-      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="循环神经网络" scheme="https://chouxianyu.github.io/tags/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-9.2如何训练RNN</title>
-    <link href="https://chouxianyu.github.io/2021/04/11/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-9-2%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83RNN/"/>
-    <id>https://chouxianyu.github.io/2021/04/11/李宏毅机器学习课程笔记-9-2如何训练RNN/</id>
-    <published>2021-04-11T02:41:12.000Z</published>
-    <updated>2021-04-11T02:43:24.928Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="RNN的损失函数"><a href="#RNN的损失函数" class="headerlink" title="RNN的损失函数"></a>RNN的损失函数</h2><p>仍然以Slot Filling为例，如下图所示。</p><p><img src="https://pic2.zhimg.com/80/v2-bbab6148db7b998a52c988e160c3fd16_720w.png" alt="img"></p><p>对于1个word$x^i$，RNN输出1个one-hot编码的vector $y^i$，求$y^i$和对应label的交叉熵损失（Cross Entropy Loss），将多个word的loss求和即为RNN的损失函数。需要注意的是不能打乱word的语序，$x^{i+1}$要紧接着$x^i$输入。</p><p>确定RNN的损失函数后，RNN的训练其实也是用的梯度下降。训练前馈神经网络时我们使用有效的反向传播算法，为了方便地训练RNN，我们使用BPTT。基于BP，<strong>BPTT(Backpropagation Through Time)</strong>考虑了时间维度的信息。</p><h2 id="RNN的Error-Surface"><a href="#RNN的Error-Surface" class="headerlink" title="RNN的Error Surface"></a>RNN的Error Surface</h2><p>RNN的Error Surface如下图所示，其中$z$轴代表loss，$x$轴和$y$轴代表两个参数$w_1$和$w_2$。可以看出，RNN的Error Surface在某些地方非常平坦，在某些地方又非常的陡峭。<strong>这样的Error Surface导致在训练RNN时loss剧烈变化</strong>。</p><p><img src="https://pic2.zhimg.com/80/v2-9264ded1a5556fb9bce3cbd5f7d5a3aa_720w.png" alt="img"></p><h2 id="问题出现的原因"><a href="#问题出现的原因" class="headerlink" title="问题出现的原因"></a>问题出现的原因</h2><p>既然RNN的Error Surface中有这么平滑的地方，那会不会是sigmoid激活函数造成的梯度消失呢？原因并不是sigmoid，如果是的话，那换成ReLU就可以，但把sigmoid换成ReLU之后，效果反而更差了。那到底为什么会有非常陡峭和非常平滑的地方呢？</p><p><img src="https://pic4.zhimg.com/80/v2-e601dceb08a568fabb5e12ab811d310b_720w.png" alt="img"></p><p>如上图所示，假设某RNN只含1个神经元，并且该神经元是Linear的，input和output的weight都是1，没有bias，memory传递的weight是$w$，输入序列为[1, 0, 0, 0, …, 0]，所以$y^{1000}=w^{999}$。</p><p>现在我们考虑loss关于参数$w$的梯度，当$w:\ 1\ =&gt;\ 1.01$时，可知$y^{1000}:\ 1\ =&gt;\ 20000$，此时梯度很大；当$w:\ 0.99\ =&gt;\ 0.01$时，可知$y^{1000}$几乎没有变化，此时梯度很小。</p><p>从该例中可知，RNN的Error Surface中的“悬崖”出现的原因是，<strong>关于memory的参数$w$的作用随着时间增加不断增强，导致RNN出现梯度消失或梯度爆炸的问题</strong>。</p><h2 id="处理方法"><a href="#处理方法" class="headerlink" title="处理方法"></a>处理方法</h2><p>如何解决RNN梯度消失或梯度爆炸的问题？可以通过<strong>Clipping</strong>进行处理，Clipping的效果是使梯度不超过某个阈值，即当梯度即将超过某个阈值（比如15）时，就将梯度赋值为该阈值。</p><h3 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h3><p>有什么更好的方法可以解决RNN的Error Surface中的问题呢？LSTM就是使用最广泛的技巧，它可以“删除”Error Surface中比较平坦的部分，也就解决了梯度消失的问题，但它无法解决梯度爆炸的问题。正因如此，训练LSTM时需要将学习率调得特别小。</p><p>LSTM为什么可以解决RNN中梯度消失的问题呢，因为RNN和LSTM对memory的处理是不同的（LSTM有forget gate）。<strong>在RNN中，每个时间点memory中的旧值都会被新值覆盖，导致参数$w$对memory的影响每次都被清除，进而引发梯度消失。在LSTM中，每个时间点memory里的旧值会乘以$f(g(f))$再与新值相加，只有在forget gate被关闭时参数$w$对memory的影响才会被清除，在forget gate被打开时参数$w$对memory的影响就会通过累加得到保留，因此不会出现梯度消失的问题。</strong></p><p>LSTM在1997年被提出，第1版的LSTM被提出就是为了解决梯度消失的问题，但这1版本是没有forget gate的，forget gate是后来才加上去的。也有1种说法是，在训练LSTM时需要给forget gate特别大的bias，以确保forget gate在多数情况下是开启的。</p><h3 id="GRU（Gated-Recurrent-Unit-Cho-EMNLP’14）"><a href="#GRU（Gated-Recurrent-Unit-Cho-EMNLP’14）" class="headerlink" title="GRU（Gated Recurrent Unit, Cho, EMNLP’14）"></a>GRU（Gated Recurrent Unit, Cho, EMNLP’14）</h3><p>GRU比LSTM更简单，GRU只有2个gate，因此需要更少的参数量、鲁棒性更好、更不容易过拟合。GRU的基本思路是“旧的不去，新的不来”，GRU把input和forget gate联动起来，当forget gate把memory中的值清空时，input gate才会打开然后放入新的值。</p><h3 id="Clockwise-RNN（Jan-Koutnik-JMLR’14）"><a href="#Clockwise-RNN（Jan-Koutnik-JMLR’14）" class="headerlink" title="Clockwise RNN（Jan Koutnik, JMLR’14）"></a>Clockwise RNN（Jan Koutnik, JMLR’14）</h3><h3 id="SCRN（Structrally-Constrained-Recurrent-Network-Tomas-Mikolov-ICLR’15）"><a href="#SCRN（Structrally-Constrained-Recurrent-Network-Tomas-Mikolov-ICLR’15）" class="headerlink" title="SCRN（Structrally Constrained Recurrent Network, Tomas Mikolov, ICLR’15）"></a>SCRN（Structrally Constrained Recurrent Network, Tomas Mikolov, ICLR’15）</h3><h3 id="Vanilla-RNN-Initialized-with-Identity-Matrix-ReLU（Quoc-V-Le-arXiv’15）"><a href="#Vanilla-RNN-Initialized-with-Identity-Matrix-ReLU（Quoc-V-Le-arXiv’15）" class="headerlink" title="Vanilla RNN Initialized with Identity Matrix + ReLU（Quoc V.Le, arXiv’15）"></a>Vanilla RNN Initialized with Identity Matrix + ReLU（Quoc V.Le, arXiv’15）</h3><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;RNN的损失函数&quot;&gt;&lt;a href=&quot;#RNN的损失函数&quot; class=&quot;headerlink&quot; title=&quot;RNN的损失函数&quot;&gt;&lt;/a&gt;RNN的损失函数&lt;/h2&gt;&lt;p&gt;仍然以Slot Filling为例，如下图所示。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http
       
     
     </summary>
