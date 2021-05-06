@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2021-05-05T01:54:04.032Z</updated>
+  <updated>2021-05-06T00:38:46.076Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>李宏毅机器学习课程笔记-13.4模型压缩之架构设计</title>
+    <link href="https://chouxianyu.github.io/2021/05/06/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-13-4%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E4%B9%8B%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    <id>https://chouxianyu.github.io/2021/05/06/李宏毅机器学习课程笔记-13-4模型压缩之架构设计/</id>
+    <published>2021-05-06T00:23:13.000Z</published>
+    <updated>2021-05-06T00:38:46.076Z</updated>
+    
+    <content type="html"><![CDATA[<p>调整Network的架构设计（Architecture Design），让它变得只需要比较少的参数，这是在实际操作中最有效的做法。</p><h2 id="Low-Rank-Approximation"><a href="#Low-Rank-Approximation" class="headerlink" title="Low Rank Approximation"></a>Low Rank Approximation</h2><p>如果是Fully Connected Network，前一层和后一层分别有N、M个neuron则需要$N\times M$个参数，我们可以在这两层中间加一个有K个neuron的层(不要激活函数)就需要$K(N+M)$个neuron，这样就可以减少参数量，但是根据线性代数的知识可知这3层的性能不一定比之前的2层好。</p><h2 id="Depthwise-amp-Pointwise-Convolution"><a href="#Depthwise-amp-Pointwise-Convolution" class="headerlink" title="Depthwise &amp; Pointwise Convolution"></a>Depthwise &amp; Pointwise Convolution</h2><p>在普通卷积中，每个filter（卷积核）要处理输入的所有channel。假设输入有$I$个channel，有$O$个尺寸为$k\times k$的filter，则需要$(k\times k\times I)\times O$个参数、输出$O$个channel。</p><p>深度可分离卷积(Depthwise Separable Convolution)又称为<strong>Depthwise&amp;Pointwise Convolution</strong>，分为以下2步，共需要$k\times k\times I+I\times O$个参数、输出$O$个channel。</p><ol><li><p>Depthwise Convolution</p><p> 在这一步中，filter的数量等于输入channel的数量，即<strong>每个filter只处理一个channel，这步的作用就是修改输入的尺寸</strong>。</p><p> 假设输入有$I$个channel，因此就有$I$个filter；假设每个filter的尺寸为$k\times k$，则需要$(k\times k\times1)\times I$个参数、输出$I$个channel。</p></li><li><p>Pointwise Convolution</p><p> 在这一步中，以上一步(Depthwise Convolution)的输出作为输入，<strong>每个filter的尺寸必须为$1\times 1$，和普通卷积核一样要处理输入的所有channel，这步的作用就是修改输入的通道数</strong>。</p><p> 假设有$O$个filter，则需要$(1\times1\times I)\times O$个参数、输出$O$个channel。</p></li></ol><h2 id="Group-Convolution"><a href="#Group-Convolution" class="headerlink" title="Group Convolution"></a>Group Convolution</h2><p>Group Convolution就是把输入的多个channel分成多个group，对每个group分别进行一次或多次普通卷积。Group Convolution算是普通卷积和Depthwise Convolution的折衷，当group数量和输入的通道数相同时它就相当于Depthwise Convolution，当group数量为1时它就相当于普通卷积。</p><h2 id="不同卷积的PyTorch实现"><a href="#不同卷积的PyTorch实现" class="headerlink" title="不同卷积的PyTorch实现"></a>不同卷积的PyTorch实现</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 普通卷积, weight数量 = in_chs * out_chs * kernel_size^2</span></span><br><span class="line">nn.Conv2d(in_chs, out_chs, kernel_size, stride, padding)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Group Convolution, Group数量可以自行控制，表示要分成几个group，其中in_chs和out_chs必须可以被groups整除</span></span><br><span class="line">nn.Conv2d(in_chs, out_chs, kernel_size, stride, padding, groups=groups)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Depthwise Convolution, 输入通道数=输出通道数=group数量, weight数量 = in_chs * kernel_size^2</span></span><br><span class="line">nn.Conv2d(in_chs, out_chs=in_chs, kernel_size, stride, padding, groups=in_chs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Pointwise Convolution, 也就是1×1卷积, weight数量 = in_chs * out_chs</span></span><br><span class="line">nn.Conv2d(in_chs, out_chs, <span class="number">1</span>)</span><br></pre></td></tr></table></figure><h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><p>Depthwise Separable Convolution被广泛地用在各种小型网络中：SqueezeNet、MobileNet、ShuffleNet、Xception，其中最知名的为MobileNet。</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;调整Network的架构设计（Architecture Design），让它变得只需要比较少的参数，这是在实际操作中最有效的做法。&lt;/p&gt;
+&lt;h2 id=&quot;Low-Rank-Approximation&quot;&gt;&lt;a href=&quot;#Low-Rank-Approximation&quot; c
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="模型压缩" scheme="https://chouxianyu.github.io/tags/%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9/"/>
+    
+  </entry>
   
   <entry>
     <title>李宏毅机器学习课程笔记-13.3模型压缩之参数量化</title>
@@ -539,37 +565,6 @@
       <category term="循环神经网络" scheme="https://chouxianyu.github.io/tags/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
       <category term="LSTM" scheme="https://chouxianyu.github.io/tags/LSTM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-9.3RNN的应用</title>
-    <link href="https://chouxianyu.github.io/2021/04/12/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-9-3RNN%E7%9A%84%E5%BA%94%E7%94%A8/"/>
-    <id>https://chouxianyu.github.io/2021/04/12/李宏毅机器学习课程笔记-9-3RNN的应用/</id>
-    <published>2021-04-12T00:54:54.000Z</published>
-    <updated>2021-04-12T01:02:36.510Z</updated>
-    
-    <content type="html"><![CDATA[<p>在Slot Filling中，输入是1个word vector，输出是每个word的label，<strong>输入和输出是等长的</strong>。</p><p>然而，RNN还可以实现多对1、多对多…</p><h2 id="Many-to-One"><a href="#Many-to-One" class="headerlink" title="Many to One"></a>Many to One</h2><p>Many to One：输入是1个vector sequence，输出是1个vector</p><ul><li><p>Sentiment Analysis</p><p>  输入1篇文章或1句话等（1个vector sequence），输出其情感倾向（分类或者回归，比如超好、好、普通、差、超差、[-1,1]）。</p></li><li><p>Key Term Extraction</p><p>  输入是1篇文章等，输出是几个关键词。</p></li></ul><h2 id="Many-to-Many"><a href="#Many-to-Many" class="headerlink" title="Many to Many"></a>Many to Many</h2><p><strong>Many to Many：输入和输出都是sequence，但输出更短</strong></p><p>比如Speech Recognition。输入是1段声音信号，每隔1小段时间（通常很短，比如0.01秒）就用1个vector表示，输出是1段文字。因此输入是1个vector sequence，而输出是1个charactor sequence，并且<strong>输入序列要比输出序列短</strong>。</p><p>如果仍然使用Slot Filling的方法，就只能做到输入的每个vector对应输出1个character，输入1句“好棒”的语音后可能输出文字“好好棒棒棒”，但其实应该输出文字“好棒”。我们可以通过<strong>Trimming</strong>去除输出中相同的character，但语音“好棒”和语音“好棒棒”是不同的，应该如何区分呢？可以用<strong>CTC(Connectionist Temporal Classification)</strong>，其基本思路是可以在输出中填充NULL，最终输出时删除NULL即可。</p><p><img src="https://pic2.zhimg.com/80/v2-c135e0952e8aa68cf0831e64c0cb0105_720w.png" alt="img"></p><p>如上图所示，输入中vector的数量多于label中character的数量，那CTC应该怎么训练呢？答案是假设所有的可能性都是对的。</p><h2 id="Many-to-Many-1"><a href="#Many-to-Many-1" class="headerlink" title="Many to Many"></a>Many to Many</h2><p><strong><a href="http://www.oalib.com/paper/4068742" target="_blank" rel="noopener">Sequence to Sequence Learning with Neural Networks</a>：输入和输出都是sequence，但两者长度不确定。</strong></p><p>以机器翻译为例，RNN要将英文的word sequence翻译成中文的character sequence（并不知道哪个sequence更长或更短）。</p><p><img src="https://pic1.zhimg.com/80/v2-67cb0355203c2db204efaba8eff6b2f2_720w.png" alt="img"></p><p>如上图所示，假设RNN的输入“machine learning”，在2个时间点分别输入”machine”和”learning”，在最后1个时间点时memory中就存储了整个word sequence的信息。接下来让RNN输出，得到“机”，然后把“机”当做input（这1步有很多极技巧，这里省略），并读取memory中的信息，就会输出“器”，以此类推，RNN会一直输出但不知道什么时候停止。那怎么让RNN停止输出呢？可以添加1个symbol<code>===</code>标志停止，当RNN输出这个symbol时就停止输出。</p><h2 id="Seq2Seq-for-Syntatic-Parsing"><a href="#Seq2Seq-for-Syntatic-Parsing" class="headerlink" title="Seq2Seq for Syntatic Parsing"></a>Seq2Seq for Syntatic Parsing</h2><p><a href="http://arxiv.org/abs/1412.7449" target="_blank" rel="noopener">Grammar as a Foreign Langauage</a>： 输入为1个word sequence，输出1个语法树（可以用sequence表示）。</p><h2 id="Seq2Seq-Auto-encoder-for-Text"><a href="#Seq2Seq-Auto-encoder-for-Text" class="headerlink" title="Seq2Seq Auto-encoder for Text"></a>Seq2Seq Auto-encoder for Text</h2><p>如果用bag-of-word来表示1段文本，就容易丢失word之间的联系和语序上的信息。比如“白血球消灭了感染病”和“感染病消灭了白血球”这2段文本语义完全相反但bag-of-word是相同的。</p><p><a href="https://arxiv.org/abs/1506.01057" target="_blank" rel="noopener">A Hierarchical Neural Autoencoder for Paragraphs and Documents</a>：可以使用Seq2Seq Autoencoder，在考虑语序的情况下把文章编码成vector，只需要将RNN作为编码器和解码器即可。</p><p><img src="https://pic2.zhimg.com/80/v2-58c2031f882fd46db6171384e461756d_720w.png" alt="img"></p><p>如上图所示，word sequence输入RNN后被编码成embedded vector，然后再通过另1个RNN解码，如果解码后能得到一模一样的句子，则编码得到的vector就表示了这个word sequence中最重要的信息。</p><p><img src="https://pic4.zhimg.com/80/v2-e67956b01d8f5c5c2bd4b209a9c816ff_720w.png" alt="img"></p><p>如上图所示，这个过程可以是分层的（hierarchical），可以将每1个sentence编码成1个vector然后将它们加起来得到表示整个document的vector，然后再通过它产生多个setence的vector，然后将多个setence的vector解码得到word sequence。这是1个4层的LSTM（word sequence-sentence sequence-document-sentence sequence-word sequence）。</p><p>Seq2Seq Auto-encoder比较容易得到文法的编码，而Skip Thought（输入1个句子，输出其下1句）更容易得到语义的意思。</p><h2 id="Seq2Seq-Auto-encoder-for-Speech"><a href="#Seq2Seq-Auto-encoder-for-Speech" class="headerlink" title="Seq2Seq Auto-encoder for Speech"></a>Seq2Seq Auto-encoder for Speech</h2><p><a href="https://arxiv.org/abs/1603.00982" target="_blank" rel="noopener">Audio Word2Vec: Unsupervised Learning of Audio Segment Representations using Sequence-to-sequence Autoencoder</a></p><p>Seq2Seq Auto-encoder还可以用在语音上，它可以把1个audio segment(word-level)编码成1个fixed-length vector。这有什么用处呢？它可以基于语音之间的相似度做语音搜索。</p><p><img src="https://pic1.zhimg.com/80/v2-ac9ee7ee9e1c47683525266543036146_720w.png" alt="img"></p><p>那如何基于语音之间的相似度做语音搜索呢？如上图所示，假如有1个语音的database，可将其划分为audio segments（长度可变），然后使用Seq2Seq Auto-encoder将其编码为1个fixed-length vector。对于1段需要搜索的语音，通过Seq2Seq Auto-encoder将其编码成1个fixed-length vector，计算其与database中audio segments的vector的相似度。</p><p><img src="https://pic1.zhimg.com/80/v2-286be450d67ee1a810c5dac8889deba1_720w.png" alt="img"></p><p>那如何把1个audio segment编码成1个fixed-length vector呢？如上图所示，首先把audio segment转换为acoustic feature sequence，然后输入至RNN。该RNN作为Encoder，在最后1个时间点其memory中的值就代表整个acoustic feature sequence，这就是我们想要的vector。但是只有这个作为Encoder的RNN我们没有办法训练，所以还要训练1个作为Decoder的RNN。该RNN作为Decoder，以Encoder在最后1个时间点时memory中的vector为输入，然后输出1个acoustic feature sequence，训练目标是输出的acoustic feature sequence和输入的acoustic feature sequence越接近越好。由此可知，该例中Encoder和Decoder是要同时训练的。</p><h2 id="Attention-based-Model"><a href="#Attention-based-Model" class="headerlink" title="Attention-based Model"></a>Attention-based Model</h2><blockquote><p>專家發現，小兒失憶現象是由於動物的大腦在神經新生的過程中，處於不斷重組的狀態，為減少太多訊息的干擾，會不斷清除舊記憶，從而增加對新事物的學習能力。年幼小鼠的記憶保留能力所以低下，乃因其高度活躍的神經再生所致，而成年小鼠保留記憶能力的增加，也由於其大腦相對成熟，海馬體的神經再生活力已經下降。腦科學家既然可以抑制年幼小鼠海馬體的高度活躍神經再生活力，又可刺激成年小鼠海馬體增加其神經再生活力。</p><p>——————引自<a href="http://henrylo1605.blogspot.com/2015/05/blog-post_56.html" target="_blank" rel="noopener">http://henrylo1605.blogspot.com/2015/05/blog-post_56.html</a></p></blockquote><p>现在除了RNN之外，Attention-based Model也用到了memory的思想。机器也可以有记忆，神经网络通过操控读/写头去读/写信息，这个就是Neural Turing Machine。</p><h2 id="Reading-Comprehension"><a href="#Reading-Comprehension" class="headerlink" title="Reading Comprehension"></a>Reading Comprehension</h2><p>Attention-based Model常常用在Reading Comprehension上，让机器读1篇document，再把每个setence变成代表语义的vector，接下来让用户向机器提问，神经网络就会去调用读写头，取出memory中与查询语句相关的信息，综合处理之后，可以给出正确的回答。</p><h2 id="Visual-Question-Answering"><a href="#Visual-Question-Answering" class="headerlink" title="Visual Question Answering"></a>Visual Question Answering</h2><h2 id="Speech-Question-Answering"><a href="#Speech-Question-Answering" class="headerlink" title="Speech Question Answering"></a>Speech Question Answering</h2><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;在Slot Filling中，输入是1个word vector，输出是每个word的label，&lt;strong&gt;输入和输出是等长的&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;然而，RNN还可以实现多对1、多对多…&lt;/p&gt;
-&lt;h2 id=&quot;Many-to-One&quot;&gt;&lt;a href=&quot;
-      
-    
-    </summary>
-    
-    
-      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="循环神经网络" scheme="https://chouxianyu.github.io/tags/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
