@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2021-05-06T00:38:46.076Z</updated>
+  <updated>2021-05-07T03:25:50.584Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>李宏毅机器学习课程笔记-13.5模型压缩之动态计算</title>
+    <link href="https://chouxianyu.github.io/2021/05/07/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-13-5%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E4%B9%8B%E5%8A%A8%E6%80%81%E8%AE%A1%E7%AE%97/"/>
+    <id>https://chouxianyu.github.io/2021/05/07/李宏毅机器学习课程笔记-13-5模型压缩之动态计算/</id>
+    <published>2021-05-07T03:25:13.000Z</published>
+    <updated>2021-05-07T03:25:50.584Z</updated>
+    
+    <content type="html"><![CDATA[<p>动态计算（Dynamic Computation）就是资源充足时就做到最好，资源不足时就减少运算量、先求有再求好(但也不要太差)。</p><p>一种方法是训练多个从小到大的model，然后选择合适的模型，这样的问题是需要存储很多个model。</p><p>另外一种方法是，<strong>训练一个在中间层就可以得到最终结果的model</strong>。因为网络浅层和深层提取到的特征一般分别是低级特征和高级特征，所以在网络浅层得到的结果一般要比在网络深层得到的结果差一些。在网络浅层就计算最终结果可能会迫使网络浅层学习一些高级特征，这会破坏网络从浅层到深层逐步提取低/高级特征的架构。那如何处理这些问题呢？可以看一看Multi-Scale Dense Convolutional Networks：<a href="https://arxiv.org/abs/1703.09844" target="_blank" rel="noopener">https://arxiv.org/abs/1703.09844</a></p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;动态计算（Dynamic Computation）就是资源充足时就做到最好，资源不足时就减少运算量、先求有再求好(但也不要太差)。&lt;/p&gt;
+&lt;p&gt;一种方法是训练多个从小到大的model，然后选择合适的模型，这样的问题是需要存储很多个model。&lt;/p&gt;
+&lt;p&gt;另外一种方法是
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="模型压缩" scheme="https://chouxianyu.github.io/tags/%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9/"/>
+    
+      <category term="动态计算" scheme="https://chouxianyu.github.io/tags/%E5%8A%A8%E6%80%81%E8%AE%A1%E7%AE%97/"/>
+    
+  </entry>
   
   <entry>
     <title>李宏毅机器学习课程笔记-13.4模型压缩之架构设计</title>
@@ -519,38 +548,6 @@
       
       
         &lt;h2 id=&quot;1层LSTM神经元的架构&quot;&gt;&lt;a href=&quot;#1层LSTM神经元的架构&quot; class=&quot;headerlink&quot; title=&quot;1层LSTM神经元的架构&quot;&gt;&lt;/a&gt;1层LSTM神经元的架构&lt;/h2&gt;&lt;p&gt;根据上述内容，你可能看不出LSTM与RNN有什么关系，接下来
-      
-    
-    </summary>
-    
-    
-      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="循环神经网络" scheme="https://chouxianyu.github.io/tags/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="LSTM" scheme="https://chouxianyu.github.io/tags/LSTM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-9.4LSTM入门</title>
-    <link href="https://chouxianyu.github.io/2021/04/13/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-9-4LSTM%E5%85%A5%E9%97%A8/"/>
-    <id>https://chouxianyu.github.io/2021/04/13/李宏毅机器学习课程笔记-9-4LSTM入门/</id>
-    <published>2021-04-13T00:35:26.000Z</published>
-    <updated>2021-04-13T00:47:38.903Z</updated>
-    
-    <content type="html"><![CDATA[<p>LSTM即Long Short-term Memory。</p><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>前几篇文章提到的RNN都比较简单，可以任意读写memory，没有进一步对memory进行管理。<strong>现在常用的memory管理方式是LSTM</strong>。正如其名，LSTM是比较长的短期记忆，<code>-</code>是在short和term之间。<strong>前几篇提到的RNN在有新的输入时都会更新memory，这样的memory是非常短期的，而LSTM中可以有更久之前的memory</strong>。</p><p><img src="https://pic2.zhimg.com/80/v2-2d2d4f677d917a001fcf379e00472bbf_720w.png" alt="img"></p><p>如上图所示，LSTM中有3个gate、4个输入(3个gate控制信号和1个想要写入memory cell的值)和1个输出：</p><ul><li>input gate：当某个neuron的输出想要被写进memory cell，它要先经过input gate。如果input gate是关闭的，则任何内容都无法被写入。input gate的关闭与否、什么时候开闭是由神经网络学习到的。</li><li>output gate：output gate决定了外界是否可以从memory cell中读取数据。当output gate关闭的时候，memory里面的内容无法被读取。output gate的关闭与否、什么时候开闭也是由神经网络学习到的。</li><li>forget gate：forget gate决定什么时候需要把memory cell里存放的内容忘掉，什么时候要保存。这也是由神经网络学习到的。</li></ul><h2 id="LSTM计算式"><a href="#LSTM计算式" class="headerlink" title="LSTM计算式"></a>LSTM计算式</h2><p>下图展示了LSTM的计算式。</p><p><img src="https://pic1.zhimg.com/80/v2-de00669f5a90c477fb32b2fffb71571d_720w.png" alt="img"></p><ul><li>$z$是想要被存到memory cell里的值</li><li>$z_i$是input gate的控制信号</li><li>$z_o$是output gate的控制信号</li><li>$z_f$是forget gate的控制信号</li><li>$a$是综合上述4个输入得到的输出值</li></ul><p>$z$、$z_i$、$z_o$和$z_f$通过激活函数分别得到$g(z)$、$f(z_i)$、$f(z_o)$和$f(z_f)$，其中$z_i$、$z_o$和$z_f$的激活函数$f()$一般会选sigmoid函数，因为其输出在0~1之间，可表示gate的开启程度。</p><p>令$g(z)$与$f(z_i)$相乘得到$g(z)f(z_i)$，然后把原先存放在memory cell中的$c$与$f(z_f)$相乘得到$cf(z_f)$，两者相加得到存在memory cell中的新值$c’=g(z)f(z_i)+cf(z_f)$。</p><ul><li><p>若$f(z_i)=0$，则相当于并不使用输入$z$更新memory；若$f(z_i)=1$，则相当于直接输入$g(z)$。</p></li><li><p>若$f(z_f)=1$，则不忘记memory cell中的原值$c$；若$f(z_f)=0$，则原值$c$将被遗忘清除。</p><p>  可以看出，forget gate的逻辑与直觉是相反的，该控制信号打开表示记得原值，关闭却表示遗忘。这个gate取名为remember gate更好些。</p></li></ul><p>此后，$c’$通过激活函数得到$h(c’)$，与output gate的$f(z_o)$相乘，得到输出$a=h(c’)f(z_o)$。</p><h2 id="Apply-LSTM-to-NN"><a href="#Apply-LSTM-to-NN" class="headerlink" title="Apply LSTM  to NN"></a>Apply LSTM  to NN</h2><p>上述的LSTM应该如何应用于神经网络呢？其实直接把LSTM作为1个神经元就可以了。假设输入层有2个标量输入$x_1,x_2$，隐藏层中有2个神经元，每个神经元输出1个标量，则其结构如下图所示。</p><p><img src="https://pic3.zhimg.com/80/v2-af52398f38860c122b0741e07ebb3dbd_720w.png" alt="img"></p><ul><li><strong>标量输入$x_1,x_2$乘以4个参数得到4个值，这4个值作为LSTM的4个input</strong>。</li><li>在普通的神经元中，1个input对应1个output；而在LSTM中4个input才产生1个output，并且所有的input都是不相同的。</li><li>LSTM所需要的参数量是普通NN的4倍。</li></ul><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;LSTM即Long Short-term Memory。&lt;/p&gt;
-&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;p&gt;前几篇文章提到的RNN都比较简单，可以任意读写mem
       
     
     </summary>

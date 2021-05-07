@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[李宏毅机器学习课程笔记-13.5模型压缩之动态计算]]></title>
+    <url>%2F2021%2F05%2F07%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-13-5%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E4%B9%8B%E5%8A%A8%E6%80%81%E8%AE%A1%E7%AE%97%2F</url>
+    <content type="text"><![CDATA[动态计算（Dynamic Computation）就是资源充足时就做到最好，资源不足时就减少运算量、先求有再求好(但也不要太差)。 一种方法是训练多个从小到大的model，然后选择合适的模型，这样的问题是需要存储很多个model。 另外一种方法是，训练一个在中间层就可以得到最终结果的model。因为网络浅层和深层提取到的特征一般分别是低级特征和高级特征，所以在网络浅层得到的结果一般要比在网络深层得到的结果差一些。在网络浅层就计算最终结果可能会迫使网络浅层学习一些高级特征，这会破坏网络从浅层到深层逐步提取低/高级特征的架构。那如何处理这些问题呢？可以看一看Multi-Scale Dense Convolutional Networks：https://arxiv.org/abs/1703.09844 Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>模型压缩</tag>
+        <tag>动态计算</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[李宏毅机器学习课程笔记-13.4模型压缩之架构设计]]></title>
     <url>%2F2021%2F05%2F06%2F%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-13-4%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E4%B9%8B%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%2F</url>
     <content type="text"><![CDATA[调整Network的架构设计（Architecture Design），让它变得只需要比较少的参数，这是在实际操作中最有效的做法。 Low Rank Approximation如果是Fully Connected Network，前一层和后一层分别有N、M个neuron则需要$N\times M$个参数，我们可以在这两层中间加一个有K个neuron的层(不要激活函数)就需要$K(N+M)$个neuron，这样就可以减少参数量，但是根据线性代数的知识可知这3层的性能不一定比之前的2层好。 Depthwise &amp; Pointwise Convolution在普通卷积中，每个filter（卷积核）要处理输入的所有channel。假设输入有$I$个channel，有$O$个尺寸为$k\times k$的filter，则需要$(k\times k\times I)\times O$个参数、输出$O$个channel。 深度可分离卷积(Depthwise Separable Convolution)又称为Depthwise&amp;Pointwise Convolution，分为以下2步，共需要$k\times k\times I+I\times O$个参数、输出$O$个channel。 Depthwise Convolution 在这一步中，filter的数量等于输入channel的数量，即每个filter只处理一个channel，这步的作用就是修改输入的尺寸。 假设输入有$I$个channel，因此就有$I$个filter；假设每个filter的尺寸为$k\times k$，则需要$(k\times k\times1)\times I$个参数、输出$I$个channel。 Pointwise Convolution 在这一步中，以上一步(Depthwise Convolution)的输出作为输入，每个filter的尺寸必须为$1\times 1$，和普通卷积核一样要处理输入的所有channel，这步的作用就是修改输入的通道数。 假设有$O$个filter，则需要$(1\times1\times I)\times O$个参数、输出$O$个channel。 Group ConvolutionGroup Convolution就是把输入的多个channel分成多个group，对每个group分别进行一次或多次普通卷积。Group Convolution算是普通卷积和Depthwise Convolution的折衷，当group数量和输入的通道数相同时它就相当于Depthwise Convolution，当group数量为1时它就相当于普通卷积。 不同卷积的PyTorch实现1234567891011# 普通卷积, weight数量 = in_chs * out_chs * kernel_size^2nn.Conv2d(in_chs, out_chs, kernel_size, stride, padding)# Group Convolution, Group数量可以自行控制，表示要分成几个group，其中in_chs和out_chs必须可以被groups整除nn.Conv2d(in_chs, out_chs, kernel_size, stride, padding, groups=groups)# Depthwise Convolution, 输入通道数=输出通道数=group数量, weight数量 = in_chs * kernel_size^2nn.Conv2d(in_chs, out_chs=in_chs, kernel_size, stride, padding, groups=in_chs)# Pointwise Convolution, 也就是1×1卷积, weight数量 = in_chs * out_chsnn.Conv2d(in_chs, out_chs, 1) ApplicationDepthwise Separable Convolution被广泛地用在各种小型网络中：SqueezeNet、MobileNet、ShuffleNet、Xception，其中最知名的为MobileNet。 Github（github.com）：@chouxianyu Github Pages（github.io）：@臭咸鱼 知乎（zhihu.com）：@臭咸鱼 博客园（cnblogs.com）：@臭咸鱼 B站（bilibili.com）：@绝版臭咸鱼 微信公众号：@臭咸鱼 转载请注明出处，欢迎讨论和交流!]]></content>
@@ -1044,8 +1054,8 @@
       <tags>
         <tag>算法</tag>
         <tag>PAT</tag>
-        <tag>图</tag>
         <tag>map</tag>
+        <tag>图</tag>
         <tag>哈希</tag>
       </tags>
   </entry>
@@ -1056,9 +1066,9 @@
       <tags>
         <tag>算法</tag>
         <tag>PAT</tag>
+        <tag>map</tag>
         <tag>图</tag>
         <tag>set</tag>
-        <tag>map</tag>
         <tag>点着色</tag>
       </tags>
   </entry>
@@ -1226,8 +1236,8 @@
     <url>%2F2020%2F08%2F01%2FLeetCode230%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%AC%ACK%E5%B0%8F%E7%9A%84%E5%85%83%E7%B4%A0%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/ 题解 递归解法 根据BST的性质，中序遍历BST得到的结点序列为结点的升序序列，序列中第k个元素就是第k小的元素。 所以可以中序遍历BST生成升序序列，找到第k个元素则停止遍历。 1234567891011121314151617181920212223242526272829303132333435363738394041// Problem: LeetCode 230// URL: https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/// Tags: Tree BST Recursion DFS// Difficulty: Medium#include &lt;vector&gt;using namespace std;struct TreeNode&#123; int val; TreeNode* left; TreeNode* right;&#125;;class Solution&#123;private: vector&lt;int&gt; vals; int k;public: // 中序遍历 void inorder(TreeNode* root)&#123; if (root==nullptr) return; // 遍历左子树 inorder(root-&gt;left); // 剪枝：如果已经遍历到第K个元素，则不用再遍历 if (this-&gt;vals.size() &gt;= this-&gt;k) return; // 遍历当前根结点 this-&gt;vals.push_back(root-&gt;val); // 遍历右子树 inorder(root-&gt;right); &#125; // 获取BST中第k小的元素 int kthSmallest(TreeNode* root, int k) &#123; this-&gt;k = k; // 中序遍历生成元素的升序序列 inorder(root); // 结果为升序序列中的第k个元素，下面的两行代码都可以 return this-&gt;vals[k - 1]; // return this-&gt;vals.back(); &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
         <tag>DFS</tag>
@@ -1239,8 +1249,8 @@
     <url>%2F2020%2F08%2F01%2FLeetCode669%E4%BF%AE%E5%89%AA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/trim-a-binary-search-tree/ 题解 递归解法 我看了题解写出来的，我分析题目的时候以为还要交换左右子树什么的……，其实不用 思路见代码注释 123456789101112131415161718192021222324252627// Problem: LeetCode 669// URL: https://leetcode-cn.com/problems/trim-a-binary-search-tree/// Tags: Tree BST Recursion// Difficulty: Easystruct TreeNode&#123; int val; TreeNode* left; TreeNode* right;&#125;;class Solution&#123;public: TreeNode* trimBST(TreeNode* root, int L, int R) &#123; // 处理空链表 if (root == nullptr) return nullptr; // 如果根结点小于L，则根结点以及左子树会被剪掉，整个树的修剪结果是修剪后的右子树 if (root-&gt;val &lt; L) return trimBST(root-&gt;right, L, R); // 如果根结点小于L，则根结点以及右子树会被剪掉，整个树的修剪结果是修剪后的左子树 if (root-&gt;val &gt; R) return trimBST(root-&gt;left, L, R); // 根结点不需要修剪，则修剪左右子树 root-&gt;left = trimBST(root-&gt;left, L, R); root-&gt;right = trimBST(root-&gt;right, L, R); // 修剪完成，返回根结点 return root; &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
         <tag>DFS</tag>
@@ -1252,8 +1262,8 @@
     <url>%2F2020%2F07%2F31%2FLeetCode328%E5%A5%87%E5%81%B6%E9%93%BE%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/odd-even-linked-list/ 题解 我自己写的 思路是：首先建立两个链表（奇数号结点链表和偶数号结点链表），然后遍历整个链表并通过尾插法构造这两个链表，最后将偶数号结点链表连接到奇数号结点链表尾部即可。 时间复杂度是$O(n)$，空间复杂度是$O(1)$ 具体思路见代码注释 12345678910111213141516171819202122232425262728293031323334353637383940414243// Problem: LeetCode 328// URL: https://leetcode-cn.com/problems/odd-even-linked-list/// Tags: Linked List// Difficulty: Mediumstruct ListNode&#123; int val; ListNode* next;&#125;;class Solution&#123;public: ListNode* oddEvenList(ListNode* head) &#123; // 处理0个、1个或者2个结点的情况 if (head == nullptr || head-&gt;next == nullptr || head-&gt;next-&gt;next == nullptr) return head; // 奇数号结点链表首尾 ListNode *oddHead = head, *oddTail = oddHead; // 偶数号结点链表首尾 ListNode *evenHead = head-&gt;next, *evenTail = evenHead; // 当前结点是第奇数个还是偶数个，true则为第奇数个，false则为第偶数个 bool oddFlag = true; // 从第三个结点开始遍历 head = head-&gt;next-&gt;next; // 遍历链表，将链表分为奇数号结点链表和偶数号结点链表 while(head != nullptr)&#123; if(oddFlag==true)&#123; oddTail-&gt;next = head; oddTail = oddTail-&gt;next; &#125; else&#123; evenTail-&gt;next = head; evenTail = evenTail-&gt;next; &#125; oddFlag = !oddFlag; head = head-&gt;next; &#125; // 连接奇数号结点链表和偶数号结点链表 oddTail-&gt;next = evenHead; evenTail-&gt;next = nullptr; return oddHead; &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>单向链表</tag>
       </tags>
   </entry>
@@ -1262,8 +1272,8 @@
     <url>%2F2020%2F07%2F31%2FLeetCode725%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/split-linked-list-in-parts/ 题解 这题我做了好久 该题抽象出来的话，就是要将n个物体分成k组，要求每组物体数量的差异不超过1。 思路就是先均分成k组，每组n/k（忽略小数位）个元素，剩下了n%k个物体，就把剩下的n%k个物体均分放入n%k个组（在本题中是前n%k个组）。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253// Problem: LeetCode 725// URL: https://leetcode-cn.com/problems/split-linked-list-in-parts/// Tags: Linked List// Difficulty: Medium#include&lt;vector&gt;using namespace std;struct ListNode&#123; int val; ListNode* next;&#125;;class Solution&#123;private: int getLen(ListNode* root)&#123; int len = 0; while(root != nullptr)&#123; len++; root = root-&gt;next; &#125; return len; &#125;public: vector&lt;ListNode*&gt; splitListToParts(ListNode* root, int k) &#123; vector&lt;ListNode *&gt; result; ListNode *temp = nullptr; // 遍历求链表长度 int n = this-&gt;getLen(root); // 每个part至少quotient个结点 int quotient = n / k; // 剩余remainder个结点，将其平均分配至前remainder个part int remainder = n % k; // 前remainder个part各quotient+1个结点，后k-remainder个结点各quotient个结点 for (int i = 0; i &lt; k; i++)&#123; // 存储该part的头结点 result.push_back(root); // 该part中结点数量 int partCount = remainder &gt; 0 ? quotient + 1 : quotient; // 通过遍历，将root移动到下一个part，同时用temp保存该part的尾结点 for (int j = 0; j &lt; partCount; j++)&#123; temp = root; root = root-&gt;next; &#125; // 断开该part中尾结点与下一part的连接 if (temp != nullptr) temp-&gt;next = nullptr; remainder--; &#125; return result; &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>单向链表</tag>
       </tags>
   </entry>
@@ -1272,8 +1282,8 @@
     <url>%2F2020%2F07%2F31%2FLeetCode234%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/palindrome-linked-list/ 题解一 将链表元素存入数组，然后从首尾遍历 注意如果是空链表，结果也是true 12345678910111213141516171819202122232425262728293031323334// Problem: LeetCode 234// URL: https://leetcode-cn.com/problems/palindrome-linked-list/// Tags: Linked List Two Pointers Recursion// Difficulty: Easy#include &lt;iostream&gt;#include &lt;vector&gt;using namespace std;struct ListNode&#123; int val; ListNode* next;&#125;;class Solution&#123;public: bool isPalindrome(ListNode* head) &#123; // 存储链表中的结点 vector&lt;int&gt; vals; while(head != nullptr)&#123; vals.push_back(head-&gt;val); head = head-&gt;next; &#125; // 从首尾两侧遍历 int front = 0, back = vals.size()-1; while(front &lt; back)&#123; if(vals[front] != vals[back]) return false; front++; back--; &#125; return true; &#125;&#125;; 题解二 递归写法，有点牛的 1234567891011121314151617181920212223242526272829303132// Problem: LeetCode 234// URL: https://leetcode-cn.com/problems/palindrome-linked-list/// Tags: Linked List Two Pointers Recursion// Difficulty: Easystruct ListNode&#123; int val; ListNode* next;&#125;;class Solution&#123;private: ListNode* front; bool check(ListNode* node)&#123; if(node != nullptr)&#123; // 先检查尾部 if(!check(node-&gt;next)) return false; // 检查当前结点 if(node-&gt;val != this-&gt;front-&gt;val) return false; // 该结点检查完了，递归使node从后往前，手动从前往后更新front this-&gt;front = this-&gt;front-&gt;next; &#125; return true; &#125;public: bool isPalindrome(ListNode* head) &#123; this-&gt;front = head; return this-&gt;check(head); &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>递归</tag>
         <tag>单向链表</tag>
         <tag>双指针</tag>
@@ -1284,8 +1294,8 @@
     <url>%2F2020%2F07%2F31%2FLeetCode445%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0II%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/add-two-numbers-ii/ 题解一 使用了栈，遍历链表把结点存入栈中，然后弹栈将结点相加，注意进位 自己写的思路，代码有些长，应该有递归解法 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172// Problem: LeetCode 445// URL: https://leetcode-cn.com/problems/add-two-numbers-ii/description/// Tags: Linked List Stack Recursion// Difficulty: Medium#include &lt;iostream&gt;#include &lt;stack&gt;using namespace std;struct ListNode&#123; int val; ListNode* next; ListNode(int x=0) : val(x), next(nullptr) &#123;&#125;&#125;;class Solution&#123;private: int carry=0; // 进位 ListNode* addNode(ListNode* node1, ListNode* node2)&#123; int sum = node1-&gt;val + node2-&gt;val + this-&gt;carry; node1-&gt;val = sum%10; this-&gt;carry = sum / 10; delete node2; return node1; &#125;public: ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) &#123; stack&lt;ListNode*&gt; s1; // 使用引用是为了避免不必要的内存开销 stack&lt;ListNode*&gt; s2; // 将两个链表中的结点存入栈中 while (l1!=nullptr)&#123; s1.push(l1); l1 = l1-&gt;next; &#125; while (l2!=nullptr)&#123; s2.push(l2); l2 = l2-&gt;next; &#125; ListNode *newHead; // 将两个链表等长的部分相加 while (!s1.empty() &amp;&amp; !s2.empty())&#123; newHead = this-&gt;addNode(s1.top(), s2.top()); s1.pop(); s2.pop(); &#125; // 如果两个链表不等长，则处理两个链表因不等长而剩余的结点 if (s1.empty()) s1 = s2; ListNode *tempNode; while(!s1.empty())&#123; // 取出一个结点 tempNode = s1.top(); s1.pop(); // 考虑进位 int sum = tempNode-&gt;val + this-&gt;carry; tempNode-&gt;val = sum%10; this-&gt;carry = sum/10; // 将该结点加入链表 tempNode-&gt;next = newHead; newHead = tempNode; &#125; // 考虑最后一次进位 if (this-&gt;carry &gt; 0)&#123; // 将该结点加入链表 tempNode = new ListNode(this-&gt;carry); tempNode-&gt;next = newHead; newHead = tempNode; &#125; return newHead; &#125;&#125;; 题解二 递归解法 需要向短链表中添加结点使其与长链表长度一致，然后递归使链表相加 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071// Problem: LeetCode 445// URL: https://leetcode-cn.com/problems/add-two-numbers-ii/description/// Tags: Linked List Stack Recursion// Difficulty: Medium#include &lt;iostream&gt;using namespace std;struct ListNode&#123; int val; ListNode* next; ListNode(int x=0) : val(x), next(nullptr) &#123;&#125;&#125;;class Solution&#123;private: int carry = 0; // 进位 // 遍历求出链表l有几个结点 int getLen(ListNode* l)&#123; int len=0; while(l!=nullptr)&#123; len++; l = l-&gt;next; &#125; return len; &#125; // 为链表l添加num个值为0的结点 ListNode* addZeroNodes(ListNode* l, int num)&#123; if(num&lt;=0) return l; ListNode* temp; while(num--)&#123; temp = new ListNode(0); temp-&gt;next = l; l = temp; &#125; return l; &#125; // 递归函数 ListNode* addTwoLists(ListNode* l1, ListNode* l2)&#123; if(l1==nullptr || l2==nullptr) return nullptr; // 先使后面的结点相加 addTwoLists(l1-&gt;next, l2-&gt;next); // 将两个结点相加 int sum = l1-&gt;val + l2-&gt;val + this-&gt;carry; l1-&gt;val = sum%10; this-&gt;carry = sum/10; // 释放l2返回l1 delete l2; return l1; &#125;public: ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) &#123; // 使两个链表等长 int len1=this-&gt;getLen(l1), len2=this-&gt;getLen(l2); l1 = this-&gt;addZeroNodes(l1, len2 - len1); l2 = this-&gt;addZeroNodes(l2, len1 - len2); // 通过递归使链表相加 l1 = addTwoLists(l1, l2); // 考虑最后一个进位 if(this-&gt;carry &gt; 0)&#123; ListNode* temp = new ListNode(this-&gt;carry); temp-&gt;next = l1; return temp; &#125; return l1; &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>递归</tag>
         <tag>栈</tag>
         <tag>单向链表</tag>
@@ -1296,8 +1306,8 @@
     <url>%2F2020%2F07%2F30%2FLeetCode24%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/swap-nodes-in-pairs/ 题解 递归解法，我自己写的 要明确函数的功能 函数中需手动处理空链表和链表中只有1个结点的情况；多个结点时，先手动交换前两个结点，然后通过递归交换其它结点 1234567891011121314151617181920212223242526// Problem: LeetCode 24// URL: https://leetcode-cn.com/problems/swap-nodes-in-pairs/// Tags: Linked List Recursion// Difficulty: Medium#include &lt;iostream&gt;using namespace std;struct ListNode&#123; int val; ListNode* next;&#125;;class Solution&#123;public: ListNode* swapPairs(ListNode* head) &#123; // 空链表或只有1个结点 if (head==nullptr || head-&gt;next==nullptr) return head; // 取第2和3个结点 ListNode *newHead=head-&gt;next, *subHead = head-&gt;next-&gt;next; // 交换第1个结点和第2个结点，递归交换其它结点并进行连接 newHead-&gt;next = head; head-&gt;next = swapPairs(subHead); return newHead; &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>递归</tag>
         <tag>单向链表</tag>
       </tags>
@@ -1307,8 +1317,8 @@
     <url>%2F2020%2F07%2F30%2FLeetCode19%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/ 题解一 双指针：一个“快”，一个“慢” 快指针先到达链表末尾 具体思路见代码及注释 12345678910111213141516171819202122232425262728293031323334353637383940414243444546// Problem: LeetCode 19// URL: https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/// Tags: Linked List Two Pointers Recursion// Difficulty: Medium#include &lt;iostream&gt;using namespace std;struct ListNode&#123; int val; ListNode* next;&#125;;class Solution&#123;public: // 删除链表的倒数第N个结点 ListNode* removeNthFromEnd(ListNode* head, int n) &#123; // 快慢指针 ListNode* fast = head, *slow = head; // 快指针先移动N+1步，慢指针不移动 int i = 0; while (i &lt;= n &amp;&amp; fast != nullptr)&#123; fast = fast-&gt;next; i++; &#125; // 这个if语句和上个while循环中的fast!=nullptr都是为了处理一种特殊情况： // 假如链表只有N个元素且要删除倒数第N个元素，则快指针不能移动N+1步，这时应直接删除头结点 if(i!=n+1)&#123; // 删除头结点并返回新链表 head = head-&gt;next; delete slow; return head; &#125; // 快指针和慢指针一起移动直至快指针为空 // 因为快指针先移动了n+1步，所以循环结束后慢指针是指向待删除结点前面的那个结点 while(fast!=nullptr)&#123; fast = fast-&gt;next; slow = slow-&gt;next; &#125; // 删除待删除的结点并返回新链表 fast = slow-&gt;next; slow-&gt;next = fast-&gt;next; delete fast; return head; &#125;&#125;; 题解二 递归写法，很厉害，我参考了别人的 1234567891011121314151617181920212223242526272829// Problem: LeetCode 19// URL: https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/// Tags: Linked List Two Pointers Recursion// Difficulty: Medium#include &lt;iostream&gt;using namespace std;struct ListNode&#123; int val; ListNode* next;&#125;;class Solution&#123;private: int index=0;public: // 删除链表的倒数第N个结点 ListNode* removeNthFromEnd(ListNode* head, int n) &#123; if(head == nullptr) return nullptr; // 递归表达式 head-&gt;next = removeNthFromEnd(head-&gt;next, n); // 该变量用来标记是倒数第几个结点，这条语句写在了递归表达式之后，这很关键 index++; // 此时head即为待删除结点前边的那个结点 if(index == n) return head-&gt;next; return head; &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>递归</tag>
         <tag>单向链表</tag>
         <tag>双指针</tag>
@@ -1319,8 +1329,8 @@
     <url>%2F2020%2F07%2F30%2FLeetCode513%E6%89%BE%E6%A0%91%E5%B7%A6%E4%B8%8B%E8%A7%92%E7%9A%84%E5%80%BC%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/find-bottom-left-tree-value/ 题解一 层次遍历 求最后一层最左边的结点 我自己想的思路：层次遍历，保存每一层最左侧的结点，直到二叉树遍历结束 12345678910111213141516171819202122232425262728293031323334353637383940414243// Problem: LeetCode 513// URL: https://leetcode-cn.com/problems/find-bottom-left-tree-value/// Tags: Tree Queue BFS// Difficulty: Medium#include &lt;iostream&gt;#include &lt;queue&gt;using namespace std;struct TreeNode&#123; int val; TreeNode* left; TreeNode* right;&#125;;class Solution&#123;public: // 求最后一层最左边的结点 int findBottomLeftValue(TreeNode* root) &#123; // 空树，题目已说明树不会为空 if (root==nullptr) return 0; // 存储当前层中的结点 queue&lt;TreeNode*&gt; parentNodes; parentNodes.push(root); // 按层遍历并保存每一层的第一个结点 TreeNode* leftBottomNode; while(!parentNodes.empty())&#123; queue&lt;TreeNode*&gt; childNodes; // 更新左下角结点指针 leftBottomNode = parentNodes.front(); // 获取下一层结点 while(!parentNodes.empty())&#123; root = parentNodes.front(); parentNodes.pop(); if (root-&gt;left!=nullptr) childNodes.push(root-&gt;left); if (root-&gt;right!=nullptr) childNodes.push(root-&gt;right); &#125; // 更新当前层 parentNodes = childNodes; &#125; return leftBottomNode-&gt;val; &#125;&#125;; 题解二 其他人的思路 也是按层遍历，但是会先遍历右子结点再遍历左子结点，这样遍历二叉树时最后一个结点就是最后一层最左侧的结点 1234567891011121314151617181920212223242526272829303132// Problem: LeetCode 513// URL: https://leetcode-cn.com/problems/find-bottom-left-tree-value/// Tags: Tree Queue BFS// Difficulty: Medium#include &lt;iostream&gt;#include &lt;queue&gt;using namespace std;struct TreeNode&#123; int val; TreeNode* left; TreeNode* right;&#125;;class Solution&#123;public: // 求最后一层最左边的结点 int findBottomLeftValue(TreeNode* root) &#123; // 存储当前层中的结点 queue&lt;TreeNode*&gt; nodes; nodes.push(root); // 按层遍历，但先遍历右子结点再遍历左子结点 while(!nodes.empty())&#123; root = nodes.front(); nodes.pop(); if (root-&gt;right!=nullptr) nodes.push(root-&gt;right); if (root-&gt;left!=nullptr) nodes.push(root-&gt;left); &#125; return root-&gt;val; &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>队列</tag>
         <tag>BFS</tag>
@@ -1331,8 +1341,8 @@
     <url>%2F2020%2F07%2F30%2FLeetCode637%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%B9%B3%E5%9D%87%E5%80%BC%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/average-of-levels-in-binary-tree/ 题解思路和层次遍历(点击查看)一样，没什么区别。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657// Problem: LeetCode 637// URL: https://leetcode-cn.com/problems/average-of-levels-in-binary-tree/// Tags: Tree Queue// Difficulty: Easy#include &lt;iostream&gt;#include &lt;queue&gt;#include &lt;vector&gt;using namespace std;struct TreeNode&#123; int val; TreeNode* left; TreeNode* right;&#125;;class Solution&#123;private: vector&lt;double&gt; result; double calcAverageOfLevel(vector&lt;double&gt;&amp; vec)&#123; double sum = 0; for (vector&lt;double&gt;::iterator it = vec.begin(); it!=vec.end(); ++it) sum += *it; return sum / vec.size(); &#125;public: vector&lt;double&gt; averageOfLevels(TreeNode* root) &#123; // 空树，返回空数组 if (root==nullptr) return this-&gt;result; // 父层结点，即当前正在遍历的结点 queue&lt;TreeNode*&gt; parentNodes; parentNodes.push(root); // 遍历父层结点的同时获取下一层（子层）结点 while (!parentNodes.empty())&#123; // 子层结点，即下一层结点 queue&lt;TreeNode*&gt; childNodes; // 当前层的结点的值 vector&lt;double&gt; valOfLevel; // 遍历当前层 while (!parentNodes.empty())&#123; root = parentNodes.front(); parentNodes.pop(); valOfLevel.push_back(root-&gt;val); if (root-&gt;left!=nullptr) childNodes.push(root-&gt;left); if (root-&gt;right!=nullptr) childNodes.push(root-&gt;right); &#125; // 计算并存储当前层结点值的平均值 this-&gt;result.push_back(this-&gt;calcAverageOfLevel(valOfLevel)); // 更新当前层 parentNodes = childNodes; &#125; return this-&gt;result; &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>队列</tag>
         <tag>BFS</tag>
@@ -1343,8 +1353,8 @@
     <url>%2F2020%2F07%2F30%2FLeetCode671%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%AC%AC%E4%BA%8C%E5%B0%8F%E7%9A%84%E8%8A%82%E7%82%B9%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree/ 题解一 自己想的思路，只用了函数本身，没有用其它函数 根据题目给的下面2个条件，又因为树是递归结构，可得到：根结点、左子结点和右子结点中根结点是最小的。 每个结点的子结点数量只能为 2 或 0。 如果一个结点有两个子结点的话，那么该结点的值等于两个子结点中较小的一个。 思路见代码和注释 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657// Problem: LeetCode 671// URL: https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree/// Tags: Tree Recursion// Difficulty: Easy#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;struct TreeNode&#123; int val; TreeNode* left; TreeNode* right;&#125;;class Solution&#123;public: int findSecondMinimumValue(TreeNode* root) &#123; // 如果结点为空或者无左右子树，则不存在第二小的结点 if(root==nullptr || root-&gt;left==nullptr || root-&gt;right==nullptr) return -1; // 如果左右子结点的值相等 if(root-&gt;left-&gt;val == root-&gt;right-&gt;val)&#123; // 求左右子树中第二小的结点的值 int leftSecondMin = findSecondMinimumValue(root-&gt;left); int rightSecondMin = findSecondMinimumValue(root-&gt;right); // 左右子树中不存在第二小的结点，则这整棵树中都不存在第二小的结点 if (leftSecondMin == -1 &amp;&amp; rightSecondMin == -1) return -1; // 左子树中不存在第二小的结点而右子树中存在第二小的结点，则右子树中第二小的结点即这整棵树中第二小的结点 if (leftSecondMin == -1) return rightSecondMin; // 右子树中不存在第二小的结点而左子树中存在第二小的结点，则左子树中第二小的结点即这整棵树中第二小的结点 if (rightSecondMin == -1) return leftSecondMin; return min(leftSecondMin, rightSecondMin); &#125; // 左子结点的值小于右子结点的值，而左子结点的值也等于根结点的值 else if(root-&gt;left-&gt;val &lt; root-&gt;right-&gt;val)&#123; int leftSecondMin = findSecondMinimumValue(root-&gt;left); // 左子树中不存在第二小的结点，则右子结点就是整棵树中第二小的结点 if(leftSecondMin==-1) return root-&gt;right-&gt;val; else // 左子树中存在第二小的结点，则其和右子结点中值较小的结点就是整棵树中第二小的结点 return min(leftSecondMin, root-&gt;right-&gt;val); &#125; // 和上个情况相似，不再注释说明 else&#123; int rightSecondMin = findSecondMinimumValue(root-&gt;right); if (rightSecondMin == -1) return root-&gt;left-&gt;val; else return min(rightSecondMin, root-&gt;left-&gt;val); &#125; &#125;&#125;; 题解二 其他人给的题解，速度很快 思路是：既然已经保证根结点的值最小，那就只需要遍历左右子树，遍历时一旦发现大于最小值的值（也就是第二小的值）就停止遍历并返回结果 123456789101112131415161718192021222324252627282930313233343536373839404142// Problem: LeetCode 671// URL: https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree/// Tags: Tree Recursion// Difficulty: Easy#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;struct TreeNode&#123; int val; TreeNode* left; TreeNode* right;&#125;;class Solution&#123;private: int helper(TreeNode* root, int rootMin)&#123; // 空树则无第二小的结点 if (root==nullptr) return -1; // 如果找到大于最小值的值（第二小的值），则返回 if (root-&gt;val &gt; rootMin) return root-&gt;val; // 左右子树中第二小的值 int leftSecondMin = helper(root-&gt;left, rootMin); int rightSecondMin = helper(root-&gt;right, rootMin); // 左子树中不存在第二小的值，则结果取决于右子树 if (leftSecondMin == -1) return rightSecondMin; // 右子树中不存在第二小的值，则结果取决于右子树 if (rightSecondMin == -1) return leftSecondMin; // 左右子树都存在第二小的值，则取两者中的较小值 return min(leftSecondMin, rightSecondMin); &#125;public: int findSecondMinimumValue(TreeNode* root) &#123; return helper(root, root-&gt;val); &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
         <tag>DFS</tag>
@@ -1355,8 +1365,8 @@
     <url>%2F2020%2F07%2F30%2FLeetCode337%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/house-robber-iii/ 题解 递归写法 这个思路似乎是错的(不过我提交后是在某一个测试用例是超时了)，先把这份代码放这儿吧，后边补正确的解法 题目要求两个结点不能相连，这不等于隔层求和 123456789101112131415161718192021222324252627282930313233// Problem: LeetCode 337// URL: https://leetcode-cn.com/problems/house-robber-iii/// Tags: Tree DFS Recursion// Difficulty: Medium#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;struct TreeNode&#123; int val; TreeNode* left; TreeNode* right;&#125;;class Solution&#123;public: int rob(TreeNode* root) &#123; // 空结点，结果为0 if(root==nullptr) return 0; // 抢当前结点及其隔层 int result1 = root-&gt;val; if(root-&gt;left!=nullptr) result1 += rob(root-&gt;left-&gt;left) + rob(root-&gt;left-&gt;right); if(root-&gt;right!=nullptr) result1 += rob(root-&gt;right-&gt;left) + rob(root-&gt;right-&gt;right); // 抢根结点下一层的两个结点及其隔层 int result2 = rob(root-&gt;left) + rob(root-&gt;right); return max(result1, result2); &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
         <tag>DFS</tag>
@@ -1367,8 +1377,8 @@
     <url>%2F2020%2F07%2F27%2FLeetCode124%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/ 题解 递归解法 路径：一条从树中任意结点出发，达到任意结点的序列。该路径至少包含一个结点，且不一定经过根结点。 这道题和LeetCode687最长同值路径和LeetCode543二叉树的直径很相似，都很难，每个题都做了很久 三道题的共性是dfs函数并非直接实现了目标功能，而是将目标功能拆解，实现目标功能的一部分，然后再利用某种关系（根结点、左子树、右子树之间的关系，需要结合题意）拼接出目标功能（求目标值） 思路见代码注释 需要高度注意dfs函数的功能 123456789101112131415161718192021222324252627282930313233343536373839404142// Problem: LeetCode 124// URL: https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/// Tags: Tree Recursion DFS// Difficulty: Hard#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;struct TreeNode&#123; int val; TreeNode *left; TreeNode *right;&#125;;class Solution&#123;private: int maxSum = INT_MIN; // 全局最大路径和 // 功能：求一颗树的最大路径和，要求从根结点开始，在左子树或右子树结束，也可不经过左子树和右子树，即至多经过一个子树 int dfs(TreeNode *root) &#123; if (root == nullptr) return 0; int left = dfs(root-&gt;left); int right = dfs(root-&gt;right); // 过程中更新全局最大路径和：根结点必须经过，左右子树可经过可不经过 maxSum = max(maxSum, root-&gt;val + max(left, 0) + max(right, 0)); // 从根结点开始，在左子树或右子树结束，也可不经过左子树和右子树，即至多经过一个子树 return max(root-&gt;val, root-&gt;val + max(max(left, right), 0)); &#125;public: // 求一颗树的最大路径和，不要求经过根结点，起始和终止结点任意 int maxPathSum(TreeNode *root) &#123; dfs(root); return this-&gt;maxSum; &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
         <tag>DFS</tag>
@@ -1379,8 +1389,8 @@
     <url>%2F2020%2F07%2F27%2FLeetCode687%E6%9C%80%E9%95%BF%E5%90%8C%E5%80%BC%E8%B7%AF%E5%BE%84%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/longest-univalue-path/ 题解 这道题写了好久，然后参考了题解 递归解法 这道题和LeetCode543二叉树的直径(点击查看)非常相似，可以看一下 类似的题目还有LeetCode124(点击查看)，非常相似，难度是Hard 将一条路径分为左右两半，两个结点之间路径长度等于它们到根结点的距离之和 思路见代码注释，关键的代码是26-29行 需要高度注意dfs函数的功能 123456789101112131415161718192021222324252627282930313233343536373839404142// Problem: LeetCode 687// URL: https://leetcode-cn.com/problems/longest-univalue-path/// Tags: Tree Recursion DFS// Difficulty: Easy#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;struct TreeNode&#123; int val; TreeNode* left; TreeNode* right;&#125;;class Solution&#123;private: int maxLen = 0; // 全局最长同值路径 // 功能：返回该树与根结点同值的路径（必须以根结点为起点，至多经过一个子树）的最大长度 int dfs(TreeNode* root)&#123; // 空树则长度为0 if (root == nullptr) return 0; // 该树根结点在左右方向上的最长同值路径的长度（从根结点开始，路径上的结点的值都与根结点一致） int left = dfs(root-&gt;left); int right = dfs(root-&gt;right); left = (root-&gt;left != nullptr &amp;&amp; root-&gt;val == root-&gt;left-&gt;val) ? left + 1 : 0; right = (root-&gt;right != nullptr &amp;&amp; root-&gt;val == root-&gt;right-&gt;val) ? right + 1 : 0; // 更新全局最长同值路径 maxLen = max(maxLen, left + right); // 将一条路径分为左右两半，两个结点之间路径长度等于它们到根结点的距离之和 // 经过左子树或者右子树，或者不经过子树（left和right都为0时） return max(left, right); &#125;public: // 求该树中的最长同值路径，可以经过也可以不经过根结点 int longestUnivaluePath(TreeNode* root) &#123; dfs(root); return this-&gt;maxLen; &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
         <tag>DFS</tag>
@@ -1391,8 +1401,8 @@
     <url>%2F2020%2F07%2F27%2FLeetCode404%E5%B7%A6%E5%8F%B6%E5%AD%90%E4%B9%8B%E5%92%8C%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/sum-of-left-leaves/ 题解 自己写的 递归解法 思路见代码注释 12345678910111213141516171819202122232425262728293031323334353637// Problem: LeetCode 404// URL: https://leetcode-cn.com/problems/sum-of-left-leaves/// Tags: Tree Recursion// Difficulty: Easy#include &lt;iostream&gt;using namespace std;struct TreeNode&#123; int val; TreeNode* left; TreeNode* right;&#125;;class Solution&#123;private: // 判断一个结点是否为叶子结点：该结点非空且左右孩子为空 bool isLeaf(TreeNode* root)&#123; if(root==nullptr) return false; if(root-&gt;left==nullptr &amp;&amp; root-&gt;right==nullptr) return true; return false; &#125;public: // 得到一颗树的所有左叶子结点的值的总和 int sumOfLeftLeaves(TreeNode* root)&#123; if(root==nullptr) return 0; // 如果左孩子是叶子，则该树的结果为左孩子的值+右子树的结果 if(isLeaf(root-&gt;left)) return root-&gt;left-&gt;val + sumOfLeftLeaves(root-&gt;right); // 如果左孩子不是叶子，则该树对应的值为左子树的结果+右子树的结果 return sumOfLeftLeaves(root-&gt;left) + sumOfLeftLeaves(root-&gt;right); &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
       </tags>
@@ -1402,8 +1412,8 @@
     <url>%2F2020%2F07%2F26%2FLeetCode111%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/ 题解一 递归解法 我写的 说明详见注释 1234567891011121314151617181920212223242526272829303132333435363738// Problem: LeetCode 111// URL: https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/// Tags: Tree Recursion DFS// Difficulty: Easy#include &lt;iostream&gt;using namespace std;struct TreeNode&#123; int val; TreeNode* left; TreeNode* right;&#125;;class Solution&#123;private: int min=INT_MAX; // 深度优先遍历，在过程中记录最小路径 void dfs(TreeNode* root, int level)&#123; if(root==nullptr) return; level += 1; if(root-&gt;left==nullptr &amp;&amp; root-&gt;right==nullptr &amp;&amp; level &lt; this-&gt;min) this-&gt;min = level; dfs(root-&gt;left, level); dfs(root-&gt;right, level); &#125;public: int minDepth(TreeNode* root)&#123; // 空树则最小路径为0 if(root==nullptr) return 0; dfs(root, 0); return this-&gt;min; &#125;&#125;; 题解二 递归解法 参考了官方的题解 说明详见代码注释，感觉有些地方比较不符合人的思维逻辑 123456789101112131415161718192021222324252627282930// Problem: LeetCode 111// URL: https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/// Tags: Tree Recursion DFS// Difficulty: Easy#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;struct TreeNode&#123; int val; TreeNode* left; TreeNode* right;&#125;;class Solution&#123;public: int minDepth(TreeNode* root)&#123; // 空树则最小路径为0 if(root==nullptr) return 0; int left = minDepth(root-&gt;left); int right = minDepth(root-&gt;right); // 如果子树中有空树， 则该树的最小深度等于子树深度之和+1 if(left==0 || right==0) return left+right+1; // 如果子树都不为空，则该树的最小深度等于子树深度较小值+1 return min(left, right)+1; &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
         <tag>DFS</tag>
@@ -1414,8 +1424,8 @@
     <url>%2F2020%2F07%2F26%2FLeetCode101%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/symmetric-tree/ 题解 我写的 递归解法 具体方法见代码注释 123456789101112131415161718192021222324252627282930313233343536373839// Problem: LeetCode 101// URL: https://leetcode-cn.com/problems/symmetric-tree/// Tags: Tree Recursion DFS// Difficulty: Easy#include &lt;iostream&gt;using namespace std;struct TreeNode&#123; int val; TreeNode* left; TreeNode* right;&#125;;class Solution&#123;private: // 判断两个树s和t是否互相对称 // 有3个要求： // ①根结点值相等 // ②s的左子树和t的右子树互相对称 // ③s的右子树和t的左子树互相对称 bool isSymmetric(TreeNode* s, TreeNode* t)&#123; if(s==nullptr &amp;&amp; t==nullptr) return true; if(s==nullptr || t==nullptr) return false; if(s-&gt;val == t-&gt;val) return isSymmetric(s-&gt;left, t-&gt;right) &amp;&amp; isSymmetric(s-&gt;right, t-&gt;left); return false; &#125;public: bool isSymmetric(TreeNode* root) &#123; // 如果该树为空，则为对称的 if(root==nullptr) return true; // 左子树和右子树对称 return isSymmetric(root-&gt;left, root-&gt;right); &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
         <tag>DFS</tag>
@@ -1426,8 +1436,8 @@
     <url>%2F2020%2F07%2F26%2FLeetCode572%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%A0%91%E7%9A%84%E5%AD%90%E6%A0%91%2F</url>
     <content type="text"><![CDATA[题目描述https://leetcode-cn.com/problems/subtree-of-another-tree/ 题解 我写的 两层DFS、双重DFS 其它题解一般也是这个思路 1234567891011121314151617181920212223242526272829303132333435363738394041// Problem: LeetCode 572// URL: https://leetcode-cn.com/problems/subtree-of-another-tree/// Tags: Tree Recursion DFS// Difficulty: Easy#include &lt;iostream&gt;using namespace std;struct TreeNode&#123; int val; TreeNode* left; TreeNode* right;&#125;;class Solution&#123;private: // 判断s和t两个树是否相同（同质） bool isSametree(TreeNode* s, TreeNode* t)&#123; // 两个树均为空 if(s==nullptr &amp;&amp; t==nullptr) return true; // 一个树为空 if(s==nullptr || t==nullptr) return false; // 两个树都不为空 if(s-&gt;val==t-&gt;val) // 如果根结点的val都相同，则递归比较子树 return isSametree(s-&gt;left, t-&gt;left) &amp;&amp; isSametree(s-&gt;right, t-&gt;right); return false; &#125;public: // 判断t是否为s的子树 bool isSubtree(TreeNode* s, TreeNode* t) &#123; // 如果s是空树，则t不可能是s的子树 if(s==nullptr) return false; // t为s的子树有3种可能：s==t、t是s左子树的子树、t是s右子树的子树 return isSametree(s, t) || isSubtree(s-&gt;left, t) || isSubtree(s-&gt;right, t); &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
         <tag>DFS</tag>
@@ -1438,8 +1448,8 @@
     <url>%2F2020%2F07%2F26%2FLeetCode437%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8CIII%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/path-sum-iii/ 题解 两个DFS，两个DFS作用不一样 我写的，其它人的题解大概也是这个思路 这道题是昨天那道题(点击查看)的扩展，建议先看一下昨天那道题的题解二。 昨天那道题中的路径是根结点到叶子结点之间的路径 今天这道题中的路径是任意结点到任意结点之间的路径，只要求是向下的（即从父结点到子结点） 可以按照下面2步修改昨天那道题，即可得到今天这道题并求解 Step1：求根结点到任意结点（而非叶子结点）之间的路径 处理这一差异，只需要将昨天那道题判断语句中的叶子结点条件删除即可，即只判断路径长度是否相等，不管是不是叶子结点 Step2：求任意结点（而非根结点）到任意结点之间的路径 处理这一差异，只需基于昨天那道题的解法，再套一层递归，即不止求根结点，还要递归求解其左右子树并将路径数相加 1234567891011121314151617181920212223242526272829303132333435// Problem: LeetCode 437// URL: https://leetcode-cn.com/problems/path-sum-iii/// Tags: Tree Recursion DFS// Difficulty: Medium#include &lt;iostream&gt;using namespace std;struct TreeNode&#123; int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr)&#123;&#125;&#125;;class Solution&#123;private: // Step1：搜索当前子树中结点到根结点之间距离等于sum的路径数 int dfs(TreeNode* root, int sum)&#123; if (root == nullptr) return 0; int count = 0; if (root-&gt;val == sum) count++; return count + dfs(root-&gt;left, sum - root-&gt;val) + dfs(root-&gt;right, sum - root-&gt;val); &#125;public: int pathSum(TreeNode* root, int sum) &#123; if(root==nullptr) return 0; // Step2：结果为：以当前结点为根结点时的路径数+以左子结点为根结点时的路径数+以右子结点为根结点时的路径数； return dfs(root, sum) + pathSum(root-&gt;left, sum) + pathSum(root-&gt;right, sum); &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
         <tag>DFS</tag>
@@ -1450,8 +1460,8 @@
     <url>%2F2020%2F07%2F25%2FLeetCode112%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/path-sum/ 题解一 我自己写的 在dfs过程中要记录当前结点与根结点之间的距离，并且回溯时也需要更新该值 注意要求是叶子结点到根结点之间的距离 详细思路见代码注释 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152// Problem: LeetCode 112// URL: https://leetcode-cn.com/problems/path-sum/// Tags: Tree Recursion DFS 回溯// Difficulty: Easy#include &lt;iostream&gt;using namespace std;struct TreeNode&#123; int val; TreeNode *left; TreeNode *right; TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;&#125;;class Solution&#123;private: bool existed = false; // 当前是否存在叶子结点到根结点的路径和等于给定sum int now = 0; // 当前结点的路径和 int sum = -1; // 给定的sum void dfs(TreeNode* root)&#123; // 如果当前已找到符合要求的结点，则不用再搜索 if(existed==true) return ; // 如果是空结点，则不用搜索 if(root==nullptr) return ; // 遍历当前结点，计算其到根结点之间的距离 this-&gt;now += root-&gt;val; // 如果是叶子结点并且其与根结点的距离等于给定sum，则该结点符合条件 if(root-&gt;left==nullptr &amp;&amp; root-&gt;right==nullptr &amp;&amp; this-&gt;now == this-&gt;sum)&#123; existed = true; return; &#125; // 搜索左子树和右子树 dfs(root-&gt;left); dfs(root-&gt;right); // 该子树已搜索完毕，需要更新当前结点与根结点之间的距离（回溯） this-&gt;now -= root-&gt;val; &#125;public: bool hasPathSum(TreeNode* root, int sum) &#123; // 设置目标 this-&gt;sum = sum; // 深度搜索 dfs(root); // 返回搜索结果 return this-&gt;existed; &#125;&#125;; 题解二 别人的题解，用另外一种方式理解了sum，厉害 thumb up 12345678910111213141516171819202122232425// Problem: LeetCode 112// URL: https://leetcode-cn.com/problems/path-sum/// Tags: Tree Recursion DFS 回溯// Difficulty: Easy#include &lt;iostream&gt;using namespace std;struct TreeNode&#123; int val; TreeNode *left; TreeNode *right; TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;&#125;;class Solution&#123;public: bool hasPathSum(TreeNode* root, int sum) &#123; if(root==nullptr) return false; if(root-&gt;left==nullptr &amp;&amp; root-&gt;right==nullptr &amp;&amp; root-&gt;val==sum) return true; return hasPathSum(root-&gt;left, sum-root-&gt;val) || hasPathSum(root-&gt;right, sum-root-&gt;val); &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
         <tag>DFS</tag>
@@ -1463,8 +1473,8 @@
     <url>%2F2020%2F07%2F25%2FLeetCode617%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/merge-two-binary-trees/ 题解 递归解法 解法见代码注释 123456789101112131415161718192021222324252627282930313233343536373839404142434445// Problem: LeetCode 617// URL: https://leetcode-cn.com/problems/merge-two-binary-trees/// Tags: Tree Recursion// Difficulty: Easy#include &lt;iostream&gt;using namespace std;struct TreeNode&#123; int val; TreeNode* left; TreeNode* right; TreeNode(int x):val(x),left(nullptr),right(nullptr)&#123;&#125;&#125;;class Solution&#123;private: // 将树t1和t2合并至t1，并返回t1 TreeNode* heleper(TreeNode* t1, TreeNode* t2)&#123; // 两个空树，返回null if(t1==nullptr &amp;&amp; t2==nullptr) return nullptr; // 仅t2为空树，不需合并，直接返回t1即可 else if(t1!=nullptr &amp;&amp; t2==nullptr)&#123; return t1; &#125; // 仅t1为空树，不需合并，直接返回t2即可 else if(t1==nullptr &amp;&amp; t2!=nullptr)&#123; return t2; &#125; // t1和t2均非空 else&#123; t1-&gt;val += t2-&gt;val; // 合并根结点 t1-&gt;left = heleper(t1-&gt;left, t2-&gt;left); // 合并左子树 t1-&gt;right = heleper(t1-&gt;right, t2-&gt;right); // 合并右子树 delete t2; // 释放结点 return t1; &#125; &#125;public: TreeNode* mergeTrees(TreeNode* t1, TreeNode* t2) &#123; return heleper(t1,t2); &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
       </tags>
@@ -1474,8 +1484,8 @@
     <url>%2F2020%2F07%2F25%2FLeetCode226%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/invert-binary-tree/ 题解一 递归解法 我写的，不够简洁 12345678910111213141516171819202122232425262728293031// Problem: LeetCode 226// URL: https://leetcode-cn.com/problems/invert-binary-tree/// Tags: Tree Recursion// Difficulty: Easy#include &lt;iostream&gt;using namespace std;struct TreeNode&#123; TreeNode* left; TreeNode* right; int val; TreeNode(int x):val(x),left(nullptr),right(nullptr)&#123;&#125;&#125;;class Solution&#123;public: TreeNode* invertTree(TreeNode* root) &#123; // 递归出口，空结点直接返回 if(root==nullptr) return nullptr; // 该结点交换左右子树 TreeNode *temp = root-&gt;left; root-&gt;left = root-&gt;right; root-&gt;right = temp; // 递归翻转左右子树 invertTree(root-&gt;left); invertTree(root-&gt;right); return root; &#125;&#125;; 题解二 比我写的简洁一些，交换了最后两步的顺序，特别是利用了二叉树翻转后根结点不变的特点 123456789101112131415161718192021222324252627282930// Problem: LeetCode 226// URL: https://leetcode-cn.com/problems/invert-binary-tree/// Tags: Tree Recursion// Difficulty: Easy#include &lt;iostream&gt;using namespace std;struct TreeNode&#123; TreeNode* left; TreeNode* right; int val; TreeNode(int x):val(x),left(nullptr),right(nullptr)&#123;&#125;&#125;;class Solution&#123;public: TreeNode* invertTree(TreeNode* root) &#123; // 递归出口，空结点直接返回 if(root==nullptr) return nullptr; // 递归翻转左右子树 TreeNode* left = invertTree(root-&gt;left); TreeNode* right = invertTree(root-&gt;right); // 该结点交换左右子树 root-&gt;left = right; root-&gt;right = left; return root; &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
       </tags>
@@ -1485,8 +1495,8 @@
     <url>%2F2020%2F07%2F25%2FLeetCode543%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/diameter-of-binary-tree/ 题解 一棵二叉树的直径长度是任意两个结点路径长度中的最大值，两结点之间的路径长度是以它们之间边的数目表示 将一条路径分为左右两半，两个结点之间路径长度等于根结点左右子树的深度之和 这条路径可能穿过也可能不穿过根结点，所以在DFS过程中记录路径长度的最大值 相似的题目有 LeetCode687最长同值路径 LeetCode124(点击查看) 要注意depth函数的功能 123456789101112131415161718192021222324252627282930313233343536373839404142// Problem: LeetCode 543// URL: https://leetcode-cn.com/problems/maxDiameter-of-binary-tree/// Tags: Tree DFS Recursion// Difficulty: Easy#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;struct TreeNode&#123; TreeNode* left; TreeNode* right; int val; TreeNode(int x):val(x),left(nullptr),right(nullptr)&#123;&#125;&#125;;class Solution&#123;private: int maxDiameter=0; // 全局最大直径 // 返回该树的最大深度 int depth(TreeNode* root)&#123; // 空结点深度为0 if(root==nullptr) return 0; // 左右子树深度 int leftDepth = depth(root-&gt;left); int rightDepth = depth(root-&gt;right); // 更新最大直径：两个结点之间路径长度等于根结点左右子树的深度之和 if (leftDepth + rightDepth &gt; this-&gt;maxDiameter) this-&gt;maxDiameter = leftDepth + rightDepth; // 返回该树最大深度 return max(leftDepth, rightDepth) + 1; &#125;public: // 求一颗树的直径：任意两个结点路径长度中的最大值 int diameterOfBinaryTree(TreeNode* root) &#123; depth(root); return this-&gt;maxDiameter; &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
         <tag>DFS</tag>
@@ -1497,8 +1507,8 @@
     <url>%2F2020%2F07%2F25%2FLeetCode110%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/balanced-binary-tree/ 题解 递归解法 平衡二叉树定义：一个二叉树每个结点的左右两个子树的高度差的绝对值不超过1 递归函数返回值：如果平衡则返回该树的高度，空树则返回0，不平衡（左右子树不平衡或该结点不平衡）则返回-1 12345678910111213141516171819202122232425262728293031323334353637383940414243// Problem: LeetCode 110// URL: https://leetcode-cn.com/problems/balanced-binary-tree/description/// Tags: Tree DFS// Difficulty: Easy#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;struct TreeNode&#123; TreeNode* left; TreeNode* right; int val; TreeNode(int x):val(x), left(nullptr), right(nullptr)&#123;&#125;&#125;;class Solution&#123;private: int recursion(TreeNode* root)&#123;//若该树平衡则返回其高度，不平衡则返回-1 // 空树深度为0，也算平衡树 if(root==nullptr) return 0; // 计算左子树和右子树深度 int left=recursion(root-&gt;left); int right=recursion(root-&gt;right); // 若子树不平衡，则父树也不平衡(平衡二叉树定义：一个二叉树每个结点的左右两个子树的高度差的绝对值不超过1) if(left&lt;0||right&lt;0) return -1; // 左右子树平衡，则判断该树是否平衡 if (abs(left-right)&lt;=1) return max(left,right)+1; else return -1; &#125;public: bool isBalanced(TreeNode* root)&#123; return recursion(root)&gt;=0; &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
         <tag>DFS</tag>
@@ -1509,8 +1519,8 @@
     <url>%2F2020%2F07%2F24%2FLeetCode104%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/ 题解 递归 递归出口是当前结点为空，则返回0 如果非空，则该结点深度为左子树和右子树深度的最大值+1 12345678910111213141516171819202122232425262728293031// Problem: LeetCode 104// URL: https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/description/// Tags: Tree Recursion// Difficulty: Easy#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;struct TreeNode&#123; TreeNode* left; TreeNode* right; int val; TreeNode(int x):val(x), left(nullptr), right(nullptr)&#123;&#125;&#125;;class Solution&#123;public: int maxDepth(TreeNode* root)&#123; if(nullptr==root) return 0; return max(maxDepth(root-&gt;left), maxDepth(root-&gt;right))+1; &#125;&#125;;int main()&#123; cout &lt;&lt; "helloworld" &lt;&lt; endl; // system("pause"); return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
       </tags>
@@ -1520,8 +1530,8 @@
     <url>%2F2020%2F07%2F24%2FLeetCode102%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%2F</url>
     <content type="text"><![CDATA[题目链接https://leetcode-cn.com/problems/binary-tree-level-order-traversal/ 题解一：非递归BFS 用队列存储每层的结点 获取到一层结点后，则可以获得该层所有结点的val和下一层的所有结点 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152// Problem: LeetCode 102// URL: https://leetcode-cn.com/problems/binary-tree-level-order-traversal/// Tags: Tree BFS DFS Recursion Queue// Difficulty: Medium#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;queue&gt;using namespace std;struct TreeNode&#123; int val; TreeNode* left; TreeNode* right; TreeNode(int x): val(x), left(nullptr), right(nullptr)&#123;&#125;&#125;;class Solution&#123;public: vector&lt;vector&lt;int&gt;&gt; levelOrder(TreeNode* root)&#123; vector&lt;vector&lt;int&gt;&gt; result; // 最终结果 queue&lt;TreeNode*&gt; parentNodes; // 父层结点 if(root!=nullptr) parentNodes.push(root); while(!parentNodes.empty())&#123; // 找子层结点 queue&lt;TreeNode*&gt; childNodes; // 子层结点 vector&lt;int&gt; parentVals; // 父层结点元素 while (!parentNodes.empty())&#123; root = parentNodes.front(); parentNodes.pop(); parentVals.push_back(root-&gt;val); if (root-&gt;left != nullptr) childNodes.push(root-&gt;left); if (root-&gt;right != nullptr) childNodes.push(root-&gt;right); &#125; parentNodes = childNodes; result.push_back(parentVals); &#125; return result; &#125;&#125;;int main()&#123; cout &lt;&lt; "helloworld" &lt;&lt; endl; // system("pause"); return 0;&#125; 题解二：DFS递归 用变量level记录当前处于哪一层 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849// Problem: LeetCode 102// URL: https://leetcode-cn.com/problems/binary-tree-level-order-traversal/// Tags: Tree BFS DFS Recursion Queue// Difficulty: Medium#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;queue&gt;using namespace std;struct TreeNode&#123; int val; TreeNode* left; TreeNode* right; TreeNode(int x): val(x), left(nullptr), right(nullptr)&#123;&#125;&#125;;class Solution&#123;public: vector&lt;vector&lt;int&gt;&gt; levelOrder(TreeNode* root)&#123; vector&lt;vector&lt;int&gt;&gt; result; // 最终结果 dfs(result, root, 0); return result; &#125; void dfs(vector&lt;vector&lt;int&gt;&gt;&amp; result, TreeNode* root, int level)&#123; // 空指针，无动作 if(nullptr==root)&#123; return; &#125; // 如果该层第一次被遍历到，则为该层创建空数组 if(result.size()&lt;=level)&#123; result.push_back(vector&lt;int&gt;()); &#125; // 遍历该结点 result[level].push_back(root-&gt;val); // 遍历左子树 dfs(result, root-&gt;left, level + 1); // 遍历右子树 dfs(result, root-&gt;right, level + 1); &#125;&#125;;int main()&#123; cout &lt;&lt; "helloworld" &lt;&lt; endl; // system("pause"); return 0;&#125; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
         <tag>DFS</tag>
@@ -1545,8 +1555,8 @@
     <url>%2F2020%2F07%2F13%2FLeetCode94%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%2F</url>
     <content type="text"><![CDATA[[toc] 题目介绍 题目链接 https://leetcode-cn.com/problems/binary-tree-inorder-traversal/ 题目考点 二叉树中序遍历，递归，迭代，栈 题目难度 LeetCode Medium 题目大意 二叉树中序遍历（左中右） 输入 1个二叉树 输出 该二叉树中序遍历的结果 题解一解题思路 递归法 先通过递归遍历当前根结点的左子树，然后遍历当前的根结点，然后通过递归遍历当前根结点的右子树。 复杂度分析 假设该二叉树有n个结点，则时间复杂度为$O(n)$、最大空间复杂度为$O(n)$、平均空间复杂度为$O(log\ n)$。 代码1234567891011121314151617class Solution &#123;public: vector&lt;int&gt; result; void traversal(TreeNode* root)&#123; if(root!=nullptr)&#123; traversal(root-&gt;left); result.push_back(root-&gt;val); traversal(root-&gt;right); &#125; &#125; vector&lt;int&gt; inorderTraversal(TreeNode* root) &#123; traversal(root); return result; &#125;&#125;; 题解二解题思路 迭代法/栈法 通过显式栈模拟递归函数。该思路仅需要微小改动就可以通用于二叉树的先/中/后序遍历。该思路实现3种顺序遍历的介绍：https://www.cnblogs.com/chouxianyu/p/13293284.html 该思路的核心是将nullptr作为可以遍历下1个结点的标志（因此也就不能将空结点压入栈中），即遇到nullptr时就可以遍历下一个结点，如果不是nullptr则根据遍历顺序入栈，当前根结点入栈时也要将nullptr压入栈中（后续遇到这个nullptr时就可以遍历到该根结点）。 复杂度分析 假设二叉树有n个结点，则时间复杂度为$O(n)$、最大空间复杂度为$O(n)$、平均空间复杂度为$O(log\ n)$。 代码12345678910111213141516171819202122232425class Solution &#123;public: vector&lt;int&gt; inorderTraversal(TreeNode* root) &#123; vector&lt;int&gt; result; stack&lt;TreeNode*&gt; nodes; if(root!=nullptr) nodes.push(root); while(!nodes.empty())&#123; root=nodes.top(); nodes.pop(); if(root==nullptr)&#123; result.push_back(nodes.top()-&gt;val); nodes.pop(); &#125;else&#123; if (root-&gt;right!=nullptr) nodes.push(root-&gt;right); nodes.push(root); nodes.push(nullptr); if (root-&gt;left!=nullptr) nodes.push(root-&gt;left); &#125; &#125; return result; &#125;&#125;; 题解三解题思路 栈法/迭代法 中序遍历的顺序为：左子树、根结点、右子树。 对于1个根结点root，分3步操作： 将root压入栈中并不断更新为其左子树，直至root为空 可以想象下，中序遍历时就是这样并不遍历当前结点，而是一直往左下角延伸到底 更新root为栈顶结点并遍历它（第1步结束后，此时栈顶结点无左子树或其左子树已遍历完） 更新root为其右子树通过循环遍历其右子树 如果root非空或者栈非空则循环以上步骤 复杂度分析 假设二叉树有n个结点，则时间复杂度为$O(n)$、最大空间复杂度为$O(n)$、平均空间复杂度为$O(log\ n)$。 代码123456789101112131415161718class Solution &#123;public: vector&lt;int&gt; inorderTraversal(TreeNode* root) &#123; vector&lt;int&gt; result; stack&lt;TreeNode*&gt; nodes; while(root!=nullptr || !nodes.empty())&#123; while(root!=nullptr)&#123; nodes.push(root); root=root-&gt;left; &#125; root=nodes.top(); nodes.pop(); result.push_back(root-&gt;val); root=root-&gt;right; &#125; return result; &#125;&#125;; 题解四Morris 遍历算法是另一种遍历二叉树的方法。 假设二叉树有n个结点，该算法的时间复杂度为$O(n)$、空间复杂度为$O(1)$。 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
         <tag>栈</tag>
@@ -1558,8 +1568,8 @@
     <url>%2F2020%2F07%2F13%2FLeetCode145%E4%BA%8C%E5%8F%89%E6%A0%91%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%2F</url>
     <content type="text"><![CDATA[[toc] 题目介绍 题目链接 https://leetcode-cn.com/problems/binary-tree-postorder-traversal/description/ 题目考点 二叉树，后序遍历，递归，迭代，栈 题目难度 LeetCode Medium 题目大意 后序遍历1颗二叉树 输入 1颗二叉树 输出 后序遍历的结果 题解一解题思路 递归法 后序遍历的顺序是“左右中”。先后通过递归遍历左子树和右子树，然后遍历当前根结点。 复杂度分析 假设该二叉树有n个结点，则时间复杂度为$O(n)$、最大空间复杂度为$O(n)$、平均空间复杂度为$O(log\ n)$。 代码1234567891011121314151617class Solution&#123;public: vector&lt;int&gt; result; void traversal(TreeNode* root)&#123; if(root!=nullptr)&#123; traversal(root-&gt;left); traversal(root-&gt;right); result.push_back(root-&gt;val); &#125; &#125; vector&lt;int&gt; postorderTraversal(TreeNode* root)&#123; traversal(root); return result; &#125;&#125;; 题解二解题思路 栈法/迭代法 该思路是通过显式栈模拟递归函数。虽然该思路的复杂度稍高一些，但其仅需要微小改动就可以通用于二叉树的先/中/后序遍历。该思路实现3种顺序遍历的介绍：https://www.cnblogs.com/chouxianyu/p/13293284.html 该思路的核心是将nullptr作为可以遍历下1个结点的标志（因此也就不能将空结点压入栈中），即遇到nullptr时就可以遍历下一个结点，如果不是nullptr则根据遍历顺序入栈，当前根结点入栈时也要将nullptr压入栈中（后续遇到这个nullptr时就可以遍历到该根结点）。 复杂度分析 假设二叉树有n个结点，则时间复杂度为$O(n)$、最大空间复杂度为$O(n)$、平均空间复杂度为$O(log\ n)$。 代码12345678910111213141516171819202122232425class Solution &#123;public: vector&lt;int&gt; postorderTraversal(TreeNode* root) &#123; stack&lt;TreeNode*&gt; nodes; vector&lt;int&gt; result; if (root!=nullptr) nodes.push(root); while(!nodes.empty())&#123; root=nodes.top(); nodes.pop(); if(root==nullptr)&#123; result.push_back(nodes.top()-&gt;val); nodes.pop(); &#125;else&#123; nodes.push(root); nodes.push(nullptr); if(root-&gt;right!=nullptr) nodes.push(root-&gt;right); if(root-&gt;left!=nullptr) nodes.push(root-&gt;left); &#125; &#125; return result; &#125;&#125;; 题解三解题思路 栈法/迭代法 后序遍历的顺序为：左子树、右子树、根结点。 用prev保存上1个遍历过的结点。对于1个根结点，分3步操作： 将root压入栈中并不断更新为其左子树，直至root为空 可以想象下，后序遍历时就是这样并不遍历当前结点，而是一直往左下角延伸到底 更新root为栈顶结点 第1步结束后，此时栈顶结点无左子树或其左子树已遍历完 如果无右子树或右子树已遍历，则遍历root并更新prev为root、更新root为nullptr；否则root入栈并更新root为右子树。 如果root非空或者栈非空则循环以上步骤。 复杂度分析 假设二叉树有n个结点，则时间复杂度为$O(n)$、最大空间复杂度为$O(n)$、平均空间复杂度为$O(log\ n)$。 代码12345678910111213141516171819202122232425class Solution &#123;public: vector&lt;int&gt; postorderTraversal(TreeNode* root) &#123; stack&lt;TreeNode*&gt; nodes; vector&lt;int&gt; result; TreeNode* prev=nullptr; while(root!=nullptr || !nodes.empty())&#123; while(root!=nullptr)&#123; nodes.push(root); root=root-&gt;left; &#125; root=nodes.top(); nodes.pop(); if(root-&gt;right==nullptr || root-&gt;right==prev)&#123; result.push_back(root-&gt;val); prev=root; root=nullptr; &#125;else&#123; nodes.push(root); root=root-&gt;right; &#125; &#125; return result; &#125;&#125;; 题解四Morris 遍历算法是另一种遍历二叉树的方法。 假设二叉树有n个结点，该算法的时间复杂度为$O(n)$、空间复杂度为$O(1)$。 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
         <tag>栈</tag>
@@ -1571,8 +1581,8 @@
     <url>%2F2020%2F07%2F12%2FLeetCode144%E4%BA%8C%E5%8F%89%E6%A0%91%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%2F</url>
     <content type="text"><![CDATA[[toc] 题目介绍 题目链接 https://leetcode-cn.com/problems/binary-tree-preorder-traversal/description/ 题目考点 二叉树先序遍历，递归，栈，迭代 题目难度 LeetCode Medium 题目大意 给出1个二叉树，要求先序遍历（中左右）。 输入 1个二叉树 输出 先序遍历的结果（vector） 题解一解题思路 递归法 先遍历当前根结点，再先后通过递归遍历左子树和右子树。 复杂度分析 假设二叉树有n个结点，则时间复杂度为$O(n)$、最大空间复杂度为$O(n)$、平均空间复杂度为$O(log\ n)$。 代码12345678910111213141516class Solution&#123;public: vector&lt;int&gt; result; void traversal(TreeNode* root)&#123; if (root != nullptr)&#123; result.push_back(root-&gt;val); traversal(root-&gt;left); traversal(root-&gt;right); &#125; &#125; vector&lt;int&gt; preorderTraversal(TreeNode* root)&#123; traversal(root); return result; &#125;&#125;; 题解二解题思路 栈法/迭代法 显式地模拟递归函数的栈，每次结点出栈后相当于调用1次递归函数（处理1个根结点及其子树），出栈后根据遍历顺序对当前根结点及其左右子树进行操作（注意遍历顺序和入栈顺序是相反的）。 复杂度分析 假设二叉树有n个结点，则时间复杂度为$O(n)$、最大空间复杂度为$O(n)$、平均空间复杂度为$O(log\ n)$。 代码1234567891011121314151617181920class Solution &#123;public: vector&lt;int&gt; preorderTraversal(TreeNode* root) &#123; vector&lt;int&gt; result; stack&lt;TreeNode*&gt; nodes; nodes.push(root); while(!nodes.empty())&#123; root = nodes.top(); nodes.pop(); if (root!=nullptr)&#123; result.push_back(root-&gt;val); nodes.push(root-&gt;right); nodes.push(root-&gt;left); &#125; &#125; return result; &#125;&#125;; 题解三解题思路 栈法/迭代法 该思路和题解二中的思路都是通过显式栈模拟递归函数。虽然该思路的复杂度稍高一些，但其仅需要微小改动就可以通用于二叉树的先/中/后序遍历。该思路实现3种顺序遍历的介绍：https://www.cnblogs.com/chouxianyu/p/13293284.html 该思路的核心是将nullptr作为可以遍历下1个结点的标志（因此也就不能将空结点压入栈中），即遇到nullptr时就可以遍历下一个结点，如果不是nullptr则根据遍历顺序入栈，当前根结点入栈时也要将nullptr压入栈中（后续遇到这个nullptr时就可以遍历到该根结点）。 复杂度分析 假设二叉树有n个结点，则时间复杂度为$O(n)$、最大空间复杂度为$O(n)$、平均空间复杂度为$O(log\ n)$。 代码12345678910111213141516171819202122232425262728class Solution &#123;public: vector&lt;int&gt; preorderTraversal(TreeNode* root) &#123; vector&lt;int&gt; result; stack&lt;TreeNode*&gt; nodes; if (root!=nullptr)&#123; nodes.push(root); &#125; while(!nodes.empty())&#123; root = nodes.top(); nodes.pop(); if (root==nullptr)&#123; result.push_back(nodes.top()-&gt;val); nodes.pop(); &#125;else&#123; if (root-&gt;right!=nullptr) nodes.push(root-&gt;right); if (root-&gt;left!=nullptr) nodes.push(root-&gt;left); nodes.push(root); nodes.push(nullptr); &#125; &#125; return result; &#125;&#125;; 题解四还有个Morris遍历，其时间复杂度为$O(n)$、空间复杂度为$O(1)$，其核心是利用树中的大量空闲指针，实现空间开销的缩减。该方法的论文名称为Traversing Binary Trees Simply and Cheaply。 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>二叉树</tag>
         <tag>递归</tag>
         <tag>栈</tag>
@@ -1584,8 +1594,8 @@
     <url>%2F2020%2F07%2F12%2FLeetCode83%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0%2F</url>
     <content type="text"><![CDATA[[toc] 题目介绍 题目链接 https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/ 题目考点 链表，递归，迭代 题目难度 LeetCode 题目大意 给出1个排好序的链表，删除其中的重复元素 输入 原链表 输出 删除重复元素后的链表 题解一解题思路 递归法 首先通过遍历删除与头结点同值的结点，后面1部分的链表通过递归删除其中的重复结点，然后将当前头结点与后面1部分链表（已删除重复结点）连接起来，最终返回当前头结点。 复杂度分析 假设链表有n个结点，则时间复杂度和空间复杂度都为$O(n)$。 代码123456789101112class Solution &#123;public: ListNode* deleteDuplicates(ListNode* head) &#123; if (head==nullptr) return head; ListNode* cur=head; while(cur!=nullptr &amp;&amp; cur-&gt;val == head-&gt;val) cur = cur-&gt;next; head-&gt;next = deleteDuplicates(cur); return head; &#125;&#125;; 题解二解题思路 递归法 首先取出头结点，然后通过递归删除剩余链表中的重复结点并将其与头结点连接，然后判断当前头结点和第2个结点是否重复（如果重复则删除）。 复杂度分析 假设链表有n个结点，则时间复杂度和空间复杂度都为$O(n)$。 代码123456789101112class Solution &#123;public: ListNode* deleteDuplicates(ListNode* head) &#123; if (head==nullptr) return head; head-&gt;next = deleteDuplicates(head-&gt;next); if (head-&gt;next!=nullptr &amp;&amp; head-&gt;val==head-&gt;next-&gt;val) return head-&gt;next; return head; &#125;&#125;; 题解三解题思路 迭代法 整体思路为用哨兵sentry保存当前最后1个不重复结点，当发现新的不重复结点时将哨兵与该结点连接（这样就是一次性删除多个重复结点）。 具体方法为：遍历链表，当发现cur和sentry异值时则一次性删除多个重复结点并更新最后1个不重复结点为当前结点（sentry-&gt;next=cur;sentry=cur;），直到整个链表遍历结束。最后将最后1个不重复结点的下1个结点置空。 复杂度分析 假设链表长度为n，则时间复杂度为$O(n)$、空间复杂度为$O(1)$。 代码1234567891011121314151617class Solution &#123;public: ListNode* deleteDuplicates(ListNode* head) &#123; if (head==nullptr) return nullptr; ListNode* sentry=head, *cur=head; while(cur!=nullptr)&#123; if(sentry-&gt;val != cur-&gt;val)&#123; sentry-&gt;next = cur; sentry = cur; &#125; cur = cur-&gt;next; &#125; sentry-&gt;next=nullptr; return head; &#125;&#125;; 题解四解题思路 迭代法 遍历链表，如果当前结点与下1个结点通知则删除下1个结点，否则更新下1个结点。 该思路与题解三的思路有相同也有不同，相同之处是都保存当前最后1个不重复结点，区别是题解三是一次性删除多个重复结点，而该方法是遇到1个重复结点则直接删除（1次删除1个结点）。 复杂度分析 假设链表长度为n，则时间复杂度为$O(n)$、空间复杂度为$O(1)$。 代码1234567891011121314class Solution &#123;public: ListNode* deleteDuplicates(ListNode* head) &#123; if (head==nullptr) return head; ListNode* cur=head, *next; while((next=cur-&gt;next)!=nullptr) if (cur-&gt;val==next-&gt;val) cur-&gt;next = next-&gt;next; else cur = next; return head; &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>递归</tag>
         <tag>迭代</tag>
         <tag>单向链表</tag>
@@ -1597,8 +1607,8 @@
     <url>%2F2020%2F07%2F11%2FLeetCode21%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[[toc] 题目介绍 题目链接 https://leetcode-cn.com/problems/merge-two-sorted-lists/description/ 题目考点 链表，递归，迭代 题目难度 LeetCode Easy 题目大意 给出2个升序链表，请合并成1个新的升序链表。 输入 2个升序链表的头结点 输出 新的升序链表的头结点 题解一解题思路 递归法 取出当前2个链表中头结点较小的那个链表的头结点，然后通过递归将2个链表合并（a-&gt;next和b）。 复杂度分析 假设3个链表分别有n和m个结点，则时间复杂度为$O(n+m)$、空间复杂度为$O(n+m)$。 代码1234567891011121314151617class Solution &#123;public: ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) &#123; // 边界和递归出口 if(nullptr==l1)&#123;return l2;&#125; if(nullptr==l2)&#123;return l1;&#125; // 递归表达式 if(l1-&gt;val&lt;l2-&gt;val)&#123; l1-&gt;next = mergeTwoLists(l1-&gt;next, l2); return l1; &#125; else&#123; l2-&gt;next = mergeTwoLists(l2-&gt;next, l1); return l2; &#125; &#125;&#125;; 题解二解题思路 迭代法 用pre保存前1个结点，用2个指针分别遍历这2个链表每次取出值最小的结点，然后拼接成新的链表。当其中1个链表遍历结束，将另外1个链表直接拼接在新的链表的尾部。 复杂度分析 假设2个链表的长度分别是n和m，则最大时间复杂度为$O(n+m)$、空间复杂度为$O(1)$。 代码1234567891011121314151617181920212223242526272829303132class Solution &#123;public: ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) &#123; // 定义头结点，方便建立新链表 ListNode *head = new ListNode(-1); // 遍历链表用的指针 ListNode *l3 = head; // 同时遍历两个链表并拼接值较小的结点到新链表中，同步更新链表指针，直至某个链表遍历结束 while (l1 != nullptr &amp;&amp; l2 != nullptr)&#123; if (l1-&gt;val &lt; l2-&gt;val)&#123; l3-&gt;next = l1; l1 = l1-&gt;next; &#125;else&#123; l3-&gt;next = l2; l2 = l2-&gt;next; &#125; l3 = l3-&gt;next; &#125; // 将未遍历完的链表拼接至新链表 if(l1!=nullptr)&#123; l3-&gt;next = l1; &#125; if (l2 != nullptr)&#123; l3-&gt;next = l2; &#125; // 释放无意义头结点并返回其next l3 = head-&gt;next; delete head; return l3; &#125;&#125;; 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>递归</tag>
         <tag>迭代</tag>
         <tag>单向链表</tag>
@@ -1609,8 +1619,8 @@
     <url>%2F2020%2F07%2F11%2FLeetCode206%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[[toc] 题目介绍 题目链接 https://leetcode-cn.com/problems/reverse-linked-list/description/ 题目考点 链表，递归，迭代（用到了双指针），栈 题目难度 LeetCode-Easy 题目大意 给定1个链表，请将其反转 输入 链表的头结点 输出 反转后链表的头结点 题解一解题思路 递归法 定义递归函数（函数功能是反转链表并返回链表反转后的头结点），将链表分成A（头结点）和B（头结点以外的其它结点）2部分，通过递归将链表B反转并得到其新的头结点，然后将A拼接在反转后链表B的尾部（注意链表B反转前其头结点正好是反转后的尾结点），最终返回新的链表（B）。 复杂度分析 假设链表有n个结点，则递归有n层，所以时间复杂度为$O(n)$，空间复杂度为$O(n)$。 代码12345678910111213141516171819class Solution&#123;public: ListNode *reverseList(ListNode *head) &#123; if (nullptr == head || nullptr == head-&gt;next) return head; // devide the nodes into A(the original head) and B(the nodes except the original head). ListNode *ptrA = head; // A:原先的head ListNode *ptrB = reverseList(head-&gt;next); // B:将原先head以外的结点逆序并返回它的新head，此时head-&gt;next已经为链表B反转后的尾结点 // 将A连接到B后面并将A的next设为空 head-&gt;next-&gt;next = ptrA; ptrA-&gt;next = nullptr; // 返回反转后的链表 return ptrB; &#125;&#125;; 题解二解题思路 迭代法 本质就是头插法，需要用到双指针（1个遍历该链表，1个保存新链表的head），每取到1个结点就将其插入新链表的头部。 复杂度分析 假设链表有n个结点，则时间复杂度为$O(n)$、空间复杂度为$O(1)$。 代码1234567891011121314151617class Solution&#123;public: ListNode *reverseList(ListNode *head)&#123; ListNode *newHead = nullptr, *next; while (head != nullptr)&#123; // 保存下一个结点 next = head-&gt;next; // 把当前结点插到头部 head-&gt;next = newHead; // 更新头结点 newHead = head; // 更新当前结点 head = next; &#125; return newHead; &#125;&#125;; 题解三解题思路 栈法 遍历链表并将结点压入栈中，然后出栈建立新链表。 复杂度分析 假设链表有n个结点，则时间复杂度为$O(2n)$、空间复杂度为$O(n)$。 代码123456789101112131415161718192021class Solution&#123;public: ListNode *reverseList(ListNode *head)&#123; // 链表结点入栈（包括nullptr） stack&lt;ListNode*&gt; s; s.push(nullptr); for (auto p=head; p!=nullptr; p=p-&gt;next) s.push(p); // 取出新的头结点 head = s.top(); s.pop(); // 将当前结点的next指向前一个结点（pre） ListNode *pre = head; while(!s.empty())&#123; pre-&gt;next = s.top(); s.pop(); pre = pre-&gt;next; &#125; return head; &#125;&#125;; 题解四解题思路 原地反转法（三指针法） 定义3个指针pre、cur、next，以2个结点（pre和cur）为单位遍历各个结点。对于每个当前结点cur将其与pre的顺序逆置（cur-&gt;next=pre）再分别先后将pre和cur更新为cur和next。 复杂度分析 假设链表有n个结点，则时间复杂度为$O(n)$、空间复杂度为$O(1)$。 代码12345678910111213141516class Solution&#123;public: ListNode *reverseList(ListNode *head)&#123; ListNode *pre=nullptr, *cur=head, *next; while(cur!=nullptr)&#123; // 保存next next = cur-&gt;next; // 逆序 cur-&gt;next = pre; // 更新结点 pre = cur; cur = next; &#125; return pre; // cur为nullptr时，此时的pre是原链表的尾结点，也是链表反转后的头结点 &#125;&#125;; 参考链接 https://leetcode-cn.com/problems/reverse-linked-list/solution/fan-zhuan-lian-biao-by-leetcode/ https://leetcode-cn.com/problems/reverse-linked-list/solution/si-lu-fen-xi-n-duo-chong-fang-shi-chu-li-ajn6/ 作者：@臭咸鱼 转载请注明出处！ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>递归</tag>
         <tag>栈</tag>
         <tag>迭代</tag>
@@ -1623,8 +1633,8 @@
     <url>%2F2020%2F07%2F10%2FLeetCode160%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[题目介绍 题目链接 https://leetcode-cn.com/problems/intersection-of-two-linked-lists/ 题目考点 链表、双指针 题目难度 LeetCode简单 题目大意 给定2个链表，请找出它们的相交结点。 读题可知：两个指针相同（并不是2个结点的值相同）即需要求得的结果，2个链表的长度不确定，2个链表可能没有相交结点，链表中无循环。 输入 2个链表的头指针 输出 相交结点的指针 题解一解题思路 双指针法 假如2个链表有交叉点（intersection），则可以设这2个链表彼此不重复的结点分别为d1和d2，重复的结点为d，即链表A=d1+d、链表B=d2+d。如果1个链表遍历完则使其从另外1个链表的头部重新开始，形成2条长度相等的路径：d1+d+d2, d2+d+d1，这2条路径走完之后2个指针就刚好遍历到相交结点。如果这2个链表没有交叉点，那最后2个指针都正好是空。 复杂度分析 假设2个链表的结点数分别为n和m，则时间复杂度为$O(n+m)$、空间复杂度为$O(1)$。这个思路是该题效率最高的算法。 代码123456789101112131415161718192021222324252627282930// Problem: Leetcode 160// URL: https://leetcode-cn.com/problems/intersection-of-two-linked-lists/// Tags: Linked List// Difficulty: Easystruct ListNode&#123; int val; ListNode* next; ListNode(int x):val(x),next(NULL)&#123;&#125;&#125;;class Solution&#123;public: ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)&#123; // Deal with the border "nullptr" if (nullptr==headA || nullptr==headB) &#123; return nullptr; &#125; ListNode *ptrA = headA; ListNode *ptrB = headB; // d1+d+d2=d2+d+d1 while (ptrA != ptrB)&#123; ptrA = nullptr == ptrA ? headB : ptrA-&gt;next; ptrB = nullptr == ptrB ? headA : ptrB-&gt;next; &#125; return ptrA; &#125;&#125;; 题解二 暴力枚举法 写2层循环，外循环遍历链表A，内循环遍历链表B并判断此时链表A的当前结点是否与链表B中某个结点相同。 复杂度分析 假设2个链表的结点数分别为n和m，则时间复杂度为$O(nm)$、空间复杂度为$O(1)$。 代码略 题解三 哈希法 遍历链表A，将每个结点都放在哈希表中（可以用unordered_set，它底层就是哈希表。我看很多题解里用的set，它的底层不是哈希表而是二叉树），然后遍历链表B找到第1个在哈希表中的结点。 复杂度分析 假设2个链表的结点数分别为n和m，则平均时间复杂度为$O(n+m)$、空间复杂度为$O(m)$或$O(n)$。 代码略 题解四 栈法 将2个链表的结点压入栈中，然后弹栈找到最后1个相同结点，即为要找的相交节点。 复杂度分析 假设2个链表的结点数分别为n和m，则最小时间复杂度为$O(n+m)$、最大时间复杂度为$O(n+m+max(n,m))$、空间复杂度为$O(m+n)$。 参考链接 https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/lian-biao-xiang-jiao-shuang-zhi-zhen-onshi-jian-fu/ https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/dao-tui-xun-zhao-lian-biao-jiao-dian-by-6gyav/ 作者：@臭咸鱼 转载请注明出处：https://www.cnblogs.com/chouxianyu/ 欢迎讨论和交流!]]></content>
       <tags>
-        <tag>LeetCode</tag>
         <tag>算法</tag>
+        <tag>LeetCode</tag>
         <tag>单向链表</tag>
         <tag>双指针</tag>
       </tags>
@@ -2911,8 +2921,8 @@
     <url>%2F2018%2F11%2F03%2Fjava.util.NoSuchElementException%2F</url>
     <content type="text"><![CDATA[问题引入Java商店作业不同函数里需要获取用户输入，用Scanner的时候,出现了异常java.util.NoSuchElementException 作业中代码模式如下，func1和func2中都使用Scanner并关闭它。然后在main中依次调用func1和func2，func2产生异常。说func1和func2其实不合适，应该加个括号……..懒得加了 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748//Demo.javaimport java.util.Scanner;class Test&#123; void func1() &#123; Scanner sc=new Scanner(System.in); //输出用户输入，替代作业里的使用Scanner System.out.print("Func1请输入内容："); System.out.println("Func1输出"+sc.next()); //关闭Scanner sc.close(); &#125; void func2() &#123; Scanner sc=new Scanner(System.in); //输出用户输入，替代作业里的使用Scanner System.out.print("Func2请输入内容："); System.out.println("Func2输出"+sc.nextInt()); //关闭Scanner sc.close(); &#125;&#125;public class Demo&#123; public static void main(String[] args) &#123; Test t=new Test(); t.func1(); t.func2(); &#125;&#125;/*Console输出如下：Func1请输入内容：小姐，请问你喜欢吃青椒吗？Func1输出：小姐，请问你喜欢吃青椒吗？Func2请输入内容：Exception in thread "main" java.util.NoSuchElementException at java.base/java.util.Scanner.throwFor(Unknown Source) at java.base/java.util.Scanner.next(Unknown Source) at java.base/java.util.Scanner.nextInt(Unknown Source) at java.base/java.util.Scanner.nextInt(Unknown Source) at Test.func2(Demo.java:21) at Demo.main(Demo.java:31)*/ 异常产生原因func1中sc.close();语句关闭了Scanner，func2中使用Scanner产生异常 因为System.in是System类的静态成员，所以不同Scanner对象内的in是同一个in` func1和func2中都用System.in创建了Scanner func1打开Scanner后将其关闭，这里间接地将System.in也关闭了 func1结束后运行func2，这时再调用nextInt，在System.in已经关闭了的情况下，不能读取到任何数据，就会产生 java.util.NoSuchElementException 解决方法系统资源一旦释放就不能再开启了，所以只有确定不在使用系统的时候，才能将流关闭 所以应该在整个程序结束时释放Scanner等资源，而不是某个函数中每次使用Scanner等资源后都释放一次 问题引入中的代码只是个模式，上边的两句话用在作业实际代码里就好了 代码分析Scanner()创建Scanner对象代码为Scanner sc=new Scanner(System.in);构造函数源码如下 123public Scanner(InputStream source) &#123; this(new InputStreamReader(source), WHITESPACE_PATTERN);&#125; 可看出是调用了另外一个构造函数，继续查看源码 123456789101112private Scanner(Readable source, Pattern pattern) &#123; assert source != null : "source should not be null"; assert pattern != null : "pattern should not be null"; this.source = source; //看这句 delimPattern = pattern; buf = CharBuffer.allocate(BUFFER_SIZE); buf.limit(0); matcher = delimPattern.matcher(buf); matcher.useTransparentBounds(true); matcher.useAnchoringBounds(false); useLocale(Locale.getDefault(Locale.Category.FORMAT)); &#125; 至少知道了Scanner内部还是用到了流，算是对流进行了封装吧，使用起来更方便一些 close()调用语句为sc.close();，查看close()源码，如下 1234567891011121314public void close() &#123; if (closed) //1.通过closed标志校验Scanner是否已关闭； return; if (source instanceof Closeable) &#123; //2.执行source的close()方法， try &#123; //将source关闭（这里为System.in）； ((Closeable)source).close(); &#125; catch (IOException ioe) &#123; lastException = ioe; &#125; &#125; sourceClosed = true; //3.将sourceClosed标志设置为true，表示source已关闭； source = null; //4.将source置为null，不再引用，处于可回收状态； closed = true; //5.将closed标志设置为true，表示Scanner已关闭；&#125; 可以知道关闭Scanner的时候，((Closeable)source).close();把System.in关闭了 关闭后下次想再使用就当然有错了~（除非构造函数里还再把in给打开，但这样也不太合理） 其实如果还可以再仔细看看Scanner的构造方法，和Scanner的next()，能力有限，点到为止 作者：@臭咸鱼 本文为作者原创，转载请注明出处：https://chouxianyu.github.io/2018/11/03/java.util.NoSuchElementException/#more 欢迎转发和评论]]></content>
       <tags>
-        <tag>Java</tag>
         <tag>Bug</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -2920,8 +2930,8 @@
     <url>%2F2018%2F09%2F22%2FJava%E5%AD%97%E8%8A%82%E6%B5%81read%E5%87%BD%E6%95%B0%2F</url>
     <content type="text"><![CDATA[问题引入做Java作业从标准输入流获取用户输入，用到了System.in.read(),然后出现了bug。 1234567891011121314151617181920212223//随机生成一个小写字母，用户猜5次，读取用户输入，并判断是否猜对import java.io.IOException;public class LetterGuessing &#123; public static void main(String[] args) throws IOException &#123; char ch,answer; //随机生成字母 answer=(char)(Math.random()*26+'a'); System.out.print("请输入一个小写字母："); for(int i=1;i&lt;=5;i++) &#123; //获取用户输入，可能抛出异常 ch=(char)System.in.read(); //比较大小 if(ch == answer)&#123; System.out.println("恭喜，正确！用了"+i+"次猜对"); break; &#125; else if(ch &gt; answer) System.out.println("您猜大了，还有"+ (5-i) +"次机会"); else System.out.println("您猜小了，还有"+ (5-i) +"次机会"); &#125; &#125;&#125; 输入字符&#39;a&#39;，按下Enter,却没有等我下次输入，循环就运行了三次。 问题来源System.in.read()按字节读，一次读入一个字节。后边有详细讲解。 经调试，可知三次循环中ch分别为a,\r,\n。 为什么a+Enter,会变成a\r\n呢 Windows下存在两种文件读写方式，一个是二进制方式，另一种是文本方式。 文本方式中写时”换行”会变成”回车-换行”，即\r\n；读时”回车-换行”会变成”换行”。 二进制方式中读写是严格按照一个字节一个字节的方式进行的。 在这里虽然没有用到文件，但道理应该是一样的 用read()函数是按照一个字节一个字节读取的，即二进制方式。 可能可以推导出，我们向输入流中输入数据默认是按照文本方式。 解决方法方法一在代码第10行后，加两行System.in.read(); 目的是读取掉输入流中的/r和/n。 这种方法的局限性就是输入字母前后不能加空格，因为它不会使空格从输入流中删除。 方法二不用read()读取，用以下代码代替 123import java.util.Scanner;Scanner input=new Scanner(System.in);ch=input.next().charAt(0); 这种方法就比较好，读取字符串（忽略空格和换行，空格和换行不会留在输入流里），然后取字符串的第一个字符。 知识点System.in官方文档：https://docs.oracle.com/javase/10/docs/api/java/lang/System.html#in System是个类，in是System的一个成员，官方介绍如下： 1public static final InputStream in The “standard” input stream. This stream is already open and ready to supply input data. Typically this stream corresponds to keyboard input or another input source specified by the host environment or user. in是一个InputStream类型的对象,所以只需要了解InputStream即可。 InputStream官方文档： https://docs.oracle.com/javase/10/docs/api/java/io/InputStream.html 123public abstract class InputStream //抽象类extends Object //继承Object类implements Closeable //实现Closeable接口 官方介绍如下： This abstract class is the superclass of all classes representing an input stream of bytes. 翻译为：这个抽象类是所有字节流类的父类。 字节流的含义：读取方式为一个字节一个字节地读取,而字符流是二个字节二个字节的读。 Applications that need to define a subclass of InputStream must always provide a method that returns the next byte of input. 翻译为：需要定义一个InputStream子类的应用必须提供一个返回输入下一字节的方法（函数）。 read()官方文档：https://docs.oracle.com/javase/10/docs/api/java/io/InputStream.html#read() 12public abstract int read() throws IOException Reads the next byte of data from the input stream. The value byte is returned as an int in the range 0 to255. 这个是重点，它返回下一字节的ASCII码 If no byte is available because the end of the stream has been reached, the value -1 is returned. This method blocks until input data is available, the end of the stream is detected, or an exception is thrown. A subclass must provide an implementation of this method. Returns: the next byte of data, or -1 if the end of the stream is reached. Throws: IOException - if an I/O error occurs. 作者：@臭咸鱼 本文为作者原创，转载请注明出处：https://chouxianyu.github.io/2018/09/22/Java字节流read函数/#more 欢迎转发和评论]]></content>
       <tags>
-        <tag>Java</tag>
         <tag>Bug</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -2966,8 +2976,8 @@
     <url>%2F2018%2F08%2F22%2FJAI%E4%B8%A2%E5%8C%85%E6%8E%89%E5%B8%A7%E5%A4%84%E7%90%86%2F</url>
     <content type="text"><![CDATA[问题时间戳停止变化/图像停止更新 描述本小白刚刚接触JAI，有很多不懂的地方。这次遇到问题是请教了YZ大哥（不知道年龄，暂时这么称呼），很感谢YZ大哥的耐心指导。因为我不仅不知道怎么调，连在哪里调也不知道╭(╯^╰)╮。以下是此次问题解决步骤，是YZ大哥跟我说怎么做，然后我照做，过程中又遇到问题，下边也给出了碰到的问题以及相应的解决方法。（8.21更） 刚刚又看了下JAI SDK Getting Started Guide，发现YZ讲的方法就是文档里那部分我觉得可以先跳过的内容，出现问题应该也是因为我没有按照文档进行配置…..可能我写的这个会有错误、遗漏、表述模糊，具体操作还可参加文档说明（8.22更） 4.4=》设置接收缓冲区 4.5=》设置中断调整 4.6=》打开巨型帧 4.7=》计算和设置包延迟 出现问题原因图像传输时丢包（掉帧） 解决方法使用 JAI Control Tool 采集图像 防止丢包如何使用JAI Control Tool 采集图像 如何查看是否丢包？ 除了通过搜索，也可以找到GigE Image Acquisition-Total missing packets其实观察刚开始采集图像时图片是否有撕裂的情况（出现水平黑线） 如果丢包 设置相机据包为8000左右（我是8196）如何设置相机数据包 设置相机数据包后用JAI Control Tool采图时黑屏，查看黑屏是是否有帧率如何查看帧率 有帧率则调整网卡巨型帧等如何找到相机连接的网卡网络和共享中心-以太网（就是相机那条网线）-属性-由勾选EBUS设置为不勾选EBUS 同时可以看到连接时使用的网卡 找到网卡右击-属性-高级-巨型帧（由关闭设为9KB MTU）接收缓冲区设为最大（我的最大只有512，只能这样了） 提醒：文档中指出当巨型帧打开的时候，相机数据包大小就可以大于1500bytes，但相机数据包必须小于巨型帧大小。 提醒：文档中指出典型的接收缓冲区最大值为2048，标准默认值为256，请结合自己的实际情况 是不是我的网卡太菜了，众筹给我买个好的可以吗？？？ 如果仍丢包则根据文档设置延时直至成功如何设置延时？参照文档设置延时（主要是帧率）我的Max Fps是2.00 ，Band Width是90% 修改最大帧率，调整带宽，点击calculate，点击ok。（文档指出当数据包大小或者像素格式改变时，数据包延迟都需要重新计算） 最后查看是否丢包 如有丢包可以再次调整数据包大小和延迟。另外有一点是，图像的传输是和你整个电脑的运行都有关系的，而不只是网卡和相机设置。]]></content>
       <tags>
-        <tag>JAI</tag>
         <tag>Bug</tag>
+        <tag>JAI</tag>
       </tags>
   </entry>
   <entry>
