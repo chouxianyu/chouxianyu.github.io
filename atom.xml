@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2021-05-07T03:25:50.584Z</updated>
+  <updated>2021-05-08T00:14:21.040Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>李宏毅机器学习课程笔记-13.6模型压缩代码实战</title>
+    <link href="https://chouxianyu.github.io/2021/05/08/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-13-6%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E4%BB%A3%E7%A0%81%E5%AE%9E%E6%88%98/"/>
+    <id>https://chouxianyu.github.io/2021/05/08/李宏毅机器学习课程笔记-13-6模型压缩代码实战/</id>
+    <published>2021-05-07T23:59:38.000Z</published>
+    <updated>2021-05-08T00:14:21.040Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文为作者学习李宏毅机器学习课程时参照样例完成homework7的记录。</p><p>全部课程PPT、数据和代码下载链接：</p><p>链接：<a href="https://pan.baidu.com/s/1n_N7aoaNxxwqO03EmV5Bjg" target="_blank" rel="noopener">https://pan.baidu.com/s/1n_N7aoaNxxwqO03EmV5Bjg</a> 提取码：tpmc</p><p>代码仓库：<a href="https://github.com/chouxianyu/LHY_ML2020_Codes" target="_blank" rel="noopener">https://github.com/chouxianyu/LHY_ML2020_Codes</a></p><h1 id="任务描述"><a href="#任务描述" class="headerlink" title="任务描述"></a>任务描述</h1><p>通过Architecture Design、Knowledge Distillation、Network Pruning和Weight Quantization这4种模型压缩策略，用一个非常小的model完成homework3中食物图片分类的任务。</p><h2 id="1-Architecture-Design"><a href="#1-Architecture-Design" class="headerlink" title="1.Architecture Design"></a>1.Architecture Design</h2><p>MobileNet提出了Depthwise &amp; Pointwise Convolution。我们在这里实现MobileNet v1这个比较小的network，后续使用Knowledge Distillation策略训练它，然后对它进行剪枝和量化。</p><h2 id="2-Knowledge-Distillation"><a href="#2-Knowledge-Distillation" class="headerlink" title="2.Knowledge Distillation"></a>2.Knowledge Distillation</h2><p>将ResNet18作为Teacher Net(使用torchvision中的ResNet18，仅将num_classes改成11，加载助教训练好的Accuracy约为88.4%的参数)，将上一步(1.Architecture Design)设计的小model作为Student Net，使用Knowledge_Distillation策略训练Student Net。</p><p>Loss计算方法为$Loss = \alpha T^2 \times KL(\frac{\text{Teacher’s Logits}}{T} || \frac{\text{Student’s Logits}}{T}) + (1-\alpha)(\text{Original Loss})$，关于为什么要对student进行logsoftmax可见<a href="https://github.com/peterliht/knowledge-distillation-pytorch/issues/2" target="_blank" rel="noopener">https://github.com/peterliht/knowledge-distillation-pytorch/issues/2</a></p><p>论文《Distilling the Knowledge in a Neural Network》：<a href="https://arxiv.org/abs/1503.02531" target="_blank" rel="noopener">https://arxiv.org/abs/1503.02531</a></p><h2 id="3-Network-Pruning"><a href="#3-Network-Pruning" class="headerlink" title="3.Network Pruning"></a>3.Network Pruning</h2><p>对上一步(2.Knowledge_Distillation)训练好的Student Net做剪枝。</p><p>根据论文《Learning Efficient Convolutional Networks through Network Slimming》，论文链接：<a href="https://arxiv.org/abs/1708.06519" target="_blank" rel="noopener">https://arxiv.org/abs/1708.06519</a><br>BatchNorm层中的gamma值和一些特定卷积核（或者全连接层的一个神经元）相关联，因此可以使用BatchNorm层中的gamma值判断相关通道的重要性。</p><p>Student Net中CNN部分有几个结构相同的Sequential，其结构、权重名称、实现代码、权重形状如下表所示。</p><div class="table-container"><table><thead><tr><th style="text-align:center">#</th><th style="text-align:left">name</th><th style="text-align:left">meaning</th><th>code</th><th>weight shape</th></tr></thead><tbody><tr><td style="text-align:center">0</td><td style="text-align:left">cnn.{i}.0</td><td style="text-align:left">Depthwise Convolution</td><td>nn.Conv2d(x, x, 3, 1, 1, group=x)</td><td>(x, 1, 3, 3)</td></tr><tr><td style="text-align:center">1</td><td style="text-align:left">cnn.{i}.1</td><td style="text-align:left">Batch Normalization</td><td>nn.BatchNorm2d(x)</td><td>(x)</td></tr><tr><td style="text-align:center">2</td><td style="text-align:left"></td><td style="text-align:left">ReLU6</td><td>nn.ReLU6</td><td></td></tr><tr><td style="text-align:center">3</td><td style="text-align:left">cnn.{i}.3</td><td style="text-align:left">Pointwise Convolution</td><td>nn.Conv2d(x, y, 1),</td><td>(y, x, 1, 1)</td></tr><tr><td style="text-align:center">4</td><td style="text-align:left"></td><td style="text-align:left">MaxPooling</td><td>nn.MaxPool2d(2, 2, 0)</td></tr></tbody></table></div><p>独立剪枝prune_count次，每次剪枝的剪枝率按prune_rate逐渐增大，剪枝后微调finetune_epochs个epoch。</p><h2 id="4-Weight-Quantization"><a href="#4-Weight-Quantization" class="headerlink" title="4.Weight Quantization"></a>4.Weight Quantization</h2><p>对第二步(2.Knowledge_Distillation)训练好的Student Net做量化（用更少的bit表示一个value）。</p><p>torch预设的FloatTensor是32bit，而FloatTensor最低可以是16bit。</p><p>如何将32bit转成8bit的int呢？对每个weight进行min-max normalization，然后乘以$2^8-1$再四舍五入成整数，这样就可以转成uint8了。</p><h1 id="数据集描述"><a href="#数据集描述" class="headerlink" title="数据集描述"></a>数据集描述</h1><p>数据集为homework3中食物图片分类数据集。</p><p>11个图片类别，训练集中有9866张图片，验证集中有3430张图片，测试集中有3347张图片。</p><p>训练集和验证集中图片命名格式为<code>类别_编号.jpg</code>，编号不重要。</p><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p><a href="https://github.com/chouxianyu/LHY_ML2020_Codes/tree/master/hw7_NetworkCompression" target="_blank" rel="noopener">https://github.com/chouxianyu/LHY_ML2020_Codes/tree/master/hw7_NetworkCompression</a></p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;本文为作者学习李宏毅机器学习课程时参照样例完成homework7的记录。&lt;/p&gt;
+&lt;p&gt;全部课程PPT、数据和代码下载链接：&lt;/p&gt;
+&lt;p&gt;链接：&lt;a href=&quot;https://pan.baidu.com/s/1n_N7aoaNxxwqO03EmV5Bjg&quot; target
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="模型压缩" scheme="https://chouxianyu.github.io/tags/%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9/"/>
+    
+      <category term="网络剪枝" scheme="https://chouxianyu.github.io/tags/%E7%BD%91%E7%BB%9C%E5%89%AA%E6%9E%9D/"/>
+    
+      <category term="知识蒸馏" scheme="https://chouxianyu.github.io/tags/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/"/>
+    
+      <category term="参数量化" scheme="https://chouxianyu.github.io/tags/%E5%8F%82%E6%95%B0%E9%87%8F%E5%8C%96/"/>
+    
+  </entry>
   
   <entry>
     <title>李宏毅机器学习课程笔记-13.5模型压缩之动态计算</title>
@@ -525,37 +558,6 @@
       <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="PyTorch" scheme="https://chouxianyu.github.io/tags/PyTorch/"/>
-    
-      <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="循环神经网络" scheme="https://chouxianyu.github.io/tags/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="LSTM" scheme="https://chouxianyu.github.io/tags/LSTM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-9.5详解基于LSTM的RNN</title>
-    <link href="https://chouxianyu.github.io/2021/04/14/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-9-5%E8%AF%A6%E8%A7%A3%E5%9F%BA%E4%BA%8ELSTM%E7%9A%84RNN/"/>
-    <id>https://chouxianyu.github.io/2021/04/14/李宏毅机器学习课程笔记-9-5详解基于LSTM的RNN/</id>
-    <published>2021-04-14T02:38:35.000Z</published>
-    <updated>2021-04-14T02:40:15.998Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1层LSTM神经元的架构"><a href="#1层LSTM神经元的架构" class="headerlink" title="1层LSTM神经元的架构"></a>1层LSTM神经元的架构</h2><p>根据上述内容，你可能看不出LSTM与RNN有什么关系，接下来具体介绍LSTM在RNN中的应用。</p><p>假设我们现在有一些LSTM（下图中白色部分）作为神经元，每个LSTM的memory cell里都存了一个scalar值（下图中红框中内容），把这些scalar连接起来就组成了1个vector $c^{t-1}$，即关于上个input（时间点为t-1）的memory。</p><p><img src="https://pic4.zhimg.com/80/v2-d96ed6d363d633b87729a22badf815a9_720w.png" alt="img"></p><p><strong>在时间点t，输入为1个vector $x^t$，它会经过4个线性的transform得到$z^f,z^i,z,z^o$，$z^f,z^i,z,z^o$这4个vector的dimension数量和LSTM神经元的数量相等，这4个vector的1个dimension即为1个LSTM神经元的输入（4个vector的第1个dimension为第1个LSTM神经元的输入）。</strong></p><h2 id="1个LSTM神经元的运算方法"><a href="#1个LSTM神经元的运算方法" class="headerlink" title="1个LSTM神经元的运算方法"></a>1个LSTM神经元的运算方法</h2><p>下图是单个LSTM神经元的运算方法，其4个input分别是$z$、$z^i$、$z^f$和$z^o$的其中1维（1维为1个神经元的输入）。每个LSTM神经元的input是各不相同的，但它们可以共同运算。</p><p>1个LSTM神经元的运算方法如下图所示。</p><p><img src="https://pic3.zhimg.com/80/v2-bc5c546a495db0ef197f4527f841562c_720w.png" alt="img"></p><p>$f(z^f)$与上一个时间点的memory $c^{t-1}$对应的cell值相乘，加上$g(z)$与$f(z^i)$的乘积，得到该时刻该cell中的值$c^t$，最终再乘以output gate的信号$f(z^o)$，得到输出$y^t$。</p><h2 id="1个LSTM神经元在相邻时刻时的运算方法"><a href="#1个LSTM神经元在相邻时刻时的运算方法" class="headerlink" title="1个LSTM神经元在相邻时刻时的运算方法"></a>1个LSTM神经元在相邻时刻时的运算方法</h2><p><img src="https://pic1.zhimg.com/80/v2-993d9ee86e0180e96e405e6b3248b41f_720w.png" alt="img"></p><p>上图是同1个LSTM神经元在2个相邻时刻的运算方法，其中与前文描述略有不同的是，这里还需要把当前时刻该神经元的输出$y^t$以及该神经元中cell保存的值$c^t$（peephole）都连接到下一时刻的输入上。因此在$t+1$时刻，神经元不只是考虑当前的输入$x^{t+1}$，还要看前一时刻该神经元的输出$h^t$和cell保存值$c^t$。</p><p>如何考虑结合$t+1$时刻的输入$x^{t+1}$和上一时刻该神经元的信息$h^t,c^t$呢？====&gt;<strong>把$x^{t+1}$、$h^t$和$c^t$这3个vector并在一起</strong>，乘上4个不同的转换矩阵，得到该神经元$t+1$时刻的4个输入$z$、$z^i$、$z^f$、$z^o$。</p><h2 id="多层LSTM在相邻时刻的运算方法"><a href="#多层LSTM在相邻时刻的运算方法" class="headerlink" title="多层LSTM在相邻时刻的运算方法"></a>多层LSTM在相邻时刻的运算方法</h2><p><img src="https://pic2.zhimg.com/80/v2-a6435474533a8871ad59ed5443055159_720w.png" alt="img"></p><p>上图中左边一列的2个LSTM代表2层LSTM，右边一列的2个LSTM则代表它们在下一时刻的状态。即横向是时间轴，纵向是层轴。</p><p>虽然看起来很复杂，感觉不一定work，但LSTM在RNN中已成为了标准做法。</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;1层LSTM神经元的架构&quot;&gt;&lt;a href=&quot;#1层LSTM神经元的架构&quot; class=&quot;headerlink&quot; title=&quot;1层LSTM神经元的架构&quot;&gt;&lt;/a&gt;1层LSTM神经元的架构&lt;/h2&gt;&lt;p&gt;根据上述内容，你可能看不出LSTM与RNN有什么关系，接下来
-      
-    
-    </summary>
-    
-    
-      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="神经网络" scheme="https://chouxianyu.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
