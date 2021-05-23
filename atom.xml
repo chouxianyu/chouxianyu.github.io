@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2021-05-20T01:34:50.565Z</updated>
+  <updated>2021-05-23T01:19:54.477Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,68 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>李宏毅机器学习课程笔记-14.4 Seq2Seq：Transformer</title>
+    <link href="https://chouxianyu.github.io/2021/05/23/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-14-4-Seq2Seq%EF%BC%9ATransformer/"/>
+    <id>https://chouxianyu.github.io/2021/05/23/李宏毅机器学习课程笔记-14-4-Seq2Seq：Transformer/</id>
+    <published>2021-05-23T01:01:21.000Z</published>
+    <updated>2021-05-23T01:19:54.477Z</updated>
+    
+    <content type="html"><![CDATA[<p>transformer最知名的应用就是BERT，BERT就是无监督训练的transformer，transformer就是具有<strong>Self-attention</strong>的Seq2Seq模型。</p><p>RNN常用于处理输入和输出都是sequence的任务，因为RNN是通过遍历输入的sequence而逐步输出一个sequence，所以RNN很难被并行化。因为CNN可以并行化，所以有人提出用CNN处理输入和输出是sequence的任务：每个卷积核将sequence中的一部分作为输入并输出一个sequence、多个卷积核就可以生成多个sequence。层数较少的CNN不能看到long-term的信息，层数很多的CNN才能看到long-term的信息，如果在浅层（比如第一层）就需要看到long-term的信息怎么办呢？</p><p>有人提出<strong>用Self-Attention Layer代替RNN</strong>，其输入和输出和RNN一样都是sequence，它的特别之处是和Bidirectional RNN一样在输出时就已经看过了输入的整个sequence，并且可以并行计算。</p><h2 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h2><p>Self-Attention来自于谷歌的paper：《Attention is all you need》。</p><ol><li><p>假设现在有输入序列$x^1,x^2,x^3,x^4$</p></li><li><p>进行embedding：$a^i=Wx^i$</p></li><li><p>将$a^i$输入到Self-Attention Layer得到$q^i,k^i,v^i$</p><p> $q$代表query，它是要去和key进行match的，$q^i=W^qa^i$</p><p> $k$代表key，它是要被query进行match的，$k^i=W^ka^i$</p><p> $v$代表value，我们要通过attention从中进一步提取information，$v^i=W^va^i$</p></li><li><p>使用每个query对每个key做attention</p><p> 以$q^i$为例，使用$q^i$和4个key得到$\alpha_{i,1},\alpha_{i,2},\alpha_{i,3},\alpha_{i,4}$，可以使用Scaled Dot-Product Attention：$\alpha_{i,j}=\frac{q^i\cdot k^j}{\sqrt d}$，其中$d$是$q^i$和$k^j$的维数，除以$\sqrt d$是因为$q^i\cdot k^j$的大小会受$d$的大小的影响；再使用softmax函数得到$\hat\alpha_{i,1},\hat\alpha_{i,2},\hat\alpha_{i,3},\hat\alpha_{i,4}$</p></li><li><p>$b^i=\sum\limits_j\hat\alpha_{i,j}v^j$，这样在计算$b^i$时就是可以看到输入的整个sequence</p></li></ol><h2 id="Self-Attention如何并行化计算"><a href="#Self-Attention如何并行化计算" class="headerlink" title="Self-Attention如何并行化计算"></a>Self-Attention如何并行化计算</h2><p>Self-Attention是如何实现并行化计算的呢？上述Self-Attention的计算其实都是一些矩阵运算，因此可以使用GPU加速。</p><ol><li>输入为$I$</li><li>$Q=W^qI,K=W^kI,V=W^vI$</li><li>$A=K^TQ$</li><li>$\hat A=softmax(A)$</li><li>输出为$O=V\hat A$</li></ol><h2 id="Multi-head-Self-attention"><a href="#Multi-head-Self-attention" class="headerlink" title="Multi-head Self-attention"></a>Multi-head Self-attention</h2><p>Self-attention有一种变形是Multi-head Self-attention，现以2个head的情况为例介绍Multi-head Self-attention。</p><p>Multi-head的作用在于不同head关注的东西可能不一样。</p><ol><li><p>假设现在有输入序列$x^1,x^2,x^3,x^4$</p></li><li><p>进行embedding：$a^i=Wx^i$</p></li><li><p>将$a^i$输入到Self-Attention Layer得到$q^{i,1},q^{i,2},k^{i,1},k^{i,2},v^{i,1},v^{i,2}$</p><p> 这里体现了Multi-head。</p><p> $q$代表query，它是要去和key进行match的，$q^{i,1}=W^{q,1}a^i,q^{i,2}=W^{q,2}a^i$</p><p> $k$代表key，它是要被query进行match的，$k^{i,1}=W^{k,1}a^i,k^{i,2}=W^{k,2}a^i$</p><p> $v$代表value，我们要通过attention从中进一步提取information，$v^{i,1}=W^{v,1}a^i,v^{i,2}=W^{v,2}a^i$</p></li><li><p>使用每个query对每个key做attention</p><p> 这里体现了Multi-head。</p><p> 以$q^{i,1},q^{i,2}$为例，$q^{i,1}$只会和$k^{i,1}$做attention，$q^{i,2}$只会和$k^{i,2}$做attention</p></li><li><p>最终得到$b^{i,1},b^{i,2}$，将两者直接concat，如果需要还可以通过乘以$W^O$修改维度</p></li></ol><h2 id="Positional-Encoding"><a href="#Positional-Encoding" class="headerlink" title="Positional Encoding"></a>Positional Encoding</h2><p>上面讲的Self-Attention并没有考虑sequence中元素之间的顺序，所以需要Positional Encoding。</p><p>Positional Encoding即每个position都有一个独一无二的positional vector $e^i$，这些vector并不是从数据中学习到的，在将$x^i$embedding得到$a^i$后再加上$e^i$，然后再输入到Self-Attention Layer。</p><h2 id="Seq2Seq-with-Attention"><a href="#Seq2Seq-with-Attention" class="headerlink" title="Seq2Seq with Attention"></a>Seq2Seq with Attention</h2><p>如何将Self-Attention应用到一个Seq2Seq模型中呢？</p><p>一般的Seq2Seq模型中包括2个RNN分别作为Encoder和Decoder，我们可以使用Self-Attention Layer代替这2个RNN。</p><h2 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h2><p>以中文翻译为英文的任务为例，假如要把“机器学习”翻译为“Machine Learning”。</p><p>Transformer也分为Encoder和Decoder，Encoder的输入是“机器学习”，先给Decoder一个输入<code>&lt;BOS&gt;</code>代表句子的开始（begin of sentence），然后Decoder会输出一个“Machine”，在下一个时刻把“Machine”输入到Decoder得到“Learning”，直到Decoder输出“句点”。</p><p>下面介绍Transformer的具体结构，如下图所示。</p><p><img src="https://pic1.zhimg.com/80/v2-4b53b731a961ee467928619d14a5fd44_720w.jpg" alt="img"></p><p>如上图所示，在Encoder中，首先将输入进行embedding，然后加上positional encoding，然后进入多个相同的Block。每个Block中首先是一个Multi-head Attention，然后再将Multi-head Attention的输入和输出加起来，然后做Layer Normalization，然后进入Feedforward Layer，再将Feedforward Layer的输入和输出加起来，然后做Layer Normalization。</p><p>如上图所示，在Decoder中，Decoder的输入是Decoder在前一个时刻的输出，然后加上positional encoding，然后进入多个相同的Block。每个Block中首先是一个Masked Multi-head Attention（Masked指Decoder在做Self-Attention时只会attend已经生成的sequence），然后将Masked Multi-head Attention的输入和输出加起来，再做Layer Normalization，然后将Layer Normalization的输出和Encoder的输出输入到一个Multi-head Attention中，然后将Multi-head Attention的输入和输出详见并做Layer Normalization，然后进入Feedforward Layer，再将Feedforward Layer的输入和输出加起来，然后做Layer Normalization。多个相同的Block结束以后，进入Linear层，然后进入Softmax层得到最终的输出。</p><p>如果一个任务可以用Seq2Seq模型完成，那就可以用Transformer。</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;transformer最知名的应用就是BERT，BERT就是无监督训练的transformer，transformer就是具有&lt;strong&gt;Self-attention&lt;/strong&gt;的Seq2Seq模型。&lt;/p&gt;
+&lt;p&gt;RNN常用于处理输入和输出都是sequence的
+      
+    
+    </summary>
+    
+    
+      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Seq2Seq" scheme="https://chouxianyu.github.io/tags/Seq2Seq/"/>
+    
+      <category term="Attention" scheme="https://chouxianyu.github.io/tags/Attention/"/>
+    
+      <category term="Transformer" scheme="https://chouxianyu.github.io/tags/Transformer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>李宏毅机器学习课程笔记-14.3 Seq2Seq：Tips for Generation</title>
+    <link href="https://chouxianyu.github.io/2021/05/22/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-14-3-Seq2Seq%EF%BC%9ATips-for-Generation/"/>
+    <id>https://chouxianyu.github.io/2021/05/22/李宏毅机器学习课程笔记-14-3-Seq2Seq：Tips-for-Generation/</id>
+    <published>2021-05-22T02:00:57.000Z</published>
+    <updated>2021-05-22T02:01:52.261Z</updated>
+    
+    <content type="html"><![CDATA[<p>在训练一个可以产生句子的网络时，有哪些技巧呢？ </p><h2 id="Bad-Attention"><a href="#Bad-Attention" class="headerlink" title="Bad Attention"></a>Bad Attention</h2><p>假如要做video的caption generation，某视频有4个frame，即有4个时刻的图片。</p><p>用$\alpha^i_t$表示attention weight，其上标表示frame的索引、下标表示时刻的索引。在第1个时刻，产生attention $\alpha^1_1,\alpha^2_1,\alpha^3_1,\alpha^4_1$，生成第1个word $w_1$；在第2个时刻，产生attention $\alpha^1_2,\alpha^2_2,\alpha^3_2,\alpha^4_2$，生成第2个word $w_2$；以此类推……</p><p>这样有时候会产生一些<strong>bad attention</strong>。比如，如果4个时刻的attention都集中在某一个frame上，就会产生一些奇怪的结果，比如每次生成的word都是相同的。</p><p><strong>good attention</strong>需要关注到输入中的每个frame，对每个frame的关注度不能太多也不能太少并且应该是同等级的。那如何实现这种好的attention呢？比如使用正则项$\sum_i(\tau-\sum_t\alpha_t^i)$使得每个frame在4个时刻的attention weight之和都接近$\tau$，这个$\tau$是通过学习得到的，详见《Show, Attend and Tell: Neural  Image Caption Generation with Visual Attention》。</p><h2 id="Mismatch-between-Train-and-Test"><a href="#Mismatch-between-Train-and-Test" class="headerlink" title="Mismatch between Train and Test"></a>Mismatch between Train and Test</h2><p>假如用RNN生成sentence，在训练时模型refer了整个sentence，如果在某一步预测失败可以通过损失函数优化每一次预测；而在测试时，模型的输入是上一步的输出，如果一步出错，可能就会步步出错。这个问题叫做<strong>Exposure Bias</strong>。那么我们如何解决train和test之间的mismatch呢？</p><p>可以考虑修改训练方法，假设模型现在应该输出A，但现在模型输出了B，即使是错误的输出我们也应该让这个错误的输出作为下一次的输入，这样train和testing就是match的，但实际上这种训练方法是难以见效的。有一个可行的方法是<strong>Scheduled Sampling</strong>，按一定概率选择模型上一步的输出或者标注作为模型的输入，可以在刚开始时只使用标注作为输入然后慢慢开始使用模型上一步的输出作为输入。</p><h2 id="Beam-Search"><a href="#Beam-Search" class="headerlink" title="Beam Search"></a>Beam Search</h2><p>在一颗庞大的树中搜索一条最优路径时，我们无法穷举所有路径，贪心策略找到的路径也不一定是最优路径。Beam Search就是指在每一步保留最好的几条路径。</p><p>有人说直接把模型输出的分布直接作为下次的输入，但其实这样的结果会比较差，因为这样无法区分出接近的分布。</p><h2 id="Object-Level-V-S-Component-Level"><a href="#Object-Level-V-S-Component-Level" class="headerlink" title="Object Level  V.S.  Component Level"></a>Object Level  V.S.  Component Level</h2><p>假如我们要生成一个sentence，那我们就应该关注整个sentence(Object Level)而不仅仅是每个word(Component Level)。</p><p>如果是按照Component Level，那使用Cross Entropy计算损失的话，训练前期loss会下降得很快，但后期loss会下降得很慢（“The dog is is fast”和”The dog is running fast”的loss的差距很小）。</p><p>那有没有一个损失函数可以基于Object Level衡量两个句子间的差异呢？目前是没有的，因为模型输出的分布是离散的，如果微小改变模型参数但保证模型输出的句子相同，那损失函数的输出就是一样的，即微小扰动并没有对loss产生影响。</p><p>那怎么办呢？</p><h2 id="Reinforcement-Learning"><a href="#Reinforcement-Learning" class="headerlink" title="Reinforcement Learning"></a>Reinforcement Learning</h2><p>可以利用强化学习进行generation，每次生成一个word并不计算reward，知道生成整个sentence后才利用所生成的sentence和标注计算reward，详见《SEQUENCE LEVEL TRAINING WITH RECURRENT NEURAL NETWORKS》。</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在训练一个可以产生句子的网络时，有哪些技巧呢？ &lt;/p&gt;
+&lt;h2 id=&quot;Bad-Attention&quot;&gt;&lt;a href=&quot;#Bad-Attention&quot; class=&quot;headerlink&quot; title=&quot;Bad Attention&quot;&gt;&lt;/a&gt;Bad Attention&lt;/
+      
+    
+    </summary>
+    
+    
+      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Seq2Seq" scheme="https://chouxianyu.github.io/tags/Seq2Seq/"/>
+    
+      <category term="Attention" scheme="https://chouxianyu.github.io/tags/Attention/"/>
+    
+  </entry>
   
   <entry>
     <title>李宏毅机器学习课程笔记-14.2 Seq2Seq：Attention</title>
@@ -100,9 +162,9 @@
     
       <category term="模型压缩" scheme="https://chouxianyu.github.io/tags/%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9/"/>
     
-      <category term="网络剪枝" scheme="https://chouxianyu.github.io/tags/%E7%BD%91%E7%BB%9C%E5%89%AA%E6%9E%9D/"/>
-    
       <category term="知识蒸馏" scheme="https://chouxianyu.github.io/tags/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/"/>
+    
+      <category term="网络剪枝" scheme="https://chouxianyu.github.io/tags/%E7%BD%91%E7%BB%9C%E5%89%AA%E6%9E%9D/"/>
     
       <category term="参数量化" scheme="https://chouxianyu.github.io/tags/%E5%8F%82%E6%95%B0%E9%87%8F%E5%8C%96/"/>
     
@@ -509,60 +571,6 @@
       <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="半监督学习" scheme="https://chouxianyu.github.io/tags/%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-10.3基于Low-density Separation假设的半监督学习</title>
-    <link href="https://chouxianyu.github.io/2021/04/18/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-10-3%E5%9F%BA%E4%BA%8ELow-density-Separation%E5%81%87%E8%AE%BE%E7%9A%84%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://chouxianyu.github.io/2021/04/18/李宏毅机器学习课程笔记-10-3基于Low-density-Separation假设的半监督学习/</id>
-    <published>2021-04-18T07:17:34.000Z</published>
-    <updated>2021-04-18T07:18:14.773Z</updated>
-    
-    <content type="html"><![CDATA[<p>按照“非黑即白”的思路，假设类别之间的boundary周围的data是很少的，即<strong>假设不同类别数据之间应该有1个很明显的boundary</strong>。</p><h3 id="Self-training"><a href="#Self-training" class="headerlink" title="Self-training"></a>Self-training</h3><p>最简单的基于Low-density Separation假设的半监督学习是Self-training。</p><ol><li><p>使用有标签的数据训练1个模型$f^*$，模型类型和训练方式没有限制，神经网络、深或浅、其它机器学习方法等等都可以</p></li><li><p>使用模型$f^<em>$生成未标注数据的伪标签(Pseudo-label)，即$y^u=f^</em>(x^u)$</p></li><li><p>取出一部分未标注数据将它们添加到有标签数据中，然后回到步骤1</p><p> 如何选择未标注数据仍然是一个open question，可以自行设计策略，比如给每个样本一个置信度。</p></li></ol><p>Self-training和<strong>生成模型中的半监督学习</strong>(见上1篇文章)还挺像的，它们的区别在于：</p><ol><li>Self-training使用<strong>hard label</strong>，即假定某个无标签样本一定属于某个类别(“非黑即白”)</li><li>生成模型使用<strong>soft label</strong>，即假定某个无标签样本有一定概率属于某类别(也可以理解为一个样本可以按照后验概率划分成多个部分，不同部分属于不同类别)</li></ol><p>Self-training使用了hard label，它并不适用于regression。</p><p>生成模型使用了soft label，它生成的伪标签在分类任务中是没有用的。因为把某个无标签样本(通过soft label生成伪标签)丢进模型重新训练模型，模型参数根本不会发生变化。</p><p>实际上，low-density separation就是<strong>通过hard label来提升分类效果</strong>的方法。</p><h3 id="Entropy-based-Regularization"><a href="#Entropy-based-Regularization" class="headerlink" title="Entropy-based Regularization"></a>Entropy-based Regularization</h3><p>该方法是Self-training的进阶版。</p><p>Self-training中使用的hard label还是有些武断和激进，Entropy-based Regularization对此进行了改进。</p><p><strong>在使用神经网络进行分类时，$y^u=f^<em>_{\theta^</em>}(x^u)$，其中$y_u$是1个one-hot编码。现在我们并不限制其必须是某个类别，而是将其看做1个分布，我们希望这个分布越集中越好(“非黑即白”)，因为分布越集中时它的含义就是样本$x^u$属于某类别的概率很大属于其它类别的概率很小</strong>。</p><p>我们可以使用Entropy评估分布$y^u$的集中程度$E(y^u)=-\sum_{m=1}^5y_m^uln(y_m^u)$，假设是5分类，其值越小则表示分布$y^u$越集中。</p><p>无监督分类的目标为有标签数据分类正确、无标签数据分类结果集中，所以损失函数则为$L=\sum_{x^r}C(y^r,\hat y^r)+\lambda\sum_{x^u}E(y^u)$，其中第1项为有标签数据的交叉熵损失、第2项为无标签数据的entropy、$\lambda$表示无标签数据的损失权重，因为式中第2项的作用类似于regularization，所以该方法被称为Entropy-based Regularization。</p><h3 id="Semi-supervised-SVM"><a href="#Semi-supervised-SVM" class="headerlink" title="Semi-supervised SVM"></a>Semi-supervised SVM</h3><p>SVM为两个类别的数据找到一个boundary，该boundary与两个类别的margin最大、分类错误最小。</p><p>Semi-supervised SVM穷举所有无标签数据的类别并进行计算，最终选择与两个类别的margin最大、分类错误最小的boundary。</p><p>在数据量大的时候，Semi-supervised SVM难以穷举出所有情况，但还有一种求近似解的方法，其大致思路是初始化一些label，然后每次尝试改动1个样本的label并判断是否更优，如果更优则改变该样本的label，具体见Transductive Inference for Text Classification using Support Vector Machines。</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;按照“非黑即白”的思路，假设类别之间的boundary周围的data是很少的，即&lt;strong&gt;假设不同类别数据之间应该有1个很明显的boundary&lt;/strong&gt;。&lt;/p&gt;
-&lt;h3 id=&quot;Self-training&quot;&gt;&lt;a href=&quot;#Self-training&quot;
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="半监督学习" scheme="https://chouxianyu.github.io/tags/%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-10.2生成模型中的半监督学习</title>
-    <link href="https://chouxianyu.github.io/2021/04/17/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-10-2%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://chouxianyu.github.io/2021/04/17/李宏毅机器学习课程笔记-10-2生成模型中的半监督学习/</id>
-    <published>2021-04-17T02:46:22.000Z</published>
-    <updated>2021-04-17T02:49:17.526Z</updated>
-    
-    <content type="html"><![CDATA[<p>生成模型中的半监督学习：Semi-supervised Learning for Generative Model</p><h2 id="有监督生成模型"><a href="#有监督生成模型" class="headerlink" title="有监督生成模型"></a>有监督生成模型</h2><p>有监督生成模型：Supervised Generative Model</p><p>如下图所示，在有监督生成模型中，得到$P(C_1),P(C_2),\mu^1,\mu^2,\Sigma$后，就可以计算出$x$属于类别$C_i$的概率$P(C_i|x)$。</p><p><img src="https://pic4.zhimg.com/80/v2-ee9b2801a6e660c4526a62103c10d2e0_720w.png" alt="img"></p><h2 id="半监督生成模型"><a href="#半监督生成模型" class="headerlink" title="半监督生成模型"></a>半监督生成模型</h2><p>半监督生成模型：Semi-supervised Generative Model</p><p>基于有监督生成模型，当有了无标签数据之后(下图中绿色圆点)，我们会明显发现有监督生成模型中的$P(C_1),P(C_2),\mu^1,\mu^2,\Sigma$并不够正确，比如2个类别的分布应该接近于下图中虚线圆圈、先验概率$P(C_1)$应该小于$P(C_2)$，所以应该使用无标签数据重新估计$P(C_1),P(C_2),\mu^1,\mu^2,\Sigma$。</p><p><img src="https://pic4.zhimg.com/80/v2-a334756241f389f2ca620c5f35ab5269_720w.png" alt="img"></p><h3 id="直观理解"><a href="#直观理解" class="headerlink" title="直观理解"></a>直观理解</h3><p>具体来讲，按照以下步骤进行计算：</p><ol><li><p>初始化参数：$\theta=\{P(C_1),P(C_2),\mu^1,\mu^2,\Sigma\}$</p><p> 可以随机初始化，也可以用有标签数据估算</p></li><li><p>通过$\theta$计算每个样本$x^u$属于类别$C_i$的概率$P_\theta(C_i|x^u)$</p></li><li><p><strong>更新参数$\theta$</strong>（其实重点就是如何同时利用有标签数据和无标签数据实现半监督）</p><ul><li>$P(C_1)=\frac{N_1+\sum_{x^u}P(C_1|x^u)}{N}$，其中$N$是所有样本的数量、$N_1$是属于类别$C_1$的样本的数量。</li><li>$\mu^1=\frac{1}{N_1}\sum_{x^r\in C_1}x^r+\frac{1}{\sum_{x^u}P(C_1|x^u)}\sum_{x^u}P(C_1|x^u)x^u$，其中$x^r,x^u$分别指有标签的样本和无标签的样本</li></ul><p>同理可知其它参数的计算和更新方法</p></li><li><p>返回第2步</p></li></ol><p>理论上，上述步骤是可以收敛的，但参数$\theta$的初始化值会影响结果。其实上面的第2步是EM算法中的E，第3步是EM算法中的M。</p><h3 id="理论推导"><a href="#理论推导" class="headerlink" title="理论推导"></a>理论推导</h3><p>$\theta=\{P(C_1),P(C_2),\mu^1,\mu^2,\Sigma\}$</p><ul><li><p>Maximum likelihood with labelled data</p><p>  使得$logL(\theta)=\sum_{x^r}logP_\theta(x^r, \hat y^r)$最大(有一个Closed-form solution)，其中每个有标注样本$x^r$的$P_\theta(x^r,\hat y^r)=P_\theta(x^r|\hat y^r)P(\hat y^r)$。</p></li><li><p>Maximum likelihood with labelled &amp; unlabeled data</p><p>  使得$logL(\theta)=\sum_{x^r}logP_\theta(x^r, \hat y^r)+\sum_{x^u}logP_\theta(x^u)$最大(该式并不是凹函数，所以需要迭代求解)，其中每个无标注样本$x^u$的$P_\theta(x^u)=P_\theta(x^u|C_1)P(C_1)+P_\theta(x^u|C_2)P(C_2)$</p></li></ul><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;生成模型中的半监督学习：Semi-supervised Learning for Generative Model&lt;/p&gt;
-&lt;h2 id=&quot;有监督生成模型&quot;&gt;&lt;a href=&quot;#有监督生成模型&quot; class=&quot;headerlink&quot; title=&quot;有监督生成模型&quot;&gt;&lt;/a&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="半监督学习" scheme="https://chouxianyu.github.io/tags/%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="概率生成模型" scheme="https://chouxianyu.github.io/tags/%E6%A6%82%E7%8E%87%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B/"/>
     
   </entry>
   
