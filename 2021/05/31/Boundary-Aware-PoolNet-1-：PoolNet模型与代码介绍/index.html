@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,深度学习,显著性目标检测,BAPoolNet,PoolNet," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="臭咸鱼的缺氧瓶" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Boundary Aware PoolNet = PoolNet + BASNet，即使用BASNet中的Deep Supervision策略和Hybrid Loss改进PoolNet。 为理解Boundary Aware PoolNet还是需要全面理解PoolNet的，因此本文将对PoolNet的模型结构及其代码实现进行介绍。 相关文章汇总：  Boundary Aware PoolNet：基于">
+<meta name="keywords" content="机器学习,深度学习,显著性目标检测,BAPoolNet,PoolNet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Boundary Aware PoolNet(1)：PoolNet模型与代码介绍">
+<meta property="og:url" content="https://chouxianyu.github.io/2021/05/31/Boundary-Aware-PoolNet-1-：PoolNet模型与代码介绍/index.html">
+<meta property="og:site_name" content="臭咸鱼的缺氧瓶">
+<meta property="og:description" content="Boundary Aware PoolNet = PoolNet + BASNet，即使用BASNet中的Deep Supervision策略和Hybrid Loss改进PoolNet。 为理解Boundary Aware PoolNet还是需要全面理解PoolNet的，因此本文将对PoolNet的模型结构及其代码实现进行介绍。 相关文章汇总：  Boundary Aware PoolNet：基于">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-be5246490726fc5895025fb5daba09fe_720w.jpeg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-ff8a917b998c1710ac7c8a91cd48b2c7_720w.jpeg">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-4bda90f7c75b31ff8d669a5f71860943_1440w.jpg?source=172ae18b">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-17c94fb51fddbffb95a4a9acf10f703b_720w.png">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-19fbea793459041b77a0992c566d4b4d_720w.png">
+<meta property="og:updated_time" content="2021-05-31T07:06:17.184Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Boundary Aware PoolNet(1)：PoolNet模型与代码介绍">
+<meta name="twitter:description" content="Boundary Aware PoolNet = PoolNet + BASNet，即使用BASNet中的Deep Supervision策略和Hybrid Loss改进PoolNet。 为理解Boundary Aware PoolNet还是需要全面理解PoolNet的，因此本文将对PoolNet的模型结构及其代码实现进行介绍。 相关文章汇总：  Boundary Aware PoolNet：基于">
+<meta name="twitter:image" content="https://pic2.zhimg.com/80/v2-be5246490726fc5895025fb5daba09fe_720w.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chouxianyu.github.io/2021/05/31/Boundary-Aware-PoolNet-1-：PoolNet模型与代码介绍/"/>
+
+
+
+
+
+  <title>Boundary Aware PoolNet(1)：PoolNet模型与代码介绍 | 臭咸鱼的缺氧瓶</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5706c34297d4762ba8c6d799a54234b9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">臭咸鱼的缺氧瓶</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快给我氧气！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2021/05/31/Boundary-Aware-PoolNet-1-：PoolNet模型与代码介绍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Boundary Aware PoolNet(1)：PoolNet模型与代码介绍</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-05-31T14:05:05+08:00">
+                2021-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/05/31/Boundary-Aware-PoolNet-1-：PoolNet模型与代码介绍/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/05/31/Boundary-Aware-PoolNet-1-：PoolNet模型与代码介绍/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2021/05/31/Boundary-Aware-PoolNet-1-：PoolNet模型与代码介绍/" class="leancloud_visitors" data-flag-title="Boundary Aware PoolNet(1)：PoolNet模型与代码介绍">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,180 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  8 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Boundary Aware PoolNet = PoolNet + BASNet，即使用BASNet中的Deep Supervision策略和Hybrid Loss改进PoolNet。</p>
+<p>为理解Boundary Aware PoolNet还是需要全面理解PoolNet的，因此本文将对PoolNet的模型结构及其代码实现进行介绍。</p>
+<p><strong>相关文章汇总：</strong></p>
+<ul>
+<li><p><a href="https://zhuanlan.zhihu.com/p/359698101" target="_blank" rel="noopener">Boundary Aware PoolNet：基于PoolNet和BASNet的显著性目标检测</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/359698301" target="_blank" rel="noopener">Boundary Aware PoolNet(1)：PoolNet模型与代码介绍</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/359698320" target="_blank" rel="noopener">Boundary Aware PoolNet(2)：BASNet模型与代码介绍</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/359698332" target="_blank" rel="noopener">Boundary Aware PoolNet(3)：Boundary Aware PoolNet模型与代码介绍</a></p>
+</li>
+</ul>
+<h1 id="PoolNet"><a href="#PoolNet" class="headerlink" title="PoolNet"></a>PoolNet</h1><p>PoolNet的论文名称为：A Simple Pooling-Based Design for Real-Time Salient Object Detection，该论文来自南开程明明老师的实验室。</p>
+<h2 id="传送门"><a href="#传送门" class="headerlink" title="传送门"></a>传送门</h2><ul>
+<li>PoolNet论文：<a href="https://arxiv.org/abs/1904.09569" target="_blank" rel="noopener">https://arxiv.org/abs/1904.09569</a></li>
+<li>PoolNet代码：<a href="https://github.com/backseason/PoolNet" target="_blank" rel="noopener">https://github.com/backseason/PoolNet</a></li>
+<li>PoolNet论文阅读笔记：<a href="https://zhuanlan.zhihu.com/p/358445121" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/358445121</a></li>
+</ul>
+<h2 id="用一句话概括PoolNet"><a href="#用一句话概括PoolNet" class="headerlink" title="用一句话概括PoolNet"></a>用一句话概括PoolNet</h2><p>PoolNet基于<strong>FPN</strong>(Feature Pyramid Network，特征金字塔网络)构造了GGM(Global Guidance Module，全局指导模块)和<strong>FAM</strong>(Feature Aggregation Module，特征聚合模块)2个模块，实现了显著性目标检测。</p>
+<h2 id="PoolNet结构"><a href="#PoolNet结构" class="headerlink" title="PoolNet结构"></a>PoolNet结构</h2><p>PoolNet模型结构如下图所示，其包括：</p>
+<ol>
+<li><p>GGM(下图中，“P”指PPM，橙色箭头指GGF)</p>
+</li>
+<li><p>FAM(即下图中的“A”)</p>
+</li>
+<li><p>FPN(即下图中的U型结构)</p>
+<p> 因此下图中GGM、FAM之外的部分就是FPN。</p>
+</li>
+</ol>
+<p><img src="https://pic2.zhimg.com/80/v2-be5246490726fc5895025fb5daba09fe_720w.jpeg" alt="img"></p>
+<h2 id="GGM和FAM"><a href="#GGM和FAM" class="headerlink" title="GGM和FAM"></a>GGM和FAM</h2><p><img src="https://pic1.zhimg.com/80/v2-ff8a917b998c1710ac7c8a91cd48b2c7_720w.jpeg" alt="img"></p>
+<p>如上图所示，<strong>GGM</strong>包括PPM(Pyramid pooling module，金字塔池化模块)和GGF(Global Guiding Flows，全局指导流)，其作用是在FPN自底向上路径的顶部提取显著目标的位置信息并将其提供给FPN自顶向下路径中的不同金字塔层；<strong>FAM</strong>位于FPN自顶向下路径中FUSE操作之前，其作用是使来自GGM的特征与FPN自顶向下路径中不同金字塔层的特征更好地融合。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>PoolNet的代码在文件<code>./networks/poolnet.py</code>中的类<code>PoolNet</code>中，其调用了Backbone(比如ResNet50)、GGM、FAM等各个模块。</p>
+<p>注意：学习代码时不只可以看PoolNet官方代码，还可以看我的Boundary Aware PoolNet的代码(包含详细中文注释，链接：<a href="https://github.com/chouxianyu/Boundary-Aware-PoolNet)。" target="_blank" rel="noopener">https://github.com/chouxianyu/Boundary-Aware-PoolNet)。</a></p>
+<p>接下来将分别介绍PoolNet模型中各个模块的理论和代码。</p>
+<h1 id="FPN"><a href="#FPN" class="headerlink" title="FPN"></a>FPN</h1><h2 id="传送门-1"><a href="#传送门-1" class="headerlink" title="传送门"></a>传送门</h2><ul>
+<li>FPN论文：<a href="https://arxiv.org/abs/1612.03144" target="_blank" rel="noopener">https://arxiv.org/abs/1612.03144</a></li>
+<li>ResNet论文：<a href="https://arxiv.org/abs/1512.03385" target="_blank" rel="noopener">https://arxiv.org/abs/1512.03385</a></li>
+<li>FPN论文阅读笔记：<a href="https://zhuanlan.zhihu.com/p/354140540" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/354140540</a></li>
+<li>ResNet论文阅读笔记：<a href="https://zhuanlan.zhihu.com/p/353228657" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/353228657</a></li>
+<li>ResNet50网络结构图及结构详解：<a href="https://zhuanlan.zhihu.com/p/353235794" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/353235794</a></li>
+</ul>
+<h2 id="FPN结构"><a href="#FPN结构" class="headerlink" title="FPN结构"></a>FPN结构</h2><p>FPN即Feature Pyramid Network(特征金字塔网络)，其结构如下图所示。FPN包含1条自底向上路径(从此输入)和1条自顶向下路径(得到输出)，形成1种U型结构。</p>
+<p><img src="https://pic2.zhimg.com/v2-4bda90f7c75b31ff8d669a5f71860943_1440w.jpg?source=172ae18b" alt="FPN网络图解"></p>
+<h2 id="自底向上路径"><a href="#自底向上路径" class="headerlink" title="自底向上路径"></a>自底向上路径</h2><p>图片从该路径输入，经过卷积等一系列操作，特征的尺寸越来越小、通道数越来越多。上图所示的自底向上路径中有5个长方体，这并不代表该路径中只有5层，而是表明在一系列操作中选出5层特征图以进一步利用。当然了，也可以选择数量更多或更少的层。</p>
+<h2 id="自顶向下路径"><a href="#自顶向下路径" class="headerlink" title="自顶向下路径"></a>自顶向下路径</h2><p>自顶向下路径由多个FUSE操作组成，上图所示的自顶向下路径中包含4个FUSE操作(数量与自底向上路径中选取的层的数量对应)，将最后1个FUSE操作的输出作为整个模型的输出。</p>
+<h2 id="FUSE"><a href="#FUSE" class="headerlink" title="FUSE"></a>FUSE</h2><p>一般FPN的FUSE操作有2个输入，其一是自底向上路径中的特征(对其进行1×1卷积)，其二是自顶向下路径中上1个FUSE操作的输出(对其进行上采样)，分别对这2个输入进行1×1卷积和上采样再将两者相加，最后进行3×3卷积得到该FUSE操作的输出。</p>
+<p>注意：因为PoolNet引入了GGM，所以PoolNet中的FUSE操作有3个输入(除了上述的2个输入还有1个输入是GGF的输出)，因此PoolNet中FPN的FUSE操作如下图所示(绿色箭头代表GGF，可以将上采样理解为GGF的一部分)。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-17c94fb51fddbffb95a4a9acf10f703b_720w.png" alt="img"></p>
+<h2 id="Backbone"><a href="#Backbone" class="headerlink" title="Backbone"></a>Backbone</h2><p>FPN更多是一种结构而非一种网络，基于FPN这种U型结构，我们可以更换<strong>Backbone</strong>(骨干网络)。什么是Backbone呢？暂时你可以将Backbone理解为自底向上路径中的网络。常见的Backbone有VGG16、ResNet系列网络等。PoolNet作者使用了VGG16和RestNet50。</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>由上可知，FPN结构可以分为自底向上路径和自顶向下路径。</p>
+<p>自底向上路径即Backbone，ResNet50的代码在文件<code>./networks/deeplab_resnet.py</code>中的类<code>ResNet</code>中，VGG16的代码在文件<code>./networks/vgg.py</code>中的类<code>vgg16</code>中。</p>
+<p>自顶向下路径由多个FUSE操作形成，PoolNet作者将FUSE操作的代码与FAM的代码一起放在了文件<code>./networks/poolnet.py</code>中的类<code>DeepPoolLayer</code>中。</p>
+<p>FPN自底向上路径和自顶向下路径中间还有一个1×1卷积，PoolNet作者将该1×1卷积的代码和GGM的代码放在了一起。</p>
+<p>注意：学习代码时不只可以看PoolNet官方代码，还可以看我的Boundary Aware PoolNet的代码(包含详细中文注释，链接：<a href="https://github.com/chouxianyu/Boundary-Aware-PoolNet)。" target="_blank" rel="noopener">https://github.com/chouxianyu/Boundary-Aware-PoolNet)。</a></p>
+<h1 id="GGM"><a href="#GGM" class="headerlink" title="GGM"></a>GGM</h1><p>由前文可知，GGM包括PPM(Pyramid pooling module，金字塔池化模块)和GGF(Global Guiding Flows，全局指导流)，其作用是在FPN自底向上路径的顶部提取显著目标的位置信息并将其提供给FPN自顶向下路径中的不同金字塔层。</p>
+<h2 id="传送门-2"><a href="#传送门-2" class="headerlink" title="传送门"></a>传送门</h2><ul>
+<li>PSPNet论文(PPM出处)：<a href="https://arxiv.org/abs/1612.01105" target="_blank" rel="noopener">https://arxiv.org/abs/1612.01105</a></li>
+<li>PSPNet论文阅读笔记：<a href="https://zhuanlan.zhihu.com/p/354860476" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/354860476</a></li>
+</ul>
+<h2 id="PPM"><a href="#PPM" class="headerlink" title="PPM"></a>PPM</h2><p>PPM由PSPNet一文提出。PoolNet中使用的是修改过的PPM，其位置在自底向上路径的顶部。</p>
+<p>PoolNet中使用的PPM包括4个子分支，PoolNet中PPM的实现如下(可结合代码理解)：</p>
+<ol>
+<li><p>用4个分支对Backbone的输出进行处理</p>
+<p> 第1个分支为恒等映射层(即不进行处理)；后3个分支分别为输出尺寸为1×1的平均池化层(即全局平均池化层)、输出尺寸为3×3的平均池化层、输出尺寸为5×5的平均池化层，并且这3个平均池化层后面都有一个1×1卷积(不改变通道数)、ReLU、上采样层(使尺寸与Backbone输出的尺寸一致)。</p>
+</li>
+<li><p>将4个分支的输出拼接</p>
+<p> 首先在通道维度上将4个子分支的输出拼接，然后用3×3卷积使通道数与Backbone输出的通道数一致，再加上1个ReLU。</p>
+</li>
+</ol>
+<p>由上可知，PPM输出特征的尺寸、通道数与输入相同。</p>
+<p>注意：FPN自底向上路径和自顶向下路径中间还有一个1×1卷积，PoolNet作者将这个1×1卷积放在了PPM之前。</p>
+<h2 id="GGF"><a href="#GGF" class="headerlink" title="GGF"></a>GGF</h2><p>当Backbone为ResNet50时，则需要4个GGF。</p>
+<p>每个GGF的输入都是PPM的输出，不同GGF之间的区别是输出特征的尺寸、通道数不相同同。</p>
+<p>每个GGF的组成为：上采样(使尺寸与对应金字塔层的尺寸一致)、3×3卷积、ReLU。</p>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><p>FPN自底向上路径和自顶向下路径中间的1×1卷积、PPM、GGF的代码都位于类<code>Backbone_locate</code>中。如果Backbone是ResNet50则代码位于文件<code>./networks/deeplab_resnet.py</code>的类<code>ResNet_locate</code>中，如果Backbone是VGG16则代码位于文件<code>./networks/vgg.py</code>的类<code>vgg16_locate</code>中。</p>
+<p>注意：学习代码时不只可以看PoolNet官方代码，还可以看我的Boundary Aware PoolNet的代码(包含详细中文注释，链接：<a href="https://github.com/chouxianyu/Boundary-Aware-PoolNet)。" target="_blank" rel="noopener">https://github.com/chouxianyu/Boundary-Aware-PoolNet)。</a></p>
+<h1 id="FAM"><a href="#FAM" class="headerlink" title="FAM"></a>FAM</h1><p>由上可知，PoolNet作者在FPN自顶向下路径中每个FUSE操作前引入了FAM，其可以使来自GGM的特征与FPN自顶向下路径中不同金字塔层的特征更好地融合。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-19fbea793459041b77a0992c566d4b4d_720w.png" alt="img"></p>
+<p>每个FAM包含4个子分支，如上图所示，其实现如下：</p>
+<ol>
+<li><p>用4个分支对输入进行处理</p>
+<p> 第1个分支为恒等映射层(即不进行处理)；后3个分支分别为下采样比例为2/4/8的平均池化层，每个平均池化层后为一个3×3卷积(不改变特征的通道数和尺寸)和上采样层(使尺寸与输入特征的尺寸一致)</p>
+</li>
+<li><p>将4个分支的输出相加，再送入一个3×3卷积(根据设置改变或不改变通道数)</p>
+</li>
+</ol>
+<p>FAM和FPN的FUSE操作的代码在文件<code>./networks/poolnet.py</code>中的类<code>DeepPoolLayer</code>中。</p>
+<p>注意：学习代码时不只可以看PoolNet官方代码，还可以看我的Boundary Aware PoolNet的代码(包含详细中文注释，链接：<a href="https://github.com/chouxianyu/Boundary-Aware-PoolNet)。" target="_blank" rel="noopener">https://github.com/chouxianyu/Boundary-Aware-PoolNet)。</a></p>
+<hr>
+<p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p>
+<p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p>
+<p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p>
+<p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>转载请注明出处，欢迎讨论和交流!</p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/显著性目标检测/" rel="tag"># 显著性目标检测</a>
+          
+            <a href="/tags/BAPoolNet/" rel="tag"># BAPoolNet</a>
+          
+            <a href="/tags/PoolNet/" rel="tag"># PoolNet</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/05/31/Boundary-Aware-PoolNet：基于PoolNet和BASNet的显著性目标检测/" rel="next" title="Boundary Aware PoolNet：基于PoolNet和BASNet的显著性目标检测">
+                <i class="fa fa-chevron-left"></i> Boundary Aware PoolNet：基于PoolNet和BASNet的显著性目标检测
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/05/31/Boundary-Aware-PoolNet-2-：BASNet模型与代码介绍/" rel="prev" title="Boundary Aware PoolNet(2)：BASNet模型与代码介绍">
+                Boundary Aware PoolNet(2)：BASNet模型与代码介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg"
+                alt="臭咸鱼" />
+            
+              <p class="site-author-name" itemprop="name">臭咸鱼</p>
+              <p class="site-description motion-element" itemprop="description">祝你天天开心啊！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">314</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">177</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://maluguang.com" title="Road Wide's Blog" target="_blank">Road Wide's Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/chouxianyu/" title="Chou Xianyu's CNBlog" target="_blank">Chou Xianyu's CNBlog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PoolNet"><span class="nav-number">1.</span> <span class="nav-text">PoolNet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#传送门"><span class="nav-number">1.1.</span> <span class="nav-text">传送门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用一句话概括PoolNet"><span class="nav-number">1.2.</span> <span class="nav-text">用一句话概括PoolNet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PoolNet结构"><span class="nav-number">1.3.</span> <span class="nav-text">PoolNet结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GGM和FAM"><span class="nav-number">1.4.</span> <span class="nav-text">GGM和FAM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.5.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FPN"><span class="nav-number">2.</span> <span class="nav-text">FPN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#传送门-1"><span class="nav-number">2.1.</span> <span class="nav-text">传送门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FPN结构"><span class="nav-number">2.2.</span> <span class="nav-text">FPN结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自底向上路径"><span class="nav-number">2.3.</span> <span class="nav-text">自底向上路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自顶向下路径"><span class="nav-number">2.4.</span> <span class="nav-text">自顶向下路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FUSE"><span class="nav-number">2.5.</span> <span class="nav-text">FUSE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Backbone"><span class="nav-number">2.6.</span> <span class="nav-text">Backbone</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">2.7.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GGM"><span class="nav-number">3.</span> <span class="nav-text">GGM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#传送门-2"><span class="nav-number">3.1.</span> <span class="nav-text">传送门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PPM"><span class="nav-number">3.2.</span> <span class="nav-text">PPM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GGF"><span class="nav-number">3.3.</span> <span class="nav-text">GGF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-2"><span class="nav-number">3.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FAM"><span class="nav-number">4.</span> <span class="nav-text">FAM</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">臭咸鱼</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">285.0k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz',
+        appKey: 'Si7hBxIAVOGbu6Pot7HHaVBB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz", "Si7hBxIAVOGbu6Pot7HHaVBB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>

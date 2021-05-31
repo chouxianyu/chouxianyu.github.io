@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2021-05-23T01:19:54.477Z</updated>
+  <updated>2021-05-31T07:06:29.557Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,137 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Boundary Aware PoolNet(3)：Boundary Aware PoolNet模型与代码介绍</title>
+    <link href="https://chouxianyu.github.io/2021/05/31/Boundary-Aware-PoolNet-3-%EF%BC%9ABoundary-Aware-PoolNet%E6%A8%A1%E5%9E%8B%E4%B8%8E%E4%BB%A3%E7%A0%81%E4%BB%8B%E7%BB%8D/"/>
+    <id>https://chouxianyu.github.io/2021/05/31/Boundary-Aware-PoolNet-3-：Boundary-Aware-PoolNet模型与代码介绍/</id>
+    <published>2021-05-31T06:15:05.000Z</published>
+    <updated>2021-05-31T07:06:29.557Z</updated>
+    
+    <content type="html"><![CDATA[<p>Boundary Aware PoolNet = PoolNet + BASNet，即使用BASNet中的Deep Supervision策略和Hybrid Loss改进PoolNet。</p><p>前面两篇文章分别介绍了PoolNet的模型及其代码、BASNet中的深度监督策略和混合损失函数，现在让我们看向PoolNet，使用BASNet一文提出的Deep Supervision和Hybrid Loss，形成BAPoolNet(Boundary Aware PoolNet)。</p><p>本文将详细介绍如何使用BASNet中的的Deep Supervision和Hybrid Loss改进PoolNet得到BAPoolNet，并介绍我在研究BAPoolNet时观察到的一些现象和结论。</p><p><strong>相关文章汇总：</strong></p><ul><li><p><a href="https://zhuanlan.zhihu.com/p/359698101" target="_blank" rel="noopener">Boundary Aware PoolNet：基于PoolNet和BASNet的显著性目标检测</a></p></li><li><p><a href="https://zhuanlan.zhihu.com/p/359698301" target="_blank" rel="noopener">Boundary Aware PoolNet(1)：PoolNet模型与代码介绍</a></p></li><li><p><a href="https://zhuanlan.zhihu.com/p/359698320" target="_blank" rel="noopener">Boundary Aware PoolNet(2)：BASNet模型与代码介绍</a></p></li><li><p><a href="https://zhuanlan.zhihu.com/p/359698332" target="_blank" rel="noopener">Boundary Aware PoolNet(3)：Boundary Aware PoolNet模型与代码介绍</a></p></li></ul><h1 id="BAPoolNet结构"><a href="#BAPoolNet结构" class="headerlink" title="BAPoolNet结构"></a>BAPoolNet结构</h1><p>在PoolNet中Backbone是ResNet50时，模型自顶向下路径中有5个FUSE操作，我借鉴BASNet中的Deep Supervision和Hybrid Loss使用这5层输出的混合Loss之和进行梯度下降，我将这整个模型称为<strong>BAPoolNet(Boundary Aware PoolNet)</strong>，其结构如下图所示。</p><p><img src="https://pic4.zhimg.com/80/v2-7854dd376ab3ea8529d00b7056343067_720w.jpeg" alt="img"></p><p>与PoolNet相比，BAPoolNet的不同之处为：</p><ol><li>添加5个边路输出以进行Deep Supervision</li><li>在计算Loss时使用BCE损失、SSIM损失、IOU损失之和</li></ol><p>如何实现Boundary Aware PoolNet，具体请看代码。</p><h1 id="BAPoolNet训练"><a href="#BAPoolNet训练" class="headerlink" title="BAPoolNet训练"></a>BAPoolNet训练</h1><h2 id="训练设置"><a href="#训练设置" class="headerlink" title="训练设置"></a>训练设置</h2><p>本文使用DUTS数据集进行模型训练和测试，其训练集包含10553张图片、测试集包含5019张图片。</p><p>除了对PoolNet的改进之外，BAPoolNet的其它实现细节和实验细节和PoolNet保持一致。</p><h2 id="训练过程中五个边路输出损失的变化情况"><a href="#训练过程中五个边路输出损失的变化情况" class="headerlink" title="训练过程中五个边路输出损失的变化情况"></a>训练过程中五个边路输出损失的变化情况</h2><p><img src="https://pic2.zhimg.com/80/v2-69b6a85891ab226ee5df51eb0d9c57de_720w.jpeg" alt="img"></p><h2 id="训练过程中三种损失的变化情况"><a href="#训练过程中三种损失的变化情况" class="headerlink" title="训练过程中三种损失的变化情况"></a>训练过程中三种损失的变化情况</h2><p><img src="https://pic1.zhimg.com/80/v2-71c71848b4c66a5b74d5af83306de182_720w.jpeg" alt="img"></p><h2 id="5个边路输出可视化结果"><a href="#5个边路输出可视化结果" class="headerlink" title="5个边路输出可视化结果"></a>5个边路输出可视化结果</h2><p><img src="https://pic2.zhimg.com/80/v2-1ce1a1a0a3ad8f86bfd91c6755a6018a_720w.jpeg" alt="img"></p><h2 id="训练过程中MAE的变化情况"><a href="#训练过程中MAE的变化情况" class="headerlink" title="训练过程中MAE的变化情况"></a>训练过程中MAE的变化情况</h2><p>下图为在DUTS-TE数据集上的测试结果。</p><p><img src="https://pic4.zhimg.com/80/v2-30646925efae3fa92521ee036bff90e8_720w.jpeg" alt="img"></p><h2 id="训练过程中F-measure的变化情况"><a href="#训练过程中F-measure的变化情况" class="headerlink" title="训练过程中F-measure的变化情况"></a>训练过程中F-measure的变化情况</h2><p>下图为在DUTS-TE数据集上的测试结果（二值化阈值为0.5）。</p><p><img src="https://pic1.zhimg.com/80/v2-ec40f811a9ab71a4c549e8c90c643495_720w.jpeg" alt="img"></p><h1 id="BAPoolNet性能"><a href="#BAPoolNet性能" class="headerlink" title="BAPoolNet性能"></a>BAPoolNet性能</h1><h2 id="视觉对比"><a href="#视觉对比" class="headerlink" title="视觉对比"></a>视觉对比</h2><p><img src="https://pic4.zhimg.com/80/v2-b507a874646b5988e1e4a6b18c24ecf7_720w.jpeg" alt="img"></p><h2 id="量化对比"><a href="#量化对比" class="headerlink" title="量化对比"></a>量化对比</h2><p>下表中MAE和maxF为各方法在DUTS-TE数据集上的测试结果。</p><div class="table-container"><table><thead><tr><th style="text-align:center">Method</th><th style="text-align:center">Conference</th><th style="text-align:center">Backbone</th><th style="text-align:center">Size(MB)</th><th style="text-align:center">MAE↓</th><th style="text-align:center">maxF↑</th></tr></thead><tbody><tr><td style="text-align:center">CapSal</td><td style="text-align:center">CVPR19</td><td style="text-align:center">ResNet-101</td><td style="text-align:center">-</td><td style="text-align:center">0.063</td><td style="text-align:center">0.826</td></tr><tr><td style="text-align:center">PiCANet</td><td style="text-align:center">CVPR18</td><td style="text-align:center">ResNet-50</td><td style="text-align:center">197.2</td><td style="text-align:center">0.050</td><td style="text-align:center">0.860</td></tr><tr><td style="text-align:center">DGRL</td><td style="text-align:center">CVPR18</td><td style="text-align:center">ResNet-50</td><td style="text-align:center">646.1</td><td style="text-align:center">0.049</td><td style="text-align:center">0.828</td></tr><tr><td style="text-align:center">BASNet</td><td style="text-align:center">CVPR19</td><td style="text-align:center">ResNet-34</td><td style="text-align:center">348.5</td><td style="text-align:center">0.047</td><td style="text-align:center">0.860</td></tr><tr><td style="text-align:center">U2Net</td><td style="text-align:center">CVPR20</td><td style="text-align:center">RSU</td><td style="text-align:center">176.3</td><td style="text-align:center">0.044</td><td style="text-align:center">0.873</td></tr><tr><td style="text-align:center">CPD</td><td style="text-align:center">CVPR19</td><td style="text-align:center">ResNet-50</td><td style="text-align:center">183.0</td><td style="text-align:center">0.043</td><td style="text-align:center">0.865</td></tr><tr><td style="text-align:center">PoolNet</td><td style="text-align:center">CVPR19</td><td style="text-align:center">ResNet-50</td><td style="text-align:center">260.0</td><td style="text-align:center">0.040</td><td style="text-align:center">0.880</td></tr><tr><td style="text-align:center"><strong>BAPoolNet</strong></td><td style="text-align:center">-</td><td style="text-align:center">ResNet-50</td><td style="text-align:center">260.7</td><td style="text-align:center"><strong>0.035</strong></td><td style="text-align:center"><strong>0.892</strong></td></tr></tbody></table></div><h2 id="PR曲线"><a href="#PR曲线" class="headerlink" title="PR曲线"></a>PR曲线</h2><p>下图为各方法在DUTS-TE数据集上的测试结果。</p><p><img src="https://pic4.zhimg.com/80/v2-e6ad03d7c136cf33416ad169bf0f89fc_720w.png" alt="img"></p><h2 id="F-measure曲线"><a href="#F-measure曲线" class="headerlink" title="F-measure曲线"></a>F-measure曲线</h2><p>下图为各方法在DUTS-TE数据集上的测试结果。</p><p><img src="https://pic2.zhimg.com/80/v2-94a0c6ae4d9e04127fdc38ece5310ae7_720w.png" alt="img"></p><h1 id="BAPoolNet代码"><a href="#BAPoolNet代码" class="headerlink" title="BAPoolNet代码"></a>BAPoolNet代码</h1><p>传送门(Boundary Aware PoolNet代码)：<a href="https://github.com/chouxianyu/Boundary-Aware-PoolNet" target="_blank" rel="noopener">https://github.com/chouxianyu/Boundary-Aware-PoolNet</a></p><p>相比于PoolNet，BAPoolNet代码的改动之处有：</p><ol><li><p>BCE Loss计算方法</p><p> 设置为<code>reduction=mean</code>而非<code>reduction=sum</code>，并且用<code>sigmoid+BCE</code>代替<code>F.binary_cross_entropy_with_logits</code>。</p></li><li><p>PoolNet<code>forward()</code>返回结果</p><p> PoolNet类返回了5个边路输出而非最终输出</p></li><li><p>整体Loss计算方法</p><p> 使用Hybrid Loss和Deep Supervision计算整体Loss</p></li></ol><p>模型性能评估代码（MAE、F-measure等），我参考了：<a href="https://github.com/Hanqer/Evaluate-SOD" target="_blank" rel="noopener">https://github.com/Hanqer/Evaluate-SOD</a></p><p>除了对PoolNet的改进之外，BAPoolNet的其它实现细节和实验细节和PoolNet保持一致。</p><h1 id="实验细节"><a href="#实验细节" class="headerlink" title="实验细节"></a>实验细节</h1><h2 id="“黑图片”问题"><a href="#“黑图片”问题" class="headerlink" title="“黑图片”问题"></a>“黑图片”问题</h2><p>在训练模型时，如果模型使用<code>train()</code>模式，结果反而比<code>eval()</code>差，具体现象为使用<code>train()</code>模式时，预测结果中有大量“黑图片”，即图片中的像素几乎都是黑色的。</p><h2 id="浅-深层的作用"><a href="#浅-深层的作用" class="headerlink" title="浅/深层的作用"></a>浅/深层的作用</h2><p>将5个边路输出可视化，可以看出0层的主要作用是定位显著目标，而后几层的主要作用是细化显著目标的特征，即在自顶向下路径中显著目标的细节逐渐丰富，同时这也代表着当浅层无法准确定位显著目标时最终输出也就无法准确定位显著目标。</p><p>我尝试过在计算5层Loss之和时调整不同层Loss的权重，比如第1层Loss权重为5、其它4层Loss权重为1或者前4层Loss权重为1、最后1层Loss权重为10等等，评估指标(MAE、F-meausure)显示调整不同层Loss权重的做法对性能提升并没有什么作用。</p><p>既然自顶向下路径中浅层富含高级语义信息/局部细节信息较少、深层高级语义信息相对较少/局部细节信息丰富，我想也许可以利用这一点在不同层使用不同的损失函数。（学识尚浅，也许这样并无效果）</p><h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>基于Deep Supervision+Hybrid Loss，我还做了一些更具体的尝试，结果如下：</p><ol><li>将<code>F.binary_cross_entropy_with_logits</code>换为<code>sigmoid+BCE</code>对结果并没有什么影响，虽然官方也说了两者仅在计算上有细微差别。</li><li>若只使用BCE Loss，则<code>reduction=mean</code>和<code>reduction=sum</code>在训练效果上差别不大，只是两者所得Loss数值的数量级有所差异，前者Loss的数量级为0到10，后者Loss的数量级在1000到几万。</li><li>在计算边路输出时使用3×3卷积或者1×1卷积，评估所得模型，MAE、F-measure等差别不大。</li><li>调整不同层Loss的权重对模型性能不大。</li><li>调整学习率对模型性能影响不大。</li></ol><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Boundary Aware PoolNet = PoolNet + BASNet，即使用BASNet中的Deep Supervision策略和Hybrid Loss改进PoolNet。&lt;/p&gt;
+&lt;p&gt;前面两篇文章分别介绍了PoolNet的模型及其代码、BASNet中的深度
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="显著性目标检测" scheme="https://chouxianyu.github.io/tags/%E6%98%BE%E8%91%97%E6%80%A7%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="BASNet" scheme="https://chouxianyu.github.io/tags/BASNet/"/>
+    
+      <category term="BAPoolNet" scheme="https://chouxianyu.github.io/tags/BAPoolNet/"/>
+    
+      <category term="PoolNet" scheme="https://chouxianyu.github.io/tags/PoolNet/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Boundary Aware PoolNet(2)：BASNet模型与代码介绍</title>
+    <link href="https://chouxianyu.github.io/2021/05/31/Boundary-Aware-PoolNet-2-%EF%BC%9ABASNet%E6%A8%A1%E5%9E%8B%E4%B8%8E%E4%BB%A3%E7%A0%81%E4%BB%8B%E7%BB%8D/"/>
+    <id>https://chouxianyu.github.io/2021/05/31/Boundary-Aware-PoolNet-2-：BASNet模型与代码介绍/</id>
+    <published>2021-05-31T06:10:05.000Z</published>
+    <updated>2021-05-31T07:06:23.837Z</updated>
+    
+    <content type="html"><![CDATA[<p>Boundary Aware PoolNet = PoolNet + BASNet，即使用BASNet中的Deep Supervision策略和Hybrid Loss改进PoolNet。</p><p>为理解Boundary Aware PoolNet，我们并不需要学习整个BASNet，只需要了解其中的<strong>Deep Supervision</strong>策略和<strong>Hybrid Loss</strong>即可。</p><p>本文将简单介绍BASNet的模型结构，重点介绍其<strong>Deep Supervision</strong>和<strong>Hybrid Loss</strong>的理论和代码实现。</p><p><strong>相关文章汇总：</strong></p><ul><li><p><a href="https://zhuanlan.zhihu.com/p/359698101" target="_blank" rel="noopener">Boundary Aware PoolNet：基于PoolNet和BASNet的显著性目标检测</a></p></li><li><p><a href="https://zhuanlan.zhihu.com/p/359698301" target="_blank" rel="noopener">Boundary Aware PoolNet(1)：PoolNet模型与代码介绍</a></p></li><li><p><a href="https://zhuanlan.zhihu.com/p/359698320" target="_blank" rel="noopener">Boundary Aware PoolNet(2)：BASNet模型与代码介绍</a></p></li><li><p><a href="https://zhuanlan.zhihu.com/p/359698332" target="_blank" rel="noopener">Boundary Aware PoolNet(3)：Boundary Aware PoolNet模型与代码介绍</a></p></li></ul><h1 id="BASNet"><a href="#BASNet" class="headerlink" title="BASNet"></a>BASNet</h1><h2 id="传送门"><a href="#传送门" class="headerlink" title="传送门"></a>传送门</h2><ul><li>BASNet论文：<a href="https://openaccess.thecvf.com/content_CVPR_2019/html/Qin_BASNet_Boundary-Aware_Salient_Object_Detection_CVPR_2019_paper.html" target="_blank" rel="noopener">https://openaccess.thecvf.com/content_CVPR_2019/html/Qin_BASNet_Boundary-Aware_Salient_Object_Detection_CVPR_2019_paper.html</a></li><li>BASNet代码：<a href="https://github.com/xuebinqin/BASNet" target="_blank" rel="noopener">https://github.com/xuebinqin/BASNet</a></li><li>BASNet论文阅读笔记：<a href="https://zhuanlan.zhihu.com/p/355420066" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/355420066</a></li></ul><h2 id="BASNet结构"><a href="#BASNet结构" class="headerlink" title="BASNet结构"></a>BASNet结构</h2><p><img src="https://pic1.zhimg.com/80/v2-ac5675e09682e8a137a434bb41b54677_720w.png" alt="img"></p><p>如上图所示，BASNet模型包括Predict Module和Refine Module。</p><ul><li><p>Predict Module</p><p>  a U-Net-like densely supervised Encoder-Decoder network，作用是predict saliency map from input images。</p><p>  其实这个Encoder-Decoder结构和FPN(特征金字塔网络)没什么区别吧。</p></li><li><p>Refine Module</p><p>  refines the resulting saliency map of the prediction module by learning the residuals between the saliency map and the ground truth。</p></li></ul><p>基于上述的2个Module，BASNet使用Deep Supervision(上图中的Sup1-8)和Hybrid Loss进行模型训练。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Predict Module的代码在文件<code>./model/BASNet.py</code>中类<code>BASNet</code>中，Refine Module的代码在文件<code>./model/BASNet.py</code>中类<code>RefUnet</code>中。</p><h1 id="Deep-Supervision"><a href="#Deep-Supervision" class="headerlink" title="Deep Supervision"></a>Deep Supervision</h1><p>直白来讲，<strong>Deep Supervision</strong>即使用神经网络中多个层的Loss之和进行梯度下降。</p><p>如前文中BASNet结构图所示，BASNet作者计算了Predict Module中的7层和Refine Module中的最后1层的Loss并进行求和，然后进行梯度下降，以此实现Deep Supervision。在计算边路输出时，需要进行上采样和卷积使得边路输出的尺寸、通道数与输入相同。</p><p>Deep Supervision的代码在文件<code>./model/BASNet.py</code>的类<code>BASNet</code>的函数<code>forward()</code>中，可知类<code>BASNet</code>在<code>forward()</code>时返回了8个边路输出，后继计算这8层的Hybrid Loss并求和进行梯度下降。</p><h1 id="Hybrid-Loss"><a href="#Hybrid-Loss" class="headerlink" title="Hybrid Loss"></a>Hybrid Loss</h1><p>直白来讲，<strong>Hybrid Loss</strong>即在计算损失时使用BCE Loss、SSIM Loss、IOU Loss这3个损失之和而非只使用BCE损失函数。</p><p>Hybrid Loss的代码在文件<code>./basnet_trin.py</code>中的函数<code>muti_bce_loss_fusion()</code>中。该函数的输入为BASNet的8个边路输出和输入对应的标注，该函数使用函数<code>bce_ssim_loss()</code>计算1个边路输出与标注的3种Loss之和。</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Boundary Aware PoolNet = PoolNet + BASNet，即使用BASNet中的Deep Supervision策略和Hybrid Loss改进PoolNet。&lt;/p&gt;
+&lt;p&gt;为理解Boundary Aware PoolNet，我们并不需要学习整个
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="显著性目标检测" scheme="https://chouxianyu.github.io/tags/%E6%98%BE%E8%91%97%E6%80%A7%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="BASNet" scheme="https://chouxianyu.github.io/tags/BASNet/"/>
+    
+      <category term="BAPoolNet" scheme="https://chouxianyu.github.io/tags/BAPoolNet/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Boundary Aware PoolNet(1)：PoolNet模型与代码介绍</title>
+    <link href="https://chouxianyu.github.io/2021/05/31/Boundary-Aware-PoolNet-1-%EF%BC%9APoolNet%E6%A8%A1%E5%9E%8B%E4%B8%8E%E4%BB%A3%E7%A0%81%E4%BB%8B%E7%BB%8D/"/>
+    <id>https://chouxianyu.github.io/2021/05/31/Boundary-Aware-PoolNet-1-：PoolNet模型与代码介绍/</id>
+    <published>2021-05-31T06:05:05.000Z</published>
+    <updated>2021-05-31T07:06:17.184Z</updated>
+    
+    <content type="html"><![CDATA[<p>Boundary Aware PoolNet = PoolNet + BASNet，即使用BASNet中的Deep Supervision策略和Hybrid Loss改进PoolNet。</p><p>为理解Boundary Aware PoolNet还是需要全面理解PoolNet的，因此本文将对PoolNet的模型结构及其代码实现进行介绍。</p><p><strong>相关文章汇总：</strong></p><ul><li><p><a href="https://zhuanlan.zhihu.com/p/359698101" target="_blank" rel="noopener">Boundary Aware PoolNet：基于PoolNet和BASNet的显著性目标检测</a></p></li><li><p><a href="https://zhuanlan.zhihu.com/p/359698301" target="_blank" rel="noopener">Boundary Aware PoolNet(1)：PoolNet模型与代码介绍</a></p></li><li><p><a href="https://zhuanlan.zhihu.com/p/359698320" target="_blank" rel="noopener">Boundary Aware PoolNet(2)：BASNet模型与代码介绍</a></p></li><li><p><a href="https://zhuanlan.zhihu.com/p/359698332" target="_blank" rel="noopener">Boundary Aware PoolNet(3)：Boundary Aware PoolNet模型与代码介绍</a></p></li></ul><h1 id="PoolNet"><a href="#PoolNet" class="headerlink" title="PoolNet"></a>PoolNet</h1><p>PoolNet的论文名称为：A Simple Pooling-Based Design for Real-Time Salient Object Detection，该论文来自南开程明明老师的实验室。</p><h2 id="传送门"><a href="#传送门" class="headerlink" title="传送门"></a>传送门</h2><ul><li>PoolNet论文：<a href="https://arxiv.org/abs/1904.09569" target="_blank" rel="noopener">https://arxiv.org/abs/1904.09569</a></li><li>PoolNet代码：<a href="https://github.com/backseason/PoolNet" target="_blank" rel="noopener">https://github.com/backseason/PoolNet</a></li><li>PoolNet论文阅读笔记：<a href="https://zhuanlan.zhihu.com/p/358445121" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/358445121</a></li></ul><h2 id="用一句话概括PoolNet"><a href="#用一句话概括PoolNet" class="headerlink" title="用一句话概括PoolNet"></a>用一句话概括PoolNet</h2><p>PoolNet基于<strong>FPN</strong>(Feature Pyramid Network，特征金字塔网络)构造了GGM(Global Guidance Module，全局指导模块)和<strong>FAM</strong>(Feature Aggregation Module，特征聚合模块)2个模块，实现了显著性目标检测。</p><h2 id="PoolNet结构"><a href="#PoolNet结构" class="headerlink" title="PoolNet结构"></a>PoolNet结构</h2><p>PoolNet模型结构如下图所示，其包括：</p><ol><li><p>GGM(下图中，“P”指PPM，橙色箭头指GGF)</p></li><li><p>FAM(即下图中的“A”)</p></li><li><p>FPN(即下图中的U型结构)</p><p> 因此下图中GGM、FAM之外的部分就是FPN。</p></li></ol><p><img src="https://pic2.zhimg.com/80/v2-be5246490726fc5895025fb5daba09fe_720w.jpeg" alt="img"></p><h2 id="GGM和FAM"><a href="#GGM和FAM" class="headerlink" title="GGM和FAM"></a>GGM和FAM</h2><p><img src="https://pic1.zhimg.com/80/v2-ff8a917b998c1710ac7c8a91cd48b2c7_720w.jpeg" alt="img"></p><p>如上图所示，<strong>GGM</strong>包括PPM(Pyramid pooling module，金字塔池化模块)和GGF(Global Guiding Flows，全局指导流)，其作用是在FPN自底向上路径的顶部提取显著目标的位置信息并将其提供给FPN自顶向下路径中的不同金字塔层；<strong>FAM</strong>位于FPN自顶向下路径中FUSE操作之前，其作用是使来自GGM的特征与FPN自顶向下路径中不同金字塔层的特征更好地融合。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>PoolNet的代码在文件<code>./networks/poolnet.py</code>中的类<code>PoolNet</code>中，其调用了Backbone(比如ResNet50)、GGM、FAM等各个模块。</p><p>注意：学习代码时不只可以看PoolNet官方代码，还可以看我的Boundary Aware PoolNet的代码(包含详细中文注释，链接：<a href="https://github.com/chouxianyu/Boundary-Aware-PoolNet)。" target="_blank" rel="noopener">https://github.com/chouxianyu/Boundary-Aware-PoolNet)。</a></p><p>接下来将分别介绍PoolNet模型中各个模块的理论和代码。</p><h1 id="FPN"><a href="#FPN" class="headerlink" title="FPN"></a>FPN</h1><h2 id="传送门-1"><a href="#传送门-1" class="headerlink" title="传送门"></a>传送门</h2><ul><li>FPN论文：<a href="https://arxiv.org/abs/1612.03144" target="_blank" rel="noopener">https://arxiv.org/abs/1612.03144</a></li><li>ResNet论文：<a href="https://arxiv.org/abs/1512.03385" target="_blank" rel="noopener">https://arxiv.org/abs/1512.03385</a></li><li>FPN论文阅读笔记：<a href="https://zhuanlan.zhihu.com/p/354140540" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/354140540</a></li><li>ResNet论文阅读笔记：<a href="https://zhuanlan.zhihu.com/p/353228657" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/353228657</a></li><li>ResNet50网络结构图及结构详解：<a href="https://zhuanlan.zhihu.com/p/353235794" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/353235794</a></li></ul><h2 id="FPN结构"><a href="#FPN结构" class="headerlink" title="FPN结构"></a>FPN结构</h2><p>FPN即Feature Pyramid Network(特征金字塔网络)，其结构如下图所示。FPN包含1条自底向上路径(从此输入)和1条自顶向下路径(得到输出)，形成1种U型结构。</p><p><img src="https://pic2.zhimg.com/v2-4bda90f7c75b31ff8d669a5f71860943_1440w.jpg?source=172ae18b" alt="FPN网络图解"></p><h2 id="自底向上路径"><a href="#自底向上路径" class="headerlink" title="自底向上路径"></a>自底向上路径</h2><p>图片从该路径输入，经过卷积等一系列操作，特征的尺寸越来越小、通道数越来越多。上图所示的自底向上路径中有5个长方体，这并不代表该路径中只有5层，而是表明在一系列操作中选出5层特征图以进一步利用。当然了，也可以选择数量更多或更少的层。</p><h2 id="自顶向下路径"><a href="#自顶向下路径" class="headerlink" title="自顶向下路径"></a>自顶向下路径</h2><p>自顶向下路径由多个FUSE操作组成，上图所示的自顶向下路径中包含4个FUSE操作(数量与自底向上路径中选取的层的数量对应)，将最后1个FUSE操作的输出作为整个模型的输出。</p><h2 id="FUSE"><a href="#FUSE" class="headerlink" title="FUSE"></a>FUSE</h2><p>一般FPN的FUSE操作有2个输入，其一是自底向上路径中的特征(对其进行1×1卷积)，其二是自顶向下路径中上1个FUSE操作的输出(对其进行上采样)，分别对这2个输入进行1×1卷积和上采样再将两者相加，最后进行3×3卷积得到该FUSE操作的输出。</p><p>注意：因为PoolNet引入了GGM，所以PoolNet中的FUSE操作有3个输入(除了上述的2个输入还有1个输入是GGF的输出)，因此PoolNet中FPN的FUSE操作如下图所示(绿色箭头代表GGF，可以将上采样理解为GGF的一部分)。</p><p><img src="https://pic4.zhimg.com/80/v2-17c94fb51fddbffb95a4a9acf10f703b_720w.png" alt="img"></p><h2 id="Backbone"><a href="#Backbone" class="headerlink" title="Backbone"></a>Backbone</h2><p>FPN更多是一种结构而非一种网络，基于FPN这种U型结构，我们可以更换<strong>Backbone</strong>(骨干网络)。什么是Backbone呢？暂时你可以将Backbone理解为自底向上路径中的网络。常见的Backbone有VGG16、ResNet系列网络等。PoolNet作者使用了VGG16和RestNet50。</p><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>由上可知，FPN结构可以分为自底向上路径和自顶向下路径。</p><p>自底向上路径即Backbone，ResNet50的代码在文件<code>./networks/deeplab_resnet.py</code>中的类<code>ResNet</code>中，VGG16的代码在文件<code>./networks/vgg.py</code>中的类<code>vgg16</code>中。</p><p>自顶向下路径由多个FUSE操作形成，PoolNet作者将FUSE操作的代码与FAM的代码一起放在了文件<code>./networks/poolnet.py</code>中的类<code>DeepPoolLayer</code>中。</p><p>FPN自底向上路径和自顶向下路径中间还有一个1×1卷积，PoolNet作者将该1×1卷积的代码和GGM的代码放在了一起。</p><p>注意：学习代码时不只可以看PoolNet官方代码，还可以看我的Boundary Aware PoolNet的代码(包含详细中文注释，链接：<a href="https://github.com/chouxianyu/Boundary-Aware-PoolNet)。" target="_blank" rel="noopener">https://github.com/chouxianyu/Boundary-Aware-PoolNet)。</a></p><h1 id="GGM"><a href="#GGM" class="headerlink" title="GGM"></a>GGM</h1><p>由前文可知，GGM包括PPM(Pyramid pooling module，金字塔池化模块)和GGF(Global Guiding Flows，全局指导流)，其作用是在FPN自底向上路径的顶部提取显著目标的位置信息并将其提供给FPN自顶向下路径中的不同金字塔层。</p><h2 id="传送门-2"><a href="#传送门-2" class="headerlink" title="传送门"></a>传送门</h2><ul><li>PSPNet论文(PPM出处)：<a href="https://arxiv.org/abs/1612.01105" target="_blank" rel="noopener">https://arxiv.org/abs/1612.01105</a></li><li>PSPNet论文阅读笔记：<a href="https://zhuanlan.zhihu.com/p/354860476" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/354860476</a></li></ul><h2 id="PPM"><a href="#PPM" class="headerlink" title="PPM"></a>PPM</h2><p>PPM由PSPNet一文提出。PoolNet中使用的是修改过的PPM，其位置在自底向上路径的顶部。</p><p>PoolNet中使用的PPM包括4个子分支，PoolNet中PPM的实现如下(可结合代码理解)：</p><ol><li><p>用4个分支对Backbone的输出进行处理</p><p> 第1个分支为恒等映射层(即不进行处理)；后3个分支分别为输出尺寸为1×1的平均池化层(即全局平均池化层)、输出尺寸为3×3的平均池化层、输出尺寸为5×5的平均池化层，并且这3个平均池化层后面都有一个1×1卷积(不改变通道数)、ReLU、上采样层(使尺寸与Backbone输出的尺寸一致)。</p></li><li><p>将4个分支的输出拼接</p><p> 首先在通道维度上将4个子分支的输出拼接，然后用3×3卷积使通道数与Backbone输出的通道数一致，再加上1个ReLU。</p></li></ol><p>由上可知，PPM输出特征的尺寸、通道数与输入相同。</p><p>注意：FPN自底向上路径和自顶向下路径中间还有一个1×1卷积，PoolNet作者将这个1×1卷积放在了PPM之前。</p><h2 id="GGF"><a href="#GGF" class="headerlink" title="GGF"></a>GGF</h2><p>当Backbone为ResNet50时，则需要4个GGF。</p><p>每个GGF的输入都是PPM的输出，不同GGF之间的区别是输出特征的尺寸、通道数不相同同。</p><p>每个GGF的组成为：上采样(使尺寸与对应金字塔层的尺寸一致)、3×3卷积、ReLU。</p><h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><p>FPN自底向上路径和自顶向下路径中间的1×1卷积、PPM、GGF的代码都位于类<code>Backbone_locate</code>中。如果Backbone是ResNet50则代码位于文件<code>./networks/deeplab_resnet.py</code>的类<code>ResNet_locate</code>中，如果Backbone是VGG16则代码位于文件<code>./networks/vgg.py</code>的类<code>vgg16_locate</code>中。</p><p>注意：学习代码时不只可以看PoolNet官方代码，还可以看我的Boundary Aware PoolNet的代码(包含详细中文注释，链接：<a href="https://github.com/chouxianyu/Boundary-Aware-PoolNet)。" target="_blank" rel="noopener">https://github.com/chouxianyu/Boundary-Aware-PoolNet)。</a></p><h1 id="FAM"><a href="#FAM" class="headerlink" title="FAM"></a>FAM</h1><p>由上可知，PoolNet作者在FPN自顶向下路径中每个FUSE操作前引入了FAM，其可以使来自GGM的特征与FPN自顶向下路径中不同金字塔层的特征更好地融合。</p><p><img src="https://pic2.zhimg.com/80/v2-19fbea793459041b77a0992c566d4b4d_720w.png" alt="img"></p><p>每个FAM包含4个子分支，如上图所示，其实现如下：</p><ol><li><p>用4个分支对输入进行处理</p><p> 第1个分支为恒等映射层(即不进行处理)；后3个分支分别为下采样比例为2/4/8的平均池化层，每个平均池化层后为一个3×3卷积(不改变特征的通道数和尺寸)和上采样层(使尺寸与输入特征的尺寸一致)</p></li><li><p>将4个分支的输出相加，再送入一个3×3卷积(根据设置改变或不改变通道数)</p></li></ol><p>FAM和FPN的FUSE操作的代码在文件<code>./networks/poolnet.py</code>中的类<code>DeepPoolLayer</code>中。</p><p>注意：学习代码时不只可以看PoolNet官方代码，还可以看我的Boundary Aware PoolNet的代码(包含详细中文注释，链接：<a href="https://github.com/chouxianyu/Boundary-Aware-PoolNet)。" target="_blank" rel="noopener">https://github.com/chouxianyu/Boundary-Aware-PoolNet)。</a></p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Boundary Aware PoolNet = PoolNet + BASNet，即使用BASNet中的Deep Supervision策略和Hybrid Loss改进PoolNet。&lt;/p&gt;
+&lt;p&gt;为理解Boundary Aware PoolNet还是需要全面理解Poo
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="显著性目标检测" scheme="https://chouxianyu.github.io/tags/%E6%98%BE%E8%91%97%E6%80%A7%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="BAPoolNet" scheme="https://chouxianyu.github.io/tags/BAPoolNet/"/>
+    
+      <category term="PoolNet" scheme="https://chouxianyu.github.io/tags/PoolNet/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Boundary Aware PoolNet：基于PoolNet和BASNet的显著性目标检测</title>
+    <link href="https://chouxianyu.github.io/2021/05/31/Boundary-Aware-PoolNet%EF%BC%9A%E5%9F%BA%E4%BA%8EPoolNet%E5%92%8CBASNet%E7%9A%84%E6%98%BE%E8%91%97%E6%80%A7%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
+    <id>https://chouxianyu.github.io/2021/05/31/Boundary-Aware-PoolNet：基于PoolNet和BASNet的显著性目标检测/</id>
+    <published>2021-05-31T06:00:05.000Z</published>
+    <updated>2021-05-31T07:05:54.266Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Boundary-Aware-PoolNet"><a href="#Boundary-Aware-PoolNet" class="headerlink" title="Boundary-Aware-PoolNet"></a>Boundary-Aware-PoolNet</h1><p>Boundary Aware PoolNet = PoolNet + BASNet : Deeply supervised PoolNet using the hybrid loss in BASNet for Salient Object Detection</p><p>Boundary Aware PoolNet = PoolNet + BASNet，即使用BASNet中的Deep Supervision和Hybrid Loss改进PoolNet。</p><p>经过评估，BAPoolNet的性能超过了之前的SOTA方法（注：在DUTS-TE数据集上进行测试，暂未在其它数据集上进行测试）。</p><p><strong>相关文章汇总：</strong></p><ul><li><p><a href="https://zhuanlan.zhihu.com/p/359698101" target="_blank" rel="noopener">Boundary Aware PoolNet：基于PoolNet和BASNet的显著性目标检测</a></p></li><li><p><a href="https://zhuanlan.zhihu.com/p/359698301" target="_blank" rel="noopener">Boundary Aware PoolNet(1)：PoolNet模型与代码介绍</a></p></li><li><p><a href="https://zhuanlan.zhihu.com/p/359698320" target="_blank" rel="noopener">Boundary Aware PoolNet(2)：BASNet模型与代码介绍</a></p></li><li><p><a href="https://zhuanlan.zhihu.com/p/359698332" target="_blank" rel="noopener">Boundary Aware PoolNet(3)：Boundary Aware PoolNet模型与代码介绍</a></p></li></ul><p><strong>代码链接：</strong></p><p><a href="https://github.com/chouxianyu/Boundary-Aware-PoolNet" target="_blank" rel="noopener">https://github.com/chouxianyu/Boundary-Aware-PoolNet</a></p><h1 id="BAPoolNet结构"><a href="#BAPoolNet结构" class="headerlink" title="BAPoolNet结构"></a>BAPoolNet结构</h1><p>在PoolNet中Backbone是ResNet50时，模型自顶向下路径中有5个FUSE操作，我借鉴BASNet中的Deep Supervision和Hybrid Loss使用这5层输出的混合Loss之和进行梯度下降，我将这整个模型称为<strong>BAPoolNet(Boundary Aware PoolNet)</strong>，其结构如下图所示。</p><p><img src="https://pic4.zhimg.com/80/v2-7854dd376ab3ea8529d00b7056343067_720w.jpeg" alt="img"></p><p>与PoolNet相比，BAPoolNet的不同之处为：</p><ol><li>添加5个边路输出以进行Deep Supervision</li><li>在计算Loss时使用BCE损失、SSIM损失、IOU损失之和</li></ol><p>除了对PoolNet的改进之外，BAPoolNet的其它实现细节和实验细节和PoolNet保持一致。</p><p>如何实现Boundary Aware PoolNet，具体请看代码。</p><h1 id="BAPoolNet性能"><a href="#BAPoolNet性能" class="headerlink" title="BAPoolNet性能"></a>BAPoolNet性能</h1><h2 id="5个边路输出可视化结果"><a href="#5个边路输出可视化结果" class="headerlink" title="5个边路输出可视化结果"></a>5个边路输出可视化结果</h2><p><img src="https://pic2.zhimg.com/80/v2-1ce1a1a0a3ad8f86bfd91c6755a6018a_720w.jpeg" alt="img"></p><h2 id="视觉对比"><a href="#视觉对比" class="headerlink" title="视觉对比"></a>视觉对比</h2><p><img src="https://pic4.zhimg.com/80/v2-b507a874646b5988e1e4a6b18c24ecf7_720w.jpeg" alt="img"></p><h2 id="量化对比"><a href="#量化对比" class="headerlink" title="量化对比"></a>量化对比</h2><p>下表中MAE和maxF为各方法在DUTS-TE数据集上的测试结果。</p><div class="table-container"><table><thead><tr><th style="text-align:center">Method</th><th style="text-align:center">Conference</th><th style="text-align:center">Backbone</th><th style="text-align:center">Size(MB)</th><th style="text-align:center">MAE↓</th><th style="text-align:center">maxF↑</th></tr></thead><tbody><tr><td style="text-align:center">CapSal</td><td style="text-align:center">CVPR19</td><td style="text-align:center">ResNet-101</td><td style="text-align:center">-</td><td style="text-align:center">0.063</td><td style="text-align:center">0.826</td></tr><tr><td style="text-align:center">PiCANet</td><td style="text-align:center">CVPR18</td><td style="text-align:center">ResNet-50</td><td style="text-align:center">197.2</td><td style="text-align:center">0.050</td><td style="text-align:center">0.860</td></tr><tr><td style="text-align:center">DGRL</td><td style="text-align:center">CVPR18</td><td style="text-align:center">ResNet-50</td><td style="text-align:center">646.1</td><td style="text-align:center">0.049</td><td style="text-align:center">0.828</td></tr><tr><td style="text-align:center">BASNet</td><td style="text-align:center">CVPR19</td><td style="text-align:center">ResNet-34</td><td style="text-align:center">348.5</td><td style="text-align:center">0.047</td><td style="text-align:center">0.860</td></tr><tr><td style="text-align:center">U2Net</td><td style="text-align:center">CVPR20</td><td style="text-align:center">RSU</td><td style="text-align:center">176.3</td><td style="text-align:center">0.044</td><td style="text-align:center">0.873</td></tr><tr><td style="text-align:center">CPD</td><td style="text-align:center">CVPR19</td><td style="text-align:center">ResNet-50</td><td style="text-align:center">183.0</td><td style="text-align:center">0.043</td><td style="text-align:center">0.865</td></tr><tr><td style="text-align:center">PoolNet</td><td style="text-align:center">CVPR19</td><td style="text-align:center">ResNet-50</td><td style="text-align:center">260.0</td><td style="text-align:center">0.040</td><td style="text-align:center">0.880</td></tr><tr><td style="text-align:center"><strong>BAPoolNet</strong></td><td style="text-align:center">-</td><td style="text-align:center">ResNet-50</td><td style="text-align:center">260.7</td><td style="text-align:center"><strong>0.035</strong></td><td style="text-align:center"><strong>0.892</strong></td></tr></tbody></table></div><h2 id="PR曲线"><a href="#PR曲线" class="headerlink" title="PR曲线"></a>PR曲线</h2><p>下图为各方法在DUTS-TE数据集上的测试结果。</p><p><img src="https://pic4.zhimg.com/80/v2-e6ad03d7c136cf33416ad169bf0f89fc_720w.png" alt="img"></p><h2 id="F-measure曲线"><a href="#F-measure曲线" class="headerlink" title="F-measure曲线"></a>F-measure曲线</h2><p>下图为各方法在DUTS-TE数据集上的测试结果。</p><p><img src="https://pic2.zhimg.com/80/v2-94a0c6ae4d9e04127fdc38ece5310ae7_720w.png" alt="img"></p><h1 id="BAPoolNet代码"><a href="#BAPoolNet代码" class="headerlink" title="BAPoolNet代码"></a>BAPoolNet代码</h1><p><strong>传送门：</strong></p><ul><li>PoolNet代码：<a href="https://github.com/backseason/PoolNet" target="_blank" rel="noopener">https://github.com/backseason/PoolNet</a></li><li>BASNet代码：<a href="https://github.com/xuebinqin/BASNet" target="_blank" rel="noopener">https://github.com/xuebinqin/BASNet</a></li><li>BAPoolNet代码：<a href="https://github.com/chouxianyu/Boundary-Aware-PoolNet" target="_blank" rel="noopener">https://github.com/chouxianyu/Boundary-Aware-PoolNet</a></li></ul><p>相比于PoolNet，BAPoolNet代码的改动之处有：</p><ol><li><p>BCE Loss计算方法</p><p> 设置为<code>reduction=mean</code>而非<code>reduction=sum</code>，并且用<code>sigmoid+BCE</code>代替<code>F.binary_cross_entropy_with_logits</code>。</p></li><li><p>PoolNet<code>forward()</code>返回结果</p><p> PoolNet类返回了5个边路输出而非最终输出</p></li><li><p>整体Loss计算方法</p><p> 使用Hybrid Loss和Deep Supervision计算整体Loss</p></li></ol><p>模型性能评估代码（MAE、F-measure等），我参考了：<a href="https://github.com/Hanqer/Evaluate-SOD" target="_blank" rel="noopener">https://github.com/Hanqer/Evaluate-SOD</a></p><p>除了对PoolNet的改进之外，BAPoolNet的其它实现细节和实验细节和PoolNet保持一致。</p><p><strong>Coding Environments：</strong></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Python <span class="number">3.7</span><span class="number">.3</span></span><br><span class="line">torch <span class="number">1.4</span><span class="number">.0</span></span><br><span class="line">torchvision <span class="number">0.5</span><span class="number">.0</span></span><br><span class="line">tensorflow  <span class="number">2.0</span><span class="number">.0</span></span><br><span class="line">tensorboard <span class="number">2.0</span><span class="number">.2</span></span><br><span class="line">tensorboardX <span class="number">2.1</span></span><br><span class="line">……</span><br></pre></td></tr></table></figure><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Boundary-Aware-PoolNet&quot;&gt;&lt;a href=&quot;#Boundary-Aware-PoolNet&quot; class=&quot;headerlink&quot; title=&quot;Boundary-Aware-PoolNet&quot;&gt;&lt;/a&gt;Boundary-Aware-PoolN
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="显著性目标检测" scheme="https://chouxianyu.github.io/tags/%E6%98%BE%E8%91%97%E6%80%A7%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="BASNet" scheme="https://chouxianyu.github.io/tags/BASNet/"/>
+    
+      <category term="BAPoolNet" scheme="https://chouxianyu.github.io/tags/BAPoolNet/"/>
+    
+      <category term="PoolNet" scheme="https://chouxianyu.github.io/tags/PoolNet/"/>
+    
+  </entry>
   
   <entry>
     <title>李宏毅机器学习课程笔记-14.4 Seq2Seq：Transformer</title>
@@ -36,9 +167,9 @@
     </summary>
     
     
-      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="Seq2Seq" scheme="https://chouxianyu.github.io/tags/Seq2Seq/"/>
     
@@ -68,9 +199,9 @@
     </summary>
     
     
-      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="Seq2Seq" scheme="https://chouxianyu.github.io/tags/Seq2Seq/"/>
     
@@ -98,9 +229,9 @@
     </summary>
     
     
-      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="Seq2Seq" scheme="https://chouxianyu.github.io/tags/Seq2Seq/"/>
     
@@ -127,9 +258,9 @@
     </summary>
     
     
-      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="Seq2Seq" scheme="https://chouxianyu.github.io/tags/Seq2Seq/"/>
     
@@ -469,108 +600,6 @@
       <category term="ExplainableAI" scheme="https://chouxianyu.github.io/tags/ExplainableAI/"/>
     
       <category term="LIME" scheme="https://chouxianyu.github.io/tags/LIME/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-11.3Explainable AI(Global Explanation)</title>
-    <link href="https://chouxianyu.github.io/2021/04/23/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-11-3Explainable-AI-Global-Explanation/"/>
-    <id>https://chouxianyu.github.io/2021/04/23/李宏毅机器学习课程笔记-11-3Explainable-AI-Global-Explanation/</id>
-    <published>2021-04-23T03:33:37.000Z</published>
-    <updated>2021-04-23T03:34:13.996Z</updated>
-    
-    <content type="html"><![CDATA[<p>假定在图片分类任务中，<strong>Global Explanation要求机器说明它认为一个类别(比如“cat”)是什么样子，而非针对一张图片进行解释。</strong></p><h2 id="Activation-maximization"><a href="#Activation-maximization" class="headerlink" title="Activation maximization"></a>Activation maximization</h2><p>在<a href="https://zhuanlan.zhihu.com/p/361283328" target="_blank" rel="noopener">李宏毅机器学习课程笔记-7.2CNN学到了什么</a>一文中，我们已讲过Activation maximization，不再复述，这里讲一些相关的新知识。</p><ol><li>在Activation maximization的MNIST手写数字识别案例中，我们观察到机器学习到的数字在人类看来完全就是噪音，由此可以想到：将机器认为是数字(或其它事物)的内容作为噪声添加到其它数据中，也许这样就可以实现Attack。</li><li>在使用Activation maximization观察模型学习到的内容时，我们可能需要使用大量<strong>Regularization(保证“可解释性”)</strong>以及暴调超参数，详见《Understanding Neural Networks Through Deep Visualization》。</li></ol><h2 id="“Regularization”-From-Generator"><a href="#“Regularization”-From-Generator" class="headerlink" title="“Regularization” From Generator"></a>“Regularization” From Generator</h2><p><strong>除了使用人工设置的Regularization来告诉机器什么是一张正常的输出(比如image)，还可以使用Generator进行Regularization</strong>。</p><p>Image Generator的输入是一个低维向量$z$，其输出为一张图片$x$，即$x=G(z)$。通常这个低维向量$z$是从某个已知的distribution(比如高斯分布、正态分布)中sample出来的，我们可以收集很多图片并使用GAN或者VAE训练这个Generator。</p><p>那如何使用Image Generator生成对图片的限制呢？以图片分类为例，将Generator输出的图片$x$输入到Image Classifier中得到输出分类结果$y_i$，目标是找到一个$z^<em>$使得图片$x$属于对应类别$i$的可能性$y_i$最大，即$z^</em>=arg \ max y_i$。得到$z^<em>$之后将其输入至Image Generator就可以得到一个图片$x$。如果通过$x^</em>=arg \ max y_i$直接得到图片呢，则不能保证结果的“可解释性”，因而需要对结果进行“可解释性”的约束，上述过程中Generator的作用就是对图片进行约束以确保生成的图片$x$是“可解释”的。</p><p>注：在进行$z^*=arg \ max y_i$时，Image Generator和Classifier的参数是不参与本次训练的。</p><p>那使用Generator能得到什么样的结果呢？结果挺好的，详见《Plug &amp; Play Generative Networks: Conditional Iterative Generation of Images in Latent Space》。</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;假定在图片分类任务中，&lt;strong&gt;Global Explanation要求机器说明它认为一个类别(比如“cat”)是什么样子，而非针对一张图片进行解释。&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Activation-maximization&quot;&gt;&lt;a href=&quot;#Ac
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="ExplainableAI" scheme="https://chouxianyu.github.io/tags/ExplainableAI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-11.2Explainable AI(Local Explanation)</title>
-    <link href="https://chouxianyu.github.io/2021/04/22/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-11-2Explainable-AI-Local-Explanation/"/>
-    <id>https://chouxianyu.github.io/2021/04/22/李宏毅机器学习课程笔记-11-2Explainable-AI-Local-Explanation/</id>
-    <published>2021-04-22T00:40:25.000Z</published>
-    <updated>2021-04-22T00:41:07.591Z</updated>
-    
-    <content type="html"><![CDATA[<p>假定在图片分类任务中有一张图片，<strong>Local Explanation</strong>则要求机器说明为什么它认为这张图片是某个类别(比如“cat”)。</p><p>Explainable AI(<strong>Local Explanation</strong>)的目标是，知道每个component对于最终结果的重要性。我们可以通过remove或者modify其中一个component，看decision会有什么变化。</p><h2 id="基于梯度判断Component重要性"><a href="#基于梯度判断Component重要性" class="headerlink" title="基于梯度判断Component重要性"></a>基于梯度判断Component重要性</h2><p>假设输入是$x$，它有很多component $\{x_1,x_2,\dots,x_N\}$组成。如果输入是image，则component一般是pixel、segment或patch等；如果输入是text，则component一般是word。对于图片，我们可以在图片上“放置”一个灰块以覆盖图像的一小部分，观察其对结果的影响，见《<strong>Visualizing <em>and</em> Understanding Convolutional Networks</strong>》。注：component的选取、remove或者modify也是需要研究的。</p><p>还有另一种方法是，输入为$\{x_1,…,x_n\}$，对某个pixel $x_n$加上$\Delta x$，用$\frac{\Delta y}{\Delta x}$来表示扰动$\Delta x$对结果$y$的影响，即通过$\frac{\partial y_k}{\partial x_n}$的绝对值表示某个pixel对$y_k$的影响，见《<strong>Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps</strong>》。</p><p>还有很多其它<strong>基于梯度来判断Component重要性</strong>的方法：</p><ul><li><p>Grad-CAM</p></li><li><p>SmoothGrad</p></li><li><p>Layer-wise Relevance Propagation(LRP)</p><p>  Redistribute the output, Backward propagation until reaching input</p></li><li><p>Guided Backpropagation</p></li></ul><h2 id="梯度饱和"><a href="#梯度饱和" class="headerlink" title="梯度饱和"></a>梯度饱和</h2><p>基于梯度来判断component重要性的方法也存在着局限性：<strong>梯度饱和(Gradient Saturation)和Noisy Gradient</strong>。</p><p>考虑$\frac{\partial大象}{\partial鼻子长度}$，可知在一定范围内，鼻子越长，则判定为大象的概率就越大，但随着鼻子长度增加到一定数值后，鼻子长度对于判定大象的影响几乎为0，这时就出现了梯度饱和，如下图所示。</p><p><img src="https://pic4.zhimg.com/80/v2-ccef0f3a481afd976ed03ce3e6a12484_720w.png" alt="img"></p><p>那如何解决梯度饱和的问题呢？解决方法就是<strong>Global Explanation</strong>，可以参考Integrated gradient和DeepLIFT。</p><p>相对于梯度饱和，另外一个问题就是<strong>Noisy Gradient</strong>，即Gradient变化非常大，解决方法是<strong>SmoothGrad</strong>（在计算梯度时添加噪声以扰动生成多个样本，并计算平均梯度）</p><h2 id="Attack-Interpretation"><a href="#Attack-Interpretation" class="headerlink" title="Attack Interpretation"></a>Attack Interpretation</h2><p>向输入中加入一些细微的噪声，这样并不影响视觉效果和模型的输出，但这样可以<strong>攻击explanation</strong>，如下图所示，详见《Interpretation of Neural Networks is Fragile》。</p><p><img src="https://pic2.zhimg.com/80/v2-704a838681754edb670b33ef0c228987_720w.png" alt="img"></p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;假定在图片分类任务中有一张图片，&lt;strong&gt;Local Explanation&lt;/strong&gt;则要求机器说明为什么它认为这张图片是某个类别(比如“cat”)。&lt;/p&gt;
-&lt;p&gt;Explainable AI(&lt;strong&gt;Local Explanation&lt;/stron
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="ExplainableAI" scheme="https://chouxianyu.github.io/tags/ExplainableAI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-11.1Explainable AI引言</title>
-    <link href="https://chouxianyu.github.io/2021/04/21/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-11-1Explainable-AI%E5%BC%95%E8%A8%80/"/>
-    <id>https://chouxianyu.github.io/2021/04/21/李宏毅机器学习课程笔记-11-1Explainable-AI引言/</id>
-    <published>2021-04-21T01:48:40.000Z</published>
-    <updated>2021-04-21T01:58:47.017Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Explainable-AI是什么"><a href="#Explainable-AI是什么" class="headerlink" title="Explainable AI是什么"></a>Explainable AI是什么</h2><p>我们希望，机器不仅要知道“是什么”还要知道“为什么”，或者说<strong>机器不仅要给出答案还要给出explanation</strong>。</p><p>Explanation可以分为两类：</p><ol><li><p><strong>Local Explanation</strong></p><p> 假定在图片分类任务中有一张图片，要求机器说明<strong>为什么它认为这张图片是某个类别(比如“cat”)</strong>。</p></li><li><p><strong>Global Explanation</strong></p><p> 假定在图片分类任务中，要求机器说明<strong>它认为一个类别(比如“cat”)是什么样子</strong>，而非针对一张图片进行解释。</p></li></ol><h2 id="Explainable-AI有什么用"><a href="#Explainable-AI有什么用" class="headerlink" title="Explainable AI有什么用"></a>Explainable AI有什么用</h2><p>在使用机器挑选简历时，我们需要知道机器为什么选择某份简历(性别?还是实力)。</p><p>在使用机器判定罪犯是否可以假释时，我们需要知道机器为什么判定是或否(实证?还是肤色)。</p><p>在使用机器判定是否给某人贷款时，我们需要知道机器为什么判定是或否。</p><p>通过Explainable AI，我们可以知道模型学到了什么从而进行模型诊断，对模型进行改进和调整。我们不仅只关注模型在数据集上的精确度，还需要进行模型诊断，因为有可能精确度很高但实际上机器什么都没学到。</p><h2 id="Explainable-AI是否有必要"><a href="#Explainable-AI是否有必要" class="headerlink" title="Explainable AI是否有必要"></a>Explainable AI是否有必要</h2><p>李宏毅老师认为Explainable AI的目标并非完全理解模型是如何work的，而是为了让人感到comfortable。</p><p>因为深度学习是一个黑盒所以有些人认为深度学习不可信，这有些因噎废食。人脑等很多事物对现在的人类来讲都也还是黑盒，完全理解模型的work机理不是必要的，因为某些东西是黑盒就不使用它也不行。</p><p>Explainable AI其实就是为了使老板、客户、自己等感到comfortable，甚至对不同人也应该有不同的解释。</p><h2 id="Interpretable-VS-Powerful"><a href="#Interpretable-VS-Powerful" class="headerlink" title="Interpretable VS Powerful"></a>Interpretable VS Powerful</h2><p>决策树既是interpretable又是powerful的，但当分支特别多的时候决策树的表现也会很差，这时可以使用Random Forest或者XGBoost，但它们虽然powerful但不interpretable。</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;Explainable-AI是什么&quot;&gt;&lt;a href=&quot;#Explainable-AI是什么&quot; class=&quot;headerlink&quot; title=&quot;Explainable AI是什么&quot;&gt;&lt;/a&gt;Explainable AI是什么&lt;/h2&gt;&lt;p&gt;我们希望，机器不仅要
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="ExplainableAI" scheme="https://chouxianyu.github.io/tags/ExplainableAI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-10.4基于Smoothness假设的半监督学习</title>
-    <link href="https://chouxianyu.github.io/2021/04/19/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-10-4%E5%9F%BA%E4%BA%8ESmoothness%E5%81%87%E8%AE%BE%E7%9A%84%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://chouxianyu.github.io/2021/04/19/李宏毅机器学习课程笔记-10-4基于Smoothness假设的半监督学习/</id>
-    <published>2021-04-19T00:27:39.000Z</published>
-    <updated>2021-04-19T00:29:53.557Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Smoothness假设"><a href="#Smoothness假设" class="headerlink" title="Smoothness假设"></a>Smoothness假设</h2><h3 id="Smoothness假设的定义"><a href="#Smoothness假设的定义" class="headerlink" title="Smoothness假设的定义"></a>Smoothness假设的定义</h3><p>基于Smoothness假设的半监督学习的基本思路是“近朱者赤近墨者黑”，即<strong>相似的$x$具有相同的$\hat y$</strong>，其具体<strong>定义</strong>为：</p><ol><li>$x$的<strong>分布不平均</strong>，在某些地方(high density region)很集中，在某些地方很分散</li><li>如果$x^1$和$x^2$在一个<strong>high density region</strong>中距离非常近，则$x^1$和$x^2$通过1个<strong>high density path</strong>相连、$\hat y^1=\hat y^2$。</li></ol><p>举一个例子，如下图所示，$x^1,x^2,x^3$是3个样本，如果单纯地看它们之间的相似度，显然$x^2$和$x^3$更接近一些。但对于smoothness assumption来说，$x^1$和$x^2$是位于同一个high density region中，它们之间有high density path；而$x^2$与$x^3$之间则是“断开”的，没有high density path，因此$x^1$与$x^2$更“像”。</p><p><img src="https://pic1.zhimg.com/80/v2-a45cf1b179557c638d294edf952053a2_720w.png" alt="img"></p><h3 id="手写数字识别举例"><a href="#手写数字识别举例" class="headerlink" title="手写数字识别举例"></a>手写数字识别举例</h3><p>再举一个手写数字识别和人脸识别的例子，如下图所示，最左侧的2、最右侧的2和最右侧的3，从<strong>pixel角度</strong>来看明显是最右侧的2和3更加相似(尽管两者并非是同一个数字)，但如果考虑最左侧的2朝着最右侧的2的演化过程，可以发现产生了一种“<strong>间接相似性</strong>”(high density path)。根据Smoothness假设，由于这6个2之间存在间接的相似而这6个2和最右侧的3之间不存在high density path，因此这6个2是彼此相似的；而最右侧的3和这6个2是不相似的。</p><p><img src="https://pic4.zhimg.com/80/v2-c8fd736cc00ef0209e973b93b62b2541_720w.png" alt="img"></p><h3 id="文章分类举例"><a href="#文章分类举例" class="headerlink" title="文章分类举例"></a>文章分类举例</h3><p>假设对天文学(astronomy)和旅行(travel)的文章进行分类，它们有各自的专属词汇，此时如果unlabeled data与label data的词汇是相同或重合(overlap)的，那么就很容易分类；但真实情况中unlabeled data和labeled data之间可能没有任何重复的word，因为世界上的词汇太多了，sparse的分布中overlap难以发生。</p><p>但如果unlabeled data足够多，就会以一种<strong>相似传递</strong>的形式，建立起文档之间相似的桥梁。</p><h2 id="cluster-and-then-label"><a href="#cluster-and-then-label" class="headerlink" title="cluster and then label"></a>cluster and then label</h2><p>如何实现基于Smoothness假设的半监督学习呢？在具体实现上，最简单的方式是cluster and then label。</p><p>cluster and then label就是先<strong>把所有样本(包括有标签样本和无标签样本)分成几个cluster，然后根据每个cluster中各类别有标签样本的数量确定该cluster中所有样本的label，然后进一步用这些cluster学习得到分类器</strong>。</p><p>这种方法不一定会得到好的结果，因为该方法有个<strong>前提是我们能够把同类别的样本分到同一个cluster</strong>，而这并不容易。对图像分类来说，如果仅仅依据pixel-wise相似度来划分cluster，得到的结果一般都会很差。所以为了满足这个前提，我们需要设计较好的方法来描述一张图片(比如使用Deep Autoencoder提取图片特征feature)，以保证cluster时能够将同类别的样本分到同一个cluster。</p><h2 id="Graph-based-Approach"><a href="#Graph-based-Approach" class="headerlink" title="Graph-based Approach"></a>Graph-based Approach</h2><h3 id="high-density-path"><a href="#high-density-path" class="headerlink" title="high density path"></a>high density path</h3><p>如何实现基于Smoothness假设的半监督学习呢？我们可以将每个样本视为图中的1个点，<strong>通过图来表示connected by a high density path</strong>。Graph-based方法的基本思路是图中的有标注样本会影响与它们邻近的无标注样本并在图中产生“<strong>间接相似性</strong>”，即使某些无标注样本没有直接与有标注样本相连也仍然可以被判定为相似。如果想要让这种方法生效，<strong>收集到的数据一定要足够多</strong>，否则可能导致无法形成path、失去了information的传递效果。</p><h3 id="如何建立一张图"><a href="#如何建立一张图" class="headerlink" title="如何建立一张图"></a>如何建立一张图</h3><p>有时候点之间的边是比较好建立的(比如网页超链接、论文引用)，有时候需要我们自行建立点之间的边。图的好坏对最终结果的影响是非常关键的，但如何建图是一件heuristic的事情，需要我们凭经验和直觉来做，<strong>建图步骤</strong>如下：</p><ol><li><p>定义两个样本$x^i,x^j$之间的相似度计算方法$s(x^i,x^j)$</p><p> 如果是基于pixel-wise的相似度，那结果可能比较差，建议使用更好的方法(比如使用Autoencoder提取图片特征，并基于提取到的特征计算相似度)。</p><p> 推荐使用的相似度计算方法为高斯径向基函数(Gaussian Radial Basis Function)：$s(x^i,x^j)=exp(-\gamma||x^i-x^j||^2)$，其中$x^i,x^j$均为vector。经验上来说exp(exponential)通常是可以帮助提升性能的，因为它使得仅当$x^i,x^j$非常接近时similarity才会大、只要距离稍微远一点similarity就会迅速变小，也就是使用exponential可以做到<strong>只有非常近的两个点才能相连、稍微远一点就无法相连</strong>的效果。</p></li><li><p>建立点和点之间的边</p><ul><li><p>k-Nearest Neighbor(K近邻算法)</p><p>  在特征空间中，如果一个样本附近的k个最近样本的大多数属于某一类别，则该样本也属于这个类别</p></li><li><p>e-Neighborhood</p></li></ul></li><li><p>设置点和点之间边的权重</p><p> 一条边的权重应该和该边两个顶点的相似度成比例</p></li></ol><h3 id="如何定量地评估一个图符合Smoothness假设的程度"><a href="#如何定量地评估一个图符合Smoothness假设的程度" class="headerlink" title="如何定量地评估一个图符合Smoothness假设的程度"></a>如何定量地评估一个图符合Smoothness假设的程度</h3><p>那如何定量地评估一个图符合Smoothness假设的程度呢？</p><p><img src="https://pic1.zhimg.com/80/v2-db490c6a659a6fb1765c956d9f584cac_720w.png" alt="img"></p><p>如上图所示，我们定义1个图的<strong>Smoothness</strong>为$S=\frac{1}{2}\sum_{i,j}w_{i,j}(y^i-y^j)^2$并希望它<strong>越小越好</strong>，其中$i,j$为所有样本点的索引、$x^i$表示样本的特征、$y^j$表示样本的标注(有可能是伪标签)、$w_{i,j}$是2个样本之间边的权重、$\frac{1}{2}$只是为了方便计算。</p><p>上式Smoothness定义还可以表示为$S=y^TLy$，其中$y$是1个(R+U)-dim的vector：$y=[\dots,y^i,\dots,y^j,\dots]^T$、$L$是1个(R+U)×(R+U)的矩阵(名字叫做Graph Laplacian)。</p><p>Graph Laplacian的定义为$L=D-W$，其中$W_{i,j}$为2个样本点之间边的权重，把$W$每行元素之和放在该行对应的对角线上其它元素值为0即可得到$D$，如上图所示。在图神经网络(Spectral-based Convolution)中，有关于Graph Laplacian的介绍。</p><h3 id="如何训练"><a href="#如何训练" class="headerlink" title="如何训练"></a>如何训练</h3><p>Smoothness定义$S=y^TLy$中$y$是模型的输出(预测得到的类别)，它是取决于模型参数的，因此训练时仅需在有标注数据的损失函数上加上Smoothness即可：$L=\sum_{x^r}C(y^r,\hat y^r)+\lambda S$，其中$\lambda S$可以被视为正则项。</p><p>由上可知，<strong>训练目标</strong>为：</p><ol><li>有标注数据的交叉熵越小越好，即模型的输出与标注越接近越好</li><li>所有数据的Smoothness越小越好，即不管是有标注数据还是无标注数据，模型输出都要符合Smoothness Assumption的假设</li></ol><p>注：训练时可以不仅仅要求整个模型的输出层要smooth，还可以对模型中任意一个隐藏层加上smooth的限制。</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;Smoothness假设&quot;&gt;&lt;a href=&quot;#Smoothness假设&quot; class=&quot;headerlink&quot; title=&quot;Smoothness假设&quot;&gt;&lt;/a&gt;Smoothness假设&lt;/h2&gt;&lt;h3 id=&quot;Smoothness假设的定义&quot;&gt;&lt;a href=
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="半监督学习" scheme="https://chouxianyu.github.io/tags/%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   

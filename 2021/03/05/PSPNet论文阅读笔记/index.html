@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,深度学习,神经网络,论文笔记,scene parsing,PSPNet," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="臭咸鱼的缺氧瓶" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="基本信息 论文名称   Pyramid Scene Parsing Network  作者   Hengshuang Zhao等  发表时间   2016年  来源   CVPR2017   主要收获知识 scene parsing的目标是给图片中每个像素赋予1个类别标签，其可以提供对场景的完整理解，预测每个element的标签、位置和形状。  本文主要贡献  提出PSPNet，将difficul">
+<meta name="keywords" content="机器学习,深度学习,神经网络,论文笔记,scene parsing,PSPNet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PSPNet论文阅读笔记">
+<meta property="og:url" content="https://chouxianyu.github.io/2021/03/05/PSPNet论文阅读笔记/index.html">
+<meta property="og:site_name" content="臭咸鱼的缺氧瓶">
+<meta property="og:description" content="基本信息 论文名称   Pyramid Scene Parsing Network  作者   Hengshuang Zhao等  发表时间   2016年  来源   CVPR2017   主要收获知识 scene parsing的目标是给图片中每个像素赋予1个类别标签，其可以提供对场景的完整理解，预测每个element的标签、位置和形状。  本文主要贡献  提出PSPNet，将difficul">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-03-05T08:14:43.765Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PSPNet论文阅读笔记">
+<meta name="twitter:description" content="基本信息 论文名称   Pyramid Scene Parsing Network  作者   Hengshuang Zhao等  发表时间   2016年  来源   CVPR2017   主要收获知识 scene parsing的目标是给图片中每个像素赋予1个类别标签，其可以提供对场景的完整理解，预测每个element的标签、位置和形状。  本文主要贡献  提出PSPNet，将difficul">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chouxianyu.github.io/2021/03/05/PSPNet论文阅读笔记/"/>
+
+
+
+
+
+  <title>PSPNet论文阅读笔记 | 臭咸鱼的缺氧瓶</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5706c34297d4762ba8c6d799a54234b9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">臭咸鱼的缺氧瓶</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快给我氧气！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2021/03/05/PSPNet论文阅读笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PSPNet论文阅读笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-05T15:53:52+08:00">
+                2021-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/03/05/PSPNet论文阅读笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/03/05/PSPNet论文阅读笔记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2021/03/05/PSPNet论文阅读笔记/" class="leancloud_visitors" data-flag-title="PSPNet论文阅读笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3,171 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  13 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h1><ul>
+<li><p>论文名称</p>
+<p>  Pyramid Scene Parsing Network</p>
+</li>
+<li><p>作者</p>
+<p>  Hengshuang Zhao等</p>
+</li>
+<li><p>发表时间</p>
+<p>  2016年</p>
+</li>
+<li><p>来源</p>
+<p>  CVPR2017</p>
+</li>
+</ul>
+<h1 id="主要收获"><a href="#主要收获" class="headerlink" title="主要收获"></a>主要收获</h1><h2 id="知识"><a href="#知识" class="headerlink" title="知识"></a>知识</h2><ul>
+<li><p>scene parsing的目标是给图片中每个像素赋予1个类别标签，其可以提供对场景的完整理解，预测每个element的标签、位置和形状。</p>
+</li>
+<li><p>本文主要贡献</p>
+<ul>
+<li>提出PSPNet，将difficult scenery context features嵌入1个FCN based pixel prediction framework。</li>
+<li>基于deeply supervised loss，为ResNet提供1个高效的优化策略。</li>
+<li>为SOTA的scene parsing and semantic segmentation构建了1个practical system，并公开了所有关键细节。</li>
+</ul>
+</li>
+<li><p>本文方法原理</p>
+<p>  为获得合适的global features，本文提出PSPNet。除了<strong>使用传统的dilated FCN实现pixel prediction</strong>，我们<strong>将pixel-level feature扩展到了专门设计的global pyramid pooling的特征中</strong>，局部和全局的clues共同使得最终的预测更可靠。我们还提出了1种使用deeply supervised loss的优化策略。我们给出了所有实验细节（对本文模型的性能很重要），并公开了代码和训练好的模型。</p>
+</li>
+<li><p><strong>本文核心思路</strong></p>
+<p>  scene parsing还面临着diverse scenes和unrestricted vocabulary的困难，其导致一些外表相似的物体被错误预测，但当有了context prior之后，理应可以得到正确的预测。目前基于FCN算法的主要问题也是缺乏利用global scene category clue的合适策略。所以PSPNet基于FCN将<strong>PPM（pyramid pooling module）</strong>作为高效的global context prior。</p>
+</li>
+<li><p><strong>PPM核心思路</strong></p>
+<p>  感受野的大小可以大概表示我们能用多少context information。而CNN的实验感受野比其理论感受野小得多，特别是网络深层。这使得许多网络没有充分融合重要的global scenery prior。</p>
+<p>  Global average pooling直接将所有像素混合得到1个vector可能会失去spatial relation并导致ambiguity。考虑到这一点，Global context information和sub-region context有助于区分各种category，1个更有力的representation可以是来自不同sub-regions的具有这些感受野的信息的融合。</p>
+</li>
+<li><p>其它</p>
+<ul>
+<li>FCN用卷积层代替全连接层进行分类</li>
+<li>dilated convolution可以增大神经网络的感受野。</li>
+<li>本文baseline network是FCN和dilated network(《Semantic image segmentation with deep convolutional nets and fully connected crfs》)。</li>
+<li>一些工作主要探索了2个方向：multi-scale feature ensembling和structure prediction，这2个方向都都改善了scene parsing的localization ability。</li>
+<li>开创性的《Semantic image segmentation with deep convolutional nets and fully connected crfs》使用条件随机场(CRF)作为post processing以精化分割结果。</li>
+<li>《Parsenet: Looking wider to see better》证明了global average pooling with FCN可以提升语义分割结果。</li>
+</ul>
+</li>
+</ul>
+<h2 id="一些未知的东西"><a href="#一些未知的东西" class="headerlink" title="一些未知的东西"></a>一些未知的东西</h2><ul>
+<li>scene和vocabulary具体指什么？</li>
+<li>context prior具体指什么？</li>
+<li>knowledge graph（知识图谱）是什么？</li>
+<li>dilated convolution是什么？</li>
+</ul>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><ul>
+<li><p>背景</p>
+<p>  对于unrestricted open vocabulary和diverse scenes，scene parsing(场景解析)具有挑战性。</p>
+</li>
+<li><p>方法</p>
+<p>  本文使用PPM(pyramid pooling module)和提出的PSPNet(pyramid scene parsing network)，<strong>实现了通过融合different-region-based context获取全局context信息的能力</strong>。本文中的global prior presentation(全局先验表征)可在scene pareing任务中有效产生高质量结果，而PSPNet提供了1个出色的pixel-level prediction framework。</p>
+</li>
+<li><p>结果</p>
+<p>  本文提出的方法在多个数据集上实现了SOTA，取得ImageNet scene parsing challenge 2016、PASCAL VOC 2012 benchmark和Cityscapes benchmark的第1名。单独1个PSPNet在PASCAL VOC 2012取得mIoU accuracy 85.4%的新纪录，在Cityscapes取得mIoU accuracy 80.2%的新纪录。</p>
+</li>
+</ul>
+<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><ul>
+<li><p>背景和意义</p>
+<p>  基于semantic segmentation的scene parsing是计算机视觉中的基本主题，其目标是<strong>给图片中每个像素赋予1个类别标签</strong>。<strong>scene parsing可提供对场景的完整理解，它可以预测每个element的标签、位置和形状</strong>。对于自动驾驶、机器人感应等潜在应用，该主题引起了广泛兴趣。</p>
+</li>
+<li><p>困难</p>
+<p>  <strong>scene parsing的困难与scene和label的多样性紧密相关</strong>。首创的scene parsing任务是对LMO数据集中2688张图片的33个场景进行分类。更多最近的PASCAL VOC语义分割数据集和PASCAL context数据集中包括更多context相似的标签，比如chair和sofa、horse和cow等等。新的ADE20K是最具挑战性的1个数据集数据集，其具有大量无限制开放的vocabulary和更多的scene类别，图1展示了其中一些具有代表性的图片。为这些数据集找到1个有效的算法需要克服许多困难。</p>
+</li>
+<li><p>目前进展</p>
+<p>  scene parsing的SOTA算法多数是基于全卷积神经网络（FCN）。基于CNN的算法推动了dynamic object understanding，但考虑到<strong>diverse scenes和unrestricted vocabulary</strong>则还面临着挑战。图2第1行中1个boat被错误识别为car，出现这些错误是由于<strong>similar appearance of objects</strong>。但<strong>当图片的context prior为1条河附近的boathouse时，理应得到正确的预测</strong>。</p>
+<p>  为了精准的场景感知，知识图谱依赖于scene context的先验信息(prior information)。我们发现<strong>目前基于FCN算法的主要问题是缺乏利用global scene category clue的合适策略</strong>。对于complex scene understanding，为了获取1个global image-level feature，<strong>spatial pyramid poolin</strong>g被广泛应用，因为spatial statistics为overall scene interpretation提供了较好的descriptor。<strong>Spatial pyramid pooling network</strong>进一步增强了这个能力。</p>
+</li>
+<li><p>本文方法原理</p>
+<p>  与上述方法不同，为获得合适的global features，本文提出PSPNet。除了<strong>使用传统的dilated FCN实现pixel prediction</strong>，我们<strong>将pixel-level feature扩展到了专门设计的global pyramid pooling的特征中</strong>，局部和全局的clues共同使得最终的预测更可靠。我们还提出了1种使用deeply supervised loss的优化策略。我们给出了所有实验细节（对本文模型的性能很重要），并公开了代码和训练好的模型。</p>
+</li>
+<li><p>本文方法性能</p>
+<p>  在所有公开数据集上达到SOTA，是ImageNet scene parsing challenge 2016的冠军、PASCALVOC 2012 semantic segmentation benchmark的第1名、urban scene Cityscapes data的第1名。这证明PSPNet为pixellevel prediction tasks指明了1个方向，它甚至可以帮助基于CNN的stereo matching、optical flow、depth estimation等。</p>
+</li>
+<li><p>本文主要贡献</p>
+<ul>
+<li>提出PSPNet，将difficult scenery context features嵌入1个FCN based pixel prediction framework。</li>
+<li>基于deeply supervised loss，为ResNet提供1个高效的优化策略。</li>
+<li>为SOTA的scene parsing and semantic segmentation构建了1个practical system，并公开了所有关键细节。</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2. Related Work"></a>2. Related Work</h1><ul>
+<li><p>受<strong>FCN用卷积层代替全连接层进行分类</strong>的启发，scene parsing和semantic segmentation等pixel-level prediction任务取得了巨大进步。为增大神经网络的感受野，《Semantic image segmentation with deep convolutional nets and fully connected crfs》和《Multi-scale context aggregation by dilated convolutions》使用了<strong>dilated convolution</strong>。Noh等人提出了1个coarse-to-fine structure with deconvolution network以学习segmentation mask。<strong>本文baseline network是FCN和dilated network(《Semantic image segmentation with deep convolutional nets and fully connected crfs》)</strong>。</p>
+</li>
+<li><p>其它工作主要探索了2个方向。</p>
+<ul>
+<li>第1个方向是multi-scale feature ensembling。因为在深度网络中，higher-layer feature包含更多semantic meaning，很少location information。<strong>融合多尺度的特征</strong>可以提高性能。</li>
+<li><p>第2个方向是基于structure prediction。开创性的《Semantic image segmentation with deep convolutional nets and fully connected crfs》<strong>使用条件随机场(CRF)作为post processing以精化分割结果</strong>。还有一些方法通过end-to-end modeling精化了网络。</p>
+<p>这2个方向都都改善了scene parsing的<strong>localization ability</strong>（predicted semantic boundary fits objects），然而在复杂场景中还有很大空间可以更加有效地利用必要信息。</p>
+</li>
+</ul>
+</li>
+<li><p>为充分利用global image-level priors(for diverse scene understanding)，一些方法使用传统方法而非神经网络提取了global context information。在object detection frameworks下也有了相似的提升。Liu等人证明了<strong>global average pooling with FCN可以提升语义分割结果</strong>。然而本文实验证明，对于ADE20K数据集，<strong>这些global descriptors还不足够representative</strong>。因此本文使用PSPNet实现了通过融合<strong>different-region-based context</strong>获取全局context信息的能力。</p>
+</li>
+</ul>
+<h1 id="3-Pyramid-Scene-Parsing-Network"><a href="#3-Pyramid-Scene-Parsing-Network" class="headerlink" title="3. Pyramid Scene Parsing Network"></a>3. Pyramid Scene Parsing Network</h1><p>在把应用FCN到scene parsing时，我们观察到一些具有代表性的失败案例并对其进行了分析。这激发了我们<strong>将pyramid pooling module 作为高效global context prior</strong>的思路。图3展示了PSPNet的结构。</p>
+<h2 id="3-1-Important-Observations"><a href="#3-1-Important-Observations" class="headerlink" title="3.1. Important Observations"></a>3.1. Important Observations</h2><p>ADE20K数据集包含150个stuff/object category labels（比如wall、sky、tree）和1038张imagelevel scene descriptors（比如airport terminal、bedroom、street），所以形成了大量的label和分布广阔的scene。检查了《Semantic understanding of scenes through the ADE20K dataset》提供的FCN baseline的预测结果，我们总结出了complex-scene parsing的几个普遍问题：Mismatched Relationship、Confusion Categories和Inconspicuous Classes（具体内容见原文）。总结这些问题，很多错误与<strong>不同感受野的contextual relationship和global information</strong>部分或完全相关。因此1个具有合适<strong>global-scene-level prior</strong>的神经网络可以大量提高scene parsing的性能。</p>
+<h2 id="3-2-Pyramid-Pooling-Module"><a href="#3-2-Pyramid-Pooling-Module" class="headerlink" title="3.2. Pyramid Pooling Module"></a>3.2. Pyramid Pooling Module</h2><p>实验证明，pyramid pooling module是高效的global contextual prior。</p>
+<p>在1个神经网络中，<strong>感受野的大小可以大概表示我们能用多少context information</strong>。虽然理论上ResNet的感受野已经超过输入图片的大小了，但Zhou等人发现<strong>CNN的实验感受野比其理论感受野小得多，特别是网络深层</strong>。这使得<strong>许多网络没有充分融合重要的global scenery prior</strong>。本文提出1个高效的global prior representation来解决这个问题。</p>
+<p>Global average pooling可以很好地作为global contextual prior的baseline model，常常被用在图片分类任务中，也被用于semantic segmentation。考虑到ADE20K数据集中图片scene的复杂性，该策略并不足以涵盖必要信息：<strong>图片的每个像素被标注为许多stuff/objects，直接将它们混合得到1个vector可能会失去spatial relation并导致ambiguity</strong>。考虑到这一点，<strong>Global context information和sub-region context有助于区分各种category</strong>，1个更有力的representation可以是来自不同sub-regions的具有这些感受野的信息的融合。一些场景/图片分类方面的工作[引]也得到了相似结论。</p>
+<p>在《Hypercolumns for object segmentation and fine-grained localization》中，pyramid pooling生成的不同层次的feature maps最终被flatten和concatenate，然后送入1个全连接层进行分类。该global prior的目标是移除CNN用于图片分类时fixed-size的constraint。为进一步减少不同sub-region之间的context information loss，本文提出1个hierarchical global prior，<strong>包含不同尺度和不同sub-region的信息</strong>，称其为pyramid pooling module，用来在神经网络最后1个特征图上构建global scene prior，如图3(c)所示。</p>
+<p><strong>PPM的具体结构：</strong></p>
+<p>PPM融合4个不同金字塔尺度的特征。最coarse的level是<strong>global pooling</strong>，生成1个single bin output。接下来的pyramid level将特征图<strong>划分成不同的sub-region并为不同location形成pooled representation</strong>。PPM中不同level的输出包含不同尺寸的特征图。为了保持global feature的占比，我们在每1个pyramid level后使用<strong>1×1卷积</strong>以将context representation的dimension减少到1。然后将这些1维特征图<strong>上采样</strong>以使其与初始特征图大小相同。最终将不同level的特征<strong>concatenate</strong>后作为最终的pyramid pooling global feature。</p>
+<p>注意pyramid level的数量和每个level的size是<strong>可以修改</strong>的，它们与输入至pyramid pooling layer的特征图的size相关。该结构采用size不同、stride不同的pooling kernel以提取不同sub-region的特征。因此这些kernel在representation上应该保持合理的gap。本文中的PPM包含<strong>4个level</strong>，bin的size分别是<strong>1×1、2×2、3×3和6×6</strong>。关于选择最大池化还是平均池化，本文5.2节中做了大量实验。</p>
+<h2 id="3-3-Network-Architecture"><a href="#3-3-Network-Architecture" class="headerlink" title="3.3. Network Architecture"></a>3.3. Network Architecture</h2><p>如图3所示，输入1张图片，使用预训练的<strong>ResNet</strong>模型并使用<strong>dilated network的策略</strong>提取得到feature map。最后feature map的size是输入图片size的1/8。然后使用PPM获取context information。通过本文4个level的PPM，可以涵盖图片的whole、half和small portions。然后将PPM4个分支的输出和PPM的输入concatenate。最后再用1个卷积层获得最后的prediction。</p>
+<p>PSPNet为pixel-level scene parsing提供了高效的global contextual prior。PPM提取到的特征比global pooling更具代表性。考虑到计算成本，PSPNet相比于其 baseline(the original dilated FCN network)并没有增加多少计算成本。通过end-to-end learning，全局的PPM特征和局部的FCN特征可以最优化。</p>
+<h1 id="4-Deep-Supervision-for-ResNet-Based-FCN"><a href="#4-Deep-Supervision-for-ResNet-Based-FCN" class="headerlink" title="4. Deep Supervision for ResNet-Based FCN"></a>4. Deep Supervision for ResNet-Based FCN</h1><p>深度网络可以得到好的性能，但增加网络深度可能导致optimization difficulty，ResNet通过在每个block中使用skip connection解决了这个问题。ResNet的Latter layers主要基于previous ones学习residues。</p>
+<p>相反地，本文通过1个additional loss生成initial results，然后通过the final loss学习residue。因此，深度网络的优化被分解成易解的2个。</p>
+<p>略……</p>
+<hr>
+<p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p>
+<p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p>
+<p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p>
+<p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>转载请注明出处，欢迎讨论和交流!</p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/神经网络/" rel="tag"># 神经网络</a>
+          
+            <a href="/tags/论文笔记/" rel="tag"># 论文笔记</a>
+          
+            <a href="/tags/scene-parsing/" rel="tag"># scene parsing</a>
+          
+            <a href="/tags/PSPNet/" rel="tag"># PSPNet</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/02/FPN网络图解及论文笔记/" rel="next" title="FPN网络图解及论文笔记">
+                <i class="fa fa-chevron-left"></i> FPN网络图解及论文笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/08/BASNet论文详解/" rel="prev" title="BASNet论文详解">
+                BASNet论文详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg"
+                alt="臭咸鱼" />
+            
+              <p class="site-author-name" itemprop="name">臭咸鱼</p>
+              <p class="site-description motion-element" itemprop="description">祝你天天开心啊！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">314</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">177</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://maluguang.com" title="Road Wide's Blog" target="_blank">Road Wide's Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/chouxianyu/" title="Chou Xianyu's CNBlog" target="_blank">Chou Xianyu's CNBlog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本信息"><span class="nav-number">1.</span> <span class="nav-text">基本信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主要收获"><span class="nav-number">2.</span> <span class="nav-text">主要收获</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识"><span class="nav-number">2.1.</span> <span class="nav-text">知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些未知的东西"><span class="nav-number">2.2.</span> <span class="nav-text">一些未知的东西</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">3.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Introduction"><span class="nav-number">4.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Related-Work"><span class="nav-number">5.</span> <span class="nav-text">2. Related Work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Pyramid-Scene-Parsing-Network"><span class="nav-number">6.</span> <span class="nav-text">3. Pyramid Scene Parsing Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-Important-Observations"><span class="nav-number">6.1.</span> <span class="nav-text">3.1. Important Observations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Pyramid-Pooling-Module"><span class="nav-number">6.2.</span> <span class="nav-text">3.2. Pyramid Pooling Module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-Network-Architecture"><span class="nav-number">6.3.</span> <span class="nav-text">3.3. Network Architecture</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Deep-Supervision-for-ResNet-Based-FCN"><span class="nav-number">7.</span> <span class="nav-text">4. Deep Supervision for ResNet-Based FCN</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">臭咸鱼</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">285.0k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz',
+        appKey: 'Si7hBxIAVOGbu6Pot7HHaVBB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz", "Si7hBxIAVOGbu6Pot7HHaVBB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
