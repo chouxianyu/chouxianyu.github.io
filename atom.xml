@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chouxianyu.github.io/"/>
-  <updated>2021-05-31T07:06:29.557Z</updated>
+  <updated>2021-06-13T01:11:31.540Z</updated>
   <id>https://chouxianyu.github.io/</id>
   
   <author>
@@ -15,6 +15,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>李宏毅机器学习课程笔记-15.1无监督学习简介</title>
+    <link href="https://chouxianyu.github.io/2021/06/13/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-15-1%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E7%AE%80%E4%BB%8B/"/>
+    <id>https://chouxianyu.github.io/2021/06/13/李宏毅机器学习课程笔记-15-1无监督学习简介/</id>
+    <published>2021-06-13T01:03:25.000Z</published>
+    <updated>2021-06-13T01:11:31.540Z</updated>
+    
+    <content type="html"><![CDATA[<p>无监督学习(Unsupervised Learning)可以分为两类：</p><ul><li>化繁为简<ul><li>聚类(Clustering)</li><li>降维(Dimension Reduction)</li></ul></li><li>无中生有<ul><li>生成(Generation)</li></ul></li></ul><p>在无监督学习(Unsupervised Learning)中，数据集中通常只有$(x,\hat y)$中的$x$或$\hat y$，其中：</p><ul><li><strong>化繁为简</strong>就是把复杂的input变成比较简单的output，比如把一堆未标注的“树”图片转变为一棵抽象的“树”，此时数据集只有input $x$，而没有output $\hat y$。</li><li><strong>无中生有</strong>就是随机给模型一个输入(比如是一个数字)，它就会生成不同图像，此时数据集中没有input $x$，而只有output $\hat y$</li></ul><h2 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h2><ul><li><p>定义</p><p>  聚类(clustering)就是把”<strong>相近</strong>“的样本划分为同一类，比如<strong>用聚类算法</strong>对一些没有标签的图片进行分类，然后<strong>人工</strong>为这些类别打上cluster 1、cluster 2、cluster 3的标签。</p></li><li><p>一个critical的open question</p><p>  在聚类算法中要分几个cluster？不能太多也不能太少，需要empirically决定。</p></li><li><p>聚类算法的缺点</p><p>  它<strong>强迫每个样本属于并只属于1个cluster</strong>，实际上一个样本可能拥有多个cluster的特征，如果强制把它划分到某个cluster，就会失去很多信息。</p></li></ul><p>如果原先的object是high dimension的，比如image，那现在用它的属性来描述自身，就可以使之从高维空间转变为低维空间，这就是所谓的<strong>降维(Dimension Reduction)</strong></p><h3 id="K-means"><a href="#K-means" class="headerlink" title="K-means"></a>K-means</h3><p>最常用的聚类方法是<strong>K-means</strong>，其目标为将N个无标签样本$\{x^1,…,x^n,…,x^N\}$划分为K个cluster，其算法流程如下：</p><ol><li><p>初始化K个cluster的center：$c^i,i\in \{1,2,…,K\}$</p><p> 初始化方法可以是从N个样本中随机选取K个样本作为K个center $c^i$的初始值；</p><p> 如果不从样本中选取center的初始值，最终可能会导致部分cluster中没有样本。</p></li><li><p>遍历所有样本$x^n$并判断它属于哪个cluster</p><p> 如果$x^n$与第i个cluster的center $c^i$最“接近”，那$x^n$就属于该cluster；</p><p> 我们用$b_i^n=1$表示样本$x^n$属于第i个cluster，$b_i^n=0$表示不属于。</p></li><li><p>更新center：把每个cluster里的所有object取平均值作为新的center值，即$c^i=\sum\limits_{x^n}b_i^n x^n/\sum\limits_{x^n} b_i^n$</p></li><li><p>反复第2步和第3步</p></li></ol><h3 id="HAC"><a href="#HAC" class="headerlink" title="HAC"></a>HAC</h3><p>HAC的全称是Hierarchical Agglomerative Clustering，它是一种层次聚类算法</p><p>假设有5个样本，想要通过HAC进行聚类，其步骤为：</p><ol><li><p>build a tree:</p><p> 过程与哈夫曼树的建树过程类似，只不过哈夫曼树是依据词频建树，而HAC是依据样本相似度建树。</p><p> 对于所有样本，两两计算相似度并挑出最相似的2个样本，比如样本1和2，将样本点1和2进行merge(比如可以对两个vector取平均)得到代表这2个样本的新“样本”，此时只剩下4个样本，再重复上述步骤合并样本直到只剩下一个样本</p></li><li><p>pick a threshold</p><p> 选取相似度阈值，形象来讲就是在已构造的tree上横着切一刀，切到的每个“树枝”就是1个cluster，如下图所示。</p><p> <img src="https://pic4.zhimg.com/80/v2-71c43f422ca1b0fdc43172074a54adc5_720w.png" alt="img"></p></li></ol><p>HAC和K-means的最大区别在于<strong>如何决定cluster的数量</strong>。K-means中需要人工确定cluster数量，而HAC中需要人工确定相似度阈值。</p><h2 id="降维"><a href="#降维" class="headerlink" title="降维"></a>降维</h2><p>降维即Dimension Reduction。</p><h3 id="引入降维"><a href="#引入降维" class="headerlink" title="引入降维"></a>引入降维</h3><p>聚类算法的假设是<strong>每个样本属于并只属于1个cluster</strong>，但实际上一个样本可能拥有多个cluster的特征，如果强制把它划分到某个cluster，就会失去很多信息。所以可以用一个vector来描述1个样本，该vector的每一维表示样本的某一种属性，这种做法就叫Distributed Representation/Dimension Reduction。</p><h3 id="降维作用原理"><a href="#降维作用原理" class="headerlink" title="降维作用原理"></a>降维作用原理</h3><p>因为<strong>数据存在冗余</strong>。比如MNIST手写数字图片是28×28的matrix，反过来想，一个任意的28×28的matrix转成图片看起来应该都不会是个数字，或许我们并不需要这么大的数据量来描述数字。</p><h3 id="如何实现降维"><a href="#如何实现降维" class="headerlink" title="如何实现降维"></a>如何实现降维</h3><p>Dimension Reduction就是要找一个function，其输入是原始的高维特征$x$，其输出是降维后的低维特征$z$，其中$z$的维度数比$x$少。</p><p>最简单的Dimension Reduction是<strong>Feature Selection</strong>，即直接将高维数据中一些直观上认为无效的维度删除，这样就做到了降维。但Feature Selection不总是有用，因为很多情况下每个维度其实都不能被直接删除，甚至我们不知道哪些维度可以删除哪些维度不可以删除。</p><h2 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h2><p>略</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;无监督学习(Unsupervised Learning)可以分为两类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;化繁为简&lt;ul&gt;
+&lt;li&gt;聚类(Clustering)&lt;/li&gt;
+&lt;li&gt;降维(Dimension Reduction)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;无中生有&lt;u
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="深度学习" scheme="https://chouxianyu.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="无监督学习" scheme="https://chouxianyu.github.io/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="聚类" scheme="https://chouxianyu.github.io/tags/%E8%81%9A%E7%B1%BB/"/>
+    
+      <category term="降维" scheme="https://chouxianyu.github.io/tags/%E9%99%8D%E7%BB%B4/"/>
+    
+      <category term="生成" scheme="https://chouxianyu.github.io/tags/%E7%94%9F%E6%88%90/"/>
+    
+  </entry>
   
   <entry>
     <title>Boundary Aware PoolNet(3)：Boundary Aware PoolNet模型与代码介绍</title>
@@ -44,9 +84,9 @@
     
       <category term="BASNet" scheme="https://chouxianyu.github.io/tags/BASNet/"/>
     
-      <category term="BAPoolNet" scheme="https://chouxianyu.github.io/tags/BAPoolNet/"/>
-    
       <category term="PoolNet" scheme="https://chouxianyu.github.io/tags/PoolNet/"/>
+    
+      <category term="BAPoolNet" scheme="https://chouxianyu.github.io/tags/BAPoolNet/"/>
     
   </entry>
   
@@ -108,9 +148,9 @@
     
       <category term="显著性目标检测" scheme="https://chouxianyu.github.io/tags/%E6%98%BE%E8%91%97%E6%80%A7%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
     
-      <category term="BAPoolNet" scheme="https://chouxianyu.github.io/tags/BAPoolNet/"/>
-    
       <category term="PoolNet" scheme="https://chouxianyu.github.io/tags/PoolNet/"/>
+    
+      <category term="BAPoolNet" scheme="https://chouxianyu.github.io/tags/BAPoolNet/"/>
     
   </entry>
   
@@ -141,9 +181,9 @@
     
       <category term="BASNet" scheme="https://chouxianyu.github.io/tags/BASNet/"/>
     
-      <category term="BAPoolNet" scheme="https://chouxianyu.github.io/tags/BAPoolNet/"/>
-    
       <category term="PoolNet" scheme="https://chouxianyu.github.io/tags/PoolNet/"/>
+    
+      <category term="BAPoolNet" scheme="https://chouxianyu.github.io/tags/BAPoolNet/"/>
     
   </entry>
   
@@ -293,11 +333,11 @@
     
       <category term="模型压缩" scheme="https://chouxianyu.github.io/tags/%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9/"/>
     
-      <category term="知识蒸馏" scheme="https://chouxianyu.github.io/tags/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/"/>
-    
       <category term="网络剪枝" scheme="https://chouxianyu.github.io/tags/%E7%BD%91%E7%BB%9C%E5%89%AA%E6%9E%9D/"/>
     
       <category term="参数量化" scheme="https://chouxianyu.github.io/tags/%E5%8F%82%E6%95%B0%E9%87%8F%E5%8C%96/"/>
+    
+      <category term="知识蒸馏" scheme="https://chouxianyu.github.io/tags/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/"/>
     
   </entry>
   
@@ -573,33 +613,6 @@
       <category term="PyTorch" scheme="https://chouxianyu.github.io/tags/PyTorch/"/>
     
       <category term="ExplainableAI" scheme="https://chouxianyu.github.io/tags/ExplainableAI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习课程笔记-11.4模型无关的局部解释(LIME)</title>
-    <link href="https://chouxianyu.github.io/2021/04/24/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-11-4%E6%A8%A1%E5%9E%8B%E6%97%A0%E5%85%B3%E7%9A%84%E5%B1%80%E9%83%A8%E8%A7%A3%E9%87%8A-LIME/"/>
-    <id>https://chouxianyu.github.io/2021/04/24/李宏毅机器学习课程笔记-11-4模型无关的局部解释-LIME/</id>
-    <published>2021-04-24T02:36:52.000Z</published>
-    <updated>2021-04-24T02:37:44.740Z</updated>
-    
-    <content type="html"><![CDATA[<p>模型无关的局部解释（Local Interpretable Model-Agnostic Explanations，LIME）指<strong>使用一个Interpretable Model拟合一个Uninterpretable Model的局部</strong>，比如使用Linear Model或者Decision Tree模拟Neural Network。</p><p>具体来讲，对于局部范围内的相同输入，我们希望两个模型的输出尽可能接近。这里要重点强调局部范围的概念，因为实际上Linear Model并不能模拟整个Neural Network但却可以模拟其中的一个Local Region，这也是LIME可行的原因。</p><h2 id="案例：使用Linear-Model拟合Neural-Network"><a href="#案例：使用Linear-Model拟合Neural-Network" class="headerlink" title="案例：使用Linear Model拟合Neural Network"></a>案例：使用Linear Model拟合Neural Network</h2><ol><li><p>定位：确定需要解释的data point(下图5个蓝点中最中间的蓝点)</p></li><li><p>取样：在上一步确定的data point周围sample获得更多的data point(下图5个蓝点)</p><p> sample的<strong>范围</strong>需要根据情况调整，一般范围小则拟合得更准确</p><p> sample的<strong>方法</strong>不同，结果也会不同</p></li><li><p>拟合：使用Linear Model模拟上一步确定的data point及其对应的Neural Network输出</p></li><li><p>解释：对Linear Model进行解释，进而解释Neural Network的局部</p></li></ol><p><img src="https://pic1.zhimg.com/80/v2-a29bafdc2312575cab096090938493b2_720w.png" alt="img"></p><h2 id="案例：LIME-For-Image-Classification"><a href="#案例：LIME-For-Image-Classification" class="headerlink" title="案例：LIME For Image Classification"></a>案例：LIME For Image Classification</h2><p>如何将LIME应用到Image Classification呢？假设有一张图片被分类为frog，下面只讲一些关键点。</p><ul><li><p>如何进行sample？</p><p>  首先可以将图片分成多个segment：$\{s_1,s_2,\dots,s_n\}$，随机去除其中的一些segment就可以得到该图片“周围”的一些图片</p></li><li><p>将LIME应用于图片时，一般要进行Feature Extraction，那如何做呢？</p><p>  使用$x_i$表示图片中的每个segment是否被删除，其中$i=1,…,n$，若$x_i$为1则表示该segment被删除，否则表示该segment未被删除</p></li><li><p>如何解释Linear Model？</p><p>  设Linear Model为$y=w_1x_1+..+w_nx_n$，$w_i$的值有以下3种情况</p><ul><li>$w_i\approx 0$表示$s_i$对分类为frog没有影响；</li><li>$w_i&gt; 0$表示$s_i$对分类为frog具有正面影响，即这个segment使得模型倾向于将图片分类为frog</li><li>$w_i&lt;0$表示$s_i$对分类为frog具有负面影响，即这个segment使得模型倾向于认为该图片不是frog类别</li></ul></li></ul><h2 id="Tree-Regularization"><a href="#Tree-Regularization" class="headerlink" title="Tree Regularization"></a>Tree Regularization</h2><p><strong>理论上可以用无深度限制的Decision Tree拟合完整的Neural Network，但Decision Tree的深度不可能没有限制</strong>，因此在使用Decision Tree拟合Neural Network时需要对Decision Tree的复杂度进行约束。</p><p>设Neural Network的参数为$\theta$、Decision Tree的参数为$T_\theta$，使用Decision Tree的平均深度表示其参数$T_\theta$的复杂度$O(T_\theta)$。在使用Decision Tree拟合Neural Network时，不仅要使两者输出相近还要使$O(T_\theta)$最小化，因此优化目标为$\theta^*=arg\ {\rm min}\ L(\theta) + \lambda O(T_\theta)$。</p><p>因此我们<strong>在训练神经网络时就可以使用Tree Regularization使得训练出的神经网络更具有可解释性</strong>，$O(T_\theta)$不能微分，解决方法详见《Beyond Sparsity: Tree Regularization of Deep Models for Interpretability》。</p><hr><p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p><p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p><p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p><p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p><p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p><p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p><p>转载请注明出处，欢迎讨论和交流!</p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;模型无关的局部解释（Local Interpretable Model-Agnostic Explanations，LIME）指&lt;strong&gt;使用一个Interpretable Model拟合一个Uninterpretable Model的局部&lt;/strong&gt;，比如使用
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://chouxianyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="ExplainableAI" scheme="https://chouxianyu.github.io/tags/ExplainableAI/"/>
-    
-      <category term="LIME" scheme="https://chouxianyu.github.io/tags/LIME/"/>
     
   </entry>
   
