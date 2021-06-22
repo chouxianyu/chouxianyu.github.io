@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,无监督学习,降维,主成分分析," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="臭咸鱼的缺氧瓶" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="主成分分析即Principal Component Analysis，PCA，它是一种线性降维方法。 主成分分析(1)PCA即主成分分析(Principe Component Analysis)。PCA假设降维函数是一个linear function，即输入$x$和输出$z$之间是linear transform $z=Wx$，而PCA要做的就是根据很多个$x$找出$W$。 PCA for 1-D">
+<meta name="keywords" content="机器学习,无监督学习,降维,主成分分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="李宏毅机器学习课程笔记-15.2无监督学习之主成分分析">
+<meta property="og:url" content="https://chouxianyu.github.io/2021/06/22/李宏毅机器学习课程笔记-15-2无监督学习之主成分分析/index.html">
+<meta property="og:site_name" content="臭咸鱼的缺氧瓶">
+<meta property="og:description" content="主成分分析即Principal Component Analysis，PCA，它是一种线性降维方法。 主成分分析(1)PCA即主成分分析(Principe Component Analysis)。PCA假设降维函数是一个linear function，即输入$x$和输出$z$之间是linear transform $z=Wx$，而PCA要做的就是根据很多个$x$找出$W$。 PCA for 1-D">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-caa44b686d346046181404af39d47bf2_720w.png">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-cab4358ef46e991c5c034500b9c773bb_720w.png">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-58b3fa7a51e0567f17eb530550d50af3_720w.png">
+<meta property="og:updated_time" content="2021-06-22T01:52:08.410Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="李宏毅机器学习课程笔记-15.2无监督学习之主成分分析">
+<meta name="twitter:description" content="主成分分析即Principal Component Analysis，PCA，它是一种线性降维方法。 主成分分析(1)PCA即主成分分析(Principe Component Analysis)。PCA假设降维函数是一个linear function，即输入$x$和输出$z$之间是linear transform $z=Wx$，而PCA要做的就是根据很多个$x$找出$W$。 PCA for 1-D">
+<meta name="twitter:image" content="https://pic1.zhimg.com/80/v2-caa44b686d346046181404af39d47bf2_720w.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chouxianyu.github.io/2021/06/22/李宏毅机器学习课程笔记-15-2无监督学习之主成分分析/"/>
+
+
+
+
+
+  <title>李宏毅机器学习课程笔记-15.2无监督学习之主成分分析 | 臭咸鱼的缺氧瓶</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5706c34297d4762ba8c6d799a54234b9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">臭咸鱼的缺氧瓶</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快给我氧气！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chouxianyu.github.io/2021/06/22/李宏毅机器学习课程笔记-15-2无监督学习之主成分分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="臭咸鱼">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="臭咸鱼的缺氧瓶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">李宏毅机器学习课程笔记-15.2无监督学习之主成分分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-06-22T09:50:54+08:00">
+                2021-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/06/22/李宏毅机器学习课程笔记-15-2无监督学习之主成分分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/06/22/李宏毅机器学习课程笔记-15-2无监督学习之主成分分析/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2021/06/22/李宏毅机器学习课程笔记-15-2无监督学习之主成分分析/" class="leancloud_visitors" data-flag-title="李宏毅机器学习课程笔记-15.2无监督学习之主成分分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3,178 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  13 分
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>主成分分析即Principal Component Analysis，PCA，它是一种线性降维方法。</p>
+<h2 id="主成分分析-1"><a href="#主成分分析-1" class="headerlink" title="主成分分析(1)"></a>主成分分析(1)</h2><p>PCA即主成分分析(Principe Component Analysis)。<strong>PCA假设降维函数是一个linear function</strong>，即输入$x$和输出$z$之间是linear transform $z=Wx$，而PCA要做的就是根据很多个$x$找出$W$。</p>
+<h3 id="PCA-for-1-D"><a href="#PCA-for-1-D" class="headerlink" title="PCA for 1-D"></a>PCA for 1-D</h3><p>为了简化问题先假设输出$z=W\cdot x$是1个标量(scalar)，其中$W$是1个行向量(row vector)、$x$是1个列向量。若假设$W$的模(长度)$||W||_2=1$，此时$z$就是$x$在$W$方向上的投影。</p>
+<p>我们希望所有$x$在$W$方向上投影得到的所有$z$分布越大越好，也就是说<strong>在投影之后不同样本之间的区别仍然是可以被看得出来的</strong>，所以投影结果的variance越大越好，即我们希望找到一个使得投影结果的variance较大的$W$，variance的计算公式为$Var(z)=\frac{1}{N}\sum\limits_{z}(z-\bar{z})^2, ||W||_2=1$，其中$\bar z$是所有$z$的平均值。</p>
+<h3 id="PCA-for-n-D"><a href="#PCA-for-n-D" class="headerlink" title="PCA for n-D"></a>PCA for n-D</h3><p>如果输出$z=Wx$是1个包含$n$个元素的向量($n$需要我们自己确定)，其中$W$是1个matrix、$w^i$是$W$中的第$i$个行向量($||w^i||_2=0,1\leq i\leq n$)、$x$是1个列向量，则$z_i=w^i\cdot x$表示$x$在方向$w^i$上的投影。</p>
+<p>注：$w^i$必须相互正交，即$W$为正交矩阵(Orthogonal Matrix)，否则最终找到的$w^i$实际上是相同的值。</p>
+<h3 id="拉格朗日乘子法"><a href="#拉格朗日乘子法" class="headerlink" title="拉格朗日乘子法"></a>拉格朗日乘子法</h3><p>如何求出PCA中的参数$W$呢？实际上已经有相关库可以直接调用PCA，此外也可以用神经网络描述PCA算法然后用梯度下降的方法来求解，这里主要介绍用<strong>拉格朗日乘子法</strong>(Lagrange multiplier)求解PCA的数学推导过程。</p>
+<p> 注：$w^i$和$x$均为列向量，下文中类似$w^i\cdot x$表示的是矢量内积，而$(w^i)^T\cdot x$表示的是矩阵相乘。</p>
+<h4 id="计算-w-1"><a href="#计算-w-1" class="headerlink" title="计算$w^1$"></a>计算$w^1$</h4><p><strong>结论：$w^1$是$S=Cov(x)$这个matrix中的特征向量，对应最大的特征值$\lambda_1$</strong>。</p>
+<p>首先计算出$\bar{z_1}$：</p>
+<script type="math/tex; mode=display">
+\begin{split}
+&z_1=w^1\cdot x\\
+&\bar{z_1}=\frac{1}{N}\sum z_1=\frac{1}{N}\sum w^1\cdot x=w^1\cdot \frac{1}{N}\sum x=w^1\cdot \bar x
+\end{split}</script><p>$Var(z_1)$越大越好，所以我们要使得$Var(z_1)$最大：</p>
+<script type="math/tex; mode=display">
+\begin{split}
+Var(z_1)&=\frac{1}{N}\sum\limits_{z_1} (z_1-\bar{z_1})^2\\
+&=\frac{1}{N}\sum\limits_{x} (w^1\cdot x-w^1\cdot \bar x)^2\\
+&=\frac{1}{N}\sum (w^1\cdot (x-\bar x))^2\\
+\end{split}</script><p>因为$(a\cdot b)^2=(a^Tb)^2=a^Tba^Tb=a^Tb(a^Tb)^T=a^Tbb^Ta$，所以：</p>
+<script type="math/tex; mode=display">
+\begin{split}
+Var(z_1)&=\frac{1}{N}\sum (w^1\cdot (x-\bar x))^2\\
+&=\frac{1}{N}\sum(w^1)^T(x-\bar x)(x-\bar x)^T w^1\\
+&=(w^1)^T\frac{1}{N}(\sum(x-\bar x)(x-\bar x)^T) w^1\\
+\end{split}</script><p>又因为$Cov(x)=\frac{1}{N}\sum(x-\bar x)(x-\bar x)^T$，并令$S=Cov(x)$，所以：</p>
+<script type="math/tex; mode=display">
+\begin{split}
+Var(z_1)&=(w^1)^T\frac{1}{N}(\sum(x-\bar x)(x-\bar x)^T) w^1\\
+&=(w^1)^T Cov(x)w^1\\
+&=(w^1)^TSw^1
+\end{split}</script><p>在使得$Var(z_1)=(w^1)^TCov(x)w^1$<strong>最大</strong>的同时，还有一个<strong>约束条件</strong>是$||w^1||_2=(w^1)^Tw^1=1$，否则$w^1$无限大就可以使得$Var(z_1)$但这并没有意义。</p>
+<p>因为$S=Cov(x)$，所以S是对称的(symmetric)、半正定的(positive-semidefine)、所有特征值非负的(non-negative eigenvalues)。</p>
+<p>使用拉格朗日乘数法，利用目标和约束条件构造函数：$g(w^1)=(w^1)^TSw^1-\alpha((w^1)^Tw^1-1)$，对$w^1$中每个元素求偏微分并使为0：</p>
+<script type="math/tex; mode=display">
+\begin{split}
+&\partial g(w^1)/\partial w_1^1=0\\
+&\partial g(w^1)/\partial w_2^1=0\\
+&\partial g(w^1)/\partial w_3^1=0\\
+&...
+\end{split}</script><p>整理上式，可以得到：$Sw^1=\alpha w^1$，其中$w^1$是$S$的特征向量(eigenvector)，但满足$(w^1)^Tw^1=1$的特征向量$w^1$有很多，我们要找的是使得$(w^1)^TSw^1$最大的那个$w_1$，于是可得$(w^1)^TSw^1=(w^1)^T \alpha w^1=\alpha (w^1)^T w^1=\alpha$，因此使得$(w^1)^TSw^1$最大就变成了使得$\alpha$最大，即$S$的特征值$\alpha$最大时对应的那个特征向量$w^1$就是我们要找的$w^1$。</p>
+<h4 id="计算-w-2"><a href="#计算-w-2" class="headerlink" title="计算$w^2$"></a>计算$w^2$</h4><p>在计算$w^2$时比计算$w^1$时多了一个限制条件：$w^2$必须与$w^1$正交(orthogonal)。</p>
+<p>所以求解目标为：使得$(w^2)^TSw^2$最大，约束条件为：$(w^2)^Tw^2=1,(w^2)^Tw^1=0$</p>
+<p><strong>结论：$w^2$也是$S=Cov(x)$这个matrix中的特征向量，对应第二大的特征值$\lambda_2$</strong></p>
+<p>与计算$w^1$一样使用拉格朗日乘子法求解，定义$g(w^2)=(w^2)^TSw^2-\alpha((w^2)^Tw^2-1)-\beta((w^2)^Tw^1-0)$，然后对$w^2$的每个元素做偏微分：</p>
+<script type="math/tex; mode=display">
+\begin{split}
+&\partial g(w^2)/\partial w_1^2=0\\
+&\partial g(w^2)/\partial w_2^2=0\\
+&\partial g(w^2)/\partial w_3^2=0\\
+&...
+\end{split}</script><p>整理上式可得$Sw^2-\alpha w^2-\beta w^1=0$，该式两侧同乘$(w^1)^T$得到$(w^1)^TSw^2-\alpha (w^1)^Tw^2-\beta (w^1)^Tw^1=0$，其中$\alpha (w^1)^Tw^2=0,\beta (w^1)^Tw^1=\beta$。</p>
+<p>由于$(w^1)^TSw^2$是vector×matrix×vector=scalar所以在外面套一个transpose不会改变其值，并且S是对称的即$S^T=S$，所以：</p>
+<script type="math/tex; mode=display">
+\begin{split}
+(w^1)^TSw^2&=((w^1)^TSw^2)^T\\
+&=(w^2)^TS^Tw^1\\
+&=(w^2)^TSw^1
+\end{split}</script><p>已知$w^1$满足$Sw^1=\lambda_1 w^1$，所以：</p>
+<script type="math/tex; mode=display">
+\begin{split}
+(w^1)^TSw^2&=(w^2)^TSw^1\\
+&=\lambda_1(w^2)^Tw^1\\
+&=0
+\end{split}</script><p>因此有$(w^1)^TSw^2=0$，$\alpha (w^1)^Tw^2=0$，$\beta (w^1)^Tw^1=\beta$，又根据$(w^1)^TSw^2-\alpha (w^1)^Tw^2-\beta (w^1)^Tw^1=0$，所以$\beta=0$。</p>
+<p>此时$Sw^2-\alpha w^2-\beta w^1=0$就转变成了$Sw^2-\alpha w^2=0$即$Sw^2=\alpha w^2$。由于$S$是对称的，因此在与$w_1$不冲突的情况下，这里$\alpha$选取第二大的特征值$\lambda_2$时，可以使$(w^2)^TSw^2$最大。</p>
+<h3 id="decorrelation"><a href="#decorrelation" class="headerlink" title="decorrelation"></a>decorrelation</h3><p>可知$z=W\cdot x$，有一个神奇的事情是$Cov(z)=D$，即z的covariance是一个对角矩阵(diagonal matrix)。</p>
+<p>推导过程如下：</p>
+<p><img src="https://pic1.zhimg.com/80/v2-caa44b686d346046181404af39d47bf2_720w.png" alt="img"></p>
+<p>PCA可以让降维后数据中不同dimension之间的covariance变为0，即降维后数据中不同feature之间是没有correlation的，这样的好处是<strong>减少feature之间的联系从而减少model所需的参数量</strong>。</p>
+<p>如果使用PCA将原数据降维之后再给其他model使用，那这些model就可以直接假设数据的各个维度不相关，这时model得到简化、参数量大大降低，相同的数据量可以得到更好的训练结果，从而可以避免overfitting的发生。</p>
+<h2 id="主成分分析-2"><a href="#主成分分析-2" class="headerlink" title="主成分分析(2)"></a>主成分分析(2)</h2><h3 id="Reconstruction-Component"><a href="#Reconstruction-Component" class="headerlink" title="Reconstruction Component"></a>Reconstruction Component</h3><p>假设我们现在考虑MNIST手写数字识别，可以假设一个数字图片由一些类似于笔画的component(本质上是一个28×28的vector)组成，将这些component记做$u_1,u_2,u_3,…$，我们把$K$个component加权求和就可以组成一个数字图片：$x≈c_1u^1+c_2u^2+…+c_Ku^K+\bar x$，其中$x$是一张数字图片，$\bar x$是所有数字图片的平均值。</p>
+<p>假设$K$个component已知，我们就可以用$\left [\begin{matrix}c_1\ c_2\ c_3…c_k \end{matrix} \right]^T$来表示一张数字图片，如果$k$远小于图片像素数量，那这种表示方法就可以有效降维。</p>
+<p>那我们要如何找出这$K$个component呢？我们要找到$K$个vector使得$x-\bar x$和$\hat x$越接近越好，其中$\hat x=c_1u^1+c_2u^2+…+c_Ku^K$。</p>
+<p>所以目标是使得Reconstruction Error $||(x-\bar x)-\hat x||$最小，即$L=\min\limits_{u^1,…,u^k}\sum||(x-\bar x)-(\sum\limits_{i=1}^k c_i u^i) ||_2$。</p>
+<p>回顾PCA中$z=W\cdot x$，实际上我们通过PCA最终解得的$W=\{w^1,w^2,…,w^k\}$就是使Reconstruction Error最小化的$K$个vector$\{u^1,u^2,…,u^k\}$，简单证明如下。</p>
+<p>如下图和下式所示，用下图中的矩阵相乘来表示所有的$x^i-\bar x≈c_1^i u^1+c_2^i u^2+…$，其中$x^i$指第$i$张图片，目标是使$\approx$两侧矩阵之间的差距越小越好。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-cab4358ef46e991c5c034500b9c773bb_720w.png" alt="img"></p>
+<script type="math/tex; mode=display">
+\begin{split}
+&x=
+\left [
+\begin{matrix}
+u_1\ u_2\ ...\ u_k
+\end{matrix}
+\right ]\cdot
+\left [
+\begin{matrix}
+c_1\\
+c_2\\
+...\\
+c_k
+\end{matrix}
+\right ]\\ \\
+
+&\left [
+\begin{matrix}
+x_1\\
+x_2\\
+...\\
+x_n
+\end{matrix}
+\right ]=\left [
+\begin{matrix}
+u_1^1\ u_2^1\ ... u_k^1 \\
+u_1^2\ u_2^2\ ... u_k^2 \\
+...\\
+u_1^n\ u_2^n\ ... u_k^n
+\end{matrix}
+\right ]\cdot
+\left [
+\begin{matrix}
+c_1\\
+c_2\\
+...\\
+c_k
+\end{matrix}
+\right ]\\
+\end{split}</script><p>使用SVD将每个matrix $X_{m×n}$都拆成matrix $U_{m×K}$、$\Sigma_{K×K}$、$V_{K×n}$的乘积，其中$K$为component的数目。使用SVD拆解后三个矩阵相乘的结果是跟等号左边的矩阵$X$最接近的，此时$U$就对应着$u^i$形成的矩阵、$\Sigma\cdot V$就对应着$c_k^i$形成的矩阵。</p>
+<p>根据SVD的结论，组成矩阵$U$的$k$个列向量(标准正交向量，orthonormal vector)就是$XX^T$最大的$k$个特征值(eignvalue)所对应的特征向量(eigenvector)，而$XX^T$实际上就是$x$的covariance matrix，因此$U$就是PCA的$k$个解。</p>
+<p>PCA寻找$W$的过程，实际上就是把$X$拆解成能够使得Reconstruction Error最小的$k$个component的过程，PCA中要找的投影方向$w^i$就相当于恰当的component $u^i$，PCA中投影结果$z^i$就相当于各个component各自的权重$c_i$。</p>
+<h3 id="NN-for-PCA"><a href="#NN-for-PCA" class="headerlink" title="NN for PCA"></a>NN for PCA</h3><p>由上可知，PCA找出来的$\{w^1,w^2,…,w^k\}$就是$K$个component $\{u^1,u^2,…,u^k\}$。$\hat x=\sum\limits_{k=1}^K c_k w^k$，我们要使$\hat x$与$x-\bar x$之间的差距越小越好。我们已经通过SVD找到了$w^k$的值，而对每个不同的样本$x$都有一组不同的$c_k$值。</p>
+<p>在PCA中我们已经证得，$\{w^1,w^2,…,w^k\}$这$k$个vector是标准正交化的(orthonormal)，因此$c_k=(x-\bar x)\cdot w^k$，这个时候我们就可以使用神经网络来表示整个过程，如下图所示。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-58b3fa7a51e0567f17eb530550d50af3_720w.png" alt="img"></p>
+<p>如上图所示，假设$x$是3维向量，要投影到2维的component上，即$K=2$。$c_k=(x-\bar x)\cdot w^k$类似于神经网络，$x-\bar x$相当于一个神经元的3维输入，而$w^k_1$，$w^k_2$，$w^k_3$则是该神经元的权重，而$c_k$则是这个神经元的输出。得到$c_1$和$c_2$之后，再让它乘上$w^1$和$w^2$然后求和得到$\hat x$。此时，PCA就被表示成只含一层hidden layer的神经网络，且这个hidden layer是线性的(没有激活函数)，训练目标是让这个神经网络的输入$x-\bar x$与输出$\hat x$越接近越好，这就是<strong>Autoencoder</strong>。</p>
+<p>注：PCA求解出的$w^i$与上述神经网络所解得的$w^i$是不一样的，因为PCA解出的$w^i$是相互垂直的(orgonormal)，而上述神经网络的解无法保证$w^i$相互垂直，神经网络无法做到Reconstruction Error比PCA小。因此，在linear情况下直接用PCA找$W$远比用神经网络的方式更快速方便，神经网络的好处是它可以使用不止一层的hidden layer而可以做Deep Autoencoder。</p>
+<h3 id="PCA的缺点"><a href="#PCA的缺点" class="headerlink" title="PCA的缺点"></a>PCA的缺点</h3><ul>
+<li>PCA是无监督的，没有使用label</li>
+<li>PCA是线性的，而有时需要non-linear transformation</li>
+</ul>
+<h3 id="What-happens-to-PCA"><a href="#What-happens-to-PCA" class="headerlink" title="What happens to PCA"></a>What happens to PCA</h3><p>观察PCA对MNIST和Face的降维结果(见原视频)，我们发现找到的component好像并不算是component。比如MNIST实验中PCA找到的是几乎完整的数字雏形，而Face实验中找到的是几乎完整的人脸雏形，而我们想象中的组件应该是类似于横折撇捺、眼睛鼻子眉毛等等。</p>
+<p>原因是这样的：$x\approx c_1u^1+c_2u^2+…+c_Ku^K+\bar x$，其中$c_i$是可正可负的，所以component不仅可以相加还可以相减，于是PCA得到的组件并不是我们想象中的那样，但通过这些组件的加加减减肯定可以获得我们想象中的基础的component。</p>
+<p>如果想要直接得到类似笔画的基础component，就要使用<strong>NMF(non-negative matrix factorization，非负矩阵分解)</strong>。</p>
+<h2 id="非负矩阵分解"><a href="#非负矩阵分解" class="headerlink" title="非负矩阵分解"></a>非负矩阵分解</h2><p>如果想要直接得到类似笔画的基础component，就要使用<strong>NMF(non-negative matrix factorization，非负矩阵分解)</strong>。</p>
+<p>PCA可以看成是对原始矩阵$X$做SVD进行矩阵分解，但并不保证分解后矩阵的正负。实际上在进行图像处理时，如果部分component的matrix包含一些负值的话，如何处理负的像素值也会成为一个问题(可以做归一化处理，但比较麻烦)。</p>
+<p>而NMF的基本思路是，强迫使所有component和它的权重都必须是正的，也就是说<strong>所有图像都必须由组件叠加(不可相减)得到</strong>。</p>
+<p>相比于PCA，我们可以发现NMF对MNIST和Face的降维结果(见原视频)更接近于我们想象中的基本的component。</p>
+<h2 id="其它PCA版本"><a href="#其它PCA版本" class="headerlink" title="其它PCA版本"></a>其它PCA版本</h2><p>降维的方法有很多，这里再列举一些与PCA有关的方法：</p>
+<ul>
+<li><p>Multidimensional Scaling (<strong>MDS</strong>) [Alpaydin, Chapter 6.7]</p>
+<p>  MDS不需要把每个data都表示成feature vector，只需要知道特征向量之间的distance，就可以做降维，PCA保留了原来在高维空间中的距离，在某种情况下MDS就是特殊的PCA</p>
+</li>
+<li><p><strong>Probabilistic PCA</strong> [Bishop, Chapter 12.2]</p>
+<p>  PCA概率版本</p>
+</li>
+<li><p><strong>Kernel PCA</strong> [Bishop, Chapter 12.3]</p>
+<p>  PCA非线性版本</p>
+</li>
+<li><p>Canonical Correlation Analysis (<strong>CCA</strong>) [Alpaydin, Chapter 6.9]</p>
+<p>  CCA常用于两种不同的data source的情况，比如同时对声音信号和唇形的图像进行降维</p>
+</li>
+<li><p>Independent Component Analysis (<strong>ICA</strong>)</p>
+<p>  ICA常用于source separation，PCA找的是正交的组件，而ICA则只需要找“独立”的组件即可</p>
+</li>
+<li><p>Linear Discriminant Analysis (<strong>LDA</strong>) [Alpaydin, Chapter 6.8]</p>
+<p>  LDA是supervised的方式</p>
+</li>
+</ul>
+<hr>
+<p>Github（github.com）：<a href="https://github.com/chouxianyu" target="_blank" rel="noopener">@chouxianyu</a></p>
+<p>Github Pages（github.io）：<a href="https://chouxianyu.github.io/">@臭咸鱼</a></p>
+<p>知乎（zhihu.com）：<a href="https://www.zhihu.com/people/chouxianyu0" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>博客园（cnblogs.com）：<a href="https://www.cnblogs.com/chouxianyu/" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>B站（bilibili.com）：<a href="https://space.bilibili.com/346368054" target="_blank" rel="noopener">@绝版臭咸鱼</a></p>
+<p>微信公众号：<a href="https://images.cnblogs.com/cnblogs_com/chouxianyu/1511971/o_201224051323wechat_qrcode.jpg" target="_blank" rel="noopener">@臭咸鱼</a></p>
+<p>转载请注明出处，欢迎讨论和交流!</p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/无监督学习/" rel="tag"># 无监督学习</a>
+          
+            <a href="/tags/降维/" rel="tag"># 降维</a>
+          
+            <a href="/tags/主成分分析/" rel="tag"># 主成分分析</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/06/13/李宏毅机器学习课程笔记-15-1无监督学习简介/" rel="next" title="李宏毅机器学习课程笔记-15.1无监督学习简介">
+                <i class="fa fa-chevron-left"></i> 李宏毅机器学习课程笔记-15.1无监督学习简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7d451315be18b3" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://i.loli.net/2018/08/22/5b7d7c56c9f8c.jpg"
+                alt="臭咸鱼" />
+            
+              <p class="site-author-name" itemprop="name">臭咸鱼</p>
+              <p class="site-description motion-element" itemprop="description">祝你天天开心啊！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">316</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">182</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://maluguang.com" title="Road Wide's Blog" target="_blank">Road Wide's Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/chouxianyu/" title="Chou Xianyu's CNBlog" target="_blank">Chou Xianyu's CNBlog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#主成分分析-1"><span class="nav-number">1.</span> <span class="nav-text">主成分分析(1)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PCA-for-1-D"><span class="nav-number">1.1.</span> <span class="nav-text">PCA for 1-D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCA-for-n-D"><span class="nav-number">1.2.</span> <span class="nav-text">PCA for n-D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拉格朗日乘子法"><span class="nav-number">1.3.</span> <span class="nav-text">拉格朗日乘子法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#计算-w-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">计算$w^1$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算-w-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">计算$w^2$</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#decorrelation"><span class="nav-number">1.4.</span> <span class="nav-text">decorrelation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主成分分析-2"><span class="nav-number">2.</span> <span class="nav-text">主成分分析(2)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reconstruction-Component"><span class="nav-number">2.1.</span> <span class="nav-text">Reconstruction Component</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NN-for-PCA"><span class="nav-number">2.2.</span> <span class="nav-text">NN for PCA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCA的缺点"><span class="nav-number">2.3.</span> <span class="nav-text">PCA的缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#What-happens-to-PCA"><span class="nav-number">2.4.</span> <span class="nav-text">What happens to PCA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非负矩阵分解"><span class="nav-number">3.</span> <span class="nav-text">非负矩阵分解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它PCA版本"><span class="nav-number">4.</span> <span class="nav-text">其它PCA版本</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">臭咸鱼</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">289.4k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz',
+        appKey: 'Si7hBxIAVOGbu6Pot7HHaVBB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("J2VurMUeJm2qfNcHuXrsuluu-gzGzoHsz", "Si7hBxIAVOGbu6Pot7HHaVBB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
